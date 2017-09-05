@@ -111,6 +111,7 @@ class SocketUtil
         else
         {
             Debug.Log("SocketUtil----断开服务器连接失败，因为当前已经断开");
+            m_isNormalStop = true;
         }
     }
 
@@ -136,7 +137,10 @@ class SocketUtil
         {
             Debug.Log("SocketUtil----连接服务器失败：" + ex.Message);
 
-            m_onSocketEvent_Connect(false);
+            if (!m_isNormalStop)
+            {
+                m_onSocketEvent_Connect(false);
+            }
         }
     }
 
