@@ -67,7 +67,7 @@ public class HpSocketEngine : MonoBehaviour {
     {
         if (client.Connect(ip,port,false))
         {
-            print("连接上服务器：" + ip + " " + port);
+            print("连接上服务器：" + ip + ":" + port);
         }else
             print("连接服务器失败");
     }
@@ -94,12 +94,8 @@ public class HpSocketEngine : MonoBehaviour {
     HandleResult OnReceive(TcpClient sender, byte[] bytes)
     {
         // 数据到达了
-        var s1 = Convert.ToString(bytes);
         var s2 = Encoding.UTF8.GetString(bytes);
-        var s = bytes.ToString();
-        print("服务端回调："+ s2 + "\n"+ "服务端回调：" + s1);
-
-
+        print("服务端回调："+ s2 );
         return HandleResult.Ok;
     }
 
