@@ -13,9 +13,14 @@ public class LoginScript : MonoBehaviour {
         SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
         SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
         SocketUtil.getInstance().setOnSocketEvent_Close(onSocketClose);
-        SocketUtil.getInstance().setOnSocketEvent_Close(onSocketStop);
+        SocketUtil.getInstance().setOnSocketEvent_Stop(onSocketStop);
 
         SocketUtil.getInstance().start();
+    }
+
+    void OnDestroy()
+    {
+        SocketUtil.getInstance().stop();
     }
     
     void Update ()
@@ -58,23 +63,23 @@ public class LoginScript : MonoBehaviour {
     //-------------------------------------------------------------------------------------------------------
     void onSocketConnect()
     {
-        Debug.Log("onSocketConnect");
+        Debug.Log("连接服务器成功");
     }
 
     void onSocketReceive(string data)
     {
-        Debug.Log("onSocketReceive:" + data);
+        Debug.Log("收到服务器消息:" + data);
 
         m_dataList.Add(data);
     }
-
+    
     void onSocketClose()
     {
-        Debug.Log("onSocketClose");
+        Debug.Log("被动与服务器断开连接");
     }
 
     void onSocketStop()
     {
-        Debug.Log("onSocketStop");
+        Debug.Log("主动与服务器断开连接");
     }
 }

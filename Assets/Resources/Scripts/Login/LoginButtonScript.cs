@@ -17,10 +17,12 @@ public class LoginButtonScript : MonoBehaviour {
     public void onClickLogin()
     {
         GameObject.Find("Canvas").GetComponent<LoginScript>().reqLogin();
+        //SocketUtil.getInstance().start();
     }
 
     public void onClickQuickRegister()
     {
         GameObject.Find("Canvas").GetComponent<LoginScript>().reqQuickRegister();
+        //SocketUtil.getInstance().stop();
     }
 }
