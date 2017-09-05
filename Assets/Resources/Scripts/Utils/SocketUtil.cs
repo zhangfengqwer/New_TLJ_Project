@@ -11,7 +11,7 @@ class SocketUtil
 {
     static SocketUtil s_instance = null;
 
-    public delegate void OnSocketEvent_Connect();               // 连接服务器成功
+    public delegate void OnSocketEvent_Connect(bool result);    // 连接服务器结果
     public delegate void OnSocketEvent_Receive(string data);    // 收到服务器消息
     public delegate void OnSocketEvent_Close();                 // 与服务器非正常断开连接
     public delegate void OnSocketEvent_Stop();                  // 与服务器正常断开连接
@@ -22,8 +22,8 @@ class SocketUtil
     OnSocketEvent_Stop m_onSocketEvent_Stop = null;
 
     Socket m_socket = null;
-    IPAddress m_ipAddress = IPAddress.Parse("10.224.5.110");
-    int m_ipPort = 60001;
+    IPAddress m_ipAddress = null;
+    int m_ipPort = 0;
     
     bool m_isStart = false;
     bool m_isNormalStop = false;
@@ -62,8 +62,19 @@ class SocketUtil
         m_onSocketEvent_Stop = onSocketEvent_Stop;
     }
 
+    public void init(string ip,int port)
+    {
+        m_ipAddress = IPAddress.Parse(ip);
+        m_ipPort = port;
+    }
+
     public void start()
     {
+        if (!checkSocketIsInit())
+        {
+            return;
+        }
+
         if (!m_isStart)
         {
             Thread t1 = new Thread(CreateConnectionInThread);
@@ -77,6 +88,11 @@ class SocketUtil
 
     public void stop()
     {
+        if (!checkSocketIsInit())
+        {
+            return;
+        }
+
         if (m_isStart)
         {
             m_isStart = false;
@@ -108,7 +124,7 @@ class SocketUtil
             
             if (m_onSocketEvent_Connect != null)
             {
-                m_onSocketEvent_Connect();
+                m_onSocketEvent_Connect(true);
             }
 
             m_isStart = true;
@@ -120,12 +136,17 @@ class SocketUtil
         {
             Debug.Log("SocketUtil----连接服务器失败：" + ex.Message);
 
-            //m_netListen.onNetListenError("");
+            m_onSocketEvent_Connect(false);
         }
     }
 
     public void sendMessage(string sendData)
     {
+        if (!checkSocketIsInit())
+        {
+            return;
+        }
+
         if (m_isStart)
         {
             sendData = sendData.Replace("\r\n", "");
@@ -142,6 +163,8 @@ class SocketUtil
                 if (m_onSocketEvent_Close != null && !m_isNormalStop)
                 {
                     Debug.Log("SocketUtil----与服务端连接断开：" + ex.Message);
+
+                    m_isStart = false;
                     m_onSocketEvent_Close();
                 }
             }
@@ -202,6 +225,8 @@ class SocketUtil
                     if (m_onSocketEvent_Close != null && !m_isNormalStop)
                     {
                         Debug.Log("SocketUtil----被动与服务端连接断开");
+
+                        m_isStart = false;
                         m_onSocketEvent_Close();
                     }
 
@@ -213,11 +238,24 @@ class SocketUtil
                 if (m_onSocketEvent_Close != null && !m_isNormalStop)
                 {
                     Debug.Log("SocketUtil----被动与服务端连接断开：" + ex.Message);
+
+                    m_isStart = false;
                     m_onSocketEvent_Close();
                 }
 
                 return;
             }
         }
+    }
+
+    bool checkSocketIsInit()
+    {
+        if (m_ipAddress == null || m_ipPort == 0)
+        {
+            Debug.Log("SocketUtil----没有设置IP和端口");
+            return false;
+        }
+
+        return true;
     }
 }
