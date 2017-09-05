@@ -32,25 +32,17 @@ class CommonUtil
         return DateTime.Now.Day;
     }
 
-    static public bool splitStrIsPerfect(string str, List<string> list, string str_c)
+    static public bool splitStrIsPerfect(string str, List<string> list, char c)
     {
         bool b = false;
         {
-            string temp = "";
-            for (int i = str.Length - str_c.Length; i < str.Length; i++)
-            {
-                temp += str[i];
-            }
-
-            if (temp.CompareTo(str_c) == 0)
+            if (str[str.Length - 1] == c)
             {
                 b = true;
             }
         }
-
-        char c = '.';
-        str = str.Replace(str_c, ".");
-        splitStr(str,list,c);
+        
+        splitStr(str, list, c);
 
         return b;
     }

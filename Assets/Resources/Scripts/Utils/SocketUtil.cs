@@ -29,7 +29,7 @@ class SocketUtil
     bool m_isNormalStop = false;
 
     // 数据包尾部标识
-    string m_packEndFlag = "..";
+    char m_packEndFlag = (char)1;
     string m_endStr = "";
 
     public static SocketUtil getInstance()
@@ -160,12 +160,16 @@ class SocketUtil
             }
             catch (SocketException ex)
             {
-                if (m_onSocketEvent_Close != null && !m_isNormalStop)
+                if (!m_isNormalStop)
                 {
                     Debug.Log("SocketUtil----与服务端连接断开：" + ex.Message);
 
                     m_isStart = false;
-                    m_onSocketEvent_Close();
+
+                    if (m_onSocketEvent_Close != null)
+                    {
+                        m_onSocketEvent_Close();
+                    }
                 }
             }
         }
@@ -190,10 +194,11 @@ class SocketUtil
                 reces = reces.Replace("\r\n", "");
 
                 //Debug.Log("SocketUtil----收到服务端消息：" + reces);
+
                 if (reces.CompareTo("") != 0)
                 {
                     List<string> list = new List<string>();
-                    bool b = CommonUtil.splitStrIsPerfect(reces, list, "..");
+                    bool b = CommonUtil.splitStrIsPerfect(reces, list , m_packEndFlag);
 
                     if (b)
                     {
@@ -222,12 +227,16 @@ class SocketUtil
                 }
                 else
                 {
-                    if (m_onSocketEvent_Close != null && !m_isNormalStop)
+                    if (!m_isNormalStop)
                     {
                         Debug.Log("SocketUtil----被动与服务端连接断开");
 
                         m_isStart = false;
-                        m_onSocketEvent_Close();
+
+                        if (m_onSocketEvent_Close != null)
+                        {
+                            m_onSocketEvent_Close();
+                        }
                     }
 
                     return;
@@ -235,12 +244,16 @@ class SocketUtil
             }
             catch (SocketException ex)
             {
-                if (m_onSocketEvent_Close != null && !m_isNormalStop)
+                if (!m_isNormalStop)
                 {
                     Debug.Log("SocketUtil----被动与服务端连接断开：" + ex.Message);
 
                     m_isStart = false;
-                    m_onSocketEvent_Close();
+
+                    if (m_onSocketEvent_Close != null)
+                    {
+                        m_onSocketEvent_Close();
+                    }
                 }
 
                 return;
