@@ -85,4 +85,23 @@ class CommonUtil
     {
         return str.Substring(str.LastIndexOf(c) + 1);
     }
+
+    // size：物品数量
+    // jiange：物品间隔
+    // index：物品序号（从0开始）
+    // centerPosX：居中位置坐标
+    static public int getPosX(int size, int jiange, int index, int centerPosX)
+    {
+        int firstX;
+        if (size % 2 == 0)
+        {
+            firstX = (centerPosX - jiange / 2) - (size / 2 - 1) * jiange;
+        }
+        else
+        {
+            firstX = centerPosX - (size / 2) * jiange;
+        }
+
+        return firstX + jiange * index;
+    }
 }

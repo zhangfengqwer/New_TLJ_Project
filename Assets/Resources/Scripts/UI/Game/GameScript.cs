@@ -2,15 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour {
 
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
 
+    List<TLJCommon.PokerInfo> myPokerList = new List<TLJCommon.PokerInfo>();
+
+    public Button m_buttonOutPoker;
+
     // Use this for initialization
     void Start ()
     {
+        m_buttonOutPoker.interactable = false;
+
         // 设置Socket事件
         SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
         SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
@@ -52,6 +59,12 @@ public class GameScript : MonoBehaviour {
         reqExitRoom();
     }
 
+    public void onClickOutPoker()
+    {
+        m_buttonOutPoker.interactable = false;
+        reqOutPoker();
+    }
+
     //----------------------------------------------------------发送数据 start--------------------------------------------------
 
     // 请求加入房间
@@ -74,6 +87,18 @@ public class GameScript : MonoBehaviour {
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
         data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
+
+    // 请求出牌
+    public void reqOutPoker()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_OutPoker;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
@@ -146,25 +171,50 @@ public class GameScript : MonoBehaviour {
 
             case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
                 {
-                    string str = string.Format("人数已凑齐，可以开赛：{0}、{1}、{2}、{3}", jd["userList"][0]["uid"],jd["userList"][1]["uid"],jd["userList"][2]["uid"],jd["userList"][3]["uid"]);
-                    ToastScript.createToast(str);
-                    //for (int i = 0; i < jd["userList"].Count; i++)
-                    //{
-                    //    Debug.Log(jd["userList"][i]["name"]);
-                    //    Debug.Log(jd["userList"][i]["uid"]);
-                    //}
+                    //string str = string.Format("人数已凑齐，可以开赛：{0}、{1}、{2}、{3}", jd["userList"][0]["uid"],jd["userList"][1]["uid"],jd["userList"][2]["uid"],jd["userList"][3]["uid"]);
+                    //ToastScript.createToast(str);
+
+                    for (int i = 0; i < jd["pokerList"].Count; i++)
+                    {
+                        int num = (int)jd["pokerList"][i]["num"];
+                        int pokerType = (int)jd["pokerList"][i]["pokerType"];
+
+                        myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                    }
+
+                    startGame();
                 }
                 break;
 
             case (int)TLJCommon.Consts.PlayAction.PlayAction_OutPoker:
                 {
-
+                    string uid = (string)jd["uid"];
+                    if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                    {
+                        m_buttonOutPoker.interactable = true;
+                        ToastScript.createToast("轮到你出牌");
+                    }
                 }
                 break;
         }
     }
 
     //----------------------------------------------------------接收数据 end--------------------------------------------------
+
+    void startGame()
+    {
+        for (int i = 0; i < myPokerList.Count; i++)
+        {
+            GameObject poker = PokerScript.createPoker();
+            poker.transform.SetParent(GameObject.Find("Canvas").transform);
+
+            int x = CommonUtil.getPosX(myPokerList.Count, 40, i, 0);
+            poker.transform.localPosition = new Vector3(x, 0, 0);
+            poker.transform.localScale = new Vector3(1,1,1);
+
+            poker.GetComponent<PokerScript>().initPoker(myPokerList[i].m_num, (int)myPokerList[i].m_pokerType);
+        }
+    }
 
     //-------------------------------------------------------------------------------------------------------
     void onSocketConnect(bool result)
