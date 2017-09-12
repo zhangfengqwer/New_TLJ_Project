@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class ToastScript : MonoBehaviour {
 
@@ -52,6 +53,11 @@ public class ToastScript : MonoBehaviour {
         }
         else
         {
+            if (s_toactObj[s_toactObj.Count - 1] == null)
+            {
+                return;
+            }
+
             float tempY = s_toactObj[s_toactObj.Count - 1].transform.localPosition.y;
             obj.transform.localPosition = new Vector3(0, tempY - 50, 0);
         }
