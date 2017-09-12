@@ -5,8 +5,11 @@ using System.Collections.Generic;
 
 public class ToastScript : MonoBehaviour {
 
+    static List<GameObject> s_toactObj = new List<GameObject>();
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
     }
 	
 	// Update is called once per frame
@@ -16,6 +19,7 @@ public class ToastScript : MonoBehaviour {
         gameObject.transform.localPosition += new Vector3(0, move, 0);
         if(gameObject.transform.localPosition.y > 360)
         {
+            s_toactObj.Remove(gameObject);
             Destroy(gameObject);
             return;
         }
@@ -29,17 +33,28 @@ public class ToastScript : MonoBehaviour {
 
         obj.GetComponent<ToastScript>().setData(obj,text);
 
+        s_toactObj.Add(obj);
+
         return obj;
     }
 
-    void setData (GameObject obj, string text)
+    void setData(GameObject obj, string text)
     {
         m_text.text = text;
 
         m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         obj.transform.SetParent(m_canvas.transform);
-        obj.transform.localPosition = new Vector3(0,0,0);
-        obj.transform.localScale = new Vector3(1,1,1);
+        obj.transform.localScale = new Vector3(1, 1, 1);
+
+        if (s_toactObj.Count == 0)
+        {
+            obj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            float tempY = s_toactObj[s_toactObj.Count - 1].transform.localPosition.y;
+            obj.transform.localPosition = new Vector3(0, tempY - 50, 0);
+        }
     }
 
     //--------------------------------------------
