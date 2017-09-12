@@ -29,4 +29,11 @@ public class MainScript : MonoBehaviour {
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    public void OnHeadClick()
+    {
+        GameObject userInfo = Resources.Load<GameObject>("Prefabs/UI/userInfoPanel");
+        GameObject.Instantiate(userInfo,this.transform);
+        
+    }
 }
