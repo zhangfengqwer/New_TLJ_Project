@@ -7,20 +7,30 @@ using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour {
 
+    public Button m_buttonStartGame;
+    public Button m_buttonOutPoker;
+
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
 
     List<TLJCommon.PokerInfo> myPokerList = new List<TLJCommon.PokerInfo>();
     List<GameObject> m_myPokerObjList = new List<GameObject>();
     List<GameObject> m_outPokerObjList = new List<GameObject>();
-
-    public Button m_buttonOutPoker;
+    List<GameObject> m_otherPlayerUIObjList = new List<GameObject>();
+    
+    GameObject m_timer;
+    TimerScript m_timerScript;
 
     // Use this for initialization
     void Start ()
     {
-        m_buttonOutPoker.interactable = false;
+        initData();
 
+        initUI();
+    }
+
+    void initData()
+    {
         // 设置Socket事件
         SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
         SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
@@ -29,8 +39,44 @@ public class GameScript : MonoBehaviour {
 
         SocketUtil.getInstance().init(NetConfig.s_playService_ip, NetConfig.s_playService_port);
         SocketUtil.getInstance().start();
+
+        // 初始化定时器
+        {
+            m_timer = TimerScript.createTimer();
+            m_timerScript = m_timer.GetComponent<TimerScript>();
+            m_timerScript.setOnTimerEvent_TimeEnd(onTimerEventTimeEnd);
+        }
     }
-	
+
+    void initUI()
+    {
+        m_buttonOutPoker.interactable = false;
+
+        // 上边的玩家
+        {
+            GameObject obj = OtherPlayerUIScript.create();
+            obj.transform.localPosition = new Vector3(0, 300, 0);
+
+            m_otherPlayerUIObjList.Add(obj);
+        }
+
+        // 左边的玩家
+        {
+            GameObject obj = OtherPlayerUIScript.create();
+            obj.transform.localPosition = new Vector3(-550, 0, 0);
+
+            m_otherPlayerUIObjList.Add(obj);
+        }
+
+        // 右边的玩家
+        {
+            GameObject obj = OtherPlayerUIScript.create();
+            obj.transform.localPosition = new Vector3(550, 0, 0);
+
+            m_otherPlayerUIObjList.Add(obj);
+        }
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -64,7 +110,6 @@ public class GameScript : MonoBehaviour {
 
     public void onClickOutPoker()
     {
-        m_buttonOutPoker.interactable = false;
         reqOutPoker();
     }
 
@@ -97,6 +142,9 @@ public class GameScript : MonoBehaviour {
     // 请求出牌
     public void reqOutPoker()
     {
+        m_buttonOutPoker.interactable = false;
+        m_timerScript.stop();
+
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
@@ -154,6 +202,9 @@ public class GameScript : MonoBehaviour {
                             {
                                 int roomId = (int)jd["roomId"];
                                 ToastScript.createToast("加入房间成功：" + roomId);
+
+                                // 禁用开始游戏按钮
+                                m_buttonStartGame.transform.localScale = new Vector3(0,0,0);
                             }
                             break;
 
@@ -200,6 +251,14 @@ public class GameScript : MonoBehaviour {
                         int pokerType = (int)jd["pokerList"][i]["pokerType"];
 
                         myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                    }
+
+                    // 显示其他玩家的头像、昵称、金币
+                    for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
+                    {
+                        m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setHead("");
+                        m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setName("昵称");
+                        m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setGoldNum(1000);
                     }
 
                     startGame();
@@ -255,12 +314,26 @@ public class GameScript : MonoBehaviour {
                             }
                         }
 
-                        string uid = (string)jd["cur_uid"];
-                        if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                        // 轮到自己出牌
                         {
-                            m_buttonOutPoker.interactable = true;
-                            ToastScript.createToast("轮到你出牌");
+                            string uid = (string)jd["cur_uid"];
+                            if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            {
+                                m_buttonOutPoker.interactable = true;
+                                ToastScript.createToast("轮到你出牌");
+
+                                // 如果是自己出牌，就设置倒计时回调
+                                m_timerScript.setOnTimerEvent_TimeEnd(onTimerEventTimeEnd);
+                            }
+                            else
+                            {
+                                // 如果不是自己出牌，就取消倒计时回调
+                                m_timerScript.setOnTimerEvent_TimeEnd(null);
+                            }
                         }
+
+                        // 开始倒计时
+                        m_timerScript.start(10);
                     }
                     catch (Exception ex)
                     {
@@ -297,7 +370,7 @@ public class GameScript : MonoBehaviour {
             if (isMyPokerList)
             {
                 int x = CommonUtil.getPosX(objList.Count, 40, i, 0);
-                objList[i].transform.localPosition = new Vector3(x, -200, 0);
+                objList[i].transform.localPosition = new Vector3(x, -180, 0);
             }
             // 上一个玩家出的牌的牌堆
             else
@@ -369,5 +442,17 @@ public class GameScript : MonoBehaviour {
     void onSocketStop()
     {
         Debug.Log("主动与服务器断开连接");
+    }
+
+    void onTimerEventTimeEnd()
+    {
+        ToastScript.createToast("时间到，自动出牌");
+
+        if (m_myPokerObjList.Count > 0)
+        {
+            m_myPokerObjList[m_myPokerObjList.Count - 1].GetComponent<PokerScript>().onClickPoker();
+        }
+        
+        reqOutPoker();
     }
 }
