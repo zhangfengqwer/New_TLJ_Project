@@ -30,10 +30,22 @@ public class MainScript : MonoBehaviour {
         SceneManager.LoadScene("GameScene");
     }
 
-    public void OnHeadClick()
+    public void OnClickHead()
     {
-        GameObject userInfo = Resources.Load<GameObject>("Prefabs/UI/userInfoPanel");
+        GameObject userInfo = Resources.Load<GameObject>("Prefabs/UI/UserInfoPanel");
         GameObject.Instantiate(userInfo,this.transform);
         
+    }
+
+    public void OnClickSign()
+    {
+        GameObject WeeklySignPanel = Resources.Load<GameObject>("Prefabs/UI/WeeklySignPanel");
+        GameObject.Instantiate(WeeklySignPanel, this.transform);
+    }
+
+    public void OnClickInventory()
+    {
+        GameObject WeeklySignPanel = Resources.Load<GameObject>("Prefabs/UI/InventoryPanel");
+        GameObject.Instantiate(WeeklySignPanel, this.transform);
     }
 }

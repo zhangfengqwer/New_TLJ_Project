@@ -55,6 +55,7 @@ public class LoginScript : MonoBehaviour {
         }
 	}
 
+
     public void onClickLogin()
     {
         reqLogin();

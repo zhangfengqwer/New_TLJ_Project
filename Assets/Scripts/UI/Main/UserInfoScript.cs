@@ -22,14 +22,7 @@ public class UserInfoScript : MonoBehaviour {
         userImage.sprite = Resources.Load<Sprite>("Sprites/Game/Poker/icon_xiaowang");
     }
 
-    private void ScaleObject(float begin)
-    {
-        Vector3 vector3 = new Vector3() {x = begin, y = begin, z = begin};
-
-        transform.localScale = vector3;
-
-
-    }
+   
 
     /// <summary>
     /// 缩放粒子
@@ -59,6 +52,7 @@ public class UserInfoScript : MonoBehaviour {
 
     public void OnCloseClick()
     {
+
         Destroy(this.gameObject);
     }
 
