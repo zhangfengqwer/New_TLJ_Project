@@ -19,7 +19,7 @@ public class ScaleUtil : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (scaleTag)
