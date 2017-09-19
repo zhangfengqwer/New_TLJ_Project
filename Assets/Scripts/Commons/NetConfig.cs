@@ -68,7 +68,7 @@ public class NetConfig
                 s_mySqlService_ip = jd["MySqlService"]["ip"].ToString();
                 s_mySqlService_port = (int)jd["MySqlService"]["port"];
 
-                GameObject.Find("Canvas").GetComponent<LoginScript>().init();
+                GameObject.Find("Login").GetComponent<LoginScript>().init();
             }
         }
         catch (Exception ex)

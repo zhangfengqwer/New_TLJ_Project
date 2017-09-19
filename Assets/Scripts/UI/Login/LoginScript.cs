@@ -47,9 +47,10 @@ public class LoginScript : MonoBehaviour {
             ToastScript.createToast("连接服务器成功");
             m_isConnServerSuccess = false;
         }
-
+        print("sdf");
         for (int i = 0; i < m_dataList.Count; i++)
         {
+            print("取");
             onReceive(m_dataList[i]);
             m_dataList.RemoveAt(i);
         }
@@ -59,7 +60,7 @@ public class LoginScript : MonoBehaviour {
     public void onClickLogin()
     {
         reqLogin();
-        GetSignData();
+//        GetSignData();
     }
 
     private void GetSignData()
