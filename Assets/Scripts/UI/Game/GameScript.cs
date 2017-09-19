@@ -17,7 +17,8 @@ public class GameScript : MonoBehaviour {
     List<GameObject> m_myPokerObjList = new List<GameObject>();
     List<GameObject> m_outPokerObjList = new List<GameObject>();
     List<GameObject> m_otherPlayerUIObjList = new List<GameObject>();
-    
+    public GameObject m_myUserInfoUI;
+
     GameObject m_timer;
     TimerScript m_timerScript;
 
@@ -149,7 +150,7 @@ public class GameScript : MonoBehaviour {
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
         data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
-        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_OutPoker;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_PlayerOutPoker;
         
         // 自己出的牌
         {
@@ -253,19 +254,104 @@ public class GameScript : MonoBehaviour {
                         myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
                     }
 
-                    // 显示其他玩家的头像、昵称、金币
-                    for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
+                    //// 显示其他玩家的头像、昵称、金币
+                    //for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
+                    //{
+                    //    m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setHead("");
+                    //    m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setName("昵称");
+                    //    m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setGoldNum(1000);
+                    //}
+
+                    // 显示所有玩家的头像、昵称、金币
                     {
-                        m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setHead("");
-                        m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setName("昵称");
-                        m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().setGoldNum(1000);
+                        int myIndex = 0;
+                        for (int i = 0; i < jd["userList"].Count; i++)
+                        {
+                            if (jd["userList"][i]["uid"].ToString().CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            {
+                                //m_myUserInfoUI.GetComponent<MyUIScript>().setHead("");
+                                m_myUserInfoUI.GetComponent<MyUIScript>().setName(jd["userList"][i]["uid"].ToString());
+                                m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(i);
+
+                                myIndex = i;
+
+                                break;
+                            }
+                        }
+
+                        switch (myIndex)
+                        {
+                            case 0:
+                                {
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
+
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
+
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
+                                }
+                                break;
+
+                            case 1:
+                                {
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
+
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
+
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
+                                }
+                                break;
+
+                            case 2:
+                                {
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
+
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
+
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
+                                }
+                                break;
+
+                            case 3:
+                                {
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
+
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
+
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
+                                }
+                                break;
+                        }
                     }
 
                     startGame();
                 }
                 break;
 
-            case (int)TLJCommon.Consts.PlayAction.PlayAction_OutPoker:
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_CallPlayerOutPoker:
                 {
                     try
                     {
@@ -319,8 +405,18 @@ public class GameScript : MonoBehaviour {
                             string uid = (string)jd["cur_uid"];
                             if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
                             {
+                                int isFreeOutPoker = (int)jd["isFreeOutPoker"];
+                                if (isFreeOutPoker == 1)
+                                {
+                                    ToastScript.createToast("轮到你出牌：任意出");
+                                }
+                                else
+                                {
+                                    ToastScript.createToast("轮到你出牌：跟牌");
+                                }
+
                                 m_buttonOutPoker.interactable = true;
-                                ToastScript.createToast("轮到你出牌");
+                                
 
                                 // 如果是自己出牌，就设置倒计时回调
                                 m_timerScript.setOnTimerEvent_TimeEnd(onTimerEventTimeEnd);
@@ -339,6 +435,12 @@ public class GameScript : MonoBehaviour {
                     {
                         ToastScript.createToast("异常：" + ex.Message);
                     }
+                }
+                break;
+
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_GameOver:
+                {
+                    ToastScript.createToast("游戏结束");
                 }
                 break;
         }
