@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour {
@@ -238,6 +239,8 @@ public class GameScript : MonoBehaviour {
                             }
                             break;
                     }
+
+                    SceneManager.LoadScene("MainScene");
                 }
                 break;
 
