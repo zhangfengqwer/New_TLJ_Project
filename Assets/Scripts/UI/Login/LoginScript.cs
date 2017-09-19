@@ -59,6 +59,17 @@ public class LoginScript : MonoBehaviour {
     public void onClickLogin()
     {
         reqLogin();
+        GetSignData();
+    }
+
+    private void GetSignData()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = "Sign";
+        data["account"] = m_inputAccount.text;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
     }
 
     public void onClickQuickRegister()

@@ -35,7 +35,6 @@ public class WeeklySignScript : MonoBehaviour {
         for (int i = 0; i < 7; i++)
         {
             signObjects.Add(content.transform.GetChild(i).gameObject);
-            print(signObjects[i]);
         }
     }
     private void InitUi()

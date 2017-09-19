@@ -45,7 +45,14 @@ public class MainScript : MonoBehaviour {
 
     public void OnClickInventory()
     {
-        GameObject WeeklySignPanel = Resources.Load<GameObject>("Prefabs/UI/InventoryPanel");
-        GameObject.Instantiate(WeeklySignPanel, this.transform);
+        GameObject InventoryPanel = Resources.Load<GameObject>("Prefabs/UI/InventoryPanel");
+        GameObject.Instantiate(InventoryPanel, this.transform);
     }
+    public void OnClickShop()
+    {
+        GameObject ShopPanel = Resources.Load<GameObject>("Prefabs/UI/ShopPanel");
+        GameObject.Instantiate(ShopPanel, this.transform);
+    }
+
+
 }
