@@ -47,7 +47,6 @@ public class LoginScript : MonoBehaviour {
             ToastScript.createToast("连接服务器成功");
             m_isConnServerSuccess = false;
         }
-        print("sdf");
         for (int i = 0; i < m_dataList.Count; i++)
         {
             print("取");
@@ -60,7 +59,7 @@ public class LoginScript : MonoBehaviour {
     public void onClickLogin()
     {
         reqLogin();
-//        GetSignData();
+        GetSignData();
     }
 
     private void GetSignData()
@@ -68,7 +67,7 @@ public class LoginScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = "Sign";
-        data["account"] = m_inputAccount.text;
+        data["uid"] = "123";
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
