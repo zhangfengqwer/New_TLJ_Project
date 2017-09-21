@@ -216,4 +216,42 @@ public class LoginScript : MonoBehaviour {
     {
         Debug.Log("主动与服务器断开连接");
     }
+
+    private string account;
+    private string password = "123";
+
+
+    public void OnClickPalyer1()
+    {
+        account = "a";
+        SendRequest();
+    }
+
+    public void OnClickPalyer2()
+    {
+        account = "b";
+        SendRequest();
+    }
+
+    public void OnClickPalyer3()
+    {
+        account = "c";
+        SendRequest();
+    }
+
+    public void OnClickPalyer4()
+    {
+        account = "d";
+        SendRequest();
+    }
+    private void SendRequest()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = "Login";
+        data["account"] = account;
+        data["password"] = password;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
 }
