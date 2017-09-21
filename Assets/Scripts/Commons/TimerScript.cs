@@ -5,7 +5,14 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
+    public enum TimerType
+    {
+        TimerType_QiangZhu,
+        TimerType_OutPoker,
+    }
+
     public Text m_textTime;
+    TimerType m_timerType;
 
     public delegate void OnTimerEvent_TimeEnd();
     OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
@@ -19,7 +26,7 @@ public class TimerScript : MonoBehaviour
         GameObject obj = MonoBehaviour.Instantiate(prefab);
         obj.transform.SetParent(GameObject.Find("Canvas").transform);
         obj.transform.localScale = new Vector3(1,1,1);
-        obj.transform.localPosition = new Vector3(400,200,0);
+        obj.transform.localPosition = new Vector3(450,200,0);
 
         return obj;
     }
@@ -58,9 +65,11 @@ public class TimerScript : MonoBehaviour
         m_onTimerEvent_TimeEnd = onTimerEvent_TimeEnd;
     }
 
-    public void start(float seconds)
+    public void start(float seconds, TimerType timerType)
     {
         gameObject.transform.localScale = new Vector3(1,1,1);
+
+        m_timerType = timerType;
 
         // 设置最后渲染
         gameObject.transform.SetAsLastSibling();
@@ -78,5 +87,10 @@ public class TimerScript : MonoBehaviour
         m_isStart = false;
 
         m_textTime.text = "0";
+    }
+
+    public TimerType getTimerType()
+    {
+        return m_timerType;
     }
 }
