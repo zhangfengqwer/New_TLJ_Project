@@ -7,6 +7,9 @@ public class MyUIScript : MonoBehaviour {
 
     public Text m_textName;
     public Text m_textGoldNum;
+    public Image m_imageZhuangJiaIcon;
+
+    public string m_uid;
 
     // Use this for initialization
     void Start () {

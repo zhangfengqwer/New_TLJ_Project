@@ -8,6 +8,7 @@ public class TimerScript : MonoBehaviour
     public enum TimerType
     {
         TimerType_QiangZhu,
+        TimerType_MaiDi,
         TimerType_OutPoker,
     }
 
@@ -17,6 +18,7 @@ public class TimerScript : MonoBehaviour
     public delegate void OnTimerEvent_TimeEnd();
     OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
 
+    bool m_isNeedCallBack = true;
     bool m_isStart = false;
     float m_time;
 
@@ -52,9 +54,12 @@ public class TimerScript : MonoBehaviour
 
                 gameObject.transform.localScale = new Vector3(0,0,0);
 
-                if (m_onTimerEvent_TimeEnd != null)
+                if (m_isNeedCallBack)
                 {
-                    m_onTimerEvent_TimeEnd();
+                    if (m_onTimerEvent_TimeEnd != null)
+                    {
+                        m_onTimerEvent_TimeEnd();
+                    }
                 }
             }
         }
@@ -65,11 +70,12 @@ public class TimerScript : MonoBehaviour
         m_onTimerEvent_TimeEnd = onTimerEvent_TimeEnd;
     }
 
-    public void start(float seconds, TimerType timerType)
+    public void start(float seconds, TimerType timerType,bool isNeedCallBack)
     {
         gameObject.transform.localScale = new Vector3(1,1,1);
 
         m_timerType = timerType;
+        m_isNeedCallBack = isNeedCallBack;
 
         // 设置最后渲染
         gameObject.transform.SetAsLastSibling();
