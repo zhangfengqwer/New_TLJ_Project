@@ -134,6 +134,11 @@ public class PokerScript : MonoBehaviour {
         return m_isSelect;
     }
 
+    public void setIsSelect(bool isSelect)
+    {
+        m_isSelect = isSelect;
+    }
+
     public void onClickPoker()
     {
         if (m_isSelect)
