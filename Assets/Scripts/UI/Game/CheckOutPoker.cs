@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TLJCommon;
 using UnityEngine;
 
 public class CheckOutPoker
@@ -252,6 +253,8 @@ public class CheckOutPoker
     public static OutPokerType checkOutPokerType(List<TLJCommon.PokerInfo> outPokerList)
     {
         int count = outPokerList.Count;
+        PlayRuleUtil.SetPokerWeight(outPokerList,GameScript.m_levelPokerNum,(Consts.PokerType) GameScript.m_masterPokerType);
+
 
         if (count == 0)
         {
