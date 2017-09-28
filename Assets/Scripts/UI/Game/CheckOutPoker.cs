@@ -36,8 +36,6 @@ public class CheckOutPoker
             {
                 return false;
             }
-
-
 //            // 先检查花色是否一致
 //            {
 //                for (int i = 1; i < myOutPokerList.Count; i++)
