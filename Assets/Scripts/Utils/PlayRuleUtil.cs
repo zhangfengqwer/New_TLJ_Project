@@ -41,7 +41,7 @@ public class PlayRuleUtil
     //单牌是否为主牌
     static bool IsMasterPoker(PokerInfo pokerInfo)
     {
-        if (pokerInfo.m_num ==RoomData.m_levelPokerNum || (int)pokerInfo.m_pokerType == RoomData.m_masterPokerType
+        if (pokerInfo.m_num ==GameScript.m_levelPokerNum || (int)pokerInfo.m_pokerType == GameScript.m_masterPokerType
             || pokerInfo.m_pokerType == Consts.PokerType.PokerType_Wang)
         {
             return true;
