@@ -32,8 +32,8 @@ public class GameScript : MonoBehaviour {
     int m_qiangZhuTime = 10;            // 抢主时间
     int m_maiDiTime = 20;               // 埋底时间
 
-    int m_levelPokerNum = -1;           // 级牌
-    int m_masterPokerType = -1;         // 主牌花色
+    public static int m_levelPokerNum = -1;           // 级牌
+    public static int m_masterPokerType = -1;         // 主牌花色
 
     string m_teammateUID;               // 我的队友uid
     int m_isBanker;                     // 是否属于庄家一方

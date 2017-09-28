@@ -6,9 +6,9 @@ using UnityEngine;
 using TLJCommon;
 using UnityEngine.SceneManagement;
 
-public class GetSignRecordRequest : Request {
-
-    private  void Awake() 
+public class GetSignRecordRequest : Request
+{
+    private void Awake()
     {
         Tag = Consts.Tag_GetSignRecord;
     }
@@ -26,8 +26,8 @@ public class GetSignRecordRequest : Request {
     public override void OnResponse(string data)
     {
         JsonData jsonData = JsonMapper.ToObject(data);
-        var code = (int)jsonData["code"];
-        if (code == (int)Consts.Code.Code_OK)
+        var code = (int) jsonData["code"];
+        if (code == (int) Consts.Code.Code_OK)
         {
             LogicEnginerScript.IsSuccessList.Add(true);
             SignData.SignWeekDays = (int) jsonData["signWeekDays"];
@@ -42,9 +42,10 @@ public class GetSignRecordRequest : Request {
                 int nowYear = DateTime.Now.Year;
                 int nowMonth = DateTime.Now.Month;
                 int nowDay = DateTime.Now.Day;
-                print(updateTimeYear+"-"+ updateTimeMonth +"-"+ updateTimeDay);
+                print(updateTimeYear + "-" + updateTimeMonth + "-" + updateTimeDay);
                 //通过数据库的更新时间和本地时间作对比，判断是否签到过
-                if (updateTimeYear == nowYear && updateTimeMonth == nowMonth && updateTimeDay == nowDay)
+                if (updateTimeYear == nowYear && updateTimeMonth == nowMonth && updateTimeDay == nowDay &&
+                    SignData.SignWeekDays != 0)
                 {
                     SignData.IsSign = true;
                 }
@@ -77,7 +78,7 @@ public class GetSignRecordRequest : Request {
 //                        SignData.IsContinuousSign = false;
 //                    }
 
-                print("SignData.IsSign:"+SignData.IsSign
+                print("SignData.IsSign:" + SignData.IsSign
                       + "\nSignData.SignWeekDays:" + SignData.SignWeekDays);
             }
         }

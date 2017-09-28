@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 public class CheckOutPoker
 {
@@ -270,56 +271,64 @@ public class CheckOutPoker
             }
         }
         // 检查是否是拖拉机
-        else if (((count % 2) == 0) && (count >= 4))
+        else if (count % 2 == 0 && count >= 4)
         {
-            bool isSampleType = true;
-            
-            for (int i = 1; i < outPokerList.Count; i++)
+            if (PlayRuleUtil.CheckTuoLaJi(outPokerList))
             {
-                if (outPokerList[i].m_pokerType != outPokerList[0].m_pokerType)
-                {
-                    isSampleType = false;
-                    break;
-                }
-            }
-
-            if (isSampleType)
-            {
-                // 排序:从大到小
-                for (int i = 0; i < outPokerList.Count - 1; i++)
-                {
-                    for (int j = (i + 1); j < outPokerList.Count; j++)
-                    {
-                        if (outPokerList[j].m_num > outPokerList[i].m_num)
-                        {
-                            TLJCommon.PokerInfo temp = outPokerList[j];
-                            outPokerList[j] = outPokerList[i];
-                            outPokerList[i] = temp;
-                        }
-                    }
-                }
-
-                bool isTuoLaJi = true;
-                int beforeNum = outPokerList[0].m_num + 1;
-                for (int i = 0; i < outPokerList.Count - 1; i += 2)
-                {
-                    if ((outPokerList[i].m_num == outPokerList[i + 1].m_num) && ((outPokerList[i].m_num - beforeNum) == -1))
-                    {
-                        beforeNum = outPokerList[i].m_num;
-                    }
-                    else
-                    {
-                        isTuoLaJi = false;
-                        break;
-                    }
-                }
-
-                if (isTuoLaJi)
-                {
-                    return OutPokerType.OutPokerType_TuoLaJi;
-                }
+                Debug.Log("出的是拖拉机");
+                return OutPokerType.OutPokerType_TuoLaJi;
             }
         }
+//        else if (((count % 2) == 0) && (count >= 4))
+//        {
+//            bool isSampleType = true;
+//            
+//            for (int i = 1; i < outPokerList.Count; i++)
+//            {
+//                if (outPokerList[i].m_pokerType != outPokerList[0].m_pokerType)
+//                {
+//                    isSampleType = false;
+//                    break;
+//                }
+//            }
+//
+//            if (isSampleType)
+//            {
+//                // 排序:从大到小
+//                for (int i = 0; i < outPokerList.Count - 1; i++)
+//                {
+//                    for (int j = (i + 1); j < outPokerList.Count; j++)
+//                    {
+//                        if (outPokerList[j].m_num > outPokerList[i].m_num)
+//                        {
+//                            TLJCommon.PokerInfo temp = outPokerList[j];
+//                            outPokerList[j] = outPokerList[i];
+//                            outPokerList[i] = temp;
+//                        }
+//                    }
+//                }
+//
+//                bool isTuoLaJi = true;
+//                int beforeNum = outPokerList[0].m_num + 1;
+//                for (int i = 0; i < outPokerList.Count - 1; i += 2)
+//                {
+//                    if ((outPokerList[i].m_num == outPokerList[i + 1].m_num) && ((outPokerList[i].m_num - beforeNum) == -1))
+//                    {
+//                        beforeNum = outPokerList[i].m_num;
+//                    }
+//                    else
+//                    {
+//                        isTuoLaJi = false;
+//                        break;
+//                    }
+//                }
+//
+//                if (isTuoLaJi)
+//                {
+//                    return OutPokerType.OutPokerType_TuoLaJi;
+//                }
+//            }
+//        }
 
         return OutPokerType.OutPokerType_Error;
     }
