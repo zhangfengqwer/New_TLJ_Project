@@ -12,9 +12,11 @@ public class PlayRuleUtil
     {
         if (playerOutPokerList.Count % 2 == 0 && playerOutPokerList.Count >= 4)
         {
+
             //都是主牌或者都是同一花色的副牌
             if (IsAllMasterPoker(playerOutPokerList) || IsAllFuPoker(playerOutPokerList))
             {
+
                 //先判断是否为对子
                 for (int i = 0; i < playerOutPokerList.Count; i += 2)
                 {
@@ -27,7 +29,7 @@ public class PlayRuleUtil
                 //判断权重
                 for (int i = 0; i < playerOutPokerList.Count - 2; i += 2)
                 {
-                    if (playerOutPokerList[i + 2].m_weight - playerOutPokerList[i].m_weight != 1)
+                    if (Math.Abs(playerOutPokerList[i + 2].m_weight - playerOutPokerList[i].m_weight) != 1)
                     {
                         return false;
                     }
