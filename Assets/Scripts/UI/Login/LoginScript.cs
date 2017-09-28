@@ -95,9 +95,9 @@ public class LoginScript : MonoBehaviour
             string name = jd["userInfo"]["name"].ToString();
             int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
-//            UserDataScript.getInstance().getUserInfo().m_uid = uid;
-//            UserDataScript.getInstance().getUserInfo().m_name = name;
-//            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
+            UserDataScript.getInstance().getUserInfo().m_uid = uid;
+            UserDataScript.getInstance().getUserInfo().m_name = name;
+            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.Uid = uid;
             UserData.Name = name;
             UserData.GoldCount = goldNum;
@@ -125,9 +125,9 @@ public class LoginScript : MonoBehaviour
             string name = jd["userInfo"]["name"].ToString();
             int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
-//            UserDataScript.getInstance().getUserInfo().m_uid = uid;
-//            UserDataScript.getInstance().getUserInfo().m_name = name;
-//            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
+            UserDataScript.getInstance().getUserInfo().m_uid = uid;
+            UserDataScript.getInstance().getUserInfo().m_name = name;
+            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.Uid = uid;
             UserData.Name = name;
             UserData.GoldCount = goldNum;
