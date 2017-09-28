@@ -28,7 +28,7 @@ public class GameScript : MonoBehaviour {
     GameObject m_timer;
     TimerScript m_timerScript;
 
-    int m_outPokerTime = 1;            // 出牌时间 
+    int m_outPokerTime = 10;            // 出牌时间 
     int m_qiangZhuTime = 10;            // 抢主时间
     int m_maiDiTime = 20;               // 埋底时间
 
@@ -388,6 +388,7 @@ public class GameScript : MonoBehaviour {
 
         switch (playAction)
         {
+            // 加入游戏
             case (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
                 {
                     int code = (int)jd["code"];
@@ -414,6 +415,7 @@ public class GameScript : MonoBehaviour {
                 }
                 break;
 
+            // 退出游戏
             case (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame:
                 {
                     int code = (int)jd["code"];
@@ -438,6 +440,7 @@ public class GameScript : MonoBehaviour {
                 }
                 break;
 
+            // 开始游戏
             case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
                 {
                     // 级牌
@@ -559,6 +562,7 @@ public class GameScript : MonoBehaviour {
                 }
                 break;
 
+            // 抢主
             case (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu:
                 {
                     m_timerScript.stop();
@@ -654,8 +658,12 @@ public class GameScript : MonoBehaviour {
                 }
                 break;
 
+            // 埋底
             case (int)TLJCommon.Consts.PlayAction.PlayAction_MaiDi:
                 {
+                    // 禁用埋底按钮
+                    m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
+
                     m_timerScript.stop();
 
                     // 判断谁是庄家
@@ -697,10 +705,19 @@ public class GameScript : MonoBehaviour {
                 }
                 break;
 
+            // 通知某人出牌
             case (int)TLJCommon.Consts.PlayAction.PlayAction_CallPlayerOutPoker:
                 {
                     try
                     {
+                        // 所有牌设为未选中
+                        {
+                            for (int i = 0; i < m_myPokerObjList.Count; i++)
+                            {
+                                m_myPokerObjList[i].GetComponent<PokerScript>().setIsSelect(false);
+                            }
+                        }
+
                         // 庄家对家抓到的分数
                         {
                             int getScore = (int)jd["getScore"];
@@ -828,6 +845,51 @@ public class GameScript : MonoBehaviour {
                 }
                 break;
 
+            // 有人甩牌
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_ShuaiPai:
+                {
+                    try
+                    {
+                        string uid = (string)jd["uid"];
+
+                        // 显示出的牌
+                        {
+                            ToastScript.createToast("有人尝试甩牌");
+                            m_curRoundFirstOutPokerList.Clear();
+
+                            // 清空每个人座位上的牌
+                            {
+                                for (int i = 0; i < m_curRoundOutPokerList.Count; i++)
+                                {
+                                    for (int j = 0; j < m_curRoundOutPokerList[i].Count; j++)
+                                    {
+                                        Destroy(m_curRoundOutPokerList[i][j]);
+                                    }
+                                }
+
+                                m_curRoundOutPokerList.Clear();
+                            }
+
+                            List<TLJCommon.PokerInfo> outPokerList = new List<TLJCommon.PokerInfo>();
+                            for (int i = 0; i < jd["pokerList"].Count; i++)
+                            {
+                                int num = (int)jd["pokerList"][i]["num"];
+                                int pokerType = (int)jd["pokerList"][i]["pokerType"];
+
+                                outPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                            }
+
+                            showOtherOutPoker(outPokerList, uid);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ToastScript.createToast("异常：" + ex.Message);
+                    }
+                }
+                break;
+
+            // 游戏结束
             case (int)TLJCommon.Consts.PlayAction.PlayAction_GameOver:
                 {
                     try
@@ -1424,8 +1486,6 @@ public class GameScript : MonoBehaviour {
     // 时间到，自动出牌
     void autoOutPoker()
     {
-        ToastScript.createToast("时间到，自动出牌");
-
         // 全部设为未选中状态
         for (int i = 0; i < m_myPokerObjList.Count ; i++)
         {
@@ -1438,6 +1498,7 @@ public class GameScript : MonoBehaviour {
         // 自由出牌
         if (m_isFreeOutPoker)
         {
+            ToastScript.createToast("时间到，自动出牌：自由出牌");
             m_myPokerObjList[m_myPokerObjList.Count - 1].GetComponent<PokerScript>().onClickPoker();
             reqOutPoker();
         }
@@ -1450,62 +1511,64 @@ public class GameScript : MonoBehaviour {
             {
                 switch (CheckOutPoker.checkOutPokerType(m_curRoundFirstOutPokerList))
                 {
-                    case CheckOutPoker.OutPokerType.OutPokerType_Single:
+                    case CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi:
                         {
-                            // 先找同花色的
-                            for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
+                            ToastScript.createToast("时间到，自动出牌：拖拉机");
+
+                            List<TLJCommon.PokerInfo> firstOutPokerList_single = GameUtil.choiceSinglePoker(m_curRoundFirstOutPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+                            List<TLJCommon.PokerInfo> firstOutPokerList_double = GameUtil.choiceDoublePoker(m_curRoundFirstOutPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+
+                            List<TLJCommon.PokerInfo> myPokerList_single = GameUtil.choiceSinglePoker(myPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+                            List<TLJCommon.PokerInfo> myPokerList_double = GameUtil.choiceDoublePoker(myPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+
+                            int needAllPokerNum = firstOutPokerList_single.Count + firstOutPokerList_double.Count * 2;
+
+                            // 先找拖拉机
                             {
-                                if (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                for (int i = myPokerList_double.Count - 1; i >= firstOutPokerList_double.Count - 1; i--)
                                 {
-                                    m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-
-                                    reqOutPoker();
-
-                                    return;
-                                }
-                            }
-
-                            // 没有同花色的就随便出
-                            {
-                                m_myPokerObjList[m_myPokerObjList.Count - 1].GetComponent<PokerScript>().onClickPoker();
-                                reqOutPoker();
-
-                                return;
-                            }
-                        }
-                        break;
-
-                    case CheckOutPoker.OutPokerType.OutPokerType_Double:
-                        {
-                            // 先找同花色的对子
-                            for (int i = m_myPokerObjList.Count - 1; i >= 1; i--)
-                            {
-                                if (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
-                                {
-                                    if (m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                    bool find = true;
+                                    for (int j = 0; j < firstOutPokerList_double.Count - 1; j++)
                                     {
-                                        if (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum() == m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerNum())
+                                        if ((myPokerList_double[i - j].m_num - myPokerList_double[i - j - 1].m_num) != -1)
                                         {
-                                            m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-                                            m_myPokerObjList[i - 1].GetComponent<PokerScript>().onClickPoker();
-
-                                            reqOutPoker();
-
-                                            return;
+                                            find = false;
                                         }
                                     }
-                                }
-                            }
 
-                            // 没有同花色的对子就随便出两张同花色的牌
-                            for (int i = m_myPokerObjList.Count - 1; i >= 1; i--)
-                            {
-                                if (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
-                                {
-                                    if (m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                    if (find)
                                     {
-                                        m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-                                        m_myPokerObjList[i - 1].GetComponent<PokerScript>().onClickPoker();
+                                        for (int j = 0; i < firstOutPokerList_double.Count; j++)
+                                        {
+                                            // 对子要找两次
+                                            {
+                                                for (int k = m_myPokerObjList.Count - 1; k >= 0; k--)
+                                                {
+                                                    if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == myPokerList_double[i - j].m_num) &&
+                                                       (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                                    {
+                                                        if (!m_myPokerObjList[k].GetComponent<PokerScript>().getIsSelect())
+                                                        {
+                                                            m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                for (int k = m_myPokerObjList.Count - 1; k >= 0; k--)
+                                                {
+                                                    if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == myPokerList_double[i - j].m_num) &&
+                                                       (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                                    {
+                                                        if (!m_myPokerObjList[k].GetComponent<PokerScript>().getIsSelect())
+                                                        {
+                                                            m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
 
                                         reqOutPoker();
 
@@ -1514,128 +1577,116 @@ public class GameScript : MonoBehaviour {
                                 }
                             }
 
-                            // 没有两张同花色的牌就随便出任意两张牌
+                            // 没有拖拉机就按正常流程走
                             {
-                                m_myPokerObjList[m_myPokerObjList.Count - 1].GetComponent<PokerScript>().onClickPoker();
-                                m_myPokerObjList[m_myPokerObjList.Count - 2].GetComponent<PokerScript>().onClickPoker();
-
-                                reqOutPoker();
-
-                                return;
-                            }
-                        }
-                        break;
-
-                    case CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi:
-                        {
-                            // 先找同花色的拖拉机
-                            {
-                                List<TLJCommon.PokerInfo> tempList = new List<TLJCommon.PokerInfo>();
-                                for (int i = m_myPokerObjList.Count - 1; i >= (count - 1); i--)
                                 {
-                                    if (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                    int findAllNum = 0;
+
+                                    // 选择同花色单牌
                                     {
-                                        for (int j = 0; j < count; j++)
+                                        if (firstOutPokerList_single.Count > 0)
                                         {
-                                            tempList.Add(new TLJCommon.PokerInfo(m_myPokerObjList[i - j].GetComponent<PokerScript>().getPokerNum(), (TLJCommon.Consts.PokerType)m_myPokerObjList[i - j].GetComponent<PokerScript>().getPokerType()));
-                                        }
-                                        
-                                        // 找到拖拉机了
-                                        if (CheckOutPoker.checkOutPokerType(tempList) == CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi)
-                                        {
-                                            for (int j = 0; j < tempList.Count; j++)
+                                            int hasFindNum = 0;
+                                            for (int i = myPokerList_single.Count - 1; i >= 0; i--)
                                             {
-                                                for (int k = 0; k < m_myPokerObjList.Count; k++)
+                                                TLJCommon.PokerInfo pokerInfo = myPokerList_single[i];
+
+                                                for (int j = m_myPokerObjList.Count - 1; j >= 0; j--)
                                                 {
-                                                    if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)tempList[j].m_pokerType) &&
-                                                            (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == (int)tempList[j].m_num))
+                                                    if ((m_myPokerObjList[j].GetComponent<PokerScript>().getPokerNum() == pokerInfo.m_num) &&
+                                                       (m_myPokerObjList[j].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
                                                     {
-                                                        m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
-                                                    }
-                                                }
-                                            }
-
-                                            reqOutPoker();
-
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            tempList.Clear();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        tempList.Clear();
-                                    }
-                                }
-                            }
-
-                            // 没有同花色的拖拉机优先出对子
-                            {
-                                List<TLJCommon.PokerInfo> tempList = new List<TLJCommon.PokerInfo>();
-                                for (int i = m_myPokerObjList.Count - 1; i >= 1; i--)
-                                {
-                                    if ((m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType) &&
-                                        (m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType) &&
-                                        (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum() == (m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerNum())))
-                                    {
-                                        tempList.Add(new TLJCommon.PokerInfo(m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum(), (TLJCommon.Consts.PokerType)m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType()));
-                                        tempList.Add(new TLJCommon.PokerInfo(m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerNum(), (TLJCommon.Consts.PokerType)m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerType()));
-
-                                        if (tempList.Count == count)
-                                        {
-                                            if (CheckOutPoker.checkOutPokerType(tempList) == CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi)
-                                            {
-                                                for (int j = 0; j < tempList.Count; j++)
-                                                {
-                                                    for (int k = 0; k < m_myPokerObjList.Count; k++)
-                                                    {
-                                                        if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)tempList[j].m_pokerType) &&
-                                                                (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == (int)tempList[j].m_num))
+                                                        if (!m_myPokerObjList[j].GetComponent<PokerScript>().getIsSelect())
                                                         {
-                                                            m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
+                                                            m_myPokerObjList[j].GetComponent<PokerScript>().onClickPoker();
+
+                                                            ++hasFindNum;
+
+                                                            break;
                                                         }
                                                     }
                                                 }
 
-                                                reqOutPoker();
-
-                                                return;
+                                                if (hasFindNum == firstOutPokerList_single.Count)
+                                                {
+                                                    break;
+                                                }
                                             }
+
+                                            findAllNum += hasFindNum;
                                         }
                                     }
-                                }
 
-                                // 对子不足的情况下用单牌充数
-                                for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
-                                {
-                                    if ((m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                    // 选择同花色对子
                                     {
-                                        if (i >= 1)
+                                        if (firstOutPokerList_double.Count > 0)
                                         {
-                                            if ((m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                            int hasFindNum = 0;
+                                            for (int i = myPokerList_double.Count - 1; i >= 0; i--)
                                             {
-                                                if (m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum() != (m_myPokerObjList[i - 1].GetComponent<PokerScript>().getPokerNum()))
+                                                TLJCommon.PokerInfo pokerInfo = myPokerList_double[i];
+
+                                                // 对子要找两次
                                                 {
-                                                    tempList.Add(new TLJCommon.PokerInfo(m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum(), (TLJCommon.Consts.PokerType)m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType()));
-
-                                                    if (tempList.Count == count)
+                                                    for (int j = m_myPokerObjList.Count - 1; j >= 0; j--)
                                                     {
-                                                        if (CheckOutPoker.checkOutPokerType(tempList) == CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi)
+                                                        if ((m_myPokerObjList[j].GetComponent<PokerScript>().getPokerNum() == pokerInfo.m_num) &&
+                                                           (m_myPokerObjList[j].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
                                                         {
-                                                            for (int j = 0; j < tempList.Count; j++)
+                                                            if (!m_myPokerObjList[j].GetComponent<PokerScript>().getIsSelect())
                                                             {
-                                                                for (int k = 0; k < m_myPokerObjList.Count; k++)
-                                                                {
-                                                                    if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)tempList[j].m_pokerType) &&
-                                                                            (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == (int)tempList[j].m_num))
-                                                                    {
-                                                                        m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
-                                                                    }
-                                                                }
-                                                            }
+                                                                m_myPokerObjList[j].GetComponent<PokerScript>().onClickPoker();
 
+                                                                ++hasFindNum;
+
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    for (int j = m_myPokerObjList.Count - 1; j >= 0; j--)
+                                                    {
+                                                        if ((m_myPokerObjList[j].GetComponent<PokerScript>().getPokerNum() == pokerInfo.m_num) &&
+                                                           (m_myPokerObjList[j].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                                        {
+                                                            if (!m_myPokerObjList[j].GetComponent<PokerScript>().getIsSelect())
+                                                            {
+                                                                m_myPokerObjList[j].GetComponent<PokerScript>().onClickPoker();
+
+                                                                ++hasFindNum;
+
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                if (hasFindNum == (firstOutPokerList_double.Count * 2))
+                                                {
+                                                    break;
+                                                }
+                                            }
+
+                                            findAllNum += hasFindNum;
+                                        }
+                                    }
+
+                                    // 如果还差的话则拿剩余的同花色补充
+                                    {
+                                        if (findAllNum < needAllPokerNum)
+                                        {
+                                            for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
+                                            {
+                                                PokerScript pokerScript = m_myPokerObjList[i].GetComponent<PokerScript>();
+
+                                                if (pokerScript.getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                                {
+                                                    if (!pokerScript.getIsSelect())
+                                                    {
+                                                        pokerScript.onClickPoker();
+
+                                                        if ((++findAllNum) == needAllPokerNum)
+                                                        {
                                                             reqOutPoker();
 
                                                             return;
@@ -1646,70 +1697,227 @@ public class GameScript : MonoBehaviour {
                                         }
                                         else
                                         {
-                                            tempList.Add(new TLJCommon.PokerInfo(m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum(), (TLJCommon.Consts.PokerType)m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType()));
+                                            reqOutPoker();
 
-                                            if (tempList.Count == count)
-                                            {
-                                                if (CheckOutPoker.checkOutPokerType(tempList) == CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi)
-                                                {
-                                                    for (int j = 0; j < tempList.Count; j++)
-                                                    {
-                                                        for (int k = 0; k < m_myPokerObjList.Count; k++)
-                                                        {
-                                                            if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)tempList[j].m_pokerType) &&
-                                                                    (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == (int)tempList[j].m_num))
-                                                            {
-                                                                m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
-                                                            }
-                                                        }
-                                                    }
-
-                                                    reqOutPoker();
-
-                                                    return;
-                                                }
-                                            }
+                                            return;
                                         }
                                     }
-                                }
 
-                                // 同花色的单牌不够充数，就用其他花色补上
-                                for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
-                                {
-                                    if ((m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType() != (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                    // 如果还差的话则拿其他花色补充
                                     {
-                                        tempList.Add(new TLJCommon.PokerInfo(m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum(), (TLJCommon.Consts.PokerType)m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType()));
-
-                                        if (tempList.Count == count)
+                                        if (findAllNum < needAllPokerNum)
                                         {
-                                            if (CheckOutPoker.checkOutPokerType(tempList) == CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi)
+                                            for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
                                             {
-                                                for (int j = 0; j < tempList.Count; j++)
+                                                PokerScript pokerScript = m_myPokerObjList[i].GetComponent<PokerScript>();
+
+                                                if (pokerScript.getPokerType() != (int)m_curRoundFirstOutPokerList[0].m_pokerType)
                                                 {
-                                                    for (int k = 0; k < m_myPokerObjList.Count; k++)
+                                                    if (!pokerScript.getIsSelect())
                                                     {
-                                                        if ((m_myPokerObjList[k].GetComponent<PokerScript>().getPokerType() == (int)tempList[j].m_pokerType) &&
-                                                                (m_myPokerObjList[k].GetComponent<PokerScript>().getPokerNum() == (int)tempList[j].m_num))
+                                                        pokerScript.onClickPoker();
+
+                                                        if ((++findAllNum) == needAllPokerNum)
                                                         {
-                                                            m_myPokerObjList[k].GetComponent<PokerScript>().onClickPoker();
+                                                            reqOutPoker();
+
+                                                            return;
                                                         }
                                                     }
                                                 }
-
-                                                reqOutPoker();
-
-                                                return;
                                             }
                                         }
+                                        else
+                                        {
+                                            reqOutPoker();
+
+                                            return;
+                                        }
                                     }
+
+                                    ToastScript.createToast("拖拉机跟牌类型自动出牌失败：没找到足够的张数");
                                 }
                             }
                         }
                         break;
 
+                    case CheckOutPoker.OutPokerType.OutPokerType_Single:
+                    case CheckOutPoker.OutPokerType.OutPokerType_Double:
                     case CheckOutPoker.OutPokerType.OutPokerType_ShuaiPai:
+                    case CheckOutPoker.OutPokerType.OutPokerType_Error:
                         {
+                            List<TLJCommon.PokerInfo> firstOutPokerList_single =  GameUtil.choiceSinglePoker(m_curRoundFirstOutPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+                            List<TLJCommon.PokerInfo> firstOutPokerList_double = GameUtil.choiceDoublePoker(m_curRoundFirstOutPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
 
+                            List<TLJCommon.PokerInfo> myPokerList_single = GameUtil.choiceSinglePoker(myPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+                            List<TLJCommon.PokerInfo> myPokerList_double = GameUtil.choiceDoublePoker(myPokerList, m_curRoundFirstOutPokerList[0].m_pokerType);
+
+                            int needAllPokerNum = firstOutPokerList_single.Count + firstOutPokerList_double.Count * 2;
+
+                            {
+                                int findAllNum = 0;
+
+                                // 选择同花色单牌
+                                {
+                                    if (firstOutPokerList_single.Count > 0)
+                                    {
+                                        int hasFindNum = 0;
+                                        for (int i = myPokerList_single.Count - 1; i >= 0; i--)
+                                        {
+                                            TLJCommon.PokerInfo pokerInfo = myPokerList_single[i];
+
+                                            for (int j = m_myPokerObjList.Count - 1; j >= 0; j--)
+                                            {
+                                                if ((m_myPokerObjList[j].GetComponent<PokerScript>().getPokerNum() == pokerInfo.m_num) &&
+                                                   (m_myPokerObjList[j].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                                {
+                                                    if (!m_myPokerObjList[j].GetComponent<PokerScript>().getIsSelect())
+                                                    {
+                                                        m_myPokerObjList[j].GetComponent<PokerScript>().onClickPoker();
+
+                                                        ++hasFindNum;
+
+                                                        break;
+                                                    }
+                                                }
+                                            }
+
+                                            if (hasFindNum == firstOutPokerList_single.Count)
+                                            {
+                                                break;
+                                            }
+                                        }
+
+                                        findAllNum += hasFindNum;
+                                    }
+                                }
+
+                                // 选择同花色对子
+                                {
+                                    if (firstOutPokerList_double.Count > 0)
+                                    {
+                                        int hasFindNum = 0;
+                                        for (int i = myPokerList_double.Count - 1; i >= 0; i--)
+                                        {
+                                            TLJCommon.PokerInfo pokerInfo = myPokerList_double[i];
+
+                                            // 对子要找两次
+                                            {
+                                                for (int j = m_myPokerObjList.Count - 1; j >= 0; j--)
+                                                {
+                                                    if ((m_myPokerObjList[j].GetComponent<PokerScript>().getPokerNum() == pokerInfo.m_num) &&
+                                                       (m_myPokerObjList[j].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                                    {
+                                                        if (!m_myPokerObjList[j].GetComponent<PokerScript>().getIsSelect())
+                                                        {
+                                                            m_myPokerObjList[j].GetComponent<PokerScript>().onClickPoker();
+
+                                                            ++hasFindNum;
+
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+
+                                                for (int j = m_myPokerObjList.Count - 1; j >= 0; j--)
+                                                {
+                                                    if ((m_myPokerObjList[j].GetComponent<PokerScript>().getPokerNum() == pokerInfo.m_num) &&
+                                                       (m_myPokerObjList[j].GetComponent<PokerScript>().getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType))
+                                                    {
+                                                        if (!m_myPokerObjList[j].GetComponent<PokerScript>().getIsSelect())
+                                                        {
+                                                            m_myPokerObjList[j].GetComponent<PokerScript>().onClickPoker();
+
+                                                            ++hasFindNum;
+
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            if (hasFindNum == (firstOutPokerList_double.Count * 2))
+                                            {
+                                                break;
+                                            }
+                                        }
+
+                                        findAllNum += hasFindNum;
+                                    }
+                                }
+
+                                // 如果还差的话则拿剩余的同花色补充
+                                {
+                                    if (findAllNum < needAllPokerNum)
+                                    {
+                                        for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
+                                        {
+                                            PokerScript pokerScript = m_myPokerObjList[i].GetComponent<PokerScript>();
+
+                                            if (pokerScript.getPokerType() == (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                            {
+                                                if (!pokerScript.getIsSelect())
+                                                {
+                                                    pokerScript.onClickPoker();
+
+                                                    if ((++findAllNum) == needAllPokerNum)
+                                                    {
+                                                        reqOutPoker();
+
+                                                        return;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        reqOutPoker();
+
+                                        return;
+                                    }
+                                }
+
+                                // 如果还差的话则拿其他花色补充
+                                {
+                                    if (findAllNum < needAllPokerNum)
+                                    {
+                                        for (int i = m_myPokerObjList.Count - 1; i >= 0; i--)
+                                        {
+                                            PokerScript pokerScript = m_myPokerObjList[i].GetComponent<PokerScript>();
+
+                                            if (pokerScript.getPokerType() != (int)m_curRoundFirstOutPokerList[0].m_pokerType)
+                                            {
+                                                if (!pokerScript.getIsSelect())
+                                                {
+                                                    pokerScript.onClickPoker();
+
+                                                    if ((++findAllNum) == needAllPokerNum)
+                                                    {
+                                                        reqOutPoker();
+
+                                                        return;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        reqOutPoker();
+
+                                        return;
+                                    }
+                                }
+                                
+                                ToastScript.createToast("拖拉机跟牌类型自动出牌失败：没找到足够的张数");
+                            }
+                        }
+                        break;
+
+                    default:
+                        {
+                            ToastScript.createToast("时间到，自动出牌：未知类型");
                         }
                         break;
                 }

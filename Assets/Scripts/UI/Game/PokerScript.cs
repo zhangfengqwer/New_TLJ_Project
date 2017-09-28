@@ -19,12 +19,20 @@ public class PokerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+        m_isSelect = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        if (getIsSelect())
+        {
+            gameObject.transform.Find("Text_state").GetComponent<Text>().text = "1";
+        }
+        else
+        {
+            gameObject.transform.Find("Text_state").GetComponent<Text>().text = "0";
+        }
 	}
 
     public void initPoker(int num,int pokerType)
@@ -126,16 +134,23 @@ public class PokerScript : MonoBehaviour {
         return m_isSelect;
     }
 
+    public void setIsSelect(bool isSelect)
+    {
+        m_isSelect = isSelect;
+    }
+
     public void onClickPoker()
     {
         if (m_isSelect)
         {
-            gameObject.transform.localPosition -= new Vector3(0,30,0);
+            //gameObject.transform.localPosition -= new Vector3(0,30,0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x,-220,0);
             m_isSelect = false;
         }
         else
         {
-            gameObject.transform.localPosition += new Vector3(0, 30, 0);
+            //gameObject.transform.localPosition += new Vector3(0, 30, 0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -190, 0);
             m_isSelect = true;
         }
     }
