@@ -255,7 +255,6 @@ public class CheckOutPoker
         int count = outPokerList.Count;
         PlayRuleUtil.SetPokerWeight(outPokerList,GameScript.m_levelPokerNum,(Consts.PokerType) GameScript.m_masterPokerType);
 
-
         if (count == 0)
         {
             return OutPokerType.OutPokerType_Error;
