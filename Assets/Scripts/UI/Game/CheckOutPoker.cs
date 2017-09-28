@@ -22,16 +22,16 @@ public class CheckOutPoker
         // 自由出牌
         if (isFreeOutPoker)
         {
-            // 先检查花色是否一致
-            {
-                for (int i = 1; i < myOutPokerList.Count; i++)
-                {
-                    if (myOutPokerList[i].m_pokerType != myOutPokerList[0].m_pokerType)
-                    {
-                        return false;
-                    }
-                }
-            }
+            //// 先检查花色是否一致
+            //{
+            //    for (int i = 1; i < myOutPokerList.Count; i++)
+            //    {
+            //        if (myOutPokerList[i].m_pokerType != myOutPokerList[0].m_pokerType)
+            //        {
+            //            return false;
+            //        }
+            //    }
+            //}
 
             /*
              * 这里不对出牌的类型做检测，由服务器判断，因为有个甩牌，得服务端处理
