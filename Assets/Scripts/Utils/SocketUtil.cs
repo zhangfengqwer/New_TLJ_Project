@@ -122,15 +122,12 @@ class SocketUtil
             m_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ipEndPort = new IPEndPoint(m_ipAddress, m_ipPort);
             m_socket.Connect(ipEndPort);
-            
+            m_isStart = true;
+            m_isNormalStop = false;
             if (m_onSocketEvent_Connect != null)
             {
                 m_onSocketEvent_Connect(true);
             }
-
-            m_isStart = true;
-            m_isNormalStop = false;
-
             receive();
         }
         catch (SocketException ex)

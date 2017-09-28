@@ -50,6 +50,5 @@ public class ScaleUtil : MonoBehaviour
     public void OnClickClose()
     {
         scaleTag = true;
-
     }
 }

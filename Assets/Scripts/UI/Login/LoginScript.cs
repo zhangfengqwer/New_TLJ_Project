@@ -6,18 +6,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoginScript : MonoBehaviour {
-
+public class LoginScript : MonoBehaviour
+{
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
 
     public InputField m_inputAccount;
     public InputField m_inputPassword;
+    public GameObject LogicEnginer;
 
-    void Start ()
+    void Start()
     {
         NetConfig.reqNetConfig();
-
         m_inputAccount.text = "123";
         m_inputPassword.text = "123";
     }
@@ -37,10 +37,13 @@ public class LoginScript : MonoBehaviour {
 
     void OnDestroy()
     {
-        SocketUtil.getInstance().stop();
+        if (!LogicEnginerScript.IsLogicConnect)
+        {
+            SocketUtil.getInstance().stop();
+        }
     }
-    
-    void Update ()
+
+    void Update()
     {
         if (m_isConnServerSuccess)
         {
@@ -53,23 +56,12 @@ public class LoginScript : MonoBehaviour {
             onReceive(m_dataList[i]);
             m_dataList.RemoveAt(i);
         }
-	}
+    }
 
 
     public void onClickLogin()
     {
         reqLogin();
-        GetSignData();
-    }
-
-    private void GetSignData()
-    {
-        JsonData data = new JsonData();
-
-        data["tag"] = "Sign";
-        data["uid"] = "123";
-
-        SocketUtil.getInstance().sendMessage(data.ToJson());
     }
 
     public void onClickQuickRegister()
@@ -80,7 +72,7 @@ public class LoginScript : MonoBehaviour {
     void onReceive(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        string tag = (string)jd["tag"];
+        string tag = (string) jd["tag"];
 
         if (tag.CompareTo(TLJCommon.Consts.Tag_Login) == 0)
         {
@@ -95,24 +87,26 @@ public class LoginScript : MonoBehaviour {
     void onReceive_Login(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int)jd["code"];
+        int code = (int) jd["code"];
 
-        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             string uid = jd["userInfo"]["uid"].ToString();
             string name = jd["userInfo"]["name"].ToString();
-            int goldNum = (int)(jd["userInfo"]["goldNum"]);
+            int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
-            UserDataScript.getInstance().getUserInfo().m_uid = uid;
-            UserDataScript.getInstance().getUserInfo().m_name = name;
-            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
-
+//            UserDataScript.getInstance().getUserInfo().m_uid = uid;
+//            UserDataScript.getInstance().getUserInfo().m_name = name;
+//            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
+            UserData.Uid = uid;
+            UserData.Name = name;
+            UserData.GoldCount = goldNum;
             Debug.Log(uid);
             Debug.Log(name);
             Debug.Log(goldNum);
-
-            //ToastScript.createToast("登录成功");
-            SceneManager.LoadScene("MainScene");
+            SocketUtil.getInstance().stop();
+            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
+            GameObject.Instantiate(LogicEnginer);
         }
         else
         {
@@ -123,18 +117,20 @@ public class LoginScript : MonoBehaviour {
     void onReceive_QuickRegister(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int)jd["code"];
+        int code = (int) jd["code"];
 
-        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             string uid = jd["userInfo"]["uid"].ToString();
             string name = jd["userInfo"]["name"].ToString();
-            int goldNum = (int)(jd["userInfo"]["goldNum"]);
+            int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
-            UserDataScript.getInstance().getUserInfo().m_uid = uid;
-            UserDataScript.getInstance().getUserInfo().m_name = name;
-            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
-
+//            UserDataScript.getInstance().getUserInfo().m_uid = uid;
+//            UserDataScript.getInstance().getUserInfo().m_name = name;
+//            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
+            UserData.Uid = uid;
+            UserData.Name = name;
+            UserData.GoldCount = goldNum;
             //ToastScript.createToast("注册成功");
             SceneManager.LoadScene("MainScene");
         }
@@ -147,7 +143,7 @@ public class LoginScript : MonoBehaviour {
     // 请求登录
     public void reqLogin()
     {
-        if ((m_inputAccount.text.CompareTo("") == 0 ) || (m_inputPassword.text.CompareTo("") == 0))
+        if ((m_inputAccount.text.CompareTo("") == 0) || (m_inputPassword.text.CompareTo("") == 0))
         {
             ToastScript.createToast("请输入账号密码");
             return;
@@ -205,7 +201,7 @@ public class LoginScript : MonoBehaviour {
 
         m_dataList.Add(data);
     }
-    
+
     void onSocketClose()
     {
         Debug.Log("被动与服务器断开连接,尝试重新连接");
@@ -244,6 +240,7 @@ public class LoginScript : MonoBehaviour {
         account = "d";
         SendRequest();
     }
+
     private void SendRequest()
     {
         JsonData data = new JsonData();

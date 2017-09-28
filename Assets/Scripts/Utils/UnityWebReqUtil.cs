@@ -18,7 +18,7 @@ public class UnityWebReqUtil:MonoBehaviour
             {
                 _Instance = new UnityWebReqUtil();
 
-                GameObject obj = new GameObject();
+                GameObject obj = new GameObject("UnityWebReqUtil");
                 MonoBehaviour.DontDestroyOnLoad(obj);
                 _Instance = obj.AddComponent<UnityWebReqUtil>();
             }

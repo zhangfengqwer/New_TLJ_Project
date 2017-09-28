@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopPanelScript : MonoBehaviour {
+public class NoticePanelScript : MonoBehaviour {
     private UIWarpContent[] uiWarpContent;
     private List<string> _list;
     public GameObject obj1;
-    public GameObject obj2;
-    public GameObject obj3;
     // Use this for initialization
     void Start ()
 	{
@@ -22,21 +20,17 @@ public class ShopPanelScript : MonoBehaviour {
         {
             _list.Add("物品:" + Random.Range(0, 1000));
         }
-        uiWarpContent = gameObject.GetComponentsInChildren<UIWarpContent>(true);
-        print(uiWarpContent.Length);
+        uiWarpContent = gameObject.GetComponentsInChildren<UIWarpContent>();
         foreach (var VARIABLE in uiWarpContent)
         {
             VARIABLE.onInitializeItem = onInitializeItem;
             VARIABLE.Init(_list.Count);
         }
         obj1.SetActive(false);
-        obj2.SetActive(false);
-        obj3.SetActive(false);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
     {
-        
 //        var find = go.transform.Find("Text");
 //        Button button = go.GetComponent<Button>();
 //        button.onClick.RemoveAllListeners();
@@ -48,4 +42,7 @@ public class ShopPanelScript : MonoBehaviour {
 //        });
 //        find.GetComponent<Text>().text = _list[dataindex];
     }
+
+
+   
 }
