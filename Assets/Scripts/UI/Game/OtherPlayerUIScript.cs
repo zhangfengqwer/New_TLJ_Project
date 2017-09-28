@@ -7,8 +7,21 @@ using System;
 
 public class OtherPlayerUIScript : MonoBehaviour {
 
+    public enum Direction
+    {
+        Direction_Null,
+        Direction_Up,
+        Direction_Left,
+        Direction_Right,
+        Direction_Down,
+    }
+
     public Text m_textName;
     public Text m_textGoldNum;
+    public Image m_imageZhuangJiaIcon;
+
+    public string m_uid;
+    public Direction m_direction = Direction.Direction_Null;
 
     static public GameObject create()
     {
