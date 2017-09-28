@@ -275,7 +275,7 @@ public class CheckOutPoker
         {
             if (PlayRuleUtil.CheckTuoLaJi(outPokerList))
             {
-                Debug.Log("出的是拖拉机");
+                ToastScript.createToast("出的是拖拉机");
                 return OutPokerType.OutPokerType_TuoLaJi;
             }
         }
