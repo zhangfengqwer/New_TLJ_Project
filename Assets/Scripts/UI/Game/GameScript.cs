@@ -12,6 +12,7 @@ public class GameScript : MonoBehaviour {
     public Button m_buttonOutPoker;
     public Button m_buttonQiangZhu;
     public Button m_buttonMaiDi;
+    public Button m_buttonChat;
     public Text m_textScore;
 
     List<string> m_dataList = new List<string>();
@@ -75,6 +76,7 @@ public class GameScript : MonoBehaviour {
         m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
         m_buttonQiangZhu.transform.localScale = new Vector3(0,0,0);
         m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
+        m_buttonChat.transform.localScale = new Vector3(0, 0, 0);
 
         // 上边的玩家
         {
@@ -148,6 +150,11 @@ public class GameScript : MonoBehaviour {
     public void onClickMaiDi()
     {
         reqMaiDi();
+    }
+
+    public void onClickChat()
+    {
+        reqChat(1);
     }
 
     //----------------------------------------------------------发送数据 start--------------------------------------------------
@@ -367,6 +374,18 @@ public class GameScript : MonoBehaviour {
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
 
+    // 发送聊天信息
+    public void reqChat(int content_id)
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_Chat;
+        data["content_id"] = 1;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
     //----------------------------------------------------------发送数据 end--------------------------------------------------
 
     //----------------------------------------------------------接收数据 start--------------------------------------------------
@@ -661,9 +680,6 @@ public class GameScript : MonoBehaviour {
             // 埋底
             case (int)TLJCommon.Consts.PlayAction.PlayAction_MaiDi:
                 {
-                    // 禁用埋底按钮
-                    m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
-
                     m_timerScript.stop();
 
                     // 判断谁是庄家
@@ -708,6 +724,9 @@ public class GameScript : MonoBehaviour {
             // 通知某人出牌
             case (int)TLJCommon.Consts.PlayAction.PlayAction_CallPlayerOutPoker:
                 {
+                    // 禁用埋底按钮
+                    m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
+
                     try
                     {
                         // 所有牌设为未选中
@@ -980,6 +999,55 @@ public class GameScript : MonoBehaviour {
                     }
                 }
                 break;
+
+            // 聊天
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_Chat:
+                {
+                    try
+                    {
+                        string content_text = (string)jd["content_text"];
+                        string uid = (string)jd["uid"];
+
+                        if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                        {
+                            ChatContentScript.createChatContent(content_text, new Vector2(-260, -290), TextAnchor.MiddleLeft);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
+                            {
+                                if (m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
+                                {
+                                    switch (m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_direction)
+                                    {
+                                        case OtherPlayerUIScript.Direction.Direction_Up:
+                                            {
+                                                ChatContentScript.createChatContent(content_text, new Vector2(0, 300), TextAnchor.MiddleCenter);
+                                            }
+                                            break;
+
+                                        case OtherPlayerUIScript.Direction.Direction_Left:
+                                            {
+                                                ChatContentScript.createChatContent(content_text, new Vector2(-260, 0), TextAnchor.MiddleLeft);
+                                            }
+                                            break;
+
+                                        case OtherPlayerUIScript.Direction.Direction_Right:
+                                            {
+                                                ChatContentScript.createChatContent(content_text, new Vector2(380, 0), TextAnchor.MiddleRight);
+                                            }
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ToastScript.createToast("异常：" + ex.Message);
+                    }
+                }
+                break;
         }
     }
 
@@ -988,6 +1056,8 @@ public class GameScript : MonoBehaviour {
     void startGame()
     {
         m_buttonQiangZhu.transform.localScale = new Vector3(1, 1, 1);
+        m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
+
         ToastScript.createToast("开始抢主,本局打" + m_levelPokerNum.ToString());
 
         // 开始倒计时

@@ -26,8 +26,8 @@ public class NetConfig
 
     public static void reqNetConfig()
     {
-        UnityWebReqUtil.Instance.setCallBack(httpCallBack);
-        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json");
+        //UnityWebReqUtil.Instance.setCallBack(httpCallBack);
+        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json", httpCallBack);
     }
 
     static void httpCallBack(string tag,string data)
@@ -40,7 +40,7 @@ public class NetConfig
 
                 if (true)
                 {
-                    str = data.TrimStart();
+                    str = data;
                 }
                 // 使用本地的
                 else
