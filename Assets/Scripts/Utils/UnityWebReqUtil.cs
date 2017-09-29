@@ -8,7 +8,6 @@ public class UnityWebReqUtil:MonoBehaviour
     private static UnityWebReqUtil _Instance;
 
     public delegate void CallBack(string tag, string data);
-    CallBack s_callback = null;
 
     public static UnityWebReqUtil Instance
     {
@@ -26,19 +25,14 @@ public class UnityWebReqUtil:MonoBehaviour
 
             return _Instance;
         }
-    }    
-
-    public void setCallBack(CallBack callback)
-    {
-        s_callback = callback;
     }
 
-    public void Get(string url)
+    public void Get(string url, CallBack callback)
     {
-        StartCoroutine(DoGet(url));
+        StartCoroutine(DoGet(url, callback));
     }
 
-    IEnumerator DoGet(string url)
+    IEnumerator DoGet(string url, CallBack callback)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -47,27 +41,21 @@ public class UnityWebReqUtil:MonoBehaviour
             if (www.isError)
             {
                 Debug.Log(www.error);
-                if (s_callback != null)
-                {
-                    s_callback("get", www.error);
-                }
+                callback("get", www.error);
             }
             else
             {
-                if (s_callback != null)
-                {
-                    s_callback("get", www.downloadHandler.text);
-                }
+                callback("get", www.downloadHandler.text.TrimStart());
             }
         }
     }
 
-    public void Post(string url, WWWForm form)
+    public void Post(string url, WWWForm form, CallBack callback)
     {
-        StartCoroutine(DoPost(url, form));
+        StartCoroutine(DoPost(url, form, callback));
     }
 
-    IEnumerator DoPost(string url, WWWForm form)
+    IEnumerator DoPost(string url, WWWForm form, CallBack callback)
     {
         using (UnityWebRequest www = UnityWebRequest.Post(url, form))
         {
@@ -76,11 +64,11 @@ public class UnityWebReqUtil:MonoBehaviour
             if (www.isError)
             {
                 Debug.Log(www.error);
-                s_callback("post",www.error);
+                callback("post",www.error);
             }
             else
             {
-                s_callback("post",www.downloadHandler.text);
+                callback("post",www.downloadHandler.text.TrimStart());
             }
         }
     }

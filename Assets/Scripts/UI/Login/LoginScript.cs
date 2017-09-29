@@ -17,7 +17,12 @@ public class LoginScript : MonoBehaviour
 
     void Start()
     {
-        NetConfig.reqNetConfig();
+        // 拉取数值表
+        {
+            NetConfig.reqNetConfig();
+            PropData.getInstance().reqHttp();
+        }
+
         m_inputAccount.text = "123";
         m_inputPassword.text = "123";
     }
