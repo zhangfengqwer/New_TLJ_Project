@@ -9,6 +9,10 @@ public class MainScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
+        for (int i = 0; i < ChatData.getInstance().getChatTextList().Count; i++)
+        {
+            Debug.Log(ChatData.getInstance().getChatTextList()[i].m_text);
+        }
     }
 	
 	// Update is called once per frame
