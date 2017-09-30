@@ -25,11 +25,13 @@ public class CheckOutPoker
             //判断是否是主牌
             if (PlayRuleUtil.IsAllMasterPoker(myOutPokerList))
             {
+                ToastScript.createToast("主牌");
                 return true;
             }
             //判断是否为同花色副牌
             else if (PlayRuleUtil.IsAllFuPoker(myOutPokerList))
             {
+                ToastScript.createToast("同花色副牌");
                 return true;
             }
             else
@@ -159,7 +161,10 @@ public class CheckOutPoker
                     break;
 
                 case CheckOutPoker.OutPokerType.OutPokerType_Single:
+
+                    break;
                 case CheckOutPoker.OutPokerType.OutPokerType_Double:
+                    break;
                 case CheckOutPoker.OutPokerType.OutPokerType_ShuaiPai:
                 case CheckOutPoker.OutPokerType.OutPokerType_Error:
                     {
