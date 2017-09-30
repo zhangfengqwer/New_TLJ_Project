@@ -67,11 +67,13 @@ public class LoginScript : MonoBehaviour
 
     public void onClickLogin()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         reqLogin();
     }
 
     public void onClickQuickRegister()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         reqQuickRegister();
     }
 
