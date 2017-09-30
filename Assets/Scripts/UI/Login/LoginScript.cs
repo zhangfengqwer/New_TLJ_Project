@@ -21,6 +21,7 @@ public class LoginScript : MonoBehaviour
         {
             NetConfig.reqNetConfig();
             PropData.getInstance().reqHttp();
+            ChatData.getInstance().reqHttp();
         }
 
         m_inputAccount.text = "123";
@@ -66,11 +67,13 @@ public class LoginScript : MonoBehaviour
 
     public void onClickLogin()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         reqLogin();
     }
 
     public void onClickQuickRegister()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         reqQuickRegister();
     }
 

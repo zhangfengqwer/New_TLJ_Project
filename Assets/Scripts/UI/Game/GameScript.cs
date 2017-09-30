@@ -29,7 +29,7 @@ public class GameScript : MonoBehaviour {
     GameObject m_timer;
     TimerScript m_timerScript;
 
-    int m_outPokerTime = 10;            // 出牌时间 
+    int m_outPokerTime = 30;            // 出牌时间 
     int m_qiangZhuTime = 10;            // 抢主时间
     int m_maiDiTime = 20;               // 埋底时间
 
@@ -154,7 +154,7 @@ public class GameScript : MonoBehaviour {
 
     public void onClickChat()
     {
-        reqChat(1);
+        reqChat(2);
     }
 
     //----------------------------------------------------------发送数据 start--------------------------------------------------
@@ -382,7 +382,7 @@ public class GameScript : MonoBehaviour {
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
         data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_Chat;
-        data["content_id"] = 1;
+        data["content_id"] = content_id;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
@@ -1005,8 +1005,12 @@ public class GameScript : MonoBehaviour {
                 {
                     try
                     {
-                        string content_text = (string)jd["content_text"];
                         string uid = (string)jd["uid"];
+                        string content_text = "";
+                        if (ChatData.getInstance().getChatTextById((int)jd["content_id"]) != null)
+                        {
+                            content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
+                        }
 
                         if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
                         {
