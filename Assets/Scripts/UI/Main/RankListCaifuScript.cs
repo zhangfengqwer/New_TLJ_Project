@@ -55,11 +55,11 @@ public class RankListCaifuScript : MonoBehaviour
                 Ranking.gameObject.SetActive(true);
                 if (i == 1)
                 {
-                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Shengji/images/award_2");
+                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_2");
                 }
                 else if (i == 2)
                 {
-                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Shengji/images/award_3");
+                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_3");
                 }
             }
             else

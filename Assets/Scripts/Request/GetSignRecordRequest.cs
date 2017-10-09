@@ -54,33 +54,13 @@ public class GetSignRecordRequest : Request
                     SignData.IsSign = false;
                 }
 
-
-//                    int offsetTime = nowDay - updateTimeDay;
-//                    if (offsetTime == 0 )
-//                    {
-//                        //客户端不能继续签到
-//                        SignData.IsSign = true;
-//                        SignData.IsContinuousSign = true;
-//
-//                    }  else if (offsetTime == 1)
-//                    { 
-//                        //客户端可以签到
-//                        SignData.IsSign = false;
-//                        //客户端是连续签到的
-//                        SignData.IsContinuousSign = true;
-//                       
-//                    }
-//                    else
-//                    {  
-//                        //客户端可以签到
-//                        SignData.IsSign = false;
-//                        //客户端不是连续签到的
-//                        SignData.IsContinuousSign = false;
-//                    }
-
                 print("SignData.IsSign:" + SignData.IsSign
                       + "\nSignData.SignWeekDays:" + SignData.SignWeekDays);
             }
+        }
+        else
+        {
+            ToastScript.createToast("签到返回数据错误");
         }
     }
 }

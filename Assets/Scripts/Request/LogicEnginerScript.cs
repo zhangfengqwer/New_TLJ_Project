@@ -12,6 +12,7 @@ public class LogicEnginerScript : MonoBehaviour
     public static LogicEnginerScript Instance;
     private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
     private GetSignRecordRequest _getSignRecordRequest;
+    //判断loading中是否返回所有需要的信息
     public static List<bool> IsSuccessList = new List<bool>();
     private void Awake()
     {
@@ -38,7 +39,10 @@ public class LogicEnginerScript : MonoBehaviour
     {
         init();
         _getSignRecordRequest = GetComponent<GetSignRecordRequest>();
+      
+       
     }
+
 
     /// <summary>
     /// 设置Socket事件

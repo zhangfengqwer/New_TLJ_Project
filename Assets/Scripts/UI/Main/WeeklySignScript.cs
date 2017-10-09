@@ -127,6 +127,7 @@ public class WeeklySignScript : MonoBehaviour
 
     public void OnSignClick()
     {
+        LogicEnginerScript.Instance.init();
         //发送 签到请求
         LogicEnginerScript.Instance.GetComponent<SignRequest>().CallBack = SignCallBack;
         LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest();
