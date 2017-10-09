@@ -36,7 +36,6 @@ public class LoginScript : MonoBehaviour
         SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
         SocketUtil.getInstance().setOnSocketEvent_Close(onSocketClose);
         SocketUtil.getInstance().setOnSocketEvent_Stop(onSocketStop);
-
         SocketUtil.getInstance().init(NetConfig.s_loginService_ip, NetConfig.s_loginService_port);
         SocketUtil.getInstance().start();
     }
