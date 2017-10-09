@@ -50,5 +50,7 @@ public class ScaleUtil : MonoBehaviour
     public void OnClickClose()
     {
         scaleTag = true;
+
+        AudioScript.getAudioScript().playSound_ButtonClose();
     }
 }

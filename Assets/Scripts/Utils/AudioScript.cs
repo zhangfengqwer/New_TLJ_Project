@@ -189,6 +189,12 @@ public class AudioScript : MonoBehaviour {
         playSound("Audios/button_click");
     }
 
+    // 点击关闭按钮
+    public void playSound_ButtonClose()
+    {
+        playSound("Audios/button_close");
+    }
+
     //----------------------------------------------------------------------------播放 end
 
     //---------------------------------------------------
