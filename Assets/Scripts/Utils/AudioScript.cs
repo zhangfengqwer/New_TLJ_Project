@@ -20,11 +20,13 @@ public class AudioScript : MonoBehaviour {
     public void init ()
     {
         initMusicPlayer();
-        initSfxPlayer();
+        initSoundPlayer();
     }
 
     void initMusicPlayer ()
     {
+        m_musicVolume = PlayerPrefs.GetFloat("MusicVolume",1.0f);
+
         GameObject go = new GameObject("musicPlayer");
         go.transform.SetParent(transform, false);
         AudioSource player = go.AddComponent<AudioSource>();
@@ -32,15 +34,17 @@ public class AudioScript : MonoBehaviour {
 
         player.loop = true;
         player.mute = false;
-        player.volume = 0.2f;
+        player.volume = m_musicVolume;
         player.pitch = 1.0f;
         player.playOnAwake = false;
 
         m_musicEnable = getMusicEnable();
     }
 
-    void initSfxPlayer ()
+    void initSoundPlayer ()
     {
+        m_soundVolume = PlayerPrefs.GetFloat("SoundVolume", 1.0f);
+
         m_soundPlayer = new List<AudioSource>();
 
         GameObject go = new GameObject("soundPlayer");
@@ -50,7 +54,7 @@ public class AudioScript : MonoBehaviour {
 
         player.loop = false;
         player.mute = false;
-        player.volume = 1.0f;
+        player.volume = m_soundVolume;
         player.pitch = 1.0f;
         player.playOnAwake = false;
 
@@ -110,6 +114,8 @@ public class AudioScript : MonoBehaviour {
     {
         m_musicVolume = volume;
         m_musicPlayer.volume = m_musicVolume;
+
+       PlayerPrefs.SetFloat("MusicVolume", m_musicVolume);
     }
 
     public float getSoundVolume()
@@ -124,6 +130,8 @@ public class AudioScript : MonoBehaviour {
         {
             m_soundPlayer[i].volume = m_soundVolume;
         }
+
+        PlayerPrefs.SetFloat("SoundVolume", m_soundVolume);
     }
 
     public void stopMusic ()

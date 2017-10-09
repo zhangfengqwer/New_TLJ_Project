@@ -8,6 +8,15 @@ using UnityEngine;
 
 public class NetConfig
 {
+    enum NetType
+    {
+        NetType_Dev,
+        NetType_Test,
+        NetType_Formal,
+    }
+
+    static NetType m_netType = NetType.NetType_Test;
+
     // 登录服务器
     public static string s_loginService_ip;
     public static int s_loginService_port;
@@ -26,8 +35,27 @@ public class NetConfig
 
     public static void reqNetConfig()
     {
-        //UnityWebReqUtil.Instance.setCallBack(httpCallBack);
-        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json", httpCallBack);
+        switch (m_netType)
+        {
+            case NetType.NetType_Dev:
+                {
+                    UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_dev.json", httpCallBack);
+                }
+                break;
+
+            case NetType.NetType_Test:
+                {
+                    UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
+                }
+                break;
+
+            case NetType.NetType_Formal:
+                {
+                    //UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json", httpCallBack);
+                }
+                break;
+        }
+        
     }
 
     static void httpCallBack(string tag,string data)
