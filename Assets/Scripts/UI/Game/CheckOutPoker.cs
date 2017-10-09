@@ -25,37 +25,19 @@ public class CheckOutPoker
             //判断是否是主牌
             if (PlayRuleUtil.IsAllMasterPoker(myOutPokerList))
             {
+                ToastScript.createToast("主牌");
                 return true;
             }
             //判断是否为同花色副牌
             else if (PlayRuleUtil.IsAllFuPoker(myOutPokerList))
             {
+                ToastScript.createToast("同花色副牌");
                 return true;
             }
             else
             {
                 return false;
             }
-//            // 先检查花色是否一致
-//            {
-//                for (int i = 1; i < myOutPokerList.Count; i++)
-//                {
-//                    if (myOutPokerList[i].m_pokerType != myOutPokerList[0].m_pokerType)
-//                    {
-//                        return false;
-//                    }
-//                }
-//            }
-
-            /*
-             * 这里不对出牌的类型做检测，由服务器判断，因为有个甩牌，得服务端处理
-             */
-
-            //// 检查出牌的类型是否正确：单排、对子、拖拉机、甩牌
-            //if (checkOutPokerType(myOutPokerList) == OutPokerType.OutPokerType_Error)
-            //{
-            //    return false;
-            //}
         }
         // 跟牌
         else
@@ -179,7 +161,10 @@ public class CheckOutPoker
                     break;
 
                 case CheckOutPoker.OutPokerType.OutPokerType_Single:
+
+                    break;
                 case CheckOutPoker.OutPokerType.OutPokerType_Double:
+                    break;
                 case CheckOutPoker.OutPokerType.OutPokerType_ShuaiPai:
                 case CheckOutPoker.OutPokerType.OutPokerType_Error:
                     {
