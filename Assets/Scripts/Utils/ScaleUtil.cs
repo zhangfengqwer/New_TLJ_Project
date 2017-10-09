@@ -16,6 +16,8 @@ public class ScaleUtil : MonoBehaviour
     {
         target.transform.localScale = new Vector3(startScale,startScale,1);
         currentScale = startScale;
+
+        AudioScript.getAudioScript().playSound_LayerShow();
     }
 
     // Update is called once per frame
@@ -51,6 +53,6 @@ public class ScaleUtil : MonoBehaviour
     {
         scaleTag = true;
 
-        AudioScript.getAudioScript().playSound_ButtonClose();
+        AudioScript.getAudioScript().playSound_LayerClose();
     }
 }
