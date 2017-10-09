@@ -220,7 +220,8 @@ public class GameScript : MonoBehaviour {
         {
             // 检测出牌合理性
             {
-                if (!CheckOutPoker.checkOutPoker(m_isFreeOutPoker, myOutPokerList, m_curRoundFirstOutPokerList, myPokerList))
+                if (!CheckOutPoker.checkOutPoker(m_isFreeOutPoker, myOutPokerList, m_curRoundFirstOutPokerList,
+                    myPokerList, GameScript.m_levelPokerNum, GameScript.m_masterPokerType)) 
                 {
                     ToastScript.createToast("出的牌不合规则");
                     return;
@@ -1583,7 +1584,7 @@ public class GameScript : MonoBehaviour {
 
             if (m_myPokerObjList.Count >= count)
             {
-                switch (CheckOutPoker.checkOutPokerType(m_curRoundFirstOutPokerList))
+                switch (CheckOutPoker.checkOutPokerType(m_curRoundFirstOutPokerList,GameScript.m_levelPokerNum,GameScript.m_masterPokerType))
                 {
                     case CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi:
                         {
