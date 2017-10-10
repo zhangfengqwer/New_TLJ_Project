@@ -11,8 +11,17 @@ public class LoginScript : MonoBehaviour
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
 
+    public GameObject m_panel_choicePlatform;
+    public GameObject m_panel_login;
+    public GameObject m_panel_register;
+
     public InputField m_inputAccount;
     public InputField m_inputPassword;
+
+    public InputField m_inputAccount_register;
+    public InputField m_inputPassword_register;
+    public InputField m_inputSecondPassword_register;
+
     public GameObject LogicEnginer;
 
     void Start()
@@ -26,6 +35,9 @@ public class LoginScript : MonoBehaviour
 
         m_inputAccount.text = "123";
         m_inputPassword.text = "123";
+
+        m_panel_login.transform.localScale = new Vector3(0,0,0);
+        m_panel_register.transform.localScale = new Vector3(0, 0, 0);
     }
 
     // 等获取到服务器配置文件再调用
@@ -63,7 +75,39 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    // 显示登录界面（输入账号密码）
+    public void OnEnterLoginClick()
+    {
+        m_panel_choicePlatform.transform.localScale = new Vector3(0, 0, 0);
+        m_panel_login.transform.localScale = new Vector3(1, 1, 1);
+        m_panel_register.transform.localScale = new Vector3(0, 0, 0);
+    }
 
+    // 显示注册界面
+    public void OnEnterRegisterClick()
+    {
+        m_panel_choicePlatform.transform.localScale = new Vector3(0, 0, 0);
+        m_panel_login.transform.localScale = new Vector3(0,0,0);
+        m_panel_register.transform.localScale = new Vector3(1,1,1);
+    }
+
+    // 微信登录
+    public void onClickLogin_wechat()
+    {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
+        ToastScript.createToast("暂未开放");
+    }
+
+    // QQ登录
+    public void onClickLogin_qq()
+    {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
+        ToastScript.createToast("暂未开放");
+    }
+
+    // 官方登录
     public void onClickLogin()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
@@ -108,9 +152,7 @@ public class LoginScript : MonoBehaviour
             UserData.Uid = uid;
             UserData.Name = name;
             UserData.GoldCount = goldNum;
-            Debug.Log(uid);
-            Debug.Log(name);
-            Debug.Log(goldNum);
+
             SocketUtil.getInstance().stop();
             GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
             GameObject.Instantiate(LogicEnginer);
@@ -170,9 +212,15 @@ public class LoginScript : MonoBehaviour
     // 请求注册
     public void reqQuickRegister()
     {
-        if ((m_inputAccount.text.CompareTo("") == 0) || (m_inputPassword.text.CompareTo("") == 0))
+        if ((m_inputAccount_register.text.CompareTo("") == 0) || (m_inputSecondPassword_register.text.CompareTo("") == 0) || (m_inputPassword_register.text.CompareTo("") == 0))
         {
             ToastScript.createToast("请输入账号密码");
+            return;
+        }
+
+        if (m_inputSecondPassword_register.text.CompareTo(m_inputPassword_register.text) != 0)
+        {
+            ToastScript.createToast("密码不一致");
             return;
         }
 
@@ -180,8 +228,8 @@ public class LoginScript : MonoBehaviour
             JsonData data = new JsonData();
 
             data["tag"] = "QuickRegister";
-            data["account"] = m_inputAccount.text;
-            data["password"] = m_inputPassword.text;
+            data["account"] = m_inputAccount_register.text;
+            data["password"] = m_inputSecondPassword_register.text;
 
             SocketUtil.getInstance().sendMessage(data.ToJson());
         }

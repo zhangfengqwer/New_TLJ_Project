@@ -37,8 +37,6 @@ public class AudioScript : MonoBehaviour {
         player.volume = m_musicVolume;
         player.pitch = 1.0f;
         player.playOnAwake = false;
-
-        m_musicEnable = getMusicEnable();
     }
 
     void initSoundPlayer ()
@@ -57,51 +55,43 @@ public class AudioScript : MonoBehaviour {
         player.volume = m_soundVolume;
         player.pitch = 1.0f;
         player.playOnAwake = false;
-
-        m_soundEnable = getSoundEnable();
     }
 
     void playMusic (string audioPath)
     {
-        if(m_musicEnable)
-        {
-            m_musicPlayer.clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
-            m_musicPlayer.Play();
-            m_musicPlayer.volume = m_musicVolume;
-        }
+        m_musicPlayer.clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
+        m_musicPlayer.Play();
+        m_musicPlayer.volume = m_musicVolume;
     }
 
     void playSound (string audioPath)
     {
-        if(m_soundEnable)
+        for(int i = 0; i < m_soundPlayer.Count; i++)
         {
-            for(int i = 0; i < m_soundPlayer.Count; i++)
+            if(!m_soundPlayer[i].isPlaying)
             {
-                if(!m_soundPlayer[i].isPlaying)
-                {
-                    m_soundPlayer[i].clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
-                    m_soundPlayer[i].Play();
+                m_soundPlayer[i].clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
+                m_soundPlayer[i].Play();
 
-                    return;
-                }
+                return;
             }
+        }
 
-            // 如果执行到这里，说明暂时没有空余的音效组件使用，需要再新建一个
-            {
-                GameObject go = new GameObject("soundPlayer");
-                go.transform.SetParent(transform, false);
-                AudioSource player = go.AddComponent<AudioSource>();
-                m_soundPlayer.Add(player);
+        // 如果执行到这里，说明暂时没有空余的音效组件使用，需要再新建一个
+        {
+            GameObject go = new GameObject("soundPlayer");
+            go.transform.SetParent(transform, false);
+            AudioSource player = go.AddComponent<AudioSource>();
+            m_soundPlayer.Add(player);
 
-                player.loop = false;
-                player.mute = false;
-                player.volume = m_soundVolume;
-                player.pitch = 1.0f;
-                player.playOnAwake = false;
+            player.loop = false;
+            player.mute = false;
+            player.volume = m_soundVolume;
+            player.pitch = 1.0f;
+            player.playOnAwake = false;
 
-                player.clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
-                player.Play();
-            }
+            player.clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
+            player.Play();
         }
     }
 
@@ -153,28 +143,6 @@ public class AudioScript : MonoBehaviour {
         }
     }
 
-    public void setMusicEnable (bool enable)
-    {
-        PlayerPrefs.SetInt("music enable", enable ? 1 : 0);
-        m_musicEnable = enable;
-    }
-
-    public void setSoundEnable (bool enable)
-    {
-        PlayerPrefs.SetInt("sound enable", enable ? 1 : 0);
-        m_soundEnable = enable;
-    }
-
-    public bool getMusicEnable ()
-    {
-        return PlayerPrefs.GetInt("music enable", 1) == 1 ? true : false;
-    }
-
-    public bool getSoundEnable ()
-    {
-        return PlayerPrefs.GetInt("sound enable", 1) == 1 ? true : false;
-    }
-
     //----------------------------------------------------------------------------播放 start
 
     // 背景音乐
@@ -186,13 +154,19 @@ public class AudioScript : MonoBehaviour {
     // 点击按钮
     public void playSound_ButtonClick ()
     {
-        playSound("Audios/button_click");
+        playSound("Audios/yx_anniu");
     }
 
-    // 点击关闭按钮
-    public void playSound_ButtonClose()
+    // 界面弹出
+    public void playSound_LayerShow()
     {
-        playSound("Audios/button_close");
+        playSound("Audios/yx_jiemiantanchu");
+    }
+
+    // 界面关闭
+    public void playSound_LayerClose()
+    {
+        playSound("Audios/yx_jiemianguanbi");
     }
 
     //----------------------------------------------------------------------------播放 end
@@ -206,9 +180,6 @@ public class AudioScript : MonoBehaviour {
     AudioSource m_musicPlayer;
     //#音效会同时播放多个，所以用List;
     List<AudioSource> m_soundPlayer;
-
-    private bool m_musicEnable = true;
-    private bool m_soundEnable = true;
 
     float m_musicVolume = 1.0f;
     float m_soundVolume = 1.0f;
