@@ -683,6 +683,10 @@ public class PlayRuleUtil
         {
             tempAll.Add(poker);
         }
+        //设置权重
+        SetPokerWeight(firstPokerList, mLevelPokerNum, (Consts.PokerType) masterPokerType);
+        SetPokerWeight(myPokerList, mLevelPokerNum, (Consts.PokerType) masterPokerType);
+
 
         List<PokerInfo> resultList = new List<PokerInfo>();
         //第一个人出牌的牌数
