@@ -632,7 +632,11 @@ public class PlayRuleUtil
             }
         }
 
-        if (typeList.Count > 0) return true;
+        if (typeList.Count > 0)
+        {
+            typeList = typeList.OrderBy(a => a.m_weight).ToList();
+            return true;
+        }
         return false;
     }
 
