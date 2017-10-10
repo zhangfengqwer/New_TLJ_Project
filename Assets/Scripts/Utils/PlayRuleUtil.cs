@@ -687,7 +687,6 @@ public class PlayRuleUtil
         SetPokerWeight(firstPokerList, mLevelPokerNum, (Consts.PokerType) masterPokerType);
         SetPokerWeight(myPokerList, mLevelPokerNum, (Consts.PokerType) masterPokerType);
 
-
         List<PokerInfo> resultList = new List<PokerInfo>();
         //第一个人出牌的牌数
         int count = firstPokerList.Count;
@@ -758,9 +757,9 @@ public class PlayRuleUtil
                     break;
 
                 case CheckOutPoker.OutPokerType.OutPokerType_ShuaiPai:
+                    //第一个人出的是主牌
                     if (PlayRuleUtil.IsMasterPoker(firstPokerList[0], mLevelPokerNum, masterPokerType))
                     {
-                        //第一个人出的是主牌
                         List<PokerInfo> masterPoker = GetMasterPoker(tempAll, mLevelPokerNum, masterPokerType);
                         GetPokerWhenShuaiP(firstPokerList, masterPoker, tempAll, count, resultList);
 
@@ -866,7 +865,7 @@ public class PlayRuleUtil
         {
             //得到主牌中的对子
             List<PokerInfo> myDoublePoker = GetDoublePoker(masterPoker);
-            List<PokerInfo> mySinglePoker = GetSinglePoker(firstPokerList, firstDoublePoker);
+            List<PokerInfo> mySinglePoker = GetSinglePoker(masterPoker, myDoublePoker);
             if (myDoublePoker.Count <= firstDoublePoker.Count)
             {
                 tempList.AddRange(myDoublePoker);
