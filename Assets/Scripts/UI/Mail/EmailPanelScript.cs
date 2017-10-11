@@ -27,17 +27,24 @@ public class EmailPanelScript : MonoBehaviour
     {
         m_ListViewScript.clear();
 
-        for (int i = 0; i < 10; i++)
+        for(int i = 0; i < 6; i++)
+        {
+            MailData mailData = new MailData();
+            mailData.m_email_id = i;
+            mailData.m_title = "邮件";
+            mailData.m_content = "正文" + i;
+            mailData.m_time = "2017-10-11";
+            UserMailData.getInstance().addMailData(mailData);
+        }
+
+        for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
         {
             GameObject prefab = Resources.Load("Prefabs/UI/Item/Mail_List_Item") as GameObject;
             GameObject obj = MonoBehaviour.Instantiate(prefab);
-            obj.GetComponent<Mail_List_Item_Script>().setTitle("这是邮件标题");
-            obj.GetComponent<Mail_List_Item_Script>().setTime("2017-10-11");
+            obj.GetComponent<Mail_List_Item_Script>().setTitle(UserMailData.getInstance().getUserMailDataList()[i].m_title);
+            obj.GetComponent<Mail_List_Item_Script>().setTime(UserMailData.getInstance().getUserMailDataList()[i].m_time);
 
-
-            //GameObject temp = new GameObject();
-            //temp.AddComponent<Image>();
-            //temp.GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(300,50);
+            obj.transform.name = UserMailData.getInstance().getUserMailDataList()[i].m_email_id.ToString();
 
             m_ListViewScript.addItem(obj);
         }

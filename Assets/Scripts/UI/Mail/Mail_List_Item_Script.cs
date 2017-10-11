@@ -32,6 +32,6 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-
+        MailDetailScript.create(int.Parse(gameObject.transform.name));
     }
 }
