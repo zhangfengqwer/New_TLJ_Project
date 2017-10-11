@@ -41,7 +41,6 @@ public class MailDetailScript : MonoBehaviour {
                 break;
             }
         }
-        //m_content.text = content;
     }
 
     public void onClickDelete()
