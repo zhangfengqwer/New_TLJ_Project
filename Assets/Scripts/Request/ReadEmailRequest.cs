@@ -15,7 +15,7 @@ public class ReadEmailRequest : Request
 
     private void Awake()
     {
-        Tag = Consts.Tag_GetBag;
+        Tag = Consts.Tag_ReadMail;
     }
 
     public override void OnRequest()
