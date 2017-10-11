@@ -14,6 +14,15 @@ public class WeeklySignScript : MonoBehaviour
     private int totalSignDays;
     private List<SignItem> _signItems;
     private bool isSignSuccess = false;
+
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/WeeklySignPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+
+        return obj;
+    }
+
     void Start()
     {
         InitData();
