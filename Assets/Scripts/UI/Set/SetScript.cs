@@ -8,6 +8,14 @@ public class SetScript : MonoBehaviour {
     public Slider m_sliderMusic;
     public Slider m_sliderSound;
 
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/SettingPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+
+        return obj;
+    }
+
     // Use this for initialization
     void Start ()
     {

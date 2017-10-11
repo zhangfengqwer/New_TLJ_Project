@@ -11,6 +11,14 @@ public class UserInfoScript : MonoBehaviour {
     public Text shengLv;
     public Image userImage;
 
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/UserInfoPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+
+        return obj;
+    }
+
     private void Start()
     {
         nickName.text = "zfffff";

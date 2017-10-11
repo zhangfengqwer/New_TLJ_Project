@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryPanelScript : MonoBehaviour {
+public class BagPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
     private List<string> _list;
+
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/BagPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+
+        return obj;
+    }
+
     // Use this for initialization
     void Start ()
 	{

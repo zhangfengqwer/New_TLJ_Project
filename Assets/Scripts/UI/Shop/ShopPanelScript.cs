@@ -9,6 +9,15 @@ public class ShopPanelScript : MonoBehaviour {
     public GameObject obj1;
     public GameObject obj2;
     public GameObject obj3;
+
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShopPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+
+        return obj;
+    }
+
     // Use this for initialization
     void Start ()
 	{
