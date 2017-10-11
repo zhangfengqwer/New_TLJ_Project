@@ -194,7 +194,7 @@ class SocketUtil
 
                 reces = reces.Replace("\r\n", "");
 
-                //Debug.Log("SocketUtil----收到服务端消息：" + reces);
+//                Debug.Log("SocketUtil----收到服务端消息：" + reces);
 
                 if (reces.CompareTo("") != 0)
                 {

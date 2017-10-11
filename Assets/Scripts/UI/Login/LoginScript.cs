@@ -36,7 +36,7 @@ public class LoginScript : MonoBehaviour
         m_inputAccount.text = "123";
         m_inputPassword.text = "123";
 
-        m_panel_login.transform.localScale = new Vector3(0,0,0);
+        m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(0, 0, 0);
     }
 
@@ -54,10 +54,7 @@ public class LoginScript : MonoBehaviour
 
     void OnDestroy()
     {
-        if (!LogicEnginerScript.IsLogicConnect)
-        {
-            SocketUtil.getInstance().stop();
-        }
+        SocketUtil.getInstance().stop();
     }
 
     void Update()
@@ -87,8 +84,8 @@ public class LoginScript : MonoBehaviour
     public void OnEnterRegisterClick()
     {
         m_panel_choicePlatform.transform.localScale = new Vector3(0, 0, 0);
-        m_panel_login.transform.localScale = new Vector3(0,0,0);
-        m_panel_register.transform.localScale = new Vector3(1,1,1);
+        m_panel_login.transform.localScale = new Vector3(0, 0, 0);
+        m_panel_register.transform.localScale = new Vector3(1, 1, 1);
     }
 
     // 微信登录
@@ -150,11 +147,11 @@ public class LoginScript : MonoBehaviour
             UserDataScript.getInstance().getUserInfo().m_name = name;
             UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.uid = uid;
-          
 
-            SocketUtil.getInstance().stop();
-            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
-            GameObject.Instantiate(LogicEnginer);
+            SceneManager.LoadScene("MainScene");
+//            SocketUtil.getInstance().stop();
+//            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
+//            GameObject.Instantiate(LogicEnginer);
         }
         else
         {
@@ -178,11 +175,11 @@ public class LoginScript : MonoBehaviour
             UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.uid = uid;
 
-            SocketUtil.getInstance().stop();
-            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
-            GameObject.Instantiate(LogicEnginer);
+            //            SocketUtil.getInstance().stop();
+            //            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
+            //            GameObject.Instantiate(LogicEnginer);
             //ToastScript.createToast("注册成功");
-          
+            SceneManager.LoadScene("MainScene");
         }
         else
         {
@@ -213,7 +210,9 @@ public class LoginScript : MonoBehaviour
     // 请求注册
     public void reqQuickRegister()
     {
-        if ((m_inputAccount_register.text.CompareTo("") == 0) || (m_inputSecondPassword_register.text.CompareTo("") == 0) || (m_inputPassword_register.text.CompareTo("") == 0))
+        if ((m_inputAccount_register.text.CompareTo("") == 0) ||
+            (m_inputSecondPassword_register.text.CompareTo("") == 0) ||
+            (m_inputPassword_register.text.CompareTo("") == 0))
         {
             ToastScript.createToast("请输入账号密码");
             return;

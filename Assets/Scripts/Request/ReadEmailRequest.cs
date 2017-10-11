@@ -30,6 +30,5 @@ public class ReadEmailRequest : Request
 
     public override void OnResponse(string data)
     {
-
     }
 }
