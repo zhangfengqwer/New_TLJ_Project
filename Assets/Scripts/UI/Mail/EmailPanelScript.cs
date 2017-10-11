@@ -31,8 +31,7 @@ public class EmailPanelScript : MonoBehaviour
         {
             GameObject prefab = Resources.Load("Prefabs/UI/Item/Mail_List_Item") as GameObject;
             GameObject obj = MonoBehaviour.Instantiate(prefab);
-            obj.GetComponent<Mail_List_Item_Script>().setTitle(UserMailData.getInstance().getUserMailDataList()[i].m_title);
-            obj.GetComponent<Mail_List_Item_Script>().setTime(UserMailData.getInstance().getUserMailDataList()[i].m_time);
+            obj.GetComponent<Mail_List_Item_Script>().setMailData(UserMailData.getInstance().getUserMailDataList()[i]);
 
             obj.transform.name = UserMailData.getInstance().getUserMailDataList()[i].m_email_id.ToString();
 

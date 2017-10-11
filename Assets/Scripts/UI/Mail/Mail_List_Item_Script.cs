@@ -7,8 +7,11 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public Text m_text_title;
     public Text m_text_time;
+    public Image m_redPoint;
 
     public Button m_button_item;
+
+    MailData m_mailData;
 
     // Use this for initialization
     void Start () {
@@ -20,14 +23,20 @@ public class Mail_List_Item_Script : MonoBehaviour {
 		
 	}
 
-    public void setTitle(string str)
+    public void setMailData(MailData mailData)
     {
-        m_text_title.text = str;
-    }
+        m_mailData = mailData;
 
-    public void setTime(string str)
-    {
-        m_text_time.text = str;
+        {
+            m_text_title.text = m_mailData.m_title;
+            m_text_time.text = m_mailData.m_time;
+
+            // 已读
+            if (m_mailData.m_state == 1)
+            {
+                m_redPoint.transform.localScale = new Vector3(0,0,0);
+            }
+        }
     }
 
     public void onClickItem()
