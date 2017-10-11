@@ -35,7 +35,7 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Update()
     {
-        if (IsSuccessList.Count == 3)
+        if (IsSuccessList.Count == 2)
         {
             SceneManager.LoadScene("MainScene");
             IsSuccessList.Clear();
