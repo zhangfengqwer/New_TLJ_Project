@@ -18,6 +18,17 @@ public class ListViewScript : MonoBehaviour {
 
         return obj;
     }
+    
+    void Start()
+    {
+        m_listSize = gameObject.GetComponent<RectTransform>().sizeDelta;
+        m_content = gameObject.transform.Find("Viewport").Find("Content").gameObject;
+    }
+
+    public List<GameObject> getItemList()
+    {
+        return m_itemList;
+    }
 
     public void setSize(Vector2 listSize, Vector2 contentSize)
     {
@@ -71,16 +82,4 @@ public class ListViewScript : MonoBehaviour {
 
         m_itemList.Clear();
     }
-
-    // Use this for initialization
-    void Start ()
-    {
-        m_listSize = gameObject.GetComponent<RectTransform>().sizeDelta;
-        m_content = gameObject.transform.Find("Viewport").Find("Content").gameObject;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

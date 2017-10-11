@@ -65,6 +65,56 @@ public class UserMailData {
         m_myMailDataList.Add(mailData);
     }
 
+    // 邮件设为已读
+    public void setMailReaded(int email_id)
+    {
+        for (int i = 0; i < m_myMailDataList.Count; i++)
+        {
+            if (m_myMailDataList[i].m_email_id == email_id)
+            {
+                m_myMailDataList[i].m_state = 1;
+                break;
+            }
+        }
+    }
+
+    // 所有邮件设为已读
+    public void setAllMailReaded()
+    {
+        for (int i = 0; i < m_myMailDataList.Count; i++)
+        {
+            if (m_myMailDataList[i].m_state == 0)
+            {
+                m_myMailDataList[i].m_state = 1;
+            }
+        }
+    }
+
+    // 删除邮件
+    public void deleteMail(int email_id)
+    {
+        for (int i = 0; i < m_myMailDataList.Count; i++)
+        {
+            if (m_myMailDataList[i].m_email_id == email_id)
+            {
+                m_myMailDataList.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    // 删除所有邮件:必须是已读的
+    public void deleteAllMail()
+    {
+        for (int i = m_myMailDataList.Count - 1; i >= 0; i--)
+        {
+            if (m_myMailDataList[i].m_state == 1)
+            {
+                m_myMailDataList.RemoveAt(i);
+            }
+        }
+    }
+
     // 清空数据
     public static void clearData()
     {

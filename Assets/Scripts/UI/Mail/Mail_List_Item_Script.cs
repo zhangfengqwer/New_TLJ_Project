@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Mail_List_Item_Script : MonoBehaviour {
 
+    public EmailPanelScript m_parentScript;
+
     public Text m_text_title;
     public Text m_text_time;
     public Image m_redPoint;
@@ -40,18 +42,29 @@ public class Mail_List_Item_Script : MonoBehaviour {
         }
     }
 
+    public MailData getMailData()
+    {
+        return m_mailData;
+    }
+
     public void onClickItem()
     {
-        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
-        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
+        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().CallBack = onReceive_ReadMail;
+        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+    }
 
-        JsonData jsonData = new JsonData();
-        jsonData["tag"] = TLJCommon.Consts.Tag_ReadMail;
-        jsonData["uid"] = UserData.uid;
-        jsonData["email_id"] = 7;
-        string requestData = jsonData.ToJson();
-        SocketUtil.getInstance().sendMessage(requestData);
+    public void onReceive_ReadMail(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+        int email_id = (int)jd["email_id"];
 
-        //MailDetailScript.create(int.Parse(gameObject.transform.name));
+        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        {
+            m_parentScript.setMailReaded(email_id);
+        }
+
+        MailDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
     }
 }
