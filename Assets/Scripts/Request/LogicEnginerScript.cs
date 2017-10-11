@@ -14,6 +14,7 @@ public class LogicEnginerScript : MonoBehaviour
     //请求
     private GetSignRecordRequest _getSignRecordRequest;
     private GetUserInfoRequest _getUserInfoRequest;
+    private GetEmailRequest _getEmailRequest;
 
 
     //判断loading中是否返回所有需要的信息
@@ -34,7 +35,7 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Update()
     {
-        if (IsSuccessList.Count == 2)
+        if (IsSuccessList.Count == 3)
         {
             SceneManager.LoadScene("MainScene");
             IsSuccessList.Clear();
@@ -45,6 +46,7 @@ public class LogicEnginerScript : MonoBehaviour
     {
         _getSignRecordRequest = GetComponent<GetSignRecordRequest>();
         _getUserInfoRequest = GetComponent<GetUserInfoRequest>();
+        _getEmailRequest = GetComponent<GetEmailRequest>();
         init();
     }
 
@@ -85,7 +87,8 @@ public class LogicEnginerScript : MonoBehaviour
     private void SendRequest()
     {
         _getSignRecordRequest.OnRequest();
-        _getUserInfoRequest.OnRequest();
+//        _getUserInfoRequest.OnRequest();
+        _getEmailRequest.OnRequest();
     }
 
     private void onSocketReceive(string data)
