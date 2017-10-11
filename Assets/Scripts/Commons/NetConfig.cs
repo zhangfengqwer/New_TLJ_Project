@@ -15,6 +15,7 @@ public class NetConfig
         NetType_Formal,
     }
 
+    //static NetType m_netType = NetType.NetType_Dev;
     static NetType m_netType = NetType.NetType_Test;
 
     // 登录服务器

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,8 +42,16 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
-        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
+        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+
+        JsonData jsonData = new JsonData();
+        jsonData["tag"] = TLJCommon.Consts.Tag_ReadMail;
+        jsonData["uid"] = UserData.uid;
+        jsonData["email_id"] = 7;
+        string requestData = jsonData.ToJson();
+        SocketUtil.getInstance().sendMessage(requestData);
+
         //MailDetailScript.create(int.Parse(gameObject.transform.name));
     }
 }

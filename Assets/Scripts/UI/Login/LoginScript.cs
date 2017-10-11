@@ -22,8 +22,6 @@ public class LoginScript : MonoBehaviour
     public InputField m_inputPassword_register;
     public InputField m_inputSecondPassword_register;
 
-    public GameObject LogicEnginer;
-
     void Start()
     {
         // 拉取数值表
@@ -150,8 +148,7 @@ public class LoginScript : MonoBehaviour
             UserDataScript.getInstance().getUserInfo().m_name = name;
             UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.uid = uid;
-          
-
+            
             SocketUtil.getInstance().stop();
             GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
             GameObject.Instantiate(LogicEnginer);

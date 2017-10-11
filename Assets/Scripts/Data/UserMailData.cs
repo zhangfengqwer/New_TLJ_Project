@@ -53,20 +53,6 @@ public class UserMailData {
 
             m_myMailDataList.Add(mailData);
         }
-
-        string uid = jd["userInfo"]["uid"].ToString();
-        string name = jd["userInfo"]["name"].ToString();
-        int goldNum = (int)(jd["userInfo"]["goldNum"]);
-
-        UserDataScript.getInstance().getUserInfo().m_uid = uid;
-        UserDataScript.getInstance().getUserInfo().m_name = name;
-        UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
-        UserData.uid = uid;
-
-
-        SocketUtil.getInstance().stop();
-        GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
-        GameObject.Instantiate(LogicEnginer);
     }
 
     public List<MailData> getUserMailDataList()
