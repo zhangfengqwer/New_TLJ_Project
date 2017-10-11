@@ -149,9 +149,8 @@ public class LoginScript : MonoBehaviour
             UserDataScript.getInstance().getUserInfo().m_uid = uid;
             UserDataScript.getInstance().getUserInfo().m_name = name;
             UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
-            UserData.Uid = uid;
-            UserData.Name = name;
-            UserData.GoldCount = goldNum;
+            UserData.uid = uid;
+          
 
             SocketUtil.getInstance().stop();
             GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
@@ -177,11 +176,13 @@ public class LoginScript : MonoBehaviour
             UserDataScript.getInstance().getUserInfo().m_uid = uid;
             UserDataScript.getInstance().getUserInfo().m_name = name;
             UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
-            UserData.Uid = uid;
-            UserData.Name = name;
-            UserData.GoldCount = goldNum;
+            UserData.uid = uid;
+
+            SocketUtil.getInstance().stop();
+            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
+            GameObject.Instantiate(LogicEnginer);
             //ToastScript.createToast("注册成功");
-            SceneManager.LoadScene("MainScene");
+          
         }
         else
         {

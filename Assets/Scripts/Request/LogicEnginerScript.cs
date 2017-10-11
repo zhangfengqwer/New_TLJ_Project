@@ -11,9 +11,14 @@ public class LogicEnginerScript : MonoBehaviour
     public static bool IsLogicConnect = false;
     public static LogicEnginerScript Instance;
     private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
+    //请求
     private GetSignRecordRequest _getSignRecordRequest;
+    private GetUserInfoRequest _getUserInfoRequest;
+
+
     //判断loading中是否返回所有需要的信息
     public static List<bool> IsSuccessList = new List<bool>();
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,9 +31,10 @@ public class LogicEnginerScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
     private void Update()
     {
-        if (IsSuccessList.Count == 1)
+        if (IsSuccessList.Count == 2)
         {
             SceneManager.LoadScene("MainScene");
             IsSuccessList.Clear();
@@ -37,10 +43,9 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Start()
     {
-        init();
         _getSignRecordRequest = GetComponent<GetSignRecordRequest>();
-      
-       
+        _getUserInfoRequest = GetComponent<GetUserInfoRequest>();
+        init();
     }
 
 
@@ -64,14 +69,23 @@ public class LogicEnginerScript : MonoBehaviour
             Debug.Log("连接服务器成功");
             IsLogicConnect = true;
             m_isConnServerSuccess = true;
-            //发送 请求签到数据的请求
-            _getSignRecordRequest.OnRequest();
+            //发送 一些数据的请求
+            SendRequest();
         }
         else
         {
             Debug.Log("连接服务器失败，尝试重新连接");
             SocketUtil.getInstance().start();
         }
+    }
+
+    /// <summary>
+    /// loading过程中需要添加的请求
+    /// </summary>
+    private void SendRequest()
+    {
+        _getSignRecordRequest.OnRequest();
+        _getUserInfoRequest.OnRequest();
     }
 
     private void onSocketReceive(string data)

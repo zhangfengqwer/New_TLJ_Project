@@ -42,7 +42,7 @@ public class RankListJifenScript : MonoBehaviour
             var Text_Ranking = goChild.transform.Find("Text_Ranking");
             Text RankText = Text_Ranking.GetComponent<Text>();
             var Image_Head = goChild.transform.Find("Image_Head");
-            var Name = goChild.transform.Find("Name");
+            var Name = goChild.transform.Find("name");
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
             Image rankImage = Ranking.GetComponent<Image>();

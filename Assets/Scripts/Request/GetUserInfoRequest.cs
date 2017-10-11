@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using LitJson;
-using UnityEngine;
 using TLJCommon;
+using UnityEngine;
 
-public class SignRequest : Request {
+public class GetUserInfoRequest : Request {
+
     private void Awake()
     {
-        Tag = Consts.Tag_Sign;
+        Tag = Consts.Tag_UserInfo;
     }
-
-    public delegate void SignCallBack(bool falg);
-
-    public SignCallBack CallBack;
 
     public override void OnRequest()
     {
@@ -29,11 +26,17 @@ public class SignRequest : Request {
         var code = (int)jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            CallBack(true);
+            LogicEnginerScript.IsSuccessList.Add(true);
+            UserData.name = (string) jsonData["name"];
+            UserData.phone = (string) jsonData["phone"];
+            UserData.gold = (int) jsonData["gold"];
+            UserData.yuanbao = (int) jsonData["yuanbao"];
         }
         else
         {
-            CallBack(false);
+            ToastScript.createToast("用户信息数据错误");
         }
+
+     
     }
 }

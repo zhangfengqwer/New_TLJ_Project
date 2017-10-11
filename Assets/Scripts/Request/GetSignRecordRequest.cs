@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using LitJson;
-using UnityEngine;
+﻿using LitJson;
+using System;
 using TLJCommon;
-using UnityEngine.SceneManagement;
 
 public class GetSignRecordRequest : Request
 {
@@ -13,12 +9,11 @@ public class GetSignRecordRequest : Request
         Tag = Consts.Tag_GetSignRecord;
     }
 
-
     public override void OnRequest()
     {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
-        jsonData["uid"] = UserData.Uid;
+        jsonData["uid"] = UserData.uid;
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMessage(requestData);
     }
