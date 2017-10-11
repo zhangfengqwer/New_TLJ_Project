@@ -26,17 +26,7 @@ public class EmailPanelScript : MonoBehaviour
     public void loadMail()
     {
         m_ListViewScript.clear();
-
-        for(int i = 0; i < 6; i++)
-        {
-            MailData mailData = new MailData();
-            mailData.m_email_id = i;
-            mailData.m_title = "邮件";
-            mailData.m_content = "正文" + i;
-            mailData.m_time = "2017-10-11";
-            UserMailData.getInstance().addMailData(mailData);
-        }
-
+        
         for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
         {
             GameObject prefab = Resources.Load("Prefabs/UI/Item/Mail_List_Item") as GameObject;
