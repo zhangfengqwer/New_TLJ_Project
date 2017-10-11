@@ -7,7 +7,8 @@ using UnityEngine;
 public class ReadEmailRequest : Request
 {
     private int emailId;
-
+    private bool flag;
+    private string result;
     public void setEmailId(int id)
     {
         emailId = id;
@@ -18,6 +19,18 @@ public class ReadEmailRequest : Request
         Tag = Consts.Tag_ReadMail;
     }
 
+    private void Update()
+    {
+        if (flag)
+        {
+            CallBack(result);
+            flag = false;
+        }
+    }
+    public delegate void ReadMailCallBack(string result);
+
+    public ReadMailCallBack CallBack;
+
     public override void OnRequest()
     {
         JsonData jsonData = new JsonData();
@@ -25,10 +38,11 @@ public class ReadEmailRequest : Request
         jsonData["uid"] = UserData.uid;
         jsonData["email_id"] = emailId;
         string requestData = jsonData.ToJson();
-        LogicEnginerScript.Instance.SendMessage(requestData);
+        LogicEnginerScript.Instance.SendMyMessage(requestData);
     }
 
     public override void OnResponse(string data)
     {
+        flag = true;
     }
 }

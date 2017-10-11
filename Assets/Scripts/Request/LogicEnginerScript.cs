@@ -114,7 +114,7 @@ public class LogicEnginerScript : MonoBehaviour
         SocketUtil.getInstance().start();
     }
 
-    public void SendMessage(string sendData)
+    public void SendMyMessage(string sendData)
     {
         SocketUtil.getInstance().sendMessage(sendData);
     }

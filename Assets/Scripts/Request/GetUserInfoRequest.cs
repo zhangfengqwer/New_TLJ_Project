@@ -17,7 +17,7 @@ public class GetUserInfoRequest : Request {
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
         string requestData = jsonData.ToJson();
-        LogicEnginerScript.Instance.SendMessage(requestData);
+        LogicEnginerScript.Instance.SendMyMessage(requestData);
     }
 
     public override void OnResponse(string data)
