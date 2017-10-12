@@ -151,12 +151,16 @@ class SocketUtil
         if (m_isStart)
         {
             sendData = sendData.Replace("\r\n", "");
-            Debug.Log("SocketUtil----发送给服务端消息：" + sendData);
+            //Debug.Log("SocketUtil----发送给服务端消息：" + sendData);
 
             try
             {
                 byte[] bytes = new byte[1024];
-                bytes = Encoding.UTF8.GetBytes(sendData);
+
+                // 增加数据包尾部标识
+                bytes = Encoding.UTF8.GetBytes(sendData + m_packEndFlag);
+
+                Debug.Log("SocketUtil----发送给服务端消息：" + Encoding.UTF8.GetString(bytes, 0, bytes.Length));
                 m_socket.Send(bytes);
             }
             catch (SocketException ex)
