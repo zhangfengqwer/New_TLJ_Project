@@ -34,6 +34,6 @@ public class BagPanelScript : MonoBehaviour {
             PropDetailPanelScript.create(PropList[dataindex].prop_id, this);
         });
 
-        find.GetComponent<Text>().text = PropList[dataindex].prop_id + "";
+        find.GetComponent<Text>().text = PropList[dataindex].prop_id + "x"+ PropList[dataindex].prop_num;
     }
 }
