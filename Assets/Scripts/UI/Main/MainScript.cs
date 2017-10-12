@@ -94,9 +94,15 @@ public class MainScript : MonoBehaviour {
     {
         EmailPanelScript.create();
     }
+
     public void OnClickSetting()
     {
         SetScript.create();
+    }
+
+    public void OnClickKeFu()
+    {
+        KeFuPanelScript.create();
     }
 
 }
