@@ -1,15 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UserInfoScript : MonoBehaviour {
+public class UserInfoScript : MonoBehaviour
+{
     public Text nickName;
     public Text account;
     public Text gold;
     public Text yuanBaoCount;
     public Text shengLv;
-    public Text zongDuiJu;
+    public Text allGame;
     public Text taoPaoLv;
     public Text meiLiZhi;
     public Image userImage;
@@ -33,17 +35,28 @@ public class UserInfoScript : MonoBehaviour {
         account.text = UserData.name;
         gold.text = UserData.gold.ToString();
         yuanBaoCount.text = UserData.yuanbao.ToString();
-        shengLv.text = "100%";
-        zongDuiJu.text = "0";
-        taoPaoLv.text = "0%";
-        meiLiZhi.text = "100";
+        meiLiZhi.text = UserData.gameData.meiliZhi+"";
+        if (UserData.gameData.allGameCount == 0)
+        {
+            shengLv.text = "0%";
+            allGame.text = "0";
+            taoPaoLv.text = "0%";
+        }
+        else
+        {
+            //默认为保留两位
+            shengLv.text = String.Format("{0:F}", (UserData.gameData.winCount / (float)UserData.gameData.allGameCount) * 100) + "%";
+            allGame.text = UserData.gameData.allGameCount+"";
+            taoPaoLv.text = (UserData.gameData.runCount / (float)UserData.gameData.allGameCount) * 100 + "%";
+        }
+       
+      
 
         userImage.sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
     }
 
     public void OnCloseClick()
     {
-
         Destroy(this.gameObject);
     }
 
