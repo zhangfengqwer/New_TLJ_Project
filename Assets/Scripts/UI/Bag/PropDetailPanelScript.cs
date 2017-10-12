@@ -61,17 +61,23 @@ public class PropDetailPanelScript : MonoBehaviour {
     private void UpdatePropData()
     {
         List<UserPropData> userPropDatas = BagPanelScript.Instance.PropList;
-        foreach (var Prop in userPropDatas)
+
+        for (int i = 0; i < userPropDatas.Count; i++)
         {
+            UserPropData Prop = userPropDatas[i];
             if (m_propInfo.m_id == Prop.prop_id)
             {
                 Prop.prop_num--;
-                if (Prop.prop_num <= 0)
+                if (Prop.prop_num == 0)
                 {
-//                    userPropDatas.Remove(Prop);
+                    userPropDatas.Remove(Prop);
+                    BagPanelScript.Instance.deleteItem(i);
+                    Destroy(this.gameObject);
+                    return;
                 }
             }
         }
+
         print(userPropDatas.Count);
         BagPanelScript.Instance.UpdateUI();
     }

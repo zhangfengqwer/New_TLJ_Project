@@ -21,5 +21,4 @@ public class UserPropData
 {
     public int prop_id;
     public int prop_num;
-    public int type;
 }

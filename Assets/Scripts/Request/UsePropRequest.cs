@@ -45,5 +45,6 @@ public class UsePropRequest : Request {
     {
         result = data;
         flag = true;
+//        LogicEnginerScript.Instance._getUserBagRequest.OnRequest();
     }
 }
