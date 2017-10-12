@@ -15,7 +15,8 @@ public class LogicEnginerScript : MonoBehaviour
     private GetSignRecordRequest _getSignRecordRequest;
     private GetUserInfoRequest _getUserInfoRequest;
     private GetEmailRequest _getEmailRequest;
-    private GetUserBagRequest _getUserBagRequest;
+    [HideInInspector]
+    public GetUserBagRequest _getUserBagRequest;
 
 
     //判断loading中是否返回所有需要的信息
