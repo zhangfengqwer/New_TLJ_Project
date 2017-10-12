@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
+using TLJCommon;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,14 +20,11 @@ public class BagPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
-	    if (Instance == null)
-	    {
-	        Instance = this;
-	    }
-	    PropList = GetUserBagRequest.Instance.GetPropList();
-	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
-	    uiWarpContent.onInitializeItem = onInitializeItem;
-	    uiWarpContent.Init(PropList.Count);
+        // 拉取邮件
+        {
+            LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
+            LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+        }
     }
 
     public void deleteItem(int dataindex)
@@ -55,5 +54,32 @@ public class BagPanelScript : MonoBehaviour {
         });
 
         find.GetComponent<Text>().text = PropList[dataindex].prop_id + "x"+ PropList[dataindex].prop_num;
+    }
+
+    public void onReceive_GetUserBag(string data)
+    {
+        {
+            JsonData jsonData = JsonMapper.ToObject(data);
+            var code = (int)jsonData["code"];
+            if (code == (int)Consts.Code.Code_OK)
+            {
+                GetUserBagRequest.Instance._userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+            }
+            else
+            {
+                ToastScript.createToast("用户背包数据错误");
+
+                return;
+            }
+        }
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        PropList = GetUserBagRequest.Instance.GetPropList();
+        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+        uiWarpContent.onInitializeItem = onInitializeItem;
+        uiWarpContent.Init(PropList.Count);
     }
 }

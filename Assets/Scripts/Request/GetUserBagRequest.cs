@@ -5,8 +5,15 @@ using TLJCommon;
 using UnityEngine;
 
 public class GetUserBagRequest : Request {
-    private  List<UserPropData> _userPropDatas;
+    public  List<UserPropData> _userPropDatas;
     public static GetUserBagRequest Instance;
+
+    public delegate void GetUserBagCallBack(string result);
+    public GetUserBagCallBack CallBack = null;
+
+    private bool flag = false;
+    private string result;
+
     private void Awake()
     {
         Tag = Consts.Tag_GetBag;
@@ -15,6 +22,20 @@ public class GetUserBagRequest : Request {
             Instance = this;
         }
     }
+
+    void Update()
+    {
+        if (flag)
+        {
+            if (CallBack != null)
+            {
+                CallBack(result);
+            }
+
+            flag = false;
+        }
+    }
+
     // Use this for initialization
     public override void OnRequest()
     {
@@ -33,6 +54,8 @@ public class GetUserBagRequest : Request {
         {
             _userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
 
+            result = data;
+            flag = true;
         }
         else
         {

@@ -27,7 +27,11 @@ public class EmailPanelScript : MonoBehaviour
 
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
-        loadMail();
+        // 拉取邮件
+        {
+            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = onReceive_GetMail;
+            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+        }
     }
 
     public void loadMail()
@@ -210,5 +214,12 @@ public class EmailPanelScript : MonoBehaviour
         {
             deleteAllMail();
         }
+    }
+
+    public void onReceive_GetMail(string data)
+    {
+        UserMailData.getInstance().initJson(data);
+
+        loadMail();
     }
 }
