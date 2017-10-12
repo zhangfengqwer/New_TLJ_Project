@@ -29,7 +29,7 @@ public class DeleteEmailRequest : Request
         }
     }
     public delegate void ReadMailCallBack(string result);
-
+    
     public ReadMailCallBack CallBack;
 
     public override void OnRequest()
