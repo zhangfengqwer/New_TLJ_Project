@@ -85,6 +85,30 @@ public class NoticelDataScript
         return m_gonggaoDataList;
     }
 
+    public NoticeData getNoticeDataById(int notice_id)
+    {
+        NoticeData noticeData = null;
+        for (int i = 0; i < m_huodongDataList.Count; i++)
+        {
+            if (m_huodongDataList[i].m_notice_id == notice_id)
+            {
+                noticeData = m_huodongDataList[i];
+                break;
+            }
+        }
+
+        for (int i = 0; i < m_gonggaoDataList.Count; i++)
+        {
+            if (m_gonggaoDataList[i].m_notice_id == notice_id)
+            {
+                noticeData = m_gonggaoDataList[i];
+                break;
+            }
+        }
+
+        return noticeData;
+    }
+
     // 设为已读
     public void setNoticeReaded(int notice_id)
     {

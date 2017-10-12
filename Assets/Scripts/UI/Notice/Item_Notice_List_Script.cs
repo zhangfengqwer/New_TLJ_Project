@@ -49,10 +49,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-        Debug.Log("onClickItem");
-
         int notice_id = int.Parse(gameObject.transform.name);
         m_parentScript.setNoticeReaded(notice_id);
+        NoticeDetailScript.create(notice_id, m_parentScript);
 
         //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
         //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().CallBack = onReceive_ReadMail;
@@ -70,6 +69,6 @@ public class Item_Notice_List_Script : MonoBehaviour {
             m_parentScript.setNoticeReaded(notice_id);
         }
 
-        //MailDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
+        NoticeDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
     }
 }
