@@ -15,6 +15,7 @@ public class LogicEnginerScript : MonoBehaviour
     private GetSignRecordRequest _getSignRecordRequest;
     private GetUserInfoRequest _getUserInfoRequest;
     private GetEmailRequest _getEmailRequest;
+    private GetUserBagRequest _getUserBagRequest;
 
 
     //判断loading中是否返回所有需要的信息
@@ -42,6 +43,7 @@ public class LogicEnginerScript : MonoBehaviour
         _getSignRecordRequest = GetComponent<GetSignRecordRequest>();
         _getUserInfoRequest = GetComponent<GetUserInfoRequest>();
         _getEmailRequest = GetComponent<GetEmailRequest>();
+        _getUserBagRequest = GetComponent<GetUserBagRequest>();
         init();
     }
 
@@ -84,6 +86,7 @@ public class LogicEnginerScript : MonoBehaviour
         _getSignRecordRequest.OnRequest();
         _getUserInfoRequest.OnRequest();
         _getEmailRequest.OnRequest();
+        _getUserBagRequest.OnRequest();
     }
 
     private void onSocketReceive(string data)
