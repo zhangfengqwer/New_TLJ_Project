@@ -4,9 +4,8 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class GetUserBagRequest : Request {
-    private static List<UserPropData> _userPropDatas;
-
+public class GetUserBagRequest : Request
+{ 
     private void Awake()
     {
         Tag = Consts.Tag_GetBag;
@@ -27,16 +26,11 @@ public class GetUserBagRequest : Request {
         var code = (int)jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            _userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+            UserBagData.getInstance().initJson(data);
         }
         else
         {
             ToastScript.createToast("用户背包数据错误");
         }
-    }
-
-    public static List<UserPropData> GetPropList()
-    {
-        return _userPropDatas;
     }
 }

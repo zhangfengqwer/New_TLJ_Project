@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BagPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
-    private List<UserPropData> PropList;
 
     public static GameObject create()
     {
@@ -16,14 +15,13 @@ public class BagPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
-	    PropList = GetUserBagRequest.GetPropList();
 	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
 	    uiWarpContent.onInitializeItem = onInitializeItem;
-	    uiWarpContent.Init(PropList.Count);
-	   
+
+        uiWarpContent.Init(UserBagData.getInstance().getUserBagDataList().Count);
     }
 
-    private void onInitializeItem(GameObject go, int dataindex)
+    void onInitializeItem(GameObject go, int dataindex)
     {
         var find = go.transform.Find("Text");
         Button button = go.GetComponent<Button>();
@@ -31,9 +29,16 @@ public class BagPanelScript : MonoBehaviour {
         button.onClick.AddListener(delegate()
         {
             // 显示道具详情
-            PropDetailPanelScript.create(PropList[dataindex].prop_id, this);
+            PropDetailPanelScript.create(UserBagData.getInstance().getUserBagDataList()[dataindex].prop_id, this);
         });
 
-        find.GetComponent<Text>().text = PropList[dataindex].prop_id + "x"+ PropList[dataindex].prop_num;
+        find.GetComponent<Text>().text = UserBagData.getInstance().getUserBagDataList()[dataindex].prop_id + "x"+ UserBagData.getInstance().getUserBagDataList()[dataindex].prop_num;
+    }
+
+    public void useProp(int prop_id)
+    {
+        UserBagData.getInstance().useProp(prop_id,1);
+
+        // 刷新list
     }
 }
