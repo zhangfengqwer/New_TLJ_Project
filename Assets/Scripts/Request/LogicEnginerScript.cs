@@ -82,8 +82,8 @@ public class LogicEnginerScript : MonoBehaviour
     private void SendRequest()
     {
         _getSignRecordRequest.OnRequest();
-        //_getUserInfoRequest.OnRequest();
-        _getEmailRequest.OnRequest();
+//        _getUserInfoRequest.OnRequest();
+//        _getEmailRequest.OnRequest();
     }
 
     private void onSocketReceive(string data)
