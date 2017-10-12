@@ -49,6 +49,8 @@ class PropData
             PropInfo temp = new PropInfo();
 
             temp.m_id = (int)jd[i]["prop_id"];
+            temp.m_type = (int)jd[i]["type"];
+
             temp.m_name = (string)jd[i]["prop_name"];
             temp.m_desc = (string)jd[i]["desc"];
             temp.m_icon = (string)jd[i]["icon"];
@@ -82,6 +84,8 @@ class PropData
 class PropInfo
 {
     public int m_id = 0;
+    public int m_type = 0;           // 0:可以直接使用    1:不可以直接使用
+
     public string m_name = "";
     public string m_desc = "";
     public string m_icon = "";
