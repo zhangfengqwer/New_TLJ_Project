@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class BagPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
-    private List<UserPropData> PropList;
+    public List<UserPropData> PropList;
+
+    public static BagPanelScript Instance;
 
     public static GameObject create()
     {
@@ -16,11 +18,20 @@ public class BagPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
+	    if (Instance == null)
+	    {
+	        Instance = this;
+	    }
 	    PropList = GetUserBagRequest.GetPropList();
 	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
 	    uiWarpContent.onInitializeItem = onInitializeItem;
 	    uiWarpContent.Init(PropList.Count);
-	   
+    }
+
+    public void UpdateUI()
+    {
+        print(PropList.Count);
+        uiWarpContent.Init(PropList.Count);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)

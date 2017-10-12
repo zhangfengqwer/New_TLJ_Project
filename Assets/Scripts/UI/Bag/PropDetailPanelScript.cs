@@ -50,15 +50,30 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void onReceive_UseProp(string data)
     {
-        //JsonData jd = JsonMapper.ToObject(data);
-        //int code = (int)jd["code"];
-        //int email_id = (int)jd["email_id"];
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        {
+            UpdatePropData();
+        }
+    }
 
-        //if (code == (int)TLJCommon.Consts.Code.Code_OK)
-        //{
-        //    m_parentScript.deleteMail(email_id);
-        //    Destroy(gameObject);
-        //}
+    private void UpdatePropData()
+    {
+        List<UserPropData> userPropDatas = BagPanelScript.Instance.PropList;
+        foreach (var Prop in userPropDatas)
+        {
+            if (m_propInfo.m_id == Prop.prop_id)
+            {
+                Prop.prop_num--;
+                if (Prop.prop_num <= 0)
+                {
+//                    userPropDatas.Remove(Prop);
+                }
+            }
+        }
+        print(userPropDatas.Count);
+        BagPanelScript.Instance.UpdateUI();
     }
 
     // Use this for initialization
