@@ -78,7 +78,6 @@ public class PropDetailPanelScript : MonoBehaviour {
             }
         }
 
-        print(userPropDatas.Count);
         BagPanelScript.Instance.UpdateUI();
     }
 

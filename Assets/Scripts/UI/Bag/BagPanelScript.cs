@@ -22,6 +22,7 @@ public class BagPanelScript : MonoBehaviour {
 	    {
 	        Instance = this;
 	    }
+
 	    PropList = GetUserBagRequest.Instance.GetPropList();
 	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
 	    uiWarpContent.onInitializeItem = onInitializeItem;
@@ -30,7 +31,6 @@ public class BagPanelScript : MonoBehaviour {
 
     public void deleteItem(int dataindex)
     {
-        print("删除:"+dataindex);
         uiWarpContent.DelItem(dataindex);
     }
 

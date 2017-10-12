@@ -32,7 +32,6 @@ public class GetUserBagRequest : Request {
         if (code == (int) Consts.Code.Code_OK)
         {
             _userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
-
         }
         else
         {
