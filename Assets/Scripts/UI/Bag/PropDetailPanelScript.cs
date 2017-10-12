@@ -12,17 +12,16 @@ public class PropDetailPanelScript : MonoBehaviour {
     public Text m_text_desc;
     public Image m_image_icon;
     public Button m_button_use;
-
     PropInfo m_propInfo = null;
 
     public static GameObject create(int prop_id, BagPanelScript parentScript)
     {
+       
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/PropDetailPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
 
         obj.GetComponent<PropDetailPanelScript>().setPropId(prop_id);
         obj.GetComponent<PropDetailPanelScript>().m_parentScript = parentScript;
-
         return obj;
     }
 
@@ -44,9 +43,9 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void onClickUseProp()
     {
-        //LogicEnginerScript.Instance.GetComponent<DeleteEmailRequest>().setEmailId(m_mailData.m_email_id);
-        //LogicEnginerScript.Instance.GetComponent<DeleteEmailRequest>().CallBack = onReceive_DeleteMail;
-        //LogicEnginerScript.Instance.GetComponent<DeleteEmailRequest>().OnRequest();
+        LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
+        LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
+        LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
     }
 
     public void onReceive_UseProp(string data)
