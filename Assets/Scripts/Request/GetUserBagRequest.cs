@@ -5,6 +5,7 @@ using TLJCommon;
 using UnityEngine;
 
 public class GetUserBagRequest : Request {
+    private static List<UserPropData> _userPropDatas;
 
     private void Awake()
     {
@@ -22,5 +23,20 @@ public class GetUserBagRequest : Request {
 
     public override void OnResponse(string data)
     {
+        JsonData jsonData = JsonMapper.ToObject(data);
+        var code = (int)jsonData["code"];
+        if (code == (int) Consts.Code.Code_OK)
+        {
+            _userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+        }
+        else
+        {
+            ToastScript.createToast("用户背包数据错误");
+        }
+    }
+
+    public static List<UserPropData> GetPropList()
+    {
+        return _userPropDatas;
     }
 }

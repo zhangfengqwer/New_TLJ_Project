@@ -16,3 +16,10 @@ public class UserGameData
     public int runCount { get; set; }
     public int meiliZhi { get; set; }
 }
+
+public class UserPropData
+{
+    public int prop_id;
+    public int prop_num;
+    public int type;
+}
