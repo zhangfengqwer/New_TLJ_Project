@@ -26,17 +26,15 @@ public class GetUserInfoRequest : Request {
         var code = (int)jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            LogicEnginerScript.IsSuccessList.Add(true);
             UserData.name = (string) jsonData["name"];
             UserData.phone = (string) jsonData["phone"];
             UserData.gold = (int) jsonData["gold"];
             UserData.yuanbao = (int) jsonData["yuanbao"];
+            UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
         }
         else
         {
             ToastScript.createToast("用户信息数据错误");
         }
-
-     
     }
 }
