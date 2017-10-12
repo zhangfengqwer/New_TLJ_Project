@@ -30,11 +30,11 @@ public class BagPanelScript : MonoBehaviour {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
         {
-            ToastScript.createToast(PropList[dataindex].prop_id+"");
+//            ToastScript.createToast(PropList[dataindex].prop_id+"");
             print(PropList[dataindex]);
 
             // 显示道具详情
-            PropDetailPanelScript.create(101,this);
+            PropDetailPanelScript.create(PropList[dataindex].prop_id, this);
         });
 
         find.GetComponent<Text>().text = PropList[dataindex].prop_id+"";
