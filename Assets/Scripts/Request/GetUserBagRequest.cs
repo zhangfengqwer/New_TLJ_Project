@@ -4,11 +4,16 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class GetUserBagRequest : Request
-{ 
+public class GetUserBagRequest : Request {
+    private  List<UserPropData> _userPropDatas;
+    public static GetUserBagRequest Instance;
     private void Awake()
     {
         Tag = Consts.Tag_GetBag;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
     // Use this for initialization
     public override void OnRequest()
@@ -26,11 +31,17 @@ public class GetUserBagRequest : Request
         var code = (int)jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            UserBagData.getInstance().initJson(data);
+            _userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+
         }
         else
         {
             ToastScript.createToast("用户背包数据错误");
         }
+    }
+
+    public  List<UserPropData> GetPropList()
+    {
+        return _userPropDatas;
     }
 }

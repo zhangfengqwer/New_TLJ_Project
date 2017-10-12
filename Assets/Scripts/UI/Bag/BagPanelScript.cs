@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BagPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
+    public List<UserPropData> PropList;
+
+    public static BagPanelScript Instance;
 
     public static GameObject create()
     {
@@ -15,13 +18,32 @@ public class BagPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
+	    if (Instance == null)
+	    {
+	        Instance = this;
+	    }
+	    PropList = GetUserBagRequest.Instance.GetPropList();
 	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
 	    uiWarpContent.onInitializeItem = onInitializeItem;
-
-        uiWarpContent.Init(UserBagData.getInstance().getUserBagDataList().Count);
+	    uiWarpContent.Init(PropList.Count);
     }
 
-    void onInitializeItem(GameObject go, int dataindex)
+    public void deleteItem(int dataindex)
+    {
+        print("删除:"+dataindex);
+        uiWarpContent.DelItem(dataindex);
+    }
+
+    public void UpdateUI()
+    {
+        for (int i = 0; i < PropList.Count; i++)
+        {
+            deleteItem(i);
+        }
+        uiWarpContent.Init(PropList.Count);
+    }
+
+    private void onInitializeItem(GameObject go, int dataindex)
     {
         var find = go.transform.Find("Text");
         Button button = go.GetComponent<Button>();
@@ -29,16 +51,9 @@ public class BagPanelScript : MonoBehaviour {
         button.onClick.AddListener(delegate()
         {
             // 显示道具详情
-            PropDetailPanelScript.create(UserBagData.getInstance().getUserBagDataList()[dataindex].prop_id, this);
+            PropDetailPanelScript.create(PropList[dataindex].prop_id, this);
         });
 
-        find.GetComponent<Text>().text = UserBagData.getInstance().getUserBagDataList()[dataindex].prop_id + "x"+ UserBagData.getInstance().getUserBagDataList()[dataindex].prop_num;
-    }
-
-    public void useProp(int prop_id)
-    {
-        UserBagData.getInstance().useProp(prop_id,1);
-
-        // 刷新list
+        find.GetComponent<Text>().text = PropList[dataindex].prop_id + "x"+ PropList[dataindex].prop_num;
     }
 }

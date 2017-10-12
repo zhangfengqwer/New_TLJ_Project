@@ -52,13 +52,34 @@ public class PropDetailPanelScript : MonoBehaviour {
     {
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
-        int prop_id = (int)jd["prop_id"];
-
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
-            m_parentScript.useProp(prop_id);
-            Destroy(gameObject);
+            UpdatePropData();
         }
+    }
+
+    private void UpdatePropData()
+    {
+        List<UserPropData> userPropDatas = BagPanelScript.Instance.PropList;
+
+        for (int i = 0; i < userPropDatas.Count; i++)
+        {
+            UserPropData Prop = userPropDatas[i];
+            if (m_propInfo.m_id == Prop.prop_id)
+            {
+                Prop.prop_num--;
+                if (Prop.prop_num == 0)
+                {
+                    userPropDatas.Remove(Prop);
+                    BagPanelScript.Instance.deleteItem(i);
+                    Destroy(this.gameObject);
+                    return;
+                }
+            }
+        }
+
+        print(userPropDatas.Count);
+        BagPanelScript.Instance.UpdateUI();
     }
 
     // Use this for initialization
