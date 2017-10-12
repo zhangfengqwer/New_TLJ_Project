@@ -38,7 +38,11 @@ public class BagPanelScript : MonoBehaviour {
         {
             ToastScript.createToast(_list[dataindex]);
             print(_list[dataindex]);
+
+            // 显示道具详情
+            PropDetailPanelScript.create(101,this);
         });
+
         find.GetComponent<Text>().text = _list[dataindex];
     }
 
