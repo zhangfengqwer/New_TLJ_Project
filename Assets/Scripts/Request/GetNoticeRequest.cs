@@ -23,8 +23,5 @@ public class GetNoticeRequest : Request {
 
     public override void OnResponse(string data)
     {
-
     }
-
-   
 }

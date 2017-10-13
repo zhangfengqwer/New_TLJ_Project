@@ -11,6 +11,7 @@ public class LogicEnginerScript : MonoBehaviour
     public static bool IsLogicConnect = false;
     public static LogicEnginerScript Instance;
     private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
+    private List<Request> requestList = new List<Request>();
     //请求
     private GetSignRecordRequest _getSignRecordRequest;
     private GetUserInfoRequest _getUserInfoRequest;
@@ -42,19 +43,29 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Start()
     {
+        AddRequest();
+        InitRequest();
+        InitSocket();
+    }
+
+    private void AddRequest()
+    {
+    }
+
+    private void InitRequest()
+    {
         _getSignRecordRequest = GetComponent<GetSignRecordRequest>();
         _getUserInfoRequest = GetComponent<GetUserInfoRequest>();
         _getEmailRequest = GetComponent<GetEmailRequest>();
         _getUserBagRequest = GetComponent<GetUserBagRequest>();
         _getNoticeRequest = GetComponent<GetNoticeRequest>();
-        init();
     }
 
 
     /// <summary>
     /// 设置Socket事件
     /// </summary>
-    public void init()
+    public void InitSocket()
     {
         SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
         SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);

@@ -98,7 +98,7 @@ public class NetConfig
                 s_mySqlService_port = (int)jd["MySqlService"]["port"];
 
                 GameObject.Find("Login").GetComponent<LoginScript>().init();
-//                GameObject.Find("LogicEnginer").GetComponent<LogicEnginerScript>().init();
+//                GameObject.Find("LogicEnginer").GetComponent<LogicEnginerScript>().InitSocket();
             }
         }
         catch (Exception ex)

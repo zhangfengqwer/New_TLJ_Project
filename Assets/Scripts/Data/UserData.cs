@@ -23,3 +23,14 @@ public class UserPropData
     public int prop_id;
     public int prop_num;
 }
+
+public class UserNoticeJsonObj
+{
+    public int notice_id;
+    public string title;
+    public string content;
+    public int type;
+    public int state;
+    public string start_time;
+    public string end_time;
+}
