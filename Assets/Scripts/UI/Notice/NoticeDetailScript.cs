@@ -30,6 +30,6 @@ public class NoticeDetailScript : MonoBehaviour {
     public void setNoticeId(int notice_id)
     {
         m_noticeData = NoticelDataScript.getInstance().getNoticeDataById(notice_id);
-        m_content.text = m_noticeData.m_content;
+        m_content.text = m_noticeData.content;
     }
 }

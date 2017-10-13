@@ -22,8 +22,6 @@ public class NoticePanelScript : MonoBehaviour
 	{
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
-        NoticelDataScript.getInstance().initJson("");
-
         loadHuoDong();
     }
 
@@ -32,16 +30,19 @@ public class NoticePanelScript : MonoBehaviour
     {
         m_ListViewScript.clear();
 
-        for (int i = 0; i < NoticelDataScript.getInstance().getHuoDongDataList().Count; i++)
+        for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
         {
-            GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Notice_List") as GameObject;
-            GameObject obj = MonoBehaviour.Instantiate(prefab);
-            obj.GetComponent<Item_Notice_List_Script>().m_parentScript = this;
-            obj.GetComponent<Item_Notice_List_Script>().setNoticeData(NoticelDataScript.getInstance().getHuoDongDataList()[i]);
+            if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 0)
+            {
+                GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Notice_List") as GameObject;
+                GameObject obj = MonoBehaviour.Instantiate(prefab);
+                obj.GetComponent<Item_Notice_List_Script>().m_parentScript = this;
+                obj.GetComponent<Item_Notice_List_Script>().setNoticeData(NoticelDataScript.getInstance().getNoticeDataList()[i]);
 
-            obj.transform.name = NoticelDataScript.getInstance().getHuoDongDataList()[i].m_notice_id.ToString();
+                obj.transform.name = NoticelDataScript.getInstance().getNoticeDataList()[i].notice_id.ToString();
 
-            m_ListViewScript.addItem(obj);
+                m_ListViewScript.addItem(obj);
+            }
         }
 
         m_ListViewScript.addItemEnd();
@@ -52,16 +53,19 @@ public class NoticePanelScript : MonoBehaviour
     {
         m_ListViewScript.clear();
 
-        for (int i = 0; i < NoticelDataScript.getInstance().getGongGaoDataList().Count; i++)
+        for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
         {
-            GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Notice_List") as GameObject;
-            GameObject obj = MonoBehaviour.Instantiate(prefab);
-            obj.GetComponent<Item_Notice_List_Script>().m_parentScript = this;
-            obj.GetComponent<Item_Notice_List_Script>().setNoticeData(NoticelDataScript.getInstance().getGongGaoDataList()[i]);
+            if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 1)
+            {
+                GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Notice_List") as GameObject;
+                GameObject obj = MonoBehaviour.Instantiate(prefab);
+                obj.GetComponent<Item_Notice_List_Script>().m_parentScript = this;
+                obj.GetComponent<Item_Notice_List_Script>().setNoticeData(NoticelDataScript.getInstance().getNoticeDataList()[i]);
 
-            obj.transform.name = NoticelDataScript.getInstance().getGongGaoDataList()[i].m_notice_id.ToString();
+                obj.transform.name = NoticelDataScript.getInstance().getNoticeDataList()[i].notice_id.ToString();
 
-            m_ListViewScript.addItem(obj);
+                m_ListViewScript.addItem(obj);
+            }
         }
 
         m_ListViewScript.addItemEnd();
@@ -73,7 +77,7 @@ public class NoticePanelScript : MonoBehaviour
 
         for (int i = 0; i < m_ListViewScript.getItemList().Count; i++)
         {
-            if (m_ListViewScript.getItemList()[i].GetComponent<Item_Notice_List_Script>().getNoticeData().m_notice_id == notice_id)
+            if (m_ListViewScript.getItemList()[i].GetComponent<Item_Notice_List_Script>().getNoticeData().notice_id == notice_id)
             {
                 m_ListViewScript.getItemList()[i].GetComponent<Item_Notice_List_Script>().m_redPoint.transform.localScale = new Vector3(0, 0, 0);
             }
