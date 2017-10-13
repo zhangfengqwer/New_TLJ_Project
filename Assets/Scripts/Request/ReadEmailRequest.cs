@@ -9,6 +9,7 @@ public class ReadEmailRequest : Request
     private int emailId;
     private bool flag;
     private string result;
+
     public void setEmailId(int id)
     {
         emailId = id;

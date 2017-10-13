@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopPanelScript : MonoBehaviour {
-    private UIWarpContent[] uiWarpContent;
+    private UIWarpContent uiWarpContent;
     private List<string> _list;
-    public GameObject obj1;
-    public GameObject obj2;
-    public GameObject obj3;
+    private List<ShopData> shopDataList;
+    private int type = 1;
+    private List<ShopData> _shopDatas;
 
     public static GameObject create()
     {
@@ -21,51 +21,81 @@ public class ShopPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
+	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+	    uiWarpContent.onInitializeItem = onInitializeItem;
         // 拉取商店数据
         {
-            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
-            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
-        }
-    }
+	        LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
+	        LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
+	    }
+	}
 
     private void Init()
     {
-        _list = new List<string>();
-        for (int i = 0; i < 100; i++)
+        print(shopDataList.Count);
+        for (int i = shopDataList.Count -1; i>=0; i--)
         {
-            _list.Add("物品:" + Random.Range(0, 1000));
+            uiWarpContent.DelItem(i);
         }
-        uiWarpContent = gameObject.GetComponentsInChildren<UIWarpContent>(true);
-        print(uiWarpContent.Length);
-        foreach (var VARIABLE in uiWarpContent)
+
+        _shopDatas = new List<ShopData>();
+        for (int i = 0; i < shopDataList.Count; i++)
         {
-            VARIABLE.onInitializeItem = onInitializeItem;
-            VARIABLE.Init(_list.Count);
+            ShopData shopData = shopDataList[i];
+            if (shopData.goods_type == type)
+            {
+                _shopDatas.Add(shopData);
+            }
         }
-        obj1.SetActive(false);
-        obj2.SetActive(false);
-        obj3.SetActive(false);
+
+        uiWarpContent.Init(_shopDatas.Count);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
     {
-        
-//        var find = go.transform.Find("Text");
-//        Button button = go.GetComponent<Button>();
-//        button.onClick.RemoveAllListeners();
-//        button.onClick.AddListener(delegate()
-//        {
-//            ToastScript.createToast(_list[dataindex]);
-//
-//            print(_list[dataindex]);
-//        });
-//        find.GetComponent<Text>().text = _list[dataindex];
+       
+        Text goods_name = go.transform.Find("goods_name").GetComponent<Text>();
+        goods_name.text = _shopDatas[dataindex].props;
+
+        Button button = go.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(delegate()
+        {
+            ToastScript.createToast(_shopDatas[dataindex].props);
+        });
     }
 
     public void onReceive_GetShop(string data)
     {
         ShopDataScript.getInstance().initJson(data);
-
+        shopDataList = ShopDataScript.getInstance().getShopDataList();
         Init();
+    }
+
+    public void IsJinbiToggle(bool IsClick)
+    {
+        if (IsClick)
+        {
+            type = 1;
+            Init();
+        }
+    }
+
+    public void IsYuanBaoToggle(bool IsClick)
+    {
+        if (IsClick)
+        {
+            type = 2;
+            Init();
+        }
+    }
+
+    public void IsPropToggle(bool IsClick)
+    {
+        if (IsClick)
+        {
+            type = 3;
+            Init();
+        }
     }
 }
