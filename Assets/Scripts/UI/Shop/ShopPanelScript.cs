@@ -21,7 +21,11 @@ public class ShopPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
-        Init();
+        // 拉取商店数据
+        {
+            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
+            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
+        }
     }
 
     private void Init()
@@ -56,5 +60,12 @@ public class ShopPanelScript : MonoBehaviour {
 //            print(_list[dataindex]);
 //        });
 //        find.GetComponent<Text>().text = _list[dataindex];
+    }
+
+    public void onReceive_GetShop(string data)
+    {
+        ShopDataScript.getInstance().initJson(data);
+
+        Init();
     }
 }
