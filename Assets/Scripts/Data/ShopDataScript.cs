@@ -28,7 +28,7 @@ public class ShopDataScript
         m_shopDataList = JsonMapper.ToObject<List<ShopData>>(jsonData["shop_list"].ToString());
     }
 
-    public List<ShopData> getNoticeDataList()
+    public List<ShopData> getShopDataList()
     {
         return m_shopDataList;
     }
