@@ -9,12 +9,16 @@ public class BuyGoodsRequest : Request
     public delegate void BuyGoodsCallBack(string result);
     public BuyGoodsCallBack CallBack;
 
-    private int gooldsId;
+    int m_goods_id;
+    int m_goods_num;
+
     private bool flag;
     private string result;
-    public void setGoodsId(int id)
+
+    public void setGoodsInfo(int goods_id, int goods_num)
     {
-        gooldsId = id;
+        m_goods_id = goods_id;
+        m_goods_num = goods_num;
     }
 
     private void Awake()
@@ -31,13 +35,13 @@ public class BuyGoodsRequest : Request
         }
     }
     
-
     public override void OnRequest()
     {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
-        jsonData["goods_id"] = gooldsId;
+        jsonData["goods_id"] = m_goods_id;
+        jsonData["goods_num"] = m_goods_num;
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }

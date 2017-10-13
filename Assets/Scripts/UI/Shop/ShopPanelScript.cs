@@ -76,7 +76,7 @@ public class ShopPanelScript : MonoBehaviour {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
         {
-            ToastScript.createToast(_shopItemDatas[dataindex].props);
+            BuyGoodsPanelScript.create(_shopItemDatas[dataindex].goods_id);
         });
     }
 
