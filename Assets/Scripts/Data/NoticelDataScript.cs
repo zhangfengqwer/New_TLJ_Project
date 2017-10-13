@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class NoticelDataScript
 {
@@ -22,7 +23,7 @@ public class NoticelDataScript
     public void initJson(string json)
     {
         m_noticeDataList.Clear();
-
+        
         JsonData jsonData = JsonMapper.ToObject(json);
         m_noticeDataList = JsonMapper.ToObject<List<NoticeData>>(jsonData["notice_list"].ToString());
     }
@@ -63,11 +64,11 @@ public class NoticelDataScript
 
 public class NoticeData
 {
-    public int notice_id = 0;
+    public int notice_id;
     public string title = "";
     public string content = "";
-    public string start_time = "";
-    public string end_time = "";
     public int type = 0;        // 0:活动    1:公告
     public int state = 0;       // 0:未读    1:已读
+    public string start_time;
+    public string end_time;
 }

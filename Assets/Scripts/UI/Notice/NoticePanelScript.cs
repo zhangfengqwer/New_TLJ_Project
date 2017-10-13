@@ -22,7 +22,11 @@ public class NoticePanelScript : MonoBehaviour
 	{
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
-        loadHuoDong();
+        // 拉取公告活动
+        {
+            LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().CallBack = onReceive_GetNotice;
+            LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+        }
     }
 
     // 显示活动
@@ -92,5 +96,12 @@ public class NoticePanelScript : MonoBehaviour
     public void onClickGongGao()
     {
         loadGongGao();
+    }
+
+    public void onReceive_GetNotice(string data)
+    {
+        NoticelDataScript.getInstance().initJson(data);
+
+        loadHuoDong();
     }
 }
