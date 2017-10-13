@@ -31,11 +31,11 @@ public class Item_Notice_List_Script : MonoBehaviour {
         m_noticeData = noticeData;
 
         {
-            m_text_title.text = m_noticeData.m_title;
-            m_text_time.text = m_noticeData.m_time;
+            m_text_title.text = m_noticeData.title;
+            m_text_time.text = m_noticeData.start_time;
 
             // 已读
-            if (m_noticeData.m_state == 1)
+            if (m_noticeData.state == 1)
             {
                 m_redPoint.transform.localScale = new Vector3(0, 0, 0);
             }
