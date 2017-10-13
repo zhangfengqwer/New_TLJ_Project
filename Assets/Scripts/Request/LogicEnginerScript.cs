@@ -15,6 +15,7 @@ public class LogicEnginerScript : MonoBehaviour
     private GetSignRecordRequest _getSignRecordRequest;
     private GetUserInfoRequest _getUserInfoRequest;
     private GetEmailRequest _getEmailRequest;
+    private GetNoticeRequest _getNoticeRequest;
     [HideInInspector]
     public GetUserBagRequest _getUserBagRequest;
 
@@ -45,6 +46,7 @@ public class LogicEnginerScript : MonoBehaviour
         _getUserInfoRequest = GetComponent<GetUserInfoRequest>();
         _getEmailRequest = GetComponent<GetEmailRequest>();
         _getUserBagRequest = GetComponent<GetUserBagRequest>();
+        _getNoticeRequest = GetComponent<GetNoticeRequest>();
         init();
     }
 
@@ -88,6 +90,7 @@ public class LogicEnginerScript : MonoBehaviour
         _getUserInfoRequest.OnRequest();
         _getEmailRequest.OnRequest();
         _getUserBagRequest.OnRequest();
+        _getNoticeRequest.OnRequest();
     }
 
     private void onSocketReceive(string data)
