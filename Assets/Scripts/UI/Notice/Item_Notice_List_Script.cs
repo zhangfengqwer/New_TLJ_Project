@@ -49,16 +49,12 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-        int notice_id = int.Parse(gameObject.transform.name);
-        m_parentScript.setNoticeReaded(notice_id);
-        NoticeDetailScript.create(notice_id, m_parentScript);
-
-        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
-        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().CallBack = onReceive_ReadMail;
-        //LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+        LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().setNoticeId(int.Parse(gameObject.transform.name));
+        LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().CallBack = onReceive_ReadNotice;
+        LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().OnRequest();
     }
 
-    public void onReceive_ReadMail(string data)
+    public void onReceive_ReadNotice(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
