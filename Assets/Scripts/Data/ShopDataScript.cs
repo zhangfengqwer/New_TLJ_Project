@@ -52,6 +52,7 @@ public class ShopDataScript
 public class ShopData
 {
     public int goods_id;
+    public string goods_name;
     public int goods_type;          // 1:金币 2:元宝 3:道具
     public string props;
     public int price;
