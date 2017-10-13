@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 public class UserData  {
 
     public static string uid { set; get; }
@@ -7,6 +7,7 @@ public class UserData  {
     public static int gold{ set; get; }
     public static int yuanbao { set; get; }
     public static UserGameData gameData { set; get; }
+    public static List<UserPropData> propData { set; get; }
 }
 
 public class UserGameData

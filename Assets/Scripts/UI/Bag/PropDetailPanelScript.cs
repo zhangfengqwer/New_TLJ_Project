@@ -60,7 +60,7 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     private void UpdatePropData()
     {
-        List<UserPropData> userPropDatas = BagPanelScript.Instance.PropList;
+        List<UserPropData> userPropDatas = UserData.propData;
 
         for (int i = 0; i < userPropDatas.Count; i++)
         {
@@ -80,15 +80,4 @@ public class PropDetailPanelScript : MonoBehaviour {
 
         BagPanelScript.Instance.UpdateUI();
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 }

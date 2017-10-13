@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class BagPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
-    public List<UserPropData> PropList;
 
     public static BagPanelScript Instance;
 
@@ -19,7 +18,7 @@ public class BagPanelScript : MonoBehaviour {
     }
     // Use this for initialization
     void Start ()
-	{
+    {
         // 拉取邮件
         {
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
@@ -29,17 +28,16 @@ public class BagPanelScript : MonoBehaviour {
 
     public void deleteItem(int dataindex)
     {
-        print("删除:"+dataindex);
         uiWarpContent.DelItem(dataindex);
     }
 
     public void UpdateUI()
     {
-        for (int i = 0; i < PropList.Count; i++)
+        for (int i = 0; i < UserData.propData.Count; i++)
         {
             deleteItem(i);
         }
-        uiWarpContent.Init(PropList.Count);
+        uiWarpContent.Init(UserData.propData.Count);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
@@ -50,10 +48,10 @@ public class BagPanelScript : MonoBehaviour {
         button.onClick.AddListener(delegate()
         {
             // 显示道具详情
-            PropDetailPanelScript.create(PropList[dataindex].prop_id, this);
+            PropDetailPanelScript.create(UserData.propData[dataindex].prop_id, this);
         });
 
-        find.GetComponent<Text>().text = PropList[dataindex].prop_id + "x"+ PropList[dataindex].prop_num;
+        find.GetComponent<Text>().text = UserData.propData[dataindex].prop_id + "x"+ UserData.propData[dataindex].prop_num;
     }
 
     public void onReceive_GetUserBag(string data)
@@ -63,12 +61,11 @@ public class BagPanelScript : MonoBehaviour {
             var code = (int)jsonData["code"];
             if (code == (int)Consts.Code.Code_OK)
             {
-                GetUserBagRequest.Instance._userPropDatas = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+                UserData.propData = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
             }
             else
             {
                 ToastScript.createToast("用户背包数据错误");
-
                 return;
             }
         }
@@ -77,9 +74,8 @@ public class BagPanelScript : MonoBehaviour {
         {
             Instance = this;
         }
-        PropList = GetUserBagRequest.Instance.GetPropList();
         uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
         uiWarpContent.onInitializeItem = onInitializeItem;
-        uiWarpContent.Init(PropList.Count);
+        uiWarpContent.Init(UserData.propData.Count);
     }
 }
