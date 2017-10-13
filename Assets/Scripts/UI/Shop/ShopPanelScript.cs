@@ -8,7 +8,7 @@ public class ShopPanelScript : MonoBehaviour {
     private List<string> _list;
     private List<ShopData> shopDataList;
     private int type = 1;
-    private List<ShopData> _shopDatas;
+    private List<ShopData> _shopItemDatas;
 
     public static GameObject create()
     {
@@ -32,36 +32,51 @@ public class ShopPanelScript : MonoBehaviour {
 
     private void Init()
     {
-        print(shopDataList.Count);
         for (int i = shopDataList.Count -1; i>=0; i--)
         {
             uiWarpContent.DelItem(i);
         }
 
-        _shopDatas = new List<ShopData>();
+        _shopItemDatas = new List<ShopData>();
         for (int i = 0; i < shopDataList.Count; i++)
         {
             ShopData shopData = shopDataList[i];
             if (shopData.goods_type == type)
             {
-                _shopDatas.Add(shopData);
+                _shopItemDatas.Add(shopData);
             }
         }
 
-        uiWarpContent.Init(_shopDatas.Count);
+        uiWarpContent.Init(_shopItemDatas.Count);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
     {
        
         Text goods_name = go.transform.Find("goods_name").GetComponent<Text>();
-        goods_name.text = _shopDatas[dataindex].props;
+        Text goods_price = go.transform.Find("goods_price").GetComponent<Text>();
+        goods_name.text = _shopItemDatas[dataindex].props;
+        //设置价格
+        string price = null;
+        if (_shopItemDatas[dataindex].money_type == 1)
+        {
+            price = "金币:";
+        }
+        else if (_shopItemDatas[dataindex].money_type == 2)
+        {
+            price = "元宝:";
+        }
+        else
+        {
+            price = "¥:";
+        }
+        goods_price.text = price + _shopItemDatas[dataindex].price;
 
         Button button = go.GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
         {
-            ToastScript.createToast(_shopDatas[dataindex].props);
+            ToastScript.createToast(_shopItemDatas[dataindex].props);
         });
     }
 
