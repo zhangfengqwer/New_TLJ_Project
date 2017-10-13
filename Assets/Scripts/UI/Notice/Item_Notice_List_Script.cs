@@ -49,9 +49,16 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-        LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().setNoticeId(int.Parse(gameObject.transform.name));
-        LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().CallBack = onReceive_ReadNotice;
-        LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().OnRequest();
+        if (NoticelDataScript.getInstance().getNoticeDataById(int.Parse(gameObject.transform.name)).state == 1)
+        {
+            NoticeDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
+        }
+        else
+        {
+            LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().setNoticeId(int.Parse(gameObject.transform.name));
+            LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().CallBack = onReceive_ReadNotice;
+            LogicEnginerScript.Instance.GetComponent<ReadNoticeRequest>().OnRequest();
+        }
     }
 
     public void onReceive_ReadNotice(string data)
