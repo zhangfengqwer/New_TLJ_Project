@@ -123,6 +123,31 @@ public class BuyGoodsPanelScript : MonoBehaviour {
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             ToastScript.createToast("购买成功:" + m_shopData.goods_name);
+
+            {
+                List<string> list_str1 = new List<string>();
+                CommonUtil.splitStr(m_shopData.props, list_str1, ';');
+
+                for (int i = 0; i < list_str1.Count; i++)
+                {
+                    List<string> list_str2 = new List<string>();
+                    CommonUtil.splitStr(list_str1[i], list_str2, ':');
+
+                    int prop_id = int.Parse(list_str2[0]);
+                    int prop_num = int.Parse(list_str2[1]);
+
+                    // 金币
+                    if (prop_id == 1)
+                    {
+                        UserData.gold += prop_num;
+                    }
+                    // 元宝
+                    else if (prop_id == 1)
+                    {
+                        UserData.yuanbao += prop_num;
+                    }
+                }
+            }
         }
     }
 }

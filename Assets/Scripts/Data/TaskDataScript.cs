@@ -24,26 +24,8 @@ public class TaskDataScript
     {
         m_taskDataList.Clear();
 
-        //JsonData jsonData = JsonMapper.ToObject(json);
-        //m_taskDataList = JsonMapper.ToObject<List<TaskData>>(jsonData["task_list"].ToString());
-
-        // 临时代码
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                TaskData temp = new TaskData();
-
-                temp.task_id = 200 + i;
-                temp.title = "任务名称" + i;
-                temp.content = "任务内容" + i;
-                temp.reward = "";
-                temp.progress = 0;
-                temp.target = i;
-                temp.isover = 0;
-
-                m_taskDataList.Add(temp);
-            }
-        }
+        JsonData jsonData = JsonMapper.ToObject(json);
+        m_taskDataList = JsonMapper.ToObject<List<TaskData>>(jsonData["task_list"].ToString());
     }
 
     public List<TaskData> getTaskDataList()

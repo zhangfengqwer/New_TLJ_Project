@@ -21,14 +21,11 @@ public class TaskPanelScript : MonoBehaviour {
     {
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
-        //// 拉取任务
-        //{
-        //    LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().CallBack = onReceive_GetTask;
-        //    LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
-        //}
-
-        TaskDataScript.getInstance().initJson("");
-        loadTask();
+        // 拉取任务
+        {
+            LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().CallBack = onReceive_GetTask;
+            LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
+        }
     }
 
     public void loadTask()
@@ -60,7 +57,7 @@ public class TaskPanelScript : MonoBehaviour {
         {
             if (m_ListViewScript.getItemList()[i].GetComponent<Item_Task_List_Script>().getTaskData().task_id == task_id)
             {
-                m_ListViewScript.getItemList()[i].GetComponent<Item_Task_List_Script>().m_button_wancheng.transform.localScale = new Vector3(0, 0, 0);
+                m_ListViewScript.getItemList()[i].GetComponent<Item_Task_List_Script>().setTaskIsOver();
             }
         }
     }
