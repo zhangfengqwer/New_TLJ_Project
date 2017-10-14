@@ -54,7 +54,7 @@ public class GetNoticeRequest : Request {
         }
         else
         {
-            ToastScript.createToast("返回公告活动数据错误");
+            ToastScript.createToast("返回公告活动数据错误：" + code);
         }
     }
 }

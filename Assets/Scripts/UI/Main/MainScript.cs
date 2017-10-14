@@ -101,4 +101,8 @@ public class MainScript : MonoBehaviour {
         KeFuPanelScript.create();
     }
 
+    public void OnClickTask()
+    {
+        TaskPanelScript.create();
+    }
 }

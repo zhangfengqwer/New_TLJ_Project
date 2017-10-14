@@ -4,23 +4,23 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class ReadEmailRequest : Request
+public class CompleteTaskRequest : Request
 {
-    public delegate void ReadMailCallBack(string result);
-    public ReadMailCallBack CallBack;
+    public delegate void CompleteTaskCallBack(string result);
+    public CompleteTaskCallBack CallBack;
 
-    private int emailId;
+    private int taskId;
     private bool flag;
     private string result;
 
-    public void setEmailId(int id)
+    public void setTaskId(int id)
     {
-        emailId = id;
+        taskId = id;
     }
 
     private void Awake()
     {
-        Tag = Consts.Tag_ReadMail;
+        Tag = Consts.Tag_CompleteTask;
     }
 
     private void Update()
@@ -31,13 +31,14 @@ public class ReadEmailRequest : Request
             flag = false;
         }
     }
+    
 
     public override void OnRequest()
     {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
-        jsonData["email_id"] = emailId;
+        jsonData["task_id"] = taskId;
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }

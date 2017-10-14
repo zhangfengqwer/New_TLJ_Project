@@ -4,17 +4,17 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class GetEmailRequest : Request {
-
-    public delegate void GetMailCallBack(string result);
-    public GetMailCallBack CallBack = null;
+public class GetTaskRequest : Request
+{
+    public delegate void GetTaskCallBack(string result);
+    public GetTaskCallBack CallBack = null;
 
     private bool flag = false;
     private string result;
 
     private void Awake()
     {
-        Tag = Consts.Tag_GetMail;
+        Tag = Consts.Tag_GetTask;
     }
 
     void Update()
@@ -42,18 +42,15 @@ public class GetEmailRequest : Request {
     public override void OnResponse(string data)
     {
         JsonData jsonData = JsonMapper.ToObject(data);
-        var code = (int) jsonData["code"];
-        if (code == (int) Consts.Code.Code_OK)
+        var code = (int)jsonData["code"];
+        if (code == (int)Consts.Code.Code_OK)
         {
-            LogicEnginerScript.IsSuccessList.Add(true);
-            UserMailData.getInstance().initJson(data);
-
             result = data;
             flag = true;
         }
         else
         {
-            ToastScript.createToast("返回邮箱数据错误:" + code);
+            ToastScript.createToast("返回任务数据错误:" + code);
         }
     }
 }

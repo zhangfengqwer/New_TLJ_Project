@@ -32,9 +32,10 @@ public class BuyGoodsPanelScript : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        m_button_jian.interactable = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()

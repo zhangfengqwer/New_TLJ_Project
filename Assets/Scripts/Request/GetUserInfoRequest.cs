@@ -34,7 +34,7 @@ public class GetUserInfoRequest : Request {
         }
         else
         {
-            ToastScript.createToast("用户信息数据错误");
+            ToastScript.createToast("用户信息数据错误：" + code);
         }
     }
 }

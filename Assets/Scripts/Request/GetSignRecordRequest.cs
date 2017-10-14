@@ -55,7 +55,7 @@ public class GetSignRecordRequest : Request
         }
         else
         {
-            ToastScript.createToast("签到返回数据错误");
+            ToastScript.createToast("返回签到数据错误:" + code);
         }
     }
 }
