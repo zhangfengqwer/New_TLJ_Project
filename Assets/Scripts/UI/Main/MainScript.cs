@@ -7,30 +7,18 @@ public class MainScript : MonoBehaviour {
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
-    public Text UserName;
-    public Text UserGold;
-    public Text UserYuanBao;
 
-    public static MainScript Instance;
+    public GameObject m_loadingPanel;
+
     // Use this for initialization
     void Start ()
 	{
-	    if (Instance == null)
-	    {
-	        Instance = this;
-	    }
         AudioScript.getAudioScript().playMusic_GameBg();
-	    InitMainUI();
-    }
 
-    public void InitMainUI()
-    {
-        UserName.text = UserData.name;
-        UserGold.text = UserData.gold+"";
-        UserYuanBao.text = UserData.yuanbao+"";
+        m_loadingPanel = LoadingScript.create();
     }
-
-    // Update is called once per frame
+	
+	// Update is called once per frame
 	void Update () {
 		
 	}
@@ -38,6 +26,15 @@ public class MainScript : MonoBehaviour {
     void OnDestroy()
     {
         SocketUtil.getInstance().stop();
+    }
+
+    public void refreshUI()
+    {
+        // 昵称
+        // 金币
+        // 元宝
+        
+        Destroy(m_loadingPanel);
     }
 
     public void onClickEnterXiuXianChang()
