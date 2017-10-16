@@ -22,8 +22,6 @@ public class LoginScript : MonoBehaviour
     public InputField m_inputPassword_register;
     public InputField m_inputSecondPassword_register;
 
-    public GameObject LogicEnginer;
-
     void Start()
     {
         // 拉取数值表

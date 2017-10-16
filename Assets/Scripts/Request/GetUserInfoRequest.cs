@@ -11,6 +11,17 @@ public class GetUserInfoRequest : Request {
         Tag = Consts.Tag_UserInfo;
     }
 
+    private bool flag = false;
+
+    void Update()
+    {
+        if (flag)
+        {
+            MainScript.Instance.InitMainUI();
+            flag = false;
+        }
+    }
+
     public override void OnRequest()
     {
         JsonData jsonData = new JsonData();
@@ -31,6 +42,8 @@ public class GetUserInfoRequest : Request {
             UserData.gold = (int) jsonData["gold"];
             UserData.yuanbao = (int) jsonData["yuanbao"];
             UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
+            flag = true;
+
         }
         else
         {

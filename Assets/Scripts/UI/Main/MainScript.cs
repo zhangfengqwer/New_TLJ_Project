@@ -7,14 +7,30 @@ public class MainScript : MonoBehaviour {
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
+    public Text UserName;
+    public Text UserGold;
+    public Text UserYuanBao;
 
+    public static MainScript Instance;
     // Use this for initialization
     void Start ()
 	{
+	    if (Instance == null)
+	    {
+	        Instance = this;
+	    }
         AudioScript.getAudioScript().playMusic_GameBg();
+	    InitMainUI();
     }
-	
-	// Update is called once per frame
+
+    public void InitMainUI()
+    {
+        UserName.text = UserData.name;
+        UserGold.text = UserData.gold+"";
+        UserYuanBao.text = UserData.yuanbao+"";
+    }
+
+    // Update is called once per frame
 	void Update () {
 		
 	}
