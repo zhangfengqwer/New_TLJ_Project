@@ -7,6 +7,9 @@ public class MainScript : MonoBehaviour {
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
+    public Text UserAccount;
+    public Text UserGold;
+    public Text UserYuanBao;
 
     public GameObject m_loadingPanel;
 
@@ -33,7 +36,10 @@ public class MainScript : MonoBehaviour {
         // 昵称
         // 金币
         // 元宝
-        
+        UserAccount.text = UserData.name;
+        UserGold.text = UserData.gold+"";
+        UserYuanBao.text = UserData.yuanbao+"";
+
         Destroy(m_loadingPanel);
     }
 

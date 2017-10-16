@@ -32,7 +32,7 @@ public class UserInfoScript : MonoBehaviour
     private void InitUI()
     {
         nickName.text = UserData.name;
-        account.text = UserData.name;
+        account.text = UserData.uid;
         gold.text = UserData.gold.ToString();
         yuanBaoCount.text = UserData.yuanbao.ToString();
         meiLiZhi.text = UserData.gameData.meiliZhi+"";
