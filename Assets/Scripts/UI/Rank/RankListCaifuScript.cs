@@ -17,7 +17,7 @@ public class RankListCaifuScript : MonoBehaviour
         InitUI();
 
         CaifuRank.text = "我的排名:" + 12;
-        CaifuCount.text = "我的财富:" + 50;
+        CaifuCount.text = "我的徽章:" + 50;
     }
 
     private void InitData()
@@ -46,7 +46,7 @@ public class RankListCaifuScript : MonoBehaviour
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
             Image rankImage = Ranking.GetComponent<Image>();
-            Count.GetComponent<Text>().text = "财富：" + i;
+            Count.GetComponent<Text>().text = "徽章：" + i;
 
             Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
             if (i < 3)

@@ -64,8 +64,15 @@ class SocketUtil
 
     public void init(string ip,int port)
     {
-        m_ipAddress = IPAddress.Parse(ip);
-        m_ipPort = port;
+        try
+        {
+            m_ipAddress = IPAddress.Parse(ip);
+            m_ipPort = port;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
     public void start()

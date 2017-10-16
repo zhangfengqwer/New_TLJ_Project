@@ -17,7 +17,7 @@ public class RankListJifenScript : MonoBehaviour
         InitUI();
 
         JifenRank.text = "我的排名:" + 1094;
-        JifenCount.text = "我的积分:" +  10000;
+        JifenCount.text = "我的金币:" +  UserData.gold;
     }
 
     private void InitData()
@@ -47,7 +47,7 @@ public class RankListJifenScript : MonoBehaviour
             var Ranking = goChild.transform.Find("Ranking");
             Image rankImage = Ranking.GetComponent<Image>();
 
-            Count.GetComponent<Text>().text = "积分：" + i;
+            Count.GetComponent<Text>().text = "金币：" + i;
             Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
             if (i < 3)
             {
