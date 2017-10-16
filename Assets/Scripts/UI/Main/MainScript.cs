@@ -8,10 +8,14 @@ public class MainScript : MonoBehaviour {
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
 
+    public GameObject m_loadingPanel;
+
     // Use this for initialization
     void Start ()
 	{
         AudioScript.getAudioScript().playMusic_GameBg();
+
+        m_loadingPanel = LoadingScript.create();
     }
 	
 	// Update is called once per frame
@@ -22,6 +26,15 @@ public class MainScript : MonoBehaviour {
     void OnDestroy()
     {
         SocketUtil.getInstance().stop();
+    }
+
+    public void refreshUI()
+    {
+        // 昵称
+        // 金币
+        // 元宝
+        
+        Destroy(m_loadingPanel);
     }
 
     public void onClickEnterXiuXianChang()

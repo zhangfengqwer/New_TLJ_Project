@@ -6,9 +6,22 @@ using UnityEngine;
 
 public class GetUserInfoRequest : Request {
 
+    private bool flag = false;
+    private string result;
+
     private void Awake()
     {
         Tag = Consts.Tag_UserInfo;
+    }
+
+    void Update()
+    {
+        if (flag)
+        {
+            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+
+            flag = false;
+        }
     }
 
     public override void OnRequest()
@@ -31,6 +44,9 @@ public class GetUserInfoRequest : Request {
             UserData.gold = (int) jsonData["gold"];
             UserData.yuanbao = (int) jsonData["yuanbao"];
             UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
+
+            result = data;
+            flag = true;
         }
         else
         {
