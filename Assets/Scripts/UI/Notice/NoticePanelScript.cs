@@ -9,6 +9,10 @@ public class NoticePanelScript : MonoBehaviour
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
 
+    public Button m_button_tab;
+
+    int m_tabType = 1;      // 1：活动   2：公告
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/NoticePanel") as GameObject;
@@ -88,14 +92,22 @@ public class NoticePanelScript : MonoBehaviour
         }
     }
 
-    public void onClickHuoDong()
+    public void onClickTab()
     {
-        loadHuoDong();
-    }
+        if (m_tabType == 1)
+        {
+            m_tabType = 2;
+            loadGongGao();
 
-    public void onClickGongGao()
-    {
-        loadGongGao();
+            m_button_tab.GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/biaoti_gonggao", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            m_tabType = 1;
+            loadHuoDong();
+
+            m_button_tab.GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/biaoti_huodong", typeof(Sprite)) as Sprite;
+        }
     }
 
     public void onReceive_GetNotice(string data)
