@@ -39,6 +39,6 @@ public class MyUIScript : MonoBehaviour {
 
     public void onClickHead()
     {
-        Debug.Log("点击头像");
+        GameUserInfoPanelScript.create(UserData.uid);
     }
 }

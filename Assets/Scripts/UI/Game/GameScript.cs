@@ -13,6 +13,7 @@ public class GameScript : MonoBehaviour {
     public Button m_buttonQiangZhu;
     public Button m_buttonMaiDi;
     public Button m_buttonChat;
+    public Button m_buttonTuoGuan;
     public Text m_textScore;
 
     List<string> m_dataList = new List<string>();
@@ -29,7 +30,7 @@ public class GameScript : MonoBehaviour {
     GameObject m_timer;
     TimerScript m_timerScript;
 
-    int m_outPokerTime = 5;            // 出牌时间 
+    int m_outPokerTime = 5;             // 出牌时间 
     int m_qiangZhuTime = 10;            // 抢主时间
     int m_maiDiTime = 20;               // 埋底时间
 
@@ -77,6 +78,7 @@ public class GameScript : MonoBehaviour {
         m_buttonQiangZhu.transform.localScale = new Vector3(0,0,0);
         m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
         m_buttonChat.transform.localScale = new Vector3(0, 0, 0);
+        m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
 
         // 上边的玩家
         {

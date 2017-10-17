@@ -26,7 +26,7 @@ public class OtherPlayerUIScript : MonoBehaviour {
 
     static public GameObject create()
     {
-        GameObject prefab = Resources.Load("Prefabs/Game/OtherPlayerUI") as GameObject;
+        GameObject prefab = Resources.Load("Prefabs/Game/OtherPlayerHeadUI") as GameObject;
         GameObject obj = MonoBehaviour.Instantiate(prefab);
         obj.transform.SetParent(GameObject.Find("Canvas").transform);
         obj.transform.localScale = new Vector3(1,1,1);
@@ -56,6 +56,6 @@ public class OtherPlayerUIScript : MonoBehaviour {
 
     public void onClickHead()
     {
-        Debug.Log("点击头像");
+        GameUserInfoPanelScript.create(m_uid);
     }
 }
