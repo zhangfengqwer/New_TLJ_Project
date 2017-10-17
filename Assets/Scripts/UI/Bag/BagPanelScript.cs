@@ -19,7 +19,7 @@ public class BagPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        // 拉取邮件
+        // 拉取背包
         {
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
