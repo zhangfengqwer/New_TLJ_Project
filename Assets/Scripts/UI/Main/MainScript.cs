@@ -11,6 +11,7 @@ public class MainScript : MonoBehaviour {
     public Text UserGold;
     public Text UserYuanBao;
 
+    public GameObject m_headIcon;
     public GameObject m_loadingPanel;
 
     // Use this for initialization
@@ -22,6 +23,10 @@ public class MainScript : MonoBehaviour {
 
             AudioScript.getAudioScript().playMusic_GameBg();
             m_loadingPanel = LoadingScript.create();
+        }
+        else
+        {
+            refreshUI();
         }
     }
 	
@@ -37,14 +42,23 @@ public class MainScript : MonoBehaviour {
 
     public void refreshUI()
     {
+        // 头像
+        m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
+
         // 昵称
-        // 金币
-        // 元宝
         UserAccount.text = UserData.name;
+
+        // 金币
         UserGold.text = UserData.gold+"";
+
+        // 元宝
         UserYuanBao.text = UserData.yuanbao+"";
 
-        Destroy(m_loadingPanel);
+        // 删除loading界面
+        if (m_loadingPanel.transform.IsChildOf(GameObject.Find("Canvas").transform))
+        {
+            Destroy(m_loadingPanel);
+        }
     }
 
     public void onClickEnterXiuXianChang()

@@ -41,6 +41,8 @@ public class GetUserInfoRequest : Request {
         {
             UserData.name = (string) jsonData["name"];
             UserData.phone = (string) jsonData["phone"];
+            //UserData.head = (string)jsonData["head"];
+            UserData.head = "head_9";
             UserData.gold = (int) jsonData["gold"];
             UserData.yuanbao = (int) jsonData["yuanbao"];
             UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());

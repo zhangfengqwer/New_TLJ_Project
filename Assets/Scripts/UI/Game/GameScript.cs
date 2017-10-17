@@ -109,7 +109,7 @@ public class GameScript : MonoBehaviour {
 
         // 我的信息
         {
-            m_myUserInfoUI.GetComponent<MyUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_9");
+            m_myUserInfoUI.GetComponent<MyUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
             m_myUserInfoUI.GetComponent<MyUIScript>().setName(UserData.name);
             m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
             m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserDataScript.getInstance().getUserInfo().m_uid;

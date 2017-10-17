@@ -14,7 +14,7 @@ public class UserInfoScript : MonoBehaviour
     public Text allGame;
     public Text taoPaoLv;
     public Text meiLiZhi;
-    public Image userImage;
+    public GameObject headIcon;
 
     public static GameObject create()
     {
@@ -36,6 +36,9 @@ public class UserInfoScript : MonoBehaviour
         gold.text = UserData.gold.ToString();
         yuanBaoCount.text = UserData.yuanbao.ToString();
         meiLiZhi.text = UserData.gameData.meiliZhi+"";
+
+        headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
+
         if (UserData.gameData.allGameCount == 0)
         {
             shengLv.text = "0%";
@@ -49,10 +52,8 @@ public class UserInfoScript : MonoBehaviour
             allGame.text = UserData.gameData.allGameCount+"";
             taoPaoLv.text = (UserData.gameData.runCount / (float)UserData.gameData.allGameCount) * 100 + "%";
         }
-       
-      
-
-        userImage.sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
+        
+        headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
     }
 
     public void OnCloseClick()
