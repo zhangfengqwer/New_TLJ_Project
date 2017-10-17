@@ -33,16 +33,23 @@ public class BagPanelScript : MonoBehaviour {
 
     public void UpdateUI()
     {
-        for (int i = 0; i < UserData.propData.Count; i++)
+        for (int i = UserData.propData.Count - 1; i >=0 ; i--)
         {
             deleteItem(i);
         }
+       
         uiWarpContent.Init(UserData.propData.Count);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
     {
-        var find = go.transform.Find("Text");
+
+        Text propName = go.transform.Find("PropName").GetComponent<Text>();
+        Image propImage = go.transform.Find("PropImage").GetComponent<Image>();
+        propName.text = UserData.propData[dataindex].prop_name + "x" + UserData.propData[dataindex].prop_num;
+        propImage.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + UserData.propData[dataindex].prop_icon);
+
+
         Button button = go.GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
@@ -50,9 +57,9 @@ public class BagPanelScript : MonoBehaviour {
             // 显示道具详情
             PropDetailPanelScript.create(UserData.propData[dataindex].prop_id, this);
         });
-
-        find.GetComponent<Text>().text = UserData.propData[dataindex].prop_id + "x"+ UserData.propData[dataindex].prop_num;
     }
+
+
 
     public void onReceive_GetUserBag(string data)
     {
@@ -62,6 +69,20 @@ public class BagPanelScript : MonoBehaviour {
             if (code == (int)Consts.Code.Code_OK)
             {
                 UserData.propData = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+                for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)
+                {
+                    PropInfo propInfo = PropData.getInstance().getPropInfoList()[i];
+                    for (int j = 0; j < UserData.propData.Count; j++)
+                    {
+                        UserPropData userPropData = UserData.propData[j];
+                        if (propInfo.m_id == userPropData.prop_id)
+                        {
+                            userPropData.prop_icon = propInfo.m_icon;
+                            userPropData.prop_name = propInfo.m_name;
+                        }
+                    }
+
+                }
             }
             else
             {

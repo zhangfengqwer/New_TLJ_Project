@@ -22,6 +22,8 @@ public class UserPropData
 {
     public int prop_id;
     public int prop_num;
+    public string prop_icon;
+    public string prop_name;
 }
 
 public class UserNoticeJsonObj
