@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UnityEngine;
 
 class ChatData
 {
@@ -21,26 +21,11 @@ class ChatData
         return s_instance;
     }
 
-    public void reqHttp()
-    {
-        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/chat.json", httpCallBack);
-    }
-
-    void httpCallBack(string tag, string data)
-    {
-        try
-        {
-            init(data);
-        }
-        catch (Exception ex)
-        {
-            ToastScript.createToast("解析json出错：" + ex.Message);
-        }
-    }
-
-    void init(string jsonData)
+    public void init()
     {
         m_chatTextList.Clear();
+
+        string jsonData = Resources.Load("Entity/chat").ToString();
 
         JsonData jd = JsonMapper.ToObject(jsonData);
 
@@ -77,7 +62,7 @@ class ChatData
     }
 }
 
-class ChatText
+public class ChatText
 {
     public int m_id = 0;
     public string m_text = "";

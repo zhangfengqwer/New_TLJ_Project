@@ -172,7 +172,7 @@ public class GameScript : MonoBehaviour {
 
     public void onClickChat()
     {
-        reqChat(2);
+        ChatPanelScript.create(this);
     }
 
     //----------------------------------------------------------发送数据 start--------------------------------------------------
