@@ -102,4 +102,24 @@ class GameUtil
 
         return doubleList;
     }
+
+    static public string getPropIconPath(int prop_id)
+    {
+        string path = "";
+
+        // 金币
+        if (prop_id == 1)
+        {
+            path = "Sprites/Icon/Prop/icon_jinbi";
+        }
+        else if (prop_id == 2)
+        {
+            path = "Sprites/Icon/Prop/icon_yuanbao";
+        }
+        else
+        {
+            path = "Sprites/Icon/Prop/" + PropData.getInstance().getPropInfoById(prop_id).m_icon;
+        }
+        return path;
+    }
 }

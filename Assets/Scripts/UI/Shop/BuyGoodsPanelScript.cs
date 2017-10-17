@@ -52,6 +52,14 @@ public class BuyGoodsPanelScript : MonoBehaviour {
             m_text_goods_name.text = m_shopData.goods_name;
             m_text_goods_num.text = m_goods_num.ToString();
 
+            // 道具图标
+            {
+                List<string> list_str = new List<string>();
+                CommonUtil.splitStr(m_shopData.props, list_str, ':');
+                Debug.Log(GameUtil.getPropIconPath(int.Parse(list_str[0])));
+                CommonUtil.setImageSprite(m_text_goods_icon, GameUtil.getPropIconPath(int.Parse(list_str[0])));
+            }
+
             if (m_shopData.money_type == 1)
             {
                 m_text_goods_allPrice.text = "金币：" + (m_shopData.price * m_goods_num).ToString();

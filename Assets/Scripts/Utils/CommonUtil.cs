@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
+using UnityEngine.UI;
 
 class CommonUtil
 {
@@ -103,5 +105,10 @@ class CommonUtil
         }
 
         return firstX + jiange * index;
+    }
+
+    static public void setImageSprite(Image image,string path)
+    {
+        image.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 }
