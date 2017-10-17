@@ -53,7 +53,7 @@ public class GetEmailRequest : Request {
         }
         else
         {
-            ToastScript.createToast("返回邮箱数据错误:" + code);
+            Debug.Log("返回邮箱数据错误:" + code);
         }
     }
 }

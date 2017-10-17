@@ -50,7 +50,7 @@ public class GetTaskRequest : Request
         }
         else
         {
-            ToastScript.createToast("返回任务数据错误:" + code);
+            Debug.Log("返回任务数据错误:" + code);
         }
     }
 }

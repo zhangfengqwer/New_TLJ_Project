@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MyUIScript : MonoBehaviour {
 
+    public GameObject m_headIcon;
     public Text m_textName;
     public Text m_textGoldNum;
     public Image m_imageZhuangJiaIcon;

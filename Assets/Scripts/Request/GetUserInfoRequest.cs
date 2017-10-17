@@ -50,7 +50,7 @@ public class GetUserInfoRequest : Request {
         }
         else
         {
-            ToastScript.createToast("用户信息数据错误：" + code);
+            Debug.Log("用户信息数据错误：" + code);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using LitJson;
 using System;
 using TLJCommon;
+using UnityEngine;
 
 public class GetSignRecordRequest : Request
 {
@@ -55,7 +56,7 @@ public class GetSignRecordRequest : Request
         }
         else
         {
-            ToastScript.createToast("返回签到数据错误:" + code);
+            Debug.Log("返回签到数据错误:" + code);
         }
     }
 }

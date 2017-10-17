@@ -104,6 +104,14 @@ public class GameScript : MonoBehaviour {
 
             m_otherPlayerUIObjList.Add(obj);
         }
+
+        // 我的信息
+        {
+            m_myUserInfoUI.GetComponent<MyUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_9");
+            m_myUserInfoUI.GetComponent<MyUIScript>().setName(UserData.name);
+            m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+            m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserDataScript.getInstance().getUserInfo().m_uid;
+        }
     }
 
 	// Update is called once per frame
@@ -125,6 +133,16 @@ public class GameScript : MonoBehaviour {
     void OnDestroy()
     {
         SocketUtil.getInstance().stop();
+    }
+
+    public void onClickBag()
+    {
+        BagPanelScript.create();
+    }
+
+    public void onClickSet()
+    {
+        SetScript.create();
     }
 
     public void onClickJoinRoom()
@@ -485,10 +503,10 @@ public class GameScript : MonoBehaviour {
                         {
                             if (jd["userList"][i]["uid"].ToString().CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
                             {
-                                m_myUserInfoUI.GetComponent<MyUIScript>().setHead("");
-                                m_myUserInfoUI.GetComponent<MyUIScript>().setName(jd["userList"][i]["uid"].ToString());
-                                m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(i);
-                                m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserDataScript.getInstance().getUserInfo().m_uid;
+                                //m_myUserInfoUI.GetComponent<MyUIScript>().setHead("");
+                                //m_myUserInfoUI.GetComponent<MyUIScript>().setName(jd["userList"][i]["uid"].ToString());
+                                //m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(i);
+                                //m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserDataScript.getInstance().getUserInfo().m_uid;
 
                                 myIndex = i;
 
@@ -500,17 +518,17 @@ public class GameScript : MonoBehaviour {
                         {
                             case 0:
                                 {
-                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
@@ -519,17 +537,17 @@ public class GameScript : MonoBehaviour {
 
                             case 1:
                                 {
-                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
@@ -538,17 +556,17 @@ public class GameScript : MonoBehaviour {
 
                             case 2:
                                 {
-                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
@@ -557,17 +575,17 @@ public class GameScript : MonoBehaviour {
 
                             case 3:
                                 {
-                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
                                     m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
                                     m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
 
-                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setHead("");
+                                    m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
                                     m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();

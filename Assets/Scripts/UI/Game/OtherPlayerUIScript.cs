@@ -16,6 +16,7 @@ public class OtherPlayerUIScript : MonoBehaviour {
         Direction_Down,
     }
 
+    public GameObject m_headIcon;
     public Text m_textName;
     public Text m_textGoldNum;
     public Image m_imageZhuangJiaIcon;

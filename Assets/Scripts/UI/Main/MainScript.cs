@@ -13,9 +13,13 @@ public class MainScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
 	{
-        AudioScript.getAudioScript().playMusic_GameBg();
+        if (!OtherData.s_isMainInited)
+        {
+            OtherData.s_isMainInited = true;
 
-        m_loadingPanel = LoadingScript.create();
+            AudioScript.getAudioScript().playMusic_GameBg();
+            m_loadingPanel = LoadingScript.create();
+        }
     }
 	
 	// Update is called once per frame
@@ -59,12 +63,12 @@ public class MainScript : MonoBehaviour {
 
     public void onClickJingDianChang()
     {
-        SceneManager.LoadScene("GameScene");
+        GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
     }
 
     public void onClickChaoDiChang()
     {
-        SceneManager.LoadScene("GameScene");
+        GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
     }
 
     public void onClickXiuXianChang_back()
