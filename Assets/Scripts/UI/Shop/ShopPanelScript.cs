@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ public class ShopPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
     private List<string> _list;
     private List<ShopData> shopDataList;
-    private int type = 1;
+    private int type = 2;
     private List<ShopData> _shopItemDatas;
 
     public static GameObject create()
@@ -52,10 +53,32 @@ public class ShopPanelScript : MonoBehaviour {
 
     private void onInitializeItem(GameObject go, int dataindex)
     {
-       
+        ShopData shopItemData = _shopItemDatas[dataindex];
+        string[] strings = shopItemData.props.Split(':');
+        int id = Convert.ToInt32(strings[0]);
+
         Text goods_name = go.transform.Find("goods_name").GetComponent<Text>();
         Text goods_price = go.transform.Find("goods_price").GetComponent<Text>();
-        goods_name.text = _shopItemDatas[dataindex].props;
+        Image goods_image = go.transform.Find("goods_image").GetComponent<Image>();
+
+        if (type == 3)
+        {
+            for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)
+            {
+                PropInfo propInfo = PropData.getInstance().getPropInfoList()[i];
+                if (id == propInfo.m_id)
+                {
+                    goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + propInfo.m_icon);
+                }
+
+            }
+        }
+        else if(type == 2)
+        {
+            goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_lanzuanshi");
+        }
+
+        goods_name.text = _shopItemDatas[dataindex].goods_name;
         //设置价格
         string price = null;
         if (_shopItemDatas[dataindex].money_type == 1)
