@@ -162,9 +162,9 @@ public class GameScript : MonoBehaviour {
         reqOutPoker();
     }
 
-    public void onClickQiangZhu()
+    public void onClickQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
-        reqQiangZhu();
+        reqQiangZhu(pokerList);
     }
 
     public void onClickMaiDi()
@@ -259,7 +259,7 @@ public class GameScript : MonoBehaviour {
         }
     }
 
-    public void reqQiangZhu()
+    public void reqQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
         JsonData data = new JsonData();
 
@@ -268,35 +268,20 @@ public class GameScript : MonoBehaviour {
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
 
         int select = -1;
+        JsonData jarray = new JsonData();
+
         // 自己出的牌
-        for (int i = 0; i < m_myPokerObjList.Count; i++)
+        for (int i = 0; i < pokerList.Count; i++)
         {
-            PokerScript pokerScript = m_myPokerObjList[i].GetComponent<PokerScript>();
-            if (pokerScript.getIsSelect())
-            {
-                select = pokerScript.getPokerNum();
-
-                data["pokerType"] = pokerScript.getPokerType();
-                break;
-            }
+            JsonData jd = new JsonData();
+            jd["num"] = pokerList[i].m_num;
+            jd["pokerType"] = (int)pokerList[i].m_pokerType;
+            jarray.Add(jd);
         }
 
-        if (select != -1)
-        {
-            if (select == m_levelPokerNum)
-            {
-                m_timerScript.stop();
-                SocketUtil.getInstance().sendMessage(data.ToJson());
-            }
-            else
-            {
-                ToastScript.createToast("请选择正确的牌");
-            }
-        }
-        else
-        {
-            ToastScript.createToast("请选中你的牌");
-        }
+        data["pokerList"] = jarray;
+        
+        SocketUtil.getInstance().sendMessage(data.ToJson());
     }
     
     public void reqMaiDi()
@@ -391,6 +376,18 @@ public class GameScript : MonoBehaviour {
         data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
         data["pokerType"] = -1;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
+
+    // 抢主结束
+    public void reqQiangZhuEnd()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhuEnd;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
@@ -608,7 +605,12 @@ public class GameScript : MonoBehaviour {
 
                     if (isEnd == 1)
                     {
-                        startGame();
+                        {
+                            ToastScript.createToast("开始抢主,本局打" + m_levelPokerNum.ToString());
+
+                            // 开始倒计时
+                            m_timerScript.start(m_qiangZhuTime, TimerScript.TimerType.TimerType_QiangZhu, true);
+                        }
                     }
                 }
                 break;
@@ -616,11 +618,31 @@ public class GameScript : MonoBehaviour {
             // 抢主
             case (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu:
                 {
+                    string str = "有人抢主：";
+                    // 主牌花色
+                    {
+                        for (int i = 0; i < jd["pokerList"].Count; i++)
+                        {
+                            int num = (int)jd["pokerList"][i]["num"];
+                            int pokerType = (int)jd["pokerList"][i]["pokerType"];
+
+                            m_masterPokerType = pokerType;
+
+                            str += (num + "  ");
+                        }
+                    }
+                    ToastScript.createToast(str);
+                }
+                break;
+
+            // 抢主结束
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhuEnd:
+                {
                     m_timerScript.stop();
 
                     // 主牌花色
                     {
-                        m_masterPokerType = (int)jd["pokerType"];
+                        m_masterPokerType = (int)jd["masterPokerType"];
 
                         if (m_masterPokerType != -1)
                         {
@@ -647,7 +669,7 @@ public class GameScript : MonoBehaviour {
                             Destroy(poker.GetComponent<Button>());
 
                             ToastScript.createToast("本局打无主牌");
-                        }                        
+                        }
                     }
 
                     // 对我的牌重新排序
@@ -666,7 +688,7 @@ public class GameScript : MonoBehaviour {
                         {
                             ToastScript.createToast("我是庄家");
 
-                            m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(1,1,1);
+                            m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(1, 1, 1);
                         }
                         else
                         {
@@ -1091,10 +1113,7 @@ public class GameScript : MonoBehaviour {
 
     void startGame()
     {
-        ToastScript.createToast("开始抢主,本局打" + m_levelPokerNum.ToString());
-
-        // 开始倒计时
-        m_timerScript.start(m_qiangZhuTime, TimerScript.TimerType.TimerType_QiangZhu,true);
+        
     }
 
     void createMyPokerObj()
@@ -1558,8 +1577,8 @@ public class GameScript : MonoBehaviour {
             // 抢主
             case TimerScript.TimerType.TimerType_QiangZhu:
                 {
-                    ToastScript.createToast("时间到，放弃抢主");
-                    reqGiveUpQiangZhu();
+                    ToastScript.createToast("抢主时间结束");
+                    reqQiangZhuEnd();
                 }
                 break;
 
