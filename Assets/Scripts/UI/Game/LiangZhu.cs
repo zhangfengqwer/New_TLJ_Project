@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class LiangZhu : MonoBehaviour
 {
-    public static LiangZhu Instance;
-   
+    public GameScript m_parentScript;
+
     public Button ButtonWang;
     public Button ButtonHei;
     public Button ButtonHong;
@@ -15,12 +15,14 @@ public class LiangZhu : MonoBehaviour
     public Button ButtonFang;
     private List<PokerInfo> liangzhuPoker;
 
-    void Start()
+    public static GameObject create(GameScript parentScript)
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+        GameObject prefab = Resources.Load("Prefabs/Game/LiangZhu") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+
+        obj.GetComponent<LiangZhu>().m_parentScript = parentScript;
+
+        return obj;
     }
 
     public void UpdateUi(List<PokerInfo> handerPoker, List<PokerInfo> lastLiangZhuPoker)
@@ -63,5 +65,8 @@ public class LiangZhu : MonoBehaviour
                     break;
             }
         }
+
+
+        // m_parentScript.onClickQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     }
 }
