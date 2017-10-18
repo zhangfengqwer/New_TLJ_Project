@@ -9,6 +9,7 @@ public class MainScript : MonoBehaviour {
     public GameObject m_xiuxianchang;
     public Text UserAccount;
     public Text UserGold;
+    public Text MyGold;
     public Text UserYuanBao;
 
     public GameObject m_headIcon;
@@ -50,6 +51,7 @@ public class MainScript : MonoBehaviour {
 
         // 金币
         UserGold.text = UserData.gold+"";
+        MyGold.text = "我的金币:"+ UserData.gold;
 
         // 元宝
         UserYuanBao.text = UserData.yuanbao+"";

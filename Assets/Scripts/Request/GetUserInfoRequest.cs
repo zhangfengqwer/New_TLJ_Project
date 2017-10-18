@@ -4,8 +4,8 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class GetUserInfoRequest : Request {
-
+public class GetUserInfoRequest : Request
+{
     private bool flag = false;
     private string result;
 
@@ -36,13 +36,13 @@ public class GetUserInfoRequest : Request {
     public override void OnResponse(string data)
     {
         JsonData jsonData = JsonMapper.ToObject(data);
-        var code = (int)jsonData["code"];
+        var code = (int) jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)
         {
             UserData.name = (string) jsonData["name"];
             UserData.phone = (string) jsonData["phone"];
             //UserData.head = (string)jsonData["head"];
-            UserData.head = "head_9";
+            UserData.head = "head_" + jsonData["head"];
             UserData.gold = (int) jsonData["gold"];
             UserData.yuanbao = (int) jsonData["yuanbao"];
             UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());

@@ -50,7 +50,7 @@ public class UserInfoScript : MonoBehaviour
             //默认为保留两位
             shengLv.text = String.Format("{0:F}", (UserData.gameData.winCount / (float)UserData.gameData.allGameCount) * 100) + "%";
             allGame.text = UserData.gameData.allGameCount+"";
-            taoPaoLv.text = (UserData.gameData.runCount / (float)UserData.gameData.allGameCount) * 100 + "%";
+            taoPaoLv.text = String.Format("{0:F}", (UserData.gameData.runCount / (float)UserData.gameData.allGameCount) * 100) + "%"; ;
         }
         
         headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);

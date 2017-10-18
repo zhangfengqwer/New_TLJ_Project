@@ -8,6 +8,7 @@ public class ShopPanelScript : MonoBehaviour {
     private UIWarpContent uiWarpContent;
     private List<string> _list;
     private List<ShopData> shopDataList;
+    //商品类型，1：金币，2：元宝，3：道具
     private int type = 2;
     private List<ShopData> _shopItemDatas;
 
@@ -73,9 +74,13 @@ public class ShopPanelScript : MonoBehaviour {
 
             }
         }
-        else if(type == 2)
+        else if (type == 2)
         {
-            goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_lanzuanshi");
+            goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_yuanbao");
+        }
+        else
+        {
+            goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
         }
 
         goods_name.text = _shopItemDatas[dataindex].goods_name;

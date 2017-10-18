@@ -1037,4 +1037,72 @@ public class PlayRuleUtil
             tempList.Add(masterPoker[0]);
         }
     }
+
+    /// <summary>
+    /// 得到主牌中的级牌和大小王
+    /// </summary>
+    /// <param name="masterPoker"></param>
+    /// <param name="mLevelPokerNum"></param>
+    /// <param name="masterPokerType"></param>
+    /// <returns></returns>
+    public static List<PokerInfo> GetJiPaiAndWang(List<PokerInfo> masterPoker, int mLevelPokerNum)
+    {
+        List<PokerInfo> pokerInfos = new List<PokerInfo>();
+        for (int i = 0; i < masterPoker.Count; i++)
+        {
+            PokerInfo pokerInfo = masterPoker[i];
+            if (pokerInfo.m_num == mLevelPokerNum || pokerInfo.m_pokerType == Consts.PokerType.PokerType_Wang)
+            {
+                pokerInfos.Add(pokerInfo);
+            }
+        }
+        return pokerInfos;
+    }
+
+    /// <summary>
+    /// 得到能够亮主的牌
+    /// </summary>
+    /// <param name="handerPoker"></param>
+    /// <param name="liangZhuPoker"></param>
+    /// <param name="mLevelPokerNum"></param>
+    /// <param name="masterPokerType"></param>
+    /// <returns></returns>
+    public static List<PokerInfo> GetLiangzhuPoker(List<PokerInfo> handerPoker, List<PokerInfo> liangZhuPoker, int mLevelPokerNum,
+        int masterPokerType)
+    {
+        List<PokerInfo> pokerInfos = new List<PokerInfo>();
+        List<PokerInfo> jiPaiAndWang = PlayRuleUtil.GetJiPaiAndWang(handerPoker, mLevelPokerNum);
+        if (jiPaiAndWang.Count == 0) return pokerInfos;
+
+        //第一次亮主
+        if (liangZhuPoker == null || liangZhuPoker.Count == 0)
+        {
+            for (int i = 0; i < handerPoker.Count; i++)
+            {
+                if (handerPoker[i].m_num == mLevelPokerNum)
+                {
+                    pokerInfos.Add(handerPoker[i]);
+                }
+            }
+            return pokerInfos;
+        }
+        else if (liangZhuPoker.Count == 2 || liangZhuPoker.Count == 1)
+        {
+            Consts.PokerType mPokerType = liangZhuPoker[0].m_pokerType;
+            List<PokerInfo> doublePoker = PlayRuleUtil.GetDoublePoker(jiPaiAndWang);
+            for (int i = 0; i < doublePoker.Count - 1; i += 2)
+            {
+                if (doublePoker[i].m_pokerType > mPokerType)
+                {
+                    pokerInfos.Add(doublePoker[i]);
+                    pokerInfos.Add(doublePoker[i + 1]);
+                }
+            }
+            return pokerInfos;
+        }
+        else
+        {
+            return pokerInfos;
+        }
+    }
 }
