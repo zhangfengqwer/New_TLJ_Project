@@ -40,14 +40,14 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     {
         m_scrollViewScript.clear();
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < HuDongData.getInstance().getHuDongDataList().Count; i++)
         {
             GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_hudong_Scroll") as GameObject;
             GameObject obj = MonoBehaviour.Instantiate(prefab);
-            //obj.GetComponent<Mail_List_Item_Script>().m_parentScript = this;
-            //obj.GetComponent<Mail_List_Item_Script>().setMailData(UserMailData.getInstance().getUserMailDataList()[i]);
+            obj.GetComponent<Item_hudong_Scroll_Script>().m_parentScript = this;
+            obj.GetComponent<Item_hudong_Scroll_Script>().setHuDongPropData(HuDongData.getInstance().getHuDongDataList()[i]);
 
-            //obj.transform.name = UserMailData.getInstance().getUserMailDataList()[i].m_email_id.ToString();
+            obj.transform.name = HuDongData.getInstance().getHuDongDataList()[i].m_id.ToString();
 
             m_scrollViewScript.addItem(obj);
         }
