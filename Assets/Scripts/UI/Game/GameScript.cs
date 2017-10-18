@@ -21,10 +21,10 @@ public class GameScript : MonoBehaviour {
 
     List<TLJCommon.PokerInfo> myPokerList = new List<TLJCommon.PokerInfo>();
     List<GameObject> m_myPokerObjList = new List<GameObject>();
-    //List<GameObject> m_outPokerObjList = new List<GameObject>();
     List<List<GameObject>> m_curRoundOutPokerList = new List<List<GameObject>>();
     List<GameObject> m_otherPlayerUIObjList = new List<GameObject>();
     public GameObject m_myUserInfoUI;
+    GameObject m_waitOtherPlayer;
 
     // 倒计时
     GameObject m_timer;
@@ -83,7 +83,7 @@ public class GameScript : MonoBehaviour {
         // 上边的玩家
         {
             GameObject obj = OtherPlayerUIScript.create();
-            obj.transform.localPosition = new Vector3(0, 300, 0);
+            obj.transform.localPosition = new Vector3(0, 130, 0);
             obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Up;
 
             m_otherPlayerUIObjList.Add(obj);
@@ -442,6 +442,8 @@ public class GameScript : MonoBehaviour {
 
                                 // 禁用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(0,0,0);
+
+                                m_waitOtherPlayer = WaitOtherPlayerScript.create();
                             }
                             break;
 
@@ -483,6 +485,8 @@ public class GameScript : MonoBehaviour {
             // 开始游戏
             case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
                 {
+                    Destroy(m_waitOtherPlayer);
+
                     // 级牌
                     m_levelPokerNum = (int)jd["levelPokerNum"];
                     

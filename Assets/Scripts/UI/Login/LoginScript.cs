@@ -29,6 +29,7 @@ public class LoginScript : MonoBehaviour
             NetConfig.reqNetConfig();
             PropData.getInstance().reqHttp();
             ChatData.getInstance().init();
+            HuDongData.getInstance().init();
         }
 
         m_inputAccount.text = "123";
