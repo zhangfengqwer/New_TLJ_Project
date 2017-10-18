@@ -33,6 +33,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         {
             m_text_name.text = m_propInfo.m_name;
             m_text_desc.text = m_propInfo.m_desc;
+            CommonUtil.setImageSprite(m_image_icon, GameUtil.getPropIconPath(m_propInfo.m_id));
 
             if (m_propInfo.m_type != 0)
             {
