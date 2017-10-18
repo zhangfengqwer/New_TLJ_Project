@@ -487,20 +487,16 @@ public class GameScript : MonoBehaviour {
                 {
                     Destroy(m_waitOtherPlayer);
 
+                    {
+                        m_buttonQiangZhu.transform.localScale = new Vector3(1, 1, 1);
+                        m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
+                    }
+
                     // 级牌
                     m_levelPokerNum = (int)jd["levelPokerNum"];
                     
                     // 我的队友uid
                     m_teammateUID = jd["teammateUID"].ToString();
-
-                    // 我的牌
-                    for (int i = 0; i < jd["pokerList"].Count; i++)
-                    {
-                        int num = (int)jd["pokerList"][i]["num"];
-                        int pokerType = (int)jd["pokerList"][i]["pokerType"];
-
-                        myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-                    }
 
                     // 显示所有玩家的头像、昵称、金币
                     {
@@ -509,11 +505,6 @@ public class GameScript : MonoBehaviour {
                         {
                             if (jd["userList"][i]["uid"].ToString().CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
                             {
-                                //m_myUserInfoUI.GetComponent<MyUIScript>().setHead("");
-                                //m_myUserInfoUI.GetComponent<MyUIScript>().setName(jd["userList"][i]["uid"].ToString());
-                                //m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(i);
-                                //m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserDataScript.getInstance().getUserInfo().m_uid;
-
                                 myIndex = i;
 
                                 break;
@@ -599,10 +590,26 @@ public class GameScript : MonoBehaviour {
                                 break;
                         }
                     }
-                    
+                }
+                break;
+
+            // 发牌
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_FaPai:
+                {
+                    int num = (int)jd["num"];
+                    int pokerType = (int)jd["pokerType"];
+
+                    int isEnd = (int)jd["isEnd"];
+
+                    myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+
                     sortMyPokerList(-1);        // 对我的牌进行排序
                     createMyPokerObj();         // 创建我的牌对象
-                    startGame();
+
+                    if (isEnd == 1)
+                    {
+                        startGame();
+                    }
                 }
                 break;
 
@@ -1084,9 +1091,6 @@ public class GameScript : MonoBehaviour {
 
     void startGame()
     {
-        m_buttonQiangZhu.transform.localScale = new Vector3(1, 1, 1);
-        m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
-
         ToastScript.createToast("开始抢主,本局打" + m_levelPokerNum.ToString());
 
         // 开始倒计时
