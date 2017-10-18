@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LiangZhu : MonoBehaviour
 {
-    public GameScript m_parentScript;
+    private GameScript m_parentScript;
 
     public Button ButtonWang;
     public Button ButtonHei;
@@ -65,8 +65,39 @@ public class LiangZhu : MonoBehaviour
                     break;
             }
         }
+    }
 
+    public void OnClickHei()
+    {
+        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
+    }
+    public void OnClickhong()
+    {
+        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
+    }
+    public void OnClickMei()
+    {
+        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
+    }
+    public void OnClickFang()
+    {
+        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
+    }
+    public void OnClickWang()
+    {
+        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
+    }
 
-        // m_parentScript.onClickQiangZhu(List<TLJCommon.PokerInfo> pokerList)
+    private List<PokerInfo> GetPokerTypePoker(Consts.PokerType pokerType)
+    {
+        List<PokerInfo> pokerInfos = new List<PokerInfo>();
+        for (int i = 0; i < liangzhuPoker.Count; i++)
+        {
+            if (liangzhuPoker[i].m_pokerType == pokerType)
+            {
+                pokerInfos.Add(liangzhuPoker[i]);
+            }
+        }
+        return pokerInfos;
     }
 }
