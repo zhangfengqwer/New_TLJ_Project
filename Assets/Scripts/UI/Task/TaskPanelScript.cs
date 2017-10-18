@@ -32,8 +32,6 @@ public class TaskPanelScript : MonoBehaviour {
     {
         m_ListViewScript.clear();
 
-        Debug.Log("aa:"+TaskDataScript.getInstance().getTaskDataList().Count);
-
         for (int i = 0; i < TaskDataScript.getInstance().getTaskDataList().Count; i++)
         {
             GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Task_List") as GameObject;
