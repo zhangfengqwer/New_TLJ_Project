@@ -41,19 +41,19 @@ public class Item_Task_List_Script : MonoBehaviour {
             if (m_taskData.isover == 1)
             {
                 m_button_wancheng.interactable = false;
-                m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "已领取";
+                CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yilingque");
             }
             else
             {
                 if (m_taskData.progress == m_taskData.target)
                 {
                     m_button_wancheng.interactable = true;
-                    m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "已完成";
+                    CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yiwancheng");
                 }
                 else
                 {
                     m_button_wancheng.interactable = false;
-                    m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "未完成";
+                    CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_weiwancheng");
                 }
             }
         }
@@ -67,7 +67,7 @@ public class Item_Task_List_Script : MonoBehaviour {
     public void setTaskIsOver()
     {
         m_button_wancheng.interactable = false;
-        m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "已领取";
+        CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yilingque");
     }
 
     public void onClickWanCheng()

@@ -83,7 +83,7 @@ public class GameScript : MonoBehaviour {
         // 上边的玩家
         {
             GameObject obj = OtherPlayerUIScript.create();
-            obj.transform.localPosition = new Vector3(0, 130, 0);
+            obj.transform.localPosition = new Vector3(0, 200, 0);
             obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Up;
 
             m_otherPlayerUIObjList.Add(obj);
@@ -791,11 +791,11 @@ public class GameScript : MonoBehaviour {
                             }
                         }
 
-                        // 庄家对家抓到的分数
+                        // 闲家抓到的分数
                         {
                             int getScore = (int)jd["getScore"];
                             m_getAllScore += getScore;
-                            m_textScore.text = "分数：" + m_getAllScore.ToString();
+                            m_textScore.text = m_getAllScore.ToString();
                         }
 
                         int hasPlayerOutPoker = (int)jd["hasPlayerOutPoker"];
@@ -969,10 +969,10 @@ public class GameScript : MonoBehaviour {
                     {
                         ToastScript.createToast("游戏结束");
 
-                        // 庄家对家抓到的分数
+                        // 闲家抓到的分数
                         {
                             m_getAllScore = (int)jd["getAllScore"];
-                            m_textScore.text = "分数：" + m_getAllScore.ToString();
+                            m_textScore.text = m_getAllScore.ToString();
                         }
                         
                         {
