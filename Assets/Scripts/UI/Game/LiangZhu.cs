@@ -17,7 +17,9 @@ public class LiangZhu : MonoBehaviour
     public Button ButtonHei;
     public Button ButtonHong;
     public Button ButtonMei;
+    public Text textLiangzhu;
     public Button ButtonFang;
+    public GameObject GiveUp;
     private List<PokerInfo> liangzhuPoker;
 
     public UseType m_useType;
@@ -35,6 +37,25 @@ public class LiangZhu : MonoBehaviour
 
     public void UpdateUi(List<PokerInfo> handerPoker, List<PokerInfo> lastLiangZhuPoker)
     {
+        ButtonFang.interactable = false;
+        ButtonMei.interactable = false;
+        ButtonHong.interactable = false;
+        ButtonHei.interactable = false;
+        ButtonWang.interactable = false;
+
+        switch (m_useType)
+        {
+            case UseType.UseType_chaodi:
+                GiveUp.transform.localScale = new Vector3(1, 1, 1);
+                textLiangzhu.text = "抄底";
+                break;
+            case UseType.UseType_liangzhu:
+                GiveUp.transform.localScale = new Vector3(0, 0, 0);
+                textLiangzhu.text = "亮主";
+                break;
+        }
+
+
         liangzhuPoker = PlayRuleUtil.GetLiangzhuPoker(handerPoker, lastLiangZhuPoker, GameScript.m_levelPokerNum, GameScript.m_masterPokerType);
 
         foreach (PokerInfo pokerInfo in liangzhuPoker)
@@ -77,23 +98,41 @@ public class LiangZhu : MonoBehaviour
 
     public void OnClickHei()
     {
-        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
+        OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
     }
     public void OnClickhong()
     {
-        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
+        OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
     }
     public void OnClickMei()
     {
-        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
+        OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
     }
     public void OnClickFang()
     {
-        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
+        OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
     }
     public void OnClickWang()
     {
-        m_parentScript.onClickQiangZhu(GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
+        OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
+    }
+
+    public void OnClickGiveUp()
+    {
+        
+    }
+
+    private void OnClickLiangzhu(List<PokerInfo> list)
+    {
+        switch (m_useType)
+        {
+            case UseType.UseType_chaodi:
+                m_parentScript.onClickChaoDi(list);
+                break;
+            case UseType.UseType_liangzhu:
+                m_parentScript.onClickQiangZhu(list);
+                break;
+        }
     }
 
     private List<PokerInfo> GetPokerTypePoker(Consts.PokerType pokerType)
