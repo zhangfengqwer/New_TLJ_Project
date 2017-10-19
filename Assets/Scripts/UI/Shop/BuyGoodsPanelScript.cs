@@ -113,6 +113,7 @@ public class BuyGoodsPanelScript : MonoBehaviour {
         m_goods_num = m_goods_buy_maxNum;
         m_text_goods_num.text = m_goods_num.ToString();
 
+        m_button_jian.interactable = true;
         m_button_jia.interactable = false;
     }
 

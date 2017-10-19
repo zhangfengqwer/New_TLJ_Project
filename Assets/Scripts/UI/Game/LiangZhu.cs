@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class LiangZhu : MonoBehaviour
 {
+    public enum UseType
+    {
+        UseType_liangzhu,
+        UseType_chaodi,
+    }
     private GameScript m_parentScript;
 
     public Button ButtonWang;
@@ -15,12 +20,15 @@ public class LiangZhu : MonoBehaviour
     public Button ButtonFang;
     private List<PokerInfo> liangzhuPoker;
 
-    public static GameObject create(GameScript parentScript)
+    public UseType m_useType;
+
+    public static GameObject create(GameScript parentScript, UseType useType)
     {
         GameObject prefab = Resources.Load("Prefabs/Game/LiangZhu") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
 
         obj.GetComponent<LiangZhu>().m_parentScript = parentScript;
+        obj.GetComponent<LiangZhu>().m_useType = useType;
 
         return obj;
     }

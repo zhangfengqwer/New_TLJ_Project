@@ -10,6 +10,8 @@ public class TimerScript : MonoBehaviour
         TimerType_QiangZhu,
         TimerType_MaiDi,
         TimerType_OutPoker,
+        TimerType_ChaoDi,
+        TimerType_OtherMaiDi,
     }
 
     public Text m_textTime;
