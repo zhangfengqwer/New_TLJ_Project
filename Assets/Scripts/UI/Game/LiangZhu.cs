@@ -119,7 +119,7 @@ public class LiangZhu : MonoBehaviour
 
     public void OnClickGiveUp()
     {
-        
+        m_parentScript.onClickChaoDi(new List<PokerInfo>());
     }
 
     private void OnClickLiangzhu(List<PokerInfo> list)

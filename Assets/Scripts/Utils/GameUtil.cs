@@ -122,4 +122,36 @@ class GameUtil
         }
         return path;
     }
+
+    static public string getMasterPokerIconPath(int masterPokerType)
+    {
+        string path = "";
+        
+        if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_FangKuai)
+        {
+            path = "Sprites/Game/Poker/icon_fangkuai";
+        }
+        else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_HeiTao)
+        {
+            path = "Sprites/Game/Poker/icon_heitao";
+        }
+        else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_HongTao)
+        {
+            path = "Sprites/Game/Poker/icon_hongtao";
+        }
+        else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_MeiHua)
+        {
+            path = "Sprites/Game/Poker/icon_meihua";
+        }
+        else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_Wang)
+        {
+            path = "Sprites/Game/Poker/icon_wuzhu";
+        }
+        else if (masterPokerType == -1)
+        {
+            path = "Sprites/Game/Poker/icon_wuzhu";
+        }
+
+        return path;
+    }
 }
