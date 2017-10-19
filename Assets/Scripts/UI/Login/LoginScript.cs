@@ -119,7 +119,7 @@ public class LoginScript : MonoBehaviour
     void onReceive(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        string tag = (string)jd["tag"];
+        string tag = (string) jd["tag"];
 
         if (tag.CompareTo(TLJCommon.Consts.Tag_Login) == 0)
         {
