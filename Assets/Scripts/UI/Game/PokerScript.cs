@@ -9,6 +9,10 @@ public class PokerScript : MonoBehaviour {
     int m_pokerType;
     bool m_isSelect = false;
 
+    public Image m_image_num;
+    public Image m_image_small_icon;
+    public Image m_image_big_icon;
+
     public static GameObject createPoker()
     {
         GameObject prefabs = Resources.Load("Prefabs/Game/Poker") as GameObject;
@@ -25,76 +29,44 @@ public class PokerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (getIsSelect())
-        {
-            gameObject.transform.Find("Text_state").GetComponent<Text>().text = "1";
-        }
-        else
-        {
-            gameObject.transform.Find("Text_state").GetComponent<Text>().text = "0";
-        }
 	}
 
     public void initPoker(int num,int pokerType)
     {
         m_num = num;
         m_pokerType = pokerType;
-
-        if (num >= 2 && num <= 10)
-        {
-            gameObject.transform.Find("Text").GetComponent<Text>().text = num.ToString();
-        }
-        else
-        {
-            if (num == 11)
-            {
-                gameObject.transform.Find("Text").GetComponent<Text>().text = "J";
-            }
-            else if (num == 12)
-            {
-                gameObject.transform.Find("Text").GetComponent<Text>().text = "Q";
-            }
-            else if (num == 13)
-            {
-                gameObject.transform.Find("Text").GetComponent<Text>().text = "K";
-            }
-            else if (num == 14)
-            {
-                gameObject.transform.Find("Text").GetComponent<Text>().text = "A";
-            }
-            else if (num == 15)
-            {
-                gameObject.transform.Find("Text").GetComponent<Text>().text = "小王";
-            }
-            else if (num == 16)
-            {
-                gameObject.transform.Find("Text").GetComponent<Text>().text = "大王";
-            }
-        }
-
+        
         switch (m_pokerType)
         {
             case (int)TLJCommon.Consts.PokerType.PokerType_FangKuai:
                 {
-                    gameObject.transform.Find("Image_icon").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/icon_fangkuai", typeof(Sprite)) as Sprite;
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/red_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_fangkuai");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_fangkuai");
                 }
                 break;
 
             case (int)TLJCommon.Consts.PokerType.PokerType_HeiTao:
                 {
-                    gameObject.transform.Find("Image_icon").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/icon_heitao", typeof(Sprite)) as Sprite;
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/black_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_heitao");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_heitao");
                 }
                 break;
 
             case (int)TLJCommon.Consts.PokerType.PokerType_HongTao:
                 {
-                    gameObject.transform.Find("Image_icon").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/icon_hongtao", typeof(Sprite)) as Sprite;
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/red_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_hongtao");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_hongtao");
                 }
                 break;
 
             case (int)TLJCommon.Consts.PokerType.PokerType_MeiHua:
                 {
-                    gameObject.transform.Find("Image_icon").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/icon_meihua", typeof(Sprite)) as Sprite;
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/black_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_meihua");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_meihua");
                 }
                 break;
 
@@ -102,18 +74,20 @@ public class PokerScript : MonoBehaviour {
                 {
                     if (num == 15)
                     {
-                        gameObject.transform.Find("Image_icon").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/icon_xiaowang", typeof(Sprite)) as Sprite;
+                        CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/black_" + m_num);
+                        CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_xiaowang");
                     }
                     else if (num == 16)
                     {
-                        gameObject.transform.Find("Image_icon").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/icon_dawang", typeof(Sprite)) as Sprite;
+                        CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/red_" + m_num);
+                        CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_dawang");
                     }
 
-                    gameObject.transform.Find("Image_icon").transform.localPosition = new Vector3(-2.44f, 7.2f,0);
-                    gameObject.transform.Find("Image_icon").transform.localScale = new Vector3(1,1,1);
-                    gameObject.transform.Find("Image_icon").GetComponent<Image>().SetNativeSize();
+                    m_image_num.SetNativeSize();
+                    m_image_big_icon.SetNativeSize();
 
-                    gameObject.transform.Find("Text").transform.localScale = new Vector3(0,0,0);
+                    m_image_small_icon.transform.localScale = new Vector3(0,0,0);
+                    m_image_big_icon.transform.localScale = new Vector3(1, 1, 1);
                 }
                 break;
         }

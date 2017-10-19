@@ -30,7 +30,8 @@ public class TimerScript : MonoBehaviour
         GameObject obj = MonoBehaviour.Instantiate(prefab);
         obj.transform.SetParent(GameObject.Find("Canvas").transform);
         obj.transform.localScale = new Vector3(1,1,1);
-        obj.transform.localPosition = new Vector3(450,200,0);
+        //obj.transform.localPosition = new Vector3(450,200,0);
+        obj.transform.localPosition = new Vector3(0, 0, 0);
 
         return obj;
     }
@@ -38,6 +39,7 @@ public class TimerScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
     }
 	
 	// Update is called once per frame

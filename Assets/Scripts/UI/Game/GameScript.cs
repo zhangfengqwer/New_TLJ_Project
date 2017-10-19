@@ -10,11 +10,11 @@ public class GameScript : MonoBehaviour {
 
     public Button m_buttonStartGame;
     public Button m_buttonOutPoker;
-    public Button m_buttonQiangZhu;
     public Button m_buttonMaiDi;
     public Button m_buttonChat;
     public Button m_buttonTuoGuan;
     public Text m_textScore;
+    public Image m_imageMasterPokerType;
 
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
@@ -83,7 +83,6 @@ public class GameScript : MonoBehaviour {
         }
 
         m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
-        m_buttonQiangZhu.transform.localScale = new Vector3(0,0,0);
         m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
         m_buttonChat.transform.localScale = new Vector3(0, 0, 0);
         m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
@@ -178,6 +177,7 @@ public class GameScript : MonoBehaviour {
 
     public void onClickChaoDi(List<TLJCommon.PokerInfo> pokerList)
     {
+        Destroy(m_liangzhuObj);
         reqChaoDi(pokerList);
     }
 
@@ -270,6 +270,7 @@ public class GameScript : MonoBehaviour {
             SocketUtil.getInstance().sendMessage(data.ToJson());
 
             m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
+            
             m_timerScript.stop();
         }
         else
@@ -615,7 +616,6 @@ public class GameScript : MonoBehaviour {
                     Destroy(m_waitOtherPlayer);
 
                     {
-                        m_buttonQiangZhu.transform.localScale = new Vector3(1, 1, 1);
                         m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
 
                         m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
@@ -785,28 +785,11 @@ public class GameScript : MonoBehaviour {
 
                         if (m_masterPokerType != -1)
                         {
-                            GameObject poker = PokerScript.createPoker();
-                            poker.transform.SetParent(GameObject.Find("Canvas").transform);
-                            poker.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-                            poker.transform.localPosition = new Vector3(-600, 315, 0);
-
-                            poker.GetComponent<PokerScript>().initPoker(m_levelPokerNum, m_masterPokerType);
-
-                            // 禁止点击
-                            Destroy(poker.GetComponent<Button>());
+                            CommonUtil.setImageSprite(m_imageMasterPokerType, GameUtil.getMasterPokerIconPath(m_masterPokerType));
                         }
                         else
                         {
-                            GameObject poker = PokerScript.createPoker();
-                            poker.transform.SetParent(GameObject.Find("Canvas").transform);
-                            poker.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-                            poker.transform.localPosition = new Vector3(-600, 315, 0);
-
-                            poker.GetComponent<PokerScript>().initPoker(m_levelPokerNum, m_masterPokerType);
-
-                            // 禁止点击
-                            Destroy(poker.GetComponent<Button>());
-
+                            CommonUtil.setImageSprite(m_imageMasterPokerType, GameUtil.getMasterPokerIconPath(m_masterPokerType));
                             ToastScript.createToast("本局打无主牌");
                         }
                     }
@@ -854,9 +837,6 @@ public class GameScript : MonoBehaviour {
                             ToastScript.createToast("我是普通人一方");
                         }
                     }
-
-                    // 禁用抢主按钮
-                    m_buttonQiangZhu.transform.localScale = new Vector3(0, 0, 0);
 
                     // 所有牌设为未选中状态
                     for (int i = 0; i < m_myPokerObjList.Count; i++)
