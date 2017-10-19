@@ -11,8 +11,15 @@ public class RememberPokerHelper : MonoBehaviour {
     public GameObject MeiContent;
     public GameObject FangContent;
     public GameObject ItemPoker;
-    private Vector3 startPosition;
+    public Image xiaoWang1;
+    public Image xiaoWang2;
+    public Image daWang1;
+    public Image daWang2;
 
+
+    private Vector3 startPosition;
+    private static List<Image> xiaoWangList = new List<Image>();
+    private static List<Image> daWangList = new List<Image>();
     private static Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
     private static Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
 
@@ -30,13 +37,23 @@ public class RememberPokerHelper : MonoBehaviour {
 		Init(MeiContent, Consts.PokerType.PokerType_MeiHua);
 		Init(FangContent, Consts.PokerType.PokerType_FangKuai);
 
+        xiaoWangList.Add(xiaoWang1);
+        xiaoWangList.Add(xiaoWang2);
+        daWangList.Add(daWang1);
+        daWangList.Add(daWang2);
+
         this.transform.localPosition = new Vector3(0, 0, 0);
         startPosition = this.transform.localPosition;
-        print(startPosition);
 
-//        List<PokerInfo> pokerInfos = new List<PokerInfo>();
-//        pokerInfos.Add(new PokerInfo(2, Consts.PokerType.PokerType_FangKuai));
-//        UpdateUi(pokerInfos);
+        List<PokerInfo> pokerInfos = new List<PokerInfo>();
+        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
+        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
+        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
+        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
+        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
+        pokerInfos.Add(new PokerInfo(4, Consts.PokerType.PokerType_MeiHua));
+        pokerInfos.Add(new PokerInfo(2, Consts.PokerType.PokerType_MeiHua));
+        UpdateUi(pokerInfos);
     }
 
     private void Init(GameObject gameObject, Consts.PokerType pokerType)
@@ -120,33 +137,56 @@ public class RememberPokerHelper : MonoBehaviour {
         for (int i = 0; i < list.Count; i++)
         {
             PokerInfo pokerInfo = list[i];
-            Consts.PokerType Type = pokerInfo.m_pokerType;
-
-            List<PokerInfo> listPoker;
-            dicPokerData.TryGetValue(Type, out listPoker);
-            List<GameObject> listGo;
-            dictionaryGo.TryGetValue(Type, out listGo);
-            int index = -1;
-            for (int j = 0; j < listPoker.Count; j++)
+            //大小王
+            if (pokerInfo.m_num == 15)
             {
-                var item = listPoker[j];
-                if (pokerInfo.m_num == item.m_num && pokerInfo.m_pokerType == item.m_pokerType)
+                if (xiaoWangList.Count == 2 || xiaoWangList.Count == 1)
                 {
-                    index = listPoker.IndexOf(item);
-                    listPoker.Remove(item);
-                    break;
+                    xiaoWangList[0].color = Color.gray;
+                    xiaoWangList.Remove(xiaoWangList[0]);
+                }
+            }else if (pokerInfo.m_num == 16)
+            {
+                if (daWangList.Count == 2 || daWangList.Count == 1)
+                {
+                    daWangList[0].color = Color.gray;
+                    daWangList.Remove(daWangList[0]);
                 }
             }
-            if (index == -1) return;
-            try
+            else if (pokerInfo.m_num < 15 && pokerInfo.m_num >= 2)
             {
-                GameObject go = listGo[index];
-                go.GetComponent<Image>().color = Color.gray;
-                listGo.Remove(go);
+                Consts.PokerType Type = pokerInfo.m_pokerType;
+
+                List<PokerInfo> listPoker;
+                dicPokerData.TryGetValue(Type, out listPoker);
+                List<GameObject> listGo;
+                dictionaryGo.TryGetValue(Type, out listGo);
+                int index = -1;
+                for (int j = 0; j < listPoker.Count; j++)
+                {
+                    var item = listPoker[j];
+                    if (pokerInfo.m_num == item.m_num && pokerInfo.m_pokerType == item.m_pokerType)
+                    {
+                        index = listPoker.IndexOf(item);
+                        listPoker.Remove(item);
+                        break;
+                    }
+                }
+                if (index == -1) return;
+                try
+                {
+                    GameObject go = listGo[index];
+                    go.GetComponent<Image>().color = Color.gray;
+                    listGo.Remove(go);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
+                throw new Exception("牌的num异常");
             }
         }
     }
