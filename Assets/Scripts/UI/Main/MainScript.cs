@@ -117,7 +117,7 @@ public class MainScript : MonoBehaviour {
 
     public void OnClickInventory()
     {
-        BagPanelScript.create();
+        BagPanelScript.create(true);
     }
 
     public void OnClickShop()

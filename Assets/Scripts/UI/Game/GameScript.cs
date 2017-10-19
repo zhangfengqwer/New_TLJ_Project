@@ -146,7 +146,7 @@ public class GameScript : MonoBehaviour {
 
     public void onClickBag()
     {
-        BagPanelScript.create();
+        BagPanelScript.create(false);
     }
 
     public void onClickSet()
@@ -1303,7 +1303,7 @@ public class GameScript : MonoBehaviour {
                                     {
                                         case OtherPlayerUIScript.Direction.Direction_Up:
                                             {
-                                                ChatContentScript.createChatContent(content_text, new Vector2(0, 300), TextAnchor.MiddleCenter);
+                                                ChatContentScript.createChatContent(content_text, new Vector2(0, 270), TextAnchor.MiddleCenter);
                                             }
                                             break;
 
