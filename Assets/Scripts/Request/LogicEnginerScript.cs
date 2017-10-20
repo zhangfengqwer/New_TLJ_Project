@@ -26,15 +26,16 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else if (Instance != this)
-        {
-            Destroy(this.gameObject);
-        }
+        Instance = this;
+//        if (Instance == null)
+//        {
+//            
+//            DontDestroyOnLoad(this.gameObject);
+//        }
+//        else if (Instance != this)
+//        {
+//            Destroy(this.gameObject);
+//        }
     }
 
     private void Update()

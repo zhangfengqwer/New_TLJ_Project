@@ -11,8 +11,9 @@ public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private void Start()
     {
         _rectTransform = gameObject.GetComponent<RectTransform>();
+      
     }
-
+        
     // begin dragging
     public void OnBeginDrag(PointerEventData eventData)
     {
