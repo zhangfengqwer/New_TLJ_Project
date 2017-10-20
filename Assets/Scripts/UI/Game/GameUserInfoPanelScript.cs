@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameUserInfoPanelScript : MonoBehaviour {
 
+    public GameObject m_headIcon;
     public GameObject m_gameobj_up;
     public GameObject m_gameobj_down;
     public GameObject m_scrollView;
@@ -14,7 +15,7 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     public static GameObject create(string uid)
     {
         GameObject prefab = Resources.Load("Prefabs/Game/GameUserInfoPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<GameUserInfoPanelScript>().setPlayer(uid);
 
@@ -33,6 +34,7 @@ public class GameUserInfoPanelScript : MonoBehaviour {
         if (uid.CompareTo(UserData.uid) == 0)
         {
             m_gameobj_down.transform.localScale = new Vector3(0, 0, 0);
+            m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
         }
     }
 

@@ -14,7 +14,7 @@ public class MailDetailScript : MonoBehaviour {
     public static GameObject create(int email_id, EmailPanelScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/MailDetailPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<MailDetailScript>().setEmailId(email_id);
         obj.GetComponent<MailDetailScript>().m_parentScript = parentScript;

@@ -18,7 +18,7 @@ public class PropDetailPanelScript : MonoBehaviour {
     {
        
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/PropDetailPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<PropDetailPanelScript>().setPropId(prop_id);
         obj.GetComponent<PropDetailPanelScript>().m_parentScript = parentScript;

@@ -15,7 +15,7 @@ public class ChatPanelScript : MonoBehaviour {
     public static GameObject create(GameScript parent)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ChatPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<ChatPanelScript>().m_parentScript = parent;
 

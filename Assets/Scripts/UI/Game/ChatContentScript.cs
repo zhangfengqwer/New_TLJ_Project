@@ -14,7 +14,7 @@ public class ChatContentScript : MonoBehaviour {
         obj.transform.Find("Text").GetComponent<Text>().text = text;
         obj.transform.Find("Text").GetComponent<Text>().alignment = textAnchor;
 
-        obj.transform.SetParent(GameObject.Find("Canvas").transform);
+        obj.transform.SetParent(GameObject.Find("Canvas_Middle").transform);
         obj.transform.localScale = new Vector3(1, 1, 1);
         
         obj.transform.localPosition = pos;

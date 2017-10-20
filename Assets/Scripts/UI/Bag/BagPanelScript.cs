@@ -5,24 +5,36 @@ using TLJCommon;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BagPanelScript : MonoBehaviour {
+public class BagPanelScript : MonoBehaviour
+{
     private UIWarpContent uiWarpContent;
-
     public static BagPanelScript Instance;
+    public bool m_isNeedReqNet = true;
 
-    public static GameObject create()
+    public static GameObject create(bool isNeedReqNet)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BagPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<BagPanelScript>().m_isNeedReqNet = isNeedReqNet;
+
         return obj;
     }
+
     // Use this for initialization
     void Start ()
     {
-        // 拉取背包
+        // 拉取背包数据
+        if (m_isNeedReqNet)
         {
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+        }
+        else
+        {
+            uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+            uiWarpContent.onInitializeItem = onInitializeItem;
+            uiWarpContent.Init(UserData.propData.Count);
         }
     }
 
@@ -58,9 +70,7 @@ public class BagPanelScript : MonoBehaviour {
             PropDetailPanelScript.create(UserData.propData[dataindex].prop_id, this);
         });
     }
-
-
-
+    
     public void onReceive_GetUserBag(string data)
     {
         {
