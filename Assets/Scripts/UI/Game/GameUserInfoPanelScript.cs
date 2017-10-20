@@ -40,8 +40,8 @@ public class GameUserInfoPanelScript : MonoBehaviour {
         PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
 
         m_text_name.text = playerData.m_name;
-        m_text_shenglv.text = (((float)playerData.m_winCount / (float)playerData.m_allGameCount) * 100).ToString() + "%";
-        m_text_taopaolv.text = (((float)playerData.m_runCount / (float)playerData.m_allGameCount) * 100).ToString() + "%";
+        m_text_shenglv.text = (((int)((float)playerData.m_winCount / (float)playerData.m_allGameCount)) * 100).ToString() + "%";
+        m_text_taopaolv.text = (((int)((float)playerData.m_runCount / (float)playerData.m_allGameCount) * 100)).ToString() + "%";
         m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
 
         m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);

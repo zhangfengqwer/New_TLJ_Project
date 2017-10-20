@@ -46,6 +46,11 @@ public class GameResultPanelScript : MonoBehaviour {
         }
 
         m_text_xianjia_score.text = "闲家得分：" + score;
+
+        m_text_player_left1.text = GameData.getInstance().m_playerDataList[0].m_name;
+        m_text_player_left2.text = GameData.getInstance().m_playerDataList[2].m_name;
+        m_text_player_right1.text = GameData.getInstance().m_playerDataList[1].m_name;
+        m_text_player_right2.text = GameData.getInstance().m_playerDataList[3].m_name;
     }
 
     public void onClickJiXu()
@@ -58,8 +63,13 @@ public class GameResultPanelScript : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    public void onClickClose()
+    {
+        Destroy(gameObject);
+    }
+
     public void onClickExit()
     {
-
+        m_parentScript.onClickExitRoom();
     }
 }
