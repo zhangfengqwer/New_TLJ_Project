@@ -20,6 +20,9 @@ public class GameScript : MonoBehaviour {
     GameObject m_timer;
     TimerScript m_timerScript;
 
+    // 记牌器
+    GameObject m_jiPaiGameObject = null;
+
     public GameObject m_myUserInfoUI;
     GameObject m_waitOtherPlayer;
     GameObject m_liangzhuObj;
@@ -27,34 +30,7 @@ public class GameScript : MonoBehaviour {
     bool m_isConnServerSuccess = false;
 
     List<string> m_dataList = new List<string>();
-
-    //List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();
-    //List<TLJCommon.PokerInfo> m_qiangzhuPokerList = new List<TLJCommon.PokerInfo>();
-    //List<GameObject> m_myPokerObjList = new List<GameObject>();
-    //List<List<GameObject>> m_curRoundOutPokerList = new List<List<GameObject>>();
-    //List<GameObject> m_otherPlayerUIObjList = new List<GameObject>();
-
-    //int m_outPokerTime = 5;             // 出牌时间 
-    //int m_tuoGuanOutPokerTime = 1;      // 托管出牌时间 
-    //int m_qiangZhuTime = 10;            // 抢主时间
-    //int m_maiDiTime = 20;               // 埋底时间
-    //int m_chaodiTime = 10;              // 选择是否炒底时间 
-
-    //public static int m_levelPokerNum = -1;           // 级牌
-    //public static int m_masterPokerType = -1;         // 主牌花色
-
-    //string m_teammateUID;               // 我的队友uid
-    //int m_isBanker;                     // 是否属于庄家一方
-
-    //int m_getAllScore;                  // 庄家对家抓到的分数
-
-    //string m_curOutPokerPlayerUid;
-
-    //bool m_isTuoGuan = false;
-    //bool m_isFreeOutPoker = false;
-    //List<TLJCommon.PokerInfo> m_curRoundFirstOutPokerList = new List<TLJCommon.PokerInfo>();
-
-    // Use this for initialization
+    
     void Start ()
     {
         initData();
@@ -196,6 +172,18 @@ public class GameScript : MonoBehaviour {
         if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserData.uid) == 0)
         {
             CancelInvoke("onInvokeTuoGuan");
+        }
+    }
+
+    public void OnClickJiPaiQi()
+    {
+        if (m_jiPaiGameObject == null)
+        {
+            m_jiPaiGameObject = RememberPokerHelper.create();
+        }
+        else
+        {
+            m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
         }
     }
 
