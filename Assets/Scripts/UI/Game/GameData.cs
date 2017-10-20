@@ -74,14 +74,57 @@ public class GameData
         //    m_curRoundOutPokerList.Clear();
         //}
     }
+
+    public PlayerData getPlayerDataByUid(string uid)
+    {
+        for (int i = 0; i < m_playerDataList.Count ; i++)
+        {
+            if (m_playerDataList[i].m_uid.CompareTo(uid) == 0)
+            {
+                return m_playerDataList[i];
+            }
+        }
+
+        return null;
+    }
+
+    public GameObject getOtherPlayerUIByUid(string uid)
+    {
+        for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
+        {
+            if (m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
+            {
+                return m_otherPlayerUIObjList[i];
+            }
+        }
+
+        return null;
+    }
+
+    public void setOtherPlayerUI(string uid)
+    {
+        PlayerData playerData = getPlayerDataByUid(uid);
+
+        getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
+        getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setName(playerData.m_name);
+        getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setGoldNum(playerData.m_gold);
+    }
 }
 
 public class PlayerData
 {
-    public string m_uid;
-    public string m_teammateUID;    // 队友uid
-    public int m_isBanker = 0;      // 是否是庄家
+    public PlayerData(string uid)
+    {
+        m_uid = uid;
+    }
 
-    List<TLJCommon.PokerInfo> m_pokerList = new List<TLJCommon.PokerInfo>();
-    public List<TLJCommon.PokerInfo> m_curOutPokerList = new List<TLJCommon.PokerInfo>();
+    public string m_uid;
+    public string m_name;
+    public string m_head;
+
+    public int m_gold;
+    public int m_allGameCount;
+    public int m_winCount;
+    public int m_runCount;
+    public int m_meiliZhi;
 }

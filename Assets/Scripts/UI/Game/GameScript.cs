@@ -98,7 +98,7 @@ public class GameScript : MonoBehaviour {
             m_myUserInfoUI.GetComponent<MyUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
             m_myUserInfoUI.GetComponent<MyUIScript>().setName(UserData.name);
             m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
-            m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserDataScript.getInstance().getUserInfo().m_uid;
+            m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserData.uid;
         }
     }
 
@@ -183,7 +183,7 @@ public class GameScript : MonoBehaviour {
 
         GameData.getInstance().m_isTuoGuan = true;
 
-        if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+        if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserData.uid) == 0)
         {
             autoOutPoker();
         }
@@ -193,7 +193,7 @@ public class GameScript : MonoBehaviour {
     {
         GameData.getInstance().m_isTuoGuan = false;
 
-        if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+        if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserData.uid) == 0)
         {
             CancelInvoke("onInvokeTuoGuan");
         }
@@ -207,7 +207,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
@@ -219,7 +219,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
@@ -231,7 +231,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_PlayerOutPoker;
 
         bool hasOutPoker = false;
@@ -282,12 +282,23 @@ public class GameScript : MonoBehaviour {
         }
     }
 
+    // 获取游戏内玩家信息
+    public void reqUserInfo_Game(string uid)
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_UserInfo_Game;
+        data["uid"] = uid;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
+
     public void reqQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
         
         JsonData jarray = new JsonData();
@@ -309,7 +320,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_PlayerChaoDi;
 
         if (pokerList.Count > 0)
@@ -340,7 +351,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_MaiDi;
 
         int selectNum = 0;
@@ -425,7 +436,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_OtherMaiDi;
 
         int selectNum = 0;
@@ -509,7 +520,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
         data["pokerType"] = -1;
 
@@ -522,7 +533,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhuEnd;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
@@ -534,7 +545,7 @@ public class GameScript : MonoBehaviour {
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserDataScript.getInstance().getUserInfo().m_uid;
+        data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_Chat;
         data["content_id"] = content_id;
 
@@ -551,6 +562,10 @@ public class GameScript : MonoBehaviour {
         if (tag.CompareTo(TLJCommon.Consts.Tag_XiuXianChang) == 0)
         {
             onReceive_XiuXianChang(data);
+        }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_UserInfo_Game) == 0)
+        {
+            onReceive_UserInfo_Game(data);
         }
     }
 
@@ -660,13 +675,13 @@ public class GameScript : MonoBehaviour {
 
                     // 我的队友uid
                     GameData.getInstance().m_teammateUID = jd["teammateUID"].ToString();
-
+                    
                     // 显示所有玩家的头像、昵称、金币
                     {
                         int myIndex = 0;
                         for (int i = 0; i < jd["userList"].Count; i++)
                         {
-                            if (jd["userList"][i]["uid"].ToString().CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            if (jd["userList"][i]["uid"].ToString().CompareTo(UserData.uid) == 0)
                             {
                                 myIndex = i;
 
@@ -678,79 +693,58 @@ public class GameScript : MonoBehaviour {
                         {
                             case 0:
                                 {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
                                     GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
                                     GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
                                     GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
                                 }
                                 break;
 
                             case 1:
                                 {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
                                     GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
                                     GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
                                     GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
                                 }
                                 break;
 
                             case 2:
                                 {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
                                     GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
                                     GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][3]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(3);
                                     GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
                                 }
                                 break;
 
                             case 3:
                                 {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][1]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().setGoldNum(1);
                                     GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][2]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().setGoldNum(2);
                                     GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon("Sprites/Head/head_10");
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setName(jd["userList"][0]["uid"].ToString());
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().setGoldNum(0);
                                     GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
                                 }
                                 break;
+                        }
+                    }
+
+                    // 本桌所有人信息
+                    for (int i = 0; i < jd["userList"].Count; i++)
+                    {
+                        string uid = jd["userList"][i]["uid"].ToString();
+
+                        GameData.getInstance().m_playerDataList.Add(new PlayerData(uid));
+
+                        if (uid.CompareTo(UserData.uid) == 0)
+                        {
+                            GameData.getInstance().getPlayerDataByUid(uid).m_name = UserData.name;
+                            GameData.getInstance().getPlayerDataByUid(uid).m_head = UserData.head;
+                            GameData.getInstance().getPlayerDataByUid(uid).m_gold = UserData.gold;
+                            GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = UserData.gameData.allGameCount;
+                            GameData.getInstance().getPlayerDataByUid(uid).m_winCount = UserData.gameData.winCount;
+                            GameData.getInstance().getPlayerDataByUid(uid).m_runCount = UserData.gameData.runCount;
+                            GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = UserData.gameData.meiliZhi;
+                        }
+                        else
+                        {
+                            reqUserInfo_Game(uid);
                         }
                     }
                 }
@@ -840,7 +834,7 @@ public class GameScript : MonoBehaviour {
                     // 判断谁是庄家
                     {
                         string uid = jd["uid"].ToString();
-                        if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                        if (uid.CompareTo(UserData.uid) == 0)
                         {
                             ToastScript.createToast("我是庄家");
 
@@ -893,7 +887,7 @@ public class GameScript : MonoBehaviour {
                     {
                         string uid = jd["uid"].ToString();
                         // 庄家开始埋底
-                        if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                        if (uid.CompareTo(UserData.uid) == 0)
                         {
                             ToastScript.createToast("开始埋底");
 
@@ -939,7 +933,7 @@ public class GameScript : MonoBehaviour {
 
                         // 检测是否轮到自己炒底
                         {
-                            if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            if (uid.CompareTo(UserData.uid) == 0)
                             {
                                 m_liangzhuObj = LiangZhu.create(this, LiangZhu.UseType.UseType_chaodi);
                                 m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList, GameData.getInstance().m_beforeQiangzhuPokerList);
@@ -991,7 +985,7 @@ public class GameScript : MonoBehaviour {
 
                             {
                                 // 庄家开始埋底
-                                if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                                if (uid.CompareTo(UserData.uid) == 0)
                                 {
                                     ToastScript.createToast("开始埋底");
 
@@ -1061,7 +1055,7 @@ public class GameScript : MonoBehaviour {
                             int isCurRoundFirstPlayer = (int)jd["isCurRoundFirstPlayer"];
                             string pre_uid = (string)jd["pre_uid"];
                             // 如果前一次是自己出的牌，那么就得删掉这些牌
-                            if (pre_uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            if (pre_uid.CompareTo(UserData.uid) == 0)
                             {
                                 for (int i = 0; i < jd["pre_outPokerList"].Count; i++)
                                 {
@@ -1143,7 +1137,7 @@ public class GameScript : MonoBehaviour {
                         {
                             string uid = (string)jd["cur_uid"];
                             GameData.getInstance().m_curOutPokerPlayerUid = uid;
-                            if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            if (uid.CompareTo(UserData.uid) == 0)
                             {
                                 int isFreeOutPoker = (int)jd["isFreeOutPoker"];
                                 if (isFreeOutPoker == 1)
@@ -1241,7 +1235,7 @@ public class GameScript : MonoBehaviour {
                         {
                             string pre_uid = (string)jd["pre_uid"];
                             // 如果前一次是自己出的牌，那么就得删掉这些牌
-                            if (pre_uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                            if (pre_uid.CompareTo(UserData.uid) == 0)
                             {
                                 for (int i = 0; i < jd["pre_outPokerList"].Count; i++)
                                 {
@@ -1334,7 +1328,7 @@ public class GameScript : MonoBehaviour {
                             content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
                         }
 
-                        if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+                        if (uid.CompareTo(UserData.uid) == 0)
                         {
                             ChatContentScript.createChatContent(content_text, new Vector2(-260, -290), TextAnchor.MiddleLeft);
                         }
@@ -1377,6 +1371,26 @@ public class GameScript : MonoBehaviour {
         }
     }
 
+    void onReceive_UserInfo_Game(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+
+        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        {
+            string uid = (string)jd["uid"];
+
+            GameData.getInstance().getPlayerDataByUid(uid).m_name = (string)jd["name"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int)jd["head"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int)jd["gold"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int)jd["gameData"]["allGameCount"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_winCount = (int)jd["gameData"]["winCount"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_runCount = (int)jd["gameData"]["runCount"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = (int)jd["gameData"]["meiliZhi"];
+
+            GameData.getInstance().setOtherPlayerUI(uid);
+        }
+    }
     //----------------------------------------------------------接收数据 end--------------------------------------------------
 
     void startGame()
@@ -1788,7 +1802,7 @@ public class GameScript : MonoBehaviour {
 
 
         // 显示在正确的座位上
-        if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+        if (uid.CompareTo(UserData.uid) == 0)
         {
             initOutPokerPos(tempList, OtherPlayerUIScript.Direction.Direction_Down);
         }
