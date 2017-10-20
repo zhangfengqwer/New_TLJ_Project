@@ -1118,6 +1118,12 @@ public class GameScript : MonoBehaviour {
                                 }
 
                                 showOtherOutPoker(outPokerList, pre_uid);
+
+                                // 刷新记牌器
+                                if (m_jiPaiGameObject != null)
+                                {
+                                    m_jiPaiGameObject.GetComponent<RememberPokerHelper>().UpdateUi(outPokerList);
+                                }
                             }
                         }
 
@@ -1274,6 +1280,12 @@ public class GameScript : MonoBehaviour {
                                 }
 
                                 showOtherOutPoker(outPokerList, pre_uid);
+
+                                // 刷新记牌器
+                                if (m_jiPaiGameObject != null)
+                                {
+                                    m_jiPaiGameObject.GetComponent<RememberPokerHelper>().UpdateUi(outPokerList);
+                                }
                             }
                         }
 
