@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class HuDongData
 {
-
     static HuDongData s_instance = null;
 
     List<HuDongProp> m_hudongDataList = new List<HuDongProp>();
@@ -34,8 +33,8 @@ public class HuDongData
         {
             HuDongProp temp = new HuDongProp();
 
-            temp.m_id = (int)jd[i]["id"];
-            temp.m_price = (int)jd[i]["price"];
+            temp.m_id = (int) jd[i]["id"];
+            temp.m_price = (int) jd[i]["price"];
 
             m_hudongDataList.Add(temp);
         }

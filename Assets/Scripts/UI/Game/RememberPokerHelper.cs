@@ -24,8 +24,8 @@ public class RememberPokerHelper : MonoBehaviour {
 
     public static GameObject create()
     {
-        GameObject prefab = Resources.Load("Prefabs/Game/RememberPokerCanvas") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject prefab = Resources.Load("Prefabs/Game/RememberPokerHelper") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
         return obj;
     }
 
@@ -190,16 +190,5 @@ public class RememberPokerHelper : MonoBehaviour {
         }
     }
 
-    GameObject go = null;
-    public void OnClickJiPaiQi()
-    {
-        if (go == null)
-        {
-            go = create();
-        }
-        else
-        {
-            go.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
-        }
-    }
+    
 }
