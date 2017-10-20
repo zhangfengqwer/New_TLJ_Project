@@ -56,7 +56,7 @@ public class LiangZhu : MonoBehaviour
         }
 
 
-        liangzhuPoker = PlayRuleUtil.GetLiangzhuPoker(handerPoker, lastLiangZhuPoker, GameScript.m_levelPokerNum, GameScript.m_masterPokerType);
+        liangzhuPoker = PlayRuleUtil.GetLiangzhuPoker(handerPoker, lastLiangZhuPoker, GameData.getInstance().m_levelPokerNum, GameData.getInstance().m_masterPokerType);
 
         foreach (PokerInfo pokerInfo in liangzhuPoker)
         {

@@ -14,7 +14,7 @@ public class PVPChoiceScript : MonoBehaviour {
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/Panel_PVP_Choice") as GameObject;
-        GameObject obj = MonoBehaviour.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = MonoBehaviour.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         return obj;
     }

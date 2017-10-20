@@ -18,7 +18,7 @@ public class WeeklySignScript : MonoBehaviour
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/WeeklySignPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         return obj;
     }

@@ -13,7 +13,7 @@ public class NoticeDetailScript : MonoBehaviour {
     public static GameObject create(int notice_id, NoticePanelScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/NoticeDetailPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<NoticeDetailScript>().setNoticeId(notice_id);
         obj.GetComponent<NoticeDetailScript>().m_parentScript = parentScript;

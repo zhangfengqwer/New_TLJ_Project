@@ -11,7 +11,7 @@ public class SetScript : MonoBehaviour {
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/SettingPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         return obj;
     }

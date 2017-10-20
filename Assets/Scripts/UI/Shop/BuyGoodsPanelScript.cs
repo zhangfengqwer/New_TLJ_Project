@@ -24,7 +24,7 @@ public class BuyGoodsPanelScript : MonoBehaviour {
     public static GameObject create(int goods_id)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BuyGoodsPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<BuyGoodsPanelScript>().setGoodsId(goods_id);
 

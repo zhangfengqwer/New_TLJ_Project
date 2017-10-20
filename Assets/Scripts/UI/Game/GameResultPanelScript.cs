@@ -19,7 +19,7 @@ public class GameResultPanelScript : MonoBehaviour {
     public static GameObject create(GameScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/GameResultPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
         
         obj.GetComponent<GameResultPanelScript>().m_parentScript = parentScript;
 

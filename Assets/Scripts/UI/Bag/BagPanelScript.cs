@@ -14,7 +14,7 @@ public class BagPanelScript : MonoBehaviour
     public static GameObject create(bool isNeedReqNet)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BagPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<BagPanelScript>().m_isNeedReqNet = isNeedReqNet;
 
