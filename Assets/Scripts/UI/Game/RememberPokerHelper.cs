@@ -16,17 +16,16 @@ public class RememberPokerHelper : MonoBehaviour {
     public Image daWang1;
     public Image daWang2;
 
-
     private Vector3 startPosition;
     private static List<Image> xiaoWangList = new List<Image>();
     private static List<Image> daWangList = new List<Image>();
     private static Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
     private static Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
 
-    public GameObject create()
+    public static GameObject create()
     {
-        GameObject prefab = Resources.Load("Prefabs/Game/RememberPokerCanvas") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject prefab = Resources.Load("Prefabs/Game/RememberPokerHelper") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
         return obj;
     }
 
@@ -45,15 +44,15 @@ public class RememberPokerHelper : MonoBehaviour {
         this.transform.localPosition = new Vector3(0, 0, 0);
         startPosition = this.transform.localPosition;
 
-        List<PokerInfo> pokerInfos = new List<PokerInfo>();
-        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
-        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
-        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
-        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
-        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
-        pokerInfos.Add(new PokerInfo(4, Consts.PokerType.PokerType_MeiHua));
-        pokerInfos.Add(new PokerInfo(2, Consts.PokerType.PokerType_MeiHua));
-        UpdateUi(pokerInfos);
+//        List<PokerInfo> pokerInfos = new List<PokerInfo>();
+//        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
+//        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
+//        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
+//        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
+//        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
+//        pokerInfos.Add(new PokerInfo(4, Consts.PokerType.PokerType_MeiHua));
+//        pokerInfos.Add(new PokerInfo(2, Consts.PokerType.PokerType_MeiHua));
+//        UpdateUi(pokerInfos);
     }
 
     private void Init(GameObject gameObject, Consts.PokerType pokerType)
@@ -123,16 +122,16 @@ public class RememberPokerHelper : MonoBehaviour {
 
     public void OnClickClose()
     {
-        this.transform.localScale = new Vector3(0, 0, 0);
+        this.transform.localScale = Vector3.zero;
     }
 
     public void OnClickShow()
     {
         this.transform.localPosition = startPosition;
-        this.transform.localScale = new Vector3(1, 1, 1);
+        this.transform.localScale = Vector3.one;
     }
 
-    public static void UpdateUi(List<PokerInfo> list)
+    public void UpdateUi(List<PokerInfo> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
@@ -191,16 +190,5 @@ public class RememberPokerHelper : MonoBehaviour {
         }
     }
 
-    GameObject o = null;
-    public void OnClickJiPaiQi()
-    {
-        if (o == null)
-        {
-            o = create();
-        }
-        else
-        {
-            o.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
-        }
-    }
+    
 }
