@@ -15,10 +15,10 @@ public class GameScript : MonoBehaviour {
     public Button m_buttonTuoGuan;
     public Text m_textScore;
     public Image m_imageMasterPokerType;
-
-    List<string> m_dataList = new List<string>();
+    
     bool m_isConnServerSuccess = false;
 
+    List<string> m_dataList = new List<string>();
     List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();
     List<TLJCommon.PokerInfo> m_qiangzhuPokerList = new List<TLJCommon.PokerInfo>();
     List<GameObject> m_myPokerObjList = new List<GameObject>();
@@ -33,9 +33,10 @@ public class GameScript : MonoBehaviour {
     TimerScript m_timerScript;
 
     int m_outPokerTime = 5;             // 出牌时间 
+    int m_tuoGuanOutPokerTime = 1;      // 托管出牌时间 
     int m_qiangZhuTime = 10;            // 抢主时间
     int m_maiDiTime = 20;               // 埋底时间
-    int m_chaodiTime = 10;               // 选择是否炒底时间 
+    int m_chaodiTime = 10;              // 选择是否炒底时间 
 
     public static int m_levelPokerNum = -1;           // 级牌
     public static int m_masterPokerType = -1;         // 主牌花色
@@ -45,6 +46,9 @@ public class GameScript : MonoBehaviour {
 
     int m_getAllScore;                  // 庄家对家抓到的分数
 
+    string m_curOutPokerPlayerUid;
+
+    bool m_isTuoGuan = false;
     bool m_isFreeOutPoker = false;
     List<TLJCommon.PokerInfo> m_curRoundFirstOutPokerList = new List<TLJCommon.PokerInfo>();
 
@@ -194,6 +198,30 @@ public class GameScript : MonoBehaviour {
     public void onClickChat()
     {
         ChatPanelScript.create(this);
+    }
+
+    public void onClickTuoGuan()
+    {
+        {
+            TuoGuanPanelScript.create(this);
+        }
+
+        m_isTuoGuan = true;
+
+        if (m_curOutPokerPlayerUid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+        {
+            autoOutPoker();
+        }
+    }
+
+    public void onClickCancelTuoGuan()
+    {
+        m_isTuoGuan = false;
+
+        if (m_curOutPokerPlayerUid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
+        {
+            CancelInvoke("onInvokeTuoGuan");
+        }
     }
 
     //----------------------------------------------------------发送数据 start--------------------------------------------------
@@ -617,7 +645,7 @@ public class GameScript : MonoBehaviour {
 
                     {
                         m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
-
+                        m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
                         m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
                     }
 
@@ -1108,6 +1136,7 @@ public class GameScript : MonoBehaviour {
                         // 检测是否轮到自己出牌
                         {
                             string uid = (string)jd["cur_uid"];
+                            m_curOutPokerPlayerUid = uid;
                             if (uid.CompareTo(UserDataScript.getInstance().getUserInfo().m_uid) == 0)
                             {
                                 int isFreeOutPoker = (int)jd["isFreeOutPoker"];
@@ -1126,6 +1155,11 @@ public class GameScript : MonoBehaviour {
                                 
                                 // 开始出牌倒计时
                                 m_timerScript.start(m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, true);
+
+                                if (m_isTuoGuan)
+                                {
+                                    Invoke("onInvokeTuoGuan",m_tuoGuanOutPokerTime);
+                                }
                             }
                             else
                             {
@@ -1261,12 +1295,17 @@ public class GameScript : MonoBehaviour {
                             if (m_isBanker == isBankerWin)
                             {
                                 //ToastScript.createToast("我方胜利");
-                                GameResultScript.create().GetComponent<GameResultScript>().setText("胜利");
+
+                                GameObject obj = GameResultPanelScript.create(this);
+                                GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
+                                script.setData(true, m_getAllScore, 1000);
                             }
                             else
                             {
                                 //ToastScript.createToast("对方胜利");
-                                GameResultScript.create().GetComponent<GameResultScript>().setText("失败");
+                                GameObject obj = GameResultPanelScript.create(this);
+                                GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
+                                script.setData(false, m_getAllScore, -1000);
                             }
                         }
                     }
@@ -1791,6 +1830,11 @@ public class GameScript : MonoBehaviour {
     void onSocketStop()
     {
         Debug.Log("主动与服务器断开连接");
+    }
+
+    void onInvokeTuoGuan()
+    {
+        autoOutPoker();
     }
 
     void onTimerEventTimeEnd()
