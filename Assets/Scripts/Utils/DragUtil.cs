@@ -3,22 +3,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
-public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerDownHandler
+public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
     private RectTransform _rectTransform;
-    private Vector3 offset;
+    private Vector3 offset = new Vector3((float) 3.5, (float) 2.3, 0);
 
     private void Start()
     {
         _rectTransform = gameObject.GetComponent<RectTransform>();
-      
     }
-        
+
     // begin dragging
     public void OnBeginDrag(PointerEventData eventData)
     {
         SetDraggedPosition(eventData);
-      
     }
 
     // during dragging
@@ -31,6 +29,7 @@ public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         SetDraggedPosition(eventData);
+        offset = new Vector3((float) 3.5, (float) 2.3, 0);
     }
 
     /// <summary>
@@ -39,10 +38,10 @@ public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// <param name="eventData"></param>
     private void SetDraggedPosition(PointerEventData eventData)
     {
-
         // transform the screen point to world point int rectangle
         Vector3 globalMousePos;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectTransform, eventData.position, eventData.pressEventCamera, out globalMousePos))
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectTransform, eventData.position,
+            eventData.pressEventCamera, out globalMousePos))
         {
             _rectTransform.position = globalMousePos - offset;
         }
@@ -51,7 +50,8 @@ public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnPointerDown(PointerEventData eventData)
     {
         Vector3 globalMousePos;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectTransform, eventData.position, eventData.pressEventCamera, out globalMousePos);
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectTransform, eventData.position,
+            eventData.pressEventCamera, out globalMousePos);
         offset = globalMousePos - _rectTransform.position;
     }
 }
