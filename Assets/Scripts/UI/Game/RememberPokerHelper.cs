@@ -128,7 +128,14 @@ public class RememberPokerHelper : MonoBehaviour {
     public void OnClickShow()
     {
         this.transform.localPosition = startPosition;
-        this.transform.localScale = Vector3.one;
+        if (this.transform.localScale == Vector3.one)
+        {
+            this.transform.localScale = Vector3.zero;
+        }
+        else
+        {
+            this.transform.localScale = Vector3.one;
+        }
     }
 
     public void UpdateUi(List<PokerInfo> list)
