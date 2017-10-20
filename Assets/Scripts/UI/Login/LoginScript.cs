@@ -142,9 +142,6 @@ public class LoginScript : MonoBehaviour
             string name = jd["userInfo"]["name"].ToString();
             int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
-            UserDataScript.getInstance().getUserInfo().m_uid = uid;
-            UserDataScript.getInstance().getUserInfo().m_name = name;
-            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.uid = uid;
 
             SceneManager.LoadScene("MainScene");
@@ -169,9 +166,6 @@ public class LoginScript : MonoBehaviour
             string name = jd["userInfo"]["name"].ToString();
             int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
-            UserDataScript.getInstance().getUserInfo().m_uid = uid;
-            UserDataScript.getInstance().getUserInfo().m_name = name;
-            UserDataScript.getInstance().getUserInfo().m_goldNum = goldNum;
             UserData.uid = uid;
 
             //            SocketUtil.getInstance().stop();

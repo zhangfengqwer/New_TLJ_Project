@@ -15,6 +15,6 @@ public class HeadIconScript : MonoBehaviour {
 
     public void setIcon(string path)
     {
-        m_icon.sprite = Resources.Load("Sprites/Head/" + path, typeof(Sprite)) as Sprite;
+        m_icon.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 }
