@@ -9,6 +9,12 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     public GameObject m_headIcon;
     public GameObject m_gameobj_up;
     public GameObject m_gameobj_down;
+
+    public Text m_text_name;
+    public Text m_text_shenglv;
+    public Text m_text_taopaolv;
+    public Text m_text_meilizhi;
+
     public GameObject m_scrollView;
     ScrollViewScript m_scrollViewScript;
 
@@ -31,10 +37,18 @@ public class GameUserInfoPanelScript : MonoBehaviour {
 
     public void setPlayer(string uid)
     {
+        PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
+
+        m_text_name.text = playerData.m_name;
+        m_text_shenglv.text = (((float)playerData.m_winCount / (float)playerData.m_allGameCount) * 100).ToString() + "%";
+        m_text_taopaolv.text = (((float)playerData.m_runCount / (float)playerData.m_allGameCount) * 100).ToString() + "%";
+        m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
+
+        m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
+
         if (uid.CompareTo(UserData.uid) == 0)
         {
             m_gameobj_down.transform.localScale = new Vector3(0, 0, 0);
-            m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
         }
     }
 
