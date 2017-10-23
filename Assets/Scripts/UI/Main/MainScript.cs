@@ -13,7 +13,7 @@ public class MainScript : MonoBehaviour {
     public Text UserYuanBao;
 
     public GameObject m_headIcon;
-    public GameObject m_loadingPanel;
+    //public GameObject m_loadingPanel;
 
     // Use this for initialization
     void Start ()
@@ -23,7 +23,7 @@ public class MainScript : MonoBehaviour {
             OtherData.s_isMainInited = true;
 
             AudioScript.getAudioScript().playMusic_GameBg();
-            m_loadingPanel = LoadingScript.create();
+            //m_loadingPanel = LoadingScript.create();
         }
         else
         {
@@ -56,11 +56,11 @@ public class MainScript : MonoBehaviour {
         // 元宝
         UserYuanBao.text = UserData.yuanbao+"";
 
-        // 删除loading界面
-        if (m_loadingPanel.transform.IsChildOf(GameObject.Find("Canvas").transform))
-        {
-            Destroy(m_loadingPanel);
-        }
+        //// 删除loading界面
+        //if (m_loadingPanel.transform.IsChildOf(GameObject.Find("Canvas").transform))
+        //{
+        //    Destroy(m_loadingPanel);
+        //}
     }
 
     public void onClickEnterXiuXianChang()
@@ -122,7 +122,7 @@ public class MainScript : MonoBehaviour {
 
     public void OnClickShop()
     {
-        ShopPanelScript.create();
+        ShopPanelScript.create(this);
     }
 
     public void OnClickEmail()
