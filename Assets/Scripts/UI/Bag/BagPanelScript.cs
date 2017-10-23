@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class BagPanelScript : MonoBehaviour
 {
     private UIWarpContent uiWarpContent;
-    public static BagPanelScript Instance;
+    public static BagPanelScript Instance = null;
     public bool m_isNeedReqNet = true;
 
     public static GameObject create(bool isNeedReqNet)
@@ -45,12 +45,15 @@ public class BagPanelScript : MonoBehaviour
 
     public void UpdateUI()
     {
-        for (int i = UserData.propData.Count - 1; i >=0 ; i--)
+        if (Instance != null)
         {
-            deleteItem(i);
+            for (int i = UserData.propData.Count - 1; i >= 0; i--)
+            {
+                deleteItem(i);
+            }
+
+            uiWarpContent.Init(UserData.propData.Count);
         }
-       
-        uiWarpContent.Init(UserData.propData.Count);
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
