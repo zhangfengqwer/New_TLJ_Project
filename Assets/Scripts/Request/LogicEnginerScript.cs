@@ -17,6 +17,7 @@ public class LogicEnginerScript : MonoBehaviour
     private GetUserInfoRequest _getUserInfoRequest;
     private GetEmailRequest _getEmailRequest;
     private GetNoticeRequest _getNoticeRequest;
+    private MainRequest _mainRequest;
     [HideInInspector]
     public GetUserBagRequest _getUserBagRequest;
 
@@ -60,6 +61,7 @@ public class LogicEnginerScript : MonoBehaviour
         _getEmailRequest = GetComponent<GetEmailRequest>();
         _getUserBagRequest = GetComponent<GetUserBagRequest>();
         _getNoticeRequest = GetComponent<GetNoticeRequest>();
+        _mainRequest = GetComponent<MainRequest>();
     }
 
 
@@ -118,7 +120,7 @@ public class LogicEnginerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("没有找到tag对应的请求对象");
+            _mainRequest.OnResponse(data);
         }
     }
 

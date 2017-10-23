@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LitJson;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,12 +13,19 @@ public class MainScript : MonoBehaviour {
     public Text MyGold;
     public Text UserYuanBao;
 
+    public GameObject m_laba;
     public GameObject m_headIcon;
+
+    LaBaScript m_laBaScript;
+
     //public GameObject m_loadingPanel;
 
     // Use this for initialization
     void Start ()
 	{
+        m_laBaScript = m_laba.GetComponent<LaBaScript>();
+        LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
+
         if (!OtherData.s_isMainInited)
         {
             OtherData.s_isMainInited = true;
@@ -148,5 +156,25 @@ public class MainScript : MonoBehaviour {
     public void onClickLaBa()
     {
         LaBaPanelScript.create(this);
+    }
+
+    //-----------------------------------------------------------------------------
+
+    public void onReceive_Main(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        string tag = (string)jd["tag"];
+
+        // 有人使用喇叭
+        if (tag.CompareTo(TLJCommon.Consts.Tag_Broadcast_LaBa) == 0)
+        {
+            string text = (string)jd["text"];
+
+            m_laBaScript.addText(text);
+        }
+        else
+        {
+            Debug.Log("onReceive_Main：未知tag");
+        }
     }
 }

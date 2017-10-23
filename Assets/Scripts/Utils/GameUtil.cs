@@ -154,4 +154,33 @@ class GameUtil
 
         return path;
     }
+
+    static public void changeData(int id , int num)
+    {
+        if (id == 1)
+        {
+            UserData.gold += num;
+        }
+        else if (id == 2)
+        {
+            UserData.yuanbao += num;
+        }
+        else
+        {
+            for (int i = 0; i < UserData.propData.Count; i++)
+            {
+                if (UserData.propData[i].prop_id == id)
+                {
+                    UserData.propData[i].prop_num += num;
+
+                    if (UserData.propData[i].prop_num <= 0)
+                    {
+                        UserData.propData.RemoveAt(i);
+                    }
+
+                    break;
+                }
+            }
+        }
+    }
 }

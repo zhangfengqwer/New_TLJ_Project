@@ -7,7 +7,7 @@ public class LaBaScript : MonoBehaviour {
 
     public Text m_text;
 
-    public List<string> m_data = new List<string>();
+    List<string> m_data = new List<string>();
     bool m_isStartMove = false;
 
 	// Use this for initialization
@@ -40,5 +40,10 @@ public class LaBaScript : MonoBehaviour {
             m_isStartMove = false;
             CancelInvoke("onTextMove");
         }
+    }
+
+    public void addText(string text)
+    {
+        m_data.Add(text);
     }
 }

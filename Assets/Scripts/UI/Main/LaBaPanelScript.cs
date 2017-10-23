@@ -74,6 +74,8 @@ public class LaBaPanelScript : MonoBehaviour {
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             ToastScript.createToast("使用成功");
+
+            GameUtil.changeData(106,-1);
         }
     }
 }

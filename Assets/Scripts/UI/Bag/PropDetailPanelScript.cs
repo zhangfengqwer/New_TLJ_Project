@@ -44,9 +44,16 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void onClickUseProp()
     {
-        LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
-        LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
-        LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
+        if (m_propInfo.m_id != 106)
+        {
+            LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
+            LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
+            LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
+        }
+        else
+        {
+            LaBaPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>());
+        }
     }
 
     public void onReceive_UseProp(string data)
