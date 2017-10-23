@@ -4,18 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopPanelScript : MonoBehaviour {
+public class ShopPanelScript : MonoBehaviour
+{
+    public MainScript m_mainScript = null;
+
     private UIWarpContent uiWarpContent;
     private List<string> _list;
     private List<ShopData> shopDataList;
+
     //商品类型，1：金币，2：元宝，3：道具
     private int type = 2;
     private List<ShopData> _shopItemDatas;
 
-    public static GameObject create()
+    public static GameObject create(MainScript mainScript)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShopPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<ShopPanelScript>().m_mainScript = mainScript;
 
         return obj;
     }
@@ -104,7 +110,7 @@ public class ShopPanelScript : MonoBehaviour {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
         {
-            BuyGoodsPanelScript.create(_shopItemDatas[dataindex].goods_id);
+            BuyGoodsPanelScript.create(m_mainScript,_shopItemDatas[dataindex].goods_id);
         });
     }
 

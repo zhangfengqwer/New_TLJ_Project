@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BuyGoodsPanelScript : MonoBehaviour {
 
+    public MainScript m_mainScript = null;
+
     public Text m_text_goods_name;
     public Text m_text_goods_num;
     public Text m_text_goods_allPrice;
@@ -21,12 +23,13 @@ public class BuyGoodsPanelScript : MonoBehaviour {
     int m_goods_num = 1;
     int m_goods_buy_maxNum = 10;
 
-    public static GameObject create(int goods_id)
+    public static GameObject create(MainScript mainScript,int goods_id)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BuyGoodsPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<BuyGoodsPanelScript>().setGoodsId(goods_id);
+        obj.GetComponent<BuyGoodsPanelScript>().m_mainScript = mainScript;
 
         return obj;
     }
@@ -149,11 +152,29 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                     if (prop_id == 1)
                     {
                         UserData.gold += prop_num;
+
+                        if (m_mainScript != null)
+                        {
+                            m_mainScript.refreshUI();
+                        }
+                        else
+                        {
+                            Debug.Log("空");
+                        }
                     }
                     // 元宝
-                    else if (prop_id == 1)
+                    else if (prop_id == 2)
                     {
                         UserData.yuanbao += prop_num;
+
+                        if (m_mainScript != null)
+                        {
+                            m_mainScript.refreshUI();
+                        }
+                        else
+                        {
+                            Debug.Log("空");
+                        }
                     }
                 }
             }

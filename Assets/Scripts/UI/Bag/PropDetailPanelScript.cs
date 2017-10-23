@@ -55,11 +55,90 @@ public class PropDetailPanelScript : MonoBehaviour {
         int code = (int)jd["code"];
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
+            ToastScript.createToast("使用成功");
+
+            useProp(m_propInfo.m_id);
             UpdatePropData();
         }
     }
 
-    private void UpdatePropData()
+    void useProp(int id)
+    {
+        switch (id)
+        {
+            // 记牌器
+            case 101:
+                {
+                    // 不用处理
+                }
+                break;
+
+            // 加倍卡
+            case 102:
+                {
+                    // 不用处理
+                }
+                break;
+
+            // 鸡蛋
+            case 103:
+                {
+                    // 不用处理
+                }
+                break;
+
+            // 鲜花
+            case 104:
+                {
+                    // 不用处理
+                }
+                break;
+
+            // 出牌发光
+            case 105:
+                {
+                    // 不用处理
+                }
+                break;
+
+            // 喇叭
+            case 106:
+                {
+
+                }
+                break;
+
+            // 蓝钻石
+            case 107:
+                {
+                    // 不用处理
+                }
+                break;
+
+            // 逃跑率清零卡
+            case 108:
+                {
+                    UserData.gameData.runCount = 0;
+                }
+                break;
+
+            // 魅力值修正卡
+            case 109:
+                {
+                    UserData.gameData.meiliZhi = 0;
+                }
+                break;
+
+            // 徽章
+            case 110:
+                {
+                    // 不用处理
+                }
+                break;
+        }
+    }
+
+    void UpdatePropData()
     {
         List<UserPropData> userPropDatas = UserData.propData;
 

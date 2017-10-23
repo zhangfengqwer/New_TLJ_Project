@@ -43,7 +43,7 @@ public class ToastScript : MonoBehaviour {
     {
         m_text.text = text;
 
-        m_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        m_canvas = GameObject.Find("Canvas_High").GetComponent<Canvas>();
         obj.transform.SetParent(m_canvas.transform);
         obj.transform.localScale = new Vector3(1, 1, 1);
 
