@@ -15,6 +15,8 @@ public class UserInfoScript : MonoBehaviour
     public Text taoPaoLv;
     public Text meiLiZhi;
     public GameObject headIcon;
+    public Button ButtonRealName;
+    public Button ButtonBindPhone;
 
     public static GameObject create()
     {
@@ -36,6 +38,14 @@ public class UserInfoScript : MonoBehaviour
         gold.text = UserData.gold.ToString();
         yuanBaoCount.text = UserData.yuanbao.ToString();
         meiLiZhi.text = UserData.gameData.meiliZhi+"";
+        if (UserData.IsRealName)
+        {
+            ButtonRealName.interactable = false;
+        }
+        else
+        {
+            ButtonRealName.interactable = true;
+        }
 
         headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
 
