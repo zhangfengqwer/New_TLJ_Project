@@ -133,10 +133,8 @@ public class LogicEnginerScript : MonoBehaviour
         Debug.Log("收到服务器消息:" + data);
         try
         {
-            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(data);
-            JsonData jd = JsonMapper.ToObject(System.Text.Encoding.UTF8.GetString(bytes));
+            JsonData jd = JsonMapper.ToObject(data);
             var tag = jd["tag"].ToString();
-            print("tag:" + tag);
             Request request = null;
             bool getValue = requestDic.TryGetValue(tag, out request);
             if (getValue)
