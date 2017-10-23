@@ -47,6 +47,7 @@ public class GetUserInfoRequest : Request
             UserData.IsRealName = (bool) jsonData["isRealName"];
             UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
             UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
+           
 
             result = data;
             flag = true;
