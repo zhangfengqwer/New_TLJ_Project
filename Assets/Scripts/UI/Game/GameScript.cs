@@ -177,13 +177,30 @@ public class GameScript : MonoBehaviour {
 
     public void OnClickJiPaiQi()
     {
-        if (m_jiPaiGameObject == null)
+        bool canUse = false;
+        for (int i = 0; i < UserData.buffData.Count; i++)
         {
-            m_jiPaiGameObject = RememberPokerHelper.create();
+            if ((UserData.buffData[i].prop_id == 101) && (UserData.buffData[i].buff_num > 0))
+            {
+                canUse = true;
+                break;
+            }
+        }
+
+        if (canUse)
+        {
+            if (m_jiPaiGameObject == null)
+            {
+                m_jiPaiGameObject = RememberPokerHelper.create();
+            }
+            else
+            {
+                m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
+            }
         }
         else
         {
-            m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
+            ToastScript.createToast("您没有记牌器可用");
         }
     }
 

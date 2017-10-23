@@ -8,7 +8,8 @@ public class UserData  {
     public static int gold{ set; get; }
     public static int yuanbao { set; get; }
     public static UserGameData gameData { set; get; }
-    public static List<UserPropData> propData { set; get; }
+    public static List<UserPropData> propData = new List<UserPropData>();
+    public static List<BuffData> buffData = new List<BuffData>();
 }
 
 public class UserGameData
@@ -36,4 +37,10 @@ public class UserNoticeJsonObj
     public int state;
     public string start_time;
     public string end_time;
+}
+
+public class BuffData
+{
+    public int prop_id;
+    public int buff_num;
 }

@@ -45,6 +45,7 @@ public class GetUserInfoRequest : Request
             UserData.gold = (int) jsonData["gold"];
             UserData.yuanbao = (int) jsonData["yuanbao"];
             UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
+            UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
 
             result = data;
             flag = true;

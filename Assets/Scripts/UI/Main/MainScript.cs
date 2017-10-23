@@ -144,4 +144,9 @@ public class MainScript : MonoBehaviour {
     {
         TaskPanelScript.create();
     }
+
+    public void onClickLaBa()
+    {
+        LaBaPanelScript.create(this);
+    }
 }
