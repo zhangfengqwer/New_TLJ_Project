@@ -18,10 +18,10 @@ public class RememberPokerHelper : MonoBehaviour {
     public Image daWang2;
 
     private Vector3 startPosition;
-    private static List<Image> xiaoWangList = new List<Image>();
-    private static List<Image> daWangList = new List<Image>();
-    private static Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
-    private static Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
+    private  List<Image> xiaoWangList = new List<Image>();
+    private  List<Image> daWangList = new List<Image>();
+    private  Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
+    private  Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
 
     public static GameObject create()
     {
@@ -44,16 +44,6 @@ public class RememberPokerHelper : MonoBehaviour {
 
         this.transform.localPosition = new Vector3(0, 0, 0);
         startPosition = this.transform.localPosition;
-
-//        List<PokerInfo> pokerInfos = new List<PokerInfo>();
-//        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
-//        pokerInfos.Add(new PokerInfo(16, Consts.PokerType.PokerType_Wang));
-//        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
-//        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
-//        pokerInfos.Add(new PokerInfo(15, Consts.PokerType.PokerType_Wang));
-//        pokerInfos.Add(new PokerInfo(4, Consts.PokerType.PokerType_MeiHua));
-//        pokerInfos.Add(new PokerInfo(2, Consts.PokerType.PokerType_MeiHua));
-//        UpdateUi(pokerInfos);
     }
 
     private void Init(GameObject gameObject, Consts.PokerType pokerType)
@@ -197,6 +187,4 @@ public class RememberPokerHelper : MonoBehaviour {
             }
         }
     }
-
-    
 }
