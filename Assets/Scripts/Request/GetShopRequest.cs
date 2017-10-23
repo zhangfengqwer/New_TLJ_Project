@@ -42,7 +42,6 @@ public class GetShopRequest : Request
     {
         JsonData jsonData = JsonMapper.ToObject(data);
         ShopDataScript.getInstance().initJson(data);
-
         result = data;
         flag = true;
     }

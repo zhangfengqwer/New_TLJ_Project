@@ -33,29 +33,37 @@ public class ShopPanelScript : MonoBehaviour
 	    uiWarpContent.onInitializeItem = onInitializeItem;
         // 拉取商店数据
         {
-	        LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
-	        LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
-	    }
-	}
+            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
+            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
+        }
+    }
 
     private void Init()
     {
-        for (int i = shopDataList.Count -1; i>=0; i--)
+        try
         {
-            uiWarpContent.DelItem(i);
-        }
-
-        _shopItemDatas = new List<ShopData>();
-        for (int i = 0; i < shopDataList.Count; i++)
-        {
-            ShopData shopData = shopDataList[i];
-            if (shopData.goods_type == type)
+            for (int i = shopDataList.Count - 1; i >= 0; i--)
             {
-                _shopItemDatas.Add(shopData);
+                uiWarpContent.DelItem(i);
             }
-        }
 
-        uiWarpContent.Init(_shopItemDatas.Count);
+            _shopItemDatas = new List<ShopData>();
+            for (int i = 0; i < shopDataList.Count; i++)
+            {
+                ShopData shopData = shopDataList[i];
+                if (shopData.goods_type == type)
+                {
+                    _shopItemDatas.Add(shopData);
+                }
+            }
+
+            uiWarpContent.Init(_shopItemDatas.Count);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+       
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
@@ -118,6 +126,7 @@ public class ShopPanelScript : MonoBehaviour
     {
         ShopDataScript.getInstance().initJson(data);
         shopDataList = ShopDataScript.getInstance().getShopDataList();
+        print("shopDataList.Count:"+shopDataList.Count);
         Init();
     }
 

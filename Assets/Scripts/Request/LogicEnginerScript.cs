@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 using UnityEngine;
@@ -130,18 +131,29 @@ public class LogicEnginerScript : MonoBehaviour
     private void onSocketReceive(string data)
     {
         Debug.Log("收到服务器消息:" + data);
-        JsonData jd = JsonMapper.ToObject(data);
-        var tag = jd["tag"].ToString();
-        Request request = null;
-        bool getValue = requestDic.TryGetValue(tag, out request);
-        if (getValue)
+        try
         {
-            request.OnResponse(data);
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(data);
+            JsonData jd = JsonMapper.ToObject(System.Text.Encoding.UTF8.GetString(bytes));
+            var tag = jd["tag"].ToString();
+            print("tag:" + tag);
+            Request request = null;
+            bool getValue = requestDic.TryGetValue(tag, out request);
+            if (getValue)
+            {
+                request.OnResponse(data);
+            }
+            else
+            {
+                _mainRequest.OnResponse(data);
+            }
         }
-        else
+        catch (Exception e)
         {
-            _mainRequest.OnResponse(data);
+            Debug.Log(e);
         }
+       
+       
     }
 
     private void onSocketStop()
