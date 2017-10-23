@@ -157,10 +157,6 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                         {
                             m_mainScript.refreshUI();
                         }
-                        else
-                        {
-                            Debug.Log("空");
-                        }
                     }
                     // 元宝
                     else if (prop_id == 2)
@@ -170,10 +166,6 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                         if (m_mainScript != null)
                         {
                             m_mainScript.refreshUI();
-                        }
-                        else
-                        {
-                            Debug.Log("空");
                         }
                     }
                 }
