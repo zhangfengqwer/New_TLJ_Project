@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using LitJson;
 using System.Collections.Generic;
-using LitJson;
 using TLJCommon;
 using UnityEngine;
 

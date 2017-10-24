@@ -90,6 +90,6 @@ public class UserInfoScript : MonoBehaviour
 
     public void OnRealNameClick()
     {
-        GameObject go = RealNameScript.create();
+       RealNameScript.create();
     }
 }

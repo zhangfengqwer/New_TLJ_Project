@@ -162,7 +162,7 @@ class SocketUtil
 
             try
             {
-                byte[] bytes = new byte[1024];
+                byte[] bytes = new byte[1024 * 4];
 
                 // 增加数据包尾部标识
                 bytes = Encoding.UTF8.GetBytes(sendData + m_packEndFlag);
