@@ -24,15 +24,19 @@ public class LiangZhu : MonoBehaviour
 
     public UseType m_useType;
 
-    public static GameObject create(GameScript parentScript, UseType useType)
+    public static GameObject create(GameScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/Game/LiangZhu") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
 
         obj.GetComponent<LiangZhu>().m_parentScript = parentScript;
-        obj.GetComponent<LiangZhu>().m_useType = useType;
 
         return obj;
+    }
+
+    public void setUseType(UseType useType)
+    {
+        m_useType = useType;
     }
 
     public void UpdateUi(List<PokerInfo> handerPoker, List<PokerInfo> lastLiangZhuPoker)
