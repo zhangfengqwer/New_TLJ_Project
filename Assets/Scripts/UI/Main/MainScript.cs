@@ -1,10 +1,11 @@
-﻿using LitJson;
+﻿using Boo.Lang;
+using LitJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainScript : MonoBehaviour {
-
+public class MainScript : MonoBehaviour
+{
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
@@ -18,6 +19,9 @@ public class MainScript : MonoBehaviour {
 
     LaBaScript m_laBaScript;
 
+    //发送验证码的倒计时
+    private float nextTime = 1;//一秒之后执行
+
     //public GameObject m_loadingPanel;
 
     // Use this for initialization
@@ -25,6 +29,11 @@ public class MainScript : MonoBehaviour {
 	{
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
+
+        {
+            PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
+            PlayServiceSocket.s_instance.startConnect();
+        }
 
         if (!OtherData.s_isMainInited)
         {
@@ -38,10 +47,9 @@ public class MainScript : MonoBehaviour {
             refreshUI();
         }
     }
-
-    //发送验证码的倒计时
-    private float nextTime = 1;//一秒之后执行
-    void Update () {
+    
+    void Update ()
+    {
 	    if (BindPhoneScript.totalTime > 0)
 	    {
 	        if (nextTime <= Time.time)
@@ -50,11 +58,12 @@ public class MainScript : MonoBehaviour {
 	            nextTime = Time.time + 1;//到达一秒后加1
             }
 	    }
-	}
+    }
 
     void OnDestroy()
     {
-        SocketUtil.getInstance().stop();
+        LogicEnginerScript.Instance.m_socketUtil.stop();
+        //PlayServiceSocket.getInstance().Stop();
     }
 
     public void refreshUI()
@@ -185,4 +194,13 @@ public class MainScript : MonoBehaviour {
             Debug.Log("onReceive_Main：未知tag");
         }
     }
+
+    //---------------------------------------------------------------------------------
+
+    void onSocketReceive_Play(string data)
+    {
+        Debug.Log("Play:收到服务器消息:" + data);
+    }
+
+    //-----------------------------------------------------------------------------
 }
