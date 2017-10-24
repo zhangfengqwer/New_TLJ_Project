@@ -357,6 +357,18 @@ public class GameScript : MonoBehaviour {
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
 
+    // 请求继续游戏
+    public void reqContinueGame()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["uid"] = UserData.uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ContinueGame;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
+
     public void reqQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
         JsonData data = new JsonData();
@@ -1422,6 +1434,50 @@ public class GameScript : MonoBehaviour {
                             break;
                     }
 
+                }
+                break;
+
+            // 继续游戏
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_ContinueGame:
+                {
+                    int code = (int)jd["code"];
+
+                    switch (code)
+                    {
+                        case (int)TLJCommon.Consts.Code.Code_OK:
+                            {
+                                ToastScript.createToast("继续游戏成功，等待同桌玩家");
+
+                                // 禁用开始游戏按钮
+                                m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
+
+                                m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                            }
+                            break;
+
+                        case (int)TLJCommon.Consts.Code.Code_CommonFail:
+                            {
+                                ToastScript.createToast("同桌玩家退出，无法继续游戏");
+
+                                // 启用开始游戏按钮
+                                m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);
+                                Destroy(m_waitOtherPlayer);
+                            }
+                            break;
+                    }
+
+                }
+                break;
+
+            // 继续游戏失败
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_ContinueGameFail:
+                {
+                    
+                    ToastScript.createToast("同桌玩家退出，无法继续游戏");
+
+                    // 启用开始游戏按钮
+                    m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);
+                    Destroy(m_waitOtherPlayer);
                 }
                 break;
 

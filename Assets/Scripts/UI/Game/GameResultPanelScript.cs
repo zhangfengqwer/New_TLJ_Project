@@ -55,6 +55,7 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void onClickJiXu()
     {
+        m_parentScript.reqContinueGame();
         Destroy(gameObject);
     }
 
