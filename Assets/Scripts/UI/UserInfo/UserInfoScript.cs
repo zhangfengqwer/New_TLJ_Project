@@ -78,6 +78,6 @@ public class UserInfoScript : MonoBehaviour
 
     public void OnRealNameClick()
     {
-        print("实名认证");
+        RealNameScript.create();
     }
 }
