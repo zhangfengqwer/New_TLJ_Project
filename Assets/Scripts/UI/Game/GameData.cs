@@ -13,7 +13,9 @@ public class GameData
 
         return s_instance;
     }
-    
+
+    public string m_gameRoomType = "";
+
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌
     public List<TLJCommon.PokerInfo> m_beforeQiangzhuPokerList = new List<TLJCommon.PokerInfo>();       // 上一个人抢主所出的牌
     public List<TLJCommon.PokerInfo> m_curRoundFirstOutPokerList = new List<TLJCommon.PokerInfo>();     // 当前出牌回合第一个人出的牌
@@ -30,7 +32,7 @@ public class GameData
 
     public int m_levelPokerNum = -1;            // 级牌
     public int m_masterPokerType = -1;          // 主牌花色
-
+    
     public int m_isBanker;                      // 是否属于庄家一方
     public int m_getAllScore = 0;               // 庄家对家抓到的分数
 
@@ -39,7 +41,9 @@ public class GameData
 
     public bool m_isTuoGuan = false;
     public bool m_isFreeOutPoker = false;
-    
+
+    public string m_startGameJsonData = "";
+
     public void clear()
     {
         //m_myPokerList.Clear();

@@ -206,6 +206,59 @@ public class MainScript : MonoBehaviour
     void onSocketReceive_Play(string data)
     {
         Debug.Log("Play:收到服务器消息:" + data);
+
+        JsonData jd = JsonMapper.ToObject(data);
+        string tag = (string)jd["tag"];
+
+        if (tag.CompareTo(TLJCommon.Consts.Tag_XiuXianChang) == 0)
+        {
+            int playAction = (int)jd["playAction"];
+
+            switch (playAction)
+            {
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
+                {
+                    doTask_PlayAction_JoinGame(data);
+                }
+                break;
+
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
+                {
+                    doTask_PlayAction_StartGame(data);
+                }
+                break;
+            }
+            
+        }
+    }
+
+    void doTask_PlayAction_JoinGame(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+
+        switch (code)
+        {
+            case (int)TLJCommon.Consts.Code.Code_OK:
+                {
+                    int roomId = (int)jd["roomId"];
+                    ToastScript.createToast("加入房间成功：" + roomId);
+                }
+                break;
+
+            case (int)TLJCommon.Consts.Code.Code_CommonFail:
+                {
+                    ToastScript.createToast("加入房间失败，已经加入房间");
+                }
+                break;
+        }
+    }
+
+    void doTask_PlayAction_StartGame(string data)
+    {
+        GameData.getInstance().m_startGameJsonData = data;
+        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_PVP_8;
+        SceneManager.LoadScene("GameScene");
     }
 
     //-----------------------------------------------------------------------------

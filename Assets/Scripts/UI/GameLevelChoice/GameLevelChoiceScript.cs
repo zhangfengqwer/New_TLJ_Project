@@ -65,6 +65,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         Destroy(gameObject);
         SceneManager.LoadScene("GameScene");
+        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian;
     }
 
     public void onClickZhongJi()
@@ -80,6 +81,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         Destroy(gameObject);
         SceneManager.LoadScene("GameScene");
+        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian;
     }
 
     public void onClickGaoJi()
@@ -95,5 +97,6 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         Destroy(gameObject);
         SceneManager.LoadScene("GameScene");
+        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian;
     }
 }
