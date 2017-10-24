@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Assets.Scripts.model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,7 +32,6 @@ public class LoginScript : MonoBehaviour
             ChatData.getInstance().init();
             HuDongData.getInstance().init();
         }
-
         m_inputAccount.text = "123";
         m_inputPassword.text = "123";
 

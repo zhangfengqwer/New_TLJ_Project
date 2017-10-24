@@ -200,12 +200,11 @@ class SocketUtil
                 byte[] rece = new byte[1024*4];
                 int recelong = m_socket.Receive(rece, rece.Length, 0);
                 string reces = Encoding.UTF8.GetString(rece, 0, recelong);
-                Debug.Log("SocketUtil----收到服务端消息：" + reces);
                 reces = m_endStr + reces;
 
                 reces = reces.Replace("\r\n", "");
 
-                Debug.Log("SocketUtil----收到服务端消息：" + reces);
+//                Debug.Log("SocketUtil----收到服务端消息：" + reces);
 
                 if (reces.CompareTo("") != 0)
                 {

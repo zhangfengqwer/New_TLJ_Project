@@ -1,4 +1,6 @@
 ﻿using System.Text.RegularExpressions;
+using LitJson;
+using TLJCommon;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +12,11 @@ public class RealNameScript : MonoBehaviour
     private bool _isCorrectIdentification;
     private string _realName;
     private string _identification;
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/RealNamePanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
-
         return obj;
     }
 
@@ -58,6 +60,18 @@ public class RealNameScript : MonoBehaviour
 
     private void realNameCallBack(string result)
     {
-        print(result);
+        JsonData jsonData = JsonMapper.ToObject(result);
+        var code = (int) jsonData["code"];
+        if (code == (int) Consts.Code.Code_OK)
+        {
+            UserData.IsRealName = true;
+            UserInfoScript.Instance.InitUI();
+            ToastScript.createToast("实名认证成功");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            ToastScript.createToast("实名认证错误");
+        }
     }
 }

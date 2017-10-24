@@ -17,6 +17,7 @@ public class UserInfoScript : MonoBehaviour
     public GameObject headIcon;
     public Button ButtonRealName;
     public Button ButtonBindPhone;
+    public static UserInfoScript Instance;
 
     public static GameObject create()
     {
@@ -28,10 +29,11 @@ public class UserInfoScript : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         InitUI();
     }
 
-    private void InitUI()
+    public void InitUI()
     {
         nickName.text = UserData.name;
         account.text = UserData.uid;
@@ -46,6 +48,16 @@ public class UserInfoScript : MonoBehaviour
         {
             ButtonRealName.interactable = true;
         }
+
+        if (string.IsNullOrEmpty(UserData.phone))
+        {
+            ButtonBindPhone.interactable = true;
+        }
+        else
+        {
+            ButtonBindPhone.interactable = false;
+        }
+
 
         headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
 
@@ -78,6 +90,6 @@ public class UserInfoScript : MonoBehaviour
 
     public void OnRealNameClick()
     {
-        RealNameScript.create();
+        GameObject go = RealNameScript.create();
     }
 }

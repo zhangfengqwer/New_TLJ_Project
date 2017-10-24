@@ -1,13 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using Assets.Scripts.model;
+using LitJson;
+using TLJCommon;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class BindPhoneScript : MonoBehaviour {
+public class BindPhoneScript : MonoBehaviour
+{
     public InputField PhoneField;
     public InputField VerificationCodeField;
     private bool _isCorrectPhone;
     private bool _isCorrectCode;
     private string _phoneNum;
     private string _verificationCode;
+    public Button ButtonSendSms;
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BindPhonePanel") as GameObject;
@@ -47,8 +58,8 @@ public class BindPhoneScript : MonoBehaviour {
     {
         if (_isCorrectPhone && _isCorrectCode)
         {
-            LogicEnginerScript.Instance.GetComponent<RealNameRequest>().CallBack = realNameCallBack;
-            LogicEnginerScript.Instance.GetComponent<RealNameRequest>().OnRequest(_phoneNum, _verificationCode);
+            LogicEnginerScript.Instance.GetComponent<CheckSmsRequest>().CallBack = bindPhoneCallBack;
+            LogicEnginerScript.Instance.GetComponent<CheckSmsRequest>().OnRequest(_phoneNum, _verificationCode);
         }
         else
         {
@@ -60,7 +71,9 @@ public class BindPhoneScript : MonoBehaviour {
     {
         if (_isCorrectPhone)
         {
-            print("发送验证码");
+            LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().CallBack =
+                sendVerificationCodeCallBack;
+            LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().OnRequest(_phoneNum);
         }
         else
         {
@@ -68,8 +81,55 @@ public class BindPhoneScript : MonoBehaviour {
         }
     }
 
-    private void realNameCallBack(string result)
+    //发送验证码
+    private void sendVerificationCodeCallBack(string data)
     {
-        print(result);
+        try
+        {
+            JsonData jsonData = JsonMapper.ToObject(data);
+            var result = (string) jsonData["result"];
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(result);
+            XmlNodeList nodeList = xmlDoc.ChildNodes;
+            XmlNode xmlNode = nodeList[1];
+            XmlNodeList xmlNodeChildNodes = xmlNode.ChildNodes;
+            foreach (XmlNode nodeChild in xmlNodeChildNodes)
+            {
+                print(nodeChild.Name + ":" + nodeChild.InnerText);
+                string value = nodeChild.InnerText;
+                if (nodeChild.Name.Equals("ResultCode"))
+                {
+                    //发送验证码成功
+                    if (value.Equals("1"))
+                    {
+//                        ButtonSendSms.interactable = false;
+                    }
+                }else if (nodeChild.Name.Equals("ResultMessageDetails"))
+                {
+                    ToastScript.createToast(value);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    //绑定手机回调
+    private void bindPhoneCallBack(string data)
+    {
+        JsonData jsonData = JsonMapper.ToObject(data);
+        var code = (int)jsonData["code"];
+        if (code == (int)Consts.Code.Code_OK)
+        {
+            UserData.phone = _phoneNum;
+            UserInfoScript.Instance.InitUI();
+        }
+        else
+        {
+            Debug.Log("绑定手机失败：" + code);
+        }
     }
 }

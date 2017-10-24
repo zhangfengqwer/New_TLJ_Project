@@ -118,7 +118,7 @@ public class VerifyRuleUtil
 
     public static bool CheckPhone(string inputText)
     {
-        return Regex.IsMatch(inputText, @"^[1]+[3,8]+\d{9}");
+        return Regex.IsMatch(inputText, @"^[1]+\d{10}");
     }
 
     public static bool CheckVerificationCode(string inputText)

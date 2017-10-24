@@ -4,15 +4,14 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class RealNameRequest : Request {
+public class SendVerificationCodeRequest : Request {
 
     private bool flag = false;
     private string result;
-    private string realName;
-    private string identification;
+    private string phoneNum;
     private void Awake()
     {
-        Tag = Consts.Tag_RealName;
+        Tag = Consts.Tag_SendSMS;
     }
     void Update()
     {
@@ -25,14 +24,13 @@ public class RealNameRequest : Request {
             flag = false;
         }
     }
-    public delegate void RealNameCallBack(string result);
+    public delegate void SendVerificationCodeCallBack(string result);
 
-    public RealNameCallBack CallBack = null;
+    public SendVerificationCodeCallBack CallBack = null;
 
-    public void OnRequest(string reaname, string identfy)
+    public void OnRequest(string phone)
     {
-        this.realName = reaname;
-        this.identification = identfy;
+        this.phoneNum = phone;
         OnRequest();
     }
 
@@ -41,8 +39,7 @@ public class RealNameRequest : Request {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
-        jsonData["realName"] = realName;
-        jsonData["identification"] = identification;
+        jsonData["phoneNum"] = phoneNum;
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }
