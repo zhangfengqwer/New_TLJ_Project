@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class LogicEnginerScript : MonoBehaviour
 {
+    public SocketUtil m_socketUtil;
+
     bool m_isConnServerSuccess = false;
     public static bool IsLogicConnect = false;
     public static LogicEnginerScript Instance;
@@ -74,12 +76,14 @@ public class LogicEnginerScript : MonoBehaviour
     /// </summary>
     public void InitSocket()
     {
-        SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
-        SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
-        SocketUtil.getInstance().setOnSocketEvent_Close(onSocketClose);
-        SocketUtil.getInstance().setOnSocketEvent_Stop(onSocketStop);
-        SocketUtil.getInstance().init(NetConfig.s_logicService_ip, NetConfig.s_logicService_port);
-        SocketUtil.getInstance().start();
+        m_socketUtil = new SocketUtil();
+        m_socketUtil.setOnSocketEvent_Connect(onSocketConnect);
+        m_socketUtil.setOnSocketEvent_Receive(onSocketReceive);
+        m_socketUtil.setOnSocketEvent_Close(onSocketClose);
+        m_socketUtil.setOnSocketEvent_Stop(onSocketStop);
+
+        m_socketUtil.init(NetConfig.s_logicService_ip, NetConfig.s_logicService_port);
+        m_socketUtil.start();
     }
 
     private void onSocketConnect(bool result)
@@ -95,7 +99,7 @@ public class LogicEnginerScript : MonoBehaviour
         else
         {
             Debug.Log("连接服务器失败，尝试重新连接");
-            SocketUtil.getInstance().start();
+            m_socketUtil.start();
         }
     }
 
@@ -162,12 +166,12 @@ public class LogicEnginerScript : MonoBehaviour
     private void onSocketClose()
     {
         Debug.Log("被动与服务器断开连接,尝试重新连接");
-        SocketUtil.getInstance().start();
+        m_socketUtil.start();
     }
 
     public void SendMyMessage(string sendData)
     {
-        SocketUtil.getInstance().sendMessage(sendData);
+        m_socketUtil.sendMessage(sendData);
     }
 
     public void AddRequest(Request request)
@@ -182,6 +186,6 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        SocketUtil.getInstance().stop();
+        m_socketUtil.stop();
     }
 }

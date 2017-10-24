@@ -6,8 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameScript : MonoBehaviour {
-
+public class GameScript : MonoBehaviour
+{
     public Button m_buttonStartGame;
     public Button m_buttonOutPoker;
     public Button m_buttonMaiDi;
@@ -30,8 +30,6 @@ public class GameScript : MonoBehaviour {
     GameObject m_waitOtherPlayer;
     GameObject m_liangzhuObj;
 
-    bool m_isConnServerSuccess = false;
-
     List<string> m_dataList = new List<string>();
     
     void Start ()
@@ -43,14 +41,7 @@ public class GameScript : MonoBehaviour {
 
     void initData()
     {
-        // 设置Socket事件
-        SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
-        SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
-        SocketUtil.getInstance().setOnSocketEvent_Close(onSocketClose);
-        SocketUtil.getInstance().setOnSocketEvent_Stop(onSocketStop);
-
-        SocketUtil.getInstance().init(NetConfig.s_playService_ip, NetConfig.s_playService_port);
-        SocketUtil.getInstance().start();
+        PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive);
     }
 
     void initUI()
@@ -130,22 +121,11 @@ public class GameScript : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (m_isConnServerSuccess)
-        {
-            ToastScript.createToast("连接服务器成功");
-            m_isConnServerSuccess = false;
-        }
-
-        for (int i = 0; i < m_dataList.Count; i++)
-        {
-            onReceive(m_dataList[i]);
-            m_dataList.RemoveAt(i);
-        }
     }
 
     void OnDestroy()
     {
-        SocketUtil.getInstance().stop();
+        PlayServiceSocket.s_instance.Stop();
     }
 
     public void onClickBag()
@@ -262,7 +242,7 @@ public class GameScript : MonoBehaviour {
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 请求退出房间
@@ -274,7 +254,7 @@ public class GameScript : MonoBehaviour {
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 请求出牌
@@ -322,7 +302,7 @@ public class GameScript : MonoBehaviour {
                 }
             }
 
-            SocketUtil.getInstance().sendMessage(data.ToJson());
+            PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 
             m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
             
@@ -342,7 +322,7 @@ public class GameScript : MonoBehaviour {
         data["tag"] = TLJCommon.Consts.Tag_UserInfo_Game;
         data["uid"] = uid;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 请求换桌
@@ -354,7 +334,7 @@ public class GameScript : MonoBehaviour {
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ChangeRoom;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 请求继续游戏
@@ -366,7 +346,7 @@ public class GameScript : MonoBehaviour {
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ContinueGame;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     public void reqQiangZhu(List<TLJCommon.PokerInfo> pokerList)
@@ -388,7 +368,7 @@ public class GameScript : MonoBehaviour {
 
         data["pokerList"] = jarray;
         
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     public void reqChaoDi(List<TLJCommon.PokerInfo> pokerList)
@@ -419,7 +399,7 @@ public class GameScript : MonoBehaviour {
             data["hasPoker"] = 0;
         }
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     public void reqMaiDi()
@@ -497,7 +477,7 @@ public class GameScript : MonoBehaviour {
             }
 
             m_timerScript.stop();
-            SocketUtil.getInstance().sendMessage(data.ToJson());
+            PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 
             m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
         }
@@ -582,7 +562,7 @@ public class GameScript : MonoBehaviour {
             }
 
             m_timerScript.stop();
-            SocketUtil.getInstance().sendMessage(data.ToJson());
+            PlayServiceSocket.s_instance.sendMessage(data.ToJson());
         }
         else
         {
@@ -600,7 +580,7 @@ public class GameScript : MonoBehaviour {
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
         data["pokerType"] = -1;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 抢主结束
@@ -612,7 +592,7 @@ public class GameScript : MonoBehaviour {
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhuEnd;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 发送聊天信息
@@ -625,7 +605,7 @@ public class GameScript : MonoBehaviour {
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_Chat;
         data["content_id"] = content_id;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
     //----------------------------------------------------------发送数据 end--------------------------------------------------
 
@@ -1985,37 +1965,35 @@ public class GameScript : MonoBehaviour {
     }
 
     //-------------------------------------------------------------------------------------------------------
-    void onSocketConnect(bool result)
-    {
-        if (result)
-        {
-            Debug.Log("连接服务器成功");
-            m_isConnServerSuccess = true;
-        }
-        else
-        {
-            Debug.Log("连接服务器失败，尝试重新连接");
-            SocketUtil.getInstance().start();
-        }
-    }
+    //void onSocketConnect(bool result)
+    //{
+    //    if (result)
+    //    {
+    //        Debug.Log("连接服务器成功");
+    //        m_isConnServerSuccess = true;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("连接服务器失败，尝试重新连接");
+    //        PlayServiceSocket.s_instance.getSocketUtil().start();
+    //    }
+    //}
 
     void onSocketReceive(string data)
     {
-        Debug.Log("收到服务器消息:" + data);
-
-        m_dataList.Add(data);
+        onReceive(data);
     }
 
-    void onSocketClose()
-    {
-        Debug.Log("被动与服务器断开连接,尝试重新连接");
-        SocketUtil.getInstance().start();
-    }
+    //void onSocketClose()
+    //{
+    //    Debug.Log("被动与服务器断开连接,尝试重新连接");
+    //    PlayServiceSocket.s_instance.getSocketUtil().start();
+    //}
 
-    void onSocketStop()
-    {
-        Debug.Log("主动与服务器断开连接");
-    }
+    //void onSocketStop()
+    //{
+    //    Debug.Log("主动与服务器断开连接");
+    //}
 
     void onInvokeTuoGuan()
     {

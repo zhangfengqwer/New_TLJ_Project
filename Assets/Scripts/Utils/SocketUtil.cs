@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-class SocketUtil
+public class SocketUtil
 {
-    static SocketUtil s_instance = null;
+    //static SocketUtil s_instance = null;
 
     public delegate void OnSocketEvent_Connect(bool result);    // 连接服务器结果
     public delegate void OnSocketEvent_Receive(string data);    // 收到服务器消息
@@ -32,15 +32,15 @@ class SocketUtil
     char m_packEndFlag = (char)1;
     string m_endStr = "";
 
-    public static SocketUtil getInstance()
-    {
-        if (s_instance == null)
-        {
-            s_instance = new SocketUtil();
-        }
+    //public static SocketUtil getInstance()
+    //{
+    //    if (s_instance == null)
+    //    {
+    //        s_instance = new SocketUtil();
+    //    }
 
-        return s_instance;
-    }
+    //    return s_instance;
+    //}
 
     public void setOnSocketEvent_Connect(OnSocketEvent_Connect onSocketEvent_Connect)
     {

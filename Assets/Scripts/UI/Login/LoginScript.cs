@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class LoginScript : MonoBehaviour
 {
+    SocketUtil m_socketUtil;
+
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
 
@@ -41,18 +43,19 @@ public class LoginScript : MonoBehaviour
     // 等获取到服务器配置文件再调用
     public void init()
     {
-        // 设置Socket事件
-        SocketUtil.getInstance().setOnSocketEvent_Connect(onSocketConnect);
-        SocketUtil.getInstance().setOnSocketEvent_Receive(onSocketReceive);
-        SocketUtil.getInstance().setOnSocketEvent_Close(onSocketClose);
-        SocketUtil.getInstance().setOnSocketEvent_Stop(onSocketStop);
-        SocketUtil.getInstance().init(NetConfig.s_loginService_ip, NetConfig.s_loginService_port);
-        SocketUtil.getInstance().start();
+        m_socketUtil = new SocketUtil();
+        m_socketUtil.setOnSocketEvent_Connect(onSocketConnect);
+        m_socketUtil.setOnSocketEvent_Receive(onSocketReceive);
+        m_socketUtil.setOnSocketEvent_Close(onSocketClose);
+        m_socketUtil.setOnSocketEvent_Stop(onSocketStop);
+
+        m_socketUtil.init(NetConfig.s_loginService_ip, NetConfig.s_loginService_port);
+        m_socketUtil.start();
     }
 
     void OnDestroy()
     {
-        SocketUtil.getInstance().stop();
+        m_socketUtil.stop();
     }
 
     void Update()
@@ -149,7 +152,7 @@ public class LoginScript : MonoBehaviour
             UserData.uid = uid;
 
             SceneManager.LoadScene("MainScene");
-//            SocketUtil.getInstance().stop();
+//            m_socketUtil.stop();
 //            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
 //            GameObject.Instantiate(LogicEnginer);
         }
@@ -172,7 +175,7 @@ public class LoginScript : MonoBehaviour
 
             UserData.uid = uid;
 
-            //            SocketUtil.getInstance().stop();
+            //            m_socketUtil.stop();
             //            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
             //            GameObject.Instantiate(LogicEnginer);
             //ToastScript.createToast("注册成功");
@@ -200,7 +203,7 @@ public class LoginScript : MonoBehaviour
             data["account"] = m_inputAccount.text;
             data["password"] = m_inputPassword.text;
 
-            SocketUtil.getInstance().sendMessage(data.ToJson());
+            m_socketUtil.sendMessage(data.ToJson());
         }
     }
 
@@ -228,7 +231,7 @@ public class LoginScript : MonoBehaviour
             data["account"] = m_inputAccount_register.text;
             data["password"] = m_inputSecondPassword_register.text;
 
-            SocketUtil.getInstance().sendMessage(data.ToJson());
+            m_socketUtil.sendMessage(data.ToJson());
         }
     }
 
@@ -243,7 +246,7 @@ public class LoginScript : MonoBehaviour
         else
         {
             Debug.Log("连接服务器失败，尝试重新连接");
-            SocketUtil.getInstance().start();
+            m_socketUtil.start();
         }
     }
 
@@ -257,7 +260,7 @@ public class LoginScript : MonoBehaviour
     void onSocketClose()
     {
         Debug.Log("被动与服务器断开连接,尝试重新连接");
-        SocketUtil.getInstance().start();
+        m_socketUtil.start();
     }
 
     void onSocketStop()
@@ -301,6 +304,6 @@ public class LoginScript : MonoBehaviour
         data["account"] = account;
         data["password"] = password;
 
-        SocketUtil.getInstance().sendMessage(data.ToJson());
+        m_socketUtil.sendMessage(data.ToJson());
     }
 }
