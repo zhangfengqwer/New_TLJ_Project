@@ -35,7 +35,7 @@ public class LogicEnginerScript : MonoBehaviour
         Instance = this;
 //        if (Instance == null)
 //        {
-//            
+//            Instance = this;
 //            DontDestroyOnLoad(this.gameObject);
 //        }
 //        else if (Instance != this)
