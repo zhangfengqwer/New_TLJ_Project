@@ -17,6 +17,9 @@ public class BindPhoneScript : MonoBehaviour
     private string _phoneNum;
     private string _verificationCode;
     public Button ButtonSendSms;
+    private int time = 20;
+    public static int totalTime;
+    private bool IsStartTime;
 
     public static GameObject create()
     {
@@ -25,12 +28,45 @@ public class BindPhoneScript : MonoBehaviour
 
         return obj;
     }
+    private float nextTime = 1;//一秒之后执行
+    private Text textSend;
+
+    private void Timer1()
+    {
+        if (nextTime <= Time.time)
+        {
+            textSend.text = string.Format("{0:d2}",totalTime % 60);
+            nextTime = Time.time + 1;//到达一秒后加1
+            if (totalTime <= 0)
+            {
+                IsStartTime = false;
+                ButtonSendSms.interactable = true;
+                textSend.text = "发送";
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (IsStartTime)
+        {
+            Timer1();
+        }
+    }
 
     // Use this for initialization
     void Start()
     {
         PhoneField.onEndEdit.AddListener(delegate { GetPhoneNum(PhoneField); });
         VerificationCodeField.onEndEdit.AddListener(delegate { GetVerificationCode(VerificationCodeField); });
+        textSend = ButtonSendSms.transform.Find("Text_Send").GetComponent<Text>();
+
+        if (totalTime > 0)
+        {
+            textSend.text = string.Format("{0:d2}", totalTime % 60);
+            ButtonSendSms.interactable = false;
+            IsStartTime = true;
+        }
     }
 
     public void GetPhoneNum(InputField input)
@@ -73,6 +109,7 @@ public class BindPhoneScript : MonoBehaviour
             LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().CallBack =
                 sendVerificationCodeCallBack;
             LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().OnRequest(_phoneNum);
+
         }
         else
         {
@@ -102,7 +139,9 @@ public class BindPhoneScript : MonoBehaviour
                     //发送验证码成功
                     if (value.Equals("1"))
                     {
-//                        ButtonSendSms.interactable = false;
+                        totalTime = time;
+                        IsStartTime = true;
+                        ButtonSendSms.interactable = false;
                     }
                 }else if (nodeChild.Name.Equals("ResultMessageDetails"))
                 {
@@ -125,6 +164,7 @@ public class BindPhoneScript : MonoBehaviour
         {
             UserData.phone = _phoneNum;
             UserInfoScript.Instance.InitUI();
+            Destroy(this.gameObject);
         }
         else
         {

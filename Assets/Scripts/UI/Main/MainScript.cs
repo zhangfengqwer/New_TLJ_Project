@@ -38,10 +38,18 @@ public class MainScript : MonoBehaviour {
             refreshUI();
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    //发送验证码的倒计时
+    private float nextTime = 1;//一秒之后执行
+    void Update () {
+	    if (BindPhoneScript.totalTime > 0)
+	    {
+	        if (nextTime <= Time.time)
+	        {
+	            BindPhoneScript.totalTime--;
+	            nextTime = Time.time + 1;//到达一秒后加1
+            }
+	    }
 	}
 
     void OnDestroy()
