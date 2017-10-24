@@ -13,6 +13,14 @@ public class PlayServiceSocket: MonoBehaviour
     public delegate void OnPlayService_Receive(string data);    // 收到服务器消息
     OnPlayService_Receive m_onPlayService_Receive_Play = null;
 
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/Logic/PlayeEnginer") as GameObject;
+        GameObject obj = MonoBehaviour.Instantiate(prefab);
+
+        return obj;
+    }
+
     void Awake()
     {
         s_instance = this.GetComponent<PlayServiceSocket>();
