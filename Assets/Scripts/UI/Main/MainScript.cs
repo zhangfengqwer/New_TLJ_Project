@@ -30,11 +30,17 @@ public class MainScript : MonoBehaviour
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
 
+        // 游戏打牌服务器
         {
+            if (PlayServiceSocket.s_instance == null)
+            {
+                PlayServiceSocket.create();
+            }
+
             PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
             PlayServiceSocket.s_instance.startConnect();
         }
-
+        
         if (!OtherData.s_isMainInited)
         {
             OtherData.s_isMainInited = true;
