@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 /// <summary> 
 /// 验证身份证号码类 
 /// </summary> 
-public class IDCardValidationUtil
+public class VerifyRuleUtil
 {
 
     public static bool CheckRealName(string text)
@@ -114,5 +114,15 @@ public class IDCardValidationUtil
             return false;//生日验证 
         }
         return true;
+    }
+
+    public static bool CheckPhone(string inputText)
+    {
+        return Regex.IsMatch(inputText, @"^[1]+[3,8]+\d{9}");
+    }
+
+    public static bool CheckVerificationCode(string inputText)
+    {
+        return Regex.IsMatch(inputText, @"\d{6}");
     }
 }

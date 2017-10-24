@@ -27,7 +27,7 @@ public class RealNameScript : MonoBehaviour
 
     public void GetRealName(InputField input)
     {
-        _isCorrectRealName = IDCardValidationUtil.CheckRealName(input.text);
+        _isCorrectRealName = VerifyRuleUtil.CheckRealName(input.text);
         if (_isCorrectRealName)
         {
             _realName = input.text;
@@ -36,7 +36,7 @@ public class RealNameScript : MonoBehaviour
 
     public void GetIdentification(InputField input)
     {
-        _isCorrectIdentification = IDCardValidationUtil.CheckIDCard(input.text);
+        _isCorrectIdentification = VerifyRuleUtil.CheckIDCard(input.text);
         if (_isCorrectIdentification)
         {
             _identification = input.text;

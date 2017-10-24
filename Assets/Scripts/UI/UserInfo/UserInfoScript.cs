@@ -73,7 +73,7 @@ public class UserInfoScript : MonoBehaviour
 
     public void OnBindPhoneClick()
     {
-        print("绑定手机");
+        BindPhoneScript.create();
     }
 
     public void OnRealNameClick()
