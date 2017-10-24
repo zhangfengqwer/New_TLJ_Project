@@ -42,37 +42,11 @@ public class GameData
     
     public void clear()
     {
-        m_myPokerList.Clear();
-        m_beforeQiangzhuPokerList.Clear();
-        m_curRoundFirstOutPokerList.Clear();
-        m_playerDataList.Clear();
-
-        //{
-        //    for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
-        //    {
-        //        Destroy(m_otherPlayerUIObjList[i]);
-        //    }
-        //    m_otherPlayerUIObjList.Clear();
-        //}
-
-        //{
-        //    for (int i = 0; i < m_myPokerObjList.Count; i++)
-        //    {
-        //        Destroy(m_myPokerObjList[i]);
-        //    }
-        //    m_myPokerObjList.Clear();
-        //}
-
-        //{
-        //    for (int i = 0; i < m_curRoundOutPokerList.Count; i++)
-        //    {
-        //        for (int j = 0; j < m_curRoundOutPokerList.Count; j++)
-        //        {
-        //            Destroy(m_curRoundOutPokerList[i][j]);
-        //        }
-        //    }
-        //    m_curRoundOutPokerList.Clear();
-        //}
+        //m_myPokerList.Clear();
+        //m_beforeQiangzhuPokerList.Clear();
+        //m_curRoundFirstOutPokerList.Clear();
+        //m_playerDataList.Clear();
+        s_instance = null;
     }
 
     public PlayerData getPlayerDataByUid(string uid)

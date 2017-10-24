@@ -60,6 +60,7 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void onClickHuanZhuo()
     {
+        m_parentScript.reqChangeRoom();
         Destroy(gameObject);
     }
 

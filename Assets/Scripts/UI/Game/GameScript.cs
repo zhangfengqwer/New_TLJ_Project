@@ -23,6 +23,9 @@ public class GameScript : MonoBehaviour {
     // 记牌器
     GameObject m_jiPaiGameObject = null;
 
+    // 托管
+    GameObject m_tuoguanObj = null;
+
     public GameObject m_myUserInfoUI;
     GameObject m_waitOtherPlayer;
     GameObject m_liangzhuObj;
@@ -48,19 +51,21 @@ public class GameScript : MonoBehaviour {
 
         SocketUtil.getInstance().init(NetConfig.s_playService_ip, NetConfig.s_playService_port);
         SocketUtil.getInstance().start();
+    }
 
+    void initUI()
+    {
         // 初始化定时器
         {
             m_timer = TimerScript.createTimer();
             m_timerScript = m_timer.GetComponent<TimerScript>();
             m_timerScript.setOnTimerEvent_TimeEnd(onTimerEventTimeEnd);
         }
-    }
 
-    void initUI()
-    {
+        // 初始化亮主
         {
-            m_liangzhuObj = LiangZhu.create(this,LiangZhu.UseType.UseType_liangzhu);
+            m_liangzhuObj = LiangZhu.create(this);
+            m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_liangzhu);
             m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         }
 
@@ -78,8 +83,52 @@ public class GameScript : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void Update ()
+    void clearData()
+    {
+        {
+            Destroy(m_timer);
+            Destroy(m_jiPaiGameObject);
+            Destroy(m_liangzhuObj);
+            Destroy(m_waitOtherPlayer);
+
+            if (m_tuoguanObj != null)
+            {
+                Destroy(m_tuoguanObj);
+            }
+        }
+
+        {
+            for (int i = GameData.getInstance().m_otherPlayerUIObjList.Count - 1; i >=0 ; i--)
+            {
+                Destroy(GameData.getInstance().m_otherPlayerUIObjList[i]);
+            }
+            GameData.getInstance().m_otherPlayerUIObjList.Clear();
+        }
+
+        {
+            for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0 ; i--)
+            {
+                Destroy(GameData.getInstance().m_myPokerObjList[i]);
+            }
+            GameData.getInstance().m_myPokerObjList.Clear();
+        }
+
+        {
+            for (int i = GameData.getInstance().m_curRoundOutPokerList.Count - 1; i >= 0 ; i--)
+            {
+                for (int j = GameData.getInstance().m_curRoundOutPokerList[i].Count - 1; j >= 0 ; j--)
+                {
+                    Destroy(GameData.getInstance().m_curRoundOutPokerList[i][j]);
+                }
+            }
+            GameData.getInstance().m_curRoundOutPokerList.Clear();
+        }
+
+        GameData.getInstance().clear();
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         if (m_isConnServerSuccess)
         {
@@ -126,13 +175,13 @@ public class GameScript : MonoBehaviour {
 
     public void onClickQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
-        //Destroy(m_liangzhuObj);
+        //m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         reqQiangZhu(pokerList);
     }
 
     public void onClickChaoDi(List<TLJCommon.PokerInfo> pokerList)
     {
-        Destroy(m_liangzhuObj);
+        m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         reqChaoDi(pokerList);
     }
 
@@ -153,9 +202,7 @@ public class GameScript : MonoBehaviour {
 
     public void onClickTuoGuan()
     {
-        {
-            TuoGuanPanelScript.create(this);
-        }
+        m_tuoguanObj = TuoGuanPanelScript.create(this);
 
         GameData.getInstance().m_isTuoGuan = true;
 
@@ -294,6 +341,18 @@ public class GameScript : MonoBehaviour {
 
         data["tag"] = TLJCommon.Consts.Tag_UserInfo_Game;
         data["uid"] = uid;
+
+        SocketUtil.getInstance().sendMessage(data.ToJson());
+    }
+
+    // 请求换桌
+    public void reqChangeRoom()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["uid"] = UserData.uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ChangeRoom;
 
         SocketUtil.getInstance().sendMessage(data.ToJson());
     }
@@ -810,7 +869,7 @@ public class GameScript : MonoBehaviour {
             case (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhuEnd:
                 {
                     m_timerScript.stop();
-                    Destroy(m_liangzhuObj);
+                    m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
 
                     // 主牌花色
                     {
@@ -940,7 +999,8 @@ public class GameScript : MonoBehaviour {
                         {
                             if (uid.CompareTo(UserData.uid) == 0)
                             {
-                                m_liangzhuObj = LiangZhu.create(this, LiangZhu.UseType.UseType_chaodi);
+                                m_liangzhuObj = LiangZhu.create(this);
+                                m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
                                 m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList, GameData.getInstance().m_beforeQiangzhuPokerList);
 
                                 // 开始炒底倒计时
@@ -1325,11 +1385,43 @@ public class GameScript : MonoBehaviour {
                                 script.setData(false, GameData.getInstance().m_getAllScore, -1000);
                             }
                         }
+
+                        clearData();
+                        initUI();
                     }
                     catch (Exception ex)
                     {
                         ToastScript.createToast("异常：" + ex.Message);
                     }
+                }
+                break;
+
+            // 换桌
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_ChangeRoom:
+                {
+                    int code = (int)jd["code"];
+
+                    switch (code)
+                    {
+                        case (int)TLJCommon.Consts.Code.Code_OK:
+                            {
+                                int roomId = (int)jd["roomId"];
+                                ToastScript.createToast("加入房间成功：" + roomId);
+
+                                // 禁用开始游戏按钮
+                                m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
+
+                                m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                            }
+                            break;
+
+                        case (int)TLJCommon.Consts.Code.Code_CommonFail:
+                            {
+                                ToastScript.createToast("加入房间失败，已经加入房间");
+                            }
+                            break;
+                    }
+
                 }
                 break;
 
@@ -1905,7 +1997,7 @@ public class GameScript : MonoBehaviour {
                 {
                     ToastScript.createToast("时间到，不炒底");
 
-                    Destroy(m_liangzhuObj);
+                    m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
 
                     List<TLJCommon.PokerInfo> list = new List<TLJCommon.PokerInfo>();
                     onClickChaoDi(list);

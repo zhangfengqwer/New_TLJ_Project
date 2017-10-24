@@ -91,7 +91,7 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_wechat()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        PlatformHelper.Login("Login", "GetLoginResult", "weixin");
+        //PlatformHelper.Login("Login", "GetLoginResult", "weixin");
         ToastScript.createToast("暂未开放");
     }
 
