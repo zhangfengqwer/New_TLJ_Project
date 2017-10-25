@@ -28,7 +28,7 @@ public class PVPGameRoomDataScript
         m_dataList = JsonMapper.ToObject<List<PVPGameRoomData>>(jsonData["room_list"].ToString());
     }
 
-    public List<PVPGameRoomData> getShopDataList()
+    public List<PVPGameRoomData> getDataList()
     {
         return m_dataList;
     }

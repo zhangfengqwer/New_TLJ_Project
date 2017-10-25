@@ -8,8 +8,10 @@ public class TuoGuanPanelScript : MonoBehaviour {
     
     public static GameObject create(GameScript parentScript)
     {
-        GameObject prefab = Resources.Load("Prefabs/UI/Panel/TuoGuanPanel") as GameObject;
+        GameObject prefab = Resources.Load("Prefabs/Game/TuoGuanPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<TuoGuanPanelScript>().m_parentScript = parentScript;
 
         return obj;
     }

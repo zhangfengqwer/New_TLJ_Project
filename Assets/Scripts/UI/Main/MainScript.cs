@@ -106,6 +106,20 @@ public class MainScript : MonoBehaviour
         //}
     }
 
+
+    public void showWaitMatchPanel(float time)
+    {
+        WaitMatchPanelScript script = WaitMatchPanelScript.create().GetComponent<WaitMatchPanelScript>();
+        script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
+        script.start(time);
+    }
+
+    void onTimerEvent_TimeEnd()
+    {
+        Debug.Log("暂时没有匹配到玩家");
+        ToastScript.createToast("暂时没有匹配到玩家");
+    }
+
     public void onClickEnterXiuXianChang()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
@@ -222,7 +236,7 @@ public class MainScript : MonoBehaviour
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
 
-        if (tag.CompareTo(TLJCommon.Consts.Tag_XiuXianChang) == 0)
+        if (tag.CompareTo(TLJCommon.Consts.Tag_JingJiChang) == 0)
         {
             int playAction = (int)jd["playAction"];
 
@@ -231,6 +245,13 @@ public class MainScript : MonoBehaviour
                 case (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
                 {
                     doTask_PlayAction_JoinGame(data);
+                }
+                break;
+                
+                // 退出游戏
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame:
+                {
+                    doTask_PlayAction_ExitGame(data);
                 }
                 break;
 
@@ -254,7 +275,8 @@ public class MainScript : MonoBehaviour
             case (int)TLJCommon.Consts.Code.Code_OK:
                 {
                     int roomId = (int)jd["roomId"];
-                    ToastScript.createToast("加入房间成功：" + roomId);
+                    //ToastScript.createToast("加入房间成功：" + roomId);
+                    ToastScript.createToast("报名成功");
                 }
                 break;
 
@@ -266,10 +288,31 @@ public class MainScript : MonoBehaviour
         }
     }
 
+    void doTask_PlayAction_ExitGame(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+
+        switch (code)
+        {
+            case (int)TLJCommon.Consts.Code.Code_OK:
+            {
+                int roomId = (int)jd["roomId"];
+                ToastScript.createToast("退赛成功");
+            }
+            break;
+
+            case (int)TLJCommon.Consts.Code.Code_CommonFail:
+            {
+                ToastScript.createToast("退赛失败，当前并没有加入房间");
+            }
+            break;
+        }
+    }
+
     void doTask_PlayAction_StartGame(string data)
     {
         GameData.getInstance().m_startGameJsonData = data;
-        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_PVP_JinBi_8;
         SceneManager.LoadScene("GameScene");
     }
 
