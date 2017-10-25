@@ -7,7 +7,7 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public GameScript m_parentScript;
 
-    public Text m_text_result;
+    public Image m_image_result;
     public Text m_text_xianjia_score;
     public Text m_text_gold;
 
@@ -36,16 +36,18 @@ public class GameResultPanelScript : MonoBehaviour {
     {
         if (isWin)
         {
-            m_text_result.text = "胜利";
-            m_text_xianjia_score.text = "金币：+" + score;
+            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_win");
+            m_image_result.SetNativeSize();
+            m_text_xianjia_score.text = "+" + score;
         }
         else
         {
-            m_text_result.text = "失败";
-            m_text_xianjia_score.text = "金币：" + score;
+            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_fail");
+            m_image_result.SetNativeSize();
+            m_text_xianjia_score.text = score.ToString();
         }
 
-        m_text_xianjia_score.text = "闲家得分：" + score;
+        m_text_xianjia_score.text = "" + score;
 
         m_text_player_left1.text = GameData.getInstance().m_playerDataList[0].m_name;
         m_text_player_left2.text = GameData.getInstance().m_playerDataList[2].m_name;

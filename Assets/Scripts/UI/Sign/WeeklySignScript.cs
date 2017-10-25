@@ -11,6 +11,7 @@ public class WeeklySignScript : MonoBehaviour
     private List<GameObject> signObjects = new List<GameObject>();
     public GameObject content;
     public Button btn_Sign;
+    public Image image_Signed;
     private int totalSignDays;
     private List<SignItem> _signItems;
     private bool isSignSuccess = false;
@@ -38,7 +39,8 @@ public class WeeklySignScript : MonoBehaviour
             Color color = signObject.GetComponent<Image>().color;
             color.a = 0.5f;
             signObject.GetComponent<Image>().color = color;
-            btn_Sign.interactable = false;
+            btn_Sign.transform.localScale = Vector3.zero;
+            image_Signed.transform.localScale = Vector3.one;
             SignData.IsSign = true;
             SignData.SignWeekDays++;
             isSignSuccess = false;
@@ -95,7 +97,8 @@ public class WeeklySignScript : MonoBehaviour
         //签到过，按钮不可点击
         if (SignData.IsSign)
         {
-            btn_Sign.interactable = false;
+            btn_Sign.transform.localScale = Vector3.zero;
+            image_Signed.transform.localScale = Vector3.one;
         }
         for (int i = 0; i < signObjects.Count; i++)
         {

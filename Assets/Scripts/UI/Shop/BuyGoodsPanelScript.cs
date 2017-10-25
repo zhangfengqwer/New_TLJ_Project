@@ -122,10 +122,26 @@ public class BuyGoodsPanelScript : MonoBehaviour {
 
     public void onClickBuy()
     {
-        LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
-        LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
-        LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+        switch (m_shopData.money_type)
+        {
+            case 1:
+            case 2:
+                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
+                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+                break;
+            //人民币购买
+            case 3:
+                PlatformHelper.pay(this.gameObject.name, "GetPayResult", "unity传给android的支付数据");
+                break;
+        }
     }
+
+    public void GetPayResult(string data)
+    {
+        ToastScript.createToast("android回传的数据:" + data);
+    }
+
 
     public void onReceive_BuyGoods(string data)
     {

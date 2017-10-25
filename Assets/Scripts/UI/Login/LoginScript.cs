@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using System;
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -67,7 +68,6 @@ public class LoginScript : MonoBehaviour
         }
         for (int i = 0; i < m_dataList.Count; i++)
         {
-            print("取");
             onReceive(m_dataList[i]);
             m_dataList.RemoveAt(i);
         }
@@ -100,6 +100,21 @@ public class LoginScript : MonoBehaviour
     public void GetLoginResult(string data)
     {
         ToastScript.createToast("anroid返回的数据：" + data);
+        try
+        {
+            JsonData jsonData = JsonMapper.ToObject(data);
+            var openId = (string)jsonData["openid"];
+            var nickname = (string)jsonData["nickname"];
+            var figureurl = (string)jsonData["figureurl"];
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+     
+
+
     }
 
     // QQ登录

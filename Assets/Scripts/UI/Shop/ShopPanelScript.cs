@@ -38,6 +38,7 @@ public class ShopPanelScript : MonoBehaviour
         }
     }
 
+
     private void Init()
     {
         try

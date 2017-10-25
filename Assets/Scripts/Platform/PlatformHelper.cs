@@ -220,6 +220,9 @@ public class PlatformHelper
     {
     }
 
+    public static void pay(string callObj, string callFunc, string data)
+    {
+    }
     /**
      * 取联网方式
      * 无联网 0
@@ -533,6 +536,10 @@ public class PlatformHelper
     }
 
 
+    public static void pay(string callObj, string callFunc, string data){
+        GetJC().CallStatic("pay",callObj,callFunc,data);
+    }
+
     /// <summary>
     /// 设置回调方法，第三方SDK注销账号的时候被通知
     /// </summary>
@@ -547,6 +554,7 @@ public class PlatformHelper
     /// <summary>
     /// 通用的方法，目的是减少接口变化
     /// </summary>
+    /// 
     /// <param name="input"></param>
     /// <returns></returns>
     public static String commonMethod(String input){
