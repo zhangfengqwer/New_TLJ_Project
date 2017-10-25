@@ -32,6 +32,8 @@ public class GameData
     public int m_chaodiTime = 10;               // 选择是否炒底时间 
 
     public int m_levelPokerNum = -1;            // 级牌
+    public int m_myLevelPoker = -1;             // 我方级数
+    public int m_otherLevelPoker = -1;          // 对方级数
     public int m_masterPokerType = -1;          // 主牌花色
     
     public int m_isBanker;                      // 是否属于庄家一方
