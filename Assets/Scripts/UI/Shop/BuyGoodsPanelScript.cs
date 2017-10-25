@@ -63,18 +63,7 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                 CommonUtil.setImageSprite(m_text_goods_icon, GameUtil.getPropIconPath(int.Parse(list_str[0])));
             }
 
-            if (m_shopData.money_type == 1)
-            {
-                m_text_goods_allPrice.text = "金币：" + (m_shopData.price * m_goods_num).ToString();
-            }
-            else if (m_shopData.money_type == 2)
-            {
-                m_text_goods_allPrice.text = "元宝：" + (m_shopData.price * m_goods_num).ToString();
-            }
-            else if (m_shopData.money_type == 3)
-            {
-                m_text_goods_allPrice.text = "¥：" + (m_shopData.price * m_goods_num).ToString();
-            }
+            refreshPrice();
 
             if (m_shopData.goods_type != 3)
             {
@@ -84,6 +73,22 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                 m_button_jia.transform.localScale = new Vector3(0, 0, 0);
                 m_button_max.transform.localScale = new Vector3(0, 0, 0);
             }
+        }
+    }
+
+    void refreshPrice()
+    {
+        if (m_shopData.money_type == 1)
+        {
+            m_text_goods_allPrice.text = "金币：" + (m_shopData.price * m_goods_num).ToString();
+        }
+        else if (m_shopData.money_type == 2)
+        {
+            m_text_goods_allPrice.text = "元宝：" + (m_shopData.price * m_goods_num).ToString();
+        }
+        else if (m_shopData.money_type == 3)
+        {
+            m_text_goods_allPrice.text = "¥：" + (m_shopData.price * m_goods_num).ToString();
         }
     }
 
@@ -97,6 +102,8 @@ public class BuyGoodsPanelScript : MonoBehaviour {
         }
 
         m_text_goods_num.text = m_goods_num.ToString();
+
+        refreshPrice();
     }
 
     public void onClickJia()
@@ -109,6 +116,8 @@ public class BuyGoodsPanelScript : MonoBehaviour {
         }
 
         m_text_goods_num.text = m_goods_num.ToString();
+
+        refreshPrice();
     }
 
     public void onClickMax()
@@ -118,6 +127,8 @@ public class BuyGoodsPanelScript : MonoBehaviour {
 
         m_button_jian.interactable = true;
         m_button_jia.interactable = false;
+
+        refreshPrice();
     }
 
     public void onClickBuy()
