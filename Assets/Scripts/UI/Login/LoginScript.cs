@@ -93,7 +93,7 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_wechat()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        //PlatformHelper.Login("Login", "GetLoginResult", "weixin");
+        PlatformHelper.Login("Login", "GetLoginResult", "weixin");
         ToastScript.createToast("暂未开放");
     }
 
@@ -106,7 +106,7 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_qq()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-
+        PlatformHelper.Login("Login", "GetLoginResult", "qq");
         ToastScript.createToast("暂未开放");
     }
 

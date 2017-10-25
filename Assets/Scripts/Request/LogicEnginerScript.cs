@@ -32,16 +32,17 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-//        if (Instance == null)
-//        {
-//            Instance = this;
-//            DontDestroyOnLoad(this.gameObject);
-//        }
-//        else if (Instance != this)
-//        {
-//            Destroy(this.gameObject);
-//        }
+//        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+      
     }
 
     private void Update()
@@ -70,7 +71,11 @@ public class LogicEnginerScript : MonoBehaviour
         LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
     }
 
+    public delegate void OnLogicService_Receive(string data);    // 收到服务器消息
+    public OnLogicService_Receive logicService_Receive = null;
 
+
+   
     /// <summary>
     /// 设置Socket事件
     /// </summary>
@@ -187,5 +192,18 @@ public class LogicEnginerScript : MonoBehaviour
     private void OnDestroy()
     {
         m_socketUtil.stop();
+    }
+
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/Logic/LogicEnginer") as GameObject;
+        GameObject obj = MonoBehaviour.Instantiate(prefab);
+
+        return obj;
+    }
+
+    public void startConnect()
+    {
+        m_socketUtil.start();
     }
 }

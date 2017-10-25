@@ -27,20 +27,32 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+	    // 游戏打牌服务器
+	    {
+	        if (LogicEnginerScript.Instance == null)
+	        {
+	            LogicEnginerScript.create();
+	        }
+	    }
+
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
 
-        // 游戏打牌服务器
-        {
-            if (PlayServiceSocket.s_instance == null)
-            {
-                PlayServiceSocket.create();
-            }
+	    // 游戏打牌服务器
+	    {
+	        if (PlayServiceSocket.s_instance == null)
+	        {
+	            PlayServiceSocket.create();
+	        }
 
-            PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
-            PlayServiceSocket.s_instance.startConnect();
-        }
-        
+	        PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
+	        PlayServiceSocket.s_instance.startConnect();
+	    }
+	   
+
+
+
+
         if (!OtherData.s_isMainInited)
         {
             OtherData.s_isMainInited = true;
@@ -68,7 +80,7 @@ public class MainScript : MonoBehaviour
 
     void OnDestroy()
     {
-        LogicEnginerScript.Instance.m_socketUtil.stop();
+//        LogicEnginerScript.Instance.m_socketUtil.stop();
         //PlayServiceSocket.getInstance().Stop();
     }
 
