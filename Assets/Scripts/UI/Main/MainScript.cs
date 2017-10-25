@@ -224,7 +224,7 @@ public class MainScript : MonoBehaviour
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
 
-        if (tag.CompareTo(TLJCommon.Consts.Tag_XiuXianChang) == 0)
+        if (tag.CompareTo(TLJCommon.Consts.Tag_JingJiChang) == 0)
         {
             int playAction = (int)jd["playAction"];
 
@@ -301,7 +301,6 @@ public class MainScript : MonoBehaviour
     void doTask_PlayAction_StartGame(string data)
     {
         GameData.getInstance().m_startGameJsonData = data;
-        //GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_PVP_JinBi_8;
         SceneManager.LoadScene("GameScene");
     }
 

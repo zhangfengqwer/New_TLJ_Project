@@ -57,15 +57,18 @@ public class GameLevelChoiceScript : MonoBehaviour {
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
             Debug.Log("进入经典初级场");
+            GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi;
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
             Debug.Log("进入抄底初级场");
+            GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi;
         }
 
         Destroy(gameObject);
+
+        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
         SceneManager.LoadScene("GameScene");
-        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi;
     }
 
     public void onClickZhongJi()
@@ -73,15 +76,18 @@ public class GameLevelChoiceScript : MonoBehaviour {
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
             Debug.Log("进入经典中级场");
+            GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi;
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
             Debug.Log("进入抄底中级场");
+            GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi;
         }
 
         Destroy(gameObject);
+        
+        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
         SceneManager.LoadScene("GameScene");
-        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi;
     }
 
     public void onClickGaoJi()
@@ -89,14 +95,17 @@ public class GameLevelChoiceScript : MonoBehaviour {
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
             Debug.Log("进入经典高级场");
+            GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi;
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
             Debug.Log("进入抄底高级场");
+            GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi;
         }
 
         Destroy(gameObject);
+
+        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
         SceneManager.LoadScene("GameScene");
-        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi;
     }
 }

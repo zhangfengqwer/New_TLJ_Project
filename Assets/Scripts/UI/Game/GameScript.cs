@@ -30,6 +30,8 @@ public class GameScript : MonoBehaviour
     GameObject m_waitOtherPlayer;
     GameObject m_liangzhuObj;
 
+    string m_tag = "111111";
+
     List<string> m_dataList = new List<string>();
 
     void Start()
@@ -43,6 +45,7 @@ public class GameScript : MonoBehaviour
 
     void initData()
     {
+        m_tag = GameData.getInstance().m_tag;
         PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive);
     }
 
@@ -375,7 +378,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
         data["gameroomtype"] = GameData.getInstance().m_gameRoomType;
@@ -388,7 +391,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame;
 
@@ -400,7 +403,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_PlayerOutPoker;
 
@@ -468,7 +471,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ChangeRoom;
 
@@ -480,7 +483,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ContinueGame;
 
@@ -491,7 +494,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
         
@@ -513,7 +516,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_PlayerChaoDi;
 
@@ -544,7 +547,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_MaiDi;
 
@@ -629,7 +632,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_OtherMaiDi;
 
@@ -713,7 +716,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu;
         data["pokerType"] = -1;
@@ -726,7 +729,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhuEnd;
 
@@ -738,7 +741,7 @@ public class GameScript : MonoBehaviour
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_Chat;
         data["content_id"] = content_id;
@@ -753,7 +756,7 @@ public class GameScript : MonoBehaviour
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
 
-        if (tag.CompareTo(TLJCommon.Consts.Tag_XiuXianChang) == 0)
+        if (tag.CompareTo(m_tag) == 0)
         {
             onReceive_XiuXianChang(data);
         }

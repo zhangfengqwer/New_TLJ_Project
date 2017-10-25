@@ -14,6 +14,7 @@ public class GameData
         return s_instance;
     }
 
+    public string m_tag = "";
     public string m_gameRoomType = "";
 
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌

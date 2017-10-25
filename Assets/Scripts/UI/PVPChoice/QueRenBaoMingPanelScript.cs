@@ -73,13 +73,14 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
 
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = TLJCommon.Consts.Tag_JingJiChang;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
         data["gameroomtype"] = m_PVPGameRoomData.gameroomtype;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 
+        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_JingJiChang;
         GameData.getInstance().m_gameRoomType = m_PVPGameRoomData.gameroomtype;
     }
 }

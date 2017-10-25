@@ -87,7 +87,7 @@ public class WaitMatchPanelScript : MonoBehaviour {
     {
         JsonData data = new JsonData();
 
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["tag"] = TLJCommon.Consts.Tag_JingJiChang;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame;
 
