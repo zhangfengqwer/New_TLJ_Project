@@ -14,53 +14,52 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
     public Button m_button_baoming;
 
+    PVPGameRoomData m_PVPGameRoomData;
+
     // Use this for initialization
     void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 
-    public void setChangCi(string str)
+    public void setPVPGameRoomData(PVPGameRoomData PVPGameRoomData)
     {
-        m_text_changci.text = str;
-    }
+        m_PVPGameRoomData = PVPGameRoomData;
 
-    public void setKaiSaiRenShu(string str)
-    {
-        m_text_kaisairenshu.text = str;
-    }
+        m_text_changci.text = m_PVPGameRoomData.gameroomname;
+        m_text_kaisairenshu.text = "满" + m_PVPGameRoomData.kaisairenshu.ToString() + "人开赛";
 
-    public void setBaoMingFei(string str)
-    {
-        m_text_baomingfei.text = str;
-    }
+        if (m_PVPGameRoomData.baomingfei.CompareTo("0") == 0)
+        {
+            m_text_baomingfei.text = "报名费:免费";
+        }
+        else
+        {
+            List<string> list = new List<string>();
+            CommonUtil.splitStr(m_PVPGameRoomData.baomingfei, list, ':');
 
-    public void setBaoMingRenShu(string str)
-    {
-        m_text_baomingrenshu.text = str;
+            if (list[0].CompareTo("1") == 0)
+            {
+                m_text_baomingfei.text = "报名费:金币*" + list[1];
+            }
+            else
+            {
+                string prop_name = PropData.getInstance().getPropInfoById(int.Parse(list[0])).m_name;
+                m_text_baomingfei.text = "报名费:" + prop_name + "*" + list[1];
+            }
+        }
+        
+        m_text_baomingrenshu.text = "已报名人数：0";
     }
 
     public void onClickBaoMing()
     {
-        //SceneManager.LoadScene("GameScene");
-
-        reqJoinRoom();
-    }
-
-    //-------------------------------------------------------------
-    // 请求加入房间
-    public void reqJoinRoom()
-    {
-        JsonData data = new JsonData();
-
-        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
-        data["uid"] = UserData.uid;
-        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
-
-        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
+        QueRenBaoMingPanelScript queRenBaoMingPanelScript = QueRenBaoMingPanelScript.create().GetComponent<QueRenBaoMingPanelScript>() ;
+        queRenBaoMingPanelScript.setData(m_PVPGameRoomData);
     }
 }

@@ -123,6 +123,22 @@ public class LoginScript : MonoBehaviour
         reqQuickRegister();
     }
 
+    public void onClickLogin_close()
+    {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
+        m_panel_choicePlatform.transform.localScale = new Vector3(1,1,1);
+        m_panel_login.transform.localScale = new Vector3(0, 0, 0);
+        m_panel_register.transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    public void onClickRegister_close()
+    {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
+        OnEnterLoginClick();
+    }
+
     void onReceive(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);

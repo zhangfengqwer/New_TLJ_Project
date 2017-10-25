@@ -378,6 +378,7 @@ public class GameScript : MonoBehaviour
         data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
+        data["gameroomtype"] = GameData.getInstance().m_gameRoomType;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
