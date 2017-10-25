@@ -99,7 +99,7 @@ public class LoginScript : MonoBehaviour
 
     public void GetLoginResult(string data)
     {
-        print("anroid返回的数据：" + data);
+        ToastScript.createToast("anroid返回的数据：" + data);
     }
 
     // QQ登录
