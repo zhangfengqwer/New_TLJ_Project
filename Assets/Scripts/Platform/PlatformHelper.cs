@@ -915,12 +915,20 @@ public class PlatformHelper
 //        }
 //        return 1;
 //    }
+
+// public static void pay(string callObj, string callFunc, string data)
+//    {
+//    }
 //}
 
 #else
 public class PlatformHelper
 {
 
+    public static void pay(string callObj, string callFunc, string data)
+    {
+
+    }
     // 是否在About框中显示Logo
     public static string GetTextOfAbout() {
         return "";
