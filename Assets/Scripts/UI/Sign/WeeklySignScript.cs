@@ -36,9 +36,13 @@ public class WeeklySignScript : MonoBehaviour
         if (isSignSuccess)
         {
             GameObject signObject = signObjects[totalSignDays];
+            var image_lingqu = signObject.transform.GetChild(2);
             Color color = signObject.GetComponent<Image>().color;
-            color.a = 0.5f;
+            color.r = 0.5f;
+            color.g = 0.5f;
+            color.b = 0.5f;
             signObject.GetComponent<Image>().color = color;
+            image_lingqu.transform.localScale = Vector3.one;
             btn_Sign.transform.localScale = Vector3.zero;
             image_Signed.transform.localScale = Vector3.one;
             SignData.IsSign = true;
@@ -106,31 +110,46 @@ public class WeeklySignScript : MonoBehaviour
             SignItem signItem = _signItems[i];
 
             var name = Object.transform.GetChild(1);
+            var image_lingqu = Object.transform.GetChild(2);
             //设置元宝等道具
             Text text1 = name.GetComponent<Text>();
             text1.text = signItem.ItemName + "x" + signItem.ItemCount;
             //未签到
             if (SignData.IsSign == false)
             {
-                if (totalSignDays > i)
+                if (i < totalSignDays)
                 {
                     Color color = Object.GetComponent<Image>().color;
-                    color.a = 0.5f;
+                    color.r = 0.5f;
+                    color.g = 0.5f;
+                    color.b = 0.5f;
                     Object.GetComponent<Image>().color = color;
+                    image_lingqu.transform.localScale = Vector3.one;
+                }
+                else
+                {
+                    image_lingqu.transform.localScale = Vector3.zero;
                 }
                 if (totalSignDays == i)
                 {
-                    Object.GetComponent<Image>().color = Color.blue;
+//                    Object.GetComponent<Image>().color = Color.blue;
                 }
             }
             //已签到
             else
             {
-                if (totalSignDays > i)
+                if (i < totalSignDays)
                 {
                     Color color = Object.GetComponent<Image>().color;
-                    color.a = 0.5f;
+                    color.r = 0.5f;
+                    color.g = 0.5f;
+                    color.b = 0.5f;
                     Object.GetComponent<Image>().color = color;
+                    image_lingqu.transform.localScale = Vector3.one;
+                }
+                else
+                {
+                    image_lingqu.transform.localScale = Vector3.zero;
                 }
             }
            
