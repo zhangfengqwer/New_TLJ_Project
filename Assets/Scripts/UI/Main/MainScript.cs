@@ -257,7 +257,7 @@ public class MainScript : MonoBehaviour
     void doTask_PlayAction_StartGame(string data)
     {
         GameData.getInstance().m_startGameJsonData = data;
-        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_PVP_8;
+        GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_PVP_JinBi_8;
         SceneManager.LoadScene("GameScene");
     }
 

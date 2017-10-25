@@ -79,8 +79,9 @@ public class GameScript : MonoBehaviour
     void checkGameRoomType()
     {
         // 休闲场
-        if ((GameData.getInstance().m_gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian) == 0) ||
-            (GameData.getInstance().m_gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi) == 0))
+        List<string> list = new List<string>();
+        CommonUtil.splitStr(GameData.getInstance().m_gameRoomType, list,'_');
+        if (list[0].CompareTo("XiuXian") == 0)
         {
 
         }
