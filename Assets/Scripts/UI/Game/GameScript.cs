@@ -15,6 +15,8 @@ public class GameScript : MonoBehaviour
     public Button m_buttonTuoGuan;
     public Text m_textScore;
     public Image m_imageMasterPokerType;
+    public Text m_text_myLevelPoker;
+    public Text m_text_otherLevelPoker;
 
     // 倒计时
     GameObject m_timer;
@@ -30,7 +32,7 @@ public class GameScript : MonoBehaviour
     GameObject m_waitOtherPlayer;
     GameObject m_liangzhuObj;
 
-    string m_tag = "111111";
+    string m_tag = "";
 
     List<string> m_dataList = new List<string>();
 
@@ -93,124 +95,146 @@ public class GameScript : MonoBehaviour
         {
             // 从比赛场过来，直接开始游戏
             {
-                JsonData jd = JsonMapper.ToObject(GameData.getInstance().m_startGameJsonData);
+                startGame_InitUI(GameData.getInstance().m_startGameJsonData);
+            }
+        }
+    }
+
+    void startGame_InitUI(string jsonData)
+    {
+        try
+        {
+            JsonData jd = JsonMapper.ToObject(jsonData);
+
+            {
+                m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);          // 禁用开始游戏按钮
+                m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
+                m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
 
                 {
-                    // 禁用开始游戏按钮
-                    m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
-
-                    m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
-                    m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
-                    m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
-
+                    // 上边的玩家
                     {
-                        // 上边的玩家
-                        {
-                            GameObject obj = OtherPlayerUIScript.create();
-                            obj.transform.localPosition = new Vector3(0, 200, 0);
-                            obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Up;
+                        GameObject obj = OtherPlayerUIScript.create();
+                        obj.transform.localPosition = new Vector3(0, 200, 0);
+                        obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Up;
 
-                            GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
-                        }
-
-                        // 左边的玩家
-                        {
-                            GameObject obj = OtherPlayerUIScript.create();
-                            obj.transform.localPosition = new Vector3(-550, 0, 0);
-                            obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Left;
-
-                            GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
-                        }
-
-                        // 右边的玩家
-                        {
-                            GameObject obj = OtherPlayerUIScript.create();
-                            obj.transform.localPosition = new Vector3(550, 0, 0);
-                            obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Right;
-
-                            GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
-                        }
-                    }
-                }
-
-                // 级牌
-                GameData.getInstance().m_levelPokerNum = (int)jd["levelPokerNum"];
-
-                // 我的队友uid
-                GameData.getInstance().m_teammateUID = jd["teammateUID"].ToString();
-
-                // 显示所有玩家的头像、昵称、金币
-                {
-                    int myIndex = 0;
-                    for (int i = 0; i < jd["userList"].Count; i++)
-                    {
-                        if (jd["userList"][i]["uid"].ToString().CompareTo(UserData.uid) == 0)
-                        {
-                            myIndex = i;
-
-                            break;
-                        }
+                        GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
                     }
 
-                    switch (myIndex)
+                    // 左边的玩家
                     {
-                        case 0:
-                            {
-                                GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-                            }
-                            break;
+                        GameObject obj = OtherPlayerUIScript.create();
+                        obj.transform.localPosition = new Vector3(-550, 0, 0);
+                        obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Left;
 
-                        case 1:
-                            {
-                                GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-                            }
-                            break;
-
-                        case 2:
-                            {
-                                GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-                            }
-                            break;
-
-                        case 3:
-                            {
-                                GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-                                GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-                            }
-                            break;
+                        GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
                     }
-                }
 
-                // 本桌所有人信息
-                for (int i = 0; i < jd["userList"].Count; i++)
-                {
-                    string uid = jd["userList"][i]["uid"].ToString();
-
-                    GameData.getInstance().m_playerDataList.Add(new PlayerData(uid));
-
-                    if (uid.CompareTo(UserData.uid) == 0)
+                    // 右边的玩家
                     {
-                        GameData.getInstance().getPlayerDataByUid(uid).m_name = UserData.name;
-                        GameData.getInstance().getPlayerDataByUid(uid).m_head = UserData.head;
-                        GameData.getInstance().getPlayerDataByUid(uid).m_gold = UserData.gold;
-                        GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = UserData.gameData.allGameCount;
-                        GameData.getInstance().getPlayerDataByUid(uid).m_winCount = UserData.gameData.winCount;
-                        GameData.getInstance().getPlayerDataByUid(uid).m_runCount = UserData.gameData.runCount;
-                        GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = UserData.gameData.meiliZhi;
-                    }
-                    else
-                    {
-                        reqUserInfo_Game(uid);
+                        GameObject obj = OtherPlayerUIScript.create();
+                        obj.transform.localPosition = new Vector3(550, 0, 0);
+                        obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Right;
+
+                        GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
                     }
                 }
             }
+
+            // 级牌
+            GameData.getInstance().m_levelPokerNum = (int)jd["levelPokerNum"];
+
+            // 我方级数
+            {
+                GameData.getInstance().m_myLevelPoker = (int)jd["myLevelPoker"];
+                m_text_myLevelPoker.text = GameData.getInstance().m_myLevelPoker.ToString();
+            }
+
+            // 对方级数
+            {
+                GameData.getInstance().m_otherLevelPoker = (int)jd["otherLevelPoker"];
+                m_text_otherLevelPoker.text = GameData.getInstance().m_otherLevelPoker.ToString();
+            }
+
+            // 我的队友uid
+            GameData.getInstance().m_teammateUID = jd["teammateUID"].ToString();
+
+            // 显示所有玩家的头像、昵称、金币
+            {
+                int myIndex = 0;
+                for (int i = 0; i < jd["userList"].Count; i++)
+                {
+                    if (jd["userList"][i]["uid"].ToString().CompareTo(UserData.uid) == 0)
+                    {
+                        myIndex = i;
+
+                        break;
+                    }
+                }
+
+                switch (myIndex)
+                {
+                    case 0:
+                        {
+                            GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
+                        }
+                        break;
+
+                    case 1:
+                        {
+                            GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
+                        }
+                        break;
+
+                    case 3:
+                        {
+                            GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
+                            GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
+                        }
+                        break;
+                }
+            }
+
+            // 本桌所有人信息
+            for (int i = 0; i < jd["userList"].Count; i++)
+            {
+                string uid = jd["userList"][i]["uid"].ToString();
+
+                GameData.getInstance().m_playerDataList.Add(new PlayerData(uid));
+
+                if (uid.CompareTo(UserData.uid) == 0)
+                {
+                    GameData.getInstance().getPlayerDataByUid(uid).m_name = UserData.name;
+                    GameData.getInstance().getPlayerDataByUid(uid).m_head = UserData.head;
+                    GameData.getInstance().getPlayerDataByUid(uid).m_gold = UserData.gold;
+                    GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = UserData.gameData.allGameCount;
+                    GameData.getInstance().getPlayerDataByUid(uid).m_winCount = UserData.gameData.winCount;
+                    GameData.getInstance().getPlayerDataByUid(uid).m_runCount = UserData.gameData.runCount;
+                    GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = UserData.gameData.meiliZhi;
+                }
+                else
+                {
+                    reqUserInfo_Game(uid);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("startGame_InitUI()报错：" + ex.Message);
         }
     }
 
@@ -832,118 +856,7 @@ public class GameScript : MonoBehaviour
                 {
                     Destroy(m_waitOtherPlayer);
 
-                    {
-                        m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
-                        m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
-                        m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
-
-                        {
-                            // 上边的玩家
-                            {
-                                GameObject obj = OtherPlayerUIScript.create();
-                                obj.transform.localPosition = new Vector3(0, 200, 0);
-                                obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Up;
-
-                                GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
-                            }
-
-                            // 左边的玩家
-                            {
-                                GameObject obj = OtherPlayerUIScript.create();
-                                obj.transform.localPosition = new Vector3(-550, 0, 0);
-                                obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Left;
-
-                                GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
-                            }
-
-                            // 右边的玩家
-                            {
-                                GameObject obj = OtherPlayerUIScript.create();
-                                obj.transform.localPosition = new Vector3(550, 0, 0);
-                                obj.GetComponent<OtherPlayerUIScript>().m_direction = OtherPlayerUIScript.Direction.Direction_Right;
-
-                                GameData.getInstance().m_otherPlayerUIObjList.Add(obj);
-                            }
-                        }
-                    }
-
-                    // 级牌
-                    GameData.getInstance().m_levelPokerNum = (int)jd["levelPokerNum"];
-
-                    // 我的队友uid
-                    GameData.getInstance().m_teammateUID = jd["teammateUID"].ToString();
-                    
-                    // 显示所有玩家的头像、昵称、金币
-                    {
-                        int myIndex = 0;
-                        for (int i = 0; i < jd["userList"].Count; i++)
-                        {
-                            if (jd["userList"][i]["uid"].ToString().CompareTo(UserData.uid) == 0)
-                            {
-                                myIndex = i;
-
-                                break;
-                            }
-                        }
-
-                        switch (myIndex)
-                        {
-                            case 0:
-                                {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-                                }
-                                break;
-
-                            case 1:
-                                {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-                                }
-                                break;
-
-                            case 2:
-                                {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][3]["uid"].ToString();
-                                }
-                                break;
-
-                            case 3:
-                                {
-                                    GameData.getInstance().m_otherPlayerUIObjList[0].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][1]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[1].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][2]["uid"].ToString();
-                                    GameData.getInstance().m_otherPlayerUIObjList[2].GetComponent<OtherPlayerUIScript>().m_uid = jd["userList"][0]["uid"].ToString();
-                                }
-                                break;
-                        }
-                    }
-
-                    // 本桌所有人信息
-                    for (int i = 0; i < jd["userList"].Count; i++)
-                    {
-                        string uid = jd["userList"][i]["uid"].ToString();
-
-                        GameData.getInstance().m_playerDataList.Add(new PlayerData(uid));
-
-                        if (uid.CompareTo(UserData.uid) == 0)
-                        {
-                            GameData.getInstance().getPlayerDataByUid(uid).m_name = UserData.name;
-                            GameData.getInstance().getPlayerDataByUid(uid).m_head = UserData.head;
-                            GameData.getInstance().getPlayerDataByUid(uid).m_gold = UserData.gold;
-                            GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = UserData.gameData.allGameCount;
-                            GameData.getInstance().getPlayerDataByUid(uid).m_winCount = UserData.gameData.winCount;
-                            GameData.getInstance().getPlayerDataByUid(uid).m_runCount = UserData.gameData.runCount;
-                            GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = UserData.gameData.meiliZhi;
-                        }
-                        else
-                        {
-                            reqUserInfo_Game(uid);
-                        }
-                    }
+                    startGame_InitUI(data);
                 }
                 break;
 
