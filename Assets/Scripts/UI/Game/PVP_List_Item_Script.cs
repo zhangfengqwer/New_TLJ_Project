@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,6 +46,21 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
     public void onClickBaoMing()
     {
-        SceneManager.LoadScene("GameScene");
+        //SceneManager.LoadScene("GameScene");
+
+        reqJoinRoom();
+    }
+
+    //-------------------------------------------------------------
+    // 请求加入房间
+    public void reqJoinRoom()
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_XiuXianChang;
+        data["uid"] = UserData.uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
+
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 }
