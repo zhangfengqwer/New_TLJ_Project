@@ -221,7 +221,8 @@ public class SocketUtil
                             }
                         }
 
-                        reces = "";
+                        //reces = "";
+                        m_endStr = "";
                     }
                     else
                     {
