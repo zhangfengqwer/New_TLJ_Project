@@ -29,7 +29,8 @@ public class GameScript : MonoBehaviour
     GameObject m_tuoguanObj = null;
 
     public GameObject m_myUserInfoUI;
-    GameObject m_waitOtherPlayer;
+    //GameObject m_waitOtherPlayer;
+    GameObject m_waitMatchPanel = null;
     GameObject m_liangzhuObj;
 
     string m_tag = "";
@@ -238,13 +239,29 @@ public class GameScript : MonoBehaviour
         }
     }
 
+    public void showWaitMatchPanel(float time)
+    {
+        m_waitMatchPanel = WaitMatchPanelScript.create();
+        WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
+        script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
+        script.start(time);
+    }
+
+    void onTimerEvent_TimeEnd()
+    {
+        Debug.Log("暂时没有匹配到玩家,请求匹配机器人");
+
+        // 让服务端匹配机器人
+        reqWaitMatchTimeOut();
+    }
+
     void clearData()
     {
         {
             Destroy(m_timer);
             Destroy(m_jiPaiGameObject);
             Destroy(m_liangzhuObj);
-            Destroy(m_waitOtherPlayer);
+            Destroy(m_waitMatchPanel);
 
             if (m_tuoguanObj != null)
             {
@@ -403,6 +420,16 @@ public class GameScript : MonoBehaviour
         data["gameroomtype"] = GameData.getInstance().m_gameRoomType;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
+    }
+
+    public void reqWaitMatchTimeOut()
+    {
+        JsonData jsonData = new JsonData();
+        jsonData["tag"] = m_tag;
+        jsonData["uid"] = UserData.uid;
+        jsonData["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
+
+        PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
     }
 
     // 请求退出房间
@@ -724,7 +751,9 @@ public class GameScript : MonoBehaviour
                                 // 禁用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(0,0,0);
 
-                                m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                                //m_waitOtherPlayer = WaitOtherPlayerScript.create();
+
+                                showWaitMatchPanel(10);
                             }
                             break;
 
@@ -766,8 +795,9 @@ public class GameScript : MonoBehaviour
             // 开始游戏
             case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
                 {
-                    Destroy(m_waitOtherPlayer);
-
+                    //Destroy(m_waitOtherPlayer);
+                    Destroy(m_waitMatchPanel);
+                    
                     startGame_InitUI(data);
                 }
                 break;
@@ -1369,7 +1399,8 @@ public class GameScript : MonoBehaviour
                                 // 禁用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
 
-                                m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                                //m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                                showWaitMatchPanel(10);
                             }
                             break;
 
@@ -1397,7 +1428,8 @@ public class GameScript : MonoBehaviour
                                 // 禁用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
 
-                                m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                                //m_waitOtherPlayer = WaitOtherPlayerScript.create();
+                                showWaitMatchPanel(10);
                             }
                             break;
 
@@ -1407,7 +1439,9 @@ public class GameScript : MonoBehaviour
 
                                 // 启用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);
-                                Destroy(m_waitOtherPlayer);
+                                //Destroy(m_waitOtherPlayer);
+                                Destroy(m_waitMatchPanel);
+                                
                             }
                             break;
                     }
@@ -1423,7 +1457,8 @@ public class GameScript : MonoBehaviour
 
                     // 启用开始游戏按钮
                     m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);
-                    Destroy(m_waitOtherPlayer);
+                    //Destroy(m_waitOtherPlayer);
+                    Destroy(m_waitMatchPanel);
                 }
                 break;
 
