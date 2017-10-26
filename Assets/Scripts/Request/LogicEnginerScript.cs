@@ -15,7 +15,7 @@ public class LogicEnginerScript : MonoBehaviour
     public static LogicEnginerScript Instance;
     private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
 
-    private List<Request> requestList = new List<Request>();
+    private System.Collections.Generic.List<Request> requestList = new System.Collections.Generic.List<Request>();
 
     //请求
     private GetSignRecordRequest _getSignRecordRequest;
@@ -28,7 +28,7 @@ public class LogicEnginerScript : MonoBehaviour
 
 
     //判断loading中是否返回所有需要的信息
-    public static List<bool> IsSuccessList = new List<bool>();
+    public static System.Collections.Generic.List<bool> IsSuccessList = new System.Collections.Generic.List<bool>();
 
     private void Awake()
     {
@@ -42,7 +42,6 @@ public class LogicEnginerScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-      
     }
 
     private void Update()
@@ -69,13 +68,15 @@ public class LogicEnginerScript : MonoBehaviour
         _getNoticeRequest = GetComponent<GetNoticeRequest>();
         _mainRequest = GetComponent<MainRequest>();
         LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
+//        LogicEnginerScript.Instance.GetComponent<GetGoldRankRequest>().CallBack = onReceive_GetGoldRank;
     }
 
-    public delegate void OnLogicService_Receive(string data);    // 收到服务器消息
+
+    public delegate void OnLogicService_Receive(string data); // 收到服务器消息
+
     public OnLogicService_Receive logicService_Receive = null;
 
 
-   
     /// <summary>
     /// 设置Socket事件
     /// </summary>
@@ -115,11 +116,31 @@ public class LogicEnginerScript : MonoBehaviour
     {
         _getUserInfoRequest.OnRequest();
         _getSignRecordRequest.OnRequest();
+
+
         _getEmailRequest.OnRequest();
         _getUserBagRequest.OnRequest();
-       
+
 
         _getNoticeRequest.OnRequest();
+    }
+
+    //收到金币排行榜回调
+    private void onReceive_GetGoldRank(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int) jd["code"];
+
+        if (code == (int) TLJCommon.Consts.Code.Code_OK)
+        {
+            RankData.goldRankDataList = JsonMapper.ToObject<List<GoldRankItemData>>(jd["gold_list"].ToString());
+            RankListJifenScript.Instance.InitData();
+            RankListJifenScript.Instance.InitUI();
+        }
+        else
+        {
+            ToastScript.createToast("金币排行榜数据错误");
+        }
     }
 
     private void onReceive_GetUserBag(string result)
@@ -159,18 +180,16 @@ public class LogicEnginerScript : MonoBehaviour
         {
             Debug.Log(e);
         }
-       
-       
     }
 
     private void onSocketStop()
     {
-        Debug.Log("主动与服务器断开连接");
+        Debug.Log("logic:主动与服务器断开连接");
     }
 
     private void onSocketClose()
     {
-        Debug.Log("被动与服务器断开连接,尝试重新连接");
+        Debug.Log("logic:被动与服务器断开连接,尝试重新连接");
         m_socketUtil.start();
     }
 

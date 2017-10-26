@@ -1,5 +1,6 @@
 ﻿using LitJson;
 using System;
+using System.Collections.Generic;
 using TLJCommon;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ public class GetSignRecordRequest : Request
             LogicEnginerScript.IsSuccessList.Add(true);
             SignData.SignWeekDays = (int) jsonData["signWeekDays"];
             string update = (string) jsonData["updateTime"];
+            WeeklySignScript._signItems = JsonMapper.ToObject<List<SignItem>>(jsonData["sign_config"].ToString());
+
             DateTime updateTime;
             var isSuccess = DateTime.TryParse(update, out updateTime);
             if (isSuccess)

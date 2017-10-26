@@ -27,7 +27,6 @@ public class SignRequest : Request {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
-        jsonData["goods_prop"] = goods_prop;
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }

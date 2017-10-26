@@ -6,38 +6,40 @@ using UnityEngine.UI;
 public class RankListJifenScript : MonoBehaviour
 {
     private UIWarpContent uiWarpContent;
-    private List<string> _list;
+    private List<GoldRankItemData> _GoldRankList;
     public GameObject Content;
     public GameObject Item;
     public Text JifenRank;
     public Text JifenCount;
+    public static RankListJifenScript Instance;
+    private static string myGoldRank;
+
     void Start()
     {
-        InitData();
-        InitUI();
-
-        JifenRank.text = "我的排名:" + 1094;
-        JifenCount.text = "我的金币:" +  UserData.gold;
+        Instance = this;
     }
 
-    private void InitData()
+    public void InitData()
     {
-        _list = new List<string>();
-        for (int i = 0; i < 30; i++)
-        {
-            _list.Add(i + "");
-        }
+        _GoldRankList = RankData.goldRankDataList;
     }
 
-    private void InitUI()
+    public void InitUI()
     {
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;
-        ContentRect.sizeDelta = new Vector2(0, itemRectSizeDelta.y * _list.Count);
-        for (int i = 0; i < _list.Count; i++)
+        ContentRect.sizeDelta = new Vector2(0, itemRectSizeDelta.y * _GoldRankList.Count);
+        for (int i = 0; i < _GoldRankList.Count; i++)
         {
             GameObject goChild = GameObject.Instantiate(Item, Content.transform);
+            GoldRankItemData goldRankItemData = _GoldRankList[i];
+
+            if (UserData.name.Equals(goldRankItemData.name))
+            {
+                myGoldRank = i + 1 + "";
+            }
+
             goChild.layer = Content.layer;
             var Text_Ranking = goChild.transform.Find("Text_Ranking");
             Text RankText = Text_Ranking.GetComponent<Text>();
@@ -47,8 +49,11 @@ public class RankListJifenScript : MonoBehaviour
             var Ranking = goChild.transform.Find("Ranking");
             Image rankImage = Ranking.GetComponent<Image>();
 
-            Count.GetComponent<Text>().text = "金币：" + i;
-            Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
+            Count.GetComponent<Text>().text = "金币：" + goldRankItemData.gold;
+            Image_Head.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
+            Name.GetComponent<Text>().text = goldRankItemData.name;
+
             if (i < 3)
             {
                 Text_Ranking.gameObject.SetActive(false);
@@ -69,5 +74,16 @@ public class RankListJifenScript : MonoBehaviour
                 RankText.text = i + 1 + "";
             }
         }
+
+        if (myGoldRank == null)
+        {
+            JifenRank.text = "未上榜";
+        }
+        else
+        {
+            JifenRank.text = myGoldRank;
+        }
+
+        JifenCount.text = "我的金币:" + UserData.gold;
     }
 }

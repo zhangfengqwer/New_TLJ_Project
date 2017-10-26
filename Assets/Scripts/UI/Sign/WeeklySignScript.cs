@@ -13,7 +13,7 @@ public class WeeklySignScript : MonoBehaviour
     public Button btn_Sign;
     public Image image_Signed;
     private int totalSignDays;
-    private List<SignItem> _signItems;
+    public static List<SignItem> _signItems;
     private bool isSignSuccess = false;
 
     public static GameObject create()
@@ -54,6 +54,35 @@ public class WeeklySignScript : MonoBehaviour
             SignData.IsSign = true;
             SignData.SignWeekDays++;
             isSignSuccess = false;
+
+            SignItem signItem = _signItems[totalSignDays];
+            print(signItem.goods_prop);
+            AddProp(signItem.goods_prop);
+        }
+    }
+
+    private void AddProp(string prop)
+    {
+        List<string> list = new List<String>();
+        CommonUtil.splitStr(prop, list, ';');
+        for (int i = 0; i < list.Count; i++)
+        {
+            string[] strings = list[i].Split(':');
+            int propId = Convert.ToInt32(strings[0]);
+            int propNum = Convert.ToInt32(strings[1]);
+            if (propId == 1)
+            {
+                UserData.gold += propNum;
+            }
+            else if (propId == 2)
+            {
+                UserData.yuanbao += propNum;
+            }
+            else
+            {
+              
+            }
+            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
         }
     }
 
@@ -70,29 +99,29 @@ public class WeeklySignScript : MonoBehaviour
             Transform child = content.transform.GetChild(i);
             signObjects.Add(child.gameObject);
         }
-        //获得签到的道具配置
-        FileStream fileStream = null;
-        try
-        {
-            fileStream = new FileStream(Path.Combine(Application.dataPath, "Resources/Temp/sign.json"), FileMode.Open);
-            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8);
-            string str = streamReader.ReadToEnd();
-            print(str);
-            _signItems = JsonMapper.ToObject<List<SignItem>>(str);
-        }
-        catch (Exception e)
-        {
-            print(e);
-        }
-        finally
-        {
-            if (fileStream != null)
-            {
-                fileStream.Close();
-            }
-        }
+      
+//        //获得签到的道具配置
+//        FileStream fileStream = null;
+//        try
+//        {
+//            fileStream = new FileStream(Path.Combine(Application.dataPath, "Resources/Temp/sign.json"), FileMode.Open);
+//            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8);
+//            string str = streamReader.ReadToEnd();
+//            _signItems = JsonMapper.ToObject<List<SignItem>>(str);
+//        }
+//        catch (Exception e)
+//        {
+//            print(e);
+//        }
+//        finally
+//        {
+//            if (fileStream != null)
+//            {
+//                fileStream.Close();
+//            }
+//        }
 
-        if (_signItems.Count != signObjects.Count)
+        if (_signItems == null ||_signItems.Count != signObjects.Count)
         {
             print("数据初始化错误");
             return;
@@ -173,8 +202,8 @@ public class WeeklySignScript : MonoBehaviour
     {
         //发送 签到请求
         LogicEnginerScript.Instance.GetComponent<SignRequest>().CallBack = SignCallBack;
-        print(_signItems[totalSignDays].goods_prop);
-        LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest(_signItems[totalSignDays].goods_prop);
+        LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest();
+
     }
 
     public void SignCallBack(bool flag)
