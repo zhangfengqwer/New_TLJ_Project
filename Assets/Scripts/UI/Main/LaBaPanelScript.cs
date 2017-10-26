@@ -76,9 +76,13 @@ public class LaBaPanelScript : MonoBehaviour {
             ToastScript.createToast("使用成功");
 
             GameUtil.changeData(106,-1);
-            BagPanelScript.Instance.UpdateUI();
 
-            //Destroy(gameObject);
+            if (BagPanelScript.Instance != null)
+            {
+                BagPanelScript.Instance.UpdateUI();
+            }
+
+            Destroy(gameObject);
         }
     }
 }
