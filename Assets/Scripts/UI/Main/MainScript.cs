@@ -111,7 +111,7 @@ public class MainScript : MonoBehaviour
     {
         WaitMatchPanelScript script = WaitMatchPanelScript.create().GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(time);
+        script.start(20);
     }
 
     void onTimerEvent_TimeEnd()

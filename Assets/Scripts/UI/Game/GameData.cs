@@ -15,7 +15,8 @@ public class GameData
     }
 
     public string m_tag = "";
-    public string m_gameRoomType = "";
+    string m_gameRoomType = "";
+    public bool m_isPVP = false;
 
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌
     public List<TLJCommon.PokerInfo> m_beforeQiangzhuPokerList = new List<TLJCommon.PokerInfo>();       // 上一个人抢主所出的牌
@@ -49,11 +50,44 @@ public class GameData
 
     public void clear()
     {
-        //m_myPokerList.Clear();
-        //m_beforeQiangzhuPokerList.Clear();
-        //m_curRoundFirstOutPokerList.Clear();
-        //m_playerDataList.Clear();
-        s_instance = null;
+        m_getAllScore = 0;
+
+        m_teammateUID = "";
+        m_curOutPokerPlayerUid = "";
+
+        m_isTuoGuan = false;
+        m_isFreeOutPoker = false;
+
+        m_myPokerList.Clear();
+        m_beforeQiangzhuPokerList.Clear();
+        m_curRoundFirstOutPokerList.Clear();
+        m_playerDataList.Clear();
+        
+        //s_instance = null;
+    }
+
+    public void setGameRoomType(string gameRoomType)
+    {
+        m_gameRoomType = gameRoomType;
+
+        List<string> list = new List<string>();
+        CommonUtil.splitStr(m_gameRoomType, list, '_');
+
+        // 休闲场
+        if (list[0].CompareTo("XiuXian") == 0)
+        {
+            m_isPVP = false;
+        }
+        // PVP
+        else
+        {
+            m_isPVP = true;
+        }
+    }
+
+    public string getGameRoomType()
+    {
+        return m_gameRoomType;
     }
 
     public PlayerData getPlayerDataByUid(string uid)

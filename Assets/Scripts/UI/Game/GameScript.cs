@@ -31,7 +31,8 @@ public class GameScript : MonoBehaviour
     public GameObject m_myUserInfoUI;
     //GameObject m_waitOtherPlayer;
     GameObject m_waitMatchPanel = null;
-    GameObject m_liangzhuObj;
+    GameObject m_liangzhuObj = null;
+    GameObject m_pvpGameResultPanel = null;
 
     string m_tag = "";
 
@@ -86,7 +87,7 @@ public class GameScript : MonoBehaviour
     {
         // 休闲场
         List<string> list = new List<string>();
-        CommonUtil.splitStr(GameData.getInstance().m_gameRoomType, list,'_');
+        CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list,'_');
         if (list[0].CompareTo("XiuXian") == 0)
         {
 
@@ -417,7 +418,7 @@ public class GameScript : MonoBehaviour
         data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame;
-        data["gameroomtype"] = GameData.getInstance().m_gameRoomType;
+        data["gameroomtype"] = GameData.getInstance().getGameRoomType();
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
@@ -721,7 +722,7 @@ public class GameScript : MonoBehaviour
 
         if (tag.CompareTo(m_tag) == 0)
         {
-            onReceive_XiuXianChang(data);
+            onReceive_PlayGame(data);
         }
         else if (tag.CompareTo(TLJCommon.Consts.Tag_UserInfo_Game) == 0)
         {
@@ -729,7 +730,7 @@ public class GameScript : MonoBehaviour
         }
     }
 
-    void onReceive_XiuXianChang(string data)
+    void onReceive_PlayGame(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
         int playAction = (int)jd["playAction"];
@@ -777,13 +778,13 @@ public class GameScript : MonoBehaviour
                         case (int)TLJCommon.Consts.Code.Code_OK:
                             {
                                 int roomId = (int)jd["roomId"];
-                                ToastScript.createToast("退出房间成功：" + roomId);
+                                //ToastScript.createToast("退出房间成功：" + roomId);
                             }
                             break;
 
                         case (int)TLJCommon.Consts.Code.Code_CommonFail:
                             {
-                                ToastScript.createToast("退出房间失败，当前并没有加入房间");
+                                //ToastScript.createToast("退出房间失败，当前并没有加入房间");
                             }
                             break;
                     }
@@ -797,7 +798,8 @@ public class GameScript : MonoBehaviour
                 {
                     //Destroy(m_waitOtherPlayer);
                     Destroy(m_waitMatchPanel);
-                    
+                    Destroy(m_pvpGameResultPanel);
+
                     startGame_InitUI(data);
                 }
                 break;
@@ -818,8 +820,6 @@ public class GameScript : MonoBehaviour
                     if (isEnd == 1)
                     {
                         {
-                            ToastScript.createToast("开始抢主,本局打" + GameData.getInstance().m_levelPokerNum.ToString());
-
                             // 开始倒计时
                             m_timerScript.start(GameData.getInstance().m_qiangZhuTime, TimerScript.TimerType.TimerType_QiangZhu, true);
                         }
@@ -888,13 +888,12 @@ public class GameScript : MonoBehaviour
                         string uid = jd["uid"].ToString();
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
-                            ToastScript.createToast("我是庄家");
-
                             m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(1, 1, 1);
                         }
                         else
                         {
-                            ToastScript.createToast(uid + "是庄家");
+                            m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(0, 0, 0);
+
                             for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
                             {
                                 if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
@@ -908,14 +907,6 @@ public class GameScript : MonoBehaviour
                     // 判断身份：庄家一方、普通人一方
                     {
                         GameData.getInstance().m_isBanker = (int)jd["isBanker"];
-                        if (GameData.getInstance().m_isBanker == 1)
-                        {
-                            ToastScript.createToast("我是庄家一方");
-                        }
-                        else
-                        {
-                            ToastScript.createToast("我是普通人一方");
-                        }
                     }
 
                     // 所有牌设为未选中状态
@@ -1149,9 +1140,9 @@ public class GameScript : MonoBehaviour
 
                             // 显示出的牌
                             {
+                                // 收到此回合第一个人出的牌
                                 if (isCurRoundFirstPlayer == 1)
                                 {
-                                    ToastScript.createToast("收到此回合第一个人出的牌");
                                     GameData.getInstance().m_curRoundFirstOutPokerList.Clear();
 
                                     // 清空每个人座位上的牌
@@ -1202,12 +1193,12 @@ public class GameScript : MonoBehaviour
                                 if (isFreeOutPoker == 1)
                                 {
                                     GameData.getInstance().m_isFreeOutPoker = true;
-                                    ToastScript.createToast("轮到你出牌：任意出");
+                                    //ToastScript.createToast("轮到你出牌：任意出");
                                 }
                                 else
                                 {
                                     GameData.getInstance().m_isFreeOutPoker = false;
-                                    ToastScript.createToast("轮到你出牌：跟牌");
+                                    //ToastScript.createToast("轮到你出牌：跟牌");
                                 }
 
                                 m_buttonOutPoker.transform.localScale = new Vector3(1, 1, 1);
@@ -1243,7 +1234,7 @@ public class GameScript : MonoBehaviour
 
                         // 显示出的牌
                         {
-                            ToastScript.createToast("有人尝试甩牌");
+                            //ToastScript.createToast("有人尝试甩牌");
                             GameData.getInstance().m_curRoundFirstOutPokerList.Clear();
 
                             // 清空每个人座位上的牌
@@ -1359,23 +1350,45 @@ public class GameScript : MonoBehaviour
                             int isBankerWin = (int)jd["isBankerWin"];
                             if (GameData.getInstance().m_isBanker == isBankerWin)
                             {
-                                //ToastScript.createToast("我方胜利");
-
-                                GameObject obj = GameResultPanelScript.create(this);
-                                GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                script.setData(true, GameData.getInstance().m_getAllScore, 1000);
+                                // 显示pvp结算界面
+                                if (GameData.getInstance().m_isPVP)
+                                {
+                                    m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
+                                    PVPGameResultPanelScript script = m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
+                                    script.setData(true);
+                                }
+                                // 显示休闲场结算界面
+                                else
+                                {
+                                    GameObject obj = GameResultPanelScript.create(this);
+                                    GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
+                                    script.setData(true, GameData.getInstance().m_getAllScore, 1000);
+                                }
                             }
                             else
                             {
-                                //ToastScript.createToast("对方胜利");
-                                GameObject obj = GameResultPanelScript.create(this);
-                                GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                script.setData(false, GameData.getInstance().m_getAllScore, -1000);
+                                // 显示pvp结算界面
+                                if (GameData.getInstance().m_isPVP)
+                                {
+                                    m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
+                                    PVPGameResultPanelScript script = m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
+                                    script.setData(false);
+                                }
+                                // 显示休闲场结算界面
+                                else
+                                {
+                                    GameObject obj = GameResultPanelScript.create(this);
+                                    GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
+                                    script.setData(false, GameData.getInstance().m_getAllScore, -1000);
+                                }
+                            }
+
+                            // 清空本局数据
+                            {
+                                clearData();
+                                initUI();
                             }
                         }
-
-                        clearData();
-                        initUI();
                     }
                     catch (Exception ex)
                     {
