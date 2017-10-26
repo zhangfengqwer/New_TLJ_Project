@@ -10,7 +10,7 @@ public class ShopPanelScript : MonoBehaviour
 
     private UIWarpContent uiWarpContent;
     private List<string> _list;
-    private List<ShopData> shopDataList;
+    private static List<ShopData> shopDataList;
 
     //商品类型，1：金币，2：元宝，3：道具
     private int type = 2;
@@ -31,11 +31,19 @@ public class ShopPanelScript : MonoBehaviour
 	{
 	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
 	    uiWarpContent.onInitializeItem = onInitializeItem;
-        // 拉取商店数据
-        {
-            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
-            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
-        }
+	    if (shopDataList == null || shopDataList.Count == 0)
+	    {
+	        // 拉取商店数据
+	        {
+	            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
+	            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
+	        }
+	    }
+	    else
+	    {
+            Init();
+	    }
+        
     }
 
 
@@ -127,7 +135,6 @@ public class ShopPanelScript : MonoBehaviour
     {
         ShopDataScript.getInstance().initJson(data);
         shopDataList = ShopDataScript.getInstance().getShopDataList();
-        print("shopDataList.Count:"+shopDataList.Count);
         Init();
     }
 
