@@ -1,1 +1,37 @@
-[{"ItemName":"钻石","ItemUrl":null,"ItemCount":1},{"ItemName":"元宝","ItemUrl":null,"ItemCount":1},{"ItemName":"蓝钻石","ItemUrl":null,"ItemCount":2},{"ItemName":"记牌器","ItemUrl":null,"ItemCount":3},{"ItemName":"红钻","ItemUrl":null,"ItemCount":4},{"ItemName":"vip","ItemUrl":null,"ItemCount":5},{"ItemName":"超级至尊vip","ItemUrl":null,"ItemCount":6}]
+[
+    {
+        "goods_name": "金币*500",
+        "goods_icon": "icon_jinbi",
+        "goods_prop": "1:500"
+    },
+    {
+        "goods_name": "喇叭*1",
+        "goods_icon": "icon_laba",
+        "goods_prop": "106:1"
+    },
+    {
+        "goods_name": "蓝钻石*1",
+        "goods_icon": "icon_lanzuanshi",
+        "goods_prop": "107:1"
+    },
+    {
+        "goods_name": "金币*666",
+        "goods_icon": "icon_jinbi",
+        "goods_prop": "1:666"
+    },
+    {
+        "goods_name": "蓝钻石*2",
+        "goods_icon": "icon_lanzuanshi",
+        "goods_prop": "107:2"
+    },
+    {
+        "goods_name": "金币*888",
+        "goods_icon": "icon_jinbi",
+        "goods_prop": "1:888"
+    },
+    {
+        "goods_name": "大礼包",
+        "goods_icon": "icon_jinbi",
+        "goods_prop": "101:1,107:3,1:300"
+    }
+]

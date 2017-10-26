@@ -1,8 +1,6 @@
 ﻿public class SignItem
 {
-
-    public string ItemName { set; get; }
-    public string ItemUrl { set; get; }
-    public int ItemCount { set; get; }
-
+    public string goods_name { set; get; }
+    public string goods_icon { set; get; }
+    public string goods_prop { set; get; }
 }

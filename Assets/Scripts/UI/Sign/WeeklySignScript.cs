@@ -36,12 +36,18 @@ public class WeeklySignScript : MonoBehaviour
         if (isSignSuccess)
         {
             GameObject signObject = signObjects[totalSignDays];
+            var name = signObject.transform.GetChild(1);
             var image_lingqu = signObject.transform.GetChild(2);
+            var image_prop = signObject.transform.GetChild(3);
             Color color = signObject.GetComponent<Image>().color;
             color.r = 0.5f;
             color.g = 0.5f;
             color.b = 0.5f;
+            name.GetComponent<Text>().color = color;
+            image_prop.GetComponent<Image>().color = color;
             signObject.GetComponent<Image>().color = color;
+
+
             image_lingqu.transform.localScale = Vector3.one;
             btn_Sign.transform.localScale = Vector3.zero;
             image_Signed.transform.localScale = Vector3.one;
@@ -57,8 +63,8 @@ public class WeeklySignScript : MonoBehaviour
     private void InitData()
     {
         totalSignDays = SignData.SignWeekDays;
-       
-      
+
+
         for (int i = 0; i < 7; i++)
         {
             Transform child = content.transform.GetChild(i);
@@ -111,9 +117,12 @@ public class WeeklySignScript : MonoBehaviour
 
             var name = Object.transform.GetChild(1);
             var image_lingqu = Object.transform.GetChild(2);
+            var image_prop = Object.transform.GetChild(3);
             //设置元宝等道具
             Text text1 = name.GetComponent<Text>();
-            text1.text = signItem.ItemName + "x" + signItem.ItemCount;
+            text1.text = signItem.goods_name;
+            var prop = image_prop.GetComponent<Image>();
+            prop.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + signItem.goods_icon);
             //未签到
             if (SignData.IsSign == false)
             {
@@ -124,6 +133,9 @@ public class WeeklySignScript : MonoBehaviour
                     color.g = 0.5f;
                     color.b = 0.5f;
                     Object.GetComponent<Image>().color = color;
+                    text1.color = color;
+                    prop.color = color;
+
                     image_lingqu.transform.localScale = Vector3.one;
                 }
                 else
@@ -145,6 +157,8 @@ public class WeeklySignScript : MonoBehaviour
                     color.g = 0.5f;
                     color.b = 0.5f;
                     Object.GetComponent<Image>().color = color;
+                    text1.color = color;
+                    prop.color = color;
                     image_lingqu.transform.localScale = Vector3.one;
                 }
                 else
@@ -152,7 +166,6 @@ public class WeeklySignScript : MonoBehaviour
                     image_lingqu.transform.localScale = Vector3.zero;
                 }
             }
-           
         }
     }
 
@@ -160,7 +173,8 @@ public class WeeklySignScript : MonoBehaviour
     {
         //发送 签到请求
         LogicEnginerScript.Instance.GetComponent<SignRequest>().CallBack = SignCallBack;
-        LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest();
+        print(_signItems[totalSignDays].goods_prop);
+        LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest(_signItems[totalSignDays].goods_prop);
     }
 
     public void SignCallBack(bool flag)
