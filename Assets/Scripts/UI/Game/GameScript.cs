@@ -334,11 +334,6 @@ public class GameScript : MonoBehaviour
         reqMaiDi();
     }
 
-    public void onClickOtherMaiDi()
-    {
-        reqOtherMaiDi();
-    }
-
     public void onClickChat()
     {
         ChatPanelScript.create(this);
@@ -652,89 +647,6 @@ public class GameScript : MonoBehaviour
         }
     }
     
-    public void reqOtherMaiDi()
-    {
-        JsonData data = new JsonData();
-
-        data["tag"] = m_tag;
-        data["uid"] = UserData.uid;
-        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_OtherMaiDi;
-
-        int selectNum = 0;
-        List<TLJCommon.PokerInfo> myOutPokerList = new List<TLJCommon.PokerInfo>();
-
-        // 自己出的牌
-        {
-            JsonData jarray = new JsonData();
-            for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-            {
-                PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
-                if (pokerScript.getIsSelect())
-                {
-                    ++selectNum;
-
-                    JsonData jd = new JsonData();
-                    jd["num"] = pokerScript.getPokerNum();
-                    jd["pokerType"] = pokerScript.getPokerType();
-                    jarray.Add(jd);
-
-                    myOutPokerList.Add(new TLJCommon.PokerInfo(pokerScript.getPokerNum(), (TLJCommon.Consts.PokerType)pokerScript.getPokerType()));
-                }
-            }
-            data["diPokerList"] = jarray;
-        }
-
-        if (selectNum == 8)
-        {
-
-            // 从我的牌堆里删除8张
-            {
-                for (int i = 0; i < myOutPokerList.Count; i++)
-                {
-                    int num = myOutPokerList[i].m_num;
-                    int pokerType = (int)myOutPokerList[i].m_pokerType;
-
-                    for (int j = GameData.getInstance().m_myPokerObjList.Count - 1; j >= 0; j--)
-                    {
-                        PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[j].GetComponent<PokerScript>();
-                        if ((pokerScript.getPokerNum() == num) && (pokerScript.getPokerType() == pokerType))
-                        {
-                            // 出的牌从自己的牌堆里删除
-                            {
-                                Destroy(GameData.getInstance().m_myPokerObjList[j]);
-                                GameData.getInstance().m_myPokerObjList.RemoveAt(j);
-                            }
-
-                            break;
-                        }
-                    }
-
-                    for (int j = GameData.getInstance().m_myPokerList.Count - 1; j >= 0; j--)
-                    {
-                        if ((GameData.getInstance().m_myPokerList[j].m_num == num) && ((int)GameData.getInstance().m_myPokerList[j].m_pokerType == pokerType))
-                        {
-                            // 出的牌从自己的牌堆里删除
-                            {
-                                GameData.getInstance().m_myPokerList.RemoveAt(j);
-                            }
-
-                            break;
-                        }
-                    }
-                }
-
-                initMyPokerPos(GameData.getInstance().m_myPokerObjList);
-            }
-
-            m_timerScript.stop();
-            PlayServiceSocket.s_instance.sendMessage(data.ToJson());
-        }
-        else
-        {
-            ToastScript.createToast("请选择8张牌");
-        }
-    }
-
     // 放弃抢主
     public void reqGiveUpQiangZhu()
     {
@@ -2102,7 +2014,7 @@ public class GameScript : MonoBehaviour
                         GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
                     }
 
-                    reqOtherMaiDi();
+                    reqMaiDi();
                 }
                 break;
 

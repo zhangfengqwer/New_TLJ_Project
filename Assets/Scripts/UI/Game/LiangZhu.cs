@@ -27,7 +27,7 @@ public class LiangZhu : MonoBehaviour
     public static GameObject create(GameScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/Game/LiangZhu") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<LiangZhu>().m_parentScript = parentScript;
 
