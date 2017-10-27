@@ -81,6 +81,6 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_JingJiChang;
-        GameData.getInstance().m_gameRoomType = m_PVPGameRoomData.gameroomtype;
+        GameData.getInstance().setGameRoomType(m_PVPGameRoomData.gameroomtype);
     }
 }

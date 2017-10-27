@@ -111,13 +111,15 @@ public class MainScript : MonoBehaviour
     {
         WaitMatchPanelScript script = WaitMatchPanelScript.create().GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(time);
+        script.start(20);
     }
 
     void onTimerEvent_TimeEnd()
     {
-        Debug.Log("暂时没有匹配到玩家");
-        ToastScript.createToast("暂时没有匹配到玩家");
+        Debug.Log("暂时没有匹配到玩家,请求匹配机器人");
+
+        // 让服务端匹配机器人
+        reqWaitMatchTimeOut();
     }
 
     public void onClickEnterXiuXianChang()
@@ -209,6 +211,17 @@ public class MainScript : MonoBehaviour
 
     //-----------------------------------------------------------------------------
 
+    public void reqWaitMatchTimeOut()
+    {
+        JsonData jsonData = new JsonData();
+        jsonData["tag"] = TLJCommon.Consts.Tag_JingJiChang;
+        jsonData["uid"] = UserData.uid;
+        jsonData["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
+
+        PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
+    }
+
+    //-----------------------------------------------------------------------------
     public void onReceive_Main(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
