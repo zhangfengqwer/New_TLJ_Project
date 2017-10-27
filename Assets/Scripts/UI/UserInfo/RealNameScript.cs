@@ -30,6 +30,9 @@ public class RealNameScript : MonoBehaviour
     public void GetRealName(InputField input)
     {
         _isCorrectRealName = VerifyRuleUtil.CheckRealName(input.text);
+        bool isSensitiveWord = SensitiveWordUtil.IsSensitiveWord(input.text);
+        print("是否是敏感词:" + isSensitiveWord);
+
         if (_isCorrectRealName)
         {
             _realName = input.text;

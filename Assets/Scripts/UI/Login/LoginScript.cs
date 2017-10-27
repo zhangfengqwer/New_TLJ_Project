@@ -38,7 +38,7 @@ public class LoginScript : MonoBehaviour
             PropData.getInstance().reqHttp();
             ChatData.getInstance().init();
             HuDongData.getInstance().init();
-            StopWordsData.InitWords();
+            SensitiveWordUtil.InitWords();
         }
 
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
