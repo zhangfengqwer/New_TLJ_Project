@@ -118,7 +118,8 @@ public class LogicEnginerScript : MonoBehaviour
     {
         _getUserInfoRequest.OnRequest();
         _getSignRecordRequest.OnRequest();
-
+        //排行榜
+        _getRankRequest.OnRequest();
 
         _getEmailRequest.OnRequest();
         _getUserBagRequest.OnRequest();
@@ -126,8 +127,7 @@ public class LogicEnginerScript : MonoBehaviour
 
         _getNoticeRequest.OnRequest();
 
-        //排行榜
-        _getRankRequest.OnRequest();
+       
     }
 
     //收到金币排行榜回调

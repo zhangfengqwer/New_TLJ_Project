@@ -35,7 +35,10 @@ public class MainScript : MonoBehaviour
 	        }
 	        else
 	        {
-	            LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
+	            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
+	           
             }
 	    }
 
