@@ -140,8 +140,7 @@ public class LogicEnginerScript : MonoBehaviour
         {
             RankData.goldRankDataList = JsonMapper.ToObject<List<GoldRankItemData>>(jd["gold_list"].ToString());
             RankData.medalRankDataList = JsonMapper.ToObject<List<MedalRankItemData>>(jd["medal_list"].ToString());
-            print(RankData.goldRankDataList.Count);
-            print(RankData.medalRankDataList.Count);
+
             RankListJifenScript.Instance.InitData();
             RankListJifenScript.Instance.InitUI();
 
