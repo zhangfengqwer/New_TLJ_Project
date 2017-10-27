@@ -36,8 +36,9 @@ public class LoginScript : MonoBehaviour
             ChatData.getInstance().init();
             HuDongData.getInstance().init();
         }
-        m_inputAccount.text = "123";
-        m_inputPassword.text = "123";
+
+        m_inputAccount.text = PlayerPrefs.GetString("account",""); 
+        m_inputPassword.text = PlayerPrefs.GetString("password", "");
 
         m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(0, 0, 0);
@@ -195,6 +196,9 @@ public class LoginScript : MonoBehaviour
             string uid = jd["userInfo"]["uid"].ToString();
             string name = jd["userInfo"]["name"].ToString();
             int goldNum = (int) (jd["userInfo"]["goldNum"]);
+
+            PlayerPrefs.SetString("account", m_inputAccount.text);
+            PlayerPrefs.SetString("password", m_inputPassword.text);
 
             UserData.uid = uid;
 
