@@ -3,11 +3,14 @@ using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Threading;
 using TLJCommon;
+
 
 public class LoginScript : MonoBehaviour
 {
@@ -35,15 +38,17 @@ public class LoginScript : MonoBehaviour
             PropData.getInstance().reqHttp();
             ChatData.getInstance().init();
             HuDongData.getInstance().init();
+            StopWordsData.InitWords();
         }
 
-        m_inputAccount.text = PlayerPrefs.GetString("account",""); 
+        m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
 
         m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(0, 0, 0);
     }
 
+   
     // 等获取到服务器配置文件再调用
     public void init()
     {
@@ -106,15 +111,16 @@ public class LoginScript : MonoBehaviour
         AudioScript.getAudioScript().playSound_ButtonClick();
         PlatformHelper.Login("Login", "GetLoginResult", "qq");
     }
+
     public void GetLoginResult(string data)
     {
         try
         {
             JsonData jsonData = JsonMapper.ToObject(data);
-            var openId = (string)jsonData["openid"];
-            var nickname = (string)jsonData["nickname"];
-            var figureurl = (string)jsonData["figureurl"];
-            var platform = (string)jsonData["platform"];
+            var openId = (string) jsonData["openid"];
+            var nickname = (string) jsonData["nickname"];
+            var figureurl = (string) jsonData["figureurl"];
+            var platform = (string) jsonData["platform"];
 
             JsonData jd = new JsonData();
             jd["tag"] = Consts.Tag_Third_Login;
@@ -123,18 +129,13 @@ public class LoginScript : MonoBehaviour
             jd["platform"] = platform;
 
             m_socketUtil.sendMessage(jd.ToJson());
-
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
         }
-     
-
-
     }
 
-   
 
     // 官方登录
     public void onClickLogin()
@@ -153,7 +154,7 @@ public class LoginScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
-        m_panel_choicePlatform.transform.localScale = new Vector3(1,1,1);
+        m_panel_choicePlatform.transform.localScale = new Vector3(1, 1, 1);
         m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(0, 0, 0);
     }
@@ -184,7 +185,6 @@ public class LoginScript : MonoBehaviour
         }
     }
 
- 
 
     void onReceive_Login(string data)
     {
@@ -212,10 +212,11 @@ public class LoginScript : MonoBehaviour
             ToastScript.createToast("登录失败：" + code.ToString());
         }
     }
+
     private void onReceive_Third_Login(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int)jd["code"];
+        int code = (int) jd["code"];
 
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
@@ -227,8 +228,8 @@ public class LoginScript : MonoBehaviour
         {
             ToastScript.createToast("：" + code.ToString());
         }
-
     }
+
     void onReceive_QuickRegister(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
