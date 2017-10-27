@@ -54,7 +54,7 @@ public class PVP_List_Item_Script : MonoBehaviour {
             }
         }
         
-        m_text_baomingrenshu.text = "已报名人数：0";
+        m_text_baomingrenshu.text = "已报名人数：" + m_PVPGameRoomData.baomingrenshu;
     }
 
     public void onClickBaoMing()

@@ -38,7 +38,7 @@ public class GetPVPRoomRequest : Request
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
         string requestData = jsonData.ToJson();
-        LogicEnginerScript.Instance.SendMyMessage(requestData);
+        PlayServiceSocket.s_instance.sendMessage(requestData);
     }
 
     public override void OnResponse(string data)
