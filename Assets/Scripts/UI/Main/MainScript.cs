@@ -33,6 +33,10 @@ public class MainScript : MonoBehaviour
 	        {
 	            LogicEnginerScript.create();
 	        }
+	        else
+	        {
+	            LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
+            }
 	    }
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
