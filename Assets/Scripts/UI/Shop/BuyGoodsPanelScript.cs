@@ -150,7 +150,11 @@ public class BuyGoodsPanelScript : MonoBehaviour {
 
     public void GetPayResult(string data)
     {
-        ToastScript.createToast("android回传的数据:" + data);
+        if ("支付成功".Equals(data))
+        {
+            LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+            LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+        }
     }
 
 

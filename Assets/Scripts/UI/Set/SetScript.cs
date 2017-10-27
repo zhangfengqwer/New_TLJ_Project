@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SetScript : MonoBehaviour {
@@ -37,5 +38,10 @@ public class SetScript : MonoBehaviour {
     public void onSliderChange_Sound()
     {
         AudioScript.getAudioScript().setSoundVolume(m_sliderSound.value);
+    }
+
+    public void OnClickChangeAccount()
+    {
+        SceneManager.LoadScene("LoginScene");
     }
 }
