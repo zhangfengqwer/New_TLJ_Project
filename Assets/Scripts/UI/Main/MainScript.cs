@@ -137,9 +137,10 @@ public class MainScript : MonoBehaviour
     public void onClickEnterJingJiChang()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        //SceneManager.LoadScene("GameScene");
 
-        PVPChoiceScript.create();
+        {
+            LogicEnginerScript.Instance.GetComponent<GetPVPRoomRequest>().OnRequest();
+        }
     }
 
     public void onClickJingDianChang()
@@ -274,7 +275,13 @@ public class MainScript : MonoBehaviour
                 }
                 break;
             }
-            
+        }
+        // 获取pvp场次信息
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_GetPVPGameRoom) == 0)
+        {
+            PVPGameRoomDataScript.getInstance().initJson(data);
+
+            PVPChoiceScript.create();
         }
     }
 

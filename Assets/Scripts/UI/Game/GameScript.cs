@@ -259,6 +259,10 @@ public class GameScript : MonoBehaviour
     void clearData()
     {
         {
+            m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(0,0,0);
+        }
+
+        {
             Destroy(m_timer);
             Destroy(m_jiPaiGameObject);
             Destroy(m_liangzhuObj);
@@ -270,6 +274,7 @@ public class GameScript : MonoBehaviour
             }
         }
 
+        // 删除另外3个人的头像昵称UI
         {
             for (int i = GameData.getInstance().m_otherPlayerUIObjList.Count - 1; i >=0 ; i--)
             {
@@ -278,6 +283,7 @@ public class GameScript : MonoBehaviour
             GameData.getInstance().m_otherPlayerUIObjList.Clear();
         }
 
+        // 删除我的手牌对象
         {
             for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0 ; i--)
             {
@@ -286,6 +292,7 @@ public class GameScript : MonoBehaviour
             GameData.getInstance().m_myPokerObjList.Clear();
         }
 
+        // 删除当前已出的牌对象
         {
             for (int i = GameData.getInstance().m_curRoundOutPokerList.Count - 1; i >= 0 ; i--)
             {
@@ -789,6 +796,12 @@ public class GameScript : MonoBehaviour
                             break;
                     }
 
+                    // 清空本局数据
+                    {
+                        clearData();
+                        initUI();
+                    }
+
                     SceneManager.LoadScene("MainScene");
                 }
                 break;
@@ -892,8 +905,6 @@ public class GameScript : MonoBehaviour
                         }
                         else
                         {
-                            m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(0, 0, 0);
-
                             for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
                             {
                                 if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)

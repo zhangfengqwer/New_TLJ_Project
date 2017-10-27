@@ -24,11 +24,7 @@ public class PVPChoiceScript : MonoBehaviour {
     {
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
-        // 拉取公告活动
-        {
-            LogicEnginerScript.Instance.GetComponent<GetPVPRoomRequest>().CallBack = onReceive_GetPVPRoom;
-            LogicEnginerScript.Instance.GetComponent<GetPVPRoomRequest>().OnRequest();
-        }
+        showJinBiChang();
     }
 	
 	// Update is called once per frame
@@ -109,12 +105,5 @@ public class PVPChoiceScript : MonoBehaviour {
         }
 
         m_ListViewScript.addItemEnd();
-    }
-
-    void onReceive_GetPVPRoom(string data)
-    {
-        PVPGameRoomDataScript.getInstance().initJson(data);
-
-        showJinBiChang();
     }
 }
