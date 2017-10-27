@@ -4,17 +4,17 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class GetGoldRankRequest : Request
+public class GetRankRequest : Request
 {
-    public delegate void GetGoldRankCallBack(string result);
-    public GetGoldRankCallBack CallBack = null;
+    public delegate void GetRankCallBack(string result);
+    public GetRankCallBack CallBack = null;
 
     private bool flag = false;
     private string result;
 
     private void Awake()
     {
-        Tag = Consts.Tag_GetShop;
+        Tag = Consts.Tag_GetRank;
     }
 
     void Update()
@@ -34,6 +34,7 @@ public class GetGoldRankRequest : Request
     {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
+        jsonData["uid"] = UserData.uid;
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }

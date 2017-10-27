@@ -44,14 +44,13 @@ public class RankListJifenScript : MonoBehaviour
             var Text_Ranking = goChild.transform.Find("Text_Ranking");
             Text RankText = Text_Ranking.GetComponent<Text>();
             var Image_Head = goChild.transform.Find("Image_Head");
-            var Name = goChild.transform.Find("name");
+            var Name = goChild.transform.Find("Name");
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
             Image rankImage = Ranking.GetComponent<Image>();
 
             Count.GetComponent<Text>().text = "金币：" + goldRankItemData.gold;
-            Image_Head.GetComponent<Image>().sprite =
-                Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
+            Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
             Name.GetComponent<Text>().text = goldRankItemData.name;
 
             if (i < 3)
@@ -81,9 +80,15 @@ public class RankListJifenScript : MonoBehaviour
         }
         else
         {
-            JifenRank.text = myGoldRank;
+            JifenRank.text = "我的排名:" + myGoldRank;
         }
 
         JifenCount.text = "我的金币:" + UserData.gold;
+    }
+
+
+    public void OnClickGold(bool flag)
+    {
+        
     }
 }

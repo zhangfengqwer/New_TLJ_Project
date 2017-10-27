@@ -15,7 +15,7 @@ public class LogicEnginerScript : MonoBehaviour
     public static LogicEnginerScript Instance;
     private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
 
-    private System.Collections.Generic.List<Request> requestList = new System.Collections.Generic.List<Request>();
+    private List<Request> requestList = new List<Request>();
 
     //请求
     private GetSignRecordRequest _getSignRecordRequest;
@@ -24,11 +24,12 @@ public class LogicEnginerScript : MonoBehaviour
     private GetEmailRequest _getEmailRequest;
     private GetNoticeRequest _getNoticeRequest;
     private MainRequest _mainRequest;
+    private GetRankRequest _getRankRequest;
     [HideInInspector] public GetUserBagRequest _getUserBagRequest;
 
 
     //判断loading中是否返回所有需要的信息
-    public static System.Collections.Generic.List<bool> IsSuccessList = new System.Collections.Generic.List<bool>();
+    public static List<bool> IsSuccessList = new List<bool>();
 
     private void Awake()
     {
@@ -66,9 +67,10 @@ public class LogicEnginerScript : MonoBehaviour
         _getEmailRequest = GetComponent<GetEmailRequest>();
         _getUserBagRequest = GetComponent<GetUserBagRequest>();
         _getNoticeRequest = GetComponent<GetNoticeRequest>();
+        _getRankRequest = GetComponent<GetRankRequest>();
         _mainRequest = GetComponent<MainRequest>();
         LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
-//        LogicEnginerScript.Instance.GetComponent<GetGoldRankRequest>().CallBack = onReceive_GetGoldRank;
+        LogicEnginerScript.Instance.GetComponent<GetRankRequest>().CallBack = onReceive_GetGoldRank;
     }
 
 
@@ -123,6 +125,9 @@ public class LogicEnginerScript : MonoBehaviour
 
 
         _getNoticeRequest.OnRequest();
+
+        //排行榜
+        _getRankRequest.OnRequest();
     }
 
     //收到金币排行榜回调
@@ -134,8 +139,14 @@ public class LogicEnginerScript : MonoBehaviour
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             RankData.goldRankDataList = JsonMapper.ToObject<List<GoldRankItemData>>(jd["gold_list"].ToString());
+            RankData.medalRankDataList = JsonMapper.ToObject<List<MedalRankItemData>>(jd["medal_list"].ToString());
+            print(RankData.goldRankDataList.Count);
+            print(RankData.medalRankDataList.Count);
             RankListJifenScript.Instance.InitData();
             RankListJifenScript.Instance.InitUI();
+
+            RankListCaifuScript.Instance.InitData();
+            RankListCaifuScript.Instance.InitUI();
         }
         else
         {

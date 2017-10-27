@@ -6,49 +6,56 @@ using UnityEngine.UI;
 public class RankListCaifuScript : MonoBehaviour
 {
     private UIWarpContent uiWarpContent;
-    private List<string> _list;
     public GameObject Content;
     public GameObject Item;
     public Text CaifuRank;
     public Text CaifuCount;
+    private static string mymedalRank;
+    private static List<MedalRankItemData> _medalRankItemDatas;
+
+    public static RankListCaifuScript Instance;
     void Start()
     {
-        InitData();
-        InitUI();
-
-        CaifuRank.text = "我的排名:" + 12;
-        CaifuCount.text = "我的徽章:" + 50;
+        Instance = this;
+//        InitData();
+//        InitUI();
     }
 
-    private void InitData()
+    public void InitData()
     {
-        _list = new List<string>();
-        for (int i = 0; i < 30; i++)
-        {
-            _list.Add(i + "");
-        }
+      _medalRankItemDatas = RankData.medalRankDataList;
     }
 
-    private void InitUI()
+
+    public void InitUI()
     {
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;
-        ContentRect.sizeDelta = new Vector2(0, itemRectSizeDelta.y * _list.Count);
-        for (int i = 0; i < _list.Count; i++)
+        ContentRect.sizeDelta = new Vector2(0, itemRectSizeDelta.y * _medalRankItemDatas.Count);
+        for (int i = 0; i < _medalRankItemDatas.Count; i++)
         {
             GameObject goChild = GameObject.Instantiate(Item, Content.transform);
+            MedalRankItemData medalRankItemData = _medalRankItemDatas[i];
+            if (UserData.name.Equals(medalRankItemData.name))
+            {
+                mymedalRank = i + 1 + "";
+            }
+
+
             goChild.layer = Content.layer;
             var Text_Ranking = goChild.transform.Find("Text_Ranking");
             Text RankText = Text_Ranking.GetComponent<Text>();
             var Image_Head = goChild.transform.Find("Image_Head");
-            var Name = goChild.transform.Find("name");
+            var Name = goChild.transform.Find("Name");
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
             Image rankImage = Ranking.GetComponent<Image>();
-            Count.GetComponent<Text>().text = "徽章：" + i;
 
-            Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
+            Count.GetComponent<Text>().text = "徽章：" + medalRankItemData.medal;
+            Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
+            Name.GetComponent<Text>().text = medalRankItemData.name;
+
             if (i < 3)
             {
                 Text_Ranking.gameObject.SetActive(false);
@@ -70,10 +77,24 @@ public class RankListCaifuScript : MonoBehaviour
             }
         }
 
-//        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
-//        uiWarpContent.onInitializeItem = onInitializeItem;
-//        uiWarpContent.Init(_list.Count);
+        if (mymedalRank == null)
+        {
+            CaifuRank.text = "未上榜";
+        }
+        else
+        {
+            CaifuRank.text = "我的排名:" + mymedalRank;
+        }
+
+        CaifuCount.text = "我的徽章:" + UserData.medal;
+
+        //        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+        //        uiWarpContent.onInitializeItem = onInitializeItem;
+        //        uiWarpContent.Init(_list.Count);
     }
+
+
+
 
 //    private void onInitializeItem(GameObject go, int dataindex)
 //    {
