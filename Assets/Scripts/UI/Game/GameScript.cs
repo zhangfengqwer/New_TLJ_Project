@@ -314,7 +314,6 @@ public class GameScript : MonoBehaviour
 
     void OnDestroy()
     {
-        PlayServiceSocket.s_instance.Stop();
     }
 
     public void onClickBag()
