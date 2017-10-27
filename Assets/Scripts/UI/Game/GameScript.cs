@@ -1407,6 +1407,29 @@ public class GameScript : MonoBehaviour
                 }
                 break;
 
+            // PVP游戏结束
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_PVPGameOver:
+                {
+                    try
+                    {
+                        ToastScript.createToast("游戏结束，稍后请在邮箱查看奖励");
+
+                        int mingci = (int)jd["mingci"];
+
+                        // 显示pvp结束界面
+                        {
+                            GameObject obj = PVPEndPanelScript.create(this);
+                            PVPEndPanelScript script = obj.GetComponent<PVPEndPanelScript>();
+                            script.setData(mingci);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ToastScript.createToast("异常：" + ex.Message);
+                    }
+                }
+                break;
+
             // 换桌
             case (int)TLJCommon.Consts.PlayAction.PlayAction_ChangeRoom:
                 {
@@ -1475,7 +1498,6 @@ public class GameScript : MonoBehaviour
             // 继续游戏失败
             case (int)TLJCommon.Consts.PlayAction.PlayAction_ContinueGameFail:
                 {
-                    
                     ToastScript.createToast("同桌玩家退出，无法继续游戏");
 
                     // 启用开始游戏按钮
