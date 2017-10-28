@@ -44,4 +44,9 @@ public class SetScript : MonoBehaviour {
     {
         SceneManager.LoadScene("LoginScene");
     }
+
+    public void OnClickExit()
+    {
+        Application.Quit();
+    }
 }

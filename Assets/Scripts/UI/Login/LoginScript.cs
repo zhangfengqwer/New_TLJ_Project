@@ -71,7 +71,7 @@ public class LoginScript : MonoBehaviour
     {
         if (m_isConnServerSuccess)
         {
-            ToastScript.createToast("连接服务器成功");
+            //ToastScript.createToast("连接服务器成功");
             m_isConnServerSuccess = false;
         }
         for (int i = 0; i < m_dataList.Count; i++)
@@ -92,6 +92,10 @@ public class LoginScript : MonoBehaviour
     // 显示注册界面
     public void OnEnterRegisterClick()
     {
+        m_inputAccount_register.text = "";
+        m_inputPassword_register.text = "";
+        m_inputSecondPassword_register.text = "";
+
         m_panel_choicePlatform.transform.localScale = new Vector3(0, 0, 0);
         m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(1, 1, 1);

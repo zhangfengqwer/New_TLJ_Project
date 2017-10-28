@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PVP_List_Item_Script : MonoBehaviour {
 
+    public Image m_image_changci_icon;
+    public Image m_image_baomingfei_icon;
     public Text m_text_changci;
     public Text m_text_kaisairenshu;
     public Text m_text_baomingfei;
@@ -36,22 +38,16 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
         if (m_PVPGameRoomData.baomingfei.CompareTo("0") == 0)
         {
-            m_text_baomingfei.text = "报名费:免费";
+            m_text_baomingfei.text = "免费";
+            m_image_baomingfei_icon.transform.localScale = new Vector3(0, 0, 0);
         }
         else
         {
             List<string> list = new List<string>();
             CommonUtil.splitStr(m_PVPGameRoomData.baomingfei, list, ':');
 
-            if (list[0].CompareTo("1") == 0)
-            {
-                m_text_baomingfei.text = "报名费:金币*" + list[1];
-            }
-            else
-            {
-                string prop_name = PropData.getInstance().getPropInfoById(int.Parse(list[0])).m_name;
-                m_text_baomingfei.text = "报名费:" + prop_name + "*" + list[1];
-            }
+            CommonUtil.setImageSprite(m_image_baomingfei_icon, GameUtil.getPropIconPath(int.Parse(list[0])));
+            m_text_baomingfei.text = list[1];
         }
         
         m_text_baomingrenshu.text = "已报名人数：" + m_PVPGameRoomData.baomingrenshu;
