@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 class GameUtil
 {
@@ -155,15 +156,29 @@ class GameUtil
         return path;
     }
 
+    /*
+     * 用于玩家 <金币、元宝、道具> 的获得和消耗
+     * 如果当前在主界面，会刷新主界面的金币和元宝数值
+     */
     static public void changeData(int id , int num)
     {
         if (id == 1)
         {
             UserData.gold += num;
+
+            if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
+            {
+                GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+            }
         }
         else if (id == 2)
         {
             UserData.yuanbao += num;
+
+            if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
+            {
+                GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+            }
         }
         else
         {

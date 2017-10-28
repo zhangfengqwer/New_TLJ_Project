@@ -86,6 +86,15 @@ public class Item_Task_List_Script : MonoBehaviour {
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             m_parentScript.setTaskOver(task_id);
+
+            // 增加奖励
+            {
+                string reward = TaskDataScript.getInstance().getTaskDataById(task_id).reward;
+                List<string> tempList = new List<string>();
+                CommonUtil.splitStr(reward, tempList, ':');
+
+                GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
+            }
         }
     }
 }

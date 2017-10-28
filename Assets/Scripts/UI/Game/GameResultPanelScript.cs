@@ -47,7 +47,16 @@ public class GameResultPanelScript : MonoBehaviour {
             m_text_xianjia_score.text = score.ToString();
         }
 
-        m_text_xianjia_score.text = "" + score;
+        m_text_xianjia_score.text = score.ToString();
+
+        if (gold > 0)
+        {
+            m_text_gold.text = "+" + gold.ToString();
+        }
+        else
+        {
+            m_text_gold.text = gold.ToString();
+        }
 
         m_text_player_left1.text = GameData.getInstance().m_playerDataList[0].m_name;
         m_text_player_left2.text = GameData.getInstance().m_playerDataList[2].m_name;

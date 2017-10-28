@@ -151,7 +151,15 @@ public class WeeklySignScript : MonoBehaviour
             Text text1 = name.GetComponent<Text>();
             text1.text = signItem.goods_name;
             var prop = image_prop.GetComponent<Image>();
-            prop.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + signItem.goods_icon);
+            if (i == 6)
+            {
+                prop.sprite = Resources.Load<Sprite>("Sprites/Sign/icon_libao");
+            }
+            else
+            {
+                prop.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + signItem.goods_icon);
+            }
+            
             //未签到
             if (SignData.IsSign == false)
             {

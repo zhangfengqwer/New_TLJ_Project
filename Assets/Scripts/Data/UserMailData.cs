@@ -62,6 +62,20 @@ public class UserMailData {
         return m_myMailDataList;
     }
 
+    public MailData getUserMailDataById(int mail_id)
+    {
+        MailData temp = null;
+        for (int i = 0; i < m_myMailDataList.Count; i++)
+        {
+            if (m_myMailDataList[i].m_email_id == mail_id)
+            {
+                temp = m_myMailDataList[i];
+            }
+        }
+
+        return temp;
+    }
+
     public void addMailData(MailData mailData)
     {
         m_myMailDataList.Add(mailData);
@@ -75,6 +89,16 @@ public class UserMailData {
             if (m_myMailDataList[i].m_email_id == email_id)
             {
                 m_myMailDataList[i].m_state = 1;
+
+                // 增加奖励
+                {
+                    List<CommonClass.Reward> rewardList = UserMailData.getInstance().getUserMailDataById(email_id).m_rewardList;
+                    for (int j = 0; j < rewardList.Count; j++)
+                    {
+                        GameUtil.changeData(rewardList[j].m_id, rewardList[j].m_num);
+                    }
+                }
+
                 break;
             }
         }
@@ -88,6 +112,15 @@ public class UserMailData {
             if (m_myMailDataList[i].m_state == 0)
             {
                 m_myMailDataList[i].m_state = 1;
+
+                // 增加奖励
+                {
+                    List<CommonClass.Reward> rewardList = UserMailData.getInstance().getUserMailDataById(m_myMailDataList[i].m_email_id).m_rewardList;
+                    for (int j = 0; j < rewardList.Count; j++)
+                    {
+                        GameUtil.changeData(rewardList[j].m_id, rewardList[j].m_num);
+                    }
+                }
             }
         }
     }

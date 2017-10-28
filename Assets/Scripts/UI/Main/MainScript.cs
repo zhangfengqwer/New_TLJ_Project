@@ -55,10 +55,6 @@ public class MainScript : MonoBehaviour
 	        PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
 	        PlayServiceSocket.s_instance.startConnect();
 	    }
-	   
-
-
-
 
         if (!OtherData.s_isMainInited)
         {

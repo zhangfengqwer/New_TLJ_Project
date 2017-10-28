@@ -1372,7 +1372,7 @@ public class GameScript : MonoBehaviour
                                 {
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                    script.setData(true, GameData.getInstance().m_getAllScore, 1000);
+                                    script.setData(true, GameData.getInstance().m_getAllScore, (int)jd["score"]);
                                 }
                             }
                             else
@@ -1389,7 +1389,7 @@ public class GameScript : MonoBehaviour
                                 {
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                    script.setData(false, GameData.getInstance().m_getAllScore, -1000);
+                                    script.setData(false, GameData.getInstance().m_getAllScore, (int)jd["score"]);
                                 }
                             }
 
