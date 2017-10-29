@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PVPEndPanelScript : MonoBehaviour {
@@ -32,6 +33,7 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     public void onClickExit()
     {
-        m_parentScript.onClickExitRoom();
+        //m_parentScript.onClickExitRoom();
+        SceneManager.LoadScene("MainScene");
     }
 }

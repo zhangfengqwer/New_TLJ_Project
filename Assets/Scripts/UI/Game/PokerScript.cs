@@ -8,6 +8,7 @@ public class PokerScript : MonoBehaviour {
     int m_num;
     int m_pokerType;
     bool m_isSelect = false;
+    public bool m_canClick = false;
 
     public Image m_image_num;
     public Image m_image_small_icon;
@@ -115,6 +116,11 @@ public class PokerScript : MonoBehaviour {
 
     public void onClickPoker()
     {
+        if (!m_canClick)
+        {
+            return;
+        }
+
         if (m_isSelect)
         {
             //gameObject.transform.localPosition -= new Vector3(0,30,0);

@@ -15,8 +15,11 @@ public class JueShengJuTiShiPanelScript : MonoBehaviour {
         return s_instance;
     }
 
-    public static void close()
+    public static void checkClose()
     {
-        Destroy(s_instance);
+        if (s_instance != null)
+        {
+            Destroy(s_instance);
+        }
     }
 }

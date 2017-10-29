@@ -811,6 +811,7 @@ public class GameScript : MonoBehaviour
                     //Destroy(m_waitOtherPlayer);
                     Destroy(m_waitMatchPanel);
                     Destroy(m_pvpGameResultPanel);
+                    JueShengJuTiShiPanelScript.checkClose();
 
                     startGame_InitUI(data);
                 }
@@ -963,6 +964,14 @@ public class GameScript : MonoBehaviour
 
                             // 启用埋底按钮
                             m_buttonMaiDi.transform.localScale = new Vector3(1, 1, 1);
+
+                            // 扑克牌可以点击
+                            {
+                                for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+                                {
+                                    GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().m_canClick = true;
+                                }
+                            }
                         }
                         else
                         {
@@ -1244,7 +1253,7 @@ public class GameScript : MonoBehaviour
 
                         // 显示出的牌
                         {
-                            //ToastScript.createToast("有人尝试甩牌");
+                            ToastScript.createToast("有人尝试甩牌");
                             GameData.getInstance().m_curRoundFirstOutPokerList.Clear();
 
                             // 清空每个人座位上的牌
@@ -1284,7 +1293,7 @@ public class GameScript : MonoBehaviour
                 {
                     try
                     {
-                        ToastScript.createToast("游戏结束");
+                        //ToastScript.createToast("游戏结束");
 
                         // 闲家抓到的分数
                         {
@@ -1407,11 +1416,32 @@ public class GameScript : MonoBehaviour
                 }
                 break;
 
+            // PVP决胜局通知
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_JueShengJuTongZhi:
+                {
+                    try
+                    {
+                        Destroy(m_pvpGameResultPanel);
+
+                        // 显示pvp结束界面
+                        {
+                            JueShengJuTiShiPanelScript.show();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ToastScript.createToast("异常：" + ex.Message);
+                    }
+                }
+                break;
+
             // PVP游戏结束
             case (int)TLJCommon.Consts.PlayAction.PlayAction_PVPGameOver:
                 {
                     try
                     {
+                        Destroy(m_pvpGameResultPanel);
+
                         ToastScript.createToast("游戏结束，稍后请在邮箱查看奖励");
 
                         int mingci = (int)jd["mingci"];
@@ -1623,7 +1653,7 @@ public class GameScript : MonoBehaviour
                     for (int i = 0; i < objList.Count; i++)
                     {
                         int x = CommonUtil.getPosX(objList.Count, jiange, i, 0);
-                        objList[i].transform.localPosition = new Vector3(x, 300, 0);
+                        objList[i].transform.localPosition = new Vector3(x, 80, 0);
 
                         // 设置最后渲染
                         objList[i].transform.SetAsLastSibling();
@@ -1635,7 +1665,7 @@ public class GameScript : MonoBehaviour
                 {
                     for (int i = 0; i < objList.Count; i++)
                     {
-                        float startX = -540;
+                        float startX = -440;
                         objList[i].transform.localPosition = new Vector3(startX + (i * jiange), 0, 0);
 
                         // 设置最后渲染
@@ -1648,7 +1678,7 @@ public class GameScript : MonoBehaviour
                 {
                     for (int i = 0; i < objList.Count; i++)
                     {
-                        float endX = 540;                
+                        float endX = 480;                
                         objList[i].transform.localPosition = new Vector3(endX - ((objList.Count - i) * jiange), 0, 0);
 
                         // 设置最后渲染
@@ -2048,6 +2078,15 @@ public class GameScript : MonoBehaviour
 
     void onTimerEventTimeEnd()
     {
+        // 全部设为未选中状态
+        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+            {
+                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+            }
+        }
+
         switch (m_timerScript.getTimerType())
         {
             // 抢主
@@ -2110,15 +2149,6 @@ public class GameScript : MonoBehaviour
     // 时间到，自动出牌
     void autoOutPoker()
     {
-        // 全部设为未选中状态
-        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count ; i++)
-        {
-            if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-            {
-                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-            }
-        }
-
         // 自由出牌
         if (GameData.getInstance().m_isFreeOutPoker)
         {
