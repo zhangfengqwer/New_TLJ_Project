@@ -7,6 +7,8 @@ public class PVPGameResultPanelScript : MonoBehaviour
 {
     public GameScript m_parentScript;
 
+    public Image m_image_guang;
+    public Image m_image_sidai;
     public Image m_image_result;
     public Button m_button_exit;
     public GameObject m_waitMatch;
@@ -31,18 +33,27 @@ public class PVPGameResultPanelScript : MonoBehaviour
     {
         if (isWin)
         {
-            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_win");
+            CommonUtil.setImageSprite(m_image_guang, "Sprites/GameResult/fangsheguang_liang");
+            CommonUtil.setImageSprite(m_image_sidai, "Sprites/GameResult/sidai_hong");
+            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/zi_jinji");
+            
             m_image_result.SetNativeSize();
 
             m_button_exit.transform.localScale = new Vector3(0,0,0);
         }
         else
         {
-            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_fail");
+            CommonUtil.setImageSprite(m_image_guang, "Sprites/GameResult/fangsheguang_hui");
+            CommonUtil.setImageSprite(m_image_sidai, "Sprites/GameResult/sidai_hui");
+            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/zi_taotai");
             m_image_result.SetNativeSize();
 
             m_waitMatch.transform.localScale = new Vector3(0, 0, 0);
         }
+
+        m_image_guang.SetNativeSize();
+        m_image_sidai.SetNativeSize();
+        m_image_result.SetNativeSize();
     }
 
     public void onClickExit()

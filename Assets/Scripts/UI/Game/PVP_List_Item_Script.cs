@@ -36,6 +36,20 @@ public class PVP_List_Item_Script : MonoBehaviour {
         m_text_changci.text = m_PVPGameRoomData.gameroomname;
         m_text_kaisairenshu.text = "满" + m_PVPGameRoomData.kaisairenshu.ToString() + "人开赛";
 
+        // 左边场次类型图标：金币、蓝钻石
+        {
+            List<string> list = new List<string>();
+            CommonUtil.splitStr(m_PVPGameRoomData.gameroomtype, list, '_');
+            if (list[1].CompareTo("JinBi") == 0)
+            {
+                CommonUtil.setImageSprite(m_image_changci_icon, GameUtil.getPropIconPath(1));
+            }
+            else
+            {
+                CommonUtil.setImageSprite(m_image_changci_icon, GameUtil.getPropIconPath(107));
+            }
+        }
+
         if (m_PVPGameRoomData.baomingfei.CompareTo("0") == 0)
         {
             m_text_baomingfei.text = "免费";
@@ -43,11 +57,14 @@ public class PVP_List_Item_Script : MonoBehaviour {
         }
         else
         {
-            List<string> list = new List<string>();
-            CommonUtil.splitStr(m_PVPGameRoomData.baomingfei, list, ':');
+            // 报名费类型：金币、蓝钻石
+            {
+                List<string> list = new List<string>();
+                CommonUtil.splitStr(m_PVPGameRoomData.baomingfei, list, ':');
 
-            CommonUtil.setImageSprite(m_image_baomingfei_icon, GameUtil.getPropIconPath(int.Parse(list[0])));
-            m_text_baomingfei.text = list[1];
+                CommonUtil.setImageSprite(m_image_baomingfei_icon, GameUtil.getPropIconPath(int.Parse(list[0])));
+                m_text_baomingfei.text = list[1];
+            }
         }
         
         m_text_baomingrenshu.text = "已报名人数：" + m_PVPGameRoomData.baomingrenshu;

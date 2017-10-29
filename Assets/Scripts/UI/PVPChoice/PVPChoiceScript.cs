@@ -8,8 +8,9 @@ public class PVPChoiceScript : MonoBehaviour {
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
 
-    public Button m_button_tiaozhansai;
-    public Button m_button_huafeisai;
+    public Image m_image_tab_xuanze;
+    //public Button m_button_tiaozhansai;
+    //public Button m_button_huafeisai;
 
     public static GameObject create()
     {
@@ -48,13 +49,7 @@ public class PVPChoiceScript : MonoBehaviour {
         m_ListViewScript.clear();
 
         {
-            CommonUtil.setImageSprite(m_button_tiaozhansai.GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/yeqie_xuanze");
-            CommonUtil.setImageSprite(m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/zi_tzs02");
-            m_button_tiaozhansai.GetComponent<Image>().SetNativeSize();
-
-            CommonUtil.setImageSprite(m_button_huafeisai.GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/yeqie_weixuan");
-            CommonUtil.setImageSprite(m_button_huafeisai.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/zi_hf01");
-            m_button_huafeisai.GetComponent<Image>().SetNativeSize();
+            m_image_tab_xuanze.transform.localPosition = new Vector3(-100,0,0);
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
@@ -80,13 +75,7 @@ public class PVPChoiceScript : MonoBehaviour {
         m_ListViewScript.clear();
 
         {
-            CommonUtil.setImageSprite(m_button_tiaozhansai.GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/yeqie_weixuan");
-            CommonUtil.setImageSprite(m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/zi_tzs01");
-            m_button_tiaozhansai.GetComponent<Image>().SetNativeSize();
-
-            CommonUtil.setImageSprite(m_button_huafeisai.GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/yeqie_xuanze");
-            CommonUtil.setImageSprite(m_button_huafeisai.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/ChoiceChangCi/zi_hf02");
-            m_button_huafeisai.GetComponent<Image>().SetNativeSize();
+            m_image_tab_xuanze.transform.localPosition = new Vector3(100, 0, 0);
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
