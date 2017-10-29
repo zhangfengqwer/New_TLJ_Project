@@ -845,10 +845,13 @@ public class GameScript : MonoBehaviour
             // 抢主
             case (int)TLJCommon.Consts.PlayAction.PlayAction_QiangZhu:
                 {
+                    ToastScript.createToast("有人抢主");
+
                     GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
 
-                    string str = "有人抢主：";
-                    // 主牌花色
+                    List<TLJCommon.PokerInfo> outPokerList = new List<TLJCommon.PokerInfo>();
+                    
+                    // 抢主所用的牌
                     {
                         for (int i = 0; i < jd["pokerList"].Count; i++)
                         {
@@ -857,12 +860,13 @@ public class GameScript : MonoBehaviour
 
                             GameData.getInstance().m_masterPokerType = pokerType;
 
+                            outPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
                             GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-
-                            str += (num + "  ");
                         }
                     }
-                    ToastScript.createToast(str);
+                    
+                    // 显示出的牌
+                    showOtherOutPoker(outPokerList, (string)jd["uid"]);
                 }
                 break;
 
@@ -964,14 +968,6 @@ public class GameScript : MonoBehaviour
 
                             // 启用埋底按钮
                             m_buttonMaiDi.transform.localScale = new Vector3(1, 1, 1);
-
-                            // 扑克牌可以点击
-                            {
-                                for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-                                {
-                                    GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().m_canClick = true;
-                                }
-                            }
                         }
                         else
                         {

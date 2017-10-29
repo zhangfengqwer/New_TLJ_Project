@@ -28,22 +28,10 @@ public class SensitiveWordUtil
       
         foreach (var words in WordsDatas)
         {
-            if (str.Equals(words))
+            if (CommonUtil.isStrContain(str, words))
             {
                 return true;
             }
-//            //使用Match方法。
-//            Regex regex = new Regex(str, RegexOptions.IgnoreCase);
-//            Match m = regex.Match(words);
-//           
-//            if (Regex.IsMatch(str, words))
-//            {
-//                return true;
-//            }
-//            if (str.Contains(words))
-//            {
-//                return true;
-//            }
         }
         return false;
     }

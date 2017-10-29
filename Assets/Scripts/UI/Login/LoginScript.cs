@@ -296,6 +296,13 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
+        if(SensitiveWordUtil.IsSensitiveWord(m_inputAccount_register.text))
+        {
+            ToastScript.createToast("您的账号有敏感词");
+
+            return;
+        }
+
         {
             JsonData data = new JsonData();
 

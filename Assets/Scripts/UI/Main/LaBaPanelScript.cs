@@ -53,6 +53,13 @@ public class LaBaPanelScript : MonoBehaviour {
 
     public void onClickSend()
     {
+        if (SensitiveWordUtil.IsSensitiveWord(m_inputField.text))
+        {
+            ToastScript.createToast("您的账号有敏感词");
+
+            return;
+        }
+
         for (int i = 0; i < UserData.propData.Count; i++)
         {
             if ((UserData.propData[i].prop_id == 106) && ((UserData.propData[i].prop_num > 0)))
