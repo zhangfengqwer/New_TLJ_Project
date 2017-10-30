@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 using UnityEngine;
 
 public class SensitiveWordUtil
@@ -25,12 +26,26 @@ public class SensitiveWordUtil
     public static bool IsSensitiveWord(string str)
     {
         if (string.IsNullOrEmpty(str)) return false;
-      
+        new Thread(() =>
+        {
+            foreach (var VARIABLE in WordsDatas)
+            {
+                Debug.Log(VARIABLE);
+            }
+        }).Start();
+       
+
+
+
         foreach (var words in WordsDatas)
         {
-            if (CommonUtil.isStrContain(str, words))
+            if (!string.IsNullOrEmpty(words))
             {
-                return true;
+                if (CommonUtil.isStrContain(str, words))
+                {
+                    Debug.Log(words);
+                    return true;
+                }
             }
         }
         return false;
