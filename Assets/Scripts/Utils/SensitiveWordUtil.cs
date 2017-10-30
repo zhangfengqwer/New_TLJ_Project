@@ -26,26 +26,12 @@ public class SensitiveWordUtil
     public static bool IsSensitiveWord(string str)
     {
         if (string.IsNullOrEmpty(str)) return false;
-        new Thread(() =>
-        {
-            foreach (var VARIABLE in WordsDatas)
-            {
-                Debug.Log(VARIABLE);
-            }
-        }).Start();
-       
-
-
-
+      
         foreach (var words in WordsDatas)
         {
-            if (!string.IsNullOrEmpty(words))
+            if (CommonUtil.isStrContain(str, words))
             {
-                if (CommonUtil.isStrContain(str, words))
-                {
-                    Debug.Log(words);
-                    return true;
-                }
+                return true;
             }
         }
         return false;
