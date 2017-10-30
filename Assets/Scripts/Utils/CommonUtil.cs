@@ -109,6 +109,11 @@ class CommonUtil
 
     static public bool isStrContain(string sourceStr, string containStr)
     {
+        if (containStr.CompareTo("") == 0)
+        {
+            return false;
+        }
+
         for (int i = 0; i <= sourceStr.Length - containStr.Length; i++)
         {
             string temp = "";
