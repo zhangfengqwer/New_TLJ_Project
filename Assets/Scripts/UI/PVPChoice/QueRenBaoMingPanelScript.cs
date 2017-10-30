@@ -69,8 +69,6 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     // 请求加入房间
     public void reqJoinRoom()
     {
-        m_mainScript.showWaitMatchPanel(10);
-
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_JingJiChang;

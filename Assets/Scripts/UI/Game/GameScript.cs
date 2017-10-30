@@ -248,7 +248,7 @@ public class GameScript : MonoBehaviour
         script.start(time);
     }
 
-    void onTimerEvent_TimeEnd()
+    public void onTimerEvent_TimeEnd()
     {
         Debug.Log("暂时没有匹配到玩家,请求匹配机器人");
 

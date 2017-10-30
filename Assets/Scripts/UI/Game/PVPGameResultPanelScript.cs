@@ -40,6 +40,8 @@ public class PVPGameResultPanelScript : MonoBehaviour
             m_image_result.SetNativeSize();
 
             m_button_exit.transform.localScale = new Vector3(0,0,0);
+
+            Invoke("onInvokeTimeOut", 10);
         }
         else
         {
@@ -54,6 +56,11 @@ public class PVPGameResultPanelScript : MonoBehaviour
         m_image_guang.SetNativeSize();
         m_image_sidai.SetNativeSize();
         m_image_result.SetNativeSize();
+    }
+
+    void onInvokeTimeOut()
+    {
+        m_parentScript.onTimerEvent_TimeEnd();
     }
 
     public void onClickExit()

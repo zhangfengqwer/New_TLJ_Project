@@ -114,7 +114,7 @@ public class MainScript : MonoBehaviour
     {
         WaitMatchPanelScript script = WaitMatchPanelScript.create().GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(20);
+        script.start(time);
     }
 
     void onTimerEvent_TimeEnd()
@@ -299,6 +299,8 @@ public class MainScript : MonoBehaviour
                 {
                     int roomId = (int)jd["roomId"];
                     ToastScript.createToast("报名成功");
+
+                    showWaitMatchPanel(10);
 
                     // 扣除报名费
                     {
