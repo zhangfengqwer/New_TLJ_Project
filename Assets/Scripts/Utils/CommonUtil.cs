@@ -135,4 +135,14 @@ class CommonUtil
     {
         image.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
+
+    //字符转ASCII码：
+    //character长度只能为1
+    static public int charToAsc(string character)
+    {
+        System.Text.ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
+        int intAsciiCode = (int)asciiEncoding.GetBytes(character)[0];
+
+        return intAsciiCode;
+    }
 }
