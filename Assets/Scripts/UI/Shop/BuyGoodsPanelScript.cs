@@ -202,5 +202,9 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            ToastScript.createToast("购买失败");
+        }
     }
 }
