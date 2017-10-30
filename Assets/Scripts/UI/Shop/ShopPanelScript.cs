@@ -6,7 +6,12 @@ using UnityEngine.UI;
 
 public class ShopPanelScript : MonoBehaviour
 {
-    public MainScript m_mainScript = null;
+    private MainScript m_mainScript = null;
+    public Text Vip;
+    public Text VipExplain;
+    public Text SlideText;
+    public Slider SliderVip;
+
 
     private UIWarpContent uiWarpContent;
     private List<string> _list;
@@ -14,6 +19,7 @@ public class ShopPanelScript : MonoBehaviour
 
     //商品类型，1：金币，2：元宝，3：道具
     private int type = 2;
+
     private List<ShopData> _shopItemDatas;
 
     public static GameObject create(MainScript mainScript)
@@ -27,23 +33,64 @@ public class ShopPanelScript : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
-	{
-	    uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
-	    uiWarpContent.onInitializeItem = onInitializeItem;
-	    if (shopDataList == null || shopDataList.Count == 0)
-	    {
-	        // 拉取商店数据
-	        {
-	            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
-	            LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
-	        }
-	    }
-	    else
-	    {
+    void Start()
+    {
+        InitVip();
+
+
+        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+        uiWarpContent.onInitializeItem = onInitializeItem;
+        if (shopDataList == null || shopDataList.Count == 0)
+        {
+            // 拉取商店数据
+            {
+                LogicEnginerScript.Instance.GetComponent<GetShopRequest>().CallBack = onReceive_GetShop;
+                LogicEnginerScript.Instance.GetComponent<GetShopRequest>().OnRequest();
+            }
+        }
+        else
+        {
             Init();
-	    }
-        
+        }
+    }
+
+    private void InitVip()
+    {
+        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
+        Vip.text = "vip" + vipLevel;
+        int vipTotal = 0;
+        switch (vipLevel)
+        {
+            case 0:
+                vipTotal = 6;
+                break;
+            case 1:
+                vipTotal = 20;
+                break;
+            case 2:
+                vipTotal = 60;
+                break;
+            case 3:
+                vipTotal = 150;
+                break;
+            case 4:
+                vipTotal = 320;
+                break;
+            case 5:
+                vipTotal = 660;
+                break;
+            case 6:
+                vipTotal = 1000;
+                break;
+            default:
+                vipTotal = 1000;
+                break;
+        }
+
+        int left = vipTotal - UserData.rechargeVip;
+        VipExplain.text = "再充值" + left + "元到VIP" + (vipLevel + 1);
+        SlideText.text = UserData.rechargeVip + "/" + vipTotal;
+        SliderVip.value = UserData.rechargeVip / (float) vipTotal;
     }
 
 
@@ -72,7 +119,6 @@ public class ShopPanelScript : MonoBehaviour
         {
             Debug.Log(e);
         }
-       
     }
 
     private void onInitializeItem(GameObject go, int dataindex)
@@ -94,7 +140,6 @@ public class ShopPanelScript : MonoBehaviour
                 {
                     goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + propInfo.m_icon);
                 }
-
             }
         }
         else if (type == 2)
@@ -127,7 +172,7 @@ public class ShopPanelScript : MonoBehaviour
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
         {
-            BuyGoodsPanelScript.create(m_mainScript,_shopItemDatas[dataindex].goods_id);
+            BuyGoodsPanelScript.create(m_mainScript, _shopItemDatas[dataindex].goods_id);
         });
     }
 
