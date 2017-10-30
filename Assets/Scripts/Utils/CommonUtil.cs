@@ -7,8 +7,22 @@ using UnityEngine.UI;
 
 class CommonUtil
 {
+
+    public static int GetVipLevel(int recharge)
+    {
+        if (recharge > 0 && recharge <= 6) return 1;
+        if (recharge > 6 && recharge <= 20) return 2;
+        if (recharge > 20 && recharge <= 60) return 3;
+        if (recharge > 60 && recharge <= 150) return 4;
+        if (recharge > 150 && recharge <= 320) return 5;
+        if (recharge > 320 && recharge <= 660) return 6;
+        if (recharge > 660 && recharge <= 1000) return 7;
+
+        return 0;
+    }
+
     // 格式2017/7/12 15:05:03
-    static public string getCurTime()
+    public static string getCurTime()
     {
         return DateTime.Now.ToString();
     }

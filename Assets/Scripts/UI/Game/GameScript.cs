@@ -543,6 +543,7 @@ public class GameScript : MonoBehaviour
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
+    // 请求抢主
     public void reqQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
         JsonData data = new JsonData();
@@ -565,6 +566,7 @@ public class GameScript : MonoBehaviour
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
+    // 请求炒底
     public void reqChaoDi(List<TLJCommon.PokerInfo> pokerList)
     {
         JsonData data = new JsonData();
@@ -596,6 +598,7 @@ public class GameScript : MonoBehaviour
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
+    // 请求埋底
     public void reqMaiDi()
     {
         JsonData data = new JsonData();

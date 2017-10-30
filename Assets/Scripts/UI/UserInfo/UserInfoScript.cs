@@ -14,6 +14,7 @@ public class UserInfoScript : MonoBehaviour
     public Text allGame;
     public Text taoPaoLv;
     public Text meiLiZhi;
+    public Text Vip;
     public GameObject headIcon;
     public Button ButtonRealName;
     public Button ButtonBindPhone;
@@ -40,6 +41,10 @@ public class UserInfoScript : MonoBehaviour
         gold.text = UserData.gold.ToString();
         yuanBaoCount.text = UserData.yuanbao.ToString();
         meiLiZhi.text = UserData.gameData.meiliZhi+"";
+        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
+        Vip.text = "vip" + vipLevel;
+
+
         if (UserData.IsRealName)
         {
             ButtonRealName.interactable = false;

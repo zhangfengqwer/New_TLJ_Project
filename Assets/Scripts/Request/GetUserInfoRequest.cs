@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using System;
+using LitJson;
 using System.Collections.Generic;
 using TLJCommon;
 using UnityEngine;
@@ -38,16 +39,23 @@ public class GetUserInfoRequest : Request
         var code = (int) jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            UserData.name = (string) jsonData["name"];
-            UserData.phone = (string) jsonData["phone"];
-            UserData.head = "Sprites/Head/head_" + jsonData["head"];
-            UserData.gold = (int) jsonData["gold"];
-            UserData.yuanbao = (int) jsonData["yuanbao"];
-            UserData.medal = (int) jsonData["medal"];
-            UserData.IsRealName = (bool) jsonData["isRealName"];
-            UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
-            UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
-
+            try
+            {
+                UserData.name = (string)jsonData["name"];
+                UserData.phone = (string)jsonData["phone"];
+                UserData.head = "Sprites/Head/head_" + jsonData["head"];
+                UserData.gold = (int)jsonData["gold"];
+                UserData.yuanbao = (int)jsonData["yuanbao"];
+                UserData.medal = (int)jsonData["medal"];
+                UserData.IsRealName = (bool)jsonData["isRealName"];
+                UserData.rechargeVip = (int)jsonData["recharge_vip"];
+                UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
+                UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.Log("解析用户信息json失败:" + e);
+            }
             result = data;
             flag = true;
         }
