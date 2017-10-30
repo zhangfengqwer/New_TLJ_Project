@@ -47,6 +47,21 @@ public class PVPGameRoomDataScript
         return m_dataList;
     }
 
+    public PVPGameRoomData getDataByRoomType(string gameRoomType)
+    {
+        PVPGameRoomData temp = null;
+        for (int i = 0; i < m_dataList.Count; i++)
+        {
+            if (m_dataList[i].gameroomtype.CompareTo(gameRoomType) == 0)
+            {
+                temp = m_dataList[i];
+                break;
+            }
+        }
+
+        return temp;
+    }
+
     public PVPGameRoomData getDataById(int id)
     {
         PVPGameRoomData temp = null;

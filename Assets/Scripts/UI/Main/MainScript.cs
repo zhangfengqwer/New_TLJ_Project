@@ -1,4 +1,4 @@
-﻿using Boo.Lang;
+﻿using System.Collections.Generic;
 using LitJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -298,8 +298,21 @@ public class MainScript : MonoBehaviour
             case (int)TLJCommon.Consts.Code.Code_OK:
                 {
                     int roomId = (int)jd["roomId"];
-                    //ToastScript.createToast("加入房间成功：" + roomId);
                     ToastScript.createToast("报名成功");
+
+                    // 扣除报名费
+                    {
+                        string gameroomtype = (string)jd["gameroomtype"].ToString();
+                        string baomingfei = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype).baomingfei;
+                        if (baomingfei.CompareTo("0") != 0)
+                        {
+                            List<string> tempList = new List<string>();
+                            CommonUtil.splitStr(baomingfei, tempList, ':');
+                            GameUtil.changeData(int.Parse(tempList[0]), -int.Parse(tempList[1]));
+
+                            refreshUI();
+                        }
+                    }
                 }
                 break;
 
