@@ -309,12 +309,9 @@ public class LoginScript : MonoBehaviour
             for (int i = 0; i < m_inputPassword_register.text.Length; i++)
             {
                 string str = m_inputPassword_register.text[i].ToString();
-                if ((CommonUtil.charToAsc(str) >= 48) &&
-                    (CommonUtil.charToAsc(str) <= 57) &&
-                    (CommonUtil.charToAsc(str) >= 65) &&
-                    (CommonUtil.charToAsc(str) <= 90) &&
-                    (CommonUtil.charToAsc(str) >= 97) &&
-                    (CommonUtil.charToAsc(str) <= 122))
+                if (((CommonUtil.charToAsc(str) >= 48) && (CommonUtil.charToAsc(str) <= 57) ||
+                    ((CommonUtil.charToAsc(str) >= 65) && (CommonUtil.charToAsc(str) <= 90) ||
+                    ((CommonUtil.charToAsc(str) >= 97) && (CommonUtil.charToAsc(str) <= 122)))))
                 {
 
                 }
