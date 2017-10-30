@@ -245,6 +245,9 @@ public class LoginScript : MonoBehaviour
             string name = jd["userInfo"]["name"].ToString();
             int goldNum = (int) (jd["userInfo"]["goldNum"]);
 
+            PlayerPrefs.SetString("account", m_inputAccount.text);
+            PlayerPrefs.SetString("password", m_inputPassword.text);
+
             UserData.uid = uid;
 
             //            m_socketUtil.stop();
