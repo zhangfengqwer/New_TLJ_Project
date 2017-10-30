@@ -29,7 +29,7 @@ public class PokerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	}
+    }
 
     public void initPoker(int num,int pokerType)
     {

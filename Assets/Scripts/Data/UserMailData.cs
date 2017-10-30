@@ -33,6 +33,7 @@ public class UserMailData {
             mailData.m_content = jd["mailData"][i]["content"].ToString();
             mailData.m_state = (int)jd["mailData"][i]["state"];
             mailData.m_time = jd["mailData"][i]["time"].ToString();
+            mailData.m_reward = jd["mailData"][i]["reward"].ToString();
 
             // 奖励
             {
@@ -121,6 +122,8 @@ public class UserMailData {
                         GameUtil.changeData(rewardList[j].m_id, rewardList[j].m_num);
                     }
                 }
+
+                ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_myMailDataList[i].m_reward);
             }
         }
     }
@@ -164,5 +167,6 @@ public class MailData
     public string m_content = "";
     public int m_state = 0;
     public string m_time = "";
+    public string m_reward = "";
     public List<CommonClass.Reward> m_rewardList = new List<CommonClass.Reward>();
 }

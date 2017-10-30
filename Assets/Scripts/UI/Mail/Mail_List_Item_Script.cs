@@ -63,6 +63,8 @@ public class Mail_List_Item_Script : MonoBehaviour {
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             m_parentScript.setMailReaded(email_id);
+
+            ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_mailData.m_reward);
         }
 
         MailDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);

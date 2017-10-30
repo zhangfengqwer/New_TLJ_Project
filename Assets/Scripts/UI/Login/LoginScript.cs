@@ -19,6 +19,7 @@ public class LoginScript : MonoBehaviour
     List<string> m_dataList = new List<string>();
     bool m_isConnServerSuccess = false;
 
+    public GameObject m_healthTipPanel;
     public GameObject m_panel_choicePlatform;
     public GameObject m_panel_login;
     public GameObject m_panel_register;
@@ -46,9 +47,15 @@ public class LoginScript : MonoBehaviour
 
         m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(0, 0, 0);
+
+        m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
+        Invoke("onInvokeHealthPanel",2);
+    }
+    void onInvokeHealthPanel()
+    {
+        m_healthTipPanel.transform.localScale = new Vector3(0,0,0);
     }
 
-   
     // 等获取到服务器配置文件再调用
     public void init()
     {
