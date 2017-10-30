@@ -296,11 +296,35 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
+        // 检测账号是否合格
         if(SensitiveWordUtil.IsSensitiveWord(m_inputAccount_register.text))
         {
             ToastScript.createToast("您的账号有敏感词");
 
             return;
+        }
+
+        // 检测密码是否合格
+        {
+            for (int i = 0; i < m_inputPassword_register.text.Length; i++)
+            {
+                string str = m_inputPassword_register.text[i].ToString();
+                if ((CommonUtil.charToAsc(str) >= 48) &&
+                    (CommonUtil.charToAsc(str) <= 57) &&
+                    (CommonUtil.charToAsc(str) >= 65) &&
+                    (CommonUtil.charToAsc(str) <= 90) &&
+                    (CommonUtil.charToAsc(str) >= 97) &&
+                    (CommonUtil.charToAsc(str) <= 122))
+                {
+
+                }
+                else
+                {
+                    ToastScript.createToast("密码格式不对");
+
+                    return;
+                }
+            }
         }
 
         {
