@@ -61,11 +61,29 @@ public class ShopPanelScript : MonoBehaviour
         int vipTotal = 0;
         switch (vipLevel)
         {
-            case 1:
+            case 0:
                 vipTotal = 6;
                 break;
-            case 2:
+            case 1:
                 vipTotal = 20;
+                break;
+            case 2:
+                vipTotal = 60;
+                break;
+            case 3:
+                vipTotal = 150;
+                break;
+            case 4:
+                vipTotal = 320;
+                break;
+            case 5:
+                vipTotal = 660;
+                break;
+            case 6:
+                vipTotal = 1000;
+                break;
+            default:
+                vipTotal = 1000;
                 break;
         }
 
