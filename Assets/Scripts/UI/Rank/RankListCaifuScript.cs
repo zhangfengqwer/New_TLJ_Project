@@ -41,7 +41,14 @@ public class RankListCaifuScript : MonoBehaviour
             if (UserData.name.Equals(medalRankItemData.name))
             {
                 mymedalRank = i + 1 + "";
-                goChild.GetComponent<Image>().color = Color.yellow;
+                Color color = new Color
+                {
+                    a = 255,
+                    r = 242,
+                    g = 228,
+                    b = 66
+                };
+                goChild.GetComponent<Image>().color = new Color(242 / (float)255, 228 / (float)255, 66 / (float)255, 1);
             }
 
 
@@ -92,42 +99,5 @@ public class RankListCaifuScript : MonoBehaviour
 
         CaifuCount.text = "我的徽章:" + UserData.medal;
 
-        //        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
-        //        uiWarpContent.onInitializeItem = onInitializeItem;
-        //        uiWarpContent.Init(_list.Count);
     }
-
-
-//    private void onInitializeItem(GameObject go, int dataindex)
-//    {
-//        print(dataindex);
-//        var ranking = go.transform.GetChild(0);
-//        var headImage = go.transform.GetChild(1);
-//        var name = go.transform.GetChild(2);
-////        var textRank = go.transform.GetChild(3);
-//        var component = headImage.GetComponent<Image>();
-//        component.sprite = Resources.Load<Sprite>("Sprites/Head/head_1");
-//        var count = name.GetChild(0);
-//        Text text = ranking.GetComponent<Text>();
-//        text.text = dataindex + 3 + "";
-//        if (dataindex == 0)
-//        {
-//            image.sprite = Resources.Load<Sprite>("Sprites/Shengji/images/award_1");
-//            textRank.gameObject.active = false;
-//        }
-//        else if (dataindex == 1)
-//        {
-//            image.sprite = Resources.Load<Sprite>("Sprites/Shengji/images/award_2");
-//            textRank.gameObject.active = false;
-//        }
-//        else if (dataindex == 2)
-//        {
-//            image.sprite = Resources.Load<Sprite>("Sprites/Shengji/images/award_3");
-//            textRank.gameObject.active = false;
-//        }
-//        else
-//        {
-//           
-//        }
-//    }
 }
