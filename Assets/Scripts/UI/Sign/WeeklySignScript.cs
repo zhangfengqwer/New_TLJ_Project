@@ -58,6 +58,8 @@ public class WeeklySignScript : MonoBehaviour
             SignItem signItem = _signItems[totalSignDays];
             print(signItem.goods_prop);
             AddProp(signItem.goods_prop);
+
+            ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(signItem.goods_prop);
         }
     }
 

@@ -179,28 +179,13 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                     int prop_id = int.Parse(list_str2[0]);
                     int prop_num = int.Parse(list_str2[1]);
 
-                    // 金币
-                    if (prop_id == 1)
-                    {
-                        UserData.gold += prop_num;
+                    GameUtil.changeData(prop_id, m_goods_num * prop_num);
 
-                        if (m_mainScript != null)
-                        {
-                            m_mainScript.refreshUI();
-                        }
-                    }
-                    // 元宝
-                    else if (prop_id == 2)
-                    {
-                        UserData.yuanbao += prop_num;
-
-                        if (m_mainScript != null)
-                        {
-                            m_mainScript.refreshUI();
-                        }
-                    }
+                    ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(prop_id+":" + m_goods_num * prop_num);
                 }
             }
+
+            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
         }
         else
         {
