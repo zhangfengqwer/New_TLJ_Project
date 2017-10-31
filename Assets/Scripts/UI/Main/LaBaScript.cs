@@ -8,26 +8,30 @@ public class LaBaScript : MonoBehaviour {
     public Text m_text;
 
     List<string> m_data = new List<string>();
-    bool m_isStartMove = false;
+
+    bool isNone = true;
 
 	// Use this for initialization
 	void Start ()
     {
+        InvokeRepeating("onTextMove", 0.05f, 0.05f);
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if ((m_data.Count > 0) && !m_isStartMove)
+        if (m_data.Count > 0)
         {
+            isNone = false;
+
             m_text.text = m_data[0];
             m_text.transform.localPosition = new Vector3(200, 0, 0);
 
             m_data.RemoveAt(0);
-
-            InvokeRepeating("onTextMove", 0.05f, 0.05f);
-
-            m_isStartMove = true;
+        }
+        else if(isNone)
+        {
+            m_text.text = "欢迎来到疯狂升级 点击喇叭可进行全服喊话哦~~";
         }
 	}
 
@@ -37,8 +41,12 @@ public class LaBaScript : MonoBehaviour {
 
         if (m_text.transform.localPosition.x <= -800)
         {
-            m_isStartMove = false;
-            CancelInvoke("onTextMove");
+            m_text.transform.localPosition = new Vector3(200, 0, 0);
+
+            if (m_data.Count <= 0)
+            {
+                isNone = true;
+            }
         }
     }
 

@@ -310,8 +310,6 @@ public class MainScript : MonoBehaviour
                             List<string> tempList = new List<string>();
                             CommonUtil.splitStr(baomingfei, tempList, ':');
                             GameUtil.changeData(int.Parse(tempList[0]), -int.Parse(tempList[1]));
-
-                            refreshUI();
                         }
                     }
                 }
@@ -336,6 +334,17 @@ public class MainScript : MonoBehaviour
             {
                 int roomId = (int)jd["roomId"];
                 ToastScript.createToast("退赛成功");
+
+                // 还回报名费
+                {
+                    string baomingfei = PVPGameRoomDataScript.getInstance().getDataByRoomType((string)jd["gameroomtype"]).baomingfei;
+                    if (baomingfei.CompareTo("0") != 0)
+                    {
+                        List<string> tempList = new List<string>();
+                        CommonUtil.splitStr(baomingfei, tempList, ':');
+                        GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
+                    }
+                }
             }
             break;
 
