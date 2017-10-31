@@ -42,6 +42,7 @@ public class SetScript : MonoBehaviour {
 
     public void OnClickChangeAccount()
     {
+        OtherData.s_isFromSetToLogin = true;
         SceneManager.LoadScene("LoginScene");
     }
 
