@@ -44,11 +44,11 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            m_obj.transform.localPosition = new Vector3(54,120,0);
+            m_obj.transform.localPosition = new Vector3(100,-8,0);
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            m_obj.transform.localPosition = new Vector3(500,120,0);
+            m_obj.transform.localPosition = new Vector3(520,-8,0);
         }
     }
 
