@@ -1655,7 +1655,7 @@ public class GameScript : MonoBehaviour
                         objList[i].transform.localPosition = new Vector3(x, 80, 0);
 
                         // 设置最后渲染
-                        objList[i].transform.SetAsLastSibling();
+                        //objList[i].transform.SetAsLastSibling();
                     }
                 }
                 break;
@@ -1668,7 +1668,7 @@ public class GameScript : MonoBehaviour
                         objList[i].transform.localPosition = new Vector3(startX + (i * jiange), 0, 0);
 
                         // 设置最后渲染
-                        objList[i].transform.SetAsLastSibling();
+                        //objList[i].transform.SetAsLastSibling();
                     }
                 }
                 break;
@@ -1681,7 +1681,7 @@ public class GameScript : MonoBehaviour
                         objList[i].transform.localPosition = new Vector3(endX - ((objList.Count - i) * jiange), 0, 0);
 
                         // 设置最后渲染
-                        objList[i].transform.SetAsLastSibling();
+                        //objList[i].transform.SetAsLastSibling();
                     }
                 }
                 break;
@@ -1694,7 +1694,7 @@ public class GameScript : MonoBehaviour
                         objList[i].transform.localPosition = new Vector3(x, -300, 0);
 
                         // 设置最后渲染
-                        objList[i].transform.SetAsLastSibling();
+                        //objList[i].transform.SetAsLastSibling();
                     }
                 }
                 break;
@@ -1711,7 +1711,16 @@ public class GameScript : MonoBehaviour
             objList[i].transform.localPosition = new Vector3(x, -220, 0);
 
             // 设置最后渲染
-            objList[i].transform.SetAsLastSibling();
+            //objList[i].transform.SetAsLastSibling();
+        }
+
+        // 让当前已出的牌（包括抢主的牌）显示在最上面
+        for (int i = 0; i < GameData.getInstance().m_curRoundOutPokerList.Count; i++)
+        {
+            for (int j = i; j < GameData.getInstance().m_curRoundOutPokerList[i].Count; j++)
+            {
+                GameData.getInstance().m_curRoundOutPokerList[i][j].transform.SetAsLastSibling();
+            }
         }
     }
 

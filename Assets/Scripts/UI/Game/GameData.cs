@@ -32,8 +32,8 @@ public class GameData
     //public int m_maiDiTime = 2;                // 埋底时间
     //public int m_chaodiTime = 2;               // 选择是否炒底时间 
 
-    public int m_outPokerTime = 10;              // 出牌时间 
-    public float m_tuoGuanOutPokerTime = 5;  // 托管出牌时间 
+    public int m_outPokerTime = 10;             // 出牌时间 
+    public float m_tuoGuanOutPokerTime = 2;     // 托管出牌时间 
     public int m_qiangZhuTime = 10;             // 抢主时间
     public int m_maiDiTime = 20;                // 埋底时间
     public int m_chaodiTime = 10;               // 选择是否炒底时间 
