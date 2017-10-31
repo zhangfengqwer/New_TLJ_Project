@@ -38,7 +38,9 @@ public class MainScript : MonoBehaviour
 	            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
-	           
+                LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
             }
 	    }
 
