@@ -185,6 +185,8 @@ public class BuyGoodsPanelScript : MonoBehaviour {
                 }
             }
 
+            Destroy(gameObject);
+
             LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
         }
         else
