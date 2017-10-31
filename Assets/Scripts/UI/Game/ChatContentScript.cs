@@ -31,7 +31,7 @@ public class ChatContentScript : MonoBehaviour {
         //m_text.alignment = TextAnchor.MiddleLeft;
         //m_text.alignment = TextAnchor.MiddleCenter;
         
-        Invoke("showEnd", 4.0f);
+        Invoke("showEnd", 3.0f);
     }
 	
 	// Update is called once per frame

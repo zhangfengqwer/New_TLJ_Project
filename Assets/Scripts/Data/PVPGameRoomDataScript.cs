@@ -38,6 +38,9 @@ public class PVPGameRoomDataScript
             temp.reward = (string)jsonData["room_list"][i]["reward"];
             temp.baomingrenshu = (int)jsonData["room_list"][i]["baomingrenshu"];
 
+            // 已报名人数增加点
+            temp.baomingrenshu += RandomUtil.getRandom(100, 200);
+
             m_dataList.Add(temp);
         }
     }

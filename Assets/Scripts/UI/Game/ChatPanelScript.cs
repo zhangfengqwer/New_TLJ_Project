@@ -12,6 +12,8 @@ public class ChatPanelScript : MonoBehaviour {
     public Button m_button_chat;
     public Button m_button_biaoqing;
 
+    bool m_canChat = true;
+
     public static GameObject create(GameScript parent)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ChatPanel") as GameObject;
@@ -89,6 +91,21 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void reqChat(ChatText chatText)
     {
-        m_parentScript.reqChat(chatText.m_id);
+        if (m_canChat)
+        {
+            m_canChat = false;
+            m_parentScript.reqChat(chatText.m_id);
+
+            Invoke("onInvoke",4);
+        }
+        else
+        {
+            ToastScript.createToast("不可连续发送");
+        }
+    }
+
+    void onInvoke()
+    {
+        m_canChat = true;
     }
 }
