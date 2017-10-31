@@ -98,11 +98,12 @@ public class ShopPanelScript : MonoBehaviour
     {
         try
         {
+            print("shopDataList.Count:" + shopDataList.Count);
             for (int i = shopDataList.Count - 1; i >= 0; i--)
             {
                 uiWarpContent.DelItem(i);
             }
-
+            print("1");
             _shopItemDatas = new List<ShopData>();
             for (int i = 0; i < shopDataList.Count; i++)
             {
@@ -110,9 +111,11 @@ public class ShopPanelScript : MonoBehaviour
                 if (shopData.goods_type == type)
                 {
                     _shopItemDatas.Add(shopData);
+                    print("2");
                 }
             }
-
+            print("uiWarpContent:"+ uiWarpContent.name);
+            print("_shopItemDatas.Count:" + _shopItemDatas.Count);
             uiWarpContent.Init(_shopItemDatas.Count);
         }
         catch (Exception e)
@@ -127,9 +130,16 @@ public class ShopPanelScript : MonoBehaviour
         string[] strings = shopItemData.props.Split(':');
         int id = Convert.ToInt32(strings[0]);
 
-        Text goods_name = go.transform.Find("goods_name").GetComponent<Text>();
         Text goods_price = go.transform.Find("goods_price").GetComponent<Text>();
+        Text goods_price2 = go.transform.Find("goods_price2").GetComponent<Text>();
         Image goods_image = go.transform.Find("goods_image").GetComponent<Image>();
+        Image goods_icon = go.transform.Find("goods_icon").GetComponent<Image>();
+        Text goods_des = go.transform.Find("goods_des").GetComponent<Text>();
+
+//        go.transform.Find("goods_price").localScale = Vector3.one;
+//        go.transform.Find("goods_price2").localScale = Vector3.zero;
+
+        goods_des.text = shopItemData.goods_name;
 
         if (type == 3)
         {
@@ -151,20 +161,24 @@ public class ShopPanelScript : MonoBehaviour
             goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
         }
 
-        goods_name.text = _shopItemDatas[dataindex].goods_name;
         //设置价格
         string price = null;
         if (_shopItemDatas[dataindex].money_type == 1)
         {
-            price = "金币:";
+            goods_icon.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
         }
         else if (_shopItemDatas[dataindex].money_type == 2)
         {
-            price = "元宝:";
+            goods_icon.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_yuanbao");
         }
         else
         {
-            price = "¥:";
+            price = "¥";
+            go.transform.Find("goods_icon").localScale = Vector3.zero;
+            go.transform.Find("goods_price2").localScale = Vector3.one;
+            go.transform.Find("goods_price").localScale = Vector3.zero;
+            goods_price2.text = price + _shopItemDatas[dataindex].price;
+        
         }
         goods_price.text = price + _shopItemDatas[dataindex].price;
 
