@@ -63,10 +63,10 @@ public class PVP_List_Item_Script : MonoBehaviour {
                 CommonUtil.splitStr(m_PVPGameRoomData.baomingfei, list, ':');
 
                 CommonUtil.setImageSprite(m_image_baomingfei_icon, GameUtil.getPropIconPath(int.Parse(list[0])));
-                m_text_baomingfei.text = list[1];
+                m_text_baomingfei.text = " *" + list[1];
             }
         }
-        
+
         m_text_baomingrenshu.text = "已报名人数：" + m_PVPGameRoomData.baomingrenshu;
     }
 
