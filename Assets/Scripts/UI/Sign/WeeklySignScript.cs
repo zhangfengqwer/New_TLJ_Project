@@ -101,27 +101,6 @@ public class WeeklySignScript : MonoBehaviour
             Transform child = content.transform.GetChild(i);
             signObjects.Add(child.gameObject);
         }
-      
-//        //获得签到的道具配置
-//        FileStream fileStream = null;
-//        try
-//        {
-//            fileStream = new FileStream(Path.Combine(Application.dataPath, "Resources/Temp/sign.json"), FileMode.Open);
-//            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8);
-//            string str = streamReader.ReadToEnd();
-//            _signItems = JsonMapper.ToObject<List<SignItem>>(str);
-//        }
-//        catch (Exception e)
-//        {
-//            print(e);
-//        }
-//        finally
-//        {
-//            if (fileStream != null)
-//            {
-//                fileStream.Close();
-//            }
-//        }
 
         if (_signItems == null ||_signItems.Count != signObjects.Count)
         {
@@ -149,6 +128,8 @@ public class WeeklySignScript : MonoBehaviour
             var name = Object.transform.GetChild(1);
             var image_lingqu = Object.transform.GetChild(2);
             var image_prop = Object.transform.GetChild(3);
+           
+
             //设置元宝等道具
             Text text1 = name.GetComponent<Text>();
             text1.text = signItem.goods_name;
@@ -183,7 +164,15 @@ public class WeeklySignScript : MonoBehaviour
                 }
                 if (totalSignDays == i)
                 {
-//                    Object.GetComponent<Image>().color = Color.blue;
+                    Button button = Object.AddComponent<Button>();
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() =>
+                    {
+                        //发送 签到请求
+                        LogicEnginerScript.Instance.GetComponent<SignRequest>().CallBack = SignCallBack;
+                        LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest();
+                    });
+                    Object.GetComponent<Image>().color = new Color(1, 185/(float)255,0,1);
                 }
             }
             //已签到
@@ -210,9 +199,7 @@ public class WeeklySignScript : MonoBehaviour
 
     public void OnSignClick()
     {
-        //发送 签到请求
-        LogicEnginerScript.Instance.GetComponent<SignRequest>().CallBack = SignCallBack;
-        LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest();
+      
 
     }
 

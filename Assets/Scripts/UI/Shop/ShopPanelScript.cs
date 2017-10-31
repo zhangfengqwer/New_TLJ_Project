@@ -136,8 +136,8 @@ public class ShopPanelScript : MonoBehaviour
         Image goods_icon = go.transform.Find("goods_icon").GetComponent<Image>();
         Text goods_des = go.transform.Find("goods_des").GetComponent<Text>();
 
-//        go.transform.Find("goods_price").localScale = Vector3.one;
-//        go.transform.Find("goods_price2").localScale = Vector3.zero;
+        go.transform.Find("goods_price").localScale = Vector3.one;
+        go.transform.Find("goods_price2").localScale = Vector3.zero;
 
         goods_des.text = shopItemData.goods_name;
 
