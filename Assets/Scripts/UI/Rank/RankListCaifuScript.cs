@@ -14,6 +14,7 @@ public class RankListCaifuScript : MonoBehaviour
     private static List<MedalRankItemData> _medalRankItemDatas;
 
     public static RankListCaifuScript Instance;
+
     void Start()
     {
         Instance = this;
@@ -23,7 +24,7 @@ public class RankListCaifuScript : MonoBehaviour
 
     public void InitData()
     {
-      _medalRankItemDatas = RankData.medalRankDataList;
+        _medalRankItemDatas = RankData.medalRankDataList;
     }
 
 
@@ -40,6 +41,7 @@ public class RankListCaifuScript : MonoBehaviour
             if (UserData.name.Equals(medalRankItemData.name))
             {
                 mymedalRank = i + 1 + "";
+                goChild.GetComponent<Image>().color = Color.yellow;
             }
 
 
@@ -50,11 +52,13 @@ public class RankListCaifuScript : MonoBehaviour
             var Name = goChild.transform.Find("Name");
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
+            var Image_icon = goChild.transform.Find("Image_icon");
             Image rankImage = Ranking.GetComponent<Image>();
 
-            Count.GetComponent<Text>().text = "徽章：" + medalRankItemData.medal;
+            Count.GetComponent<Text>().text = "" + medalRankItemData.medal;
             Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
             Name.GetComponent<Text>().text = medalRankItemData.name;
+            Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
 
             if (i < 3)
             {
@@ -92,8 +96,6 @@ public class RankListCaifuScript : MonoBehaviour
         //        uiWarpContent.onInitializeItem = onInitializeItem;
         //        uiWarpContent.Init(_list.Count);
     }
-
-
 
 
 //    private void onInitializeItem(GameObject go, int dataindex)

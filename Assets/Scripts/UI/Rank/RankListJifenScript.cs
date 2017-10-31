@@ -38,6 +38,8 @@ public class RankListJifenScript : MonoBehaviour
             if (UserData.name.Equals(goldRankItemData.name))
             {
                 myGoldRank = i + 1 + "";
+                Color color = new Color(175, 255, 159,255);
+                goChild.GetComponent<Image>().color = Color.yellow;
             }
 
             goChild.layer = Content.layer;
@@ -47,11 +49,14 @@ public class RankListJifenScript : MonoBehaviour
             var Name = goChild.transform.Find("Name");
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
+            var Image_icon = goChild.transform.Find("Image_icon");
             Image rankImage = Ranking.GetComponent<Image>();
 
-            Count.GetComponent<Text>().text = "金币：" + goldRankItemData.gold;
+            Count.GetComponent<Text>().text = "" + goldRankItemData.gold;
             Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
             Name.GetComponent<Text>().text = goldRankItemData.name;
+
+            Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
 
             if (i < 3)
             {

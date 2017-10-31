@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuyGoodsPanelScript : MonoBehaviour {
-
+public class BuyGoodsPanelScript : MonoBehaviour
+{
     public MainScript m_mainScript = null;
 
     public Text m_text_goods_name;
@@ -17,13 +17,13 @@ public class BuyGoodsPanelScript : MonoBehaviour {
     public Button m_button_jia;
     public Button m_button_max;
     public Button m_button_buy;
-    
+
     ShopData m_shopData = null;
 
     int m_goods_num = 1;
     int m_goods_buy_maxNum = 10;
 
-    public static GameObject create(MainScript mainScript,int goods_id)
+    public static GameObject create(MainScript mainScript, int goods_id)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BuyGoodsPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
@@ -35,16 +35,15 @@ public class BuyGoodsPanelScript : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         m_button_jian.interactable = false;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+    }
 
     public void setGoodsId(int goods_id)
     {
@@ -69,7 +68,7 @@ public class BuyGoodsPanelScript : MonoBehaviour {
             {
                 m_text_goods_num.transform.localScale = new Vector3(0, 0, 0);
 
-                m_button_jian.transform.localScale = new Vector3(0,0,0);
+                m_button_jian.transform.localScale = new Vector3(0, 0, 0);
                 m_button_jia.transform.localScale = new Vector3(0, 0, 0);
                 m_button_max.transform.localScale = new Vector3(0, 0, 0);
             }
@@ -137,13 +136,21 @@ public class BuyGoodsPanelScript : MonoBehaviour {
         {
             case 1:
             case 2:
-                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>()
+                    .setGoodsInfo(m_shopData.goods_id, m_goods_num);
                 LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
                 LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
                 break;
             //人民币购买
             case 3:
-                PlatformHelper.pay(this.gameObject.name, "GetPayResult", "unity传给android的支付数据");
+                JsonData data = new JsonData();
+
+                data["uid"] = UserData.uid;
+                data["itemid"] = m_shopData.goods_id;
+                data["chargecount"] = 1;
+                data["amount"] = m_shopData.price;
+
+                PlatformHelper.pay(this.gameObject.name, "GetPayResult", data.ToJson());
                 break;
         }
     }
@@ -161,9 +168,9 @@ public class BuyGoodsPanelScript : MonoBehaviour {
     public void onReceive_BuyGoods(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int)jd["code"];
+        int code = (int) jd["code"];
 
-        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             ToastScript.createToast("购买成功:" + m_shopData.goods_name);
 
@@ -181,7 +188,8 @@ public class BuyGoodsPanelScript : MonoBehaviour {
 
                     GameUtil.changeData(prop_id, m_goods_num * prop_num);
 
-                    ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(prop_id+":" + m_goods_num * prop_num);
+                    ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>()
+                        .setData(prop_id + ":" + m_goods_num * prop_num);
                 }
             }
 
