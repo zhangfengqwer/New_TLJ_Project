@@ -64,14 +64,13 @@ public class LaBaPanelScript : MonoBehaviour {
         {
             if ((UserData.propData[i].prop_id == 106) && ((UserData.propData[i].prop_num > 0)))
             {
-                LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().SetText(m_inputField.text);
+                LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().SetText(UserData.name + "：" + m_inputField.text);
                 LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().CallBack = onReceive_UseLaBa;
                 LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().OnRequest();
 
                 break;
             }
         }
-        
     }
 
     public void onReceive_UseLaBa(string data)

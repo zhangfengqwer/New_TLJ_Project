@@ -9,7 +9,7 @@ public class LaBaScript : MonoBehaviour {
 
     List<string> m_data = new List<string>();
 
-    bool isNone = true;
+    bool isEnd = true;
 
 	// Use this for initialization
 	void Start ()
@@ -22,14 +22,17 @@ public class LaBaScript : MonoBehaviour {
     {
         if (m_data.Count > 0)
         {
-            isNone = false;
+            if (isEnd)
+            {
+                isEnd = false;
 
-            m_text.text = m_data[0];
-            m_text.transform.localPosition = new Vector3(200, 0, 0);
+                m_text.text = m_data[0];
+                m_text.transform.localPosition = new Vector3(200, 0, 0);
 
-            m_data.RemoveAt(0);
+                m_data.RemoveAt(0);
+            }
         }
-        else if(isNone)
+        else if(isEnd)
         {
             m_text.text = "欢迎来到疯狂升级 点击喇叭可进行全服喊话哦~~";
         }
@@ -42,11 +45,7 @@ public class LaBaScript : MonoBehaviour {
         if (m_text.transform.localPosition.x <= -800)
         {
             m_text.transform.localPosition = new Vector3(200, 0, 0);
-
-            if (m_data.Count <= 0)
-            {
-                isNone = true;
-            }
+            isEnd = true;
         }
     }
 
