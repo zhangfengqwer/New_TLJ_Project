@@ -28,8 +28,6 @@ public class WeeklySignScript : MonoBehaviour
     {
         InitData();
         InitUi();
-
-        Sign_Guang_Script.create();
     }
 
     private void Update()
