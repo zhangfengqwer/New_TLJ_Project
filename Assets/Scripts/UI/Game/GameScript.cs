@@ -1705,12 +1705,13 @@ public class GameScript : MonoBehaviour
 
     void initMyPokerPos(List<GameObject> objList)
     {
-        int jiange = 35;
+        int jiange = 30;
 
         for (int i = 0; i < objList.Count; i++)
         {
             int x = CommonUtil.getPosX(objList.Count, jiange, i, 0);
-            objList[i].transform.localPosition = new Vector3(x, -220, 0);
+            objList[i].transform.localPosition = new Vector3(x, -240, 0);
+            objList[i].transform.localScale = new Vector3(0.8f, 0.8f,0.8f);
 
             // 设置最后渲染
             //objList[i].transform.SetAsLastSibling();

@@ -46,7 +46,10 @@ public class NetConfig
 
             case NetType.NetType_Test:
                 {
-                    UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
+                    //UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
+
+                    string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+                    httpCallBack("", jsonData);
                 }
                 break;
 
