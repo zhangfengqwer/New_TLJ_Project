@@ -11,6 +11,7 @@ public class EmailPanelScript : MonoBehaviour
 
     public Button m_button_oneKeyRead;
     public Button m_button_oneKeyDelete;
+    public Text m_text_mailNum;
 
     public static GameObject create()
     {
@@ -100,6 +101,8 @@ public class EmailPanelScript : MonoBehaviour
                 }
             }
         }
+
+        m_text_mailNum.text = "邮件数量：" + UserMailData.getInstance().getUserMailDataList().Count + "/50";
     }
 
     public void setMailReaded(int email_id)

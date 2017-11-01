@@ -32,8 +32,10 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-	    // 游戏打牌服务器
-	    {
+        AudioScript.getAudioScript().playMusic_MainBg();
+
+        // 游戏打牌服务器
+        {
 	        if (LogicEnginerScript.Instance == null)
 	        {
 	            LogicEnginerScript.create();
@@ -67,8 +69,7 @@ public class MainScript : MonoBehaviour
         if (!OtherData.s_isMainInited)
         {
             OtherData.s_isMainInited = true;
-
-            AudioScript.getAudioScript().playMusic_GameBg();
+            
             m_loadingPanel = LoadingScript.create();
         }
         else

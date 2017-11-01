@@ -40,6 +40,8 @@ public class GameScript : MonoBehaviour
 
     void Start()
     {
+        AudioScript.getAudioScript().playMusic_GameBg();
+
         initData();
 
         initUI();

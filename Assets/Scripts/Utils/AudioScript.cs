@@ -145,10 +145,16 @@ public class AudioScript : MonoBehaviour {
 
     //----------------------------------------------------------------------------播放 start
 
-    // 背景音乐
+    // 主界面背景音乐
+    public void playMusic_MainBg()
+    {
+        playMusic("Audios/bg_main");
+    }
+
+    // 游戏内背景音乐
     public void playMusic_GameBg()
     {
-        playMusic("Audios/bg_music");
+        playMusic("Audios/bg_game");
     }
 
     // 点击按钮
