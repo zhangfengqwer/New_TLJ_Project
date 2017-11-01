@@ -79,7 +79,7 @@ public class Item_Task_List_Script : MonoBehaviour {
                         obj.transform.localPosition = new Vector3(240 - (i * 70),0,0);
 
                         CommonUtil.setImageSprite(obj.GetComponent<Image>(), GameUtil.getPropIconPath(id));
-                        obj.transform.Find("Text").GetComponent<Text>().text = "*" + num.ToString();
+                        obj.transform.Find("Text").GetComponent<Text>().text = num.ToString();
                     }
                 }
             }

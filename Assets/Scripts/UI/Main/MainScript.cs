@@ -238,6 +238,11 @@ public class MainScript : MonoBehaviour
         LaBaPanelScript.create(this);
     }
 
+    public void OnClickMedalHelp()
+    {
+        
+    }
+
     //-----------------------------------------------------------------------------
 
     public void reqWaitMatchTimeOut()
