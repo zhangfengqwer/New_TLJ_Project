@@ -10,14 +10,14 @@ class CommonUtil
 
     public static int GetVipLevel(int recharge)
     {
-        if (recharge > 0 && recharge <= 6) return 0;
-        if (recharge > 6 && recharge <= 60) return 1;
-        if (recharge > 60 && recharge <= 150) return 2;
-        if (recharge > 150 && recharge <= 320) return 3;
-        if (recharge > 320 && recharge <= 660) return 4;
-        if (recharge > 660 && recharge <= 1200) return 5;
-        if (recharge > 1200 && recharge <= 2000) return 6;
-        if (recharge > 2000 && recharge <= 10000) return 7;
+        if (recharge > 0 && recharge < 6) return 0;
+        if (recharge >= 6 && recharge < 60) return 1;
+        if (recharge >= 60 && recharge < 150) return 2;
+        if (recharge >= 150 && recharge < 320) return 3;
+        if (recharge >= 320 && recharge < 660) return 4;
+        if (recharge >= 660 && recharge < 1200) return 5;
+        if (recharge >= 1200 && recharge < 2000) return 6;
+        if (recharge >= 2000 && recharge < 10000) return 7;
 
         return 0;
     }
