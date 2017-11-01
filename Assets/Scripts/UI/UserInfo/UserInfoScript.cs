@@ -16,8 +16,10 @@ public class UserInfoScript : MonoBehaviour
     public Text meiLiZhi;
     public Text Vip;
     public GameObject headIcon;
+    public GameObject AlReadyRN;
     public Button ButtonRealName;
     public Button ButtonBindPhone;
+    public Button ButtonChangePhone;
     public static UserInfoScript Instance;
 
     public static GameObject create()
@@ -48,19 +50,28 @@ public class UserInfoScript : MonoBehaviour
         if (UserData.IsRealName)
         {
             ButtonRealName.interactable = false;
+            ButtonRealName.transform.localScale = Vector3.zero;
+            AlReadyRN.transform.localScale = Vector3.one;
+
         }
         else
         {
             ButtonRealName.interactable = true;
+            ButtonRealName.transform.localScale = Vector3.one;
+            AlReadyRN.transform.localScale = Vector3.zero;
         }
 
         if (string.IsNullOrEmpty(UserData.phone))
         {
             ButtonBindPhone.interactable = true;
+            ButtonBindPhone.transform.localScale = Vector3.one;
+            ButtonChangePhone.transform.localScale = Vector3.zero;
         }
         else
         {
             ButtonBindPhone.interactable = false;
+            ButtonBindPhone.transform.localScale = Vector3.zero;
+            ButtonChangePhone.transform.localScale = Vector3.one;
         }
 
 
