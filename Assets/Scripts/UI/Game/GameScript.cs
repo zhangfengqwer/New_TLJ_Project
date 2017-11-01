@@ -40,11 +40,21 @@ public class GameScript : MonoBehaviour
 
     void Start()
     {
+        AudioScript.getAudioScript().stopMusic();
+        
+        // 3秒后播放背景音乐,每隔75秒重复播放背景音乐
+        InvokeRepeating("onInvokeStartMusic", 3,75);
+
         initData();
 
         initUI();
 
         checkGameRoomType();
+    }
+
+    void onInvokeStartMusic()
+    {
+        AudioScript.getAudioScript().playMusic_GameBg_PVP();
     }
 
     void initData()
@@ -91,13 +101,11 @@ public class GameScript : MonoBehaviour
         CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
         if (list[0].CompareTo("XiuXian") == 0)
         {
-            AudioScript.getAudioScript().playMusic_GameBg_Relax();
+
         }
         // 比赛场
         else
         {
-            AudioScript.getAudioScript().playMusic_GameBg_PVP();
-
             // 从比赛场过来，直接开始游戏
             {
                 startGame_InitUI(GameData.getInstance().m_startGameJsonData);

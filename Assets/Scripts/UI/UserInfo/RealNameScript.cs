@@ -34,7 +34,7 @@ public class RealNameScript : MonoBehaviour
         if(isSensitiveWord)
         {
             _isCorrectRealName = false;
-            ToastScript.createToast("您的账号有敏感词");
+            ToastScript.createToast("您的名字有敏感词");
         }
 
         if (_isCorrectRealName)
