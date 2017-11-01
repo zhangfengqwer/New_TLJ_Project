@@ -56,6 +56,33 @@ public class Item_Task_List_Script : MonoBehaviour {
                     CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_weiwancheng");
                 }
             }
+
+            // 奖励
+            {
+                string reward = m_taskData.reward;
+                List<string> list1 = new List<string>();
+                CommonUtil.splitStr(reward,list1,';');
+
+                for (int i = 0; i < list1.Count; i++)
+                {
+                    List<string> list2 = new List<string>();
+                    CommonUtil.splitStr(list1[i], list2, ':');
+
+                    int id = int.Parse(list2[0]);
+                    int num = int.Parse(list2[1]);
+
+                    // 奖励图标和数量
+                    {
+                        GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Task_Reward") as GameObject;
+                        GameObject obj = GameObject.Instantiate(prefab, this.transform);
+
+                        obj.transform.localPosition = new Vector3(240 - (i * 70),0,0);
+
+                        CommonUtil.setImageSprite(obj.GetComponent<Image>(), GameUtil.getPropIconPath(id));
+                        obj.transform.Find("Text").GetComponent<Text>().text = "*" + num.ToString();
+                    }
+                }
+            }
         }
     }
 
