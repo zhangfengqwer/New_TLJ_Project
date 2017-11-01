@@ -11,6 +11,8 @@ public class MainScript : MonoBehaviour
     public Image m_sign_redPoint;
     public Image m_mail_redPoint;
 
+    public Image VipImage;
+
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
@@ -123,7 +125,9 @@ public class MainScript : MonoBehaviour
         
         // 徽章
         UserMedal.text = UserData.medal+"";
+        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
 
+        VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
 
         checkRedPoint();
 
