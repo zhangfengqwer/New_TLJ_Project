@@ -6,9 +6,21 @@ using UnityEngine;
 
 public class GetSignRecordRequest : Request
 {
+    private bool flag = false;
+    private string result;
+
     private void Awake()
     {
         Tag = Consts.Tag_GetSignRecord;
+    }
+
+    void Update()
+    {
+        if (flag)
+        {
+            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
+            flag = false;
+        }
     }
 
     public override void OnRequest()
@@ -52,9 +64,12 @@ public class GetSignRecordRequest : Request
                 {
                     SignData.IsSign = false;
                 }
-//                print("SignData.IsSign:" + SignData.IsSign
-//                      + "\nSignData.SignWeekDays:" + SignData.SignWeekDays);
+                //                print("SignData.IsSign:" + SignData.IsSign
+                //                      + "\nSignData.SignWeekDays:" + SignData.SignWeekDays);
             }
+
+            result = data;
+            flag = true;
         }
         else
         {

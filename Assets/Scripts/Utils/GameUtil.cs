@@ -196,6 +196,8 @@ class GameUtil
                     break;
                 }
             }
+
+            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
         }
     }
 }

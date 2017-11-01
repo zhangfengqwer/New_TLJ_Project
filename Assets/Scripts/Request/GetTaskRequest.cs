@@ -26,6 +26,7 @@ public class GetTaskRequest : Request
                 CallBack(result);
             }
 
+            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
             flag = false;
         }
     }
@@ -47,6 +48,8 @@ public class GetTaskRequest : Request
         {
             result = data;
             flag = true;
+
+            TaskDataScript.getInstance().initJson(data);
         }
         else
         {
