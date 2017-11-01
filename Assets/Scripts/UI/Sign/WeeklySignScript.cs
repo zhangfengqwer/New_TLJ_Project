@@ -86,6 +86,7 @@ public class WeeklySignScript : MonoBehaviour
             {
               
             }
+            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
             GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
         }
     }
