@@ -1263,6 +1263,7 @@ public class GameScript : MonoBehaviour
                             {
                                 // 开始出牌倒计时
                                 m_timerScript.start(GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, false);
+                                setTimerPos(uid);
                             }
                         }
                     }
@@ -2083,31 +2084,35 @@ public class GameScript : MonoBehaviour
     {
         if (uid.CompareTo(UserData.uid) == 0)
         {
-            m_timer.transform.localPosition = new Vector3(-552,-185,0);
+            //m_timer.transform.localPosition = new Vector3(-552,-185,0);
+            m_timer.transform.localPosition = new Vector3(0,0, 0);
         }
         else
         {
             for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
             {
-                switch (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_direction)
+                if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
                 {
-                    case OtherPlayerUIScript.Direction.Direction_Up:
-                        {
-                            m_timer.transform.localPosition = new Vector3(103, 218, 0);
-                        }
-                        break;
+                    switch (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_direction)
+                    {
+                        case OtherPlayerUIScript.Direction.Direction_Up:
+                            {
+                                m_timer.transform.localPosition = new Vector3(103, 218, 0);
+                            }
+                            break;
 
-                    case OtherPlayerUIScript.Direction.Direction_Left:
-                        {
-                            m_timer.transform.localPosition = new Vector3(-470, 102, 0);
-                        }
-                        break;
+                        case OtherPlayerUIScript.Direction.Direction_Left:
+                            {
+                                m_timer.transform.localPosition = new Vector3(-470, 102, 0);
+                            }
+                            break;
 
-                    case OtherPlayerUIScript.Direction.Direction_Right:
-                        {
-                            m_timer.transform.localPosition = new Vector3(-550, -108, 0);
-                        }
-                        break;
+                        case OtherPlayerUIScript.Direction.Direction_Right:
+                            {
+                                m_timer.transform.localPosition = new Vector3(550, -108, 0);
+                            }
+                            break;
+                    }
                 }
             }
         }
