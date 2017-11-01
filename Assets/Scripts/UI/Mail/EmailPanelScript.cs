@@ -102,7 +102,7 @@ public class EmailPanelScript : MonoBehaviour
             }
         }
 
-        m_text_mailNum.text = "邮件数量：" + UserMailData.getInstance().getUserMailDataList().Count + "/50";
+        m_text_mailNum.text = UserMailData.getInstance().getUserMailDataList().Count + "/50";
     }
 
     public void setMailReaded(int email_id)
