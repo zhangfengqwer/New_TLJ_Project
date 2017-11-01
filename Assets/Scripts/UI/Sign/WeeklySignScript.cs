@@ -60,6 +60,8 @@ public class WeeklySignScript : MonoBehaviour
             AddProp(signItem.goods_prop);
 
             ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(signItem.goods_prop);
+
+            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
         }
     }
 
@@ -84,7 +86,7 @@ public class WeeklySignScript : MonoBehaviour
             {
               
             }
-            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
         }
     }
 

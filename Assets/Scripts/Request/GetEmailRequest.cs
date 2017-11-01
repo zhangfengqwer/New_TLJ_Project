@@ -26,6 +26,7 @@ public class GetEmailRequest : Request {
                 CallBack(result);
             }
 
+            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
             flag = false;
         }
     }

@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class MainScript : MonoBehaviour
 {
+    public Image m_notice_redPoint;
+    public Image m_task_redPoint;
+    public Image m_sign_redPoint;
+    public Image m_mail_redPoint;
+
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
@@ -35,12 +40,13 @@ public class MainScript : MonoBehaviour
 	        }
 	        else
 	        {
-	            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             }
 	    }
 
@@ -104,6 +110,8 @@ public class MainScript : MonoBehaviour
         // 元宝
         UserYuanBao.text = UserData.yuanbao+"";
 
+
+        checkRedPoint();
 
         Destroy(m_loadingPanel);
     }
@@ -336,6 +344,7 @@ public class MainScript : MonoBehaviour
                 ToastScript.createToast("退赛成功");
 
                 // 报名费返还通过邮件
+                LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
             }
             break;
 
@@ -351,6 +360,88 @@ public class MainScript : MonoBehaviour
     {
         GameData.getInstance().m_startGameJsonData = data;
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void checkRedPoint()
+    {
+        // 活动
+        {
+            bool isShowRedPoint = false;
+            for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
+            {
+                if (NoticelDataScript.getInstance().getNoticeDataList()[i].state == 0)
+                {
+                    isShowRedPoint = true;
+                    break;
+                }
+            }
+
+            if (isShowRedPoint)
+            {
+                m_notice_redPoint.transform.localScale = new Vector3(1,1,1);
+            }
+            else
+            {
+                m_notice_redPoint.transform.localScale = new Vector3(0, 0, 0);
+            }
+        }
+
+        // 任务
+        {
+            bool isShowRedPoint = false;
+            for (int i = 0; i < TaskDataScript.getInstance().getTaskDataList().Count; i++)
+            {
+                if ((TaskDataScript.getInstance().getTaskDataList()[i].progress == TaskDataScript.getInstance().getTaskDataList()[i].target) &&
+                    (TaskDataScript.getInstance().getTaskDataList()[i].isover == 0))
+                {
+                    isShowRedPoint = true;
+                    break;
+                }
+            }
+
+            if (isShowRedPoint)
+            {
+                m_task_redPoint.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                m_task_redPoint.transform.localScale = new Vector3(0, 0, 0);
+            }
+        }
+
+        // 签到
+        {
+            if (!SignData.IsSign)
+            {
+                m_sign_redPoint.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                m_sign_redPoint.transform.localScale = new Vector3(0, 0, 0);
+            }
+        }
+
+        // 邮件
+        {
+            bool isShowRedPoint = false;
+            for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
+            {
+                if (UserMailData.getInstance().getUserMailDataList()[i].m_state == 0)
+                {
+                    isShowRedPoint = true;
+                    break;
+                }
+            }
+
+            if (isShowRedPoint)
+            {
+                m_mail_redPoint.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                m_mail_redPoint.transform.localScale = new Vector3(0, 0, 0);
+            }
+        }
     }
 
     //-----------------------------------------------------------------------------

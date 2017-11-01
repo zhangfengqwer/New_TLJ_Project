@@ -25,6 +25,7 @@ public class LogicEnginerScript : MonoBehaviour
     private GetNoticeRequest _getNoticeRequest;
     private MainRequest _mainRequest;
     private GetRankRequest _getRankRequest;
+    private GetTaskRequest _getTaskRequest;
     [HideInInspector] public GetUserBagRequest _getUserBagRequest;
 
 
@@ -69,6 +70,7 @@ public class LogicEnginerScript : MonoBehaviour
         _getNoticeRequest = GetComponent<GetNoticeRequest>();
         _getRankRequest = GetComponent<GetRankRequest>();
         _mainRequest = GetComponent<MainRequest>();
+        _getTaskRequest = GetComponent<GetTaskRequest>();
         LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
         LogicEnginerScript.Instance.GetComponent<GetRankRequest>().CallBack = onReceive_GetGoldRank;
     }
@@ -127,7 +129,7 @@ public class LogicEnginerScript : MonoBehaviour
 
         _getNoticeRequest.OnRequest();
 
-       
+        _getTaskRequest.OnRequest();
     }
 
     //收到金币排行榜回调
