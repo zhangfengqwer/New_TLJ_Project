@@ -423,5 +423,7 @@ public class LoginScript : MonoBehaviour
     public void OnClickXieYi()
     {
         print("xieyi");
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),
+            GameObject.Find("Canvas_Middle").transform);
     }
 }

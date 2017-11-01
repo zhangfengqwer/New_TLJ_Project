@@ -128,9 +128,10 @@ public class WeeklySignScript : MonoBehaviour
             GameObject Object = signObjects[i];
             SignItem signItem = _signItems[i];
 
-            var name = Object.transform.GetChild(1);
-            var image_lingqu = Object.transform.GetChild(2);
-            var image_prop = Object.transform.GetChild(3);
+            var name = Object.transform.GetChild(2);
+            var image_lingqu = Object.transform.GetChild(3);
+            var image_prop = Object.transform.GetChild(4);
+            var guang = Object.transform.GetChild(0);
            
 
             //设置元宝等道具
@@ -167,6 +168,8 @@ public class WeeklySignScript : MonoBehaviour
                 }
                 if (totalSignDays == i)
                 {
+                    GameObject go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
+                    GameObject.Instantiate(go, guang.transform);
                     Button button = Object.AddComponent<Button>();
                     button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(() =>
@@ -175,7 +178,7 @@ public class WeeklySignScript : MonoBehaviour
                         LogicEnginerScript.Instance.GetComponent<SignRequest>().CallBack = SignCallBack;
                         LogicEnginerScript.Instance.GetComponent<SignRequest>().OnRequest();
                     });
-                    Object.GetComponent<Image>().color = new Color(1, 185/(float)255,0,1);
+//                    Object.GetComponent<Image>().color = new Color(1, 185/(float)255,0,1);
                 }
             }
             //已签到

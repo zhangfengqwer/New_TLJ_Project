@@ -8,8 +8,12 @@ public class ShopPanelScript : MonoBehaviour
 {
     private MainScript m_mainScript = null;
     public Text Vip;
+    public Image VipImage;
     public Text VipExplain;
     public Text SlideText;
+    public Text Vip1;
+    public Text Vip2;
+//    public Text SlideText;
     public Slider SliderVip;
 
 
@@ -57,7 +61,8 @@ public class ShopPanelScript : MonoBehaviour
     private void InitVip()
     {
         int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
-        Vip.text = "vip" + vipLevel;
+        VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/shop_vip_" + vipLevel);
+//        Vip.text = "vip" + vipLevel;
         int vipTotal = 0;
         switch (vipLevel)
         {
@@ -89,8 +94,11 @@ public class ShopPanelScript : MonoBehaviour
 
         int left = vipTotal - UserData.rechargeVip;
         VipExplain.text = "再充值" + left + "元到VIP" + (vipLevel + 1);
+        VipExplain.text = "累计充值"+vipTotal+ "元到VIP" + (vipLevel + 1);
         SlideText.text = UserData.rechargeVip + "/" + vipTotal;
         SliderVip.value = UserData.rechargeVip / (float) vipTotal;
+        Vip1.text = vipTotal + "元";
+        Vip2.text = "VIP"+(vipLevel + 1) +"";
     }
 
 
