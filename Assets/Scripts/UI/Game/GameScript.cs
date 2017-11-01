@@ -329,7 +329,7 @@ public class GameScript : MonoBehaviour
 
     public void onClickBag()
     {
-        BagPanelScript.create(false);
+        BagPanelScript.create(true);
     }
 
     public void onClickSet()
