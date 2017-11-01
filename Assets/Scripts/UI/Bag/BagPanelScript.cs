@@ -10,6 +10,7 @@ public class BagPanelScript : MonoBehaviour
     private UIWarpContent uiWarpContent;
     public static BagPanelScript Instance = null;
     public bool m_isNeedReqNet = true;
+    public GameObject NoProp;
 
     public static GameObject create(bool isNeedReqNet)
     {
@@ -61,7 +62,7 @@ public class BagPanelScript : MonoBehaviour
 
         Text propName = go.transform.Find("PropName").GetComponent<Text>();
         Image propImage = go.transform.Find("PropImage").GetComponent<Image>();
-        propName.text = UserData.propData[dataindex].prop_name + "x" + UserData.propData[dataindex].prop_num;
+        propName.text = UserData.propData[dataindex].prop_name + "*" + UserData.propData[dataindex].prop_num;
         propImage.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + UserData.propData[dataindex].prop_icon);
 
 
@@ -111,5 +112,15 @@ public class BagPanelScript : MonoBehaviour
         uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
         uiWarpContent.onInitializeItem = onInitializeItem;
         uiWarpContent.Init(UserData.propData.Count);
+
+        if (UserData.propData.Count == 0)
+        {
+            NoProp.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            NoProp.transform.localScale = Vector3.zero;
+        }
+
     }
 }

@@ -48,7 +48,8 @@ public class RankListCaifuScript : MonoBehaviour
                     g = 228,
                     b = 66
                 };
-                goChild.GetComponent<Image>().color = new Color(242 / (float)255, 228 / (float)255, 66 / (float)255, 1);
+                goChild.GetComponent<Image>().color =
+                    new Color(24 / (float) 255, 171 / (float) 255, 201 / (float) 255, 1);
             }
 
 
@@ -63,10 +64,12 @@ public class RankListCaifuScript : MonoBehaviour
             Image rankImage = Ranking.GetComponent<Image>();
 
             Count.GetComponent<Text>().text = "" + medalRankItemData.medal;
-            Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
+            Image_Head.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
             Name.GetComponent<Text>().text = medalRankItemData.name;
             Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
 
+            Image_icon.localScale = new Vector3((float) 1.2, (float) 1.2, 1);
             if (i < 3)
             {
                 Text_Ranking.gameObject.SetActive(false);
@@ -98,6 +101,5 @@ public class RankListCaifuScript : MonoBehaviour
         }
 
         CaifuCount.text = "我的徽章:" + UserData.medal;
-
     }
 }
