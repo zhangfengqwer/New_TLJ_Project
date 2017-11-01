@@ -6,6 +6,10 @@ using System;
 
 public class ToastScript : MonoBehaviour {
 
+    Canvas m_canvas;
+    static Text m_text;
+    static float m_speed = 2.0f;
+
     static List<GameObject> s_toactObj = new List<GameObject>();
 
 	// Use this for initialization
@@ -62,9 +66,4 @@ public class ToastScript : MonoBehaviour {
             obj.transform.localPosition = new Vector3(0, tempY - 50, 0);
         }
     }
-
-    //--------------------------------------------
-    Canvas m_canvas;
-    static Text m_text;
-    static float m_speed = 3.0f;
 }
