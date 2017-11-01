@@ -8,10 +8,14 @@ public class PlayServiceSocket: MonoBehaviour
 
     SocketUtil m_socketUtil;
     bool m_isConnServerSuccess = false;
+    bool m_isCloseSocket = false;
     List<string> m_dataList = new List<string>();
 
     public delegate void OnPlayService_Receive(string data);    // 收到服务器消息
     OnPlayService_Receive m_onPlayService_Receive_Play = null;
+
+    public delegate void OnPlayService_Close();      // 与服务器断开
+    OnPlayService_Close m_onPlayService_Receive_Close = null;
 
     public static GameObject create()
     {
@@ -46,6 +50,16 @@ public class PlayServiceSocket: MonoBehaviour
             m_isConnServerSuccess = false;
         }
 
+        if (m_isCloseSocket)
+        {
+            m_isCloseSocket = false;
+
+            if (m_onPlayService_Receive_Close != null)
+            {
+                m_onPlayService_Receive_Close();
+            }
+        }
+
         for (int i = 0; i < m_dataList.Count; i++)
         {
             m_onPlayService_Receive_Play(m_dataList[i]);
@@ -78,6 +92,11 @@ public class PlayServiceSocket: MonoBehaviour
         m_onPlayService_Receive_Play = onPlayService_Receive;
     }
 
+    public void setOnPlayService_Close(OnPlayService_Close onPlayService_Close)
+    {
+        m_onPlayService_Receive_Close = onPlayService_Close;
+    }
+
     void onSocketConnect(bool result)
     {
         if (result)
@@ -102,6 +121,9 @@ public class PlayServiceSocket: MonoBehaviour
     void onSocketClose()
     {
         Debug.Log("Play:被动与服务器断开连接,尝试重新连接");
+
+        m_isCloseSocket = true;
+
         m_socketUtil.start();
     }
 

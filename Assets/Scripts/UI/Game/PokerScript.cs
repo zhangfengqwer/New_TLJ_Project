@@ -118,13 +118,13 @@ public class PokerScript : MonoBehaviour {
         if (m_isSelect)
         {
             //gameObject.transform.localPosition -= new Vector3(0,30,0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x,-220,0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x,-240,0);
             m_isSelect = false;
         }
         else
         {
             //gameObject.transform.localPosition += new Vector3(0, 30, 0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -190, 0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -210, 0);
             m_isSelect = true;
         }
     }

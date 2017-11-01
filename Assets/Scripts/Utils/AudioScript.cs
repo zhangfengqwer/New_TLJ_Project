@@ -151,10 +151,16 @@ public class AudioScript : MonoBehaviour {
         playMusic("Audios/bg_main");
     }
 
-    // 游戏内背景音乐
-    public void playMusic_GameBg()
+    // 游戏内普通场背景音乐
+    public void playMusic_GameBg_Relax()
     {
-        playMusic("Audios/bg_game");
+        playMusic("Audios/bg_game_relax");
+    }
+
+    // 游戏内PVP背景音乐
+    public void playMusic_GameBg_PVP()
+    {
+        playMusic("Audios/bg_game_pvp");
     }
 
     // 点击按钮
