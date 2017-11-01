@@ -36,6 +36,14 @@ public class BagPanelScript : MonoBehaviour
             uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
             uiWarpContent.onInitializeItem = onInitializeItem;
             uiWarpContent.Init(UserData.propData.Count);
+            if (UserData.propData.Count == 0)
+            {
+                NoProp.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                NoProp.transform.localScale = Vector3.zero;
+            }
         }
     }
 
