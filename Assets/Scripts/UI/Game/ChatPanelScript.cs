@@ -100,7 +100,7 @@ public class ChatPanelScript : MonoBehaviour {
         }
         else
         {
-            ToastScript.createToast("不可连续发送");
+            ToastScript.createToast("请隔4秒再发送");
         }
     }
 

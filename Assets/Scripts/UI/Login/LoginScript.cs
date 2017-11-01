@@ -51,7 +51,7 @@ public class LoginScript : MonoBehaviour
         if (!OtherData.s_isFromSetToLogin)
         {
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
-            Invoke("onInvokeHealthPanel", 2);
+            Invoke("onInvokeHealthPanel", 3);
         }
     }
     void onInvokeHealthPanel()

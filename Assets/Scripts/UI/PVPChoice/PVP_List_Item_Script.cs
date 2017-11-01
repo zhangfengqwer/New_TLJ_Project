@@ -68,6 +68,14 @@ public class PVP_List_Item_Script : MonoBehaviour {
         }
 
         m_text_baomingrenshu.text = "已报名人数：" + m_PVPGameRoomData.baomingrenshu;
+
+        InvokeRepeating("onInvoke",10,10);
+    }
+
+    void onInvoke()
+    {
+        int i = RandomUtil.getRandom(-30,30);
+        m_text_baomingrenshu.text = "已报名人数：" + (m_PVPGameRoomData.baomingrenshu + i);
     }
 
     public void onClickBaoMing()
