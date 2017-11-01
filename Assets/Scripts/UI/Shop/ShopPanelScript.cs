@@ -65,25 +65,25 @@ public class ShopPanelScript : MonoBehaviour
                 vipTotal = 6;
                 break;
             case 1:
-                vipTotal = 20;
-                break;
-            case 2:
                 vipTotal = 60;
                 break;
-            case 3:
+            case 2:
                 vipTotal = 150;
                 break;
-            case 4:
+            case 3:
                 vipTotal = 320;
                 break;
-            case 5:
+            case 4:
                 vipTotal = 660;
                 break;
+            case 5:
+                vipTotal = 1200;
+                break;
             case 6:
-                vipTotal = 1000;
+                vipTotal = 2000;
                 break;
             default:
-                vipTotal = 1000;
+                vipTotal = 2000;
                 break;
         }
 
