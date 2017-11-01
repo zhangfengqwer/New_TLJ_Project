@@ -126,7 +126,6 @@ public class LogicEnginerScript : MonoBehaviour
         _getEmailRequest.OnRequest();
         _getUserBagRequest.OnRequest();
 
-
         _getNoticeRequest.OnRequest();
 
         _getTaskRequest.OnRequest();

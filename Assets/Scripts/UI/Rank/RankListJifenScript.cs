@@ -80,7 +80,7 @@ public class RankListJifenScript : MonoBehaviour
 
         if (myGoldRank == null)
         {
-            JifenRank.text = "未上榜";
+            JifenRank.text = "我的排名:未上榜";
         }
         else
         {

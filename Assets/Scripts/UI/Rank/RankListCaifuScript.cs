@@ -90,7 +90,7 @@ public class RankListCaifuScript : MonoBehaviour
 
         if (mymedalRank == null)
         {
-            CaifuRank.text = "未上榜";
+            CaifuRank.text = "我的排名:未上榜";
         }
         else
         {
