@@ -98,12 +98,10 @@ public class ShopPanelScript : MonoBehaviour
     {
         try
         {
-            print("shopDataList.Count:" + shopDataList.Count);
             for (int i = shopDataList.Count - 1; i >= 0; i--)
             {
                 uiWarpContent.DelItem(i);
             }
-            print("1");
             _shopItemDatas = new List<ShopData>();
             for (int i = 0; i < shopDataList.Count; i++)
             {
@@ -111,11 +109,8 @@ public class ShopPanelScript : MonoBehaviour
                 if (shopData.goods_type == type)
                 {
                     _shopItemDatas.Add(shopData);
-                    print("2");
                 }
             }
-            print("uiWarpContent:"+ uiWarpContent.name);
-            print("_shopItemDatas.Count:" + _shopItemDatas.Count);
             uiWarpContent.Init(_shopItemDatas.Count);
         }
         catch (Exception e)
