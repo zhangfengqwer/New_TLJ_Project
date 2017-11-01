@@ -69,7 +69,7 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
         m_text_baomingrenshu.text = "已报名人数：" + m_PVPGameRoomData.baomingrenshu;
 
-        InvokeRepeating("onInvoke",10,10);
+        InvokeRepeating("onInvoke",5,5);
     }
 
     void onInvoke()
