@@ -2140,8 +2140,6 @@ public class GameScript : MonoBehaviour
 
     void onSocketClose()
     {
-        ToastScript.createToast("与服务器断开");
-
         GameNetErrorPanelScript.create();
     }
 
