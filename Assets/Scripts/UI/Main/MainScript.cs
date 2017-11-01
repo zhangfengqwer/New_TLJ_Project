@@ -18,6 +18,7 @@ public class MainScript : MonoBehaviour
     public Text UserGold;
     public Text MyGold;
     public Text UserYuanBao;
+    public Text UserMedal;
 
     public GameObject m_laba;
     public GameObject m_headIcon;
@@ -118,7 +119,10 @@ public class MainScript : MonoBehaviour
         MyGold.text = "我的金币:"+ UserData.gold;
 
         // 元宝
-        UserYuanBao.text = UserData.yuanbao+"";
+        UserYuanBao.text = UserData.yuanbao+""; 
+        
+        // 徽章
+        UserMedal.text = UserData.medal+"";
 
 
         checkRedPoint();
