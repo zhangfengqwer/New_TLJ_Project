@@ -16,6 +16,8 @@ public class WeeklySignScript : MonoBehaviour
     public static List<SignItem> _signItems;
     private bool isSignSuccess = false;
 
+    private  GameObject go;
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/WeeklySignPanel") as GameObject;
@@ -36,9 +38,15 @@ public class WeeklySignScript : MonoBehaviour
         if (isSignSuccess)
         {
             GameObject signObject = signObjects[totalSignDays];
-            var name = signObject.transform.GetChild(1);
-            var image_lingqu = signObject.transform.GetChild(2);
-            var image_prop = signObject.transform.GetChild(3);
+            var name = signObject.transform.GetChild(2);
+            var image_lingqu = signObject.transform.GetChild(3);
+            var image_prop = signObject.transform.GetChild(4);
+            var guang = signObject.transform.GetChild(0);
+
+            //取消光
+            Transform child = guang.transform.GetChild(0);
+
+            Destroy(child.gameObject);
             Color color = signObject.GetComponent<Image>().color;
             color.r = 0.5f;
             color.g = 0.5f;
@@ -47,6 +55,7 @@ public class WeeklySignScript : MonoBehaviour
             image_prop.GetComponent<Image>().color = color;
             signObject.GetComponent<Image>().color = color;
 
+            go.transform.localScale = Vector3.zero;
 
             image_lingqu.transform.localScale = Vector3.one;
             btn_Sign.transform.localScale = Vector3.zero;
@@ -168,7 +177,7 @@ public class WeeklySignScript : MonoBehaviour
                 }
                 if (totalSignDays == i)
                 {
-                    GameObject go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
+                    go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
                     GameObject.Instantiate(go, guang.transform);
                     Button button = Object.AddComponent<Button>();
                     button.onClick.RemoveAllListeners();
