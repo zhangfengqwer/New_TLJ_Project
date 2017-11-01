@@ -32,7 +32,10 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-        AudioScript.getAudioScript().playMusic_MainBg();
+        AudioScript.getAudioScript().stopMusic();
+
+        // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
+        InvokeRepeating("onInvokeStartMusic", 3, 55);
 
         // 游戏打牌服务器
         {
@@ -78,7 +81,12 @@ public class MainScript : MonoBehaviour
             refreshUI();
         }
     }
-    
+
+    void onInvokeStartMusic()
+    {
+        AudioScript.getAudioScript().playMusic_MainBg();
+    }
+
     void Update ()
     {
 	    if (BindPhoneScript.totalTime > 0)

@@ -55,7 +55,7 @@ public class LaBaPanelScript : MonoBehaviour {
     {
         if (SensitiveWordUtil.IsSensitiveWord(m_inputField.text))
         {
-            ToastScript.createToast("您的账号有敏感词");
+            ToastScript.createToast("您的内容有敏感词");
 
             return;
         }
