@@ -419,4 +419,9 @@ public class LoginScript : MonoBehaviour
 
         m_socketUtil.sendMessage(data.ToJson());
     }
+
+    public void OnClickXieYi()
+    {
+        print("xieyi");
+    }
 }
