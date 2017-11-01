@@ -25,6 +25,12 @@ public class BagPanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+        uiWarpContent.onInitializeItem = onInitializeItem;
         // 拉取背包数据
         if (m_isNeedReqNet)
         {
@@ -33,9 +39,7 @@ public class BagPanelScript : MonoBehaviour
         }
         else
         {
-            uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
-            uiWarpContent.onInitializeItem = onInitializeItem;
-            uiWarpContent.Init(UserData.propData.Count);
+            UpdateUI();
             if (UserData.propData.Count == 0)
             {
                 NoProp.transform.localScale = Vector3.one;
@@ -62,6 +66,14 @@ public class BagPanelScript : MonoBehaviour
             }
 
             uiWarpContent.Init(UserData.propData.Count);
+            if (UserData.propData.Count == 0)
+            {
+                NoProp.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                NoProp.transform.localScale = Vector3.zero;
+            }
         }
     }
 
@@ -113,22 +125,9 @@ public class BagPanelScript : MonoBehaviour
             }
         }
 
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
-        uiWarpContent.onInitializeItem = onInitializeItem;
-        uiWarpContent.Init(UserData.propData.Count);
+        UpdateUI();
 
-        if (UserData.propData.Count == 0)
-        {
-            NoProp.transform.localScale = Vector3.one;
-        }
-        else
-        {
-            NoProp.transform.localScale = Vector3.zero;
-        }
+       
 
     }
 }
