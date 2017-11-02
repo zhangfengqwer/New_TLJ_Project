@@ -212,9 +212,17 @@ public class LoginScript : MonoBehaviour
 
             SceneManager.LoadScene("MainScene");
         }
+        else if (code == (int)TLJCommon.Consts.Code.Code_PasswordError)
+        {
+            ToastScript.createToast("密码错误");
+        }
+        else if (code == (int)TLJCommon.Consts.Code.Code_AccountNoExist)
+        {
+            ToastScript.createToast("用户不存在");
+        }
         else
         {
-            ToastScript.createToast("登录失败：" + code.ToString());
+            ToastScript.createToast("服务器内部错误");
         }
     }
 
@@ -225,15 +233,27 @@ public class LoginScript : MonoBehaviour
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
-        if (code == (int) TLJCommon.Consts.Code.Code_OK)
+        if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             string uid = jd["uid"].ToString();
             UserData.uid = uid;
             SceneManager.LoadScene("MainScene");
         }
+        else if (code == (int)TLJCommon.Consts.Code.Code_PasswordError)
+        {
+            ToastScript.createToast("密码错误");
+        }
+        else if (code == (int)TLJCommon.Consts.Code.Code_AccountNoExist)
+        {
+            ToastScript.createToast("用户不存在");
+        }
+        else if (code == (int)TLJCommon.Consts.Code.Code_CommonFail)
+        {
+            ToastScript.createToast("登录失败");
+        }
         else
         {
-            ToastScript.createToast("：" + code.ToString());
+            ToastScript.createToast("服务器内部错误");
         }
     }
 
@@ -257,9 +277,13 @@ public class LoginScript : MonoBehaviour
             
             SceneManager.LoadScene("MainScene");
         }
+        else if (code == (int)TLJCommon.Consts.Code.Code_CommonFail)
+        {
+            ToastScript.createToast("用户已存在");
+        }
         else
         {
-            ToastScript.createToast("注册失败：" + code.ToString());
+            ToastScript.createToast("服务器内部错误");
         }
     }
 
