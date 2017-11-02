@@ -16,7 +16,7 @@ public abstract class Request : MonoBehaviour
 
     private void OnDestroy()
     {
-        LogicEnginerScript.Instance.ReMoveRequest(this);
+        //LogicEnginerScript.Instance.ReMoveRequest(this);
     }
 
     public static explicit operator Request(Dictionary<string, Request>.ValueCollection v)

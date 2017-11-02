@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class LogicEnginerScript : MonoBehaviour
 {
-    public SocketUtil m_socketUtil;
-    
     public static LogicEnginerScript Instance;
-    private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
 
+    public SocketUtil m_socketUtil;
+   
+    private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
     private List<Request> requestList = new List<Request>();
 
     //请求
@@ -98,6 +98,17 @@ public class LogicEnginerScript : MonoBehaviour
         AddRequest();
         InitRequest();
         InitSocket();
+    }
+
+    public void Stop()
+    {
+        m_socketUtil.stop();
+    }
+
+    public void clear()
+    {
+        Instance = null;
+        Destroy(gameObject);
     }
 
     private void AddRequest()
