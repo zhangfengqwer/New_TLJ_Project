@@ -43,25 +43,44 @@ public class MainScript : MonoBehaviour
             if (LogicEnginerScript.Instance == null)
             {
                 LogicEnginerScript.create();
-                LogicEnginerScript.Instance.setOnLoginService_Connect(onSocketConnect);
-                LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose);
+                LogicEnginerScript.Instance.setOnLoginService_Connect(onSocketConnect_Logic);
+                LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose_Logic);
             }
-	    }
 
-        m_laBaScript = m_laba.GetComponent<LaBaScript>();
-        LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
+            LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
+
+            if (LogicEnginerScript.Instance.isConnecion())
+            {
+                {
+                    LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
+                }
+            }
+        }
+        
 
 	    // 游戏打牌服务器
 	    {
-	        if (PlayServiceSocket.s_instance == null)
-	        {
-	            PlayServiceSocket.create();
-
-                PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
-                PlayServiceSocket.s_instance.setOnPlayService_Close(null);
+            if (PlayServiceSocket.s_instance == null)
+            {
+                PlayServiceSocket.create();
                 PlayServiceSocket.s_instance.startConnect();
             }
-	    }
+
+            PlayServiceSocket.s_instance.setOnPlayService_Connect(onSocketConnect_Play);
+            PlayServiceSocket.s_instance.setOnPlayService_Receive(null);
+            PlayServiceSocket.s_instance.setOnPlayService_Close(onSocketClose_Play);
+        }
+
+        // 检测服务器是否连接
+        checkNet();
+
+        m_laBaScript = m_laba.GetComponent<LaBaScript>();
 
         if (!OtherData.s_isMainInited)
         {
@@ -96,6 +115,23 @@ public class MainScript : MonoBehaviour
     {
 //        LogicEnginerScript.Instance.m_socketUtil.stop();
         //PlayServiceSocket.getInstance().Stop();
+    }
+
+    // 检测服务器是否连接
+    void checkNet()
+    {
+        if (!LogicEnginerScript.Instance.isConnecion())
+        {
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        }
+        else if (!PlayServiceSocket.s_instance.isConnecion())
+        {
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        }
     }
 
     public void refreshUI()
@@ -459,9 +495,9 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    //-----------------------------------------------------------------------------
+    //-------------------------------------Logic服务器相关----------------------------------------
 
-    void onSocketConnect(bool result)
+    void onSocketConnect_Logic(bool result)
     {
         NetLoading.getInstance().Close();
 
@@ -483,40 +519,98 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             }
+
+            // 检测服务器是否连接
+            checkNet();
         }
         else
         {
             //Debug.Log("连接服务器失败，尝试重新连接");
 
             NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
             NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
         }
     }
 
-    void onSocketClose()
+    void onSocketClose_Logic()
     {
         //Debug.Log("被动与服务器断开连接,尝试重新连接");
 
         NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
         NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
-    void onSocketStop()
+    void onSocketStop_Logic()
     {
         //Debug.Log("主动与服务器断开连接");
 
         NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
         NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
-    void onClickChongLian()
+    void onClickChongLian_Logic()
     {
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
         LogicEnginerScript.Instance.startConnect();
+    }
+
+
+    //-------------------------------------Play服务器相关----------------------------------------
+
+    void onSocketConnect_Play(bool result)
+    {
+        NetLoading.getInstance().Close();
+
+        if (result)
+        {
+            //Debug.Log("连接服务器成功");
+
+            ToastScript.createToast("连接服务器成功");
+
+            NetLoading.getInstance().Close();
+            NetErrorPanelScript.getInstance().Close();
+
+            // 检测服务器是否连接
+            checkNet();
+        }
+        else
+        {
+            //Debug.Log("连接服务器失败，尝试重新连接");
+
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
+            NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
+        }
+    }
+
+    void onSocketClose_Play()
+    {
+        //Debug.Log("被动与服务器断开连接,尝试重新连接");
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+    }
+
+    void onSocketStop_Play()
+    {
+        //Debug.Log("主动与服务器断开连接");
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+    }
+
+    // 点击网络断开弹框中的重连按钮
+    void onClickChongLian_Play()
+    {
+        NetLoading.getInstance().Show();
+        NetErrorPanelScript.getInstance().Close();
+        PlayServiceSocket.s_instance.startConnect();
     }
 }
