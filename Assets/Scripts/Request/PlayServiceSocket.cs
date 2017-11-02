@@ -13,13 +13,13 @@ public class PlayServiceSocket: MonoBehaviour
     List<string> m_dataList = new List<string>();
     
     public delegate void OnPlayService_Receive(string data);            // 收到服务器消息
-    OnPlayService_Receive m_onPlayService_Receive_Play = null;
+    OnPlayService_Receive m_onPlayService_Receive = null;
 
     public delegate void OnPlayService_Close();                         // 与服务器断开
-    OnPlayService_Close m_onPlayService_Receive_Close = null;
+    OnPlayService_Close m_onPlayService_Close = null;
 
     public delegate void OnPlayService_Connect(bool result);           // 连接服务器结果
-    OnPlayService_Connect m_onPlayService_Receive_Connect = null;
+    OnPlayService_Connect m_onPlayService_Connect = null;
 
     public static GameObject create()
     {
@@ -54,9 +54,9 @@ public class PlayServiceSocket: MonoBehaviour
         {
             m_isCloseSocket = false;
 
-            if (m_onPlayService_Receive_Close != null)
+            if (m_onPlayService_Close != null)
             {
-                m_onPlayService_Receive_Close();
+                m_onPlayService_Close();
             }
         }
 
@@ -65,9 +65,9 @@ public class PlayServiceSocket: MonoBehaviour
         {
             m_connectState = 2;
 
-            if (m_onPlayService_Receive_Connect != null)
+            if (m_onPlayService_Connect != null)
             {
-                m_onPlayService_Receive_Connect(false);
+                m_onPlayService_Connect(false);
             }
         }
         // 连接成功
@@ -75,17 +75,17 @@ public class PlayServiceSocket: MonoBehaviour
         {
             m_connectState = 2;
 
-            if (m_onPlayService_Receive_Connect != null)
+            if (m_onPlayService_Connect != null)
             {
-                m_onPlayService_Receive_Connect(true);
+                m_onPlayService_Connect(true);
             }
         }
 
         for (int i = 0; i < m_dataList.Count; i++)
         {
-            if (m_onPlayService_Receive_Play != null)
+            if (m_onPlayService_Receive != null)
             {
-                m_onPlayService_Receive_Play(m_dataList[i]);
+                m_onPlayService_Receive(m_dataList[i]);
                 m_dataList.RemoveAt(i);
             }
         }
@@ -118,17 +118,17 @@ public class PlayServiceSocket: MonoBehaviour
 
     public void setOnPlayService_Connect(OnPlayService_Connect onPlayService_Connect)
     {
-        m_onPlayService_Receive_Connect = onPlayService_Connect;
+        m_onPlayService_Connect = onPlayService_Connect;
     }
 
     public void setOnPlayService_Receive(OnPlayService_Receive onPlayService_Receive)
     {
-        m_onPlayService_Receive_Play = onPlayService_Receive;
+        m_onPlayService_Receive = onPlayService_Receive;
     }
 
     public void setOnPlayService_Close(OnPlayService_Close onPlayService_Close)
     {
-        m_onPlayService_Receive_Close = onPlayService_Close;
+        m_onPlayService_Close = onPlayService_Close;
     }
 
     void onSocketConnect(bool result)

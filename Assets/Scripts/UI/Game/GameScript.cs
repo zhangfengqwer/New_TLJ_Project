@@ -36,8 +36,11 @@ public class GameScript : MonoBehaviour
 
     string m_tag = "";
 
+    NetErrorPanelScript m_netErrorPanelScript;
+
     void Start()
     {
+        m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
         
         // 3秒后播放背景音乐,每隔75秒重复播放背景音乐
@@ -2140,9 +2143,9 @@ public class GameScript : MonoBehaviour
     {
         //GameNetErrorPanelScript.create();
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickBack);
+        m_netErrorPanelScript.setContentText("游戏内：与服务器断开连接，点击确定回到主界面");
     }
 
     void onClickBack()

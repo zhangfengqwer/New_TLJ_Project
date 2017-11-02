@@ -12,13 +12,13 @@ public class LoginServiceSocket : MonoBehaviour {
     List<string> m_dataList = new List<string>();
 
     public delegate void OnLoginService_Receive(string data);           // 收到服务器消息
-    OnLoginService_Receive m_onLoginService_Receive_Login = null;
+    OnLoginService_Receive m_onLoginService_Receive = null;
 
     public delegate void OnLoginService_Close();                        // 与服务器断开
-    OnLoginService_Close m_onLoginService_Receive_Close = null;
+    OnLoginService_Close m_onLoginService_Close = null;
 
     public delegate void OnLoginService_Connect(bool result);           // 连接服务器结果
-    OnLoginService_Connect m_onLoginService_Receive_Connect = null;
+    OnLoginService_Connect m_onLoginService_Connect = null;
 
     public static GameObject create()
     {
@@ -51,9 +51,9 @@ public class LoginServiceSocket : MonoBehaviour {
         {
             m_isCloseSocket = false;
 
-            if (m_onLoginService_Receive_Close != null)
+            if (m_onLoginService_Close != null)
             {
-                m_onLoginService_Receive_Close();
+                m_onLoginService_Close();
             }
         }
 
@@ -62,9 +62,9 @@ public class LoginServiceSocket : MonoBehaviour {
         {
             m_connectState = 2;
 
-            if (m_onLoginService_Receive_Connect != null)
+            if (m_onLoginService_Connect != null)
             {
-                m_onLoginService_Receive_Connect(false);
+                m_onLoginService_Connect(false);
             }
         }
         // 连接成功
@@ -72,15 +72,15 @@ public class LoginServiceSocket : MonoBehaviour {
         {
             m_connectState = 2;
 
-            if (m_onLoginService_Receive_Connect != null)
+            if (m_onLoginService_Connect != null)
             {
-                m_onLoginService_Receive_Connect(true);
+                m_onLoginService_Connect(true);
             }
         }
 
         for (int i = 0; i < m_dataList.Count; i++)
         {
-            m_onLoginService_Receive_Login(m_dataList[i]);
+            m_onLoginService_Receive(m_dataList[i]);
             m_dataList.RemoveAt(i);
         }
     }
@@ -107,17 +107,17 @@ public class LoginServiceSocket : MonoBehaviour {
 
     public void setOnLoginService_Connect(OnLoginService_Connect onLoginService_Connect)
     {
-        m_onLoginService_Receive_Connect = onLoginService_Connect;
+        m_onLoginService_Connect = onLoginService_Connect;
     }
 
     public void setOnLoginService_Receive(OnLoginService_Receive onLoginService_Receive)
     {
-        m_onLoginService_Receive_Login = onLoginService_Receive;
+        m_onLoginService_Receive = onLoginService_Receive;
     }
 
     public void setOnLoginService_Close(OnLoginService_Close onLoginService_Close)
     {
-        m_onLoginService_Receive_Close = onLoginService_Close;
+        m_onLoginService_Close = onLoginService_Close;
     }
 
     void onSocketConnect(bool result)

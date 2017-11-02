@@ -33,10 +33,10 @@ public class LogicEnginerScript : MonoBehaviour
     int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
 
     public delegate void OnLogicService_Close();                        // 与服务器断开
-    OnLogicService_Close m_onLogicService_Receive_Close = null;
+    OnLogicService_Close m_onLogicService_Close = null;
 
     public delegate void OnLogicService_Connect(bool result);           // 连接服务器结果
-    OnLogicService_Connect m_onLogicService_Receive_Connect = null;
+    OnLogicService_Connect m_onLogicService_Connect = null;
 
     public static GameObject create()
     {
@@ -51,7 +51,7 @@ public class LogicEnginerScript : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else if (Instance != this)
         {
@@ -66,9 +66,9 @@ public class LogicEnginerScript : MonoBehaviour
         {
             m_isCloseSocket = false;
 
-            if (m_onLogicService_Receive_Close != null)
+            if (m_onLogicService_Close != null)
             {
-                m_onLogicService_Receive_Close();
+                m_onLogicService_Close();
             }
         }
 
@@ -77,9 +77,9 @@ public class LogicEnginerScript : MonoBehaviour
         {
             m_connectState = 2;
 
-            if (m_onLogicService_Receive_Connect != null)
+            if (m_onLogicService_Connect != null)
             {
-                m_onLogicService_Receive_Connect(false);
+                m_onLogicService_Connect(false);
             }
         }
         // 连接成功
@@ -87,9 +87,9 @@ public class LogicEnginerScript : MonoBehaviour
         {
             m_connectState = 2;
 
-            if (m_onLogicService_Receive_Connect != null)
+            if (m_onLogicService_Connect != null)
             {
-                m_onLogicService_Receive_Connect(true);
+                m_onLogicService_Connect(true);
             }
         }
     }
@@ -153,12 +153,12 @@ public class LogicEnginerScript : MonoBehaviour
 
     public void setOnLoginService_Connect(OnLogicService_Connect onLogicService_Connect)
     {
-        m_onLogicService_Receive_Connect = onLogicService_Connect;
+        m_onLogicService_Connect = onLogicService_Connect;
     }
 
     public void setOnLoginService_Close(OnLogicService_Close onLogicService_Close)
     {
-        m_onLogicService_Receive_Close = onLogicService_Close;
+        m_onLogicService_Close = onLogicService_Close;
     }
 
     private void onSocketConnect(bool result)

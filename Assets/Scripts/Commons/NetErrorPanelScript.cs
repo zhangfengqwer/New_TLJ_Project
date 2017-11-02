@@ -6,37 +6,33 @@ using UnityEngine.UI;
 
 public class NetErrorPanelScript : MonoBehaviour
 {
-    static NetErrorPanelScript s_instance = null;
-
-    static GameObject m_netErrorPanel = null;
     public Text m_text_content;
     public Button m_button;
 
     public delegate void OnClickButton();
     OnClickButton m_OnClickButton = null;
 
-    public static NetErrorPanelScript getInstance()
+    public static NetErrorPanelScript create()
     {
-        if (s_instance == null)
-        {
-            GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
-            m_netErrorPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
-            m_netErrorPanel.transform.localPosition = new Vector3(0,0,0);
+        GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
 
-            s_instance = m_netErrorPanel.GetComponent<NetErrorPanelScript>();
-        }
-        
-        return s_instance;
+        return obj.GetComponent<NetErrorPanelScript>();
+    }
+
+    private void Start()
+    {
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
     }
 
     public void Show()
     {
-        m_netErrorPanel.transform.localPosition = new Vector3(1, 1, 1);
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void Close()
     {
-        Destroy(gameObject);
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
     }
     
     public void onClickChongLian()
@@ -47,7 +43,7 @@ public class NetErrorPanelScript : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.transform.localScale = new Vector3(0, 0, 0);
         }
     }
 

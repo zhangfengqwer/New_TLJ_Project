@@ -30,9 +30,12 @@ public class MainScript : MonoBehaviour
     //发送验证码的倒计时
     private float nextTime = 1;//一秒之后执行
 
+    NetErrorPanelScript m_netErrorPanelScript;
+
     // Use this for initialization
     void Start ()
 	{
+        m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
 
         // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
@@ -48,21 +51,7 @@ public class MainScript : MonoBehaviour
             }
 
             LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
-
-            if (LogicEnginerScript.Instance.isConnecion())
-            {
-                {
-                    LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
-                    LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
-                    LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
-                    LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
-                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
-                    LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
-                    LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
-                }
-            }
         }
-        
 
 	    // 游戏打牌服务器
 	    {
@@ -76,9 +65,6 @@ public class MainScript : MonoBehaviour
             PlayServiceSocket.s_instance.setOnPlayService_Receive(null);
             PlayServiceSocket.s_instance.setOnPlayService_Close(onSocketClose_Play);
         }
-
-        // 检测服务器是否连接
-        checkNet();
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
 
@@ -122,15 +108,21 @@ public class MainScript : MonoBehaviour
     {
         if (!LogicEnginerScript.Instance.isConnecion())
         {
-            NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+            ToastScript.createToast("与Logic服务器断开连接");
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+            m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
         }
         else if (!PlayServiceSocket.s_instance.isConnecion())
         {
-            NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+            ToastScript.createToast("与Play服务器断开连接");
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
+            m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
+        }
+        else
+        {
+            ToastScript.createToast("两个服务器都成功连接");
         }
     }
 
@@ -505,10 +497,10 @@ public class MainScript : MonoBehaviour
         {
             //Debug.Log("连接服务器成功");
 
-            ToastScript.createToast("连接服务器成功");
+            ToastScript.createToast("连接Logic服务器成功");
 
             NetLoading.getInstance().Close();
-            NetErrorPanelScript.getInstance().Close();
+            m_netErrorPanelScript.Close();
 
             {
                 LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
@@ -527,9 +519,9 @@ public class MainScript : MonoBehaviour
         {
             //Debug.Log("连接服务器失败，尝试重新连接");
 
-            NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-            NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+            m_netErrorPanelScript.setContentText("连接Logic服务器失败，请重新连接");
         }
     }
 
@@ -537,25 +529,25 @@ public class MainScript : MonoBehaviour
     {
         //Debug.Log("被动与服务器断开连接,尝试重新连接");
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+        m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
     }
 
     void onSocketStop_Logic()
     {
         //Debug.Log("主动与服务器断开连接");
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+        m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
     void onClickChongLian_Logic()
     {
         NetLoading.getInstance().Show();
-        NetErrorPanelScript.getInstance().Close();
+        m_netErrorPanelScript.Close();
         LogicEnginerScript.Instance.startConnect();
     }
 
@@ -570,10 +562,10 @@ public class MainScript : MonoBehaviour
         {
             //Debug.Log("连接服务器成功");
 
-            ToastScript.createToast("连接服务器成功");
+            ToastScript.createToast("连接Play服务器成功");
 
             NetLoading.getInstance().Close();
-            NetErrorPanelScript.getInstance().Close();
+            m_netErrorPanelScript.Close();
 
             // 检测服务器是否连接
             checkNet();
@@ -582,9 +574,9 @@ public class MainScript : MonoBehaviour
         {
             //Debug.Log("连接服务器失败，尝试重新连接");
 
-            NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-            NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
+            m_netErrorPanelScript.setContentText("连接Play服务器失败，请重新连接");
         }
     }
 
@@ -592,25 +584,25 @@ public class MainScript : MonoBehaviour
     {
         //Debug.Log("被动与服务器断开连接,尝试重新连接");
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
+        m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
     }
 
     void onSocketStop_Play()
     {
         //Debug.Log("主动与服务器断开连接");
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
+        m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
     void onClickChongLian_Play()
     {
         NetLoading.getInstance().Show();
-        NetErrorPanelScript.getInstance().Close();
+        m_netErrorPanelScript.Close();
         PlayServiceSocket.s_instance.startConnect();
     }
 }
