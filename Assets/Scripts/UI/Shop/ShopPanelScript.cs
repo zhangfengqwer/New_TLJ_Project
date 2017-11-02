@@ -7,12 +7,11 @@ using UnityEngine.UI;
 public class ShopPanelScript : MonoBehaviour
 {
     private MainScript m_mainScript = null;
-    public Text Vip;
     public Image VipImage;
     public Text VipExplain;
+
     public Text SlideText;
-    public Text Vip1;
-    public Text Vip2;
+
 //    public Text SlideText;
     public Slider SliderVip;
 
@@ -93,12 +92,12 @@ public class ShopPanelScript : MonoBehaviour
         }
 
         int left = vipTotal - UserData.rechargeVip;
-        VipExplain.text = "再充值" + left + "元到VIP" + (vipLevel + 1);
-        VipExplain.text = "累计充值"+vipTotal+ "元到VIP" + (vipLevel + 1);
+
+        VipExplain.text =string.Format("累计充值" + "<color=#FF0000FF>{0}</color>" + ",即可升级到" + "<color=#FF0000FF>{1}</color>",
+            vipTotal+"元","VIP"+ (vipLevel + 1));
+            
         SlideText.text = UserData.rechargeVip + "/" + vipTotal;
         SliderVip.value = UserData.rechargeVip / (float) vipTotal;
-        Vip1.text = vipTotal + "元";
-        Vip2.text = "VIP"+(vipLevel + 1) +"";
     }
 
 
@@ -181,7 +180,6 @@ public class ShopPanelScript : MonoBehaviour
             go.transform.Find("goods_price2").localScale = Vector3.one;
             go.transform.Find("goods_price").localScale = Vector3.zero;
             goods_price2.text = price + _shopItemDatas[dataindex].price;
-        
         }
         goods_price.text = price + _shopItemDatas[dataindex].price;
 
