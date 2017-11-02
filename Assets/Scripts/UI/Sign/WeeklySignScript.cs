@@ -16,7 +16,7 @@ public class WeeklySignScript : MonoBehaviour
     public static List<SignItem> _signItems;
     private bool isSignSuccess = false;
 
-    private  GameObject go;
+    private GameObject go;
 
     public static GameObject create()
     {
@@ -96,7 +96,20 @@ public class WeeklySignScript : MonoBehaviour
             }
             else
             {
-              
+                var userPropData = new UserPropData();
+                userPropData.prop_id = propId;
+                userPropData.prop_num = propNum;
+
+                for (int j = 0; j < PropData.getInstance().getPropInfoList().Count; j++)
+                {
+                    PropInfo propInfo = PropData.getInstance().getPropInfoList()[j];
+                    if (propInfo.m_id == userPropData.prop_id)
+                    {
+                        userPropData.prop_icon = propInfo.m_icon;
+                        userPropData.prop_name = propInfo.m_name;
+                    }
+                }
+                UserData.propData.Add(userPropData);
             }
             GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
             GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
@@ -117,7 +130,7 @@ public class WeeklySignScript : MonoBehaviour
             signObjects.Add(child.gameObject);
         }
 
-        if (_signItems == null ||_signItems.Count != signObjects.Count)
+        if (_signItems == null || _signItems.Count != signObjects.Count)
         {
             print("数据初始化错误");
             return;
@@ -144,7 +157,7 @@ public class WeeklySignScript : MonoBehaviour
             var image_lingqu = Object.transform.GetChild(3);
             var image_prop = Object.transform.GetChild(4);
             var guang = Object.transform.GetChild(0);
-           
+
 
             //设置元宝等道具
             Text text1 = name.GetComponent<Text>();
@@ -158,7 +171,7 @@ public class WeeklySignScript : MonoBehaviour
             {
                 prop.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + signItem.goods_icon);
             }
-            
+
             //未签到
             if (SignData.IsSign == false)
             {
@@ -218,8 +231,6 @@ public class WeeklySignScript : MonoBehaviour
 
     public void OnSignClick()
     {
-      
-
     }
 
     public void SignCallBack(bool flag)
