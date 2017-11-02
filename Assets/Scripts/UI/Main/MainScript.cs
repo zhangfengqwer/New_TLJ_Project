@@ -62,7 +62,7 @@ public class MainScript : MonoBehaviour
             }
 
             PlayServiceSocket.s_instance.setOnPlayService_Connect(onSocketConnect_Play);
-            PlayServiceSocket.s_instance.setOnPlayService_Receive(null);
+            PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
             PlayServiceSocket.s_instance.setOnPlayService_Close(onSocketClose_Play);
         }
 
@@ -184,9 +184,7 @@ public class MainScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
-        {
-            LogicEnginerScript.Instance.GetComponent<GetPVPRoomRequest>().OnRequest();
-        }
+        reqPVPRoom();
     }
 
     public void onClickJingDianChang()
@@ -274,6 +272,16 @@ public class MainScript : MonoBehaviour
         PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
     }
 
+    public void reqPVPRoom()
+    {
+        JsonData jsonData = new JsonData();
+        jsonData["tag"] = TLJCommon.Consts.Tag_GetPVPGameRoom;
+        jsonData["uid"] = UserData.uid;
+        string requestData = jsonData.ToJson();
+
+        PlayServiceSocket.s_instance.sendMessage(requestData);
+    }
+
     //-----------------------------------------------------------------------------
     public void onReceive_Main(string data)
     {
@@ -308,6 +316,7 @@ public class MainScript : MonoBehaviour
 
             switch (playAction)
             {
+                // 加入游戏
                 case (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
                 {
                     doTask_PlayAction_JoinGame(data);
@@ -321,6 +330,7 @@ public class MainScript : MonoBehaviour
                 }
                 break;
 
+                // 开始游戏
                 case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
                 {
                     doTask_PlayAction_StartGame(data);
