@@ -75,7 +75,7 @@ public class MainScript : MonoBehaviour
         {
             OtherData.s_isMainInited = true;
 
-            NetLoading.s_instance.Show();
+            NetLoading.getInstance().Show();
         }
         else
         {
@@ -129,7 +129,7 @@ public class MainScript : MonoBehaviour
 
         checkRedPoint();
 
-        NetLoading.s_instance.Close();
+        NetLoading.getInstance().Close();
     }
 
 

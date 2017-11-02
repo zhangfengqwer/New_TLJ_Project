@@ -59,15 +59,9 @@ public class LoginScript : MonoBehaviour
     {
         try
         {
-            if (NetLoading.s_instance == null)
-            {
-                NetLoading.create();
-            }
-
-            
             LoginServiceSocket.create();
 
-            NetLoading.s_instance.Show();
+            NetLoading.getInstance().Show();
 
             LoginServiceSocket.s_instance.setOnLoginService_Connect(onSocketConnect);
             LoginServiceSocket.s_instance.setOnLoginService_Receive(onSocketReceive);
@@ -200,7 +194,7 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_Login(string data)
     {
-        NetLoading.s_instance.Close();
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
@@ -226,7 +220,7 @@ public class LoginScript : MonoBehaviour
 
     private void onReceive_Third_Login(string data)
     {
-        NetLoading.s_instance.Close();
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
@@ -245,7 +239,7 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_QuickRegister(string data)
     {
-        NetLoading.s_instance.Close();
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
@@ -278,7 +272,7 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
-        NetLoading.s_instance.Show();
+        NetLoading.getInstance().Show();
 
         {
             JsonData data = new JsonData();
@@ -336,7 +330,7 @@ public class LoginScript : MonoBehaviour
             }
         }
 
-        NetLoading.s_instance.Show();
+        NetLoading.getInstance().Show();
 
         {
             JsonData data = new JsonData();
@@ -352,57 +346,57 @@ public class LoginScript : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------
     void onSocketConnect(bool result)
     {
-        NetLoading.s_instance.Close();
+        NetLoading.getInstance().Close();
 
         if (result)
         {
-            Debug.Log("连接服务器成功");
+            //Debug.Log("连接服务器成功");
 
             ToastScript.createToast("连接服务器成功");
 
-            NetLoading.s_instance.Close();
-            NetErrorPanelScript.Close();
+            NetLoading.getInstance().Close();
+            NetErrorPanelScript.getInstance().Close();
         }
         else
         {
-            Debug.Log("连接服务器失败，尝试重新连接");
+            //Debug.Log("连接服务器失败，尝试重新连接");
 
-            NetErrorPanelScript.Show();
-            NetErrorPanelScript.s_instance.setOnClickButton(onClickChongLian);
-            NetErrorPanelScript.s_instance.setContentText("连接服务器失败，请重新连接");
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+            NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
         }
     }
 
     void onSocketReceive(string data)
     {
-        Debug.Log("收到服务器消息:" + data);
+        //Debug.Log("收到服务器消息:" + data);
         
         onReceive(data);
     }
 
     void onSocketClose()
     {
-        Debug.Log("被动与服务器断开连接,尝试重新连接");
+        //Debug.Log("被动与服务器断开连接,尝试重新连接");
 
-        NetErrorPanelScript.Show();
-        NetErrorPanelScript.s_instance.setOnClickButton(onClickChongLian);
-        NetErrorPanelScript.s_instance.setContentText("与服务器断开连接，请重新连接");
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
     void onSocketStop()
     {
-        Debug.Log("主动与服务器断开连接");
+        //Debug.Log("主动与服务器断开连接");
 
-        NetErrorPanelScript.Show();
-        NetErrorPanelScript.s_instance.setOnClickButton(onClickChongLian);
-        NetErrorPanelScript.s_instance.setContentText("与服务器断开连接，请重新连接");
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
     void onClickChongLian()
     {
-        NetLoading.s_instance.Show();
-        NetErrorPanelScript.Close();
+        NetLoading.getInstance().Show();
+        NetErrorPanelScript.getInstance().Close();
         LoginServiceSocket.s_instance.startConnect();
     }
 

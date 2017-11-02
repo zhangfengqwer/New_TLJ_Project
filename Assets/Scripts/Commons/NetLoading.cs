@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class NetLoading : MonoBehaviour {
 
-    public static NetLoading s_instance = null;
-    static GameObject s_loadingPanel = null;
+    static NetLoading s_instance = null;
+    GameObject s_loadingPanel = null;
 
-    public static void create()
+    public static NetLoading getInstance()
     {
         if (s_instance == null)
         {
             GameObject prefab = Resources.Load("Prefabs/Commons/NetLoadingUtil") as GameObject;
             GameObject obj = GameObject.Instantiate(prefab);
+
+            s_instance = obj.GetComponent<NetLoading>();
         }
+
+        return s_instance;
     }
 
-    private void Awake()
+    void Awake()
     {
-        s_instance = this.GetComponent<NetLoading>();
         DontDestroyOnLoad(gameObject);
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class NetErrorPanelScript : MonoBehaviour
 {
-    public static NetErrorPanelScript s_instance = null;
+    static NetErrorPanelScript s_instance = null;
 
     static GameObject m_netErrorPanel = null;
     public Text m_text_content;
@@ -15,31 +15,28 @@ public class NetErrorPanelScript : MonoBehaviour
     public delegate void OnClickButton();
     OnClickButton m_OnClickButton = null;
 
-    public static GameObject Show()
+    public static NetErrorPanelScript getInstance()
     {
-        if (m_netErrorPanel != null)
+        if (s_instance == null)
         {
-            Destroy(m_netErrorPanel);
+            GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
+            m_netErrorPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+            m_netErrorPanel.transform.localPosition = new Vector3(0,0,0);
+
+            s_instance = m_netErrorPanel.GetComponent<NetErrorPanelScript>();
         }
-
-        GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
-        m_netErrorPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
-
-        return m_netErrorPanel;
+        
+        return s_instance;
     }
 
-    public static void Close()
+    public void Show()
     {
-        if (m_netErrorPanel != null)
-        {
-            Destroy(m_netErrorPanel);
-        }
+        m_netErrorPanel.transform.localPosition = new Vector3(1, 1, 1);
     }
 
-    // Use this for initialization
-    void Awake()
+    public void Close()
     {
-        s_instance = GetComponent<NetErrorPanelScript>();
+        Destroy(gameObject);
     }
     
     public void onClickChongLian()
