@@ -36,8 +36,6 @@ public class GameScript : MonoBehaviour
 
     string m_tag = "";
 
-    List<string> m_dataList = new List<string>();
-
     void Start()
     {
         AudioScript.getAudioScript().stopMusic();

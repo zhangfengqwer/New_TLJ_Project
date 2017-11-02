@@ -30,8 +30,6 @@ public class MainScript : MonoBehaviour
     //发送验证码的倒计时
     private float nextTime = 1;//一秒之后执行
 
-    public GameObject m_loadingPanel;
-
     // Use this for initialization
     void Start ()
 	{
@@ -76,8 +74,8 @@ public class MainScript : MonoBehaviour
         if (!OtherData.s_isMainInited)
         {
             OtherData.s_isMainInited = true;
-            
-            m_loadingPanel = LoadingScript.create();
+
+            NetLoading.s_instance.Show();
         }
         else
         {
@@ -131,7 +129,7 @@ public class MainScript : MonoBehaviour
 
         checkRedPoint();
 
-        Destroy(m_loadingPanel);
+        NetLoading.s_instance.Close();
     }
 
 

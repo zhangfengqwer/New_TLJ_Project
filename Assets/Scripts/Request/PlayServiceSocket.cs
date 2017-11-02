@@ -19,7 +19,7 @@ public class PlayServiceSocket: MonoBehaviour
 
     public static GameObject create()
     {
-        GameObject prefab = Resources.Load("Prefabs/Logic/PlayeEnginer") as GameObject;
+        GameObject prefab = Resources.Load("Prefabs/Logic/PlayEnginer") as GameObject;
         GameObject obj = MonoBehaviour.Instantiate(prefab);
 
         return obj;

@@ -14,11 +14,6 @@ using TLJCommon;
 
 public class LoginScript : MonoBehaviour
 {
-    SocketUtil m_socketUtil;
-
-    List<string> m_dataList = new List<string>();
-    bool m_isConnServerSuccess = false;
-
     public GameObject m_healthTipPanel;
     public GameObject m_panel_choicePlatform;
     public GameObject m_panel_login;
@@ -62,33 +57,36 @@ public class LoginScript : MonoBehaviour
     // 等获取到服务器配置文件再调用
     public void init()
     {
-        m_socketUtil = new SocketUtil();
-        m_socketUtil.setOnSocketEvent_Connect(onSocketConnect);
-        m_socketUtil.setOnSocketEvent_Receive(onSocketReceive);
-        m_socketUtil.setOnSocketEvent_Close(onSocketClose);
-        m_socketUtil.setOnSocketEvent_Stop(onSocketStop);
+        try
+        {
+            if (NetLoading.s_instance == null)
+            {
+                NetLoading.create();
+            }
 
-        m_socketUtil.init(NetConfig.s_loginService_ip, NetConfig.s_loginService_port);
-        m_socketUtil.start();
+            
+            LoginServiceSocket.create();
+
+            NetLoading.s_instance.Show();
+
+            LoginServiceSocket.s_instance.setOnLoginService_Connect(onSocketConnect);
+            LoginServiceSocket.s_instance.setOnLoginService_Receive(onSocketReceive);
+            LoginServiceSocket.s_instance.setOnLoginService_Close(onSocketClose);
+            LoginServiceSocket.s_instance.startConnect();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
     }
 
     void OnDestroy()
     {
-        m_socketUtil.stop();
+        LoginServiceSocket.s_instance.Stop();
     }
 
     void Update()
     {
-        if (m_isConnServerSuccess)
-        {
-            //ToastScript.createToast("连接服务器成功");
-            m_isConnServerSuccess = false;
-        }
-        for (int i = 0; i < m_dataList.Count; i++)
-        {
-            onReceive(m_dataList[i]);
-            m_dataList.RemoveAt(i);
-        }
     }
 
     // 显示登录界面（输入账号密码）
@@ -141,8 +139,8 @@ public class LoginScript : MonoBehaviour
             jd["nickname"] = nickname;
             jd["third_id"] = openId;
             jd["platform"] = platform;
-
-            m_socketUtil.sendMessage(jd.ToJson());
+            
+            LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
         }
         catch (Exception e)
         {
@@ -202,6 +200,8 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_Login(string data)
     {
+        NetLoading.s_instance.Close();
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
@@ -217,9 +217,6 @@ public class LoginScript : MonoBehaviour
             UserData.uid = uid;
 
             SceneManager.LoadScene("MainScene");
-//            m_socketUtil.stop();
-//            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
-//            GameObject.Instantiate(LogicEnginer);
         }
         else
         {
@@ -229,6 +226,8 @@ public class LoginScript : MonoBehaviour
 
     private void onReceive_Third_Login(string data)
     {
+        NetLoading.s_instance.Close();
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
@@ -246,6 +245,8 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_QuickRegister(string data)
     {
+        NetLoading.s_instance.Close();
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
@@ -259,11 +260,7 @@ public class LoginScript : MonoBehaviour
             PlayerPrefs.SetString("password", m_inputPassword_register.text);
 
             UserData.uid = uid;
-
-            //            m_socketUtil.stop();
-            //            GameObject LogicEnginer = Resources.Load<GameObject>("Prefabs/Logic/LogicEnginer");
-            //            GameObject.Instantiate(LogicEnginer);
-            //ToastScript.createToast("注册成功");
+            
             SceneManager.LoadScene("MainScene");
         }
         else
@@ -281,14 +278,16 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
+        NetLoading.s_instance.Show();
+
         {
             JsonData data = new JsonData();
 
             data["tag"] = "Login";
             data["account"] = m_inputAccount.text;
             data["password"] = m_inputPassword.text;
-
-            m_socketUtil.sendMessage(data.ToJson());
+            
+            LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
     }
 
@@ -337,93 +336,78 @@ public class LoginScript : MonoBehaviour
             }
         }
 
+        NetLoading.s_instance.Show();
+
         {
             JsonData data = new JsonData();
 
             data["tag"] = "QuickRegister";
             data["account"] = m_inputAccount_register.text;
             data["password"] = m_inputSecondPassword_register.text;
-
-            m_socketUtil.sendMessage(data.ToJson());
+            
+            LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
     }
 
     //-------------------------------------------------------------------------------------------------------
     void onSocketConnect(bool result)
     {
+        NetLoading.s_instance.Close();
+
         if (result)
         {
             Debug.Log("连接服务器成功");
-            m_isConnServerSuccess = true;
+
+            ToastScript.createToast("连接服务器成功");
+
+            NetLoading.s_instance.Close();
+            NetErrorPanelScript.Close();
         }
         else
         {
             Debug.Log("连接服务器失败，尝试重新连接");
-            m_socketUtil.start();
+
+            NetErrorPanelScript.Show();
+            NetErrorPanelScript.s_instance.setOnClickButton(onClickChongLian);
+            NetErrorPanelScript.s_instance.setContentText("连接服务器失败，请重新连接");
         }
     }
 
     void onSocketReceive(string data)
     {
         Debug.Log("收到服务器消息:" + data);
-
-        m_dataList.Add(data);
+        
+        onReceive(data);
     }
 
     void onSocketClose()
     {
         Debug.Log("被动与服务器断开连接,尝试重新连接");
-        m_socketUtil.start();
+
+        NetErrorPanelScript.Show();
+        NetErrorPanelScript.s_instance.setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.s_instance.setContentText("与服务器断开连接，请重新连接");
     }
 
     void onSocketStop()
     {
         Debug.Log("主动与服务器断开连接");
+
+        NetErrorPanelScript.Show();
+        NetErrorPanelScript.s_instance.setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.s_instance.setContentText("与服务器断开连接，请重新连接");
     }
 
-    private string account;
-    private string password = "123";
-
-
-    public void OnClickPalyer1()
+    // 点击网络断开弹框中的重连按钮
+    void onClickChongLian()
     {
-        account = "a";
-        SendRequest();
-    }
-
-    public void OnClickPalyer2()
-    {
-        account = "b";
-        SendRequest();
-    }
-
-    public void OnClickPalyer3()
-    {
-        account = "c";
-        SendRequest();
-    }
-
-    public void OnClickPalyer4()
-    {
-        account = "d";
-        SendRequest();
-    }
-
-    private void SendRequest()
-    {
-        JsonData data = new JsonData();
-
-        data["tag"] = "Login";
-        data["account"] = account;
-        data["password"] = password;
-
-        m_socketUtil.sendMessage(data.ToJson());
+        NetLoading.s_instance.Show();
+        NetErrorPanelScript.Close();
+        LoginServiceSocket.s_instance.startConnect();
     }
 
     public void OnClickXieYi()
     {
-        print("xieyi");
-        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),
-            GameObject.Find("Canvas_Middle").transform);
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),GameObject.Find("Canvas_Middle").transform);
     }
 }
