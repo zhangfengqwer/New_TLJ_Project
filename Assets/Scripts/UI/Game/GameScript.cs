@@ -58,6 +58,7 @@ public class GameScript : MonoBehaviour
     void initData()
     {
         m_tag = GameData.getInstance().m_tag;
+        PlayServiceSocket.s_instance.setOnPlayService_Connect(null);
         PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive);
         PlayServiceSocket.s_instance.setOnPlayService_Close(onSocketClose);
     }
@@ -341,6 +342,14 @@ public class GameScript : MonoBehaviour
 
     public void onClickExitRoom()
     {
+        // 清空本局数据
+        {
+            clearData();
+            initUI();
+        }
+
+        SceneManager.LoadScene("MainScene");
+
         reqExitRoom();
     }
 
@@ -805,14 +814,6 @@ public class GameScript : MonoBehaviour
                             }
                             break;
                     }
-
-                    // 清空本局数据
-                    {
-                        clearData();
-                        initUI();
-                    }
-
-                    SceneManager.LoadScene("MainScene");
                 }
                 break;
 

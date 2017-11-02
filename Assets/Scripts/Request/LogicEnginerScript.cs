@@ -28,6 +28,7 @@ public class LogicEnginerScript : MonoBehaviour
     //判断loading中是否返回所有需要的信息
     public static List<bool> IsSuccessList = new List<bool>();
 
+    bool m_isConnecion = false;
     bool m_isCloseSocket = false;
     int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
 
@@ -91,6 +92,11 @@ public class LogicEnginerScript : MonoBehaviour
                 m_onLogicService_Receive_Connect(true);
             }
         }
+    }
+
+    public bool isConnecion()
+    {
+        return m_isConnecion;
     }
 
     private void Start()
@@ -161,23 +167,27 @@ public class LogicEnginerScript : MonoBehaviour
         {
             Debug.Log("Login:连接服务器成功");
             m_connectState = 1;
+            m_isConnecion = true;
         }
         else
         {
             Debug.Log("Login:连接服务器失败，尝试重新连接");
             m_connectState = 0;
+            m_isConnecion = false;
         }
     }
 
     private void onSocketStop()
     {
         Debug.Log("logic:主动与服务器断开连接");
+        m_isConnecion = false;
     }
 
     private void onSocketClose()
     {
         Debug.Log("logic:被动与服务器断开连接,尝试重新连接");
         m_isCloseSocket = true;
+        m_isConnecion = false;
     }
 
     private void onSocketReceive(string data)
