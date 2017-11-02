@@ -181,6 +181,7 @@ public class WeeklySignScript : MonoBehaviour
                 if (totalSignDays == i)
                 {
                     go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
+                    go.transform.localScale = Vector3.one;
                     GameObject.Instantiate(go, guang.transform);
                     Button button = Object.AddComponent<Button>();
                     button.onClick.RemoveAllListeners();

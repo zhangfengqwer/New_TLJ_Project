@@ -58,8 +58,11 @@ public class EmailPanelScript : MonoBehaviour
             bool canUseOneKeyRead = false;
             bool canUseOneKeyDelete = false;
 
-            m_button_oneKeyRead.transform.localScale = new Vector3(0,0,0);
-            m_button_oneKeyDelete.transform.localScale = new Vector3(0, 0, 0);
+            if (m_button_oneKeyRead != null)
+            {
+                m_button_oneKeyRead.transform.localScale = new Vector3(0, 0, 0);
+                m_button_oneKeyDelete.transform.localScale = new Vector3(0, 0, 0);
+            }
 
             for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
             {
