@@ -201,9 +201,7 @@ public class LoginScript : MonoBehaviour
 
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
-            string uid = jd["userInfo"]["uid"].ToString();
-            string name = jd["userInfo"]["name"].ToString();
-            int goldNum = (int) (jd["userInfo"]["goldNum"]);
+            string uid = jd["uid"].ToString();
 
             PlayerPrefs.SetString("account", m_inputAccount.text);
             PlayerPrefs.SetString("password", m_inputPassword.text);
