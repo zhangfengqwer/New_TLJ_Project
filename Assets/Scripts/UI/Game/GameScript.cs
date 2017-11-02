@@ -101,7 +101,6 @@ public class GameScript : MonoBehaviour
         CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
         if (list[0].CompareTo("XiuXian") == 0)
         {
-
         }
         // 比赛场
         else
@@ -253,7 +252,7 @@ public class GameScript : MonoBehaviour
 
     public void showWaitMatchPanel(float time)
     {
-        m_waitMatchPanel = WaitMatchPanelScript.create();
+        m_waitMatchPanel = WaitMatchPanelScript.create(GameData.getInstance().getGameRoomType());
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
         script.start(time);

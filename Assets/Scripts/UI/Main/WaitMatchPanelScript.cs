@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class WaitMatchPanelScript : MonoBehaviour {
 
     public Text m_text_time;
+    public Button m_button_TuiSai;
 
     public delegate void OnTimerEvent_TimeEnd();
     OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
@@ -14,10 +15,12 @@ public class WaitMatchPanelScript : MonoBehaviour {
     bool m_isStart = false;
     float m_time;
 
-    public static GameObject create()
+    public static GameObject create(string gameRoomType)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/WaitMatchPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<WaitMatchPanelScript>().checkHideTuiSai(gameRoomType);
 
         return obj;
     }
@@ -31,6 +34,17 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public void onClickTuiSai()
     {
         reqExitRoom();
+    }
+
+    public void checkHideTuiSai(string gameRoomType)
+    {
+        // 休闲场
+        List<string> list = new List<string>();
+        CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
+        if (list[0].CompareTo("XiuXian") == 0)
+        {
+            m_button_TuiSai.transform.localScale = new Vector3(0, 0, 0);
+        }
     }
 
 	// Update is called once per frame

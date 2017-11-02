@@ -135,9 +135,9 @@ public class MainScript : MonoBehaviour
     }
 
 
-    public void showWaitMatchPanel(float time)
+    public void showWaitMatchPanel(float time,string gameroomtype)
     {
-        WaitMatchPanelScript script = WaitMatchPanelScript.create().GetComponent<WaitMatchPanelScript>();
+        WaitMatchPanelScript script = WaitMatchPanelScript.create(gameroomtype).GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
         script.start(time);
     }
@@ -328,13 +328,14 @@ public class MainScript : MonoBehaviour
             case (int)TLJCommon.Consts.Code.Code_OK:
                 {
                     int roomId = (int)jd["roomId"];
+                    string gameroomtype = (string)jd["gameroomtype"].ToString();
+
                     ToastScript.createToast("报名成功");
 
-                    showWaitMatchPanel(10);
+                    showWaitMatchPanel(10,gameroomtype);
 
                     // 扣除报名费
                     {
-                        string gameroomtype = (string)jd["gameroomtype"].ToString();
                         string baomingfei = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype).baomingfei;
                         if (baomingfei.CompareTo("0") != 0)
                         {
