@@ -2137,7 +2137,22 @@ public class GameScript : MonoBehaviour
 
     void onSocketClose()
     {
-        GameNetErrorPanelScript.create();
+        //GameNetErrorPanelScript.create();
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
+    }
+
+    void onClickBack()
+    {
+        // 清空本局数据
+        {
+            clearData();
+            initUI();
+        }
+
+        SceneManager.LoadScene("MainScene");
     }
 
     //void onSocketClose()

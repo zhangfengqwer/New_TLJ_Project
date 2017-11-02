@@ -14,24 +14,23 @@ public class NetLoading : MonoBehaviour {
             GameObject prefab = Resources.Load("Prefabs/Commons/NetLoadingUtil") as GameObject;
             GameObject obj = GameObject.Instantiate(prefab);
 
+            DontDestroyOnLoad(obj);
+
             s_instance = obj.GetComponent<NetLoading>();
         }
 
         return s_instance;
     }
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     public void Show()
     {
-        if (s_instance != null)
+        if (s_loadingPanel != null)
         {
-            GameObject prefab = Resources.Load("Prefabs/Commons/LoadingPanel") as GameObject;
-            s_loadingPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+            Destroy(s_loadingPanel);
         }
+
+        GameObject prefab = Resources.Load("Prefabs/Commons/LoadingPanel") as GameObject;
+        s_loadingPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
     }
 
     public void Close()

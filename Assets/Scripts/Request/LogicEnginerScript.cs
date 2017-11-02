@@ -9,9 +9,7 @@ using UnityEngine.SceneManagement;
 public class LogicEnginerScript : MonoBehaviour
 {
     public SocketUtil m_socketUtil;
-
-    bool m_isConnServerSuccess = false;
-    public static bool IsLogicConnect = false;
+    
     public static LogicEnginerScript Instance;
     private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
 
@@ -19,7 +17,6 @@ public class LogicEnginerScript : MonoBehaviour
 
     //请求
     private GetSignRecordRequest _getSignRecordRequest;
-
     private GetUserInfoRequest _getUserInfoRequest;
     private GetEmailRequest _getEmailRequest;
     private GetNoticeRequest _getNoticeRequest;
@@ -28,13 +25,28 @@ public class LogicEnginerScript : MonoBehaviour
     private GetTaskRequest _getTaskRequest;
     [HideInInspector] public GetUserBagRequest _getUserBagRequest;
 
-
     //判断loading中是否返回所有需要的信息
     public static List<bool> IsSuccessList = new List<bool>();
 
+    bool m_isCloseSocket = false;
+    int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
+
+    public delegate void OnLogicService_Close();                        // 与服务器断开
+    OnLogicService_Close m_onLogicService_Receive_Close = null;
+
+    public delegate void OnLogicService_Connect(bool result);           // 连接服务器结果
+    OnLogicService_Connect m_onLogicService_Receive_Connect = null;
+
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/Logic/LogicEnginer") as GameObject;
+        GameObject obj = MonoBehaviour.Instantiate(prefab);
+
+        return obj;
+    }
+
     private void Awake()
     {
-//        Instance = this;
         if (Instance == null)
         {
             Instance = this;
@@ -48,6 +60,37 @@ public class LogicEnginerScript : MonoBehaviour
 
     private void Update()
     {
+        // 断开连接
+        if (m_isCloseSocket)
+        {
+            m_isCloseSocket = false;
+
+            if (m_onLogicService_Receive_Close != null)
+            {
+                m_onLogicService_Receive_Close();
+            }
+        }
+
+        // 连接失败
+        if (m_connectState == 0)
+        {
+            m_connectState = 2;
+
+            if (m_onLogicService_Receive_Connect != null)
+            {
+                m_onLogicService_Receive_Connect(false);
+            }
+        }
+        // 连接成功
+        else if (m_connectState == 1)
+        {
+            m_connectState = 2;
+
+            if (m_onLogicService_Receive_Connect != null)
+            {
+                m_onLogicService_Receive_Connect(true);
+            }
+        }
     }
 
     private void Start()
@@ -76,11 +119,6 @@ public class LogicEnginerScript : MonoBehaviour
     }
 
 
-    public delegate void OnLogicService_Receive(string data); // 收到服务器消息
-
-    public OnLogicService_Receive logicService_Receive = null;
-
-
     /// <summary>
     /// 设置Socket事件
     /// </summary>
@@ -96,40 +134,82 @@ public class LogicEnginerScript : MonoBehaviour
         m_socketUtil.start();
     }
 
+    public void setOnLoginService_Connect(OnLogicService_Connect onLogicService_Connect)
+    {
+        m_onLogicService_Receive_Connect = onLogicService_Connect;
+    }
+
+    public void setOnLoginService_Close(OnLogicService_Close onLogicService_Close)
+    {
+        m_onLogicService_Receive_Close = onLogicService_Close;
+    }
+
     private void onSocketConnect(bool result)
     {
         if (result)
         {
-            Debug.Log("连接服务器成功");
-            IsLogicConnect = true;
-            m_isConnServerSuccess = true;
-            //发送 一些数据的请求
-            SendRequest();
+            Debug.Log("Login:连接服务器成功");
+            m_connectState = 1;
         }
         else
         {
-            Debug.Log("连接服务器失败，尝试重新连接");
-            m_socketUtil.start();
+            Debug.Log("Login:连接服务器失败，尝试重新连接");
+            m_connectState = 0;
+        }
+    }
+
+    private void onSocketStop()
+    {
+        Debug.Log("logic:主动与服务器断开连接");
+    }
+
+    private void onSocketClose()
+    {
+        Debug.Log("logic:被动与服务器断开连接,尝试重新连接");
+        m_isCloseSocket = true;
+    }
+
+    private void onSocketReceive(string data)
+    {
+        Debug.Log("收到服务器消息:" + data);
+        try
+        {
+            JsonData jd = JsonMapper.ToObject(data);
+            var tag = jd["tag"].ToString();
+            Request request = null;
+            bool getValue = requestDic.TryGetValue(tag, out request);
+            if (getValue)
+            {
+                request.OnResponse(data);
+            }
+            else
+            {
+                _mainRequest.OnResponse(data);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
         }
     }
 
     /// <summary>
     /// loading过程中需要添加的请求
     /// </summary>
-    private void SendRequest()
-    {
-        _getUserInfoRequest.OnRequest();
-        _getSignRecordRequest.OnRequest();
-        //排行榜
-        _getRankRequest.OnRequest();
+    //private void SendRequest()
+    //{
+    //    _getUserInfoRequest.OnRequest();
+    //    _getSignRecordRequest.OnRequest();
+    //    //排行榜
+    //    _getRankRequest.OnRequest();
 
-        _getEmailRequest.OnRequest();
-        _getUserBagRequest.OnRequest();
+    //    _getEmailRequest.OnRequest();
+    //    _getUserBagRequest.OnRequest();
 
-        _getNoticeRequest.OnRequest();
+    //    _getNoticeRequest.OnRequest();
 
-        _getTaskRequest.OnRequest();
-    }
+    //    _getTaskRequest.OnRequest();
+    //}
 
     //收到金币排行榜回调
     private void onReceive_GetGoldRank(string data)
@@ -169,41 +249,6 @@ public class LogicEnginerScript : MonoBehaviour
         }
     }
 
-    private void onSocketReceive(string data)
-    {
-        Debug.Log("收到服务器消息:" + data);
-        try
-        {
-            JsonData jd = JsonMapper.ToObject(data);
-            var tag = jd["tag"].ToString();
-            Request request = null;
-            bool getValue = requestDic.TryGetValue(tag, out request);
-            if (getValue)
-            {
-                request.OnResponse(data);
-            }
-            else
-            {
-                _mainRequest.OnResponse(data);
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    private void onSocketStop()
-    {
-        Debug.Log("logic:主动与服务器断开连接");
-    }
-
-    private void onSocketClose()
-    {
-        Debug.Log("logic:被动与服务器断开连接,尝试重新连接");
-        m_socketUtil.start();
-    }
-
     public void SendMyMessage(string sendData)
     {
         m_socketUtil.sendMessage(sendData);
@@ -222,14 +267,6 @@ public class LogicEnginerScript : MonoBehaviour
     private void OnDestroy()
     {
         m_socketUtil.stop();
-    }
-
-    public static GameObject create()
-    {
-        GameObject prefab = Resources.Load("Prefabs/Logic/LogicEnginer") as GameObject;
-        GameObject obj = MonoBehaviour.Instantiate(prefab);
-
-        return obj;
     }
 
     public void startConnect()

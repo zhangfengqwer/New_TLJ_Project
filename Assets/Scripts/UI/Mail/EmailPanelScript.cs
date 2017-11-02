@@ -35,7 +35,12 @@ public class EmailPanelScript : MonoBehaviour
         }
     }
 
-    public void loadMail()
+    private void OnDestroy()
+    {
+        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = null;
+    }
+
+    void loadMail()
     {
         m_ListViewScript.clear();
         

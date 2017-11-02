@@ -38,21 +38,13 @@ public class MainScript : MonoBehaviour
         // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
         InvokeRepeating("onInvokeStartMusic", 3, 55);
 
-        // 游戏打牌服务器
+        // 逻辑服务器
         {
-	        if (LogicEnginerScript.Instance == null)
-	        {
-	            LogicEnginerScript.create();
-	        }
-	        else
-	        {
-                LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
+            if (LogicEnginerScript.Instance == null)
+            {
+                LogicEnginerScript.create();
+                LogicEnginerScript.Instance.setOnLoginService_Connect(onSocketConnect);
+                LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose);
             }
 	    }
 
@@ -64,11 +56,11 @@ public class MainScript : MonoBehaviour
 	        if (PlayServiceSocket.s_instance == null)
 	        {
 	            PlayServiceSocket.create();
-	        }
 
-	        PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
-            PlayServiceSocket.s_instance.setOnPlayService_Close(null);
-            PlayServiceSocket.s_instance.startConnect();
+                PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
+                PlayServiceSocket.s_instance.setOnPlayService_Close(null);
+                PlayServiceSocket.s_instance.startConnect();
+            }
 	    }
 
         if (!OtherData.s_isMainInited)
@@ -468,4 +460,63 @@ public class MainScript : MonoBehaviour
     }
 
     //-----------------------------------------------------------------------------
+
+    void onSocketConnect(bool result)
+    {
+        NetLoading.getInstance().Close();
+
+        if (result)
+        {
+            //Debug.Log("连接服务器成功");
+
+            ToastScript.createToast("连接服务器成功");
+
+            NetLoading.getInstance().Close();
+            NetErrorPanelScript.getInstance().Close();
+
+            {
+                LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
+            }
+        }
+        else
+        {
+            //Debug.Log("连接服务器失败，尝试重新连接");
+
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+            NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
+        }
+    }
+
+    void onSocketClose()
+    {
+        //Debug.Log("被动与服务器断开连接,尝试重新连接");
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+    }
+
+    void onSocketStop()
+    {
+        //Debug.Log("主动与服务器断开连接");
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+    }
+
+    // 点击网络断开弹框中的重连按钮
+    void onClickChongLian()
+    {
+        NetLoading.getInstance().Show();
+        NetErrorPanelScript.getInstance().Close();
+        LogicEnginerScript.Instance.startConnect();
+    }
 }

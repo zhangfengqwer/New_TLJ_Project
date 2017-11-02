@@ -124,7 +124,7 @@ public class PlayServiceSocket: MonoBehaviour
 
         m_isCloseSocket = true;
 
-        m_socketUtil.start();
+        //m_socketUtil.start();
     }
 
     void onSocketStop()
