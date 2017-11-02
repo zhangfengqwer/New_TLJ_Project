@@ -238,7 +238,8 @@ public class MainScript : MonoBehaviour
 
     public void OnClickMedalHelp()
     {
-        
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/MedalExplainPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
     }
 
     //-----------------------------------------------------------------------------
