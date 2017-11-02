@@ -10,7 +10,7 @@ class PropData
     static PropData s_instance = null;
 
     List<PropInfo> m_propInfoList = new List<PropInfo>();
-    
+
     public static PropData getInstance()
     {
         if (s_instance == null)
@@ -34,26 +34,26 @@ class PropData
         }
         catch (Exception ex)
         {
-            ToastScript.createToast("解析json出错：" + ex.Message);
+            Debug.Log("解析json出错：" + ex.Message + "\ndata");
         }
     }
 
     void init(string jsonData)
     {
         m_propInfoList.Clear();
-        
+
         JsonData jd = JsonMapper.ToObject(jsonData);
 
         for (int i = 0; i < jd.Count; i++)
         {
             PropInfo temp = new PropInfo();
 
-            temp.m_id = (int)jd[i]["prop_id"];
-            temp.m_type = (int)jd[i]["type"];
+            temp.m_id = (int) jd[i]["prop_id"];
+            temp.m_type = (int) jd[i]["type"];
 
-            temp.m_name = (string)jd[i]["prop_name"];
-            temp.m_desc = (string)jd[i]["desc"];
-            temp.m_icon = (string)jd[i]["icon"];
+            temp.m_name = (string) jd[i]["prop_name"];
+            temp.m_desc = (string) jd[i]["desc"];
+            temp.m_icon = (string) jd[i]["icon"];
 
             m_propInfoList.Add(temp);
         }
@@ -84,7 +84,7 @@ class PropData
 class PropInfo
 {
     public int m_id = 0;
-    public int m_type = 0;           // 0:可以直接使用    1:不可以直接使用
+    public int m_type = 0; // 0:可以直接使用    1:不可以直接使用
 
     public string m_name = "";
     public string m_desc = "";

@@ -48,9 +48,9 @@ public class NetConfig
                 {
                     UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
 
-                    // 使用本地配置文件
-                    //string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
-                    //httpCallBack("", jsonData);
+                     //使用本地配置文件
+//                    string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+//                    httpCallBack("", jsonData);
                 }
                 break;
 

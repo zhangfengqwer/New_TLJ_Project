@@ -42,11 +42,14 @@ public class WeeklySignScript : MonoBehaviour
             var image_lingqu = signObject.transform.GetChild(3);
             var image_prop = signObject.transform.GetChild(4);
             var guang = signObject.transform.GetChild(0);
+            //取消点击事件
+            signObject.GetComponent<Button>().enabled = false;
 
             //取消光
             Transform child = guang.transform.GetChild(0);
 
             Destroy(child.gameObject);
+
             Color color = signObject.GetComponent<Image>().color;
             color.r = 0.5f;
             color.g = 0.5f;
