@@ -394,7 +394,7 @@ public class MainScript : MonoBehaviour
             case (int)TLJCommon.Consts.Code.Code_OK:
             {
                 int roomId = (int)jd["roomId"];
-                ToastScript.createToast("退赛成功");
+                ToastScript.createToast("退赛成功,请到邮箱领取报名费");
 
                 // 报名费返还通过邮件
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
