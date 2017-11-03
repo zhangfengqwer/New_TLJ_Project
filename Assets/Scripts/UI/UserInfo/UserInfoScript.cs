@@ -43,7 +43,7 @@ public class UserInfoScript : MonoBehaviour
         gold.text = UserData.gold.ToString();
         yuanBaoCount.text = UserData.yuanbao.ToString();
         meiLiZhi.text = UserData.gameData.meiliZhi+"";
-        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
+        int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
 
         Vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
         if (UserData.IsRealName)

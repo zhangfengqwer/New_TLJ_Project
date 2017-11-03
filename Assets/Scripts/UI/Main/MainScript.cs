@@ -143,7 +143,7 @@ public class MainScript : MonoBehaviour
         
         // 徽章
         UserMedal.text = UserData.medal+"";
-        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
+        int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
 
         VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
 

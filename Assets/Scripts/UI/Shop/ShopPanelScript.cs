@@ -59,45 +59,19 @@ public class ShopPanelScript : MonoBehaviour
 
     private void InitVip()
     {
-        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
+        int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
+        int currentVipToTal = VipUtil.GetCurrentVipToTal(vipLevel);
         VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/shop_vip_" + vipLevel);
 //        Vip.text = "vip" + vipLevel;
-        int vipTotal = 0;
-        switch (vipLevel)
-        {
-            case 0:
-                vipTotal = 6;
-                break;
-            case 1:
-                vipTotal = 60;
-                break;
-            case 2:
-                vipTotal = 150;
-                break;
-            case 3:
-                vipTotal = 320;
-                break;
-            case 4:
-                vipTotal = 660;
-                break;
-            case 5:
-                vipTotal = 1200;
-                break;
-            case 6:
-                vipTotal = 2000;
-                break;
-            default:
-                vipTotal = 2000;
-                break;
-        }
+       
 
-        int left = vipTotal - UserData.rechargeVip;
+        int left = currentVipToTal - UserData.rechargeVip;
 
         VipExplain.text =string.Format("累计充值" + "<color=#FF0000FF>{0}</color>" + ",即可升级到" + "<color=#FF0000FF>{1}</color>",
-            vipTotal+"元","VIP"+ (vipLevel + 1));
+            currentVipToTal+"元","VIP"+ (vipLevel + 1));
             
-        SlideText.text = UserData.rechargeVip + "/" + vipTotal;
-        SliderVip.value = UserData.rechargeVip / (float) vipTotal;
+        SlideText.text = UserData.rechargeVip + "/" + currentVipToTal;
+        SliderVip.value = UserData.rechargeVip / (float) currentVipToTal;
     }
 
 
