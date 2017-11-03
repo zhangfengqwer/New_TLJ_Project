@@ -35,7 +35,7 @@ public class RankListJifenScript : MonoBehaviour
             GameObject goChild = GameObject.Instantiate(Item, Content.transform);
             GoldRankItemData goldRankItemData = _GoldRankList[i];
 
-            if (UserData.name.Equals(goldRankItemData.name))
+            if (goldRankItemData.name.Equals(UserData.name))
             {
                 myGoldRank = i + 1 + "";
                 goChild.GetComponent<Image>().color = new Color(24/ (float)255, 171 / (float)255, 201 / (float)255, 1);

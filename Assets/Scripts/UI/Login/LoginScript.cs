@@ -26,12 +26,14 @@ public class LoginScript : MonoBehaviour
     public InputField m_inputPassword_register;
     public InputField m_inputSecondPassword_register;
 
+    public Toggle ToggleAgree;
+
     NetErrorPanelScript m_netErrorPanelScript;
 
     void Start()
     {
         m_netErrorPanelScript = NetErrorPanelScript.create();
-
+    
         // 拉取数值表
         {
             NetConfig.reqNetConfig();
@@ -40,7 +42,8 @@ public class LoginScript : MonoBehaviour
             HuDongData.getInstance().init();
             SensitiveWordUtil.InitWords();
         }
-
+        
+        
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
 
@@ -85,6 +88,18 @@ public class LoginScript : MonoBehaviour
 
     void Update()
     {
+    }
+    
+    
+    public void OnToggleAgree()
+    {
+        var flag = ToggleAgree.isOn;
+        var Panel_EnterLogin = this.transform.Find("Panel_EnterLogin");
+        for (int i = 0; i < 3; i++)
+        {
+            Panel_EnterLogin.transform.GetChild(i).GetComponent<Button>().interactable = flag;
+        }
+        print(flag);
     }
 
     // 显示登录界面（输入账号密码）

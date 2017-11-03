@@ -19,7 +19,7 @@ public class GetUserInfoRequest : Request
         if (flag)
         {
             GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
-
+            LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             flag = false;
         }
     }

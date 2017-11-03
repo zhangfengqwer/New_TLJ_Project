@@ -38,7 +38,7 @@ public class RankListCaifuScript : MonoBehaviour
         {
             GameObject goChild = GameObject.Instantiate(Item, Content.transform);
             MedalRankItemData medalRankItemData = _medalRankItemDatas[i];
-            if (UserData.name.Equals(medalRankItemData.name))
+            if (medalRankItemData.name.Equals(UserData.name))
             {
                 mymedalRank = i + 1 + "";
                 Color color = new Color

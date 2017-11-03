@@ -143,7 +143,7 @@ public class MainScript : MonoBehaviour
         
         // 徽章
         UserMedal.text = UserData.medal+"";
-        int vipLevel = CommonUtil.GetVipLevel(UserData.rechargeVip);
+        int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
 
         VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
 
@@ -519,7 +519,6 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             }
 
             // 检测服务器是否连接
