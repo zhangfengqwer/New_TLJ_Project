@@ -516,6 +516,8 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            CancelInvoke("onInvokeCleanOutPoker");
+
             PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 
             m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
@@ -1245,6 +1247,8 @@ public class GameScript : MonoBehaviour
                                 {
                                     GameData.getInstance().m_isFreeOutPoker = true;
                                     //ToastScript.createToast("轮到你出牌：任意出");
+
+                                    Invoke("onInvokeCleanOutPoker",1);
                                 }
                                 else
                                 {
@@ -1651,6 +1655,20 @@ public class GameScript : MonoBehaviour
     void startGame()
     {
 
+    }
+
+    // 清空每个人座位上的牌
+    void onInvokeCleanOutPoker()
+    {
+        for (int i = 0; i < GameData.getInstance().m_curRoundOutPokerList.Count; i++)
+        {
+            for (int j = 0; j < GameData.getInstance().m_curRoundOutPokerList[i].Count; j++)
+            {
+                Destroy(GameData.getInstance().m_curRoundOutPokerList[i][j]);
+            }
+        }
+
+        GameData.getInstance().m_curRoundOutPokerList.Clear();
     }
 
     void createMyPokerObj()
@@ -2113,7 +2131,7 @@ public class GameScript : MonoBehaviour
 
                         case OtherPlayerUIScript.Direction.Direction_Right:
                             {
-                                m_timer.transform.localPosition = new Vector3(550, -108, 0);
+                                m_timer.transform.localPosition = new Vector3(590, 104, 0);
                             }
                             break;
                     }

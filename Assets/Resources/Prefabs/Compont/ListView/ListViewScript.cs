@@ -30,6 +30,11 @@ public class ListViewScript : MonoBehaviour {
         return m_itemList;
     }
 
+    public int getItemCount()
+    {
+        return m_itemList.Count;
+    }
+
     public void setSize(Vector2 listSize, Vector2 contentSize)
     {
         m_listSize = listSize;

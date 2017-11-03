@@ -8,9 +8,10 @@ public class ChatPanelScript : MonoBehaviour {
     public GameScript m_parentScript;
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
-
+    
     public Button m_button_chat;
     public Button m_button_biaoqing;
+    public Text m_text_weikaifang;
 
     bool m_canChat = true;
 
@@ -36,6 +37,8 @@ public class ChatPanelScript : MonoBehaviour {
     {
         m_ListViewScript.clear();
 
+        m_text_weikaifang.transform.localScale = new Vector3(0,0,0);
+
         {
             m_button_chat.transform.SetAsLastSibling();
             m_button_chat.transform.Find("Text").GetComponent<Text>().color = Color.yellow;
@@ -58,6 +61,8 @@ public class ChatPanelScript : MonoBehaviour {
     public void loadBiaoQing()
     {
         m_ListViewScript.clear();
+
+        m_text_weikaifang.transform.localScale = new Vector3(1,1,1);
 
         {
             m_button_biaoqing.transform.SetAsLastSibling();
@@ -100,7 +105,7 @@ public class ChatPanelScript : MonoBehaviour {
         }
         else
         {
-            ToastScript.createToast("请隔4秒再发送");
+            ToastScript.createToast("请隔3秒再发送");
         }
     }
 

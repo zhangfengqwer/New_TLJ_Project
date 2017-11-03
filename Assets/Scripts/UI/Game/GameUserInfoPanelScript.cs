@@ -37,18 +37,25 @@ public class GameUserInfoPanelScript : MonoBehaviour {
 
     public void setPlayer(string uid)
     {
-        PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
-
-        m_text_name.text = playerData.m_name;
-        m_text_shenglv.text = (((int)((float)playerData.m_winCount / (float)playerData.m_allGameCount)) * 100).ToString() + "%";
-        m_text_taopaolv.text = (((int)((float)playerData.m_runCount / (float)playerData.m_allGameCount) * 100)).ToString() + "%";
-        m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
-
-        m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
-
         if (uid.CompareTo(UserData.uid) == 0)
         {
+            m_text_name.text = UserData.name;
+            m_text_shenglv.text = (((int)((float)UserData.gameData.winCount / (float)UserData.gameData.allGameCount)) * 100).ToString() + "%";
+            m_text_taopaolv.text = (((int)((float)UserData.gameData.runCount / (float)UserData.gameData.allGameCount) * 100)).ToString() + "%";
+            m_text_meilizhi.text = UserData.gameData.meiliZhi.ToString();
+
             m_gameobj_down.transform.localScale = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
+
+            m_text_name.text = playerData.m_name;
+            m_text_shenglv.text = (((int)((float)playerData.m_winCount / (float)playerData.m_allGameCount)) * 100).ToString() + "%";
+            m_text_taopaolv.text = (((int)((float)playerData.m_runCount / (float)playerData.m_allGameCount) * 100)).ToString() + "%";
+            m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
+
+            m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
         }
     }
 

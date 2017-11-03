@@ -15,19 +15,18 @@ public class ToastScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        Invoke("onInvoke",2);
+    }
+
+    void onInvoke()
+    {
+        s_toactObj.Remove(gameObject);
+        Destroy(gameObject);
     }
 	
 	// Update is called once per frame
-	void Update () {
-        float move = Time.deltaTime * m_speed / (1.0f / 60.0f);
-
-        gameObject.transform.localPosition += new Vector3(0, move, 0);
-        if(gameObject.transform.localPosition.y > 360)
-        {
-            s_toactObj.Remove(gameObject);
-            Destroy(gameObject);
-            return;
-        }
+	void Update ()
+    {
 	}
 
     public static GameObject createToast (string text)
@@ -37,8 +36,6 @@ public class ToastScript : MonoBehaviour {
         m_text = obj.transform.Find("Text").GetComponent<Text>();
 
         obj.GetComponent<ToastScript>().setData(obj,text);
-
-        s_toactObj.Add(obj);
 
         return obj;
     }
@@ -51,19 +48,21 @@ public class ToastScript : MonoBehaviour {
         obj.transform.SetParent(m_canvas.transform);
         obj.transform.localScale = new Vector3(1, 1, 1);
 
-        if (s_toactObj.Count == 0)
+        if (s_toactObj.Count < 4)
         {
-            obj.transform.localPosition = new Vector3(0, 0, 0);
+            s_toactObj.Add(obj);
         }
         else
         {
-            if (s_toactObj[s_toactObj.Count - 1] == null)
-            {
-                return;
-            }
+            Destroy(s_toactObj[0]);
+            s_toactObj.RemoveAt(0);
 
-            float tempY = s_toactObj[s_toactObj.Count - 1].transform.localPosition.y;
-            obj.transform.localPosition = new Vector3(0, tempY - 50, 0);
+            s_toactObj.Add(obj);
+        }
+
+        for (int i = s_toactObj.Count - 1; i >= 0; i--)
+        {
+            s_toactObj[i].transform.localPosition = new Vector3(0, -180 + (s_toactObj.Count - i) * 60, 0);
         }
     }
 }

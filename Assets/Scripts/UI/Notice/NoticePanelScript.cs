@@ -10,6 +10,7 @@ public class NoticePanelScript : MonoBehaviour
     ListViewScript m_ListViewScript;
 
     public Button m_button_tab;
+    public Text m_text_zanwu;
 
     int m_tabType = 1;      // 1：活动   2：公告
 
@@ -36,8 +37,6 @@ public class NoticePanelScript : MonoBehaviour
     // 显示活动
     public void loadHuoDong()
     {
-        m_ListViewScript.clear();
-
         for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
         {
             if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 0)
@@ -54,13 +53,23 @@ public class NoticePanelScript : MonoBehaviour
         }
 
         m_ListViewScript.addItemEnd();
+
+        if (m_ListViewScript.getItemCount() > 0)
+        {
+            m_text_zanwu.transform.localScale = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            m_text_zanwu.transform.localScale = new Vector3(1, 1, 1);
+            m_text_zanwu.text = "暂无活动";
+        }
     }
 
     // 显示公告
     public void loadGongGao()
     {
         m_ListViewScript.clear();
-
+        
         for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
         {
             if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 1)
@@ -77,6 +86,16 @@ public class NoticePanelScript : MonoBehaviour
         }
 
         m_ListViewScript.addItemEnd();
+
+        if (m_ListViewScript.getItemCount() > 0)
+        {
+            m_text_zanwu.transform.localScale = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            m_text_zanwu.transform.localScale = new Vector3(1, 1, 1);
+            m_text_zanwu.text = "暂无公告";
+        }
     }
 
     public void setNoticeReaded(int notice_id)

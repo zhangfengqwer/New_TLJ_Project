@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WaitOtherPlayerScript : MonoBehaviour {
 
+    public string m_showText;
     Text m_text;
     int m_time_index = 1;
 
@@ -30,28 +31,28 @@ public class WaitOtherPlayerScript : MonoBehaviour {
         {
             case 1:
                 {
-                    m_text.text = "正在等待其他玩家 ";
+                    m_text.text = m_showText;
                     m_time_index = 2;
                 }
                 break;
 
             case 2:
                 {
-                    m_text.text = "正在等待其他玩家 .";
+                    m_text.text = m_showText + ".";
                     m_time_index = 3;
                 }
                 break;
 
             case 3:
                 {
-                    m_text.text = "正在等待其他玩家 ..";
+                    m_text.text = m_showText + "..";
                     m_time_index = 4;
                 }
                 break;
 
             case 4:
                 {
-                    m_text.text = "正在等待其他玩家 ...";
+                    m_text.text = m_showText + "...";
                     m_time_index = 1;
                 }
                 break;

@@ -304,7 +304,7 @@ public class LoginScript : MonoBehaviour
             data["tag"] = "Login";
             data["account"] = m_inputAccount.text;
             data["password"] = m_inputPassword.text;
-            
+
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
     }
