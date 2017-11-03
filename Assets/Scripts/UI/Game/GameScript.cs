@@ -1130,7 +1130,10 @@ public class GameScript : MonoBehaviour
                         {
                             for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
                             {
-                                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().setIsSelect(false);
+                                if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+                                {
+                                    GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+                                }
                             }
                         }
 
