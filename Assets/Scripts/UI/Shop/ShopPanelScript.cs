@@ -198,4 +198,9 @@ public class ShopPanelScript : MonoBehaviour
             Init();
         }
     }
+
+    public void OnClickVipHelp()
+    {
+        ToastScript.createToast("vip特权完善中");
+    }
 }

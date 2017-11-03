@@ -21,6 +21,7 @@ public class LiangZhu : MonoBehaviour
     public Button ButtonFang;
     public GameObject GiveUp;
     private List<PokerInfo> liangzhuPoker;
+    private List<PokerInfo> handerPoker;
 
     public UseType m_useType;
 
@@ -41,6 +42,8 @@ public class LiangZhu : MonoBehaviour
 
     public void UpdateUi(List<PokerInfo> handerPoker, List<PokerInfo> lastLiangZhuPoker)
     {
+        this.handerPoker = handerPoker;
+         
         ButtonFang.interactable = false;
         ButtonMei.interactable = false;
         ButtonHong.interactable = false;
@@ -103,22 +106,27 @@ public class LiangZhu : MonoBehaviour
     public void OnClickHei()
     {
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
+        UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
     }
     public void OnClickhong()
     {
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
+        UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
     }
     public void OnClickMei()
     {
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
+        UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
     }
     public void OnClickFang()
     {
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
+        UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
     }
     public void OnClickWang()
     {
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
+        UpdateUi(handerPoker,GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
     }
 
     public void OnClickGiveUp()

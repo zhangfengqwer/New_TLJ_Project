@@ -519,7 +519,6 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
-                LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             }
 
             // 检测服务器是否连接
