@@ -103,7 +103,7 @@ public class WaitMatchPanelScript : MonoBehaviour {
 
         data["tag"] = TLJCommon.Consts.Tag_JingJiChang;
         data["uid"] = UserData.uid;
-        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_ExitPVP;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 

@@ -324,9 +324,9 @@ public class MainScript : MonoBehaviour
                 break;
                 
                 // 退出游戏
-                case (int)TLJCommon.Consts.PlayAction.PlayAction_ExitGame:
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_ExitPVP:
                 {
-                    doTask_PlayAction_ExitGame(data);
+                    doTask_PlayAction_ExitPVP(data);
                 }
                 break;
 
@@ -384,7 +384,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void doTask_PlayAction_ExitGame(string data)
+    void doTask_PlayAction_ExitPVP(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
