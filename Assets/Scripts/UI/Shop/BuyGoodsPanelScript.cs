@@ -188,8 +188,8 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
                     GameUtil.changeData(prop_id, m_goods_num * prop_num);
 
-                    ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>()
-                        .setData(prop_id + ":" + m_goods_num * prop_num);
+                    //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(prop_id + ":" + m_goods_num * prop_num);
+                    ShowRewardPanelScript.Show(prop_id + ":" + m_goods_num * prop_num);
                 }
             }
 

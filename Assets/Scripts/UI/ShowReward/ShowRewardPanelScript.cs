@@ -5,21 +5,26 @@ using UnityEngine.UI;
 
 public class ShowRewardPanelScript : MonoBehaviour {
 
+    static List<string> s_rewardList = new List<string>();
+
     public Image m_image_itemContent;
 
-    public static GameObject create()
+    public static void Show(string reward)
     {
-        GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShowRewardPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+        if (s_rewardList.Count == 0)
+        {
+            s_rewardList.Add(reward);
 
-        return obj;
+            GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShowRewardPanel") as GameObject;
+            GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+
+            obj.GetComponent<ShowRewardPanelScript>().setData(reward);
+        }
+        else
+        {
+            s_rewardList.Add(reward);
+        }
     }
-
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
 
     public void setData(string reward)
     {
@@ -47,6 +52,15 @@ public class ShowRewardPanelScript : MonoBehaviour {
 
     public void onClickClose()
     {
+        s_rewardList.RemoveAt(0);
         Destroy(gameObject);
+
+        if (s_rewardList.Count > 0)
+        {
+            GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShowRewardPanel") as GameObject;
+            GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+
+            obj.GetComponent<ShowRewardPanelScript>().setData(s_rewardList[0]);
+        }
     }
 }

@@ -123,7 +123,8 @@ public class Item_Task_List_Script : MonoBehaviour {
                 GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
             }
 
-            ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
+            //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
+            ShowRewardPanelScript.Show(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
         }
     }
 }

@@ -71,7 +71,8 @@ public class WeeklySignScript : MonoBehaviour
             print(signItem.goods_prop);
             AddProp(signItem.goods_prop);
 
-            ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(signItem.goods_prop);
+            //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(signItem.goods_prop);
+            ShowRewardPanelScript.Show(signItem.goods_prop);
 
             GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
         }
