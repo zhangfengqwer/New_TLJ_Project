@@ -37,23 +37,27 @@ public class Item_Task_List_Script : MonoBehaviour {
             m_text_content.text = m_taskData.content;
             m_text_progress.text = "进度: " + m_taskData.progress +"/" + m_taskData.target;
 
-            // 已完成
+            // 已领取
             if (m_taskData.isover == 1)
             {
                 m_button_wancheng.interactable = false;
                 CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yilingque");
+                m_button_wancheng.GetComponent<Image>().SetNativeSize();
+                m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "";
             }
             else
             {
+                // 完成待领取
                 if (m_taskData.progress == m_taskData.target)
                 {
                     m_button_wancheng.interactable = true;
-                    CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yiwancheng");
+                    m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "领取";
                 }
+                // 未完成
                 else
                 {
                     m_button_wancheng.interactable = false;
-                    CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_weiwancheng");
+                    m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "未完成";
                 }
             }
 

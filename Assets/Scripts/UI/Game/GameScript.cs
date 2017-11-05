@@ -10,6 +10,7 @@ public class GameScript : MonoBehaviour
 {
     public Button m_buttonStartGame;
     public Button m_buttonOutPoker;
+    public Button m_buttonTiShi;
     public Button m_buttonMaiDi;
     public Button m_buttonChat;
     public Button m_buttonTuoGuan;
@@ -83,6 +84,7 @@ public class GameScript : MonoBehaviour
         }
 
         m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
+        m_buttonTiShi.transform.localScale = new Vector3(0, 0, 0);
         m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
         m_buttonChat.transform.localScale = new Vector3(0, 0, 0);
         m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
@@ -361,6 +363,11 @@ public class GameScript : MonoBehaviour
         reqOutPoker();
     }
 
+    public void onClickTiShi()
+    {
+        tishi();
+    }
+
     public void onClickQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
         //m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
@@ -431,6 +438,49 @@ public class GameScript : MonoBehaviour
         else
         {
             ToastScript.createToast("您没有记牌器可用");
+        }
+    }
+
+    void tishi()
+    {
+        // 所有牌设为未选中
+        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+            {
+                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+            }
+        }
+
+        // 自由出牌
+        if (GameData.getInstance().m_isFreeOutPoker)
+        {
+           
+            GameData.getInstance().m_myPokerObjList[GameData.getInstance().m_myPokerObjList.Count - 1].GetComponent<PokerScript>().onClickPoker();
+        }
+        // 跟牌
+        else
+        {
+            List<TLJCommon.PokerInfo> listPoker = PlayRuleUtil.GetPokerWhenTuoGuan(GameData.getInstance().m_curRoundFirstOutPokerList, GameData.getInstance().m_myPokerList, GameData.getInstance().m_levelPokerNum, GameData.getInstance().m_masterPokerType);
+            if (listPoker.Count == GameData.getInstance().m_curRoundFirstOutPokerList.Count)
+            {
+                for (int i = 0; i < listPoker.Count; i++)
+                {
+                    for (int j = GameData.getInstance().m_myPokerObjList.Count - 1; j >= 0; j--)
+                    {
+                        PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[j].GetComponent<PokerScript>();
+
+                        if ((pokerScript.getPokerNum() == listPoker[i].m_num) && (pokerScript.getPokerType() == (int)listPoker[i].m_pokerType))
+                        {
+                            if (!pokerScript.getIsSelect())
+                            {
+                                pokerScript.onClickPoker();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1266,12 +1316,20 @@ public class GameScript : MonoBehaviour
                                 {
                                     Invoke("onInvokeTuoGuan", GameData.getInstance().m_tuoGuanOutPokerTime);
                                 }
+
+                                if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
+                                    (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
+                                {
+                                    m_buttonTiShi.transform.localScale = new Vector3(1, 1, 1);
+                                }
                             }
                             else
                             {
                                 // 开始出牌倒计时
                                 m_timerScript.start(GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, false);
                                 setTimerPos(uid);
+
+                                m_buttonTiShi.transform.localScale = new Vector3(0, 0, 0);
                             }
                         }
                     }

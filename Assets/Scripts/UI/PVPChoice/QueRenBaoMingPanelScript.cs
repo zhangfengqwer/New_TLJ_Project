@@ -9,6 +9,7 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
 
     public Text m_text_roomname;
     public Text m_text_baomingfei;
+    public Image m_image_baomingfei_icon;
     public PVPGameRoomData m_PVPGameRoomData;
 
     MainScript m_mainScript;
@@ -30,21 +31,19 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
         if (m_PVPGameRoomData.baomingfei.CompareTo("0") == 0)
         {
             m_text_baomingfei.text = "免费";
+            m_image_baomingfei_icon.transform.localScale = new Vector3(0,0,0);
         }
         else
         {
             List<string> list = new List<string>();
             CommonUtil.splitStr(m_PVPGameRoomData.baomingfei, list, ':');
 
-            if (list[0].CompareTo("1") == 0)
-            {
-                m_text_baomingfei.text = "金币*" + list[1];
-            }
-            else
-            {
-                string prop_name = PropData.getInstance().getPropInfoById(int.Parse(list[0])).m_name;
-                m_text_baomingfei.text = prop_name + "*" + list[1];
-            }
+            // 报名费
+            m_text_baomingfei.text = list[1];
+
+            // 报名费类型：金币、蓝钻石
+            m_image_baomingfei_icon.transform.localScale = new Vector3(1, 1, 1);
+            CommonUtil.setImageSprite(m_image_baomingfei_icon,GameUtil.getPropIconPath(int.Parse(list[0])));
         }
     }
 
