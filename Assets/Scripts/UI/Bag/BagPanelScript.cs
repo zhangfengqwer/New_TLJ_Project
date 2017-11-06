@@ -65,6 +65,13 @@ public class BagPanelScript : MonoBehaviour
                 deleteItem(i);
             }
 
+            foreach (var prop in UserData.propData)
+            {
+                Debug.Log(prop.prop_icon + " " + prop.prop_name + " " + prop.prop_id);
+                Debug.Log("-------");
+            }
+
+
             uiWarpContent.Init(UserData.propData.Count);
             if (UserData.propData.Count == 0)
             {
@@ -124,10 +131,6 @@ public class BagPanelScript : MonoBehaviour
                 return;
             }
         }
-
         UpdateUI();
-
-       
-
     }
 }

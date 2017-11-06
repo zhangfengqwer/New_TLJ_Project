@@ -3,6 +3,7 @@ using LitJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TLJCommon;
 
 public class MainScript : MonoBehaviour
 {
@@ -518,6 +519,7 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
                 LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
@@ -535,6 +537,38 @@ public class MainScript : MonoBehaviour
             m_netErrorPanelScript.setContentText("连接Logic服务器失败，请重新连接");
         }
     }
+
+    public void onReceive_GetUserBag(string data)
+    {
+        {
+            JsonData jsonData = JsonMapper.ToObject(data);
+            var code = (int)jsonData["code"];
+            if (code == (int)Consts.Code.Code_OK)
+            {
+                UserData.propData = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+                for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)
+                {
+                    PropInfo propInfo = PropData.getInstance().getPropInfoList()[i];
+                    for (int j = 0; j < UserData.propData.Count; j++)
+                    {
+                        UserPropData userPropData = UserData.propData[j];
+                        if (propInfo.m_id == userPropData.prop_id)
+                        {
+                            userPropData.prop_icon = propInfo.m_icon;
+                            userPropData.prop_name = propInfo.m_name;
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                ToastScript.createToast("用户背包数据错误");
+                return;
+            }
+        }
+    }
+
 
     void onSocketClose_Logic()
     {
