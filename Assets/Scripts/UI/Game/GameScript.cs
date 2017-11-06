@@ -384,15 +384,14 @@ public class GameScript : MonoBehaviour
 
     public void onClickExitRoom()
     {
-        // 清空本局数据
+        if (isPVP())
         {
-            clearData();
-            initUI();
+            QueRenExitPanelScript.create(this, "是否确定退出？报名费不可退还。");
         }
-
-        SceneManager.LoadScene("MainScene");
-
-        reqExitRoom();
+        else
+        {
+            QueRenExitPanelScript.create(this, "是否确定退出？");
+        }
     }
 
     public void onClickOutPoker()
@@ -476,6 +475,19 @@ public class GameScript : MonoBehaviour
         {
             ToastScript.createToast("您没有记牌器可用");
         }
+    }
+
+    public void exitRoom()
+    {
+        // 清空本局数据
+        {
+            clearData();
+            //initUI();
+        }
+
+        SceneManager.LoadScene("MainScene");
+
+        reqExitRoom();
     }
 
     void tishi()

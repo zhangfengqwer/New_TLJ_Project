@@ -165,7 +165,7 @@ class GameUtil
         if (id == 1)
         {
             UserData.gold += num;
-            Debug.Log(UserData.gold);
+
             if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
             {
                 GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();

@@ -65,6 +65,6 @@ public class PVPGameResultPanelScript : MonoBehaviour
 
     public void onClickExit()
     {
-        m_parentScript.onClickExitRoom();
+        m_parentScript.exitRoom();
     }
 }
