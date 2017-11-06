@@ -200,4 +200,25 @@ class GameUtil
             GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
         }
     }
+
+    public static string getOneTips()
+    {
+        string str = "";
+
+        int i = RandomUtil.getRandom(1, 3);
+        if (i == 1)
+        {
+            str = "系统：欢迎来到疯狂升级 点击喇叭可进行全服喊话哦~~";
+        }
+        else if (i == 2)
+        {
+            str = "系统：关注微信公众号：“星焱娱乐”，即送丰厚大礼噢~";
+        }
+        else if (i == 3)
+        {
+            str = "系统：弹框界面点击屏幕空白处返回";
+        }
+
+        return str;
+    }
 }

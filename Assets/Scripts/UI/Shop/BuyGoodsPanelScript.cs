@@ -17,6 +17,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public Button m_button_jia;
     public Button m_button_max;
     public Button m_button_buy;
+    public Text m_text_shiduyule;
 
     ShopData m_shopData = null;
 
@@ -71,6 +72,12 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 m_button_jian.transform.localScale = new Vector3(0, 0, 0);
                 m_button_jia.transform.localScale = new Vector3(0, 0, 0);
                 m_button_max.transform.localScale = new Vector3(0, 0, 0);
+
+                m_text_shiduyule.transform.localScale = new Vector3(1,1,1);
+            }
+            else
+            {
+                m_text_shiduyule.transform.localScale = new Vector3(0, 0, 0);
             }
         }
     }

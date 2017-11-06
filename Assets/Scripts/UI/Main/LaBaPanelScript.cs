@@ -53,6 +53,13 @@ public class LaBaPanelScript : MonoBehaviour {
 
     public void onClickSend()
     {
+        if (m_inputField.text.Length > 30)
+        {
+            ToastScript.createToast("发送内容不可超过30个字符");
+
+            return;
+        }
+
         if (SensitiveWordUtil.IsSensitiveWord(m_inputField.text))
         {
             ToastScript.createToast("您的内容有敏感词");
