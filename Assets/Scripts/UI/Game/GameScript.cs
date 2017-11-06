@@ -8,12 +8,19 @@ using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour
 {
+    public GameObject m_gameInfoSign;
+
+    public Button m_button_bag;
+    public Button m_button_set;
+    public Button m_button_exit;
+
     public Button m_buttonStartGame;
     public Button m_buttonOutPoker;
     public Button m_buttonTiShi;
     public Button m_buttonMaiDi;
     public Button m_buttonChat;
     public Button m_buttonTuoGuan;
+    public Button m_buttonJiPaiQi;
     public Text m_textScore;
     public Image m_imageMasterPokerType;
     public Text m_text_myLevelPoker;
@@ -71,6 +78,9 @@ public class GameScript : MonoBehaviour
 
     void initUI()
     {
+        m_gameInfoSign.transform.localScale = new Vector3(0,0,0);
+        m_buttonJiPaiQi.transform.localScale = new Vector3(0, 0, 0);
+
         // 初始化定时器
         {
             m_timer = TimerScript.createTimer();
@@ -100,17 +110,32 @@ public class GameScript : MonoBehaviour
         }
     }
 
+    bool isPVP()
+    {
+        bool b = false;
+        List<string> list = new List<string>();
+        CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
+        if (list[0].CompareTo("PVP") == 0)
+        {
+            b = true;
+        }
+
+        return b;
+    }
+
     void checkGameRoomType()
     {
         // 休闲场
-        List<string> list = new List<string>();
-        CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
-        if (list[0].CompareTo("XiuXian") == 0)
+        if (!isPVP())
         {
+
         }
         // 比赛场
         else
         {
+            m_button_bag.transform.localScale = new Vector3(0, 0, 0);
+            m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
+
             // 从比赛场过来，直接开始游戏
             {
                 startGame_InitUI(GameData.getInstance().m_startGameJsonData);
@@ -125,10 +150,17 @@ public class GameScript : MonoBehaviour
             JsonData jd = JsonMapper.ToObject(jsonData);
 
             {
+                if (!isPVP())
+                {
+                    m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                }
+
                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);          // 禁用开始游戏按钮
                 m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
-                m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
                 m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
+
+                // 显示左上角提示牌信息
+                m_gameInfoSign.transform.localScale = new Vector3(1, 1, 1);
 
                 {
                     // 上边的玩家
@@ -352,15 +384,14 @@ public class GameScript : MonoBehaviour
 
     public void onClickExitRoom()
     {
-        // 清空本局数据
+        if (isPVP())
         {
-            clearData();
-            initUI();
+            QueRenExitPanelScript.create(this, "是否确定退出？报名费不可退还。");
         }
-
-        SceneManager.LoadScene("MainScene");
-
-        reqExitRoom();
+        else
+        {
+            QueRenExitPanelScript.create(this, "是否确定退出？");
+        }
     }
 
     public void onClickOutPoker()
@@ -444,6 +475,19 @@ public class GameScript : MonoBehaviour
         {
             ToastScript.createToast("您没有记牌器可用");
         }
+    }
+
+    public void exitRoom()
+    {
+        // 清空本局数据
+        {
+            clearData();
+            //initUI();
+        }
+
+        SceneManager.LoadScene("MainScene");
+
+        reqExitRoom();
     }
 
     void tishi()
@@ -1546,12 +1590,21 @@ public class GameScript : MonoBehaviour
                         ToastScript.createToast("游戏结束，稍后请在邮箱查看奖励");
 
                         int mingci = (int)jd["mingci"];
+                        string pvpreward = jd["pvpreward"].ToString();
 
+                        // 没有名次
+                        if (pvpreward.CompareTo("") == 0)
+                        {
+                            m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
+                            PVPGameResultPanelScript script = m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
+                            script.setData(false);
+                        }
                         // 显示pvp结束界面
+                        else
                         {
                             GameObject obj = PVPEndPanelScript.create(this);
                             PVPEndPanelScript script = obj.GetComponent<PVPEndPanelScript>();
-                            script.setData(mingci);
+                            script.setData(mingci, pvpreward);
                         }
                     }
                     catch (Exception ex)

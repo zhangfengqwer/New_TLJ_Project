@@ -41,7 +41,7 @@ public class LoginScript : MonoBehaviour
         // 拉取数值表
         {
             NetConfig.reqNetConfig();
-            PropData.getInstance().reqHttp();
+            PropData.getInstance().init();
             ChatData.getInstance().init();
             HuDongData.getInstance().init();
             SensitiveWordUtil.InitWords();

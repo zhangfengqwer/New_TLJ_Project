@@ -21,26 +21,12 @@ class PropData
         return s_instance;
     }
 
-    public void reqHttp()
-    {
-        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/prop.json", httpCallBack);
-    }
-
-    void httpCallBack(string tag, string data)
-    {
-        try
-        {
-            init(data);
-        }
-        catch (Exception ex)
-        {
-            Debug.Log("解析json出错：" + ex.Message + "\ndata");
-        }
-    }
-
-    void init(string jsonData)
+    public void init()
     {
         m_propInfoList.Clear();
+
+        // 使用本地配置文件
+        string jsonData = Resources.Load("Entity/prop").ToString();
 
         JsonData jd = JsonMapper.ToObject(jsonData);
 
@@ -81,7 +67,7 @@ class PropData
     }
 }
 
-class PropInfo
+public class PropInfo
 {
     public int m_id = 0;
     public int m_type = 0; // 0:可以直接使用    1:不可以直接使用

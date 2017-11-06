@@ -113,6 +113,7 @@ class GameUtil
         {
             path = "Sprites/Icon/Prop/icon_jinbi";
         }
+        // 元宝
         else if (prop_id == 2)
         {
             path = "Sprites/Icon/Prop/icon_yuanbao";
@@ -165,7 +166,7 @@ class GameUtil
         if (id == 1)
         {
             UserData.gold += num;
-            Debug.Log(UserData.gold);
+
             if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
             {
                 GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
