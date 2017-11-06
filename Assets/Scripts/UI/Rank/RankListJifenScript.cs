@@ -12,7 +12,7 @@ public class RankListJifenScript : MonoBehaviour
     public Text JifenRank;
     public Text JifenCount;
     public static RankListJifenScript Instance;
-    private static string myGoldRank;
+    private string myGoldRank;
 
     void Start()
     {
