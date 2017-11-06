@@ -33,7 +33,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
 
     public void onClickQueRen()
     {
-        if (m_inputField_phone.text.Length != 11)
+        if (!VerifyRuleUtil.CheckPhone(m_inputField_phone.text))
         {
             ToastScript.createToast("请输入正确的手机号");
 
