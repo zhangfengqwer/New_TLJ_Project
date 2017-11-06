@@ -15,7 +15,6 @@ public class SensitiveWordUtil
         {
             string jsonData = Resources.Load("Entity/stopwords").ToString();
             WordsDatas = jsonData.Split(',');
-            Debug.Log("屏蔽词：" + WordsDatas.Length);
         }
         catch (Exception e)
         {

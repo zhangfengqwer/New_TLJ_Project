@@ -32,6 +32,8 @@ public class LoginScript : MonoBehaviour
 
     void Start()
     {
+        ToastScript.clear();
+
         m_netErrorPanelScript = NetErrorPanelScript.create();
     
         // 拉取数值表

@@ -41,6 +41,8 @@ public class GameScript : MonoBehaviour
 
     void Start()
     {
+        ToastScript.clear();
+
         m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
         

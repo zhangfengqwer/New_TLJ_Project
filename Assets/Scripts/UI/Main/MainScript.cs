@@ -35,6 +35,8 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        ToastScript.clear();
+
         m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
 

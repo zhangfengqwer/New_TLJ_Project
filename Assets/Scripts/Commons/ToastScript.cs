@@ -8,7 +8,6 @@ public class ToastScript : MonoBehaviour {
 
     Canvas m_canvas;
     static Text m_text;
-    static float m_speed = 2.0f;
 
     static List<GameObject> s_toactObj = new List<GameObject>();
 
@@ -38,6 +37,11 @@ public class ToastScript : MonoBehaviour {
         obj.GetComponent<ToastScript>().setData(obj,text);
 
         return obj;
+    }
+
+    public static void clear()
+    {
+        s_toactObj.Clear();
     }
 
     void setData(GameObject obj, string text)
