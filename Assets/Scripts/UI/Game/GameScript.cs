@@ -160,6 +160,9 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            // 分数
+            m_textScore.text = "0";
+            
             // 级牌
             GameData.getInstance().m_levelPokerNum = (int)jd["levelPokerNum"];
 
@@ -339,7 +342,7 @@ public class GameScript : MonoBehaviour
 
     public void onClickSet()
     {
-        SetScript.create();
+        SetScript.create(true);
     }
 
     public void onClickJoinRoom()

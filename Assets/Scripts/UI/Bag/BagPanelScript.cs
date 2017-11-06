@@ -9,15 +9,15 @@ public class BagPanelScript : MonoBehaviour
 {
     private UIWarpContent uiWarpContent;
     public static BagPanelScript Instance = null;
-    public bool m_isNeedReqNet = true;
+    public bool m_isFromGameLayer = true;
     public GameObject NoProp;
 
-    public static GameObject create(bool isNeedReqNet)
+    public static GameObject create(bool isFromGameLayer)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BagPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
-        obj.GetComponent<BagPanelScript>().m_isNeedReqNet = isNeedReqNet;
+        obj.GetComponent<BagPanelScript>().m_isFromGameLayer = isFromGameLayer;
 
         return obj;
     }
@@ -32,7 +32,7 @@ public class BagPanelScript : MonoBehaviour
         uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
         uiWarpContent.onInitializeItem = onInitializeItem;
         // 拉取背包数据
-        if (m_isNeedReqNet)
+        if (!m_isFromGameLayer)
         {
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();

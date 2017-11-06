@@ -223,7 +223,7 @@ public class MainScript : MonoBehaviour
 
     public void OnClickInventory()
     {
-        BagPanelScript.create(true);
+        BagPanelScript.create(false);
     }
 
     public void OnClickShop()
@@ -238,7 +238,7 @@ public class MainScript : MonoBehaviour
 
     public void OnClickSetting()
     {
-        SetScript.create();
+        SetScript.create(false);
     }
 
     public void OnClickKeFu()
