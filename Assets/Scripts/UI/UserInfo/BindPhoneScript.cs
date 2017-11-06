@@ -20,12 +20,17 @@ public class BindPhoneScript : MonoBehaviour
     private int time = 20;
     public static int totalTime;
     private bool IsStartTime;
+    //0:绑定手机 1：修改手机
+    private static int phone_type;
+    public GameObject TitleChange;
+    public GameObject TitleBind;
 
-    public static GameObject create()
+
+    public static GameObject create(int type)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/BindPhonePanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
-
+        phone_type = type;
         return obj;
     }
     private float nextTime = 1;//一秒之后执行
@@ -57,6 +62,17 @@ public class BindPhoneScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (phone_type == 0)
+        {
+            TitleBind.transform.localScale = Vector3.one;
+            TitleChange.transform.localScale = Vector3.zero;
+        }
+        else if (phone_type == 1)
+        {
+            TitleBind.transform.localScale = Vector3.zero;
+            TitleChange.transform.localScale = Vector3.one;
+        }
+
         PhoneField.onEndEdit.AddListener(delegate { GetPhoneNum(PhoneField); });
         VerificationCodeField.onEndEdit.AddListener(delegate { GetVerificationCode(VerificationCodeField); });
         textSend = ButtonSendSms.transform.Find("Text_Send").GetComponent<Text>();

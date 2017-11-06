@@ -100,7 +100,12 @@ public class UserInfoScript : MonoBehaviour
 
     public void OnBindPhoneClick()
     {
-        BindPhoneScript.create();
+        BindPhoneScript.create(0);
+    }
+
+    public void OnChangePhoneClick()
+    {
+        BindPhoneScript.create(1);
     }
 
     public void OnRealNameClick()

@@ -42,15 +42,7 @@ public class RankListCaifuScript : MonoBehaviour
             if (medalRankItemData.name.Equals(UserData.name))
             {
                 mymedalRank = i + 1 + "";
-                Color color = new Color
-                {
-                    a = 255,
-                    r = 242,
-                    g = 228,
-                    b = 66
-                };
-                goChild.GetComponent<Image>().color =
-                    new Color(24 / (float) 255, 171 / (float) 255, 201 / (float) 255, 1);
+                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
             }
 
 

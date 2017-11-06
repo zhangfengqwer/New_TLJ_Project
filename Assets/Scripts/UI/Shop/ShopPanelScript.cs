@@ -20,7 +20,7 @@ public class ShopPanelScript : MonoBehaviour
     private List<string> _list;
     private static List<ShopData> shopDataList;
 
-    //商品类型，1：金币，2：元宝，3：道具
+    //商品类型，1：金币，2：元宝，3：道具,4:徽章
     private int type = 2;
 
     private List<ShopData> _shopItemDatas;
@@ -68,7 +68,8 @@ public class ShopPanelScript : MonoBehaviour
         int left = currentVipToTal - UserData.rechargeVip;
 
         VipExplain.text =string.Format("累计充值" + "<color=#FF0000FF>{0}</color>" + ",即可升级到" + "<color=#FF0000FF>{1}</color>",
-            currentVipToTal+"元","VIP"+ (vipLevel + 1));
+            currentVipToTal+"元",
+            "VIP"+ (vipLevel + 1));
             
         SlideText.text = UserData.rechargeVip + "/" + currentVipToTal;
         SliderVip.value = UserData.rechargeVip / (float) currentVipToTal;
@@ -195,6 +196,16 @@ public class ShopPanelScript : MonoBehaviour
         if (IsClick)
         {
             type = 3;
+            Init();
+        }
+    }
+
+     public void IsMedalToggle(bool IsClick)
+    {
+        if (IsClick)
+        {
+            ToastScript.createToast("徽章兑换暂未开放");
+            type = 4;
             Init();
         }
     }
