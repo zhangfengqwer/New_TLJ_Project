@@ -35,15 +35,8 @@ public class LaBaScript : MonoBehaviour {
         else if(isEnd)
         {
             isEnd = false;
-
-            if (RandomUtil.getRandom(1, 2) == 1)
-            {
-                m_text.text = "系统：欢迎来到疯狂升级 点击喇叭可进行全服喊话哦~~";
-            }
-            else
-            {
-                m_text.text = "系统：关注微信公众号：“星焱娱乐”，即送丰厚大礼噢~";
-            }
+            
+            m_text.text = GameUtil.getOneTips();
         }
 	}
 

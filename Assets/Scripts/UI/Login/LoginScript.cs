@@ -26,6 +26,8 @@ public class LoginScript : MonoBehaviour
     public InputField m_inputPassword_register;
     public InputField m_inputSecondPassword_register;
 
+    public Text m_text_tips;
+
     public Toggle ToggleAgree;
 
     NetErrorPanelScript m_netErrorPanelScript;
@@ -57,7 +59,11 @@ public class LoginScript : MonoBehaviour
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
             Invoke("onInvokeHealthPanel", 3);
         }
+
+        // 健康忠告提示文字
+        m_text_tips.text = GameUtil.getOneTips();
     }
+
     void onInvokeHealthPanel()
     {
         m_healthTipPanel.transform.localScale = new Vector3(0,0,0);
@@ -347,6 +353,13 @@ public class LoginScript : MonoBehaviour
         if(SensitiveWordUtil.IsSensitiveWord(m_inputAccount_register.text))
         {
             ToastScript.createToast("您的账号有敏感词");
+
+            return;
+        }
+
+        if (m_inputAccount_register.text.Length > 6)
+        {
+            ToastScript.createToast("账号长度不可超过6个字符");
 
             return;
         }
