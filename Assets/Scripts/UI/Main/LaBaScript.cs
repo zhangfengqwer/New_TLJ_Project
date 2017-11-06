@@ -36,7 +36,7 @@ public class LaBaScript : MonoBehaviour {
         {
             isEnd = false;
             
-            m_text.text = GameUtil.getOneTips();
+            m_text.text = "系统：" + GameUtil.getOneTips();
         }
 	}
 
