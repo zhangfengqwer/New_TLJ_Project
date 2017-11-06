@@ -38,7 +38,7 @@ public class RankListJifenScript : MonoBehaviour
             if (goldRankItemData.name.Equals(UserData.name))
             {
                 myGoldRank = i + 1 + "";
-                goChild.GetComponent<Image>().color = new Color(24/ (float)255, 171 / (float)255, 201 / (float)255, 1);
+                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
             }
 
             goChild.layer = Content.layer;
