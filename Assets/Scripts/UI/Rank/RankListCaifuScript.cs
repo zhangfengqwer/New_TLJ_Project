@@ -10,7 +10,7 @@ public class RankListCaifuScript : MonoBehaviour
     public GameObject Item;
     public Text CaifuRank;
     public Text CaifuCount;
-    private static string mymedalRank;
+    private string mymedalRank;
     private static List<MedalRankItemData> _medalRankItemDatas;
 
     public static RankListCaifuScript Instance;
@@ -30,6 +30,7 @@ public class RankListCaifuScript : MonoBehaviour
 
     public void InitUI()
     {
+//        mymedalRank = null;
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;
