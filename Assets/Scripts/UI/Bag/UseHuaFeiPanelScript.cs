@@ -40,9 +40,9 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
             return;
         }
 
-        LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().SetText(m_inputField_phone.text);
-        LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().CallBack = onReceive_UseHuaFei;
-        LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().OnRequest();
+        LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().SetData(m_propInfo.m_id, m_inputField_phone.text);
+        LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().CallBack = onReceive_UseHuaFei;
+        LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().OnRequest();
     }
 
     public void onReceive_UseHuaFei(string data)
@@ -51,9 +51,9 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
         int code = (int)jd["code"];
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
-            ToastScript.createToast("兑换成功");
+            ToastScript.createToast("使用成功，请等待客服为您充值");
 
-            GameUtil.changeData(106, -1);
+            GameUtil.changeData(m_propInfo.m_id, -1);
 
             if (BagPanelScript.Instance != null)
             {
