@@ -118,11 +118,6 @@ class GameUtil
         {
             path = "Sprites/Icon/Prop/icon_yuanbao";
         }
-        // 话费
-        else if (prop_id == 3)
-        {
-            path = "Sprites/Icon/Prop/icon_jinbi";
-        }
         else
         {
             path = "Sprites/Icon/Prop/" + PropData.getInstance().getPropInfoById(prop_id).m_icon;

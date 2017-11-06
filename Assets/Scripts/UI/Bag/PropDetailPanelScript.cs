@@ -44,15 +44,22 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void onClickUseProp()
     {
-        if (m_propInfo.m_id != 106)
+        // 喇叭
+        if (m_propInfo.m_id == 106)
+        {
+            LaBaPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>());
+        }
+        // 话费
+        else if ((m_propInfo.m_id == 111) || (m_propInfo.m_id == 112))
+        {
+            
+        }
+        // 其他
+        else
         {
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
-        }
-        else
-        {
-            LaBaPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>());
         }
     }
 

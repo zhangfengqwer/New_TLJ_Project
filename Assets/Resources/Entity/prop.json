@@ -68,5 +68,19 @@
 		"desc": "竞技场获得，用户兑换物品",
 		"type": 1,
 		"icon": "icon_huizhang"
+    },
+	{
+        "prop_id": 111,
+        "prop_name": "1元话费",
+		"desc": "竞技场获得，用户兑换话费",
+		"type": 0,
+		"icon": "icon_huafei1"
+    },
+	{
+        "prop_id": 112,
+        "prop_name": "5元话费",
+		"desc": "竞技场获得，用户兑换话费",
+		"type": 0,
+		"icon": "icon_huafei5"
     }
 ]

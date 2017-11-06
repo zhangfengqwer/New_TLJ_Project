@@ -67,7 +67,7 @@ class PropData
     }
 }
 
-class PropInfo
+public class PropInfo
 {
     public int m_id = 0;
     public int m_type = 0; // 0:可以直接使用    1:不可以直接使用
