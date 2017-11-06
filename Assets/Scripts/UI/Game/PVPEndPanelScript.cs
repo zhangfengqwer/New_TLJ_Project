@@ -8,6 +8,7 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     public GameScript m_parentScript;
 
+    public Image m_image_itemContent;
     public Text m_text_mingci;
 
     public static GameObject create(GameScript parentScript)
@@ -26,14 +27,42 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     }
 
-    public void setData(int mingci)
+    public void setData(int mingci,string pvpreward)
     {
         m_text_mingci.text = mingci.ToString();
+
+        List<string> list1 = new List<string>();
+        CommonUtil.splitStr(pvpreward, list1, ';');
+
+        for (int i = 0; i < list1.Count; i++)
+        {
+            List<string> list2 = new List<string>();
+            CommonUtil.splitStr(list1[i], list2, ':');
+
+            int id = int.Parse(list2[0]);
+            int num = int.Parse(list2[1]);
+
+            GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_reward") as GameObject;
+            GameObject obj = GameObject.Instantiate(prefab, m_image_itemContent.transform);
+            obj.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
+            CommonUtil.setImageSprite(obj.transform.Find("Image_icon").GetComponent<Image>(), GameUtil.getPropIconPath(id));
+            obj.transform.Find("Text_num").GetComponent<Text>().text = "x" + num;
+
+            float x = CommonUtil.getPosX(list1.Count, 130, i, 0);
+            obj.transform.localPosition = new Vector3(x, 0, 0);
+        }
     }
 
     public void onClickExit()
     {
         //m_parentScript.onClickExitRoom();
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void onClickShare()
+    {
+        //m_parentScript.onClickExitRoom();
+        ToastScript.createToast("暂未开放");
     }
 }

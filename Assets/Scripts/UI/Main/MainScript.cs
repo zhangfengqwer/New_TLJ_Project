@@ -111,21 +111,21 @@ public class MainScript : MonoBehaviour
     {
         if (!LogicEnginerScript.Instance.isConnecion())
         {
-            ToastScript.createToast("与Logic服务器断开连接");
+            //ToastScript.createToast("与Logic服务器断开连接");
             m_netErrorPanelScript.Show();
             m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
             m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
         }
         else if (!PlayServiceSocket.s_instance.isConnecion())
         {
-            ToastScript.createToast("与Play服务器断开连接");
+            //ToastScript.createToast("与Play服务器断开连接");
             m_netErrorPanelScript.Show();
             m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
             m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
         }
         else
         {
-            ToastScript.createToast("两个服务器都成功连接");
+            //ToastScript.createToast("两个服务器都成功连接");
         }
     }
 
@@ -510,7 +510,7 @@ public class MainScript : MonoBehaviour
         {
             //Debug.Log("连接服务器成功");
 
-            ToastScript.createToast("连接Logic服务器成功");
+            //ToastScript.createToast("连接Logic服务器成功");
 
             NetLoading.getInstance().Close();
             m_netErrorPanelScript.Close();
@@ -607,7 +607,7 @@ public class MainScript : MonoBehaviour
         {
             //Debug.Log("连接服务器成功");
 
-            ToastScript.createToast("连接Play服务器成功");
+            //ToastScript.createToast("连接Play服务器成功");
 
             NetLoading.getInstance().Close();
             m_netErrorPanelScript.Close();

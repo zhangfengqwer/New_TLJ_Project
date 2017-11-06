@@ -1590,12 +1590,21 @@ public class GameScript : MonoBehaviour
                         ToastScript.createToast("游戏结束，稍后请在邮箱查看奖励");
 
                         int mingci = (int)jd["mingci"];
+                        string pvpreward = jd["pvpreward"].ToString();
 
+                        // 没有名次
+                        if (pvpreward.CompareTo("") == 0)
+                        {
+                            m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
+                            PVPGameResultPanelScript script = m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
+                            script.setData(false);
+                        }
                         // 显示pvp结束界面
+                        else
                         {
                             GameObject obj = PVPEndPanelScript.create(this);
                             PVPEndPanelScript script = obj.GetComponent<PVPEndPanelScript>();
-                            script.setData(mingci);
+                            script.setData(mingci, pvpreward);
                         }
                     }
                     catch (Exception ex)

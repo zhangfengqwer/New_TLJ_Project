@@ -113,9 +113,15 @@ class GameUtil
         {
             path = "Sprites/Icon/Prop/icon_jinbi";
         }
+        // 元宝
         else if (prop_id == 2)
         {
             path = "Sprites/Icon/Prop/icon_yuanbao";
+        }
+        // 话费
+        else if (prop_id == 3)
+        {
+            path = "Sprites/Icon/Prop/icon_jinbi";
         }
         else
         {
