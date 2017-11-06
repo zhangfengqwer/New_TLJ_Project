@@ -406,7 +406,7 @@ public class LoginScript : MonoBehaviour
         {
             //Debug.Log("连接服务器成功");
 
-            ToastScript.createToast("连接服务器成功");
+            //ToastScript.createToast("连接服务器成功");
 
             NetLoading.getInstance().Close();
             m_netErrorPanelScript.Close();
