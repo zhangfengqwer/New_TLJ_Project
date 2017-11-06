@@ -49,9 +49,18 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
-        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().CallBack = onReceive_ReadMail;
-        LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+        // 未领取的邮件先请求服务器
+        if (m_mailData.m_state == 0)
+        {
+            LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().setEmailId(int.Parse(gameObject.transform.name));
+            LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().CallBack = onReceive_ReadMail;
+            LogicEnginerScript.Instance.GetComponent<ReadEmailRequest>().OnRequest();
+        }
+        // 已领取的直接显示
+        else
+        {
+            MailDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
+        }
     }
 
     public void onReceive_ReadMail(string data)
