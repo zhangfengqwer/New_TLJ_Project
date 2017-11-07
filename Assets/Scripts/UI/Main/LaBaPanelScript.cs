@@ -60,6 +60,13 @@ public class LaBaPanelScript : MonoBehaviour {
             return;
         }
 
+        if (string.IsNullOrEmpty(m_inputField.text))
+        {
+            ToastScript.createToast("发送内容不可为空");
+
+            return;
+        }
+
         if (SensitiveWordUtil.IsSensitiveWord(m_inputField.text))
         {
             ToastScript.createToast("您的内容有敏感词");
