@@ -89,6 +89,18 @@ public class MainScript : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (OtherData.s_ifOnPause)
+        {
+            OtherData.s_ifOnPause = false;
+
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+            m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
+        }
+    }
+
     void onInvokeStartMusic()
     {
         AudioScript.getAudioScript().playMusic_MainBg();
@@ -671,9 +683,5 @@ public class MainScript : MonoBehaviour
     {
         LogicEnginerScript.Instance.Stop();
         PlayServiceSocket.s_instance.Stop();
-
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }
