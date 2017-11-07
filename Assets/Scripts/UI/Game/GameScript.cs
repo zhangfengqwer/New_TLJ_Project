@@ -135,7 +135,6 @@ public class GameScript : MonoBehaviour
         if (!isPVP())
         {
             m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
-            
         }
         // 比赛场
         else
@@ -1665,6 +1664,12 @@ public class GameScript : MonoBehaviour
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
                                     script.setData(true, GameData.getInstance().m_getAllScore, (int)jd["score"]);
+
+                                    // 更新金币数量
+                                    {
+                                        UserData.gold += (int)jd["score"];
+                                        m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+                                    }
                                 }
                             }
                             else
@@ -1682,6 +1687,12 @@ public class GameScript : MonoBehaviour
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
                                     script.setData(false, GameData.getInstance().m_getAllScore, (int)jd["score"]);
+
+                                    // 更新金币数量
+                                    {
+                                        UserData.gold += (int)jd["score"];
+                                        m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+                                    }
                                 }
                             }
 

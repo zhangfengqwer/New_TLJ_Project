@@ -13,6 +13,10 @@ public class AndroidCallBack : MonoBehaviour {
     public void OnPauseCallBack(string data)
     {
         ToastScript.createToast("回到后台:"+Thread.CurrentThread);
+
+        LoginServiceSocket.s_instance.Stop();
+        LogicEnginerScript.Instance.Stop();
+        PlayServiceSocket.s_instance.Stop();
     }
 
     public void OnResumeCallBack(string data)
