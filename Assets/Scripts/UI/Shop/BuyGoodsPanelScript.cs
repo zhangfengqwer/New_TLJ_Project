@@ -202,29 +202,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             ToastScript.createToast("购买成功:" + m_shopData.goods_name);
-
-            {
-                List<string> list_str1 = new List<string>();
-                CommonUtil.splitStr(m_shopData.props, list_str1, ';');
-
-                for (int i = 0; i < list_str1.Count; i++)
-                {
-                    List<string> list_str2 = new List<string>();
-                    CommonUtil.splitStr(list_str1[i], list_str2, ':');
-
-                    int prop_id = int.Parse(list_str2[0]);
-                    int prop_num = int.Parse(list_str2[1]);
-
-                    GameUtil.changeData(prop_id, m_goods_num * prop_num);
-
-                    //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(prop_id + ":" + m_goods_num * prop_num);
-                    ShowRewardPanelScript.Show(prop_id + ":" + m_goods_num * prop_num);
-                }
-            }
-
+            //更新背包数据
+            LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = MainScript.onReceive_GetUserBag;
+            LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
             Destroy(gameObject);
-
-            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
         }
         else
         {

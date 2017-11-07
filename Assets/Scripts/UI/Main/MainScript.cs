@@ -544,9 +544,10 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    public void onReceive_GetUserBag(string data)
+    public static void onReceive_GetUserBag(string data)
     {
         {
+            print("处理背包回调");
             JsonData jsonData = JsonMapper.ToObject(data);
             var code = (int)jsonData["code"];
             if (code == (int)Consts.Code.Code_OK)
@@ -564,7 +565,6 @@ public class MainScript : MonoBehaviour
                             userPropData.prop_name = propInfo.m_name;
                         }
                     }
-
                 }
             }
             else
