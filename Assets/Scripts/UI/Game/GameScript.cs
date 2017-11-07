@@ -395,9 +395,13 @@ public class GameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 点击返回键
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //onClickExitRoom();
+            if (QueRenExitPanelScript.s_gameobject == null)
+            {
+                onClickExitRoom();
+            }
         }
 
         bool useMouse = true;
