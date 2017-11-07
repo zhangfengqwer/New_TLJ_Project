@@ -50,6 +50,9 @@ public class GameScript : MonoBehaviour
 
     void Start()
     {
+        // 禁止多点触摸
+        Input.multiTouchEnabled = false;
+
         ToastScript.clear();
 
         m_netErrorPanelScript = NetErrorPanelScript.create();
@@ -2415,7 +2418,7 @@ public class GameScript : MonoBehaviour
 
         m_netErrorPanelScript.Show();
         m_netErrorPanelScript.setOnClickButton(onClickBack);
-        m_netErrorPanelScript.setContentText("游戏内：与服务器断开连接，点击确定回到主界面");
+        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
     }
 
     void onClickBack()

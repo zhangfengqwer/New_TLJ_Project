@@ -35,6 +35,9 @@ public class LoginScript : MonoBehaviour
     void Start()
     {
         {
+            // 禁止多点触摸
+            Input.multiTouchEnabled = false;
+
             // 永不息屏
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
