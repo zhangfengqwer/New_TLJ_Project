@@ -42,6 +42,8 @@ public class MainScript : MonoBehaviour
 
         ToastScript.clear();
 
+        AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+
         m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
 
@@ -547,7 +549,7 @@ public class MainScript : MonoBehaviour
 
             m_netErrorPanelScript.Show();
             m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
-            m_netErrorPanelScript.setContentText("连接Logic服务器失败，请重新连接");
+            m_netErrorPanelScript.setContentText("连接服务器失败，请重新连接");
         }
     }
 
@@ -589,7 +591,7 @@ public class MainScript : MonoBehaviour
 
         m_netErrorPanelScript.Show();
         m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
-        m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
+        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 
     void onSocketStop_Logic()
@@ -598,7 +600,7 @@ public class MainScript : MonoBehaviour
 
         m_netErrorPanelScript.Show();
         m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
-        m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
+        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
@@ -634,7 +636,7 @@ public class MainScript : MonoBehaviour
 
             m_netErrorPanelScript.Show();
             m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
-            m_netErrorPanelScript.setContentText("连接Play服务器失败，请重新连接");
+            m_netErrorPanelScript.setContentText("连接逻辑服务器失败，请重新连接");
         }
     }
 
@@ -644,7 +646,7 @@ public class MainScript : MonoBehaviour
 
         m_netErrorPanelScript.Show();
         m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
-        m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
+        m_netErrorPanelScript.setContentText("与游戏服务器断开连接，请重新连接");
     }
 
     void onSocketStop_Play()
@@ -653,7 +655,7 @@ public class MainScript : MonoBehaviour
 
         m_netErrorPanelScript.Show();
         m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
-        m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
+        m_netErrorPanelScript.setContentText("与游戏服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
@@ -662,5 +664,16 @@ public class MainScript : MonoBehaviour
         NetLoading.getInstance().Show();
         m_netErrorPanelScript.Close();
         PlayServiceSocket.s_instance.startConnect();
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    void onPauseCallBack()
+    {
+        LogicEnginerScript.Instance.Stop();
+        PlayServiceSocket.s_instance.Stop();
+
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }
