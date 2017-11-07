@@ -37,6 +37,9 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        // 禁止多点触摸
+        Input.multiTouchEnabled = false;
+
         ToastScript.clear();
 
         m_netErrorPanelScript = NetErrorPanelScript.create();

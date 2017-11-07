@@ -50,6 +50,9 @@ public class GameScript : MonoBehaviour
 
     void Start()
     {
+        // 禁止多点触摸
+        Input.multiTouchEnabled = false;
+
         ToastScript.clear();
 
         m_netErrorPanelScript = NetErrorPanelScript.create();
@@ -132,7 +135,6 @@ public class GameScript : MonoBehaviour
         if (!isPVP())
         {
             m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
-            
         }
         // 比赛场
         else
@@ -1662,6 +1664,12 @@ public class GameScript : MonoBehaviour
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
                                     script.setData(true, GameData.getInstance().m_getAllScore, (int)jd["score"]);
+
+                                    // 更新金币数量
+                                    {
+                                        UserData.gold += (int)jd["score"];
+                                        m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+                                    }
                                 }
                             }
                             else
@@ -1679,6 +1687,12 @@ public class GameScript : MonoBehaviour
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
                                     script.setData(false, GameData.getInstance().m_getAllScore, (int)jd["score"]);
+
+                                    // 更新金币数量
+                                    {
+                                        UserData.gold += (int)jd["score"];
+                                        m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+                                    }
                                 }
                             }
 
@@ -2415,7 +2429,7 @@ public class GameScript : MonoBehaviour
 
         m_netErrorPanelScript.Show();
         m_netErrorPanelScript.setOnClickButton(onClickBack);
-        m_netErrorPanelScript.setContentText("游戏内：与服务器断开连接，点击确定回到主界面");
+        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
     }
 
     void onClickBack()
