@@ -103,7 +103,6 @@ public class MainScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("quit");
             if (exitGameObject == null)
             {
                 exitGameObject = ExitGamePanelScript.create();
