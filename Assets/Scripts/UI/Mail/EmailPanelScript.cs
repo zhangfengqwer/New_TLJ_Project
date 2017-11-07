@@ -12,6 +12,7 @@ public class EmailPanelScript : MonoBehaviour
     public Button m_button_oneKeyRead;
     public Button m_button_oneKeyDelete;
     public Text m_text_mailNum;
+    public Text m_text_zanwu;
 
     public static GameObject create()
     {
@@ -111,6 +112,16 @@ public class EmailPanelScript : MonoBehaviour
         }
 
         m_text_mailNum.text = UserMailData.getInstance().getUserMailDataList().Count + "/50";
+
+        //暂无邮件
+        if (UserMailData.getInstance().getUserMailDataList().Count == 0)
+        {
+            m_text_zanwu.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            m_text_zanwu.transform.localScale = Vector3.zero;
+        }
     }
 
     public void setMailReaded(int email_id)
