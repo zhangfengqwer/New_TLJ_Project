@@ -99,6 +99,8 @@ public class Item_Task_List_Script : MonoBehaviour {
     {
         m_button_wancheng.interactable = false;
         CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yilingque");
+        m_button_wancheng.GetComponent<Image>().SetNativeSize();
+        m_button_wancheng.transform.Find("Text").GetComponent<Text>().text = "";
     }
 
     public void onClickWanCheng()

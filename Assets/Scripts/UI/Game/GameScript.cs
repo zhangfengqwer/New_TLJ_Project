@@ -2409,6 +2409,13 @@ public class GameScript : MonoBehaviour
             // 出牌
             case TimerScript.TimerType.TimerType_OutPoker:
                 {
+                    if (!GameData.getInstance().m_isTuoGuan)
+                    {
+                        m_tuoguanObj = TuoGuanPanelScript.create(this);
+
+                        GameData.getInstance().m_isTuoGuan = true;
+                    }
+
                     autoOutPoker();
                 }
                 break;
