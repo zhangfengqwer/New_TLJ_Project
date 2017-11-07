@@ -26,6 +26,7 @@ public class MainScript : MonoBehaviour
     public GameObject m_laba;
     public GameObject m_headIcon;
 
+    private GameObject exitGameObject;
     LaBaScript m_laBaScript;
 
     //发送验证码的倒计时
@@ -88,6 +89,7 @@ public class MainScript : MonoBehaviour
         AudioScript.getAudioScript().playMusic_MainBg();
     }
 
+    
     void Update ()
     {
 	    if (BindPhoneScript.totalTime > 0)
@@ -102,7 +104,10 @@ public class MainScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             print("quit");
-            ExitGamePanelScript.create();
+            if (exitGameObject == null)
+            {
+                exitGameObject = ExitGamePanelScript.create();
+            }
         }
     }
 

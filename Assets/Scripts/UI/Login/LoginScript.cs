@@ -29,7 +29,7 @@ public class LoginScript : MonoBehaviour
     public Text m_text_tips;
 
     public Toggle ToggleAgree;
-
+    private GameObject exitGameObject;
     NetErrorPanelScript m_netErrorPanelScript;
 
     void Start()
@@ -103,7 +103,10 @@ public class LoginScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             print("quit");
-            ExitGamePanelScript.create();
+            if (exitGameObject == null)
+            {
+                exitGameObject = ExitGamePanelScript.create();
+            }
         }
     }
 
