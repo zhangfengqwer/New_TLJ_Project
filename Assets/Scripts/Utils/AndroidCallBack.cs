@@ -26,6 +26,12 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnResumeCallBack(string data)
     {
+        if (OtherData.s_isFirstOpenGame)
+        {
+            OtherData.s_isFirstOpenGame = false;
+            return;
+        }
+
         if (s_onResumeCallBack != null)
         {
             s_onResumeCallBack();

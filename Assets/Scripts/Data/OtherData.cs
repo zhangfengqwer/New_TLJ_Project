@@ -6,5 +6,6 @@ public class OtherData
 {
     public static bool s_isMainInited = false;
     public static bool s_isFromSetToLogin = false;
+    public static bool s_isFirstOpenGame = true;
     public static Vector2 s_screenSize;
 }
