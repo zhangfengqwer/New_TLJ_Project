@@ -7,10 +7,9 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
-
-    public Image m_image_tab_xuanze;
-    //public Button m_button_tiaozhansai;
-    //public Button m_button_huafeisai;
+    
+    public Button m_button_tiaozhansai;
+    public Button m_button_huafeisai;
 
     public static GameObject create()
     {
@@ -49,7 +48,8 @@ public class PVPChoiceScript : MonoBehaviour {
         m_ListViewScript.clear();
 
         {
-            m_image_tab_xuanze.transform.localPosition = new Vector3(-100,0,0);
+            m_button_tiaozhansai.GetComponent<Image>().color = new Color(255,255,255,255);
+            m_button_huafeisai.GetComponent<Image>().color = new Color(255, 255, 255, 0);
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
@@ -75,7 +75,8 @@ public class PVPChoiceScript : MonoBehaviour {
         m_ListViewScript.clear();
 
         {
-            m_image_tab_xuanze.transform.localPosition = new Vector3(100, 0, 0);
+            m_button_tiaozhansai.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+            m_button_huafeisai.GetComponent<Image>().color = new Color(255, 255, 255, 255);
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
