@@ -76,6 +76,18 @@ public class LoginScript : MonoBehaviour
         m_text_tips.text = GameUtil.getOneTips();
     }
 
+    private void OnEnable()
+    {
+        if (OtherData.s_ifOnPause)
+        {
+            OtherData.s_ifOnPause = false;
+
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickChongLian);
+            m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
+        }
+    }
+
     void onInvokeHealthPanel()
     {
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
@@ -486,9 +498,5 @@ public class LoginScript : MonoBehaviour
         LoginServiceSocket.s_instance.Stop();
         LogicEnginerScript.Instance.Stop();
         PlayServiceSocket.s_instance.Stop();
-
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }

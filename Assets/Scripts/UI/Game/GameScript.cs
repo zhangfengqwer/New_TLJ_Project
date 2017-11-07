@@ -72,6 +72,18 @@ public class GameScript : MonoBehaviour
         m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
     }
 
+    private void OnEnable()
+    {
+        if (OtherData.s_ifOnPause)
+        {
+            OtherData.s_ifOnPause = false;
+
+            m_netErrorPanelScript.Show();
+            m_netErrorPanelScript.setOnClickButton(onClickBack);
+            m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
+        }
+    }
+
     void onInvokeStartMusic()
     {
         AudioScript.getAudioScript().playMusic_GameBg_PVP();
@@ -2587,9 +2599,5 @@ public class GameScript : MonoBehaviour
     {
         LogicEnginerScript.Instance.Stop();
         PlayServiceSocket.s_instance.Stop();
-
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickBack);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
     }
 }

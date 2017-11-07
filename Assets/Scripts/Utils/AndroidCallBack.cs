@@ -17,7 +17,7 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnPauseCallBack(string data)
     {
-        ToastScript.createToast("回到后台:"+Thread.CurrentThread);
+        OtherData.s_ifOnPause = true;
 
         if (s_onPauseCallBack != null)
         {
@@ -27,7 +27,6 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnResumeCallBack(string data)
     {
-        ToastScript.createToast("返回游戏:"+Thread.CurrentThread);
     }
 
     private void OnApplicationPause(bool pauseStatus)
