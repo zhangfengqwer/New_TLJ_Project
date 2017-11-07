@@ -21,6 +21,12 @@ public class UserGameData
     public int winCount { get; set; }
     public int runCount { get; set; }
     public int meiliZhi { get; set; }
+    public int xianxianJDPrimary { get; set; }
+    public int xianxianJDMiddle { get; set; }
+    public int xianxianJDHigh { get; set; }
+    public int xianxianCDPrimary { get; set; }
+    public int xianxianCDMiddle { get; set; }
+    public int xianxianCDHigh { get; set; }
 }
 
 public class UserPropData
