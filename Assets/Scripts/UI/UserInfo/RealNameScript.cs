@@ -41,6 +41,10 @@ public class RealNameScript : MonoBehaviour
         {
             _realName = input.text;
         }
+        else
+        {
+            ToastScript.createToast("请输入正确的姓名");
+        }
     }
 
     public void GetIdentification(InputField input)
@@ -49,6 +53,10 @@ public class RealNameScript : MonoBehaviour
         if (_isCorrectIdentification)
         {
             _identification = input.text;
+        }
+        else
+        {
+            ToastScript.createToast("请输入正确的身份证");
         }
     }
 
@@ -61,7 +69,7 @@ public class RealNameScript : MonoBehaviour
         }
         else
         {
-            ToastScript.createToast("输入的信息有误");
+//            ToastScript.createToast("输入的信息有误");
         }
     }
 

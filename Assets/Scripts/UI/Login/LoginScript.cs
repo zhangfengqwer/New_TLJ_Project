@@ -137,18 +137,22 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_wechat()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        PlatformHelper.Login("Login", "GetLoginResult", "weixin");
-        ToastScript.createToast("暂未开放");
+        PlatformHelper.Login("Login", "GetWXLoginResult", "weixin");
     }
 
     // QQ登录
     public void onClickLogin_qq()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        PlatformHelper.Login("Login", "GetLoginResult", "qq");
+        PlatformHelper.Login("Login", "GetQQLoginResult", "qq");
     }
 
-    public void GetLoginResult(string data)
+    public void GetWXLoginResult(string data)
+    {
+        
+    }
+
+    public void GetQQLoginResult(string data)
     {
         try
         {
