@@ -43,7 +43,9 @@ public class LoginScript : MonoBehaviour
 
             OtherData.s_screenSize = new Vector2(Screen.width, Screen.height);
 
+            // 安卓回调
             AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+            AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
         }
 
         ToastScript.clear();
@@ -74,18 +76,6 @@ public class LoginScript : MonoBehaviour
 
         // 健康忠告提示文字
         m_text_tips.text = GameUtil.getOneTips();
-    }
-
-    private void OnEnable()
-    {
-        if (OtherData.s_ifOnPause)
-        {
-            OtherData.s_ifOnPause = false;
-
-            m_netErrorPanelScript.Show();
-            m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-            m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
-        }
     }
 
     void onInvokeHealthPanel()
@@ -498,5 +488,12 @@ public class LoginScript : MonoBehaviour
         LoginServiceSocket.s_instance.Stop();
         LogicEnginerScript.Instance.Stop();
         PlayServiceSocket.s_instance.Stop();
+    }
+
+    void onResumeCallBack()
+    {
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian);
+        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }

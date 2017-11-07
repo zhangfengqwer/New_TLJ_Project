@@ -8,6 +8,9 @@ public class AndroidCallBack : MonoBehaviour {
     public delegate void onPauseCallBack();
     public static onPauseCallBack s_onPauseCallBack = null;
 
+    public delegate void onResumeCallBack();
+    public static onResumeCallBack s_onResumeCallBack = null;
+
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -15,8 +18,6 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnPauseCallBack(string data)
     {
-        OtherData.s_ifOnPause = true;
-
         if (s_onPauseCallBack != null)
         {
             s_onPauseCallBack();
@@ -25,5 +26,9 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnResumeCallBack(string data)
     {
+        if (s_onResumeCallBack != null)
+        {
+            s_onResumeCallBack();
+        }
     }
 }
