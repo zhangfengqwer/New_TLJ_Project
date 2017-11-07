@@ -43,6 +43,7 @@ public class LoginScript : MonoBehaviour
 
             OtherData.s_screenSize = new Vector2(Screen.width, Screen.height);
 
+            AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
         }
 
         ToastScript.clear();
@@ -477,5 +478,17 @@ public class LoginScript : MonoBehaviour
     {
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),
             GameObject.Find("Canvas_Middle").transform);
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    void onPauseCallBack()
+    {
+        LoginServiceSocket.s_instance.Stop();
+        LogicEnginerScript.Instance.Stop();
+        PlayServiceSocket.s_instance.Stop();
+
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian);
+        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }

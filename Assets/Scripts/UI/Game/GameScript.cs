@@ -55,6 +55,8 @@ public class GameScript : MonoBehaviour
 
         ToastScript.clear();
 
+        AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+
         m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
         
@@ -2578,5 +2580,16 @@ public class GameScript : MonoBehaviour
             }
             
         }
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    void onPauseCallBack()
+    {
+        LogicEnginerScript.Instance.Stop();
+        PlayServiceSocket.s_instance.Stop();
+
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickBack);
+        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
     }
 }

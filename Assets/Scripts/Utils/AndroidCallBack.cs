@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class AndroidCallBack : MonoBehaviour {
 
+    public delegate void onPauseCallBack();
+    public static onPauseCallBack s_onPauseCallBack = null;
+
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -14,9 +17,10 @@ public class AndroidCallBack : MonoBehaviour {
     {
         ToastScript.createToast("回到后台:"+Thread.CurrentThread);
 
-        LoginServiceSocket.s_instance.Stop();
-        LogicEnginerScript.Instance.Stop();
-        PlayServiceSocket.s_instance.Stop();
+        if (s_onPauseCallBack != null)
+        {
+            s_onPauseCallBack();
+        }
     }
 
     public void OnResumeCallBack(string data)
