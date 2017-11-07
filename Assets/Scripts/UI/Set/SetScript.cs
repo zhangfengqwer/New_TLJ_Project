@@ -66,4 +66,10 @@ public class SetScript : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void OnClickAbout()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/AboutPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+    }
 }
