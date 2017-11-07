@@ -34,8 +34,13 @@ public class LoginScript : MonoBehaviour
 
     void Start()
     {
-        // 永不息屏
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        {
+            // 永不息屏
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+            OtherData.s_screenSize = new Vector2(Screen.width, Screen.height);
+
+        }
 
         ToastScript.clear();
 

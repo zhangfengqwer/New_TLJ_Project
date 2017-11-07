@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -42,6 +43,7 @@ public class GameScript : MonoBehaviour
     GameObject m_liangzhuObj = null;
     GameObject m_pvpGameResultPanel = null;
 
+    Vector3 m_screenPos;
     string m_tag = "";
 
     NetErrorPanelScript m_netErrorPanelScript;
@@ -61,6 +63,8 @@ public class GameScript : MonoBehaviour
         initUI();
 
         checkGameRoomType();
+
+        m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     void onInvokeStartMusic()
@@ -390,6 +394,100 @@ public class GameScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //onClickExitRoom();
+        }
+
+        bool useMouse = true;
+
+        // 鼠标触摸
+        if (useMouse)
+        {
+            Vector3 touchPos = Input.mousePosition;
+            touchPos.z = m_screenPos.z; // 这个很关键  
+            touchPos = Camera.main.ScreenToWorldPoint(touchPos);
+            touchPos = touchPos * 100.0f;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                onTouchBegan(touchPos);
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                onTouchMove(touchPos);
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                onTouchEnd(touchPos);
+            }
+        }
+        // 手机触摸
+        else
+        {
+            if (Input.touchCount > 0)
+            {
+                Vector3 touchPos = Input.GetTouch(0).position;
+
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    onTouchBegan(touchPos);
+                }
+                else if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    onTouchMove(touchPos);
+                }
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    onTouchEnd(touchPos);
+                }
+            }
+        }
+    }
+
+    void onTouchBegan(Vector3 vec3)
+    {
+        //bool isTouchPoker = false;
+        //for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
+        //{
+        //    if (GameUtil.CheckGameObjectContainPoint(GameData.getInstance().m_myPokerObjList[i], vec3))
+        //    {
+        //        isTouchPoker = true;
+        //        GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+        //        break;
+        //    }            
+        //}
+
+        //// 点击空白处，所有已选中的牌都变成未选中
+        //if (!isTouchPoker)
+        //{
+        //    for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
+        //    {
+        //        if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+        //        {
+        //            GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+        //        }
+        //    }
+        //}
+    }
+
+    void onTouchMove(Vector3 vec3)
+    {
+        //for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
+        //{
+        //    if (GameUtil.CheckGameObjectContainPoint(GameData.getInstance().m_myPokerObjList[i], vec3))
+        //    {
+        //        if (!GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+        //        {
+        //            GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+        //        }
+        //        break;
+        //    }
+        //}
+    }
+
+    void onTouchEnd(Vector3 vec3)
     {
     }
 
@@ -1836,6 +1934,7 @@ public class GameScript : MonoBehaviour
             poker.transform.localScale = new Vector3(1, 1, 1);
 
             poker.GetComponent<PokerScript>().initPoker(GameData.getInstance().m_myPokerList[i].m_num, (int)GameData.getInstance().m_myPokerList[i].m_pokerType);
+            poker.GetComponent<PokerScript>().m_canTouch = true;
 
             GameData.getInstance().m_myPokerObjList.Add(poker);
         }
@@ -2224,9 +2323,6 @@ public class GameScript : MonoBehaviour
             poker.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 
             poker.GetComponent<PokerScript>().initPoker(pokerList[i].m_num, (int)pokerList[i].m_pokerType);
-
-            // 禁止点击
-            Destroy(poker.GetComponent<Button>());
 
             tempList.Add(poker);
         }
