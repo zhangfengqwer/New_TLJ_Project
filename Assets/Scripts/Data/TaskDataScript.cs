@@ -26,6 +26,8 @@ public class TaskDataScript
 
         JsonData jsonData = JsonMapper.ToObject(json);
         m_taskDataList = JsonMapper.ToObject<List<TaskData>>(jsonData["task_list"].ToString());
+
+        sortTask();
     }
 
     public List<TaskData> getTaskDataList()
@@ -58,6 +60,56 @@ public class TaskDataScript
                 m_taskDataList[i].isover = 1;
                 break;
             }
+        }
+
+        sortTask();
+    }
+
+    // 可领取的置顶,已领取的放最下面
+    void sortTask()
+    {
+        List<TaskData> list_kelingqu = new List<TaskData>();
+        List<TaskData> list_weiwancheng = new List<TaskData>();
+        List<TaskData> list_yilingqu = new List<TaskData>();
+
+        for (int i = 0; i < m_taskDataList.Count; i++)
+        {
+            int progress = m_taskDataList[i].progress;
+            int target = m_taskDataList[i].target;
+            int isover = m_taskDataList[i].isover;
+
+            if (isover == 1)
+            {
+                list_yilingqu.Add(m_taskDataList[i]);
+            }
+            else if (progress == target)
+            {
+                list_kelingqu.Add(m_taskDataList[i]);
+            }
+            else
+            {
+                list_weiwancheng.Add(m_taskDataList[i]);
+            }
+        }
+
+        m_taskDataList.Clear();
+        
+        // 上面放可领取的
+        for (int i = 0; i < list_kelingqu.Count; i++)
+        {
+            m_taskDataList.Add(list_kelingqu[i]);
+        }
+
+        // 中间放未完成的
+        for (int i = 0; i < list_weiwancheng.Count; i++)
+        {
+            m_taskDataList.Add(list_weiwancheng[i]);
+        }
+
+        // 下面放已领取的
+        for (int i = 0; i < list_yilingqu.Count; i++)
+        {
+            m_taskDataList.Add(list_yilingqu[i]);
         }
     }
 }

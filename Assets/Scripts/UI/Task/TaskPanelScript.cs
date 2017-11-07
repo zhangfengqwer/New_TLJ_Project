@@ -56,8 +56,11 @@ public class TaskPanelScript : MonoBehaviour {
             if (m_ListViewScript.getItemList()[i].GetComponent<Item_Task_List_Script>().getTaskData().task_id == task_id)
             {
                 m_ListViewScript.getItemList()[i].GetComponent<Item_Task_List_Script>().setTaskIsOver();
+                break;
             }
         }
+
+        loadTask();
     }
     public void onReceive_GetTask(string data)
     {
