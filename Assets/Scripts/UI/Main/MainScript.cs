@@ -42,7 +42,9 @@ public class MainScript : MonoBehaviour
 
         ToastScript.clear();
 
+        // 安卓回调
         AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+        AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
 
         m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
@@ -86,18 +88,6 @@ public class MainScript : MonoBehaviour
         else
         {
             refreshUI();
-        }
-    }
-
-    private void OnEnable()
-    {
-        if (OtherData.s_ifOnPause)
-        {
-            OtherData.s_ifOnPause = false;
-
-            m_netErrorPanelScript.Show();
-            m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
-            m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
         }
     }
 
@@ -683,5 +673,12 @@ public class MainScript : MonoBehaviour
     {
         LogicEnginerScript.Instance.Stop();
         PlayServiceSocket.s_instance.Stop();
+    }
+
+    void onResumeCallBack()
+    {
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }

@@ -7,9 +7,10 @@ public class AndroidCallBack : MonoBehaviour {
 
     public delegate void onPauseCallBack();
     public static onPauseCallBack s_onPauseCallBack = null;
-    private bool isPause;
-    private bool isFocus;
-    
+
+    public delegate void onResumeCallBack();
+    public static onResumeCallBack s_onResumeCallBack = null;
+
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -17,8 +18,6 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnPauseCallBack(string data)
     {
-        OtherData.s_ifOnPause = true;
-
         if (s_onPauseCallBack != null)
         {
             s_onPauseCallBack();
@@ -27,25 +26,9 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void OnResumeCallBack(string data)
     {
-    }
-
-    private void OnApplicationPause(bool pauseStatus)
-    {
-        isPause = pauseStatus;
-        ToastScript.createToast("isPause:"+isPause);
-    }
-
-    private void OnApplicationFocus(bool hasFocus)
-    {
-        isFocus = hasFocus;
-        ToastScript.createToast("isFocus:"+isFocus);
-    }
-
-    private void Update()
-    {
-        if (isPause && !isFocus)
+        if (s_onResumeCallBack != null)
         {
-            ToastScript.createToast("回到后台:"+Thread.CurrentThread);
+            s_onResumeCallBack();
         }
     }
 }

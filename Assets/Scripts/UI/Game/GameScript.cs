@@ -55,7 +55,9 @@ public class GameScript : MonoBehaviour
 
         ToastScript.clear();
 
+        // 安卓回调
         AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+        AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
 
         m_netErrorPanelScript = NetErrorPanelScript.create();
         AudioScript.getAudioScript().stopMusic();
@@ -70,18 +72,6 @@ public class GameScript : MonoBehaviour
         checkGameRoomType();
 
         m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
-    }
-
-    private void OnEnable()
-    {
-        if (OtherData.s_ifOnPause)
-        {
-            OtherData.s_ifOnPause = false;
-
-            m_netErrorPanelScript.Show();
-            m_netErrorPanelScript.setOnClickButton(onClickBack);
-            m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
-        }
     }
 
     void onInvokeStartMusic()
@@ -2599,5 +2589,12 @@ public class GameScript : MonoBehaviour
     {
         LogicEnginerScript.Instance.Stop();
         PlayServiceSocket.s_instance.Stop();
+    }
+
+    void onResumeCallBack()
+    {
+        m_netErrorPanelScript.Show();
+        m_netErrorPanelScript.setOnClickButton(onClickBack);
+        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
     }
 }
