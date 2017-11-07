@@ -122,13 +122,21 @@ public class GameData
         return null;
     }
 
-    public void setOtherPlayerUI(string uid)
+    public void setOtherPlayerUI(string uid,bool isPVP)
     {
         PlayerData playerData = getPlayerDataByUid(uid);
 
         getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
         getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setName(playerData.m_name);
-        getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setGoldNum(playerData.m_gold);
+
+        if (isPVP)
+        {
+            getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setGoldNum(playerData.m_score);
+        }
+        else
+        {
+            getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setGoldNum(playerData.m_gold);
+        }
     }
 }
 
@@ -148,4 +156,6 @@ public class PlayerData
     public int m_winCount;
     public int m_runCount;
     public int m_meiliZhi;
+
+    public int m_score;
 }

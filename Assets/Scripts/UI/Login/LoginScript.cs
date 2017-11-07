@@ -34,6 +34,9 @@ public class LoginScript : MonoBehaviour
 
     void Start()
     {
+        // 永不息屏
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         ToastScript.clear();
 
         m_netErrorPanelScript = NetErrorPanelScript.create();
