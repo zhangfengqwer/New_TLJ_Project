@@ -222,4 +222,24 @@ class GameUtil
 
         return str;
     }
+
+    public static bool CheckGameObjectContainPoint(GameObject obj,Vector3 point)
+    {
+        point = new Vector3(point.x * (1280.0f / OtherData.s_screenSize.x), point.y * (720.0f / OtherData.s_screenSize.y));
+
+        Vector2 objSize = obj.GetComponent<RectTransform>().sizeDelta * obj.transform.localScale.x;
+        Vector3 objPos = obj.transform.localPosition;
+
+        Debug.Log(OtherData.s_screenSize + "    "+objPos + "    " + point);
+
+        if ((point.x >= (objPos.x - objSize.x / 2)) &&
+            (point.x <= (objPos.x + objSize.x / 2)) &&
+            (point.y >= (objPos.y - objSize.y / 2)) &&
+            (point.y <= (objPos.y + objSize.y / 2)))
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

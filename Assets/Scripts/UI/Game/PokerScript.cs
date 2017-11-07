@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PokerScript : MonoBehaviour {
+public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandler,IPointerClickHandler
+{
 
     int m_num;
     int m_pokerType;
     bool m_isSelect = false;
+    public bool m_canTouch = false;
 
     public Image m_image_num;
     public Image m_image_small_icon;
@@ -126,6 +129,31 @@ public class PokerScript : MonoBehaviour {
             //gameObject.transform.localPosition += new Vector3(0, 30, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -210, 0);
             m_isSelect = true;
+        }
+    }
+    
+    //------------------------------------------------------------------------------------------------------
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (m_canTouch)
+        {
+            onClickPoker();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (m_canTouch)
+        {
+            onClickPoker();
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (m_canTouch)
+        {
+            onClickPoker();
         }
     }
 }
