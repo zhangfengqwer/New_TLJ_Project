@@ -139,17 +139,39 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickBuy()
     {
+        int totalPrice = m_shopData.price * m_goods_num;
         switch (m_shopData.money_type)
         {
             case 1:
+                if (UserData.gold < totalPrice)
+                {
+                    ToastScript.createToast("金币不足,请前去充值");
+                }
+                else
+                {
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+
+                }
+                break;
             case 2:
-                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>()
-                    .setGoodsInfo(m_shopData.goods_id, m_goods_num);
-                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
-                LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+                if (UserData.yuanbao < totalPrice)
+                {
+                    ToastScript.createToast("元宝不足,请前去充值");
+                }
+                else
+                {
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+
+                }
                 break;
             //人民币购买
             case 3:
+                ToastScript.createToast("元宝购买暂未开放,敬请期待");
+
                 JsonData data = new JsonData();
 
                 data["uid"] = UserData.uid;
