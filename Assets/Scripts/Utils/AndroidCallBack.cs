@@ -32,12 +32,13 @@ public class AndroidCallBack : MonoBehaviour {
     private void OnApplicationPause(bool pauseStatus)
     {
         isPause = pauseStatus;
-        
+        ToastScript.createToast("isPause:"+isPause);
     }
 
     private void OnApplicationFocus(bool hasFocus)
     {
         isFocus = hasFocus;
+        ToastScript.createToast("isFocus:"+isFocus);
     }
 
     private void Update()
