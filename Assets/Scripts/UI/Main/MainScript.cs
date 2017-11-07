@@ -98,6 +98,12 @@ public class MainScript : MonoBehaviour
 	            nextTime = Time.time + 1;//到达一秒后加1
             }
 	    }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            print("quit");
+            ExitGamePanelScript.create();
+        }
     }
 
     void OnDestroy()
