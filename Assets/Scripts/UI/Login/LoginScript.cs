@@ -29,7 +29,7 @@ public class LoginScript : MonoBehaviour
     public Text m_text_tips;
 
     public Toggle ToggleAgree;
-
+    private GameObject exitGameObject;
     NetErrorPanelScript m_netErrorPanelScript;
 
     void Start()
@@ -45,7 +45,7 @@ public class LoginScript : MonoBehaviour
         ToastScript.clear();
 
         m_netErrorPanelScript = NetErrorPanelScript.create();
-    
+
         // 拉取数值表
         {
             NetConfig.reqNetConfig();
@@ -54,8 +54,8 @@ public class LoginScript : MonoBehaviour
             HuDongData.getInstance().init();
             SensitiveWordUtil.InitWords();
         }
-        
-        
+
+
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
 
@@ -74,8 +74,9 @@ public class LoginScript : MonoBehaviour
 
     void onInvokeHealthPanel()
     {
-        m_healthTipPanel.transform.localScale = new Vector3(0,0,0);
+        m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
     }
+
 
     // 等获取到服务器配置文件再调用
     public void init()
@@ -104,9 +105,17 @@ public class LoginScript : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            print("quit");
+            if (exitGameObject == null)
+            {
+                exitGameObject = ExitGamePanelScript.create();
+            }
+        }
     }
-    
-    
+
+
     public void OnToggleAgree()
     {
         var flag = ToggleAgree.isOn;
@@ -154,7 +163,6 @@ public class LoginScript : MonoBehaviour
 
     public void GetWXLoginResult(string data)
     {
-        
     }
 
     public void GetQQLoginResult(string data)
@@ -172,7 +180,7 @@ public class LoginScript : MonoBehaviour
             jd["nickname"] = nickname;
             jd["third_id"] = openId;
             jd["platform"] = platform;
-            
+
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
         }
         catch (Exception e)
@@ -249,11 +257,11 @@ public class LoginScript : MonoBehaviour
 
             SceneManager.LoadScene("MainScene");
         }
-        else if (code == (int)TLJCommon.Consts.Code.Code_PasswordError)
+        else if (code == (int) TLJCommon.Consts.Code.Code_PasswordError)
         {
             ToastScript.createToast("密码错误");
         }
-        else if (code == (int)TLJCommon.Consts.Code.Code_AccountNoExist)
+        else if (code == (int) TLJCommon.Consts.Code.Code_AccountNoExist)
         {
             ToastScript.createToast("用户不存在");
         }
@@ -270,21 +278,21 @@ public class LoginScript : MonoBehaviour
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
-        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             string uid = jd["uid"].ToString();
             UserData.uid = uid;
             SceneManager.LoadScene("MainScene");
         }
-        else if (code == (int)TLJCommon.Consts.Code.Code_PasswordError)
+        else if (code == (int) TLJCommon.Consts.Code.Code_PasswordError)
         {
             ToastScript.createToast("密码错误");
         }
-        else if (code == (int)TLJCommon.Consts.Code.Code_AccountNoExist)
+        else if (code == (int) TLJCommon.Consts.Code.Code_AccountNoExist)
         {
             ToastScript.createToast("用户不存在");
         }
-        else if (code == (int)TLJCommon.Consts.Code.Code_CommonFail)
+        else if (code == (int) TLJCommon.Consts.Code.Code_CommonFail)
         {
             ToastScript.createToast("登录失败");
         }
@@ -304,15 +312,15 @@ public class LoginScript : MonoBehaviour
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             string uid = jd["uid"].ToString();
-         
+
             PlayerPrefs.SetString("account", m_inputAccount_register.text);
             PlayerPrefs.SetString("password", m_inputPassword_register.text);
 
             UserData.uid = uid;
-            
+
             SceneManager.LoadScene("MainScene");
         }
-        else if (code == (int)TLJCommon.Consts.Code.Code_CommonFail)
+        else if (code == (int) TLJCommon.Consts.Code.Code_CommonFail)
         {
             ToastScript.createToast("用户已存在");
         }
@@ -362,7 +370,7 @@ public class LoginScript : MonoBehaviour
         }
 
         // 检测账号是否合格
-        if(SensitiveWordUtil.IsSensitiveWord(m_inputAccount_register.text))
+        if (SensitiveWordUtil.IsSensitiveWord(m_inputAccount_register.text))
         {
             ToastScript.createToast("您的账号有敏感词");
 
@@ -382,10 +390,9 @@ public class LoginScript : MonoBehaviour
             {
                 string str = m_inputPassword_register.text[i].ToString();
                 if (((CommonUtil.charToAsc(str) >= 48) && (CommonUtil.charToAsc(str) <= 57) ||
-                    ((CommonUtil.charToAsc(str) >= 65) && (CommonUtil.charToAsc(str) <= 90) ||
-                    ((CommonUtil.charToAsc(str) >= 97) && (CommonUtil.charToAsc(str) <= 122)))))
+                     ((CommonUtil.charToAsc(str) >= 65) && (CommonUtil.charToAsc(str) <= 90) ||
+                      ((CommonUtil.charToAsc(str) >= 97) && (CommonUtil.charToAsc(str) <= 122)))))
                 {
-
                 }
                 else
                 {
@@ -404,7 +411,7 @@ public class LoginScript : MonoBehaviour
             data["tag"] = "QuickRegister";
             data["account"] = m_inputAccount_register.text;
             data["password"] = m_inputSecondPassword_register.text;
-            
+
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
     }
@@ -436,7 +443,7 @@ public class LoginScript : MonoBehaviour
     void onSocketReceive(string data)
     {
         //Debug.Log("收到服务器消息:" + data);
-        
+
         onReceive(data);
     }
 
@@ -468,6 +475,7 @@ public class LoginScript : MonoBehaviour
 
     public void OnClickXieYi()
     {
-        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),GameObject.Find("Canvas_Middle").transform);
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),
+            GameObject.Find("Canvas_Middle").transform);
     }
 }

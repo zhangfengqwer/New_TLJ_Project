@@ -26,6 +26,7 @@ public class MainScript : MonoBehaviour
     public GameObject m_laba;
     public GameObject m_headIcon;
 
+    private GameObject exitGameObject;
     LaBaScript m_laBaScript;
 
     //发送验证码的倒计时
@@ -88,6 +89,7 @@ public class MainScript : MonoBehaviour
         AudioScript.getAudioScript().playMusic_MainBg();
     }
 
+    
     void Update ()
     {
 	    if (BindPhoneScript.totalTime > 0)
@@ -98,6 +100,15 @@ public class MainScript : MonoBehaviour
 	            nextTime = Time.time + 1;//到达一秒后加1
             }
 	    }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            print("quit");
+            if (exitGameObject == null)
+            {
+                exitGameObject = ExitGamePanelScript.create();
+            }
+        }
     }
 
     void OnDestroy()
@@ -538,9 +549,10 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    public void onReceive_GetUserBag(string data)
+    public static void onReceive_GetUserBag(string data)
     {
         {
+            print("处理背包回调");
             JsonData jsonData = JsonMapper.ToObject(data);
             var code = (int)jsonData["code"];
             if (code == (int)Consts.Code.Code_OK)
@@ -558,7 +570,6 @@ public class MainScript : MonoBehaviour
                             userPropData.prop_name = propInfo.m_name;
                         }
                     }
-
                 }
             }
             else
