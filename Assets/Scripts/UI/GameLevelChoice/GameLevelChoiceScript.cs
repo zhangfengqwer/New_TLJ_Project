@@ -64,7 +64,11 @@ public class GameLevelChoiceScript : MonoBehaviour {
             Debug.Log("进入抄底初级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi);
         }
-
+        if (UserData.gold < 1500)
+        {
+            ToastScript.createToast("金币不足，请前去购买");
+            return;
+        }
         Destroy(gameObject);
 
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
@@ -83,7 +87,11 @@ public class GameLevelChoiceScript : MonoBehaviour {
             Debug.Log("进入抄底中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi);
         }
-
+        if (UserData.gold < 35000)
+        {
+            ToastScript.createToast("金币不足，请前去购买");
+            return;
+        }
         Destroy(gameObject);
         
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
@@ -102,9 +110,15 @@ public class GameLevelChoiceScript : MonoBehaviour {
             Debug.Log("进入抄底高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi);
         }
+        if (UserData.gold < 100000)
+        {
+            ToastScript.createToast("金币不足，请前去购买");
+            return;
+        }
 
         Destroy(gameObject);
 
+       
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
         SceneManager.LoadScene("GameScene");
     }

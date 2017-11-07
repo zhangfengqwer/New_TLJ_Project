@@ -146,26 +146,24 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_wechat()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        PlatformHelper.Login("Login", "GetWXLoginResult", "weixin");
+        PlatformHelper.Login("Login", "GetLoginResult", "weixin");
     }
 
     // QQ登录
     public void onClickLogin_qq()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
-        PlatformHelper.Login("Login", "GetQQLoginResult", "qq");
+        PlatformHelper.Login("Login", "GetLoginResult", "qq");
     }
 
-    public void GetWXLoginResult(string data)
+    public void GetLoginResult(string data)
     {
-    }
-
-    public void GetQQLoginResult(string data)
-    {
+        print("Unity收到:" + data);
         try
         {
+            
             JsonData jsonData = JsonMapper.ToObject(data);
-            var openId = (string) jsonData["openid"];
+            var openId = (string) jsonData["code"];
             var nickname = (string) jsonData["nickname"];
             var figureurl = (string) jsonData["figureurl"];
             var platform = (string) jsonData["platform"];
