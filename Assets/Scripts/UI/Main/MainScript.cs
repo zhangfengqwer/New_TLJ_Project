@@ -315,6 +315,11 @@ public class MainScript : MonoBehaviour
 
             m_laBaScript.addText(text);
         }
+        // 强制离线
+        else if(tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
+        {
+            ToastScript.createToast("您已被踢下线");   
+        }
         else
         {
             Debug.Log("onReceive_Main：未知tag");
