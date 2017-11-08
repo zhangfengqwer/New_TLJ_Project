@@ -68,6 +68,11 @@ public class PlatformHelper
 
     }
 
+    public static void WXShareFriends(string obj, string func, string data)
+    {
+
+    }
+
     public static void iOSLog(string str){
         Debug.Log(str);
     }
@@ -320,6 +325,13 @@ public class PlatformHelper
     {
         GetJC().CallStatic("login", obj, func, data);
     }
+
+    //微信分享
+    public static void WXShareFriends(string obj, string func, string data)
+    {
+        GetJC().CallStatic("wxShareFriends", obj, func, data);
+    }
+
 
     /// <summary>
     /// 在外部设置该安装包是否与360等第三方平台合作 

@@ -83,7 +83,7 @@ public class UserInfoScript : MonoBehaviour
             taoPaoLv.text = "0%";
         }
         else
-        {
+        {   
             //默认为保留两位
             shengLv.text = String.Format("{0:F}", (UserData.gameData.winCount / (float)UserData.gameData.allGameCount) * 100) + "%";
             allGame.text = UserData.gameData.allGameCount+"";

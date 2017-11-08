@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using LitJson;
+using TLJCommon;
 using UnityEngine;
 
 public class AndroidCallBack : MonoBehaviour {
@@ -35,6 +38,35 @@ public class AndroidCallBack : MonoBehaviour {
         if (s_onResumeCallBack != null)
         {
             s_onResumeCallBack();
+        }
+    }
+
+    public void OnWxShareFriends(string data)
+    {
+        
+    }
+
+    public void GetLoginResult(string data)
+    {
+        print("Unity收到:" + data);
+        try
+        {
+            JsonData jsonData = JsonMapper.ToObject(data);
+            var openId = (string)jsonData["code"];
+            var nickname = (string)jsonData["nickname"];
+            var platform = (string)jsonData["platform"];
+
+            JsonData jd = new JsonData();
+            jd["tag"] = Consts.Tag_Third_Login;
+            jd["nickname"] = nickname;
+            jd["third_id"] = openId;
+            jd["platform"] = platform;
+
+            LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
         }
     }
 }

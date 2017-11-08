@@ -52,11 +52,14 @@ public class PropDetailPanelScript : MonoBehaviour {
         // 话费
         else if ((m_propInfo.m_id == 111) || (m_propInfo.m_id == 112))
         {
+            ToastScript.createToast("话费充值接口暂未开放,敬请期待");
+            return;
             UseHuaFeiPanelScript.create(m_propInfo);
         }
         // 其他
         else
         {
+
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();

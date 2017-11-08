@@ -170,6 +170,28 @@ public class ShopPanelScript : MonoBehaviour
     {
         ShopDataScript.getInstance().initJson(data);
         shopDataList = ShopDataScript.getInstance().getShopDataList();
+        //去除1005；
+        for (int i = 0; i < shopDataList.Count; i++)
+        {
+            ShopData shopData = shopDataList[i];
+            if (shopData.goods_id == 1005)
+            {
+                shopDataList.Remove(shopData);
+            }
+        }
+
+        //去除1002；
+        for (int i = 0; i < shopDataList.Count; i++)
+        {
+            ShopData shopData = shopDataList[i];
+            if (shopData.goods_id == 1002)
+            {
+                shopDataList.Remove(shopData);
+            }
+           
+        }
+
+
         Init();
     }
 
