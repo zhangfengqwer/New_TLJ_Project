@@ -412,96 +412,6 @@ public class GameScript : MonoBehaviour
                 onClickExitRoom();
             }
         }
-
-        bool useMouse = true;
-
-        // 鼠标触摸
-        if (useMouse)
-        {
-            Vector3 touchPos = Input.mousePosition;
-            touchPos.z = m_screenPos.z; // 这个很关键  
-            touchPos = Camera.main.ScreenToWorldPoint(touchPos);
-            touchPos = touchPos * 100.0f;
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                onTouchBegan(touchPos);
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                onTouchMove(touchPos);
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                onTouchEnd(touchPos);
-            }
-        }
-        // 手机触摸
-        else
-        {
-            if (Input.touchCount > 0)
-            {
-                Vector3 touchPos = Input.GetTouch(0).position;
-
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
-                {
-                    onTouchBegan(touchPos);
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                {
-                    onTouchMove(touchPos);
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                {
-                    onTouchEnd(touchPos);
-                }
-            }
-        }
-    }
-
-    void onTouchBegan(Vector3 vec3)
-    {
-        //bool isTouchPoker = false;
-        //for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
-        //{
-        //    if (GameUtil.CheckGameObjectContainPoint(GameData.getInstance().m_myPokerObjList[i], vec3))
-        //    {
-        //        isTouchPoker = true;
-        //        GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-        //        break;
-        //    }            
-        //}
-
-        //// 点击空白处，所有已选中的牌都变成未选中
-        //if (!isTouchPoker)
-        //{
-        //    for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
-        //    {
-        //        if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-        //        {
-        //            GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-        //        }
-        //    }
-        //}
-    }
-
-    void onTouchMove(Vector3 vec3)
-    {
-        //for (int i = GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
-        //{
-        //    if (GameUtil.CheckGameObjectContainPoint(GameData.getInstance().m_myPokerObjList[i], vec3))
-        //    {
-        //        if (!GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-        //        {
-        //            GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-        //        }
-        //        break;
-        //    }
-        //}
-    }
-
-    void onTouchEnd(Vector3 vec3)
-    {
     }
 
     void OnDestroy()
@@ -1018,7 +928,7 @@ public class GameScript : MonoBehaviour
                         case (int)TLJCommon.Consts.Code.Code_OK:
                             {
                                 int roomId = (int)jd["roomId"];
-                                ToastScript.createToast("加入房间成功：");
+                                //ToastScript.createToast("加入房间成功");
 
                                 // 禁用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
@@ -1780,7 +1690,7 @@ public class GameScript : MonoBehaviour
                         case (int)TLJCommon.Consts.Code.Code_OK:
                             {
                                 int roomId = (int)jd["roomId"];
-                                ToastScript.createToast("加入房间成功：");
+                                //ToastScript.createToast("加入房间成功");
 
                                 // 禁用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);

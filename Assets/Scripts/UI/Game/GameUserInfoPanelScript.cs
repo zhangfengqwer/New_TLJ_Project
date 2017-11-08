@@ -41,11 +41,19 @@ public class GameUserInfoPanelScript : MonoBehaviour {
         {
             m_text_name.text = UserData.name;
 
-            float shenglv = (float)UserData.gameData.winCount / (float)UserData.gameData.allGameCount * 100.0f;
-            float taopaolv = (float)UserData.gameData.runCount / (float)UserData.gameData.allGameCount * 100.0f;
+            if (UserData.gameData.allGameCount == 0)
+            {
+                m_text_shenglv.text = "0%";
+                m_text_taopaolv.text = "0%";
+            }
+            else
+            {
+                float shenglv = (float)UserData.gameData.winCount / (float)UserData.gameData.allGameCount * 100.0f;
+                float taopaolv = (float)UserData.gameData.runCount / (float)UserData.gameData.allGameCount * 100.0f;
 
-            m_text_shenglv.text = (int)shenglv + "%";
-            m_text_taopaolv.text = (int)taopaolv + "%";
+                m_text_shenglv.text = (int)shenglv + "%";
+                m_text_taopaolv.text = (int)taopaolv + "%";
+            }
             
             m_text_meilizhi.text = UserData.gameData.meiliZhi.ToString();
 
@@ -57,11 +65,19 @@ public class GameUserInfoPanelScript : MonoBehaviour {
                         
             m_text_name.text = playerData.m_name;
 
-            float shenglv = (float)playerData.m_winCount / (float)playerData.m_allGameCount * 100.0f;
-            float taopaolv = (float)playerData.m_runCount / (float)playerData.m_allGameCount * 100.0f;
+            if (playerData.m_allGameCount == 0)
+            {
+                m_text_shenglv.text = "0%";
+                m_text_taopaolv.text = "0%";
+            }
+            else
+            {
+                float shenglv = (float)playerData.m_winCount / (float)playerData.m_allGameCount * 100.0f;
+                float taopaolv = (float)playerData.m_runCount / (float)playerData.m_allGameCount * 100.0f;
 
-            m_text_shenglv.text = (int)shenglv + "%";
-            m_text_taopaolv.text = (int)taopaolv + "%";
+                m_text_shenglv.text = (int)shenglv + "%";
+                m_text_taopaolv.text = (int)taopaolv + "%";
+            }
 
             m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
 

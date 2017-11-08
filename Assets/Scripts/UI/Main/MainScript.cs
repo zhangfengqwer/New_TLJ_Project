@@ -408,7 +408,7 @@ public class MainScript : MonoBehaviour
 
             case (int)TLJCommon.Consts.Code.Code_CommonFail:
                 {
-                    ToastScript.createToast("加入房间失败，已经加入房间");
+                    ToastScript.createToast("您已加入其它房间，无法开始新游戏");
                 }
                 break;
         }
