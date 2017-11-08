@@ -485,15 +485,15 @@ public class LoginScript : MonoBehaviour
     //--------------------------------------------------------------------------------------------------
     void onPauseCallBack()
     {
-        LoginServiceSocket.s_instance.Stop();
-        LogicEnginerScript.Instance.Stop();
-        PlayServiceSocket.s_instance.Stop();
+        //LoginServiceSocket.s_instance.Stop();
+        //LogicEnginerScript.Instance.Stop();
+        //PlayServiceSocket.s_instance.Stop();
     }
 
     void onResumeCallBack()
     {
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
+        //m_netErrorPanelScript.Show();
+        //m_netErrorPanelScript.setOnClickButton(onClickChongLian);
+        //m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
     }
 }
