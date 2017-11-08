@@ -8,6 +8,7 @@ public class SetScript : MonoBehaviour {
 
     public Button m_button_qiehuanzhanghao;
     public Button m_button_tuichu;
+    public Button m_button_guanyu;
 
     public Slider m_sliderMusic;
     public Slider m_sliderSound;
@@ -34,6 +35,7 @@ public class SetScript : MonoBehaviour {
         {
             m_button_qiehuanzhanghao.transform.localScale = new Vector3(0, 0, 0);
             m_button_tuichu.transform.localScale = new Vector3(0, 0, 0);
+            m_button_guanyu.transform.localScale = new Vector3(0, 0, 0);
         }
     }
 	
