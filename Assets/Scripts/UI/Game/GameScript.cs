@@ -1143,6 +1143,8 @@ public class GameScript : MonoBehaviour
                             pokerScript.onClickPoker();
                         }
                     }
+
+                    checkShowZhuPaiLogo();
                 }
                 break;
 
@@ -1179,6 +1181,8 @@ public class GameScript : MonoBehaviour
 
                             // 启用埋底按钮
                             m_buttonMaiDi.transform.localScale = new Vector3(1, 1, 1);
+
+                            checkShowZhuPaiLogo();
                         }
                         else
                         {
@@ -1274,6 +1278,8 @@ public class GameScript : MonoBehaviour
 
                                         sortMyPokerList(GameData.getInstance().m_masterPokerType);
                                         createMyPokerObj();
+
+                                        checkShowZhuPaiLogo();
                                     }
 
                                     // 开始埋底倒计时
@@ -1941,6 +1947,28 @@ public class GameScript : MonoBehaviour
         }
 
         initMyPokerPos(GameData.getInstance().m_myPokerObjList);
+    }
+
+    void checkShowZhuPaiLogo()
+    {
+        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            int num = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getPokerNum();
+            int pokerType = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getPokerType();
+
+            if (GameData.getInstance().m_levelPokerNum == num)
+            {
+                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().showZhuPaiLogo();
+            }
+            else if ((GameData.getInstance().m_masterPokerType != -1) && (GameData.getInstance().m_masterPokerType == pokerType))
+            {
+                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().showZhuPaiLogo();
+            }
+            else
+            {
+                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().closeZhuPaiLogo();
+            }
+        }        
     }
 
     void initOutPokerPos(List<GameObject> objList, OtherPlayerUIScript.Direction direc)
