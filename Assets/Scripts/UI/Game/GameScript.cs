@@ -83,9 +83,14 @@ public class GameScript : MonoBehaviour
     void initData()
     {
         m_tag = GameData.getInstance().m_tag;
+
+        // 游戏服务器
         PlayServiceSocket.s_instance.setOnPlayService_Connect(null);
         PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive);
         PlayServiceSocket.s_instance.setOnPlayService_Close(onSocketClose);
+
+        // 逻辑服务器
+        LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
     }
 
     void initUI()
@@ -420,7 +425,7 @@ public class GameScript : MonoBehaviour
 
     public void onClickBag()
     {
-        BagPanelScript.create(true);
+        BagPanelScript.create(false);
     }
 
     public void onClickSet()
@@ -2334,6 +2339,32 @@ public class GameScript : MonoBehaviour
     //        PlayServiceSocket.s_instance.getSocketUtil().start();
     //    }
     //}
+
+    public void onReceive_Main(string data)
+    {
+        Debug.Log("GameScript.onReceive_Main----" + data);
+        JsonData jd = JsonMapper.ToObject(data);
+        string tag = (string)jd["tag"];
+        
+        // 强制离线
+        if (tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
+        {
+            Destroy(LogicEnginerScript.Instance);
+            Destroy(PlayServiceSocket.s_instance);
+
+            GameObject obj = CommonExitPanelScript.create();
+            obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
+            obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.AddListener(delegate ()
+            {
+                OtherData.s_isFromSetToLogin = true;
+                SceneManager.LoadScene("LoginScene");
+            });
+        }
+        else
+        {
+            Debug.Log("onReceive_Main：未知tag");
+        }
+    }
 
     void onSocketReceive(string data)
     {

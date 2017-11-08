@@ -15,7 +15,7 @@ public class NetErrorPanelScript : MonoBehaviour
     public static NetErrorPanelScript create()
     {
         GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         return obj.GetComponent<NetErrorPanelScript>();
     }

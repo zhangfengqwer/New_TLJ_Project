@@ -60,6 +60,18 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.setOnLoginService_Connect(onSocketConnect_Logic);
                 LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose_Logic);
             }
+            else
+            {
+                {
+                    LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = onReceive_GetUserBag;
+                    LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                }
+            }
 
             LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
         }
@@ -318,8 +330,12 @@ public class MainScript : MonoBehaviour
         // 强制离线
         else if(tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
         {
-            CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
-            CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.AddListener(delegate ()
+            Destroy(LogicEnginerScript.Instance);
+            Destroy(PlayServiceSocket.s_instance);
+
+            GameObject obj = CommonExitPanelScript.create();
+            obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
+            obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.AddListener(delegate ()
             {
                 OtherData.s_isFromSetToLogin = true;
                 SceneManager.LoadScene("LoginScene");
