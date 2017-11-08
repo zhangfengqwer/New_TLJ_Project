@@ -35,6 +35,7 @@ public class ToastScript : MonoBehaviour {
         m_text = obj.transform.Find("Text").GetComponent<Text>();
 
         obj.GetComponent<ToastScript>().setData(obj,text);
+        obj.GetComponent<RectTransform>().sizeDelta = new Vector2(text.Length * 30, 50);
 
         return obj;
     }
