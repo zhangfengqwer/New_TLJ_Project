@@ -131,14 +131,14 @@ public class MainScript : MonoBehaviour
             //ToastScript.createToast("与Logic服务器断开连接");
             m_netErrorPanelScript.Show();
             m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
-            m_netErrorPanelScript.setContentText("与Logic服务器断开连接，请重新连接");
+            m_netErrorPanelScript.setContentText("与逻辑服务器断开连接，请重新连接");
         }
         else if (!PlayServiceSocket.s_instance.isConnecion())
         {
             //ToastScript.createToast("与Play服务器断开连接");
             m_netErrorPanelScript.Show();
             m_netErrorPanelScript.setOnClickButton(onClickChongLian_Play);
-            m_netErrorPanelScript.setContentText("与Play服务器断开连接，请重新连接");
+            m_netErrorPanelScript.setContentText("与游戏服务器断开连接，请重新连接");
         }
         else
         {
