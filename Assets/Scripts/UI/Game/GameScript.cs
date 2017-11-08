@@ -168,8 +168,29 @@ public class GameScript : MonoBehaviour
     {
         try
         {
-            JsonData jd = JsonMapper.ToObject(jsonData);
+            // 记牌器按钮
+            {
+                bool canUse = false;
+                for (int i = 0; i < UserData.buffData.Count; i++)
+                {
+                    if ((UserData.buffData[i].prop_id == 101) && (UserData.buffData[i].buff_num > 0))
+                    {
+                        canUse = true;
+                        break;
+                    }
+                }
 
+                if (canUse)
+                {
+                    m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    m_buttonJiPaiQi.transform.localScale = new Vector3(1,1,1);
+                }
+            }
+
+            JsonData jd = JsonMapper.ToObject(jsonData);
             {
                 if (!isPVP())
                 {
@@ -367,6 +388,11 @@ public class GameScript : MonoBehaviour
             Destroy(m_liangzhuObj);
             Destroy(m_waitMatchPanel);
 
+            m_timer = null;
+            m_jiPaiGameObject = null;
+            m_liangzhuObj = null;
+            m_waitMatchPanel = null;
+
             if (m_tuoguanObj != null)
             {
                 Destroy(m_tuoguanObj);
@@ -506,30 +532,14 @@ public class GameScript : MonoBehaviour
 
     public void OnClickJiPaiQi()
     {
-        bool canUse = false;
-        for (int i = 0; i < UserData.buffData.Count; i++)
+        // 显示记牌器
+        if (m_jiPaiGameObject == null)
         {
-            if ((UserData.buffData[i].prop_id == 101) && (UserData.buffData[i].buff_num > 0))
-            {
-                canUse = true;
-                break;
-            }
-        }
-
-        if (canUse)
-        {
-            if (m_jiPaiGameObject == null)
-            {
-                m_jiPaiGameObject = RememberPokerHelper.create();
-            }
-            else
-            {
-                m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
-            }
+            reqUseBuff(101);
         }
         else
         {
-            ToastScript.createToast("您没有记牌器可用");
+            m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
         }
     }
 
@@ -610,6 +620,16 @@ public class GameScript : MonoBehaviour
         jsonData["tag"] = m_tag;
         jsonData["uid"] = UserData.uid;
         jsonData["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
+
+        PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
+    }
+
+    public void reqUseBuff(int prop_id)
+    {
+        JsonData jsonData = new JsonData();
+        jsonData["tag"] = TLJCommon.Consts.Tag_UseBuff;
+        jsonData["uid"] = UserData.uid;
+        jsonData["prop_id"] = prop_id;
 
         PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
     }
@@ -913,6 +933,10 @@ public class GameScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_UserInfo_Game) == 0)
         {
             onReceive_UserInfo_Game(data);
+        }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_UseBuff) == 0)
+        {
+            onReceive_UseBuff(data);
         }
     }
 
@@ -1837,6 +1861,43 @@ public class GameScript : MonoBehaviour
             GameData.getInstance().setOtherPlayerUI(uid,isPVP());
         }
     }
+
+    void onReceive_UseBuff(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+
+        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        {
+            string uid = (string)jd["uid"];
+            int prop_id = (int)jd["prop_id"];
+
+            // 记牌器
+            if (prop_id == 101)
+            {
+                // 剩余数量-1
+                for (int i = 0; i < UserData.buffData.Count; i++)
+                {
+                    if (UserData.buffData[i].prop_id == 101)
+                    {
+                        --UserData.buffData[i].buff_num;
+                        break;
+                    }
+                }
+
+                // 显示记牌器
+                if (m_jiPaiGameObject == null)
+                {
+                    m_jiPaiGameObject = RememberPokerHelper.create();
+                }
+                else
+                {
+                    m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
+                }
+            }
+        }
+    }
+    
     //----------------------------------------------------------接收数据 end--------------------------------------------------
 
     void startGame()
@@ -2010,19 +2071,28 @@ public class GameScript : MonoBehaviour
             {
                 for (int j = (i + 1); j < levelPokerList.Count; j++)
                 {
-                    //if (levelPokerList[j].m_pokerType > levelPokerList[i].m_pokerType)
-                    //{
-                    //    TLJCommon.PokerInfo temp = levelPokerList[j];
-                    //    levelPokerList[j] = levelPokerList[i];
-                    //    levelPokerList[i] = temp;
-                    //}
-
-                    if (((int)levelPokerList[j].m_pokerType == ZhuPokerType) || (levelPokerList[j].m_pokerType > levelPokerList[i].m_pokerType))
+                    if ((int)levelPokerList[j].m_pokerType == ZhuPokerType)
                     {
                         TLJCommon.PokerInfo temp = levelPokerList[j];
                         levelPokerList[j] = levelPokerList[i];
                         levelPokerList[i] = temp;
                     }
+                    else
+                    {
+                        if (((int)levelPokerList[i].m_pokerType != ZhuPokerType) && (levelPokerList[j].m_pokerType > levelPokerList[i].m_pokerType))
+                        {
+                            TLJCommon.PokerInfo temp = levelPokerList[j];
+                            levelPokerList[j] = levelPokerList[i];
+                            levelPokerList[i] = temp;
+                        }
+                    }
+
+                    //if (((int)levelPokerList[j].m_pokerType == ZhuPokerType) || (levelPokerList[j].m_pokerType > levelPokerList[i].m_pokerType))
+                    //{
+                    //    TLJCommon.PokerInfo temp = levelPokerList[j];
+                    //    levelPokerList[j] = levelPokerList[i];
+                    //    levelPokerList[i] = temp;
+                    //}
                 }
             }
         }
