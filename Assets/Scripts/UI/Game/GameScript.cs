@@ -11,6 +11,7 @@ public class GameScript : MonoBehaviour
 {
     public GameObject m_gameInfoSign;
 
+    public Image m_gameRoomLogo;
     public Button m_button_bag;
     public Button m_button_set;
     public Button m_button_exit;
@@ -135,6 +136,8 @@ public class GameScript : MonoBehaviour
 
     void checkGameRoomType()
     {
+        CommonUtil.setImageSprite(m_gameRoomLogo, GameUtil.getGameRoomTypeLogoPath(GameData.getInstance().getGameRoomType()));
+
         // 休闲场
         if (!isPVP())
         {

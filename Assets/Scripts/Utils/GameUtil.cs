@@ -242,4 +242,52 @@ class GameUtil
 
         return false;
     }
+
+    public static string getGameRoomTypeLogoPath(string gameroomtype)
+    {
+        string path = "";
+
+        if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_jingdian_xinshou";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_jingdian_jingying";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_jingdian_dashi";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_chaodi_xinshou";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_chaodi_jingying";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_chaodi_dashi";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_JinBi_8) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_tiaozhan_2000";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_JinBi_16) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_tiaozhan_5000";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_huafei_1";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_16) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_huafei_5";
+        }
+
+        return path;
+    }
 }
