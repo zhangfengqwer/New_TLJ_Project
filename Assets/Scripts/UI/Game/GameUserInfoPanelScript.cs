@@ -11,6 +11,7 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     public GameObject m_gameobj_down;
 
     public Text m_text_name;
+    public Text m_text_zongjushu;
     public Text m_text_shenglv;
     public Text m_text_taopaolv;
     public Text m_text_meilizhi;
@@ -54,7 +55,8 @@ public class GameUserInfoPanelScript : MonoBehaviour {
                 m_text_shenglv.text = (int)shenglv + "%";
                 m_text_taopaolv.text = (int)taopaolv + "%";
             }
-            
+
+            m_text_zongjushu.text = UserData.gameData.allGameCount.ToString();
             m_text_meilizhi.text = UserData.gameData.meiliZhi.ToString();
 
             m_gameobj_down.transform.localScale = new Vector3(0, 0, 0);
@@ -79,6 +81,7 @@ public class GameUserInfoPanelScript : MonoBehaviour {
                 m_text_taopaolv.text = (int)taopaolv + "%";
             }
 
+            m_text_zongjushu.text = playerData.m_allGameCount.ToString();
             m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
 
             m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);

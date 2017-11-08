@@ -15,6 +15,7 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     public Image m_image_num;
     public Image m_image_small_icon;
     public Image m_image_big_icon;
+    public Image m_image_zhupai;
 
     public static GameObject createPoker()
     {
@@ -94,6 +95,19 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
                 }
                 break;
         }
+
+        //if (GameData.getInstance().m_levelPokerNum == num)
+        //{
+        //    showZhuPaiLogo();
+        //}
+        //else if ((GameData.getInstance().m_masterPokerType != -1) && (GameData.getInstance().m_masterPokerType == pokerType))
+        //{
+        //    showZhuPaiLogo();
+        //}
+        //else
+        //{
+        //    closeZhuPaiLogo();
+        //}
     }
 
     public int getPokerNum()
@@ -131,7 +145,17 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
             m_isSelect = true;
         }
     }
-    
+
+    public void showZhuPaiLogo()
+    {
+        m_image_zhupai.transform.localScale = new Vector3(1,1,1);
+    }
+
+    public void closeZhuPaiLogo()
+    {
+        m_image_zhupai.transform.localScale = new Vector3(0,0,0);
+    }
+
     //------------------------------------------------------------------------------------------------------
     public void OnPointerDown(PointerEventData eventData)
     {

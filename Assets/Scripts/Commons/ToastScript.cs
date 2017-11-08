@@ -67,7 +67,7 @@ public class ToastScript : MonoBehaviour {
 
         for (int i = s_toactObj.Count - 1; i >= 0; i--)
         {
-            s_toactObj[i].transform.localPosition = new Vector3(0, -180 + (s_toactObj.Count - i) * 60, 0);
+            s_toactObj[i].transform.localPosition = new Vector3(0, -230 + (s_toactObj.Count - i) * 60, 0);
         }
     }
 }
