@@ -318,7 +318,12 @@ public class MainScript : MonoBehaviour
         // 强制离线
         else if(tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
         {
-            ToastScript.createToast("您已被踢下线");   
+            CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
+            CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.AddListener(delegate ()
+            {
+                OtherData.s_isFromSetToLogin = true;
+                SceneManager.LoadScene("LoginScene");
+            });
         }
         else
         {

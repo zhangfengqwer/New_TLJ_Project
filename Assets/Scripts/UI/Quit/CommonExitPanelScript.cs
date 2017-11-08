@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CommonExitPanelScript : MonoBehaviour {
+public class CommonExitPanelScript : MonoBehaviour
+{
     public Button ButtonConfirm;
     public Text TextContent;
 
@@ -12,10 +13,5 @@ public class CommonExitPanelScript : MonoBehaviour {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/CommonExitPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
         return obj;
-    }
-
-    public void OnClickCancel()
-    {
-        Destroy(gameObject);
     }
 }
