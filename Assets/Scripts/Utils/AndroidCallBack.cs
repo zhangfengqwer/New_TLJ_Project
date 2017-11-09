@@ -44,6 +44,7 @@ public class AndroidCallBack : MonoBehaviour {
     public void OnWxShareFriends(string data)
     {
         
+
     }
 
     public void GetLoginResult(string data)
