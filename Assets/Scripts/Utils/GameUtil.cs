@@ -167,6 +167,11 @@ class GameUtil
         {
             UserData.gold += num;
 
+            if (UserData.gold < 0)
+            {
+                UserData.gold = 0;
+            }
+
             if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
             {
                 GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();

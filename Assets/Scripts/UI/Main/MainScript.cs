@@ -62,6 +62,7 @@ public class MainScript : MonoBehaviour
             }
             else
             {
+                if (LogicEnginerScript.Instance.isConnecion())
                 {
                     LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
@@ -70,6 +71,12 @@ public class MainScript : MonoBehaviour
                     LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                }
+                else
+                {
+                    m_netErrorPanelScript.Show();
+                    m_netErrorPanelScript.setOnClickButton(onClickChongLian_Logic);
+                    m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
                 }
             }
 
