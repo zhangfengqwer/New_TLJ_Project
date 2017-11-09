@@ -131,10 +131,12 @@ public class SocketUtil
         {
             Debug.Log("SocketUtil----连接服务器失败：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
 
-            if (!m_isNormalStop)
-            {
-                m_onSocketEvent_Connect(false);
-            }
+            //if (!m_isNormalStop)
+            //{
+            //    m_onSocketEvent_Connect(false);
+            //}
+
+            m_onSocketEvent_Connect(false);
         }
     }
 
