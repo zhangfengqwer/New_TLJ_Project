@@ -64,7 +64,7 @@ public class PVPEndPanelScript : MonoBehaviour {
     {
         //m_parentScript.onClickExitRoom();
 //        ToastScript.createToast("暂未开放");
-        string content = string.Format("我获得了第{0}名", 1);
+        string content = string.Format("我获得了第{0}名", m_text_mingci.text);
         PlatformHelper.WXShareFriends("AndroidCallBack", "OnWxShareFriends", content);
     }
 }
