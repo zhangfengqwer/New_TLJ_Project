@@ -30,7 +30,6 @@ public class LoginScript : MonoBehaviour
 
     public Toggle ToggleAgree;
     private GameObject exitGameObject;
-    NetErrorPanelScript m_netErrorPanelScript;
 
     void Start()
     {
@@ -49,8 +48,6 @@ public class LoginScript : MonoBehaviour
         }
 
         ToastScript.clear();
-
-        m_netErrorPanelScript = NetErrorPanelScript.create();
 
         // 拉取数值表
         {
@@ -405,15 +402,15 @@ public class LoginScript : MonoBehaviour
             //ToastScript.createToast("连接服务器成功");
 
             NetLoading.getInstance().Close();
-            m_netErrorPanelScript.Close();
+            NetErrorPanelScript.getInstance().Close();
         }
         else
         {
             //Debug.Log("连接服务器失败，尝试重新连接");
 
-            m_netErrorPanelScript.Show();
-            m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-            m_netErrorPanelScript.setContentText("连接服务器失败，请重新连接");
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+            NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
         }
     }
 
@@ -428,25 +425,25 @@ public class LoginScript : MonoBehaviour
     {
         //Debug.Log("被动与服务器断开连接,尝试重新连接");
 
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
     void onSocketStop()
     {
         //Debug.Log("主动与服务器断开连接");
 
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
     // 点击网络断开弹框中的重连按钮
     void onClickChongLian()
     {
         NetLoading.getInstance().Show();
-        m_netErrorPanelScript.Close();
+        NetErrorPanelScript.getInstance().Close();
         LoginServiceSocket.s_instance.startConnect();
     }
 
@@ -466,8 +463,8 @@ public class LoginScript : MonoBehaviour
 
     void onResumeCallBack()
     {
-        //m_netErrorPanelScript.Show();
-        //m_netErrorPanelScript.setOnClickButton(onClickChongLian);
-        //m_netErrorPanelScript.setContentText("与服务器断开连接，请重新连接");
+        //NetErrorPanelScript.getInstance().Show();
+        //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+        //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 }

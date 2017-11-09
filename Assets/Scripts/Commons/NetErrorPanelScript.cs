@@ -6,35 +6,52 @@ using UnityEngine.UI;
 
 public class NetErrorPanelScript : MonoBehaviour
 {
-    public Text m_text_content;
-    public Button m_button;
-
     public delegate void OnClickButton();
     OnClickButton m_OnClickButton = null;
 
-    public static NetErrorPanelScript create()
-    {
-        GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+    static NetErrorPanelScript s_instance = null;
+    GameObject s_netErrorPanel = null;
 
-        return obj.GetComponent<NetErrorPanelScript>();
-    }
-
-    private void Start()
+    public static NetErrorPanelScript getInstance()
     {
-        gameObject.transform.localScale = new Vector3(0, 0, 0);
+        if (s_instance == null)
+        {
+            GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorUtil") as GameObject;
+            GameObject obj = GameObject.Instantiate(prefab);
+
+            DontDestroyOnLoad(obj);
+
+            s_instance = obj.GetComponent<NetErrorPanelScript>();
+        }
+
+        return s_instance;
     }
 
     public void Show()
     {
-        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        if (s_netErrorPanel != null)
+        {
+            Destroy(s_netErrorPanel);
+        }
+
+        GameObject prefab = Resources.Load("Prefabs/Commons/NetErrorPanel") as GameObject;
+        s_netErrorPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+        s_netErrorPanel.transform.Find("Image_bg").Find("Button_chonglian").GetComponent<Button>().onClick.AddListener(delegate ()
+        {
+            onClickChongLian();
+        });
     }
 
     public void Close()
     {
-        gameObject.transform.localScale = new Vector3(0, 0, 0);
+        if (s_netErrorPanel != null)
+        {
+            Destroy(s_netErrorPanel);
+
+            s_netErrorPanel = null;
+        }
     }
-    
+
     public void onClickChongLian()
     {
         if (m_OnClickButton != null)
@@ -43,7 +60,7 @@ public class NetErrorPanelScript : MonoBehaviour
         }
         else
         {
-            gameObject.transform.localScale = new Vector3(0, 0, 0);
+            Close();
         }
     }
 
@@ -54,6 +71,6 @@ public class NetErrorPanelScript : MonoBehaviour
 
     public void setContentText(string str)
     {
-        m_text_content.text = str;
+        s_netErrorPanel.transform.Find("Image_bg").Find("Text_content").GetComponent<Text>().text = str;
     }
 }

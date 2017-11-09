@@ -165,13 +165,13 @@ public class LogicEnginerScript : MonoBehaviour
     {
         if (result)
         {
-            Debug.Log("Login:连接服务器成功");
+            Debug.Log("Logic:连接服务器成功");
             m_connectState = 1;
             m_isConnecion = true;
         }
         else
         {
-            Debug.Log("Login:连接服务器失败，尝试重新连接");
+            Debug.Log("Logic:连接服务器失败，尝试重新连接");
             m_connectState = 0;
             m_isConnecion = false;
         }

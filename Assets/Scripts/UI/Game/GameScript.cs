@@ -47,8 +47,6 @@ public class GameScript : MonoBehaviour
     Vector3 m_screenPos;
     string m_tag = "";
 
-    NetErrorPanelScript m_netErrorPanelScript;
-
     void Start()
     {
         // 禁止多点触摸
@@ -59,8 +57,7 @@ public class GameScript : MonoBehaviour
         // 安卓回调
         AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
         AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
-
-        m_netErrorPanelScript = NetErrorPanelScript.create();
+        
         AudioScript.getAudioScript().stopMusic();
         
         // 3秒后播放背景音乐,每隔75秒重复播放背景音乐
@@ -91,6 +88,7 @@ public class GameScript : MonoBehaviour
 
         // 逻辑服务器
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
+        LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose_Logic);
     }
 
     void initUI()
@@ -2473,9 +2471,12 @@ public class GameScript : MonoBehaviour
     {
         //GameNetErrorPanelScript.create();
 
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickBack);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
+        LogicEnginerScript.Instance.Stop();
+        PlayServiceSocket.s_instance.Stop();
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
     }
 
     void onClickBack()
@@ -2487,6 +2488,16 @@ public class GameScript : MonoBehaviour
         }
 
         SceneManager.LoadScene("MainScene");
+    }
+
+    void onSocketClose_Logic()
+    {
+        LogicEnginerScript.Instance.Stop();
+        PlayServiceSocket.s_instance.Stop();
+
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
     }
 
     //void onSocketClose()
@@ -2635,8 +2646,8 @@ public class GameScript : MonoBehaviour
 
     void onResumeCallBack()
     {
-        m_netErrorPanelScript.Show();
-        m_netErrorPanelScript.setOnClickButton(onClickBack);
-        m_netErrorPanelScript.setContentText("与服务器断开连接，点击确定回到主界面");
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
+        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
     }
 }
