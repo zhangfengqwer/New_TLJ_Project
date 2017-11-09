@@ -323,6 +323,7 @@ public class LoginScript : MonoBehaviour
             data["tag"] = "Login";
             data["account"] = m_inputAccount.text;
             data["password"] = m_inputPassword.text;
+            data["passwordtype"] = 1;
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }

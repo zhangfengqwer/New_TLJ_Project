@@ -186,7 +186,7 @@ public class ShopPanelScript : MonoBehaviour
             ShopData shopData = shopDataList[i];
             if (shopData.goods_id == 1002)
             {
-                shopDataList.Remove(shopData);
+                shopDataList.Remove(shopData);                                          
             }
            
         }
