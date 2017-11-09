@@ -26,6 +26,7 @@ public class MainScript : MonoBehaviour
     public GameObject m_laba;
     public GameObject m_headIcon;
 
+    private GameObject m_waitMatchPanel = null;
     private GameObject exitGameObject;
     LaBaScript m_laBaScript;
 
@@ -202,7 +203,14 @@ public class MainScript : MonoBehaviour
 
     public void showWaitMatchPanel(float time,string gameroomtype)
     {
-        WaitMatchPanelScript script = WaitMatchPanelScript.create(gameroomtype).GetComponent<WaitMatchPanelScript>();
+        if (m_waitMatchPanel != null)
+        {
+            Destroy(m_waitMatchPanel);
+            m_waitMatchPanel = null;
+        }
+
+        m_waitMatchPanel = WaitMatchPanelScript.create(gameroomtype);
+        WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
         script.start(time);
     }
@@ -455,10 +463,18 @@ public class MainScript : MonoBehaviour
             case (int)TLJCommon.Consts.Code.Code_OK:
             {
                 int roomId = (int)jd["roomId"];
-                ToastScript.createToast("退赛成功,请到邮箱领取报名费");
+                string gameroomtype = jd["gameroomtype"].ToString();
+                if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
+                {
+                        ToastScript.createToast("退赛成功");
+                    }
+                else
+                {
+                    ToastScript.createToast("退赛成功,请到邮箱领取报名费");
 
-                // 报名费返还通过邮件
-                LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                    // 报名费返还通过邮件
+                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                }
             }
             break;
 
@@ -718,6 +734,12 @@ public class MainScript : MonoBehaviour
 
     void onResumeCallBack()
     {
+        if (m_waitMatchPanel != null)
+        {
+            Destroy(m_waitMatchPanel);
+            m_waitMatchPanel = null;
+        }
+
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
         NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
