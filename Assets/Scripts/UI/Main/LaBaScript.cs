@@ -27,6 +27,7 @@ public class LaBaScript : MonoBehaviour {
                 isEnd = false;
 
                 m_text.text = m_data[0];
+                m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25, 40);
                 m_text.transform.localPosition = new Vector3(200, 0, 0);
 
                 m_data.RemoveAt(0);
@@ -37,6 +38,7 @@ public class LaBaScript : MonoBehaviour {
             isEnd = false;
             
             m_text.text = "系统：" + GameUtil.getOneTips();
+            m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25, 40);
         }
 	}
 
@@ -44,7 +46,7 @@ public class LaBaScript : MonoBehaviour {
     {
         m_text.transform.localPosition -= new Vector3(2, 0, 0);
 
-        if (m_text.transform.localPosition.x <= -800)
+        if (m_text.transform.localPosition.x <= (-200 - m_text.GetComponent<RectTransform>().sizeDelta.x))
         {
             m_text.transform.localPosition = new Vector3(200, 0, 0);
             isEnd = true;

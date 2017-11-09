@@ -1619,7 +1619,7 @@ public class GameScript : MonoBehaviour
 
                                     // 更新金币数量
                                     {
-                                        UserData.gold += (int)jd["score"];
+                                        GameUtil.changeData(1, (int)jd["score"]);
                                         m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
                                     }
                                 }
@@ -1642,7 +1642,7 @@ public class GameScript : MonoBehaviour
 
                                     // 更新金币数量
                                     {
-                                        UserData.gold += (int)jd["score"];
+                                        GameUtil.changeData(1, (int)jd["score"]);
                                         m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
                                     }
                                 }
