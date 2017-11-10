@@ -114,7 +114,7 @@ public class BindPhoneScript : MonoBehaviour
         }
         else
         {
-            ToastScript.createToast("输入的信息有误");
+//            ToastScript.createToast("输入的信息有误");
         }
     }
 

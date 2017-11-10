@@ -54,7 +54,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         {
             ToastScript.createToast("话费充值接口暂未开放,敬请期待");
             return;
-            UseHuaFeiPanelScript.create(m_propInfo);
+//            UseHuaFeiPanelScript.create(m_propInfo);
         }
         // 其他
         else
