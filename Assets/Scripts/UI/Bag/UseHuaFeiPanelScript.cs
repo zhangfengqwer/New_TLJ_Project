@@ -10,6 +10,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
 
     public PropInfo m_propInfo = null;
 
+
     public static GameObject create(PropInfo propInfo)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/UseHuaFeiPanel") as GameObject;
@@ -51,7 +52,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
         int code = (int)jd["code"];
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
-            ToastScript.createToast("使用成功，请等待客服为您充值");
+            ToastScript.createToast("使用成功，请等待充值到账");
 
             GameUtil.changeData(m_propInfo.m_id, -1);
 
@@ -61,6 +62,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
             }
 
             Destroy(gameObject);
+            Destroy(GameObject.Find("PropDetailPanel(Clone)"));
         }
     }
 }

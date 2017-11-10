@@ -72,6 +72,10 @@ public class PlatformHelper
     {
 
     }
+    public static void WXShareFriendsCircle(string obj, string func, byte[] data)
+    {
+
+    }
 
     public static void iOSLog(string str){
         Debug.Log(str);
