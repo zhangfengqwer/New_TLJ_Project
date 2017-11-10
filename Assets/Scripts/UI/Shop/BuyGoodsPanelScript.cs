@@ -201,10 +201,19 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
-            ToastScript.createToast("购买成功,请前往背包查看");
+            if (m_shopData.goods_type == 1 || m_shopData.goods_type == 2)
+            {
+                ToastScript.createToast("购买成功");
+            }
+            else
+            {
+                ToastScript.createToast("购买成功,请去背包中查看");
+            }
+         
             //更新背包数据
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = MainScript.onReceive_GetUserBag;
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
+            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
             Destroy(gameObject);
         }
         else
