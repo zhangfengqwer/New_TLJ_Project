@@ -1159,6 +1159,11 @@ public class PlatformHelper
     public static int getProvidersName() {
         return 1;
     }
+
+    public static void WXShareFriends(string obj, string func, string data)
+    {
+
+    }
 }
 
 #endif
