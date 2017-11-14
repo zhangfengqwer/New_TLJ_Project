@@ -29,7 +29,6 @@ public class TimerScript : MonoBehaviour
         GameObject prefab = Resources.Load("Prefabs/Game/Timer") as GameObject;
         GameObject obj = MonoBehaviour.Instantiate(prefab);
         obj.transform.SetParent(GameObject.Find("Canvas").transform);
-        obj.transform.localScale = new Vector3(1,1,1);
         //obj.transform.localPosition = new Vector3(450,200,0);
         obj.transform.localPosition = new Vector3(0, 30, 0);
 
