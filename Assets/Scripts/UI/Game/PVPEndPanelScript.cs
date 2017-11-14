@@ -11,6 +11,7 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     public Image m_image_itemContent;
     public Text m_text_mingci;
+    public GameObject ShareObject;
 
     public static GameObject create(GameScript parentScript)
     {
@@ -25,7 +26,11 @@ public class PVPEndPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+//        ShareObject.GetComponent<Button>().onClick.RemoveAllListeners();
+//        ShareObject.GetComponent<Button>().onClick.AddListener(() =>
+//        {
+//            ShareObject.transform.localScale = Vector3.zero;
+//        });
     }
 
     public void setData(int mingci,string pvpreward)
@@ -64,8 +69,33 @@ public class PVPEndPanelScript : MonoBehaviour {
     public void onClickShare()
     {
         //m_parentScript.onClickExitRoom();
-//        ToastScript.createToast("暂未开放");
+        //        ToastScript.createToast("暂未开放");
+        ShareObject.transform.localScale = Vector3.one;
+    }
+
+    public void OnClickShareClose()
+    {
+        ShareObject.transform.localScale = Vector3.zero;
+    }
+
+    public void OnClickShareFriends()
+    {
         string content = string.Format("我获得了第{0}名", m_text_mingci.text);
         PlatformHelper.WXShareFriends("AndroidCallBack", "OnWxShareFriends", content);
+    }
+
+    public void OnClickShareFriendsCircle()
+    {
+        GameObject go = ShareFreindsCircleScript.create();
+        Text Text_Name = go.transform.Find("Text_Name").GetComponent<Text>();
+        Text Text_ChangCi = go.transform.Find("Text_ChangCi").GetComponent<Text>();
+        Image Image_Ranking = go.transform.Find("Image_Ranking").GetComponent<Image>();
+
+        Text_Name.text = "1124";
+        Text_ChangCi.text = "经典场";
+        string path = Application.dataPath + "/Resources/ScreenShot1.png";
+        print(path);
+        Application.CaptureScreenshot(path, 0);
+        Destroy(go);
     }
 }

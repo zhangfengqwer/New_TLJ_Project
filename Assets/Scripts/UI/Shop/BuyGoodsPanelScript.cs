@@ -175,9 +175,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 JsonData data = new JsonData();
 
                 data["uid"] = UserData.uid;
-                data["itemid"] = m_shopData.goods_id;
-                data["chargecount"] = 1;
-                data["amount"] = m_shopData.price;
+                data["goods_id"] = m_shopData.goods_id;
+                data["goods_num"] = 1;
+                data["goods_name"] = m_shopData.goods_name;
+                data["price"] = m_shopData.price;
 
                 PlatformHelper.pay(this.gameObject.name, "GetPayResult", data.ToJson());
                 break;
