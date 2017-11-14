@@ -151,12 +151,12 @@ public class LogicEnginerScript : MonoBehaviour
         m_socketUtil.start();
     }
 
-    public void setOnLoginService_Connect(OnLogicService_Connect onLogicService_Connect)
+    public void setOnLogicService_Connect(OnLogicService_Connect onLogicService_Connect)
     {
         m_onLogicService_Connect = onLogicService_Connect;
     }
 
-    public void setOnLoginService_Close(OnLogicService_Close onLogicService_Close)
+    public void setOnLogicService_Close(OnLogicService_Close onLogicService_Close)
     {
         m_onLogicService_Close = onLogicService_Close;
     }

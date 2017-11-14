@@ -56,14 +56,14 @@ public class MainScript : MonoBehaviour
             {
                 LogicEnginerScript.create();
 
-                LogicEnginerScript.Instance.setOnLoginService_Connect(onSocketConnect_Logic);
-                LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose_Logic);
+                LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
+                LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
                 LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
             }
             else
             {
-                LogicEnginerScript.Instance.setOnLoginService_Connect(onSocketConnect_Logic);
-                LogicEnginerScript.Instance.setOnLoginService_Close(onSocketClose_Logic);
+                LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
+                LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
                 LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
 
                 if (LogicEnginerScript.Instance.isConnecion())
@@ -728,20 +728,22 @@ public class MainScript : MonoBehaviour
     //--------------------------------------------------------------------------------------------------
     void onPauseCallBack()
     {
-        LogicEnginerScript.Instance.Stop();
-        PlayServiceSocket.s_instance.Stop();
+        //LogicEnginerScript.Instance.Stop();
+        //PlayServiceSocket.s_instance.Stop();
     }
 
     void onResumeCallBack()
     {
-        if (m_waitMatchPanel != null)
-        {
-            Destroy(m_waitMatchPanel);
-            m_waitMatchPanel = null;
-        }
+        //if (m_waitMatchPanel != null)
+        //{
+        //    Destroy(m_waitMatchPanel);
+        //    m_waitMatchPanel = null;
+        //}
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        //NetErrorPanelScript.getInstance().Show();
+        //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
+        //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+
+        checkNet();
     }
 }

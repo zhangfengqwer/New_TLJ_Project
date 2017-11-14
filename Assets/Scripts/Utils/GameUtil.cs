@@ -295,4 +295,14 @@ class GameUtil
 
         return path;
     }
+
+    public static void showGameObject(GameObject obj)
+    {
+        obj.transform.localScale = new Vector3(1,1,1);
+    }
+
+    public static void hideGameObject(GameObject obj)
+    {
+        obj.transform.localScale = new Vector3(0,0,0);
+    }
 }
