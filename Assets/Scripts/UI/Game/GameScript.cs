@@ -1976,6 +1976,10 @@ public class GameScript : MonoBehaviour
     {
         try
         {
+            clearData();
+
+            initUI();
+
             JsonData jd = JsonMapper.ToObject(data);
 
             int roomState = (int)jd["roomState"];
@@ -2043,6 +2047,7 @@ public class GameScript : MonoBehaviour
                 case (int)TLJCommon.Consts.RoomState.RoomState_gaming:
                     {
                         GameUtil.hideGameObject(m_liangzhuObj);
+                        GameUtil.showGameObject(m_timer);
 
                         // 主牌花色
                         {
@@ -2101,22 +2106,6 @@ public class GameScript : MonoBehaviour
 
                                 showOtherOutPoker(outPokerList, playerData.m_uid);
                             }
-
-
-                            //for (int i = 0; i < jd["curRoundAllPlayerOutPokerList"].Count; i++)
-                            //{
-                            //    PlayerData playerData = GameData.getInstance().m_playerDataList[i];
-
-                            //    List<TLJCommon.PokerInfo> outPokerList = new List<TLJCommon.PokerInfo>();
-                            //    for (int j = 0; j < jd["curRoundAllPlayerOutPokerList"][i].Count; j++)
-                            //    {
-                            //        int num = (int)jd["curRoundAllPlayerOutPokerList"][i][j]["num"];
-                            //        int pokerType = (int)jd["curRoundAllPlayerOutPokerList"][i][j]["pokerType"];
-
-                            //        outPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-                            //    }
-                            //    showOtherOutPoker(outPokerList, playerData.m_uid);
-                            //}
                         }
 
                         // 当前出牌的人
@@ -2138,7 +2127,7 @@ public class GameScript : MonoBehaviour
                                     //    GameData.getInstance().m_isFreeOutPoker = false;
                                     //    //ToastScript.createToast("轮到你出牌：跟牌");
                                     //}
-
+                                    
                                     m_buttonOutPoker.transform.localScale = new Vector3(1, 1, 1);
 
                                     // 开始出牌倒计时
@@ -2721,6 +2710,9 @@ public class GameScript : MonoBehaviour
             NetLoading.getInstance().Close();
             NetErrorPanelScript.getInstance().Close();
 
+            // 检查是否已经加入房间，已经加入的话则恢复房间
+            reqIsJoinRoom();
+
             // 检测服务器是否连接
             checkNet();
         }
@@ -2844,9 +2836,6 @@ public class GameScript : MonoBehaviour
         else
         {
             //ToastScript.createToast("两个服务器都成功连接");
-
-            // 尝试重新加入房间
-            reqIsJoinRoom();
         }
     }
 

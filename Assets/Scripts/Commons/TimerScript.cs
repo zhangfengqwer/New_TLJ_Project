@@ -36,10 +36,15 @@ public class TimerScript : MonoBehaviour
         return obj;
     }
 
+    private void Awake()
+    {
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
+    }
+
     // Use this for initialization
     void Start ()
     {
-        gameObject.transform.localScale = new Vector3(0, 0, 0);
+        
     }
 	
 	// Update is called once per frame
