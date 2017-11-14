@@ -34,6 +34,11 @@ public class NoticePanelScript : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().CallBack = null;
+    }
+
     // 显示活动
     public void loadHuoDong()
     {
