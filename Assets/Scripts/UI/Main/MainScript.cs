@@ -364,6 +364,10 @@ public class MainScript : MonoBehaviour
                 SceneManager.LoadScene("LoginScene");
             });
         }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_BuyYuanBao) == 0)
+        {
+            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+        }
         else
         {
             Debug.Log("onReceive_Main：未知tag");
