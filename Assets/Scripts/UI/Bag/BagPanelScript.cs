@@ -127,7 +127,7 @@ public class BagPanelScript : MonoBehaviour
                 {
                     var userPropData = new UserPropData();
                     userPropData.prop_icon = "icon_huizhang";
-                    userPropData.prop_id = 110;
+                    userPropData.prop_id = (int)TLJCommon.Consts.Prop.Prop_huizhang;
                     userPropData.prop_name = "徽章";
                     userPropData.prop_num = UserData.medal;
                     UserData.propData.Add(userPropData);

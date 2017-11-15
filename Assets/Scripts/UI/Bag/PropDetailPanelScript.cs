@@ -45,17 +45,17 @@ public class PropDetailPanelScript : MonoBehaviour {
     public void onClickUseProp()
     {
         // 喇叭
-        if (m_propInfo.m_id == 106)
+        if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_laba)
         {
             LaBaPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>());
         }
         // 话费
-        else if ((m_propInfo.m_id == 111) || (m_propInfo.m_id == 112))
+        else if ((m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_1yuanhuafei) || (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_5yuanhuafei) || (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_10yuanhuafei))
         {
             UseHuaFeiPanelScript.create(m_propInfo);
         }
         //徽章
-        else if (m_propInfo.m_id == 110)
+        else if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_huizhang)
         {
             ShopPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>(), 4);
         }
@@ -87,70 +87,70 @@ public class PropDetailPanelScript : MonoBehaviour {
         switch (id)
         {
             // 记牌器
-            case 101:
+            case (int)TLJCommon.Consts.Prop.Prop_jipaiqi:
                 {
                     // 不用处理
                 }
                 break;
 
             // 加倍卡
-            case 102:
+            case (int)TLJCommon.Consts.Prop.Prop_jiabeika:
                 {
                     // 不用处理
                 }
                 break;
 
             // 鸡蛋
-            case 103:
+            case (int)TLJCommon.Consts.Prop.Prop_jidan:
                 {
                     // 不用处理
                 }
                 break;
 
             // 鲜花
-            case 104:
+            case (int)TLJCommon.Consts.Prop.Prop_xianhua:
                 {
                     // 不用处理
                 }
                 break;
 
             // 出牌发光
-            case 105:
+            case (int)TLJCommon.Consts.Prop.Prop_chupaifaguang:
                 {
                     // 不用处理
                 }
                 break;
 
             // 喇叭
-            case 106:
+            case (int)TLJCommon.Consts.Prop.Prop_laba:
                 {
 
                 }
                 break;
 
             // 蓝钻石
-            case 107:
+            case (int)TLJCommon.Consts.Prop.Prop_lanzuanshi:
                 {
                     // 不用处理
                 }
                 break;
 
             // 逃跑率清零卡
-            case 108:
+            case (int)TLJCommon.Consts.Prop.Prop_taopaolvqinglin:
                 {
                     UserData.gameData.runCount = 0;
                 }
                 break;
 
             // 魅力值修正卡
-            case 109:
+            case (int)TLJCommon.Consts.Prop.Prop_meilizhixiuzheng:
                 {
                     UserData.gameData.meiliZhi = 0;
                 }
                 break;
 
             // 徽章
-            case 110:
+            case (int)TLJCommon.Consts.Prop.Prop_huizhang:
                 {
                     // 不用处理
                 }

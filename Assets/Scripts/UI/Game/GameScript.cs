@@ -175,7 +175,7 @@ public class GameScript : MonoBehaviour
                 bool canUse = false;
                 for (int i = 0; i < UserData.buffData.Count; i++)
                 {
-                    if ((UserData.buffData[i].prop_id == 101) && (UserData.buffData[i].buff_num > 0))
+                    if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jipaiqi) && (UserData.buffData[i].buff_num > 0))
                     {
                         canUse = true;
                         break;
@@ -537,7 +537,7 @@ public class GameScript : MonoBehaviour
         // 显示记牌器
         if (m_jiPaiGameObject == null)
         {
-            reqUseBuff(101);
+            reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jipaiqi);
         }
         else
         {
@@ -1932,12 +1932,12 @@ public class GameScript : MonoBehaviour
             int prop_id = (int)jd["prop_id"];
 
             // 记牌器
-            if (prop_id == 101)
+            if (prop_id == (int)TLJCommon.Consts.Prop.Prop_jipaiqi)
             {
                 // 剩余数量-1
                 for (int i = 0; i < UserData.buffData.Count; i++)
                 {
-                    if (UserData.buffData[i].prop_id == 101)
+                    if (UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jipaiqi)
                     {
                         --UserData.buffData[i].buff_num;
                         break;
