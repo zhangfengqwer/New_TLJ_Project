@@ -9,11 +9,12 @@ public class ShopPanelScript : MonoBehaviour
     private MainScript m_mainScript = null;
     public Image VipImage;
     public Text VipExplain;
-
     public Text SlideText;
-
-//    public Text SlideText;
     public Slider SliderVip;
+    public Toggle YuanbaoToggle;
+    public Toggle GoldToggle;
+    public Toggle PropToggle;
+    public Toggle MedalToggle;
 
 
     private UIWarpContent uiWarpContent;
@@ -21,17 +22,17 @@ public class ShopPanelScript : MonoBehaviour
     private static List<ShopData> shopDataList;
 
     //商品类型，1：金币，2：元宝，3：道具,4:徽章
-    private int type = 2;
+    private int _type = 2;
 
     private List<ShopData> _shopItemDatas;
 
-    public static GameObject create(MainScript mainScript)
+    public static GameObject create(MainScript mainScript,int type)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShopPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<ShopPanelScript>().m_mainScript = mainScript;
-
+        obj.GetComponent<ShopPanelScript>().SetType(type);
         return obj;
     }
 
@@ -40,9 +41,9 @@ public class ShopPanelScript : MonoBehaviour
     {
         InitVip();
 
-
         uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
         uiWarpContent.onInitializeItem = onInitializeItem;
+
         if (shopDataList == null || shopDataList.Count == 0)
         {
             // 拉取商店数据
@@ -54,6 +55,27 @@ public class ShopPanelScript : MonoBehaviour
         else
         {
             Init();
+        }
+    }
+
+    public void SetType(int type)
+    {
+        uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
+        uiWarpContent.onInitializeItem = onInitializeItem;
+        switch (type)
+        {
+            case 1:
+                GoldToggle.isOn = true;
+                break;
+            case 2:
+                YuanbaoToggle.isOn = true;
+                break;
+            case 3:
+                PropToggle.isOn = true;
+                break;
+            case 4:
+                MedalToggle.isOn = true;
+                break;
         }
     }
 
@@ -88,7 +110,7 @@ public class ShopPanelScript : MonoBehaviour
             for (int i = 0; i < shopDataList.Count; i++)
             {
                 ShopData shopData = shopDataList[i];
-                if (shopData.goods_type == type)
+                if (shopData.goods_type == _type)
                 {
                     _shopItemDatas.Add(shopData);
                 }
@@ -118,7 +140,7 @@ public class ShopPanelScript : MonoBehaviour
 
         goods_des.text = shopItemData.goods_name;
 
-        if (type == 3)
+        if (_type == 3)
         {
             for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)
             {
@@ -129,7 +151,7 @@ public class ShopPanelScript : MonoBehaviour
                 }
             }
         }
-        else if (type == 2)
+        else if (_type == 2)
         {
             goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_yuanbao");
         }
@@ -199,7 +221,7 @@ public class ShopPanelScript : MonoBehaviour
     {
         if (IsClick)
         {
-            type = 1;
+            _type = 1;
             Init();
         }
     }
@@ -208,7 +230,7 @@ public class ShopPanelScript : MonoBehaviour
     {
         if (IsClick)
         {
-            type = 2;
+            _type = 2;
             Init();
         }
     }
@@ -217,7 +239,7 @@ public class ShopPanelScript : MonoBehaviour
     {
         if (IsClick)
         {
-            type = 3;
+            _type = 3;
             Init();
         }
     }
@@ -227,7 +249,7 @@ public class ShopPanelScript : MonoBehaviour
         if (IsClick)
         {
             ToastScript.createToast("徽章兑换暂未开放");
-            type = 4;
+            _type = 4;
             Init();
         }
     }

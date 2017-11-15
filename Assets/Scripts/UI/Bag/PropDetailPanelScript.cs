@@ -52,9 +52,12 @@ public class PropDetailPanelScript : MonoBehaviour {
         // 话费
         else if ((m_propInfo.m_id == 111) || (m_propInfo.m_id == 112))
         {
-//            ToastScript.createToast("话费充值接口暂未开放,敬请期待");
-//            return;
             UseHuaFeiPanelScript.create(m_propInfo);
+        }
+        //徽章
+        else if (m_propInfo.m_id == 110)
+        {
+            ShopPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>(), 4);
         }
         // 其他
         else

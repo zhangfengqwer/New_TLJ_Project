@@ -279,11 +279,16 @@ public class MainScript : MonoBehaviour
         BagPanelScript.create(false);
     }
 
-    public void OnClickShop()
+    public void OnClickYuanBaoShop()
     {
-        ShopPanelScript.create(this);
+        ShopPanelScript.create(this,2);
     }
 
+    public void OnClickGoldShop()
+    {
+
+        ShopPanelScript.create(this,1);
+    }
     public void OnClickEmail()
     {
         EmailPanelScript.create();

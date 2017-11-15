@@ -48,7 +48,7 @@ public class LaBaPanelScript : MonoBehaviour {
     {
         Destroy(gameObject);
 
-        ShopPanelScript.create(m_mainScript);
+        ShopPanelScript.create(m_mainScript,3);
     }
 
     public void onClickSend()
