@@ -93,9 +93,29 @@ public class PVPEndPanelScript : MonoBehaviour {
 
         Text_Name.text = "1124";
         Text_ChangCi.text = "经典场";
+//        string path = Application.dataPath + "/Resources/ScreenShot1.png";
+//        print(path);
+//        Application.CaptureScreenshot(path, 0);
+        StartCoroutine(MyCaptureScreen(go));
+       
+    }
+
+    IEnumerator MyCaptureScreen(GameObject go)
+    {
+        //等待所有的摄像机和GUI被渲染完成。
+        yield return new WaitForEndOfFrame();
+        //创建一个空纹理（图片大小为屏幕的宽高）
+        Texture2D tex = new Texture2D(Screen.width, Screen.height);
+        //只能在帧渲染完毕之后调用（从屏幕左下角开始绘制，绘制大小为屏幕的宽高，宽高的偏移量都为0）
+        tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        //图片应用（此时图片已经绘制完成）
+        tex.Apply();
+        //将图片装换成png的二进制格式，保存在byte数组中（计算机是以二进制的方式存储数据）
+        byte[] result = tex.EncodeToPNG();
+        PlatformHelper.WXShareFriendsCircle("AndroidCallBack", "OnWxShareFriends", result);
+        //文件保存，创建一个新文件，在其中写入指定的字节数组（要写入的文件的路径，要写入文件的字节。）
         string path = Application.dataPath + "/Resources/ScreenShot1.png";
-        print(path);
-        Application.CaptureScreenshot(path, 0);
+        System.IO.File.WriteAllBytes(path, result);
         Destroy(go);
     }
 }

@@ -170,7 +170,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 break;
             //人民币购买
             case 3:
-                ToastScript.createToast("元宝购买暂未开放,敬请期待");
+//                ToastScript.createToast("元宝购买暂未开放,敬请期待");
 
                 JsonData data = new JsonData();
 
