@@ -71,7 +71,6 @@ public class BagPanelScript : MonoBehaviour
                 Debug.Log("-------");
             }
 
-
             uiWarpContent.Init(UserData.propData.Count);
             if (UserData.propData.Count == 0)
             {
@@ -122,7 +121,16 @@ public class BagPanelScript : MonoBehaviour
                             userPropData.prop_name = propInfo.m_name;
                         }
                     }
+                }
 
+                if (UserData.medal > 0)
+                {
+                    var userPropData = new UserPropData();
+                    userPropData.prop_icon = "icon_huizhang";
+                    userPropData.prop_id = 110;
+                    userPropData.prop_name = "徽章";
+                    userPropData.prop_num = UserData.medal;
+                    UserData.propData.Add(userPropData);
                 }
             }
             else
