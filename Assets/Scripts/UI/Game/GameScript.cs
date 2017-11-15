@@ -736,6 +736,7 @@ public class GameScript : MonoBehaviour
 
         data["tag"] = TLJCommon.Consts.Tag_UserInfo_Game;
         data["uid"] = uid;
+        data["isClientReq"] = 1;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
