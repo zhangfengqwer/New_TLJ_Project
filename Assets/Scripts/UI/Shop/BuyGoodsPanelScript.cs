@@ -170,17 +170,8 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 break;
             //人民币购买
             case 3:
-//                ToastScript.createToast("元宝购买暂未开放,敬请期待");
-
-                JsonData data = new JsonData();
-
-                data["uid"] = UserData.uid;
-                data["goods_id"] = m_shopData.goods_id;
-                data["goods_num"] = 1;
-                data["goods_name"] = m_shopData.goods_name;
-                data["price"] = m_shopData.price;
-
-                PlatformHelper.pay(this.gameObject.name, "GetPayResult", data.ToJson());
+                //ToastScript.createToast("元宝购买暂未开放,敬请期待");
+                PayTypePanelScript.create(m_shopData);
                 break;
         }
     }

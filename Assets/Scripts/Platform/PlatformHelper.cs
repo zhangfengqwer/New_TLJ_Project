@@ -229,7 +229,7 @@ public class PlatformHelper
     {
     }
 
-    public static void pay(string callObj, string callFunc, string data)
+    public static void pay(string payType, string callObj, string callFunc, string data)
     {
     }
     /**
@@ -558,6 +558,11 @@ public class PlatformHelper
 
     public static void pay(string callObj, string callFunc, string data){
         GetJC().CallStatic("pay",callObj,callFunc,data);
+    }
+
+    public static void pay(string payType, string callObj, string callFunc, string data)
+    { 
+        GetJC().CallStatic("pay",payType,callObj,callFunc,data);
     }
 
     /// <summary>
@@ -1176,6 +1181,10 @@ public class PlatformHelper
     public static void WXShareFriendsCircle(string obj, string func, byte[] data)
     {
 
+    }
+
+    public static void pay(string payTypeWx, string callObj, string callFunc, string data)
+    {
     }
 }
 

@@ -367,6 +367,7 @@ public class MainScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_BuyYuanBao) == 0)
         {
             LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+            ToastScript.createToast("支付成功");
         }
         else
         {
