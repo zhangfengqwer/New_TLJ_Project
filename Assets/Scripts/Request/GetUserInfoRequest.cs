@@ -48,6 +48,7 @@ public class GetUserInfoRequest : Request
                 UserData.yuanbao = (int)jsonData["yuanbao"];
                 UserData.medal = (int)jsonData["medal"];
                 UserData.IsRealName = (bool)jsonData["isRealName"];
+                UserData.isSetSecondPsw = (bool)jsonData["isSetSecondPsw"];
                 UserData.rechargeVip = (int)jsonData["recharge_vip"];
                 UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
                 UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
