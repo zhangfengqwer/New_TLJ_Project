@@ -4,18 +4,18 @@ using LitJson;
 using TLJCommon;
 using UnityEngine;
 
-public class UseLaBaRequest : Request
+public class SetSecondPswRequest : Request
 {
     bool flag;
     string result;
-    string text;
+    string data;
 
-    public delegate void UseLabaCallBack(string result);
-    public UseLabaCallBack CallBack = null;
+    public delegate void SetSecondPSWCallBack(string result);
+    public SetSecondPSWCallBack CallBack = null;
 
     private void Awake()
     {
-        Tag = Consts.Tag_UseLaBa;
+        Tag = Consts.Tag_SetSecondPSW;
     }
 
     private void Update()
@@ -31,17 +31,18 @@ public class UseLaBaRequest : Request
         }
     }
 
-    public void SetText(string str)
+    public void SetData(string password)
     {
-        text = str;
+        data = password;
     }
-   
+
     public override void OnRequest()
     {
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
-        jsonData["text"] = text;
+        jsonData["password"] = data;
+
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }
