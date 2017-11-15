@@ -70,8 +70,6 @@ public class GameScript : MonoBehaviour
         checkGameRoomType();
 
         m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
-
-        reqIsJoinRoom();
     }
 
     void onInvokeStartMusic()
@@ -149,6 +147,8 @@ public class GameScript : MonoBehaviour
         if (!isPVP())
         {
             m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+
+            reqIsJoinRoom();
         }
         // 比赛场
         else
@@ -1966,7 +1966,17 @@ public class GameScript : MonoBehaviour
         {
             ToastScript.createToast("当前已经加入房间");
 
-            reqRetryJoinGame();
+            string gameRoomType = jd["gameRoomType"].ToString();
+            List<string> list = new List<string>();
+            CommonUtil.splitStr(gameRoomType, list, '_');
+            if (list[0].CompareTo("PVP") == 0)
+            {
+                // PVP退出后不可以再进入
+            }
+            else
+            {
+                reqRetryJoinGame();
+            }
         }
         else
         {
