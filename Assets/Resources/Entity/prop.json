@@ -66,7 +66,7 @@
         "prop_id": 110,
         "prop_name": "徽章",
 		"desc": "竞技场获得，用户兑换物品",
-		"type": 1,
+		"type": 0,
 		"icon": "icon_huizhang"
     },
 	{
