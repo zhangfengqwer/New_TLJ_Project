@@ -336,6 +336,10 @@ public class PlatformHelper
         GetJC().CallStatic("wxShareFriends", obj, func, data);
     }
 
+    public static void WXShareFriendsCircle(string obj, string func, byte[] data)
+    {
+        GetJC().CallStatic("wxShareFriendsCircle", obj, func, data);
+    }
 
     /// <summary>
     /// 在外部设置该安装包是否与360等第三方平台合作 
@@ -1165,6 +1169,11 @@ public class PlatformHelper
     }
 
     public static void WXShareFriends(string obj, string func, string data)
+    {
+
+    }
+
+    public static void WXShareFriendsCircle(string obj, string func, byte[] data)
     {
 
     }
