@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class GetTurntableDataScript
+class TurntableDataScript
 {
-    static GetTurntableDataScript s_instance = null;
+    static TurntableDataScript s_instance = null;
 
     List<TurntableData> m_dataList = new List<TurntableData>();
 
-    public static GetTurntableDataScript getInstance()
+    public static TurntableDataScript getInstance()
     {
         if (s_instance == null)
         {
-            s_instance = new GetTurntableDataScript();
+            s_instance = new TurntableDataScript();
         }
 
         return s_instance;

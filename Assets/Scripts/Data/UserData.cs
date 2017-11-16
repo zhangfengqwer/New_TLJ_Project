@@ -14,6 +14,7 @@ public class UserData  {
     public static UserGameData gameData { set; get; }
     public static List<UserPropData> propData = new List<UserPropData>();
     public static List<BuffData> buffData = new List<BuffData>();
+    public static MyTurntableData myTurntableData = new MyTurntableData();
 }
 
 public class UserGameData
@@ -53,4 +54,11 @@ public class BuffData
 {
     public int prop_id;
     public int buff_num;
+}
+
+public class MyTurntableData
+{
+    public int freeCount;
+    public int huizhangCount;
+    public int luckyValue;
 }

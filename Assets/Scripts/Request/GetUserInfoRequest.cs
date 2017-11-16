@@ -52,6 +52,7 @@ public class GetUserInfoRequest : Request
                 UserData.rechargeVip = (int)jsonData["recharge_vip"];
                 UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
                 UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
+                UserData.myTurntableData = JsonMapper.ToObject<MyTurntableData>(jsonData["turntableData"].ToString());
             }
             catch (Exception e)
             {

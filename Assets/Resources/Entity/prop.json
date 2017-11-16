@@ -1,4 +1,18 @@
 [
+	{
+        "prop_id": 1,
+        "prop_name": "金币",
+		"desc": "金币",
+		"type": 0,
+		"icon": "icon_jinbi"
+    },
+	{
+        "prop_id": 2,
+        "prop_name": "元宝",
+		"desc": "元宝",
+		"type": 0,
+		"icon": "icon_yuanbao"
+    },
     {
         "prop_id": 101,
         "prop_name": "记牌器",
