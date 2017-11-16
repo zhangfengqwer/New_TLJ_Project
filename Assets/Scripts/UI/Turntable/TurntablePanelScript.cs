@@ -218,7 +218,7 @@ public class TurntablePanelScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = null;
+        //LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = null;
     }
 
     public void onClickFree()
