@@ -358,7 +358,7 @@ public class GameScript : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log("startGame_InitUI()报错：" + ex.Message);
+            LogUtil.Log("startGame_InitUI()报错：" + ex.Message);
         }
     }
 
@@ -372,7 +372,7 @@ public class GameScript : MonoBehaviour
 
     public void onTimerEvent_TimeEnd()
     {
-        Debug.Log("暂时没有匹配到玩家,请求匹配机器人");
+        LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
 
         // 让服务端匹配机器人
         reqWaitMatchTimeOut();
@@ -2271,7 +2271,7 @@ public class GameScript : MonoBehaviour
         }
         catch(Exception ex)
         {
-            Debug.Log(ex.Message);
+            LogUtil.Log(ex.Message);
         }
     }
     
@@ -2812,7 +2812,7 @@ public class GameScript : MonoBehaviour
 
         if (result)
         {
-            //Debug.Log("连接服务器成功");
+            //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接Play服务器成功");
 
@@ -2827,7 +2827,7 @@ public class GameScript : MonoBehaviour
         }
         else
         {
-            //Debug.Log("连接服务器失败，尝试重新连接");
+            //LogUtil.Log("连接服务器失败，尝试重新连接");
 
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
@@ -2851,7 +2851,7 @@ public class GameScript : MonoBehaviour
 
     public void onReceive_Main(string data)
     {
-        Debug.Log("GameScript.onReceive_Main----" + data);
+        LogUtil.Log("GameScript.onReceive_Main----" + data);
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
 
@@ -2871,7 +2871,7 @@ public class GameScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("onReceive_Main：未知tag");
+            LogUtil.Log("onReceive_Main：未知tag");
         }
     }
 
@@ -2881,7 +2881,7 @@ public class GameScript : MonoBehaviour
 
         if (result)
         {
-            //Debug.Log("连接服务器成功");
+            //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接Logic服务器成功");
 
@@ -2893,7 +2893,7 @@ public class GameScript : MonoBehaviour
         }
         else
         {
-            //Debug.Log("连接服务器失败，尝试重新连接");
+            //LogUtil.Log("连接服务器失败，尝试重新连接");
 
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);

@@ -88,7 +88,7 @@ public class BindPhoneScript : MonoBehaviour
     public void GetPhoneNum(InputField input)
     {
         _isCorrectPhone = VerifyRuleUtil.CheckPhone(input.text);
-        print(_isCorrectPhone);
+        LogUtil.Log(_isCorrectPhone);
         if (_isCorrectPhone)
         {
             _phoneNum = input.text;
@@ -98,7 +98,7 @@ public class BindPhoneScript : MonoBehaviour
     public void GetVerificationCode(InputField input)
     {
         _isCorrectCode = VerifyRuleUtil.CheckVerificationCode(input.text);
-        print(_isCorrectCode);
+        LogUtil.Log(_isCorrectCode);
         if (_isCorrectCode)
         {
             _verificationCode = input.text;
@@ -148,7 +148,7 @@ public class BindPhoneScript : MonoBehaviour
             XmlNodeList xmlNodeChildNodes = xmlNode.ChildNodes;
             foreach (XmlNode nodeChild in xmlNodeChildNodes)
             {
-                print(nodeChild.Name + ":" + nodeChild.InnerText);
+                LogUtil.Log(nodeChild.Name + ":" + nodeChild.InnerText);
                 string value = nodeChild.InnerText;
                 if (nodeChild.Name.Equals("ResultCode"))
                 {
@@ -167,7 +167,7 @@ public class BindPhoneScript : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log(e);
+            LogUtil.Log(e.Message);
         }
     }
 
@@ -185,7 +185,7 @@ public class BindPhoneScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("绑定手机失败：" + code);
+            LogUtil.Log("绑定手机失败：" + code);
         }
     }
 }

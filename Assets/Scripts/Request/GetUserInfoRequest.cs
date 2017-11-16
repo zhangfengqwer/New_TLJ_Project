@@ -55,14 +55,14 @@ public class GetUserInfoRequest : Request
             }
             catch (Exception e)
             {
-                Debug.Log("解析用户信息json失败:" + e);
+                LogUtil.Log("解析用户信息json失败:" + e);
             }
             result = data;
             flag = true;
         }
         else
         {
-            Debug.Log("用户信息数据错误：" + code);
+            LogUtil.Log("用户信息数据错误：" + code);
         }
     }
 }

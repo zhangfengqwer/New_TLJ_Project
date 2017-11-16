@@ -33,7 +33,7 @@ public class Item_chat_List_Script : MonoBehaviour {
     
     public void onClickItem()
     {
-        Debug.Log("聊天："+ m_chatText.m_text);
+        LogUtil.Log("聊天："+ m_chatText.m_text);
         m_parentScript.reqChat(m_chatText);
     }
 }

@@ -53,7 +53,7 @@ public class GetSignRecordRequest : Request
                 int nowYear = DateTime.Now.Year;
                 int nowMonth = DateTime.Now.Month;
                 int nowDay = DateTime.Now.Day;
-//                print(updateTimeYear + "-" + updateTimeMonth + "-" + updateTimeDay);
+                // LogUtil.Log(updateTimeYear + "-" + updateTimeMonth + "-" + updateTimeDay);
                 //通过数据库的更新时间和本地时间作对比，判断是否签到过
                 if (updateTimeYear == nowYear && updateTimeMonth == nowMonth && updateTimeDay == nowDay &&
                     SignData.SignWeekDays != 0)
@@ -64,7 +64,7 @@ public class GetSignRecordRequest : Request
                 {
                     SignData.IsSign = false;
                 }
-                //                print("SignData.IsSign:" + SignData.IsSign
+                //                LogUtil.Log("SignData.IsSign:" + SignData.IsSign
                 //                      + "\nSignData.SignWeekDays:" + SignData.SignWeekDays);
             }
 
@@ -73,7 +73,7 @@ public class GetSignRecordRequest : Request
         }
         else
         {
-            Debug.Log("返回签到数据错误:" + code);
+            LogUtil.Log("返回签到数据错误:" + code);
         }
     }
 }

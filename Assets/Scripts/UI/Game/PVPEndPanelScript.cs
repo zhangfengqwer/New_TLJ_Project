@@ -93,9 +93,9 @@ public class PVPEndPanelScript : MonoBehaviour {
 
         Text_Name.text = "1124";
         Text_ChangCi.text = "经典场";
-//        string path = Application.dataPath + "/Resources/ScreenShot1.png";
-//        print(path);
-//        Application.CaptureScreenshot(path, 0);
+        //        string path = Application.dataPath + "/Resources/ScreenShot1.png";
+        //        LogUtil.Log(path);
+        //        Application.CaptureScreenshot(path, 0);
         StartCoroutine(MyCaptureScreen(go));
        
     }

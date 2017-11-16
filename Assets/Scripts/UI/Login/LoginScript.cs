@@ -97,7 +97,7 @@ public class LoginScript : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log(ex.Message);
+            LogUtil.Log(ex.Message);
         }
     }
 
@@ -126,7 +126,7 @@ public class LoginScript : MonoBehaviour
         {
             Panel_EnterLogin.transform.GetChild(i).GetComponent<Button>().interactable = flag;
         }
-        print(flag);
+        LogUtil.Log(flag);
     }
 
     // 显示登录界面（输入账号密码）
@@ -397,7 +397,7 @@ public class LoginScript : MonoBehaviour
 
         if (result)
         {
-            //Debug.Log("连接服务器成功");
+            //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接服务器成功");
 
@@ -406,7 +406,7 @@ public class LoginScript : MonoBehaviour
         }
         else
         {
-            //Debug.Log("连接服务器失败，尝试重新连接");
+            //LogUtil.Log("连接服务器失败，尝试重新连接");
 
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
@@ -416,14 +416,14 @@ public class LoginScript : MonoBehaviour
 
     void onSocketReceive(string data)
     {
-        //Debug.Log("收到服务器消息:" + data);
+        //LogUtil.Log("收到服务器消息:" + data);
 
         onReceive(data);
     }
 
     void onSocketClose()
     {
-        //Debug.Log("被动与服务器断开连接,尝试重新连接");
+        //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
@@ -432,7 +432,7 @@ public class LoginScript : MonoBehaviour
 
     void onSocketStop()
     {
-        //Debug.Log("主动与服务器断开连接");
+        //LogUtil.Log("主动与服务器断开连接");
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);

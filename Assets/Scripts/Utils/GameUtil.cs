@@ -235,7 +235,7 @@ class GameUtil
         Vector2 objSize = obj.GetComponent<RectTransform>().sizeDelta * obj.transform.localScale.x;
         Vector3 objPos = obj.transform.localPosition;
 
-        Debug.Log(OtherData.s_screenSize + "    "+objPos + "    " + point);
+        LogUtil.Log(OtherData.s_screenSize + "    "+objPos + "    " + point);
 
         if ((point.x >= (objPos.x - objSize.x / 2)) &&
             (point.x <= (objPos.x + objSize.x / 2)) &&

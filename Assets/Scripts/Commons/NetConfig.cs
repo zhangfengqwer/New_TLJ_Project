@@ -107,7 +107,7 @@ public class NetConfig
         }
         catch (Exception ex)
         {
-            Debug.Log("读取网络配置文件出错：" + ex.Message);
+            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
         }
     }
 }

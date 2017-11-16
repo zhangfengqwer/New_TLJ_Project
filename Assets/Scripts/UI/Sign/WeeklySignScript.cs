@@ -68,7 +68,7 @@ public class WeeklySignScript : MonoBehaviour
             isSignSuccess = false;
 
             SignItem signItem = _signItems[totalSignDays];
-            print(signItem.goods_prop);
+            LogUtil.Log(signItem.goods_prop);
             AddProp(signItem.goods_prop);
 
             //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(signItem.goods_prop);
@@ -133,7 +133,7 @@ public class WeeklySignScript : MonoBehaviour
 
         if (_signItems == null || _signItems.Count != signObjects.Count)
         {
-            print("数据初始化错误");
+            LogUtil.Log("数据初始化错误");
             return;
         }
     }
@@ -239,7 +239,7 @@ public class WeeklySignScript : MonoBehaviour
         isSignSuccess = flag;
         if (!flag)
         {
-            print("签到错误");
+            LogUtil.Log("签到错误");
         }
     }
 }

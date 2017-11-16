@@ -55,7 +55,7 @@ public class GetNoticeRequest : Request {
         }
         else
         {
-            Debug.Log("返回公告活动数据错误：" + code);
+            LogUtil.Log("返回公告活动数据错误：" + code);
         }
     }
 }

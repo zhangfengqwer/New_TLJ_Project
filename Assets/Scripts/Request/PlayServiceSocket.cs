@@ -135,13 +135,13 @@ public class PlayServiceSocket: MonoBehaviour
     {
         if (result)
         {
-            Debug.Log("Play:连接服务器成功");
+            LogUtil.Log("Play:连接服务器成功");
             m_connectState = 1;
             m_isConnecion = true;
         }
         else
         {
-            Debug.Log("Play:连接服务器失败，尝试重新连接");
+            LogUtil.Log("Play:连接服务器失败，尝试重新连接");
             m_connectState = 0;
             m_isConnecion = false;
         }
@@ -149,14 +149,14 @@ public class PlayServiceSocket: MonoBehaviour
 
     void onSocketReceive(string data)
     {
-        Debug.Log("收到服务器消息:" + data);
+        LogUtil.Log("收到服务器消息:" + data);
 
         m_dataList.Add(data);
     }
 
     void onSocketClose()
     {
-        Debug.Log("Play:被动与服务器断开连接,尝试重新连接");
+        LogUtil.Log("Play:被动与服务器断开连接,尝试重新连接");
 
         m_isCloseSocket = true;
         m_isConnecion = false;
@@ -164,7 +164,7 @@ public class PlayServiceSocket: MonoBehaviour
 
     void onSocketStop()
     {
-        Debug.Log("Play:主动与服务器断开连接");
+        LogUtil.Log("Play:主动与服务器断开连接");
         m_isConnecion = false;
     }
 }

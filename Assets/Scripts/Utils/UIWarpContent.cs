@@ -89,7 +89,7 @@ public class UIWarpContent : MonoBehaviour {
 	public void Init(int dataCount)
 	{
 		if (scrollRect == null || content == null || goItemPrefab == null) {
-			Debug.LogError ("异常:请检测<"+gameObject.name+">对象上UIWarpContent对应ScrollRect、Content、GoItemPrefab 是否存在值...."+scrollRect+" _"+content+"_"+goItemPrefab);
+			LogUtil.LogError ("异常:请检测<"+gameObject.name+">对象上UIWarpContent对应ScrollRect、Content、GoItemPrefab 是否存在值...."+scrollRect+" _"+content+"_"+goItemPrefab);
 			return;
 		}
 		if (dataCount <= 0)
@@ -356,7 +356,7 @@ public class UIWarpContent : MonoBehaviour {
 	private GameObject addChild(GameObject goPrefab,Transform parent)
 	{
 		if (goPrefab == null || parent == null) {
-			Debug.LogError("异常。UIWarpContent.cs addChild(goPrefab = null  || parent = null)");
+			LogUtil.LogError("异常。UIWarpContent.cs addChild(goPrefab = null  || parent = null)");
 			return null;
 		}
 		GameObject goChild = GameObject.Instantiate (goPrefab) as GameObject;

@@ -67,8 +67,8 @@ public class BagPanelScript : MonoBehaviour
 
             foreach (var prop in UserData.propData)
             {
-                Debug.Log(prop.prop_icon + " " + prop.prop_name + " " + prop.prop_id);
-                Debug.Log("-------");
+                LogUtil.Log(prop.prop_icon + " " + prop.prop_name + " " + prop.prop_id);
+                LogUtil.Log("-------");
             }
 
             uiWarpContent.Init(UserData.propData.Count);

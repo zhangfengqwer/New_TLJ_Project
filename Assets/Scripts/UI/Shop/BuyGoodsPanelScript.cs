@@ -59,7 +59,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
             {
                 List<string> list_str = new List<string>();
                 CommonUtil.splitStr(m_shopData.props, list_str, ':');
-                Debug.Log(GameUtil.getPropIconPath(int.Parse(list_str[0])));
+                LogUtil.Log(GameUtil.getPropIconPath(int.Parse(list_str[0])));
                 CommonUtil.setImageSprite(m_text_goods_icon, GameUtil.getPropIconPath(int.Parse(list_str[0])));
             }
 

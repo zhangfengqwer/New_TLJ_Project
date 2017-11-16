@@ -17,20 +17,18 @@ public class PointUtil : MonoBehaviour, IPointerDownHandler,IPointerUpHandler, I
 
     private void FixedUpdate()
     {
-//        if (isPointerDown && !longPressTriggered)
-//        {
-//            if (Time.time - timePressStarted > durationThreshold)
-//            {
-//                longPressTriggered = true;
-//                print("changanshijian:"+ (Time.time - timePressStarted));
-//            }
-//        }
+        //        if (isPointerDown && !longPressTriggered)
+        //        {
+        //            if (Time.time - timePressStarted > durationThreshold)
+        //            {
+        //                longPressTriggered = true;
+        //                LogUtil.Log("changanshijian:"+ (Time.time - timePressStarted));
+        //            }
+        //        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        print("100");
-
         timePressStarted = Time.time;
         isPointerDown = true;
         longPressTriggered = false;
@@ -38,14 +36,11 @@ public class PointUtil : MonoBehaviour, IPointerDownHandler,IPointerUpHandler, I
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        print("200");
-
         isPointerDown = false;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        print("200");
         isPointerDown = false;
     }
 }

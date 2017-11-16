@@ -53,7 +53,7 @@ public class GetTaskRequest : Request
         }
         else
         {
-            Debug.Log("返回任务数据错误:" + code);
+            LogUtil.Log("返回任务数据错误:" + code);
         }
     }
 }

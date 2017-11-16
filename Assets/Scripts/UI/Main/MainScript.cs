@@ -217,7 +217,7 @@ public class MainScript : MonoBehaviour
 
     void onTimerEvent_TimeEnd()
     {
-        Debug.Log("暂时没有匹配到玩家,请求匹配机器人");
+        LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
 
         // 让服务端匹配机器人
         reqWaitMatchTimeOut();
@@ -376,7 +376,7 @@ public class MainScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("onReceive_Main：未知tag");
+            LogUtil.Log("onReceive_Main：未知tag");
         }
     }
 
@@ -384,7 +384,7 @@ public class MainScript : MonoBehaviour
 
     void onSocketReceive_Play(string data)
     {
-        Debug.Log("Play:收到服务器消息:" + data);
+        LogUtil.Log("Play:收到服务器消息:" + data);
 
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
@@ -592,7 +592,7 @@ public class MainScript : MonoBehaviour
 
         if (result)
         {
-            //Debug.Log("连接服务器成功");
+            //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接Logic服务器成功");
 
@@ -614,7 +614,7 @@ public class MainScript : MonoBehaviour
         }
         else
         {
-            //Debug.Log("连接服务器失败，尝试重新连接");
+            //LogUtil.Log("连接服务器失败，尝试重新连接");
 
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
@@ -625,7 +625,7 @@ public class MainScript : MonoBehaviour
     public static void onReceive_GetUserBag(string data)
     {
         {
-            print("处理背包回调");
+            LogUtil.Log("处理背包回调");
             JsonData jsonData = JsonMapper.ToObject(data);
             var code = (int)jsonData["code"];
             if (code == (int)Consts.Code.Code_OK)
@@ -656,7 +656,7 @@ public class MainScript : MonoBehaviour
 
     void onSocketClose_Logic()
     {
-        //Debug.Log("被动与服务器断开连接,尝试重新连接");
+        //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
@@ -665,7 +665,7 @@ public class MainScript : MonoBehaviour
 
     void onSocketStop_Logic()
     {
-        //Debug.Log("主动与服务器断开连接");
+        //LogUtil.Log("主动与服务器断开连接");
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
@@ -689,7 +689,7 @@ public class MainScript : MonoBehaviour
 
         if (result)
         {
-            //Debug.Log("连接服务器成功");
+            //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接Play服务器成功");
 
@@ -701,7 +701,7 @@ public class MainScript : MonoBehaviour
         }
         else
         {
-            //Debug.Log("连接服务器失败，尝试重新连接");
+            //LogUtil.Log("连接服务器失败，尝试重新连接");
 
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
@@ -711,7 +711,7 @@ public class MainScript : MonoBehaviour
 
     void onSocketClose_Play()
     {
-        //Debug.Log("被动与服务器断开连接,尝试重新连接");
+        //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
@@ -720,7 +720,7 @@ public class MainScript : MonoBehaviour
 
     void onSocketStop_Play()
     {
-        //Debug.Log("主动与服务器断开连接");
+        //LogUtil.Log("主动与服务器断开连接");
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);

@@ -58,7 +58,7 @@ public class RealNameRequest : Request {
         }
         else
         {
-            Debug.Log("返回实名认证数据错误：" + code);
+            LogUtil.Log("返回实名认证数据错误：" + code);
         }
     }
 }

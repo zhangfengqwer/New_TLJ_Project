@@ -124,32 +124,32 @@ public class LoginServiceSocket : MonoBehaviour {
     {
         if (result)
         {
-            Debug.Log("Login:连接服务器成功");
+            LogUtil.Log("Login:连接服务器成功");
             m_connectState = 1;
         }
         else
         {
-            Debug.Log("Login:连接服务器失败，尝试重新连接");
+            LogUtil.Log("Login:连接服务器失败，尝试重新连接");
             m_connectState = 0;
         }
     }
 
     void onSocketReceive(string data)
     {
-        Debug.Log("收到服务器消息:" + data);
+        LogUtil.Log("收到服务器消息:" + data);
 
         m_dataList.Add(data);
     }
 
     void onSocketClose()
     {
-        Debug.Log("Login:被动与服务器断开连接,尝试重新连接");
+        LogUtil.Log("Login:被动与服务器断开连接,尝试重新连接");
 
         m_isCloseSocket = true;
     }
 
     void onSocketStop()
     {
-        Debug.Log("Login:主动与服务器断开连接");
+        LogUtil.Log("Login:主动与服务器断开连接");
     }
 }

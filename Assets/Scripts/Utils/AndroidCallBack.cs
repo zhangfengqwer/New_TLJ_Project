@@ -49,7 +49,7 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void GetLoginResult(string data)
     {
-        print("Unity收到:" + data);
+        LogUtil.Log("Unity收到:" + data);
         try
         {
             JsonData jsonData = JsonMapper.ToObject(data);

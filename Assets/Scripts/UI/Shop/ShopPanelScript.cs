@@ -119,7 +119,7 @@ public class ShopPanelScript : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log(e);
+            LogUtil.Log(e.Message);
         }
     }
 

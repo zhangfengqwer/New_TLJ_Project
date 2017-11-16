@@ -78,7 +78,7 @@ public class PlatformHelper
     }
 
     public static void iOSLog(string str){
-        Debug.Log(str);
+        LogUtil.Log(str);
     }
 
     public static void setProductName(string str){}
@@ -222,7 +222,7 @@ public class PlatformHelper
     {
     }
     /// <summary>
-    /// 显示debug信息
+    /// 显示LogUtil信息
     /// </summary>
     /// <param name="value"></param>
     public static void showDebugInfo(string name,string unityInfo)
@@ -351,7 +351,7 @@ public class PlatformHelper
 //    }
 
     public static void iOSLog(string str){
-        Debug.Log(str);
+        LogUtil.Log(str);
     }
 
     public static void setProductName(string str){}
@@ -418,7 +418,7 @@ public class PlatformHelper
     }
 
     public static string GetVersionName () {
-        //Debug.LogError(string.Format("GetVersionName(), platform={0}", Application.platform));
+        //LogUtil.LogError(string.Format("GetVersionName(), platform={0}", Application.platform));
         if (Application.platform != RuntimePlatform.Android) {
             return "1.5";
         }
@@ -616,7 +616,7 @@ public class PlatformHelper
     }
 
     /// <summary>
-    /// 显示debug信息
+    /// 显示LogUtil信息
     /// </summary>
     /// <param name="value"></param>
     public static void showDebugInfo(string name ,string unityInfo)
@@ -906,7 +906,7 @@ public class PlatformHelper
 //    }
 //
 //    /// <summary>
-//    /// 显示debug信息
+//    /// 显示LogUtil信息
 //    /// </summary>
 //    /// <param name="value"></param>
 //    public static void showDebugInfo(string name ,string unityInfo)
@@ -1038,7 +1038,7 @@ public class PlatformHelper
     }
 
     public static void iOSLog(string str){
-        Debug.Log(str);
+        LogUtil.Log(str);
     }
 
     public static void setProductName(string str){}
@@ -1142,7 +1142,7 @@ public class PlatformHelper
     }
 
     /// <summary>
-    /// 显示debug信息
+    /// 显示LogUtil信息
     /// </summary>
     /// <param name="value"></param>
     public static void showDebugInfo(string name ,string unityInfo)

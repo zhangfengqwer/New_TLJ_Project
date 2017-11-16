@@ -54,7 +54,7 @@ public class GetEmailRequest : Request {
         }
         else
         {
-            Debug.Log("返回邮箱数据错误:" + code);
+            LogUtil.Log("返回邮箱数据错误:" + code);
         }
     }
 }

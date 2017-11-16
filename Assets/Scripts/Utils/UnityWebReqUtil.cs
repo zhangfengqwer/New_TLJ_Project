@@ -40,7 +40,7 @@ public class UnityWebReqUtil:MonoBehaviour
 
             if (www.isError)
             {
-                Debug.Log(www.error);
+                LogUtil.Log(www.error);
                 callback("get", www.error);
             }
             else
@@ -63,7 +63,7 @@ public class UnityWebReqUtil:MonoBehaviour
 
             if (www.isError)
             {
-                Debug.Log(www.error);
+                LogUtil.Log(www.error);
                 callback("post",www.error);
             }
             else

@@ -35,7 +35,7 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
 
     public void onClickItem()
     {
-        Debug.Log(gameObject.transform.name);
+        LogUtil.Log(gameObject.transform.name);
 
         ToastScript.createToast("暂未开放");
     }

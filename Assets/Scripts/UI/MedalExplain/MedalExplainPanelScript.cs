@@ -12,8 +12,14 @@ public class MedalExplainPanelScript : MonoBehaviour {
     {
         if (UserData.isSetSecondPsw)
         {
-            m_button_setSecondPsw.transform.Find("Text").GetComponent<Text>().text = "已设置";
+            CommonUtil.setImageSprite(m_button_setSecondPsw.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalExplain/anniu_zi_ysz");
+            m_button_setSecondPsw.transform.Find("Image").GetComponent<Image>().SetNativeSize();
             Destroy(m_button_setSecondPsw.GetComponent<Button>());
+        }
+        else
+        {
+            CommonUtil.setImageSprite(m_button_setSecondPsw.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalExplain/anniu_zi_szmm");
+            m_button_setSecondPsw.transform.Find("Image").GetComponent<Image>().SetNativeSize();
         }
     }
 	

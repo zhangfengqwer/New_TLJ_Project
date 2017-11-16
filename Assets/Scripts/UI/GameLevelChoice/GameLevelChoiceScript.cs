@@ -56,12 +56,12 @@ public class GameLevelChoiceScript : MonoBehaviour {
     {
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            Debug.Log("进入经典初级场");
+            LogUtil.Log("进入经典初级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi);
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            Debug.Log("进入抄底初级场");
+            LogUtil.Log("进入抄底初级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi);
         }
         if (UserData.gold < 1500)
@@ -79,7 +79,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
     {
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            Debug.Log("进入经典中级场");
+            LogUtil.Log("进入经典中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi);
 
             if (UserData.gameData.xianxianJDPrimary < 100)
@@ -90,7 +90,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            Debug.Log("进入抄底中级场");
+            LogUtil.Log("进入抄底中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi);
             if (UserData.gameData.xianxianCDPrimary < 100)
             {
@@ -113,7 +113,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
     {
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            Debug.Log("进入经典高级场");
+            LogUtil.Log("进入经典高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi);
 
             if (UserData.gameData.xianxianJDMiddle < 300)
@@ -124,7 +124,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            Debug.Log("进入抄底高级场");
+            LogUtil.Log("进入抄底高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi);
             if (UserData.gameData.xianxianCDMiddle < 300)
             {

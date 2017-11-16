@@ -79,7 +79,7 @@ public class SocketUtil
         }
         else
         {
-            Debug.Log("SocketUtil----连接服务器失败，因为当前已经连接  " + m_ipAddress.ToString() + "  " + m_ipPort);
+            LogUtil.Log("SocketUtil----连接服务器失败，因为当前已经连接  " + m_ipAddress.ToString() + "  " + m_ipPort);
         }
     }
 
@@ -107,7 +107,7 @@ public class SocketUtil
         }
         else
         {
-            Debug.Log("SocketUtil----断开服务器连接失败，因为当前已经断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
+            LogUtil.Log("SocketUtil----断开服务器连接失败，因为当前已经断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
             m_isNormalStop = true;
         }
     }
@@ -129,7 +129,7 @@ public class SocketUtil
         }
         catch (SocketException ex)
         {
-            Debug.Log("SocketUtil----连接服务器失败：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
+            LogUtil.Log("SocketUtil----连接服务器失败：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
 
             //if (!m_isNormalStop)
             //{
@@ -150,7 +150,7 @@ public class SocketUtil
         if (m_isStart)
         {
             sendData = sendData.Replace("\r\n", "");
-            //Debug.Log("SocketUtil----发送给服务端消息：" + sendData);
+            //LogUtil.Log("SocketUtil----发送给服务端消息：" + sendData);
 
             try
             {
@@ -159,14 +159,14 @@ public class SocketUtil
                 // 增加数据包尾部标识
                 bytes = Encoding.UTF8.GetBytes(sendData + m_packEndFlag);
 
-                Debug.Log("SocketUtil----发送给服务端消息：" + Encoding.UTF8.GetString(bytes, 0, bytes.Length));
+                LogUtil.Log("SocketUtil----发送给服务端消息：" + Encoding.UTF8.GetString(bytes, 0, bytes.Length));
                 m_socket.Send(bytes);
             }
             catch (SocketException ex)
             {
                 if (!m_isNormalStop)
                 {
-                    Debug.Log("SocketUtil----与服务端连接断开：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
+                    LogUtil.Log("SocketUtil----与服务端连接断开：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
 
                     m_isStart = false;
 
@@ -179,7 +179,7 @@ public class SocketUtil
         }
         else
         {
-            Debug.Log("SocketUtil----发送消息失败：已经与服务端断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
+            LogUtil.Log("SocketUtil----发送消息失败：已经与服务端断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
         }
     }
 
@@ -196,7 +196,7 @@ public class SocketUtil
 
                 reces = reces.Replace("\r\n", "");
 
-//                Debug.Log("SocketUtil----收到服务端消息：" + reces);
+//                LogUtil.Log("SocketUtil----收到服务端消息：" + reces);
 
                 if (reces.CompareTo("") != 0)
                 {
@@ -233,7 +233,7 @@ public class SocketUtil
                 {
                     if (!m_isNormalStop)
                     {
-                        Debug.Log("SocketUtil----被动与服务端连接断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
+                        LogUtil.Log("SocketUtil----被动与服务端连接断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
 
                         m_isStart = false;
 
@@ -250,7 +250,7 @@ public class SocketUtil
             {
                 if (!m_isNormalStop)
                 {
-                    Debug.Log("SocketUtil----被动与服务端连接断开：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
+                    LogUtil.Log("SocketUtil----被动与服务端连接断开：" + ex.Message + "  " + m_ipAddress.ToString() + "  " + m_ipPort);
 
                     m_isStart = false;
 
@@ -269,7 +269,7 @@ public class SocketUtil
     {
         if (m_ipAddress == null || m_ipPort == 0)
         {
-            Debug.Log("SocketUtil----没有设置IP和端口");
+            LogUtil.Log("SocketUtil----没有设置IP和端口");
             return false;
         }
 
