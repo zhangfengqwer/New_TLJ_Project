@@ -19,9 +19,17 @@ public class AndroidCallBack : MonoBehaviour {
         DontDestroyOnLoad(this);
     }
 
-    public void SetLogIsShow(bool isShow)
+    public void SetLogIsShow(string isShow)
     {
-        LogUtil.s_isShowLog = isShow;
+        if ("0".Equals(isShow))
+        {
+            LogUtil.s_isShowLog = false;
+        }
+        else
+        {
+            LogUtil.s_isShowLog = true;
+        }
+       
     }
 
     public void OnPauseCallBack(string data)
