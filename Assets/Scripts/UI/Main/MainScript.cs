@@ -261,7 +261,8 @@ public class MainScript : MonoBehaviour
 
     public void OnClickHead()
     {
-        UserInfoScript.create();
+        //UserInfoScript.create();
+        TurntablePanelScript.create();
     }
 
     public void OnClickNotice()
