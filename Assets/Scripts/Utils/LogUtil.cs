@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LogUtil : MonoBehaviour
 {
-    static bool isShowLog = false;
+    static bool isShowLog = true;
 
     public static void Log(object obj)
     {
