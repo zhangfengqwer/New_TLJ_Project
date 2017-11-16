@@ -202,18 +202,6 @@ public class ShopPanelScript : MonoBehaviour
             }
         }
 
-        //去除1002；
-        for (int i = 0; i < shopDataList.Count; i++)
-        {
-            ShopData shopData = shopDataList[i];
-            if (shopData.goods_id == 1002)
-            {
-                shopDataList.Remove(shopData);                                          
-            }
-           
-        }
-
-
         Init();
     }
 
