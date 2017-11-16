@@ -49,7 +49,8 @@ public class TurntablePanelScript : MonoBehaviour
     {
         if (m_isStartRotate)
         {
-            m_image_neiyuan.transform.Rotate(new Vector3(0, 0, -m_rotateSpeed / 100.0f));
+            float speed = Time.deltaTime * m_rotateSpeed / (1.0f / 60.0f);
+            m_image_neiyuan.transform.Rotate(new Vector3(0, 0, -speed / 100.0f));
 
             if (m_isStartChoice)
             {
