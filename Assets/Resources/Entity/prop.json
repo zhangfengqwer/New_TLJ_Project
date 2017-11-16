@@ -8,8 +8,8 @@
     },
     {
         "prop_id": 102,
-        "prop_name": "加倍卡",
-		"desc": "在游戏中使用加倍卡可获得双倍盈利",
+        "prop_name": "双倍金币卡",
+		"desc": "在游戏中使用双倍金币卡可获得双倍盈利",
 		"type": 0,
 		"icon": "icon_jiabeika"
     },
