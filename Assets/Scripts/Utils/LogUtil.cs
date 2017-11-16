@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LogUtil : MonoBehaviour
 {
-    static bool isShowLog = true;
+    public static bool s_isShowLog = true;
 
     public static void Log(object obj)
     {
-        if (isShowLog)
+        if (s_isShowLog)
         {
             Debug.Log(obj);
         }
@@ -16,7 +16,7 @@ public class LogUtil : MonoBehaviour
 
     public static void LogWarning(object obj)
     {
-        if (isShowLog)
+        if (s_isShowLog)
         {
             Debug.LogWarning(obj);
         }
@@ -24,7 +24,7 @@ public class LogUtil : MonoBehaviour
 
     public static void LogError(string obj)
     {
-        if (isShowLog)
+        if (s_isShowLog)
         {
             Debug.LogError(obj);
         }
