@@ -83,6 +83,34 @@ class CommonUtil
     }
 
     /*
+     * 裁剪字符串：1.2.3.3.5
+     * str：源字符串
+     * c：裁剪规则
+     * 返回1
+     */
+    static public int splitStr_Start(string str, char c)
+    {
+        List<string> list = new List<string>();
+        splitStr(str,list,c);
+
+        return int.Parse(list[0]);
+    }
+
+    /*
+     * 裁剪字符串：1.2.3.3.5
+     * str：源字符串
+     * c：裁剪规则
+     * 返回200
+     */
+    static public int splitStr_End(string str, char c)
+    {
+        List<string> list = new List<string>();
+        splitStr(str, list, c);
+
+        return int.Parse(list[1]);
+    }
+
+    /*
      * subStringEndByChar("1/2/3/4/5/6",'/')
      * 返回6
      */

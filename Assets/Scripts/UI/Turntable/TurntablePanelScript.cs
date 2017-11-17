@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.UI;
 
 public class TurntablePanelScript : MonoBehaviour
 {
+    public GameObject m_listView;
+    ListViewScript m_ListViewScript;
+
     public Image m_image_neiyuan;
     public Image m_image_deng1;
     public Image m_image_deng2;
@@ -23,16 +27,21 @@ public class TurntablePanelScript : MonoBehaviour
     GameObject m_targetGameObject;
     GameObject m_beforeGameObject;
 
+    public static GameObject s_instance = null;
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/TurntablePanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+        s_instance = obj;
 
         return obj;
     }
 
     void Start()
     {
+        m_ListViewScript = m_listView.GetComponent<ListViewScript>();
+
         m_button_free.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.freeCount.ToString();
         m_button_huizhang.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.huizhangCount.ToString();
 
@@ -64,6 +73,9 @@ public class TurntablePanelScript : MonoBehaviour
 
                     // 显示奖励
                     ShowRewardPanelScript.Show(TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward);
+
+                    // 显示在转盘通知列表
+                    addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
                 }
                 else
                 {
@@ -195,10 +207,6 @@ public class TurntablePanelScript : MonoBehaviour
                         {
                             m_beforeGameObject = m_rewardObj_list[8];
                         }
-                        else if (i == 2)
-                        {
-                            m_beforeGameObject = m_rewardObj_list[9];
-                        }
                         else
                         {
                             m_beforeGameObject = m_rewardObj_list[i - 3];
@@ -216,9 +224,62 @@ public class TurntablePanelScript : MonoBehaviour
         }
     }
 
+    public void onReceive_TurntableBroadcast(string data)
+    {
+        JsonData jd = JsonMapper.ToObject(data);
+
+        {
+            string name = (string)jd["name"];
+            int reward_id = (int)jd["reward_id"];
+
+            if (UserData.name.CompareTo(name) != 0)
+            {
+                addTurntableBroadcast(name, reward_id);
+            }
+        }
+    }
+
+    public void addTurntableBroadcast(string name,int reward_id)
+    {
+        try
+        {
+            TurntableBroadcastDataScript.getInstance().addData(name, reward_id);
+
+            {
+                m_ListViewScript.clear();
+                for (int i = 0; i < TurntableBroadcastDataScript.getInstance().getTurntableBroadcastDataList().Count; i++)
+                {
+                    GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_zhuanpan_guangbo") as GameObject;
+                    GameObject obj = MonoBehaviour.Instantiate(prefab);
+
+                    {
+                        TurntableBroadcastData temp = TurntableBroadcastDataScript.getInstance().getTurntableBroadcastDataList()[i];
+
+                        string reward = TurntableDataScript.getInstance().getDataById(temp.m_reward_id).m_reward;
+                        int prop_id = CommonUtil.splitStr_Start(reward, ':');
+                        int prop_num = CommonUtil.splitStr_End(reward, ':');
+                        string prop_name = PropData.getInstance().getPropInfoById(prop_id).m_name;
+
+                        string content = "恭喜" + temp.m_name + "获得" + prop_name + "*" + prop_num;
+                        obj.transform.Find("Text").GetComponent<Text>().text = content;
+                    }
+
+                    m_ListViewScript.addItem(obj);
+                }
+
+                m_ListViewScript.addItemEnd();
+            }
+        }
+        catch (Exception ex)
+        {
+            LogUtil.Log("addTurntableBroadcast----" + ex.Message);
+        }
+    }
+
     private void OnDestroy()
     {
         //LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = null;
+        s_instance = null;
     }
 
     public void onClickFree()

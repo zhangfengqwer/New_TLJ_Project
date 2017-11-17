@@ -370,10 +370,19 @@ public class MainScript : MonoBehaviour
                 SceneManager.LoadScene("LoginScene");
             });
         }
+        // 购买元宝结果通知
         else if (tag.CompareTo(TLJCommon.Consts.Tag_BuyYuanBao) == 0)
         {
             LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
             ToastScript.createToast("支付成功");
+        }
+        // 有人使用转盘
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_TurntableBroadcast) == 0)
+        {
+            if (TurntablePanelScript.s_instance != null)
+            {
+                TurntablePanelScript.s_instance.GetComponent<TurntablePanelScript>().onReceive_TurntableBroadcast(data);
+            }
         }
         else
         {
