@@ -373,8 +373,17 @@ public class MainScript : MonoBehaviour
         // 购买元宝结果通知
         else if (tag.CompareTo(TLJCommon.Consts.Tag_BuyYuanBao) == 0)
         {
-            LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
-            ToastScript.createToast("支付成功");
+            var code = (int)jd["code"];
+            if (code == (int)Consts.Code.Code_OK)
+            {
+                LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
+                ToastScript.createToast("支付成功");
+            }
+            else
+            {
+                ToastScript.createToast("支付失败");
+            }
+         
         }
         // 有人使用转盘
         else if (tag.CompareTo(TLJCommon.Consts.Tag_TurntableBroadcast) == 0)
