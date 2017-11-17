@@ -20,12 +20,9 @@ public class TurntablePanelScript : MonoBehaviour
     List<GameObject> m_rewardObj_list = new List<GameObject>();
 
     bool m_isStartRotate = false;
-    bool m_isStartChoice = false;
-    bool m_isCrossBeforeGameObject = false;
-    bool m_isStartJianSu = false;
+    int m_crossCount = 0;
     float m_rotateSpeed = 200;
     GameObject m_targetGameObject;
-    GameObject m_beforeGameObject;
 
     public static GameObject s_instance = null;
 
@@ -58,17 +55,13 @@ public class TurntablePanelScript : MonoBehaviour
     {
         if (m_isStartRotate)
         {
-            float speed = Time.deltaTime * m_rotateSpeed / (1.0f / 60.0f);
-            m_image_neiyuan.transform.Rotate(new Vector3(0, 0, -speed / 100.0f));
-
-            if (m_isStartChoice)
+            if ((int)m_targetGameObject.transform.eulerAngles.z == 0)
             {
-                if (((int)m_targetGameObject.transform.eulerAngles.z == 0) && m_isCrossBeforeGameObject)
+                ++m_crossCount;
+                if (m_crossCount == 3)
                 {
                     m_isStartRotate = false;
-                    m_isStartChoice = false;
-                    m_isCrossBeforeGameObject = false;
-                    m_isStartJianSu = false;
+                    m_crossCount = 0;
                     m_rotateSpeed = 200;
 
                     // 显示奖励
@@ -77,25 +70,19 @@ public class TurntablePanelScript : MonoBehaviour
                     // 显示在转盘通知列表
                     addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
                 }
-                else
+            }
+
+            if (m_crossCount == 2)
+            {
+                m_rotateSpeed -= 0.4f;
+                if (m_rotateSpeed < 10.0f)
                 {
-                    if (0 == (int)m_beforeGameObject.transform.eulerAngles.z)
-                    {
-                        m_isStartJianSu = true;
-                        m_isCrossBeforeGameObject = true;
-                    }
-
-                    if (m_isStartJianSu)
-                    {
-                        m_rotateSpeed -= 0.7f;
-
-                        if (m_rotateSpeed <= 10f)
-                        {
-                            m_rotateSpeed = 10f;
-                        }
-                    }
+                    m_rotateSpeed = 10.0f;
                 }
             }
+
+            float speed = Time.deltaTime * m_rotateSpeed / (1.0f / 60.0f);
+            m_image_neiyuan.transform.Rotate(new Vector3(0, 0, -speed / 100.0f));
         }
     }
 
@@ -111,11 +98,6 @@ public class TurntablePanelScript : MonoBehaviour
             m_image_deng1.transform.localScale = new Vector3(0,0,0);
             m_image_deng2.transform.localScale = new Vector3(1,1,1);
         }
-    }
-
-    void onInvokeStartChoice()
-    {
-        m_isStartChoice = true;
     }
 
     void loadReward()
@@ -199,21 +181,7 @@ public class TurntablePanelScript : MonoBehaviour
                     {
                         m_targetGameObject = m_rewardObj_list[i];
 
-                        if (i == 0)
-                        {
-                            m_beforeGameObject = m_rewardObj_list[7];
-                        }
-                        else if (i == 1)
-                        {
-                            m_beforeGameObject = m_rewardObj_list[8];
-                        }
-                        else
-                        {
-                            m_beforeGameObject = m_rewardObj_list[i - 3];
-                        }
-
                         m_isStartRotate = true;
-                        Invoke("onInvokeStartChoice", 3);
                     }
                 }
             }
@@ -304,11 +272,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickFree_tip()
     {
-
+        string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级vip等级获得贵族特权，即可增加抽奖机会。\r\n3、使用徽章进行抽奖，每日可获得三次抽奖机会。";
+        TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
 
     public void onClickHuiZhang_tip()
     {
-
+        string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级vip等级获得贵族特权，即可增加抽奖机会。\r\n3、使用徽章进行抽奖，每日可获得三次抽奖机会。";
+        TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
 }
