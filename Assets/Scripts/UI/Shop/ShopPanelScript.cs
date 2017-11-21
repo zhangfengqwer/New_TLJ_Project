@@ -82,7 +82,7 @@ public class ShopPanelScript : MonoBehaviour
     private void InitVip()
     {
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
-        int currentVipToTal = VipUtil.GetCurrentVipToTal(vipLevel);
+        int currentVipToTal = VipUtil.GetCurrentVipTotal(vipLevel);
         VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/shop_vip_" + vipLevel);
 
         var vipText = string.Format("累计充值" + "<color=#FF0000FF>{0}</color>" + ",即可升级到" + "<color=#FF0000FF>{1}</color>", currentVipToTal + "元", "VIP" + (vipLevel + 1));
