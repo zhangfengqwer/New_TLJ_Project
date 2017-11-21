@@ -252,6 +252,11 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickFree()
     {
+        if (m_isStartRotate)
+        {
+            return;
+        }
+
         // 使用转盘
         {
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
@@ -262,6 +267,11 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickHuiZhang()
     {
+        if (m_isStartRotate)
+        {
+            return;
+        }
+
         // 使用转盘
         {
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
