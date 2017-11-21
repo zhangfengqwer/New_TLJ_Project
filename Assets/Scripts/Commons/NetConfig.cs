@@ -30,18 +30,20 @@ public class NetConfig
     {
         if (s_isTest)
         {
-            // UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
+            UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
 
-            // 使用本地配置文件
-            string jsonData = jsonData = Resources.Load("Entity/NetConfig_test").ToString();
-            httpCallBack("", jsonData);
+            //// 使用本地配置文件
+            //string jsonData = jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+            //httpCallBack("", jsonData);
         }
         else
         {
-            // 使用本地配置文件
-            string jsonData = Resources.Load("Entity/NetConfig").ToString();
-            httpCallBack("", jsonData);
-        }        
+            UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json", httpCallBack);
+
+            //// 使用本地配置文件
+            //string jsonData = Resources.Load("Entity/NetConfig").ToString();
+            //httpCallBack("", jsonData);
+        }
     }
 
     static void httpCallBack(string tag,string data)
