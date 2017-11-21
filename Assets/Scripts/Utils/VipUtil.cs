@@ -31,7 +31,7 @@ public class VipUtil
 		return 0;
 	}
     
-	public static int GetCurrentVipToTal(int vipLevel)
+	public static int GetCurrentVipTotal(int vipLevel)
 	{
 		int vipTotal = 0;
 		switch (vipLevel)

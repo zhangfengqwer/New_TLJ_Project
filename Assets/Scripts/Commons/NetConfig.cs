@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class NetConfig
 {
@@ -50,6 +51,8 @@ public class NetConfig
 
 					// 使用本地配置文件
                     string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+
+                    LogUtil.Log("本地配置文件:" + jsonData);
                     httpCallBack("", jsonData);
                 }
                 break;
