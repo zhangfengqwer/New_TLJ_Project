@@ -10,7 +10,7 @@ public class SensitiveWordUtil
 
     public static void reqNet()
     {
-        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/stopwords.txt", httpCallBack);
+        UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "stopwords.txt", httpCallBack);
     }
 
     static void httpCallBack(string tag, string data)
