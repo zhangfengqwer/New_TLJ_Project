@@ -1,6 +1,7 @@
 ﻿using LitJson;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -21,12 +22,32 @@ class PropData
         return s_instance;
     }
 
-    public void init()
+    public void reqNet()
+    {
+        UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/prop.json", httpCallBack);
+    }
+
+    void httpCallBack(string tag, string data)
+    {
+        try
+        {
+            // 读取配置文件
+            {
+                init(data);
+            }
+        }
+        catch (Exception ex)
+        {
+            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
+        }
+    }
+
+    public void init(string jsonData)
     {
         m_propInfoList.Clear();
 
-        // 使用本地配置文件
-        string jsonData = Resources.Load("Entity/prop").ToString();
+        //// 使用本地配置文件
+        //string jsonData = Resources.Load("Entity/prop").ToString();
 
         JsonData jd = JsonMapper.ToObject(jsonData);
 

@@ -52,10 +52,10 @@ public class LoginScript : MonoBehaviour
         // 拉取数值表
         {
             NetConfig.reqNetConfig();
-            PropData.getInstance().init();
-            ChatData.getInstance().init();
-            HuDongData.getInstance().init();
-            SensitiveWordUtil.InitWords();
+            PropData.getInstance().reqNet();
+            ChatData.getInstance().reqNet();
+            HuDongData.getInstance().reqNet();
+            SensitiveWordUtil.reqNet();
         }
 
 

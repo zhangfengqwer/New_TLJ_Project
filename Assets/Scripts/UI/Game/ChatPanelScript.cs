@@ -27,7 +27,6 @@ public class ChatPanelScript : MonoBehaviour {
 
     void Start()
     {
-        ChatData.getInstance().init();
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
         loadChat();
