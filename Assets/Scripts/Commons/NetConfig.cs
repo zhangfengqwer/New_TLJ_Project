@@ -8,15 +8,7 @@ using UnityEngine;
 
 public class NetConfig
 {
-    enum NetType
-    {
-        NetType_Dev,
-        NetType_Test,
-        NetType_Formal,
-    }
-
-    //static NetType m_netType = NetType.NetType_Dev;
-    static NetType m_netType = NetType.NetType_Test;
+    public static bool s_isTest = true;
 
     // 登录服务器
     public static string s_loginService_ip;
@@ -36,31 +28,20 @@ public class NetConfig
 
     public static void reqNetConfig()
     {
-        switch (m_netType)
+        if (s_isTest)
         {
-            case NetType.NetType_Dev:
-                {
-                    UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_dev.json", httpCallBack);
-                }
-                break;
+            // UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
 
-            case NetType.NetType_Test:
-                {
-                    // UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig_test.json", httpCallBack);
-
-					// 使用本地配置文件
-                    string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
-                    httpCallBack("", jsonData);
-                }
-                break;
-
-            case NetType.NetType_Formal:
-                {
-                    //UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json", httpCallBack);
-                }
-                break;
+            // 使用本地配置文件
+            string jsonData = jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+            httpCallBack("", jsonData);
         }
-        
+        else
+        {
+            // 使用本地配置文件
+            string jsonData = Resources.Load("Entity/NetConfig").ToString();
+            httpCallBack("", jsonData);
+        }        
     }
 
     static void httpCallBack(string tag,string data)
