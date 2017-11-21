@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b91b91951fa518e4392b52a43b18a928
+timeCreated: 1511247857
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FZLTH_YS_GB18030
+  fontNames:
+  - FZLTH_YS_GB18030
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
