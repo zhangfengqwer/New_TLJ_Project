@@ -261,8 +261,7 @@ public class MainScript : MonoBehaviour
 
     public void OnClickHead()
     {
-        //UserInfoScript.create();
-        TurntablePanelScript.create();
+        UserInfoScript.create();
     }
 
     public void OnClickNotice()
@@ -319,6 +318,11 @@ public class MainScript : MonoBehaviour
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/MedalExplainPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+    }
+
+    public void onClickZhuanPan()
+    {
+        TurntablePanelScript.create();
     }
 
     //-----------------------------------------------------------------------------

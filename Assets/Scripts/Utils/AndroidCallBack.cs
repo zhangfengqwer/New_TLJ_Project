@@ -32,6 +32,11 @@ public class AndroidCallBack : MonoBehaviour {
        
     }
 
+    public void SeIsTest(bool isTest)
+    {
+        NetConfig.s_isTest = isTest;
+    }
+
     public void OnPauseCallBack(string data)
     {
         if (s_onPauseCallBack != null)
