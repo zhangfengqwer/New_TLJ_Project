@@ -1860,7 +1860,7 @@ public class GameScript : MonoBehaviour
                             if (type == 1)
                             {
                                 string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
-                                ChatContentScript.createChatContent(content_text, new Vector2(-260, -290), TextAnchor.MiddleLeft);
+                                ChatContentScript.createChatContent(content_text, new Vector2(-480, -290), TextAnchor.MiddleLeft);
                             }
                             else
                             {
@@ -1880,11 +1880,11 @@ public class GameScript : MonoBehaviour
                                                 if (type == 1)
                                                 {
                                                     string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
-                                                    ChatContentScript.createChatContent(content_text, new Vector2(-100, 275), TextAnchor.MiddleCenter);
+                                                    ChatContentScript.createChatContent(content_text, new Vector2(0, 200), TextAnchor.MiddleCenter);
                                                 }
                                                 else
                                                 {
-                                                    EmojiScript.create(content_id, new Vector2(0, 270));
+                                                    EmojiScript.create(content_id, new Vector2(0, 200));
                                                 }
                                             }
                                             break;
@@ -1894,7 +1894,7 @@ public class GameScript : MonoBehaviour
                                                 if (type == 1)
                                                 {
                                                     string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
-                                                    ChatContentScript.createChatContent(content_text, new Vector2(-260, 0), TextAnchor.MiddleLeft);
+                                                    ChatContentScript.createChatContent(content_text, new Vector2(-470, 0), TextAnchor.MiddleLeft);
                                                 }
                                                 else
                                                 {
@@ -1908,7 +1908,7 @@ public class GameScript : MonoBehaviour
                                                 if (type == 1)
                                                 {
                                                     string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
-                                                    ChatContentScript.createChatContent(content_text, new Vector2(380, 0), TextAnchor.MiddleRight);
+                                                    ChatContentScript.createChatContent(content_text, new Vector2(480, 0), TextAnchor.MiddleRight);
                                                 }
                                                 else
                                                 {

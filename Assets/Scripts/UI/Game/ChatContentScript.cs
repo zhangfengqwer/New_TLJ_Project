@@ -12,13 +12,38 @@ public class ChatContentScript : MonoBehaviour {
         GameObject prefab = Resources.Load("Prefabs/Game/ChatContent") as GameObject;
         GameObject obj = MonoBehaviour.Instantiate(prefab);
         obj.transform.Find("Text").GetComponent<Text>().text = text;
-        obj.transform.Find("Text").GetComponent<Text>().alignment = textAnchor;
+        //obj.transform.Find("Text").GetComponent<Text>().alignment = textAnchor;
 
         obj.transform.SetParent(GameObject.Find("Canvas_Middle").transform);
         obj.transform.localScale = new Vector3(1, 1, 1);
-        
-        obj.transform.localPosition = pos;
 
+        {
+            int size = text.Length;
+            int width = size * 32 + 20;
+            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 60);
+        }
+
+        switch (textAnchor)
+        {
+            case TextAnchor.MiddleCenter:
+                {
+                    obj.transform.localPosition = pos;
+                }
+                break;
+
+            case TextAnchor.MiddleLeft:
+                {
+                    obj.transform.localPosition = (pos + new Vector2(obj.GetComponent<RectTransform>().sizeDelta.x / 2,0));
+                }
+                break;
+
+            case TextAnchor.MiddleRight:
+                {
+                    obj.transform.localPosition = (pos - new Vector2(obj.GetComponent<RectTransform>().sizeDelta.x / 2, 0));
+                }
+                break;
+        }
+        
         return obj;
     }
 
