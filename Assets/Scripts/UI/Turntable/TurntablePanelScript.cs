@@ -1,4 +1,5 @@
-﻿using LitJson;
+﻿using DG.Tweening;
+using LitJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,8 +24,6 @@ public class TurntablePanelScript : MonoBehaviour
     List<GameObject> m_rewardObj_list = new List<GameObject>();
 
     bool m_isStartRotate = false;
-    int m_crossCount = 0;
-    float m_rotateSpeed = 600;
     GameObject m_targetGameObject;
 
     public static GameObject s_instance = null;
@@ -60,38 +59,6 @@ public class TurntablePanelScript : MonoBehaviour
 
     private void Update()
     {
-        if (m_isStartRotate)
-        {
-            if (Math.Abs((int)m_targetGameObject.transform.eulerAngles.z) <= 5)
-            //if ((int)m_targetGameObject.transform.eulerAngles.z == 0)
-            {
-                ++m_crossCount;
-                if (m_crossCount == 3)
-                {
-                    m_isStartRotate = false;
-                    m_crossCount = 0;
-                    m_rotateSpeed = 600;
-
-                    // 显示奖励
-                    ShowRewardPanelScript.Show(TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward);
-
-                    // 显示在转盘通知列表
-                    addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
-                }
-            }
-
-            if (m_crossCount == 2)
-            {
-                m_rotateSpeed -= 4.6f;
-                if (m_rotateSpeed < 10.0f)
-                {
-                    m_rotateSpeed = 10.0f;
-                }
-            }
-
-            float speed = Time.deltaTime * m_rotateSpeed / (1.0f / 60.0f);
-            m_image_neiyuan.transform.Rotate(new Vector3(0, 0, -speed / 100.0f));
-        }
     }
 
     void onInvokeDeng()
@@ -172,6 +139,8 @@ public class TurntablePanelScript : MonoBehaviour
 
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
+            m_isStartRotate = true;
+
             int reward_id = (int)jd["reward_id"];
             int type = (int)jd["type"];
             int subHuiZhangNum = (int)jd["subHuiZhangNum"];
@@ -200,8 +169,19 @@ public class TurntablePanelScript : MonoBehaviour
                     if (m_rewardObj_list[i].transform.name.CompareTo(reward_id.ToString()) == 0)
                     {
                         m_targetGameObject = m_rewardObj_list[i];
+                        
+                        int angle = -360 * 2 - (int)(m_targetGameObject.transform.localEulerAngles.z);
 
-                        m_isStartRotate = true;
+                        m_image_neiyuan.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, angle), 4.0f, RotateMode.FastBeyond360).OnComplete<Tween>(delegate () 
+                        {
+                            // 显示奖励
+                            ShowRewardPanelScript.Show(TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward);
+
+                            // 显示在转盘通知列表
+                            addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
+
+                            m_isStartRotate = false;
+                        });
                     }
                 }
             }
