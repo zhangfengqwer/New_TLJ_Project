@@ -25,16 +25,10 @@ public class AndroidCallBack : MonoBehaviour {
         {
             LogUtil.s_isShowLog = false;
         }
-        else
         {
             LogUtil.s_isShowLog = true;
         }
        
-    }
-
-    public void SeIsTest(bool isTest)
-    {
-        NetConfig.s_isTest = isTest;
     }
 
     public void OnPauseCallBack(string data)

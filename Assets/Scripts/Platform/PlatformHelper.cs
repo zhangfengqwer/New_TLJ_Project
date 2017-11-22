@@ -244,6 +244,13 @@ public class PlatformHelper
     public static int getNetWork() {
         return 1;
     }
+    /**
+     * 1表示测试包
+     */
+    public static string getIsTest()
+    {
+        return "1";
+    }
 
     /**
      * 获取手机服务商信息 
@@ -433,6 +440,13 @@ public class PlatformHelper
     {
         return false;
     }
+
+
+    public static string getIsTest()
+    {
+        return GetJC().CallStatic<string>("getIsTest").ToString();
+    }
+
 
     /// <summary>
     /// Closes the service.
@@ -1185,6 +1199,12 @@ public class PlatformHelper
 
     public static void pay(string payTypeWx, string callObj, string callFunc, string data)
     {
+
+    }
+
+    public static string getIsTest()
+    {
+        return "1";
     }
 }
 

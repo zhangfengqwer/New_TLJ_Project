@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class NetConfig
 {
-    public static bool s_isTest = true;
 
     // 登录服务器
     public static string s_loginService_ip;
@@ -32,10 +31,10 @@ public class NetConfig
 
     public static void reqNetConfig()
     {
-        if (s_isTest)
+        if ("1".Equals(PlatformHelper.getIsTest()))
         {
             UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "NetConfig_test.json", httpCallBack);
-
+            LogUtil.Log("测试包");
             // 使用本地配置文件
 //            string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
 //            httpCallBack("", jsonData);
@@ -43,7 +42,7 @@ public class NetConfig
         else
         {
             UnityWebReqUtil.Instance.Get("http://oru510uv8.bkt.clouddn.com/NetConfig.json", httpCallBack);
-
+            LogUtil.Log("线上包");
             //// 使用本地配置文件
             //string jsonData = Resources.Load("Entity/NetConfig").ToString();
             //httpCallBack("", jsonData);
