@@ -13,15 +13,18 @@ public class TurntablePanelScript : MonoBehaviour
     public Image m_image_neiyuan;
     public Image m_image_deng1;
     public Image m_image_deng2;
+    public Image m_image_add1;
 
     public Button m_button_free;
     public Button m_button_huizhang;
+
+    public Text m_text_myLuckyValue;
 
     List<GameObject> m_rewardObj_list = new List<GameObject>();
 
     bool m_isStartRotate = false;
     int m_crossCount = 0;
-    float m_rotateSpeed = 200;
+    float m_rotateSpeed = 600;
     GameObject m_targetGameObject;
 
     public static GameObject s_instance = null;
@@ -42,6 +45,10 @@ public class TurntablePanelScript : MonoBehaviour
         m_button_free.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.freeCount.ToString();
         m_button_huizhang.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.huizhangCount.ToString();
 
+        m_text_myLuckyValue.text = UserData.myTurntableData.luckyValue.ToString();
+
+        GameUtil.hideGameObject(m_image_add1.gameObject);
+
         // 获取转盘数据
         {
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = onReceive_GetTurntable;
@@ -55,14 +62,15 @@ public class TurntablePanelScript : MonoBehaviour
     {
         if (m_isStartRotate)
         {
-            if ((int)m_targetGameObject.transform.eulerAngles.z == 0)
+            if (Math.Abs((int)m_targetGameObject.transform.eulerAngles.z) <= 5)
+            //if ((int)m_targetGameObject.transform.eulerAngles.z == 0)
             {
                 ++m_crossCount;
                 if (m_crossCount == 3)
                 {
                     m_isStartRotate = false;
                     m_crossCount = 0;
-                    m_rotateSpeed = 200;
+                    m_rotateSpeed = 600;
 
                     // 显示奖励
                     ShowRewardPanelScript.Show(TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward);
@@ -74,7 +82,7 @@ public class TurntablePanelScript : MonoBehaviour
 
             if (m_crossCount == 2)
             {
-                m_rotateSpeed -= 0.4f;
+                m_rotateSpeed -= 4.6f;
                 if (m_rotateSpeed < 10.0f)
                 {
                     m_rotateSpeed = 10.0f;
@@ -98,6 +106,11 @@ public class TurntablePanelScript : MonoBehaviour
             m_image_deng1.transform.localScale = new Vector3(0,0,0);
             m_image_deng2.transform.localScale = new Vector3(1,1,1);
         }
+    }
+
+    void onInvokeAdd1()
+    {
+        GameUtil.hideGameObject(m_image_add1.gameObject);
     }
 
     void loadReward()
@@ -163,14 +176,21 @@ public class TurntablePanelScript : MonoBehaviour
             int type = (int)jd["type"];
             int subHuiZhangNum = (int)jd["subHuiZhangNum"];
 
-            GameUtil.changeData((int)TLJCommon.Consts.Prop.Prop_huizhang,subHuiZhangNum);
+            GameUtil.changeData((int)TLJCommon.Consts.Prop.Prop_huizhang,-subHuiZhangNum);
 
-            UserData.myTurntableData = JsonMapper.ToObject<MyTurntableData>(jd["turntableData"].ToString());
-
-            // 刷新UI次数
             {
-                m_button_free.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.freeCount.ToString();
-                m_button_huizhang.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.huizhangCount.ToString();
+                UserData.myTurntableData = JsonMapper.ToObject<MyTurntableData>(jd["turntableData"].ToString());
+
+                // 刷新UI次数
+                {
+                    m_button_free.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.freeCount.ToString();
+                    m_button_huizhang.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.huizhangCount.ToString();
+                }
+
+                // 刷新幸运值
+                {
+                    m_text_myLuckyValue.text = UserData.myTurntableData.luckyValue.ToString();
+                }
             }
 
             // 轮盘开始转
@@ -185,6 +205,9 @@ public class TurntablePanelScript : MonoBehaviour
                     }
                 }
             }
+
+            GameUtil.showGameObject(m_image_add1.gameObject);
+            Invoke("onInvokeAdd1",2.0f);
         }
         else
         {
@@ -257,6 +280,13 @@ public class TurntablePanelScript : MonoBehaviour
             return;
         }
 
+        if (UserData.myTurntableData.freeCount == 0)
+        {
+            ToastScript.createToast("次数不足");
+
+            return;
+        }
+
         // 使用转盘
         {
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
@@ -270,6 +300,51 @@ public class TurntablePanelScript : MonoBehaviour
         if (m_isStartRotate)
         {
             return;
+        }
+
+        switch (UserData.myTurntableData.huizhangCount)
+        {
+            case 0:
+            {
+                ToastScript.createToast("次数不足");
+
+                return;
+            }
+            break;
+
+            case 1:
+            {
+                if (UserData.medal < 10)
+                {
+                    ToastScript.createToast("徽章不足");
+
+                    return;
+                }
+            }
+            break;
+
+            case 2:
+            {
+                if (UserData.medal < 5)
+                {
+                    ToastScript.createToast("徽章不足");
+
+                    return;
+                }
+            }
+            break;
+
+            case 3:
+            {
+                if (UserData.medal < 3)
+                {
+                    ToastScript.createToast("徽章不足");
+
+                    return;
+                }
+            }
+            break;
+
         }
 
         // 使用转盘

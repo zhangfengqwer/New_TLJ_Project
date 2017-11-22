@@ -186,6 +186,15 @@ class GameUtil
                 GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
             }
         }
+        else if (id == (int)TLJCommon.Consts.Prop.Prop_huizhang)
+        {
+            UserData.medal += num;
+
+            if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
+            {
+                GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+            }
+        }
         else
         {
             for (int i = 0; i < UserData.propData.Count; i++)

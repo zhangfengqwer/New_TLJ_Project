@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class ChatPanelScript : MonoBehaviour {
 
     public GameScript m_parentScript;
-    public GameObject m_listView;
-    ListViewScript m_ListViewScript;
-    
+
+    public GameObject m_listView_chat;
+    ListViewScript m_ListViewScript_chat;
+
+    public GameObject m_listView_emoji;
+    ListViewScript m_ListViewScript_emoji;
+
     public Button m_button_chat;
     public Button m_button_biaoqing;
-    public Text m_text_weikaifang;
 
     bool m_canChat = true;
 
@@ -27,16 +30,18 @@ public class ChatPanelScript : MonoBehaviour {
 
     void Start()
     {
-        m_ListViewScript = m_listView.GetComponent<ListViewScript>();
+        m_ListViewScript_chat = m_listView_chat.GetComponent<ListViewScript>();
+        m_ListViewScript_emoji = m_listView_emoji.GetComponent<ListViewScript>();
 
         loadChat();
     }
 
     public void loadChat()
     {
-        m_ListViewScript.clear();
+        m_ListViewScript_chat.clear();
 
-        m_text_weikaifang.transform.localScale = new Vector3(0,0,0);
+        GameUtil.showGameObject(m_listView_chat);
+        GameUtil.hideGameObject(m_listView_emoji);
 
         {
             m_button_chat.transform.SetAsLastSibling();
@@ -51,36 +56,57 @@ public class ChatPanelScript : MonoBehaviour {
             obj.GetComponent<Item_chat_List_Script>().m_parentScript = this;
             obj.GetComponent<Item_chat_List_Script>().setChatData(ChatData.getInstance().getChatTextList()[i]);
 
-            m_ListViewScript.addItem(obj);
+            m_ListViewScript_chat.addItem(obj);
         }
 
-        m_ListViewScript.addItemEnd();
+        m_ListViewScript_chat.addItemEnd();
     }
 
     public void loadBiaoQing()
     {
-        m_ListViewScript.clear();
+        m_ListViewScript_emoji.clear();
 
-        m_text_weikaifang.transform.localScale = new Vector3(1,1,1);
+        GameUtil.hideGameObject(m_listView_chat);
+        GameUtil.showGameObject(m_listView_emoji);
 
         {
             m_button_biaoqing.transform.SetAsLastSibling();
             m_button_biaoqing.transform.Find("Text").GetComponent<Text>().color = Color.yellow;
             m_button_chat.transform.Find("Text").GetComponent<Text>().color = Color.gray;
         }
-        //for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
-        //{
-        //    GameObject prefab = Resources.Load("Prefabs/UI/Item/Mail_List_Item") as GameObject;
-        //    GameObject obj = MonoBehaviour.Instantiate(prefab);
-        //    obj.GetComponent<Mail_List_Item_Script>().m_parentScript = this;
-        //    obj.GetComponent<Mail_List_Item_Script>().setMailData(UserMailData.getInstance().getUserMailDataList()[i]);
 
-        //    obj.transform.name = UserMailData.getInstance().getUserMailDataList()[i].m_email_id.ToString();
+        {
+            GameObject obj = new GameObject();
+            for (int i = 0; i < 16; i++)
+            {
+                GameObject button = new GameObject();
+                button.AddComponent<Image>();
+                button.AddComponent<Button>();
+                button.transform.name = i.ToString();
 
-        //    m_ListViewScript.addItem(obj);
-        //}
+                button.GetComponent<Button>().onClick.AddListener(delegate ()
+                {
+                    int id = int.Parse(button.transform.name);
+                    reqChat_emoji(id + 1);
+                });
 
-        //m_ListViewScript.addItemEnd();
+                string path = "Sprites/Emoji/Expression-" + (i + 1) + "_1";
+                CommonUtil.setImageSprite(button.GetComponent<Image>(), path);
+                button.GetComponent<Image>().SetNativeSize();
+
+                if (i % 6 == 0)
+                {
+                    obj = new GameObject();
+                    m_ListViewScript_emoji.addItem(obj);
+                }
+
+                button.transform.SetParent(obj.transform);
+
+                button.transform.localPosition = new Vector3(-250 + (i % 6) * 100, 0, 0);
+            }
+
+            m_ListViewScript_emoji.addItemEnd();
+        }
     }
     
     public void onClickChat()
@@ -98,13 +124,28 @@ public class ChatPanelScript : MonoBehaviour {
         if (m_canChat)
         {
             m_canChat = false;
-            m_parentScript.reqChat(chatText.m_id);
+            m_parentScript.reqChat(1,chatText.m_id);
 
             Invoke("onInvoke",4);
         }
         else
         {
             ToastScript.createToast("请隔3秒再发送");
+        }
+    }
+
+    public void reqChat_emoji(int id)
+    {
+        if (m_canChat)
+        {
+            m_canChat = false;
+            m_parentScript.reqChat(2, id);
+
+            Invoke("onInvoke", 2);
+        }
+        else
+        {
+            ToastScript.createToast("请隔2秒再发送");
         }
     }
 
