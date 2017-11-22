@@ -892,13 +892,14 @@ public class GameScript : MonoBehaviour
     }
 
     // 发送聊天信息
-    public void reqChat(int content_id)
+    public void reqChat(int type,int content_id)
     {
         JsonData data = new JsonData();
 
         data["tag"] = m_tag;
         data["uid"] = UserData.uid;
         data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_Chat;
+        data["type"] = type;
         data["content_id"] = content_id;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
@@ -1851,15 +1852,20 @@ public class GameScript : MonoBehaviour
                     try
                     {
                         string uid = (string)jd["uid"];
-                        string content_text = "";
-                        if (ChatData.getInstance().getChatTextById((int)jd["content_id"]) != null)
-                        {
-                            content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
-                        }
-
+                        int type = (int)jd["type"];
+                        int content_id = (int)jd["content_id"];
+                        
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
-                            ChatContentScript.createChatContent(content_text, new Vector2(-260, -290), TextAnchor.MiddleLeft);
+                            if (type == 1)
+                            {
+                                string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
+                                ChatContentScript.createChatContent(content_text, new Vector2(-260, -290), TextAnchor.MiddleLeft);
+                            }
+                            else
+                            {
+                                EmojiScript.create(content_id,new Vector2(-470, -280));
+                            }
                         }
                         else
                         {
@@ -1871,19 +1877,43 @@ public class GameScript : MonoBehaviour
                                     {
                                         case OtherPlayerUIScript.Direction.Direction_Up:
                                             {
-                                                ChatContentScript.createChatContent(content_text, new Vector2(0, 270), TextAnchor.MiddleCenter);
+                                                if (type == 1)
+                                                {
+                                                    string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
+                                                    ChatContentScript.createChatContent(content_text, new Vector2(-100, 275), TextAnchor.MiddleCenter);
+                                                }
+                                                else
+                                                {
+                                                    EmojiScript.create(content_id, new Vector2(0, 270));
+                                                }
                                             }
                                             break;
 
                                         case OtherPlayerUIScript.Direction.Direction_Left:
                                             {
-                                                ChatContentScript.createChatContent(content_text, new Vector2(-260, 0), TextAnchor.MiddleLeft);
+                                                if (type == 1)
+                                                {
+                                                    string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
+                                                    ChatContentScript.createChatContent(content_text, new Vector2(-260, 0), TextAnchor.MiddleLeft);
+                                                }
+                                                else
+                                                {
+                                                    EmojiScript.create(content_id, new Vector2(-460, 5));
+                                                }
                                             }
                                             break;
 
                                         case OtherPlayerUIScript.Direction.Direction_Right:
                                             {
-                                                ChatContentScript.createChatContent(content_text, new Vector2(380, 0), TextAnchor.MiddleRight);
+                                                if (type == 1)
+                                                {
+                                                    string content_text = content_text = ChatData.getInstance().getChatTextById((int)jd["content_id"]).m_text;
+                                                    ChatContentScript.createChatContent(content_text, new Vector2(380, 0), TextAnchor.MiddleRight);
+                                                }
+                                                else
+                                                {
+                                                    EmojiScript.create(content_id, new Vector2(450, 5));
+                                                }
                                             }
                                             break;
                                     }
@@ -1894,6 +1924,8 @@ public class GameScript : MonoBehaviour
                     catch (Exception ex)
                     {
                         ToastScript.createToast("异常：" + ex.Message);
+
+                        LogUtil.Log("onReceive_PlayGame.PlayAction_Chat异常：" + ex.Message);
                     }
                 }
                 break;
