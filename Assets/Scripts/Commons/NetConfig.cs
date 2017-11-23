@@ -35,9 +35,10 @@ public class NetConfig
         {
             UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "NetConfig_test.json", httpCallBack);
             LogUtil.Log("测试包");
+            ToastScript.createToast("这是测试包");
             // 使用本地配置文件
-//            string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
-//            httpCallBack("", jsonData);
+            //            string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+            //            httpCallBack("", jsonData);
         }
         else
         {
@@ -94,6 +95,7 @@ public class NetConfig
         catch (Exception ex)
         {
             LogUtil.Log("读取网络配置文件出错：" + ex.Message);
+            ToastScript.createToast("读取网络配置文件出错：" + ex.Message);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandler,IPointerClickHandler
+public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandler,IPointerClickHandler,IPointerUpHandler
 {
 
     int m_num;
@@ -159,14 +159,16 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     //------------------------------------------------------------------------------------------------------
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (m_canTouch)
-        {
-            onClickPoker();
-        }
+        //Debug.Log("OnPointerDown");
+        //if (m_canTouch)
+        //{
+        //    onClickPoker();
+        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //Debug.Log("OnPointerEnter");
         if (m_canTouch)
         {
             onClickPoker();
@@ -175,9 +177,19 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (m_canTouch)
-        {
-            onClickPoker();
-        }
+        //Debug.Log("OnPointerClick");
+        //if (m_canTouch)
+        //{
+        //    onClickPoker();
+        //}
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        //Debug.Log("OnPointerUp");
+        //if (m_canTouch)
+        //{
+        //    onClickPoker();
+        //}
     }
 }
