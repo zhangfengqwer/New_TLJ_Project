@@ -63,8 +63,8 @@ public class SetScript : MonoBehaviour {
         OtherData.s_isFromSetToLogin = true;
         SceneManager.LoadScene("LoginScene");
 
-        Destroy(LogicEnginerScript.Instance);
-        Destroy(PlayServiceSocket.s_instance);
+        Destroy(LogicEnginerScript.Instance.gameObject);
+        Destroy(PlayServiceSocket.s_instance.gameObject);
     }
 
     public void OnClickExit()

@@ -31,11 +31,14 @@ public class MainScript : MonoBehaviour
     LaBaScript m_laBaScript;
 
     //发送验证码的倒计时
-    private float nextTime = 1;//一秒之后执行
+    private float nextTime = 1; //一秒之后执行
+
+    private static GameObject logicEnginer;
+    private static GameObject playEnginer;
 
     // Use this for initialization
-    void Start ()
-	{
+    void Start()
+    {
         // 禁止多点触摸
         Input.multiTouchEnabled = false;
 
@@ -44,7 +47,7 @@ public class MainScript : MonoBehaviour
         // 安卓回调
         AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
         AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
-        
+
         AudioScript.getAudioScript().stopMusic();
 
         // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
@@ -52,10 +55,9 @@ public class MainScript : MonoBehaviour
 
         // 逻辑服务器
         {
-            if (LogicEnginerScript.Instance == null)
+            if (logicEnginer == null)
             {
-                LogicEnginerScript.create();
-
+                logicEnginer = LogicEnginerScript.create();
                 LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
                 LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
                 LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
@@ -85,11 +87,11 @@ public class MainScript : MonoBehaviour
             }
         }
 
-	    // 游戏打牌服务器
-	    {
-            if (PlayServiceSocket.s_instance == null)
+        // 游戏打牌服务器
+        {
+            if (playEnginer == null)
             {
-                PlayServiceSocket.create();
+                playEnginer = PlayServiceSocket.create();
 
                 PlayServiceSocket.s_instance.setOnPlayService_Connect(onSocketConnect_Play);
                 PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
@@ -124,17 +126,17 @@ public class MainScript : MonoBehaviour
         AudioScript.getAudioScript().playMusic_MainBg();
     }
 
-    
-    void Update ()
+
+    void Update()
     {
-	    if (BindPhoneScript.totalTime > 0)
-	    {
-	        if (nextTime <= Time.time)
-	        {
-	            BindPhoneScript.totalTime--;
-	            nextTime = Time.time + 1;//到达一秒后加1
+        if (BindPhoneScript.totalTime > 0)
+        {
+            if (nextTime <= Time.time)
+            {
+                BindPhoneScript.totalTime--;
+                nextTime = Time.time + 1; //到达一秒后加1
             }
-	    }
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -183,14 +185,14 @@ public class MainScript : MonoBehaviour
         UserAccount.text = UserData.name;
 
         // 金币
-        UserGold.text = UserData.gold+"";
-        MyGold.text = "我的金币:"+ UserData.gold;
+        UserGold.text = UserData.gold + "";
+        MyGold.text = "我的金币:" + UserData.gold;
 
         // 元宝
-        UserYuanBao.text = UserData.yuanbao+""; 
-        
+        UserYuanBao.text = UserData.yuanbao + "";
+
         // 徽章
-        UserMedal.text = UserData.medal+"";
+        UserMedal.text = UserData.medal + "";
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
 
         VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
@@ -201,7 +203,7 @@ public class MainScript : MonoBehaviour
     }
 
 
-    public void showWaitMatchPanel(float time,string gameroomtype)
+    public void showWaitMatchPanel(float time, string gameroomtype)
     {
         if (m_waitMatchPanel != null)
         {
@@ -228,8 +230,8 @@ public class MainScript : MonoBehaviour
         AudioScript.getAudioScript().playSound_ButtonClick();
         //SceneManager.LoadScene("GameScene");
 
-        m_button_xiuxianchang.transform.localScale = new Vector3(0,0,0);
-        m_button_jingjichang.transform.localScale = new Vector3(0,0,0);
+        m_button_xiuxianchang.transform.localScale = new Vector3(0, 0, 0);
+        m_button_jingjichang.transform.localScale = new Vector3(0, 0, 0);
         m_xiuxianchang.transform.localScale = new Vector3(1, 1, 1);
 
         m_xiuxianchang.GetComponent<Animation>().Play("xiuxianchang_show");
@@ -281,14 +283,14 @@ public class MainScript : MonoBehaviour
 
     public void OnClickYuanBaoShop()
     {
-        ShopPanelScript.create(this,2);
+        ShopPanelScript.create(this, 2);
     }
 
     public void OnClickGoldShop()
     {
-
-        ShopPanelScript.create(this,1);
+        ShopPanelScript.create(this, 1);
     }
+
     public void OnClickEmail()
     {
         EmailPanelScript.create();
@@ -332,7 +334,7 @@ public class MainScript : MonoBehaviour
         JsonData jsonData = new JsonData();
         jsonData["tag"] = TLJCommon.Consts.Tag_JingJiChang;
         jsonData["uid"] = UserData.uid;
-        jsonData["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
+        jsonData["playAction"] = (int) TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
 
         PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
     }
@@ -351,24 +353,24 @@ public class MainScript : MonoBehaviour
     public void onReceive_Main(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        string tag = (string)jd["tag"];
+        string tag = (string) jd["tag"];
 
         // 有人使用喇叭
         if (tag.CompareTo(TLJCommon.Consts.Tag_Broadcast_LaBa) == 0)
         {
-            string text = (string)jd["text"];
+            string text = (string) jd["text"];
 
             m_laBaScript.addText(text);
         }
         // 强制离线
-        else if(tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
         {
             Destroy(LogicEnginerScript.Instance);
             Destroy(PlayServiceSocket.s_instance);
 
             GameObject obj = CommonExitPanelScript.create();
             obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
-            obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.AddListener(delegate ()
+            obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.AddListener(delegate()
             {
                 OtherData.s_isFromSetToLogin = true;
                 SceneManager.LoadScene("LoginScene");
@@ -377,8 +379,8 @@ public class MainScript : MonoBehaviour
         // 购买元宝结果通知
         else if (tag.CompareTo(TLJCommon.Consts.Tag_BuyYuanBao) == 0)
         {
-            var code = (int)jd["code"];
-            if (code == (int)Consts.Code.Code_OK)
+            var code = (int) jd["code"];
+            if (code == (int) Consts.Code.Code_OK)
             {
                 LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                 ToastScript.createToast("支付成功");
@@ -387,7 +389,6 @@ public class MainScript : MonoBehaviour
             {
                 ToastScript.createToast("支付失败");
             }
-         
         }
         // 有人使用转盘
         else if (tag.CompareTo(TLJCommon.Consts.Tag_TurntableBroadcast) == 0)
@@ -410,34 +411,34 @@ public class MainScript : MonoBehaviour
         LogUtil.Log("Play:收到服务器消息:" + data);
 
         JsonData jd = JsonMapper.ToObject(data);
-        string tag = (string)jd["tag"];
+        string tag = (string) jd["tag"];
 
         if (tag.CompareTo(TLJCommon.Consts.Tag_JingJiChang) == 0)
         {
-            int playAction = (int)jd["playAction"];
+            int playAction = (int) jd["playAction"];
 
             switch (playAction)
             {
                 // 加入游戏
-                case (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
+                case (int) TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
                 {
                     doTask_PlayAction_JoinGame(data);
                 }
-                break;
-                
+                    break;
+
                 // 退出游戏
-                case (int)TLJCommon.Consts.PlayAction.PlayAction_ExitPVP:
+                case (int) TLJCommon.Consts.PlayAction.PlayAction_ExitPVP:
                 {
                     doTask_PlayAction_ExitPVP(data);
                 }
-                break;
+                    break;
 
                 // 开始游戏
-                case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
+                case (int) TLJCommon.Consts.PlayAction.PlayAction_StartGame:
                 {
                     doTask_PlayAction_StartGame(data);
                 }
-                break;
+                    break;
             }
         }
         // 获取pvp场次信息
@@ -452,36 +453,36 @@ public class MainScript : MonoBehaviour
     void doTask_PlayAction_JoinGame(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int)jd["code"];
+        int code = (int) jd["code"];
 
         switch (code)
         {
-            case (int)TLJCommon.Consts.Code.Code_OK:
+            case (int) TLJCommon.Consts.Code.Code_OK:
+            {
+                int roomId = (int) jd["roomId"];
+                string gameroomtype = (string) jd["gameroomtype"].ToString();
+
+                ToastScript.createToast("报名成功");
+
+                showWaitMatchPanel(10, gameroomtype);
+
+                // 扣除报名费
                 {
-                    int roomId = (int)jd["roomId"];
-                    string gameroomtype = (string)jd["gameroomtype"].ToString();
-
-                    ToastScript.createToast("报名成功");
-
-                    showWaitMatchPanel(10,gameroomtype);
-
-                    // 扣除报名费
+                    string baomingfei = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype).baomingfei;
+                    if (baomingfei.CompareTo("0") != 0)
                     {
-                        string baomingfei = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype).baomingfei;
-                        if (baomingfei.CompareTo("0") != 0)
-                        {
-                            List<string> tempList = new List<string>();
-                            CommonUtil.splitStr(baomingfei, tempList, ':');
-                            GameUtil.changeData(int.Parse(tempList[0]), -int.Parse(tempList[1]));
-                        }
+                        List<string> tempList = new List<string>();
+                        CommonUtil.splitStr(baomingfei, tempList, ':');
+                        GameUtil.changeData(int.Parse(tempList[0]), -int.Parse(tempList[1]));
                     }
                 }
+            }
                 break;
 
-            case (int)TLJCommon.Consts.Code.Code_CommonFail:
-                {
-                    ToastScript.createToast("您已加入其它房间，无法开始新游戏");
-                }
+            case (int) TLJCommon.Consts.Code.Code_CommonFail:
+            {
+                ToastScript.createToast("您已加入其它房间，无法开始新游戏");
+            }
                 break;
         }
     }
@@ -489,18 +490,18 @@ public class MainScript : MonoBehaviour
     void doTask_PlayAction_ExitPVP(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int)jd["code"];
+        int code = (int) jd["code"];
 
         switch (code)
         {
-            case (int)TLJCommon.Consts.Code.Code_OK:
+            case (int) TLJCommon.Consts.Code.Code_OK:
             {
-                int roomId = (int)jd["roomId"];
+                int roomId = (int) jd["roomId"];
                 string gameroomtype = jd["gameroomtype"].ToString();
                 if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
                 {
-                        ToastScript.createToast("退赛成功");
-                    }
+                    ToastScript.createToast("退赛成功");
+                }
                 else
                 {
                     ToastScript.createToast("退赛成功,请到邮箱领取报名费");
@@ -509,13 +510,13 @@ public class MainScript : MonoBehaviour
                     LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 }
             }
-            break;
+                break;
 
-            case (int)TLJCommon.Consts.Code.Code_CommonFail:
+            case (int) TLJCommon.Consts.Code.Code_CommonFail:
             {
                 ToastScript.createToast("退赛失败，当前并没有加入房间");
             }
-            break;
+                break;
         }
     }
 
@@ -541,7 +542,7 @@ public class MainScript : MonoBehaviour
 
             if (isShowRedPoint)
             {
-                m_notice_redPoint.transform.localScale = new Vector3(1,1,1);
+                m_notice_redPoint.transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
@@ -554,7 +555,8 @@ public class MainScript : MonoBehaviour
             bool isShowRedPoint = false;
             for (int i = 0; i < TaskDataScript.getInstance().getTaskDataList().Count; i++)
             {
-                if ((TaskDataScript.getInstance().getTaskDataList()[i].progress == TaskDataScript.getInstance().getTaskDataList()[i].target) &&
+                if ((TaskDataScript.getInstance().getTaskDataList()[i].progress ==
+                     TaskDataScript.getInstance().getTaskDataList()[i].target) &&
                     (TaskDataScript.getInstance().getTaskDataList()[i].isover == 0))
                 {
                     isShowRedPoint = true;
@@ -650,8 +652,8 @@ public class MainScript : MonoBehaviour
         {
             LogUtil.Log("处理背包回调");
             JsonData jsonData = JsonMapper.ToObject(data);
-            var code = (int)jsonData["code"];
-            if (code == (int)Consts.Code.Code_OK)
+            var code = (int) jsonData["code"];
+            if (code == (int) Consts.Code.Code_OK)
             {
                 UserData.propData = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
                 for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)

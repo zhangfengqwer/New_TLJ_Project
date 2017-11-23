@@ -16,12 +16,12 @@ public class MainRequest : Request
     {
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (flag)
         {
-            CallBack(result);
             flag = false;
+            CallBack(result);
         }
     }
 
