@@ -15,7 +15,7 @@ public class VerifyRuleUtil
             _isCorrectRealName = true;
             for (int i = 0; i < text.Length; i++)
             {
-                if (!Regex.IsMatch(text.ToString(), @"[\u4E00-\u9FA5]+$"))
+                if (!Regex.IsMatch(text.ToString(), "^[\u4e00-\u9fa5]{0,}$"))
                 {
                     _isCorrectRealName = false;
                     break;

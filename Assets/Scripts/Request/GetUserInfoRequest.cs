@@ -20,6 +20,7 @@ public class GetUserInfoRequest : Request
         {
             GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
             LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
+            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
             flag = false;
         }
     }

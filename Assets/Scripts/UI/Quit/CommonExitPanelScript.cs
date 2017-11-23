@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CommonExitPanelScript : MonoBehaviour
 {
     public Button ButtonConfirm;
+    public Button ButtonClose;
     public Text TextContent;
 
     public static GameObject create()

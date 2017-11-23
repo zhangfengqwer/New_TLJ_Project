@@ -19,15 +19,19 @@ public class VipPanelScript : MonoBehaviour
 
     public Text WeeklyGoldNumText;
     public Text WeeklyDiamondNumText;
-    private List<VipData> vipDatas;
+    public static List<VipData> vipDatas;
 
     // Use this for initialization
     void Start()
     {
 
         InitVip();
-        LogUtil.Log(Resources.Load("VipRewardData").ToString());
-        vipDatas = LitJson.JsonMapper.ToObject<List<VipData>>(Resources.Load("VipRewardData").ToString());
+        if (vipDatas == null || vipDatas.Count == 0)
+        {
+            ToastScript.createToast("贵族奖励配置表返回失败");
+            return;
+        }
+       
 
         for (int i = 0; i < 10; i++)
         {
@@ -74,7 +78,7 @@ public class VipPanelScript : MonoBehaviour
         MyVipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/shop_vip_" + vipLevel);
 
         var vipText = string.Format("累计充值" + "<color=#FF0000FF>{0}</color>" + ",即可升级到" + "<color=#FF0000FF>{1}</color>",
-            currentVipToTal + "元", "VIP" + (vipLevel + 1));
+            currentVipToTal + "元", "贵族" + (vipLevel + 1));
         if (vipLevel >= 10)
         {
             vipText = string.Format("<color=#FF0000FF>{0}</color>", "贵族等级已满");
