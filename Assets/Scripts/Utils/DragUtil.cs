@@ -6,7 +6,7 @@ using System.Collections;
 public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
     private RectTransform _rectTransform;
-    private Vector3 offset = new Vector3((float) 3.5, (float) 2.3, 0);
+    private Vector3 offset = new Vector3((float) 3.7, (float) 2.3, 0);
 
     private void Start()
     {
@@ -17,6 +17,11 @@ public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         SetDraggedPosition(eventData);
+        //得到刚开始close所在的坐标
+//        Vector3 globalMousePos;
+//        RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectTransform, eventData.position,
+//            eventData.pressEventCamera, out globalMousePos);
+//        print(globalMousePos);
     }
 
     // during dragging
