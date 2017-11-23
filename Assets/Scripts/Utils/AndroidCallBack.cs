@@ -13,10 +13,19 @@ public class AndroidCallBack : MonoBehaviour {
 
     public delegate void onResumeCallBack();
     public static onResumeCallBack s_onResumeCallBack = null;
+    private static AndroidCallBack Instance;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetLogIsShow(string isShow)
