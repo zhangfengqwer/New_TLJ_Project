@@ -70,6 +70,19 @@ public class LoginScript : MonoBehaviour
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
             Invoke("onInvokeHealthPanel", 3);
         }
+        else
+        {
+            // 拉取数值表
+            {
+                NetLoading.getInstance().Show();
+                NetConfig.reqNetConfig();
+
+                PropData.getInstance().reqNet();
+                ChatData.getInstance().reqNet();
+                HuDongData.getInstance().reqNet();
+                SensitiveWordUtil.reqNet();
+            }
+        }
 
         // 健康忠告提示文字
         m_text_tips.text = GameUtil.getOneTips();
