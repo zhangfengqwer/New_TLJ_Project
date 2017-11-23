@@ -26,8 +26,8 @@ public class VipPanelScript : MonoBehaviour
     {
 
         InitVip();
-        LogUtil.Log(Resources.Load("VipData").ToString());
-        vipDatas = LitJson.JsonMapper.ToObject<List<VipData>>(Resources.Load("VipData").ToString());
+        LogUtil.Log(Resources.Load("VipRewardData").ToString());
+        vipDatas = LitJson.JsonMapper.ToObject<List<VipData>>(Resources.Load("VipRewardData").ToString());
 
         for (int i = 0; i < 10; i++)
         {
