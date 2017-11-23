@@ -81,12 +81,21 @@ public class PlayServiceSocket: MonoBehaviour
             }
         }
 
-        for (int i = 0; i < m_dataList.Count; i++)
+        //for (int i = 0; i < m_dataList.Count; i++)
+        //{
+        //    if (m_onPlayService_Receive != null)
+        //    {
+        //        m_onPlayService_Receive(m_dataList[i]);
+        //        m_dataList.RemoveAt(i);
+        //    }
+        //}
+
+        if (m_dataList.Count > 0)
         {
             if (m_onPlayService_Receive != null)
             {
-                m_onPlayService_Receive(m_dataList[i]);
-                m_dataList.RemoveAt(i);
+                m_onPlayService_Receive(m_dataList[0]);
+                m_dataList.RemoveAt(0);
             }
         }
     }
