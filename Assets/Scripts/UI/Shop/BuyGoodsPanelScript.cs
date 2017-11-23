@@ -171,7 +171,22 @@ public class BuyGoodsPanelScript : MonoBehaviour
             //人民币购买
             case 3:
                 //ToastScript.createToast("元宝购买暂未开放,敬请期待");
-                PayTypePanelScript.create(m_shopData);
+                if (UserData.IsRealName)
+                {
+                    PayTypePanelScript.create(m_shopData);
+                }
+                else
+                {
+                    CommonExitPanelScript commonExit = CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>();
+                    commonExit.TextContent.text = "您还未实名,无法购买";
+                    commonExit.ButtonClose.gameObject.SetActive(true);
+                    commonExit.ButtonConfirm.onClick.AddListener(delegate()
+                    {
+                        RealNameScript.create();
+                        Destroy(commonExit.gameObject);
+                    });
+                }
+
                 break;
         }
     }

@@ -19,7 +19,7 @@ public class VipPanelScript : MonoBehaviour
 
     public Text WeeklyGoldNumText;
     public Text WeeklyDiamondNumText;
-    private static List<VipData> vipDatas;
+    public static List<VipData> vipDatas;
 
     // Use this for initialization
     void Start()
@@ -28,7 +28,8 @@ public class VipPanelScript : MonoBehaviour
         InitVip();
         if (vipDatas == null || vipDatas.Count == 0)
         {
-            vipDatas = LitJson.JsonMapper.ToObject<List<VipData>>(Resources.Load("VipRewardData").ToString());
+            ToastScript.createToast("贵族奖励配置表返回失败");
+            return;
         }
        
 

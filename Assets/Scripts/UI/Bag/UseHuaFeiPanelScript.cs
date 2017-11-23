@@ -50,7 +50,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     {
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
-        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             ToastScript.createToast("使用成功，请等待充值到账");
 
@@ -63,6 +63,11 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
 
             Destroy(gameObject);
             Destroy(GameObject.Find("PropDetailPanel(Clone)"));
+        }
+        else
+        {
+            var s = (string)jd["msg"];
+            ToastScript.createToast("s");
         }
     }
 }

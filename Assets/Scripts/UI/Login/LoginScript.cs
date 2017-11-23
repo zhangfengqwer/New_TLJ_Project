@@ -81,6 +81,7 @@ public class LoginScript : MonoBehaviour
                 ChatData.getInstance().reqNet();
                 HuDongData.getInstance().reqNet();
                 SensitiveWordUtil.reqNet();
+                VipData.reqNet();
             }
         }
 
@@ -101,6 +102,7 @@ public class LoginScript : MonoBehaviour
             ChatData.getInstance().reqNet();
             HuDongData.getInstance().reqNet();
             SensitiveWordUtil.reqNet();
+            VipData.reqNet();
         }
     }
     

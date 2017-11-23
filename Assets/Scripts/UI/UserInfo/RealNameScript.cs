@@ -80,7 +80,11 @@ public class RealNameScript : MonoBehaviour
         if (code == (int) Consts.Code.Code_OK)
         {
             UserData.IsRealName = true;
-            UserInfoScript.Instance.InitUI();
+            if (UserInfoScript.Instance != null)
+            {
+                UserInfoScript.Instance.InitUI();
+            }
+           
             ToastScript.createToast("实名认证成功");
             Destroy(this.gameObject);
         }
