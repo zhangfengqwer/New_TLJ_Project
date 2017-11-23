@@ -59,18 +59,6 @@ public class LoginScript : MonoBehaviour
             m_debugLogScript = m_debugLog.GetComponent<DebugLogScript>();
         }
 
-        // 拉取数值表
-        {
-            NetLoading.getInstance().Show();
-            NetConfig.reqNetConfig();
-
-            PropData.getInstance().reqNet();
-            ChatData.getInstance().reqNet();
-            HuDongData.getInstance().reqNet();
-            SensitiveWordUtil.reqNet();
-        }
-
-
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
 
@@ -90,6 +78,17 @@ public class LoginScript : MonoBehaviour
     void onInvokeHealthPanel()
     {
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
+
+        // 拉取数值表
+        {
+            NetLoading.getInstance().Show();
+            NetConfig.reqNetConfig();
+
+            PropData.getInstance().reqNet();
+            ChatData.getInstance().reqNet();
+            HuDongData.getInstance().reqNet();
+            SensitiveWordUtil.reqNet();
+        }
     }
     
     // 等获取到服务器配置文件再调用
