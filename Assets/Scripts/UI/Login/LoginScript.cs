@@ -14,6 +14,9 @@ using TLJCommon;
 
 public class LoginScript : MonoBehaviour
 {
+    public GameObject m_debugLog;
+    static public DebugLogScript m_debugLogScript;
+
     public GameObject m_healthTipPanel;
     public GameObject m_panel_choicePlatform;
     public GameObject m_panel_login;
@@ -49,15 +52,12 @@ public class LoginScript : MonoBehaviour
 
         ToastScript.clear();
 
-        // 拉取数值表
         {
-            NetConfig.reqNetConfig();
-            PropData.getInstance().reqNet();
-            ChatData.getInstance().reqNet();
-            HuDongData.getInstance().reqNet();
-            SensitiveWordUtil.reqNet();
-        }
+            GameUtil.hideGameObject(m_debugLog);
 
+            // 用于打印屏幕日志
+            m_debugLogScript = m_debugLog.GetComponent<DebugLogScript>();
+        }
 
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
@@ -70,6 +70,19 @@ public class LoginScript : MonoBehaviour
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
             Invoke("onInvokeHealthPanel", 3);
         }
+        else
+        {
+            // 拉取数值表
+            {
+                NetLoading.getInstance().Show();
+                NetConfig.reqNetConfig();
+
+                PropData.getInstance().reqNet();
+                ChatData.getInstance().reqNet();
+                HuDongData.getInstance().reqNet();
+                SensitiveWordUtil.reqNet();
+            }
+        }
 
         // 健康忠告提示文字
         m_text_tips.text = GameUtil.getOneTips();
@@ -78,16 +91,28 @@ public class LoginScript : MonoBehaviour
     void onInvokeHealthPanel()
     {
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
+
+        // 拉取数值表
+        {
+            NetLoading.getInstance().Show();
+            NetConfig.reqNetConfig();
+
+            PropData.getInstance().reqNet();
+            ChatData.getInstance().reqNet();
+            HuDongData.getInstance().reqNet();
+            SensitiveWordUtil.reqNet();
+        }
     }
-
-
+    
     // 等获取到服务器配置文件再调用
     public void init()
     {
+        NetLoading.getInstance().Close();
+
         try
         {
             LoginServiceSocket.create();
-
+            
             NetLoading.getInstance().Show();
 
             LoginServiceSocket.s_instance.setOnLoginService_Connect(onSocketConnect);

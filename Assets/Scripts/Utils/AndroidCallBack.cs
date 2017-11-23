@@ -31,6 +31,11 @@ public class AndroidCallBack : MonoBehaviour {
        
     }
 
+    public void SetIsTest(bool isTest)
+    {
+        OtherData.s_isTest = isTest;
+    }
+
     public void OnPauseCallBack(string data)
     {
         if (s_onPauseCallBack != null)
