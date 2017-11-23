@@ -6,11 +6,10 @@ using UnityEngine;
 
 public class MainRequest : Request
 {
-    bool flag;
-    string result;
-
     public delegate void MainCallBack(string result);
-    public MainCallBack CallBack;
+    public MainCallBack CallBack = null;
+
+    List<string> m_dataList = new List<string>();
 
     private void Awake()
     {
@@ -18,10 +17,13 @@ public class MainRequest : Request
 
     private void Update()
     {
-        if (flag)
+        if (CallBack != null)
         {
-            CallBack(result);
-            flag = false;
+            if (m_dataList.Count > 0)
+            {
+                CallBack(m_dataList[0]);
+                m_dataList.RemoveAt(0);
+            }
         }
     }
 
@@ -31,7 +33,6 @@ public class MainRequest : Request
 
     public override void OnResponse(string data)
     {
-        result = data;
-        flag = true;
+        m_dataList.Add(data);
     }
 }

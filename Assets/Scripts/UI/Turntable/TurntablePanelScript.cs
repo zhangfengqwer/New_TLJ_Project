@@ -202,8 +202,16 @@ public class TurntablePanelScript : MonoBehaviour
         {
             string name = (string)jd["name"];
             int reward_id = (int)jd["reward_id"];
+            int canShowSelf = (int)jd["canShowSelf"];
 
-            if (UserData.name.CompareTo(name) != 0)
+            if (canShowSelf == 0)
+            {
+                if (UserData.name.CompareTo(name) != 0)
+                {
+                    addTurntableBroadcast(name, reward_id);
+                }
+            }
+            else
             {
                 addTurntableBroadcast(name, reward_id);
             }
@@ -243,7 +251,7 @@ public class TurntablePanelScript : MonoBehaviour
         }
         catch (Exception ex)
         {
-            LogUtil.Log("addTurntableBroadcast----" + ex.Message);
+            LogUtil.Log("addTurntableBroadcast异常----" + ex.Message);
         }
     }
 
@@ -337,13 +345,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickFree_tip()
     {
-        string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级vip等级获得贵族特权，即可增加抽奖机会。\r\n3、使用徽章进行抽奖，每日可获得三次抽奖机会。";
+        string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级贵族等级获得贵族特权，即可增加抽奖机会。";
         TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
 
     public void onClickHuiZhang_tip()
     {
-        string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级vip等级获得贵族特权，即可增加抽奖机会。\r\n3、使用徽章进行抽奖，每日可获得三次抽奖机会。";
+        string tip = "1、使用徽章进行抽奖，每日可获得三次抽奖机会。\r\n2、通过比赛场获得胜利可赢取徽章奖励。";
         TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
 }
