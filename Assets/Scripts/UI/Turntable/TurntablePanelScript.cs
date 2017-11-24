@@ -174,8 +174,13 @@ public class TurntablePanelScript : MonoBehaviour
 
                         m_image_neiyuan.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, angle), 4.0f, RotateMode.FastBeyond360).OnComplete<Tween>(delegate () 
                         {
+                            string reward = TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward;
+
+                            // 加到内存
+                            GameUtil.changeData(reward);
+
                             // 显示奖励
-                            ShowRewardPanelScript.Show(TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward);
+                            ShowRewardPanelScript.Show(reward);
 
                             // 显示在转盘通知列表
                             addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));

@@ -158,6 +158,20 @@ class GameUtil
     }
 
     /*
+     * 101:1000
+     */
+    static public void changeData(string reward)
+    {
+        List<string> list = new List<string>();
+        CommonUtil.splitStr(reward,list,':');
+
+        int id = int.Parse(list[0]);
+        int num = int.Parse(list[1]);
+
+        changeData(id,num);
+    }
+
+    /*
      * 用于玩家 <金币、元宝、道具> 的获得和消耗
      * 如果当前在主界面，会刷新主界面的金币和元宝数值
      */
