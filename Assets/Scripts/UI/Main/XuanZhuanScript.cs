@@ -23,7 +23,7 @@ public class XuanZhuanScript : MonoBehaviour {
     {
         if (RandomUtil.getRandom(1, 2) == 1)
         {
-            m_animation.Play("xuanzhuan");
+            m_animation.Play("mainLayerBtnXuanZhuan");
         }
     }
 }

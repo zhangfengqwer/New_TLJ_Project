@@ -9,6 +9,9 @@ public class TaskPanelScript : MonoBehaviour {
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
 
+    bool m_isScaleEnd = false;
+    bool m_hasGetData = false;
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/TaskPanel") as GameObject;
@@ -19,12 +22,28 @@ public class TaskPanelScript : MonoBehaviour {
 
     void Start()
     {
+        NetLoading.getInstance().Show();
+
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
+
+        gameObject.GetComponent<ScaleUtil>().m_callBack = scaleCallBack;
 
         // 拉取任务
         {
             LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().CallBack = onReceive_GetTask;
             LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
+        }
+    }
+
+    void scaleCallBack()
+    {
+        m_isScaleEnd = true;
+
+        if (m_hasGetData)
+        {
+            loadTask();
+
+            NetLoading.getInstance().Close();
         }
     }
 
@@ -66,6 +85,14 @@ public class TaskPanelScript : MonoBehaviour {
     {
         TaskDataScript.getInstance().initJson(data);
 
-        loadTask();
+        //loadTask();
+        m_hasGetData = true;
+
+        if (m_isScaleEnd)
+        {
+            loadTask();
+
+            NetLoading.getInstance().Close();
+        }
     }
 }
