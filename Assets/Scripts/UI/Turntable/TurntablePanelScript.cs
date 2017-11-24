@@ -276,11 +276,7 @@ public class TurntablePanelScript : MonoBehaviour
         }
 
         // 使用转盘
-        {
-            LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
-            LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().type = 1;
-            LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().OnRequest();
-        }
+        reqUseZhuanPan(1);
     }
 
     public void onClickHuiZhang()
@@ -289,6 +285,8 @@ public class TurntablePanelScript : MonoBehaviour
         {
             return;
         }
+
+        int needHuiZhangNum = 3;
 
         switch (UserData.myTurntableData.huizhangCount)
         {
@@ -302,39 +300,50 @@ public class TurntablePanelScript : MonoBehaviour
 
             case 1:
             {
-                if (UserData.medal < 10)
-                {
-                    ToastScript.createToast("徽章不足");
+                needHuiZhangNum = 10;
 
-                    return;
-                }
+                //if (UserData.medal < 10)
+                //{
+                //    ToastScript.createToast("徽章不足");
+
+                //    return;
+                //}
             }
             break;
 
             case 2:
             {
-                if (UserData.medal < 5)
-                {
-                    ToastScript.createToast("徽章不足");
+                needHuiZhangNum = 5;
 
-                    return;
-                }
+                //if (UserData.medal < 5)
+                //{
+                //    ToastScript.createToast("徽章不足");
+
+                //    return;
+                //}
             }
             break;
 
             case 3:
             {
-                if (UserData.medal < 3)
-                {
-                    ToastScript.createToast("徽章不足");
+                needHuiZhangNum = 3;
 
-                    return;
-                }
+                //if (UserData.medal < 3)
+                //{
+                //    ToastScript.createToast("徽章不足");
+
+                //    return;
+                //}
             }
             break;
 
         }
 
+        UseHuiZhangZhuanPanPanelScript.create().setData(this, needHuiZhangNum);
+    }
+
+    public void reqUseZhuanPan(int type)
+    {
         // 使用转盘
         {
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
