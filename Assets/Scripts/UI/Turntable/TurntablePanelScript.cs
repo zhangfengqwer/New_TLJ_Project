@@ -347,7 +347,7 @@ public class TurntablePanelScript : MonoBehaviour
         // 使用转盘
         {
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
-            LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().type = 2;
+            LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().type = type;
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().OnRequest();
         }
     }

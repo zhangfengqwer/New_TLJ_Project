@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,47 +12,27 @@ public class ScaleUtil : MonoBehaviour
     public float speed = 1f;
     private bool scaleTag = false;
 
+    public delegate void CallBack();
+    public CallBack m_callBack = null;
+
     // Use this for initialization
     void Start()
     {
-        target.transform.localScale = new Vector3(startScale,startScale,1);
-        currentScale = startScale;
-
         AudioScript.getAudioScript().playSound_LayerShow();
-    }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
-        if (scaleTag)
+        target.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        target.GetComponent<RectTransform>().DOScale(1f, 0.2f).OnComplete<Tween>(delegate ()
         {
-            if (currentScale > startScale)
+            if (m_callBack != null)
             {
-                currentScale -= Time.deltaTime * speed;
-                target.transform.localScale = new Vector3(currentScale, currentScale, 1);
+                m_callBack();
             }
-            else
-            {
-                scaleTag = false;
-                Destroy(this.gameObject);
-
-            }
-
-        }
-        else
-        {
-            if (currentScale <= endScale)
-            {
-                currentScale += Time.deltaTime * speed;
-                target.transform.localScale = new Vector3(currentScale, currentScale, 1);
-            }
-        }
+        });
     }
 
     public void OnClickClose()
     {
-        scaleTag = true;
+        Destroy(gameObject);
 
         AudioScript.getAudioScript().playSound_LayerClose();
     }

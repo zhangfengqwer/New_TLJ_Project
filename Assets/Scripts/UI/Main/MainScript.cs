@@ -70,6 +70,8 @@ public class MainScript : MonoBehaviour
 
                 if (LogicEnginerScript.Instance.isConnecion())
                 {
+                    NetLoading.getInstance().Show();
+
                     LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
@@ -108,17 +110,6 @@ public class MainScript : MonoBehaviour
         }
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
-
-        if (!OtherData.s_isMainInited)
-        {
-            OtherData.s_isMainInited = true;
-
-            NetLoading.getInstance().Show();
-        }
-        else
-        {
-            refreshUI();
-        }
 
        
     }
@@ -627,6 +618,8 @@ public class MainScript : MonoBehaviour
             NetErrorPanelScript.getInstance().Close();
 
             {
+                NetLoading.getInstance().Show();
+
                 LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetRankRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetSignRecordRequest>().OnRequest();
