@@ -173,7 +173,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 //ToastScript.createToast("元宝购买暂未开放,敬请期待");
                 if (UserData.IsRealName)
                 {
-                    PayTypePanelScript.create(m_shopData);
+                    ToastScript.createToast("元宝购买暂未开放,敬请期待");
                 }
                 else
                 {
@@ -186,7 +186,6 @@ public class BuyGoodsPanelScript : MonoBehaviour
                         Destroy(commonExit.gameObject);
                     });
                 }
-
                 break;
         }
     }

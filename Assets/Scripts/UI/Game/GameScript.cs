@@ -2920,7 +2920,6 @@ public class GameScript : MonoBehaviour
 
             NetLoading.getInstance().Close();
             NetErrorPanelScript.getInstance().Close();
-
             // 检测服务器是否连接
             checkNet();
         }
