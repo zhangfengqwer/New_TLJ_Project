@@ -155,7 +155,7 @@ public class GameScript : MonoBehaviour
         {
             m_button_bag.transform.localScale = new Vector3(0, 0, 0);
             m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
-            m_jiPaiGameObject.transform.localScale = new Vector3(0, 0, 0);
+            m_buttonJiPaiQi.transform.localScale = new Vector3(0, 0, 0);
 
             // 从比赛场过来，直接开始游戏
             {
