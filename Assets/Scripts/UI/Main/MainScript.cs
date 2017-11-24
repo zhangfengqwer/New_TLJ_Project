@@ -119,6 +119,8 @@ public class MainScript : MonoBehaviour
         {
             refreshUI();
         }
+
+       
     }
 
     void onInvokeStartMusic()
