@@ -286,6 +286,27 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickHuiZhang()
     {
+        // 判断是否设置过徽章密码
+        {
+            if (!UserData.isSetSecondPsw)
+            {
+                SetSecondPswPanelScript.create();
+                ToastScript.createToast("请先设置徽章密码");
+
+                return;
+            }
+        }
+
+        // 校验徽章密码
+        {
+            if (!OtherData.s_hasCheckSecondPSW)
+            {
+                CheckSecondPSWPanelScript.create();
+
+                return;
+            }
+        }
+
         if (m_isStartRotate)
         {
             return;
