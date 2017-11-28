@@ -66,7 +66,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
         }
         if (UserData.gold < 1500)
         {
-            ToastScript.createToast("金币不足，请前去购买");
+            ToastScript.createToast("金币不足1500，请前去购买");
             return;
         }
         Destroy(gameObject);
@@ -82,25 +82,25 @@ public class GameLevelChoiceScript : MonoBehaviour {
             LogUtil.Log("进入经典中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi);
 
-            if (UserData.gameData.xianxianJDPrimary < 100)
-            {
-                ToastScript.createToast("新手场必须满足100场");
-                return;
-            }
+//            if (UserData.gameData.xianxianJDPrimary < 100)
+//            {
+//                ToastScript.createToast("新手场必须满足100场");
+//                return;
+//            }
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
             LogUtil.Log("进入抄底中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi);
-            if (UserData.gameData.xianxianCDPrimary < 100)
-            {
-                ToastScript.createToast("新手场必须满足100场");
-                return;
-            }
+//            if (UserData.gameData.xianxianCDPrimary < 100)
+//            {
+//                ToastScript.createToast("新手场必须满足100场");
+//                return;
+//            }
         }
         if (UserData.gold < 35000)
         {
-            ToastScript.createToast("金币不足，请前去购买");
+            ToastScript.createToast("金币不足35000，请前去购买");
             return;
         }
         Destroy(gameObject);
@@ -116,25 +116,25 @@ public class GameLevelChoiceScript : MonoBehaviour {
             LogUtil.Log("进入经典高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi);
 
-            if (UserData.gameData.xianxianJDMiddle < 300)
-            {
-                ToastScript.createToast("精英场必须满足300场");
-                return;
-            }
+//            if (UserData.gameData.xianxianJDMiddle < 300)
+//            {
+//                ToastScript.createToast("精英场必须满足300场");
+//                return;
+//            }
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
             LogUtil.Log("进入抄底高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi);
-            if (UserData.gameData.xianxianCDMiddle < 300)
-            {
-                ToastScript.createToast("精英场必须满足300场");
-                return;
-            }
+//            if (UserData.gameData.xianxianCDMiddle < 300)
+//            {
+//                ToastScript.createToast("精英场必须满足300场");
+//                return;
+//            }
         }
         if (UserData.gold < 100000)
         {
-            ToastScript.createToast("金币不足，请前去购买");
+            ToastScript.createToast("金币不足100000，请前去购买");
             return;
         }
 

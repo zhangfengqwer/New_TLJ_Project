@@ -19,11 +19,7 @@ public class GetSignRecordRequest : Request
         if (flag)
         {
             GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
-            //未签到，弹出签到框
-            if (!SignData.IsSign)
-            {
-                WeeklySignScript.create();
-            }
+           
             flag = false;
         }
     }
