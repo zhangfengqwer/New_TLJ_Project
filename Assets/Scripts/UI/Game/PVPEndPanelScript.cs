@@ -11,7 +11,7 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     public Image m_image_itemContent;
     public Text m_text_mingci;
-    public GameObject ShareObject;
+    private GameObject ShareObject;
 
     public static GameObject create(GameScript parentScript)
     {
@@ -70,13 +70,18 @@ public class PVPEndPanelScript : MonoBehaviour {
     {
         //m_parentScript.onClickExitRoom();
         //        ToastScript.createToast("暂未开放");
-        ShareObject.transform.localScale = Vector3.one;
+        ShareObject = ChoiceShareScript.Create();
+        ShareObject.GetComponent<ChoiceShareScript>().ShareFriends.onClick.AddListener(() =>
+        {
+            string content = string.Format("我获得了第{0}名", m_text_mingci.text);
+            ShareObject.GetComponent<ChoiceShareScript>().OnClickShareFriends(content);
+        });
+        ShareObject.GetComponent<ChoiceShareScript>().ShareFriendsCirle.onClick.AddListener(() =>
+        {
+            ShareObject.GetComponent<ChoiceShareScript>().OnClickShareFriendsCircle(new byte[0]);
+        });
     }
 
-    public void OnClickShareClose()
-    {
-        ShareObject.transform.localScale = Vector3.zero;
-    }
 
     public void OnClickShareFriends()
     {

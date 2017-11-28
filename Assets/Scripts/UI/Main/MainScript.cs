@@ -304,6 +304,20 @@ public class MainScript : MonoBehaviour
         TaskPanelScript.create();
     }
 
+    public void OnClickShare()
+    {
+        GameObject ShareObject = ChoiceShareScript.Create();
+        ShareObject.GetComponent<ChoiceShareScript>().ShareFriends.onClick.AddListener(() =>
+        {
+//            string content = string.Format("我获得了第{0}名", m_text_mingci.text);
+            ShareObject.GetComponent<ChoiceShareScript>().OnClickShareFriends("");
+        });
+        ShareObject.GetComponent<ChoiceShareScript>().ShareFriendsCirle.onClick.AddListener(() =>
+        {
+            ShareObject.GetComponent<ChoiceShareScript>().OnClickShareFriendsCircle(new byte[0]);
+        });
+    }
+
     public void onClickLaBa()
     {
         LaBaPanelScript.create(this);
