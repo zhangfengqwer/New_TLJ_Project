@@ -60,6 +60,12 @@ public class SetSecondPswPanelScript : MonoBehaviour {
                     return;
                 }
             }
+
+            if (m_inputField_mima.text.Length < 6)
+            {
+                ToastScript.createToast("密码至少6位");
+                return;
+            }
         }
 
         LogicEnginerScript.Instance.GetComponent<SetSecondPswRequest>().SetData(m_inputField_mima.text);
@@ -75,6 +81,7 @@ public class SetSecondPswPanelScript : MonoBehaviour {
         {
             ToastScript.createToast("设置成功");
             UserData.isSetSecondPsw = true;
+            OtherData.s_hasCheckSecondPSW = true;
 
             Destroy(gameObject);
         }

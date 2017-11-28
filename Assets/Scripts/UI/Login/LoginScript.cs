@@ -402,6 +402,12 @@ public class LoginScript : MonoBehaviour
                     return;
                 }
             }
+
+            if (m_inputPassword_register.text.Length < 6)
+            {
+                ToastScript.createToast("密码至少6位");
+                return;
+            }
         }
 
         NetLoading.getInstance().Show();
