@@ -38,6 +38,8 @@ public class VipPanelScript : MonoBehaviour
             VipData vipData = vipDatas[i];
             var VipTab = Content.transform.GetChild(i).gameObject;
             VipTab.transform.Find("Text").GetComponent<Text>().text = "贵族" + (i + 1);
+            VipTab.transform.Find("Text").GetComponent<Text>().font = Resources.Load<Font>("Fonts/FANGZHENGKATONG");
+
             var toggle = VipTab.GetComponent<Toggle>();
 
             var temp = i;
@@ -47,16 +49,16 @@ public class VipPanelScript : MonoBehaviour
                 {
                     print(temp);
                     VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipData.vipLevel);
-                    MedalNumText.text = "x" + vipData.medalNum;
+                    MedalNumText.text = "*" + vipData.medalNum;
                     //设置会员一次领取奖励
-                    OnceGoldNumText.text = "x" + vipData.vipOnce.goldNum;
+                    OnceGoldNumText.text = "*" + vipData.vipOnce.goldNum;
                     var props = vipData.vipOnce.prop.Split(':');
                     int propId = Convert.ToInt32(props[0]);
-                    OncePropNumText.text = "x" + props[1];
+                    OncePropNumText.text = "*" + props[1];
                     CommonUtil.setImageSprite(OncePropImage, GameUtil.getPropIconPath(propId));
                     //设置会员每周领取奖励
-                    WeeklyGoldNumText.text = "x" + vipData.vipWeekly.goldNum;
-                    WeeklyDiamondNumText.text = "x" + vipData.vipWeekly.diamondNum;
+                    WeeklyGoldNumText.text = "*" + vipData.vipWeekly.goldNum;
+                    WeeklyDiamondNumText.text = "*" + vipData.vipWeekly.diamondNum;
                 }
             });
 

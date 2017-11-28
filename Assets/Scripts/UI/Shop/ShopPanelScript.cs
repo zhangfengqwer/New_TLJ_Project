@@ -178,7 +178,7 @@ public class ShopPanelScript : MonoBehaviour
         }
         else
         {
-            price = "¥";
+            price = "￥";
             go.transform.Find("goods_icon").localScale = Vector3.zero;
             go.transform.Find("goods_price2").localScale = Vector3.one;
             go.transform.Find("goods_price").localScale = Vector3.zero;
