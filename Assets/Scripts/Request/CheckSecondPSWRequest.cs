@@ -43,7 +43,7 @@ public class CheckSecondPSWRequest : Request
         jsonData["tag"] = Tag;
         jsonData["account"] = UserData.name;
         jsonData["password"] = m_secondPSW;
-        jsonData["passwordtype"] = 2;
+        jsonData["passwordtype"] = 3;
 
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
