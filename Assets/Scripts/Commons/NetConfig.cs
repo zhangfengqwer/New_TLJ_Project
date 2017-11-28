@@ -33,7 +33,7 @@ public class NetConfig
     {
         if (OtherData.s_isTest)
         {
-            UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "NetConfig_test.json", httpCallBack);
+            UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "NetConfig_test.json", httpCallBack);
 
             LogUtil.Log("测试包");
             ToastScript.createToast("这是测试包");
@@ -44,7 +44,7 @@ public class NetConfig
         }
         else
         {
-            UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "NetConfig.json", httpCallBack);
+            UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "NetConfig.json", httpCallBack);
 
             LogUtil.Log("线上包");
 

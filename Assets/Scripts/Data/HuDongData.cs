@@ -23,7 +23,7 @@ public class HuDongData
 
     public void reqNet()
     {
-        UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "hudong.json", httpCallBack);
+        UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "hudong.json", httpCallBack);
     }
 
     void httpCallBack(string tag, string data)

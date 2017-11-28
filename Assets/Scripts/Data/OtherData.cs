@@ -11,5 +11,5 @@ public class OtherData
 
     public static Vector2 s_screenSize;
 
-    public static string s_webDownUrl = "http://oru510uv8.bkt.clouddn.com/";
+    public static string s_webStorageUrl = "http://p02gqb8lq.bkt.clouddn.com/";
 }

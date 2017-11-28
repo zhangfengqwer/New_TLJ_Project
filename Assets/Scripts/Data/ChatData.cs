@@ -23,7 +23,7 @@ class ChatData
 
     public void reqNet()
     {
-        UnityWebReqUtil.Instance.Get(OtherData.s_webDownUrl + "chat.json", httpCallBack);
+        UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "chat.json", httpCallBack);
     }
 
     void httpCallBack(string tag, string data)
