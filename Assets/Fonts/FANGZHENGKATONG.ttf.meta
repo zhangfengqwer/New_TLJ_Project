@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b91b91951fa518e4392b52a43b18a928
-timeCreated: 1511247857
+guid: 5392663f190b0bf4ea84cb953f4fb9c8
+timeCreated: 1511833163
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: FZLTH_YS_GB18030
+  fontName: FZKaTong-M19S
   fontNames:
-  - FZLTH_YS_GB18030
+  - FZKaTong-M19S
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
