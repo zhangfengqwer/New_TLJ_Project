@@ -15,4 +15,5 @@ public class CommonExitPanelScript : MonoBehaviour
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
         return obj;
     }
+   
 }

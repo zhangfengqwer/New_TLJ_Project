@@ -30,24 +30,31 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void SetLogIsShow(string isShow)
     {
-        //正式包
+        //显示log
         if ("0".Equals(isShow))
         {
             LogUtil.s_isShowLog = false;
-            OtherData.s_isTest = false;
         }
         else
         {
             LogUtil.s_isShowLog = true;
-            OtherData.s_isTest = true;
+           
         }
        
     }
 
-//    public void SetIsTest(bool isTest)
-//    {
-//        OtherData.s_isTest = isTest;
-//    }
+    public void SetIsTest(string isTest)
+    {
+        //正式包
+        if ("0".Equals(isTest))
+        {
+            OtherData.s_isTest = false;
+        }
+        else
+        {
+            OtherData.s_isTest = true;
+        }
+    }
 
     public void OnPauseCallBack(string data)
     {

@@ -166,7 +166,9 @@ public class WeeklySignScript : MonoBehaviour
             var prop = image_prop.GetComponent<Image>();
             if (i == 6)
             {
-                prop.sprite = Resources.Load<Sprite>("Sprites/Sign/icon_libao");
+                var obj = Resources.Load<GameObject>("Prefabs/UI/Item/Item_sign_dalibao");
+                Instantiate(obj, Object.transform);
+                Destroy(prop.gameObject);
             }
             else
             {

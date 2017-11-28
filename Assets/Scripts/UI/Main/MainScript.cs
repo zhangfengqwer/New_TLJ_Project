@@ -110,6 +110,8 @@ public class MainScript : MonoBehaviour
         }
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
+
+       
     }
 
     void onInvokeStartMusic()

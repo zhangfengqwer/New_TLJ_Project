@@ -19,6 +19,7 @@ public class GetSignRecordRequest : Request
         if (flag)
         {
             GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
+           
             flag = false;
         }
     }
