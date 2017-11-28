@@ -120,17 +120,22 @@ public class Item_Task_List_Script : MonoBehaviour {
         {
             m_parentScript.setTaskOver(task_id);
 
+            string reward = TaskDataScript.getInstance().getTaskDataById(task_id).reward;
+
             // 增加奖励
+            if (!string.IsNullOrEmpty(reward))
             {
-                string reward = TaskDataScript.getInstance().getTaskDataById(task_id).reward;
-                List<string> tempList = new List<string>();
-                CommonUtil.splitStr(reward, tempList, ':');
+                {
+                    
+                    List<string> tempList = new List<string>();
+                    CommonUtil.splitStr(reward, tempList, ':');
 
-                GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
+                    GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
+                }
+
+                //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
+                ShowRewardPanelScript.Show(reward);
             }
-
-            //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
-            ShowRewardPanelScript.Show(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
         }
     }
 }
