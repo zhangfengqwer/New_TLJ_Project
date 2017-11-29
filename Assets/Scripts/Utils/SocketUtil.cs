@@ -189,7 +189,7 @@ public class SocketUtil
         {
             try
             {
-                byte[] rece = new byte[1024 * 1];
+                byte[] rece = new byte[1024 * 4];
                 int recelong = m_socket.Receive(rece, rece.Length, 0);
                 string reces = Encoding.UTF8.GetString(rece, 0, recelong);
                 reces = m_endStr + reces;

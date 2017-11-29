@@ -42,12 +42,10 @@ public class VipPanelScript : MonoBehaviour
 
             var toggle = VipTab.GetComponent<Toggle>();
 
-            var temp = i;
             toggle.onValueChanged.AddListener(delegate(bool isOn)
             {
                 if (isOn)
                 {
-                    print(temp);
                     VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipData.vipLevel);
                     MedalNumText.text = "*" + vipData.medalNum;
                     //设置会员一次领取奖励

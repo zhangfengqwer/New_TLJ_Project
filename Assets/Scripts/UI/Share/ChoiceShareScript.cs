@@ -28,11 +28,13 @@ public class ChoiceShareScript : MonoBehaviour {
     public void OnClickShareFriends(string content)
     {
         PlatformHelper.WXShareFriends("AndroidCallBack", "OnWxShareFriends", content);
+        Destroy(this.gameObject);
     }
 
     public void OnClickShareFriendsCircle(byte[] data)
     {
         PlatformHelper.WXShareFriendsCircle("AndroidCallBack", "OnWxShareFriends", data);
+        Destroy(this.gameObject);
     }
 
     public void OnClickShareClose()

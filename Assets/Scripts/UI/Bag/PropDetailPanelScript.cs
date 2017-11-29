@@ -57,7 +57,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         //徽章
         else if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_huizhang)
         {
-            ShopPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>(), 4);
+            ShopPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>(), 3);
         }
         // 其他
         else

@@ -1,15 +1,8 @@
-﻿using System;
-using LitJson;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using LitJson;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Threading;
-using TLJCommon;
 
 
 public class LoginScript : MonoBehaviour

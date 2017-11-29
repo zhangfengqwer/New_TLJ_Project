@@ -6,6 +6,7 @@ public abstract class Request : MonoBehaviour
 {
     [HideInInspector]
     public string Tag;
+
     public abstract void OnRequest();
     public abstract void OnResponse(string data);
 
@@ -16,11 +17,6 @@ public abstract class Request : MonoBehaviour
 
     private void OnDestroy()
     {
-        //LogicEnginerScript.Instance.ReMoveRequest(this);
-    }
-
-    public static explicit operator Request(Dictionary<string, Request>.ValueCollection v)
-    {
-        throw new NotImplementedException();
+        LogicEnginerScript.Instance.ReMoveRequest(this);
     }
 }
