@@ -51,6 +51,8 @@ public class MailDetailScript : MonoBehaviour {
 
     public void setData(string reward)
     {
+        if (string.IsNullOrEmpty(reward)) return;
+
         List<string> list1 = new List<string>();
         CommonUtil.splitStr(reward, list1, ';');
 
