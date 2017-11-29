@@ -118,6 +118,11 @@ class GameUtil
         {
             path = "Sprites/Icon/Prop/icon_yuanbao";
         }
+        // 人民币
+        else if (prop_id == 3)
+        {
+            path = "Sprites/Icon/icon_rmb";
+        }
         else
         {
             path = "Sprites/Icon/Prop/" + PropData.getInstance().getPropInfoById(prop_id).m_icon;

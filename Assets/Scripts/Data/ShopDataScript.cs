@@ -55,6 +55,9 @@ public class ShopData
     public string goods_name;
     public int goods_type;          // 1:金币 2:元宝 3:道具
     public string props;
+    public string extra_reward;
     public int price;
-    public int money_type;          // 1:金币  2:元宝  3:人民币
+    public int money_type;          // 1:金币  2:元宝  3:人民币  4:徽章
+    public int price2;
+    public int money_type2;          // 1:金币  2:元宝  3:人民币  4:徽章
 }

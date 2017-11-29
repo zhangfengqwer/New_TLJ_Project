@@ -11,14 +11,16 @@ public class BuyGoodsRequest : Request
 
     int m_goods_id;
     int m_goods_num;
+    int m_money_type;
 
     private bool flag;
     private string result;
 
-    public void setGoodsInfo(int goods_id, int goods_num)
+    public void setGoodsInfo(int goods_id, int goods_num, int money_type)
     {
         m_goods_id = goods_id;
         m_goods_num = goods_num;
+        m_money_type = money_type;
     }
 
     private void Awake()
@@ -42,6 +44,8 @@ public class BuyGoodsRequest : Request
         jsonData["uid"] = UserData.uid;
         jsonData["goods_id"] = m_goods_id;
         jsonData["goods_num"] = m_goods_num;
+        jsonData["money_type"] = m_money_type;
+        
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);
     }
