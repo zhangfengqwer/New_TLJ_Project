@@ -10,19 +10,22 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public Text m_text_goods_name;
     public Text m_text_goods_num;
-    public Text m_text_goods_allPrice;
+    //public Text m_text_goods_allPrice;
     public Image m_text_goods_icon;
 
     public Button m_button_jian;
     public Button m_button_jia;
     public Button m_button_max;
-    public Button m_button_buy;
+    public Button m_button_buy1;
+    public Button m_button_buy2;
     public Text m_text_shiduyule;
 
     ShopData m_shopData = null;
 
     int m_goods_num = 1;
     int m_goods_buy_maxNum = 10;
+
+    int m_money_type;
 
     public static GameObject create(MainScript mainScript, int goods_id)
     {
@@ -84,17 +87,103 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     void refreshPrice()
     {
-        if (m_shopData.money_type == 1)
+        if (m_shopData.price != 0)
         {
-            m_text_goods_allPrice.text = "金币：" + (m_shopData.price * m_goods_num).ToString();
+            if (m_shopData.money_type == 1)
+            {
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(1));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy1.transform.Find("Text_money_type").GetComponent<Text>().text = "金币购买";
+            }
+            else if (m_shopData.money_type == 2)
+            {
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(2));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy1.transform.Find("Text_money_type").GetComponent<Text>().text = "元宝购买";
+            }
+            else if (m_shopData.money_type == 3)
+            {
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(3));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy1.transform.Find("Text_money_type").GetComponent<Text>().text = "¥购买";
+                m_button_buy1.transform.Find("Image").localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            }
+            else if (m_shopData.money_type == 4)
+            {
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath((int)TLJCommon.Consts.Prop.Prop_huizhang));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy1.transform.Find("Text_money_type").GetComponent<Text>().text = "徽章购买";
+            }
         }
-        else if (m_shopData.money_type == 2)
+        else
         {
-            m_text_goods_allPrice.text = "元宝：" + (m_shopData.price * m_goods_num).ToString();
+            GameUtil.hideGameObject(m_button_buy1.gameObject);
         }
-        else if (m_shopData.money_type == 3)
+
+        if (m_shopData.price2 != 0)
         {
-            m_text_goods_allPrice.text = "¥：" + (m_shopData.price * m_goods_num).ToString();
+            if (m_shopData.money_type2 == 1)
+            {
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(1));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy2.transform.Find("Text_money_type").GetComponent<Text>().text = "金币购买";
+            }
+            else if (m_shopData.money_type2 == 2)
+            {
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(2));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy2.transform.Find("Text_money_type").GetComponent<Text>().text = "元宝购买";
+            }
+            else if (m_shopData.money_type2 == 3)
+            {
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(3));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy2.transform.Find("Text_money_type").GetComponent<Text>().text = "¥购买";
+                m_button_buy2.transform.Find("Image").localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            }
+            else if (m_shopData.money_type2 == 4)
+            {
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath((int)TLJCommon.Consts.Prop.Prop_huizhang));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
+                {
+                    m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
+                }
+                m_button_buy2.transform.Find("Text_money_type").GetComponent<Text>().text = "徽章购买";
+            }
+        }
+        else
+        {
+            m_button_buy1.transform.localPosition = new Vector3(0, -155,0);
+            GameUtil.hideGameObject(m_button_buy2.gameObject);
         }
     }
 
@@ -137,54 +226,96 @@ public class BuyGoodsPanelScript : MonoBehaviour
         refreshPrice();
     }
 
-    public void onClickBuy()
+    public void onClickBuy1()
     {
-        int totalPrice = m_shopData.price * m_goods_num;
+        m_money_type = m_shopData.money_type;
+        buy(m_shopData.money_type);
+    }
+
+    public void onClickBuy2()
+    {
+        m_money_type = m_shopData.money_type2;
+        buy(m_shopData.money_type2);
+    }
+
+    void buy(int money_type)
+    {
+        int totalPrice = 0;
+
+        if (money_type == m_shopData.money_type)
+        {
+            totalPrice = m_shopData.price * m_goods_num;
+        }
+        else if(money_type == m_shopData.money_type2)
+        {
+            totalPrice = m_shopData.price2 * m_goods_num;
+        }
+        
         switch (m_shopData.money_type)
         {
             case 1:
                 if (UserData.gold < totalPrice)
                 {
                     ToastScript.createToast("金币不足,请前去充值");
+                    return;
                 }
                 else
                 {
-                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
 
                 }
                 break;
+
             case 2:
                 if (UserData.yuanbao < totalPrice)
                 {
                     ToastScript.createToast("元宝不足,请前去充值");
+                    return;
                 }
                 else
                 {
-                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
 
                 }
                 break;
+
             //人民币购买
             case 3:
                 //ToastScript.createToast("元宝购买暂未开放,敬请期待");
                 if (UserData.IsRealName)
                 {
                     ToastScript.createToast("元宝购买暂未开放,敬请期待");
+                    return;
                 }
                 else
                 {
                     CommonExitPanelScript commonExit = CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>();
                     commonExit.TextContent.text = "您还未实名,无法购买";
                     commonExit.ButtonClose.gameObject.SetActive(true);
-                    commonExit.ButtonConfirm.onClick.AddListener(delegate()
+                    commonExit.ButtonConfirm.onClick.AddListener(delegate ()
                     {
                         RealNameScript.create();
                         Destroy(commonExit.gameObject);
                     });
+                }
+                break;
+
+            case 4:
+                if (UserData.medal < totalPrice)
+                {
+                    ToastScript.createToast("徽章不足,无法购买");
+                    return;
+                }
+                else
+                {
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
+
                 }
                 break;
         }
@@ -194,7 +325,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
     {
         if ("支付成功".Equals(data))
         {
-            LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num);
+            LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num,3);
             LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
         }
     }

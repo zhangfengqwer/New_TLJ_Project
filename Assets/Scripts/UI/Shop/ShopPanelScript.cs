@@ -23,7 +23,7 @@ public class ShopPanelScript : MonoBehaviour
     private List<string> _list;
     private static List<ShopData> shopDataList;
 
-    //商品类型，1：金币，2：元宝，3：道具,4:徽章
+    //商品类型，1：金币，2：元宝，3：道具
     private int _type = 2;
 
     private List<ShopData> _shopItemDatas;
