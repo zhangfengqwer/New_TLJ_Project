@@ -74,7 +74,10 @@ public class Mail_List_Item_Script : MonoBehaviour {
             m_parentScript.setMailReaded(email_id);
 
             //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_mailData.m_reward);
-            ShowRewardPanelScript.Show(m_mailData.m_reward);
+            if (!string.IsNullOrEmpty(m_mailData.m_reward))
+            {
+                ShowRewardPanelScript.Show(m_mailData.m_reward);
+            }
         }
 
         MailDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);

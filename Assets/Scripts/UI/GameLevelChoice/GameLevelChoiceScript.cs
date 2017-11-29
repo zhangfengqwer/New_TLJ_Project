@@ -8,6 +8,10 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public GameObject m_obj;
 
+    public Text m_text_chuji_onlineCount;
+    public Text m_text_zhongji_onlineCount;
+    public Text m_text_gaoji_onlineCount;
+
     public enum GameChangCiType
     {
         GameChangCiType_jingdian,
@@ -49,6 +53,13 @@ public class GameLevelChoiceScript : MonoBehaviour {
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
             m_obj.transform.localPosition = new Vector3(520,-8,0);
+        }
+
+        // 在线人数
+        {
+            m_text_chuji_onlineCount.text = RandomUtil.getRandom(100,500).ToString();
+            m_text_zhongji_onlineCount.text = RandomUtil.getRandom(100, 500).ToString();
+            m_text_gaoji_onlineCount.text = RandomUtil.getRandom(100, 500).ToString();
         }
     }
 
