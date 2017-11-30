@@ -232,6 +232,11 @@ public class LogicEnginerScript : MonoBehaviour
     //    _getTaskRequest.OnRequest();
     //}
 
+    public void reqCompleteShare()
+    {
+        GetComponent<ProgressTaskRequest>().OnRequest();
+    }
+
     //收到金币排行榜回调
     private void onReceive_GetGoldRank(string data)
     {
