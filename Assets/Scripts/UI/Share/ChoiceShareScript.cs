@@ -8,37 +8,32 @@ public class ChoiceShareScript : MonoBehaviour {
     public Button ShareFriends;
     public Button ShareFriendsCirle;
 
-    public static GameObject Create()
+    public static GameObject Create(string content,string data)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ChoiceSharePanel") as GameObject;
-        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+
+        obj.GetComponent<ChoiceShareScript>().SetClickListener(content,data);
         return obj;
-    }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void OnClickShareFriends(string content)
-    {
-        PlatformHelper.WXShareFriends("AndroidCallBack", "OnWxShareFriends", content);
-        Destroy(this.gameObject);
-    }
-
-    public void OnClickShareFriendsCircle(byte[] data)
-    {
-        PlatformHelper.WXShareFriendsCircle("AndroidCallBack", "OnWxShareFriends", data);
-        Destroy(this.gameObject);
     }
 
     public void OnClickShareClose()
     {
         Destroy(this.gameObject);
+    }
+
+    public void SetClickListener(string content, string data)
+    {
+        ShareFriends.onClick.AddListener(() =>
+        {
+            PlatformHelper.WXShareFriends("AndroidCallBack", "OnWxShareFriends", content);
+            Destroy(this.gameObject);
+        });
+
+        ShareFriendsCirle.onClick.AddListener(() =>
+        {
+            PlatformHelper.WXShareFriendsCircle("AndroidCallBack", "OnWxShareFriends", new byte[0]);
+            Destroy(this.gameObject);
+        });
     }
 }

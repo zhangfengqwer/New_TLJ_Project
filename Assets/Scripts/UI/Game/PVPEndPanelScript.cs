@@ -70,16 +70,8 @@ public class PVPEndPanelScript : MonoBehaviour {
     {
         //m_parentScript.onClickExitRoom();
         //        ToastScript.createToast("暂未开放");
-        ShareObject = ChoiceShareScript.Create();
-        ShareObject.GetComponent<ChoiceShareScript>().ShareFriends.onClick.AddListener(() =>
-        {
-            string content = string.Format("我获得了第{0}名", m_text_mingci.text);
-            ShareObject.GetComponent<ChoiceShareScript>().OnClickShareFriends(content);
-        });
-        ShareObject.GetComponent<ChoiceShareScript>().ShareFriendsCirle.onClick.AddListener(() =>
-        {
-            ShareObject.GetComponent<ChoiceShareScript>().OnClickShareFriendsCircle(new byte[0]);
-        });
+        string content = string.Format("我获得了第{0}名", m_text_mingci.text);
+        ShareObject = ChoiceShareScript.Create(content,"");
     }
 
 

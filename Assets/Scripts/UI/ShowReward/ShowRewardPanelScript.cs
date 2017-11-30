@@ -72,6 +72,6 @@ public class ShowRewardPanelScript : MonoBehaviour {
 
     public void onClickShare()
     {
-
+        ChoiceShareScript.Create("疯狂升级天天玩，玩就有话费奖品抱回家！","");
     }
 }
