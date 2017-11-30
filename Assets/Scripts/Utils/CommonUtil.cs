@@ -176,6 +176,4 @@ class CommonUtil
 
         return intAsciiCode;
     }
-
-  
 }
