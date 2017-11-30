@@ -204,7 +204,7 @@ public class ShopPanelScript : MonoBehaviour
             var SecondPay = doublePay.transform.GetChild(2);
             FirstPay.GetChild(0).GetComponent<Image>().sprite = goods_icon.sprite;
 
-            var i = goods_price.text.Length * 13;
+            var i = goods_price.text.Length * 14;
 
             if (i > 52) i = 52;
             var sizeDelta = FirstPay.GetChild(1).GetComponent<RectTransform>().sizeDelta;
