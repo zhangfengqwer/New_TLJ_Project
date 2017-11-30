@@ -28,6 +28,7 @@ public class AndroidCallBack : MonoBehaviour {
         }
     }
 
+    // log开关
     public void SetLogIsShow(string isShow)
     {
         //显示log
@@ -43,6 +44,7 @@ public class AndroidCallBack : MonoBehaviour {
        
     }
 
+    // 身是否是测试包
     public void SetIsTest(string isTest)
     {
         //正式包
@@ -56,6 +58,7 @@ public class AndroidCallBack : MonoBehaviour {
         }
     }
 
+    // 回到后台
     public void OnPauseCallBack(string data)
     {
         if (s_onPauseCallBack != null)
@@ -64,6 +67,7 @@ public class AndroidCallBack : MonoBehaviour {
         }
     }
 
+    // 回到前台
     public void OnResumeCallBack(string data)
     {
         if (OtherData.s_isFirstOpenGame)
@@ -78,11 +82,13 @@ public class AndroidCallBack : MonoBehaviour {
         }
     }
 
-    public void OnWxShareFriends(string data)
+    // 分享成功
+    public void OnShareSuccess(string data)
     {
-        
+        LogicEnginerScript.Instance.reqCompleteShare();
     }
 
+    // 登录结果回调
     public void GetLoginResult(string data)
     {
         LogUtil.Log("Unity收到:" + data);
