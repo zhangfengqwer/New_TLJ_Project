@@ -63,4 +63,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
             obj.GetComponent<ShowRewardPanelScript>().setData(s_rewardList[0]);
         }
     }
+
+    public void onClickShare()
+    {
+
+    }
 }
