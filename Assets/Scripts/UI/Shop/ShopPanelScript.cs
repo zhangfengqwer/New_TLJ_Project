@@ -140,6 +140,7 @@ public class ShopPanelScript : MonoBehaviour
         Image goods_image = go.transform.Find("goods_image").GetComponent<Image>();
         Image goods_icon = go.transform.Find("goods_icon").GetComponent<Image>();
         Text goods_des = go.transform.Find("goods_des").GetComponent<Text>();
+        GameObject doublePay = go.transform.Find("goods_price_layout").gameObject;
 
         go.transform.Find("goods_price").localScale = Vector3.one;
         go.transform.Find("goods_price2").localScale = Vector3.zero;
@@ -192,6 +193,33 @@ public class ShopPanelScript : MonoBehaviour
         {
             BuyGoodsPanelScript.create(m_mainScript, _shopItemDatas[dataindex].goods_id);
         });
+
+        if (shopItemData.price2 > 0)
+        {
+            doublePay.transform.localScale = Vector3.one;
+            goods_price.transform.localScale = Vector3.zero;
+            goods_icon.transform.localScale = Vector3.zero;
+
+            var FirstPay = doublePay.transform.GetChild(0);
+            var SecondPay = doublePay.transform.GetChild(2);
+            FirstPay.GetChild(0).GetComponent<Image>().sprite = goods_icon.sprite;
+
+            var i = goods_price.text.Length * 13;
+
+            if (i > 52) i = 52;
+            var sizeDelta = FirstPay.GetChild(1).GetComponent<RectTransform>().sizeDelta;
+
+            FirstPay.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(i, sizeDelta.y);
+            FirstPay.GetChild(1).GetComponent<Text>().text = goods_price.text;
+
+            SecondPay.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
+            SecondPay.GetChild(1).GetComponent<Text>().text = shopItemData.price2+"";
+
+        }
+        else
+        {
+            doublePay.transform.localScale = Vector3.zero;
+        }
     }
 
     public void onReceive_GetShop(string data)
