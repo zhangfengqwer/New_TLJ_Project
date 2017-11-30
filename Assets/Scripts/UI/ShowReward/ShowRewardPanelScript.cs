@@ -8,8 +8,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
     static List<string> s_rewardList = new List<string>();
 
     public Image m_image_itemContent;
+    public Button m_button_share;
 
-    public static void Show(string reward)
+    public static void Show(string reward, bool isCanShare)
     {
         if (s_rewardList.Count == 0)
         {
@@ -18,7 +19,7 @@ public class ShowRewardPanelScript : MonoBehaviour {
             GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShowRewardPanel") as GameObject;
             GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
 
-            obj.GetComponent<ShowRewardPanelScript>().setData(reward);
+            obj.GetComponent<ShowRewardPanelScript>().setData(reward, isCanShare);
         }
         else
         {
@@ -26,7 +27,7 @@ public class ShowRewardPanelScript : MonoBehaviour {
         }
     }
 
-    public void setData(string reward)
+    public void setData(string reward, bool isCanShare)
     {
         List<string> list1 = new List<string>();
         CommonUtil.splitStr(reward,list1,';');
@@ -48,6 +49,11 @@ public class ShowRewardPanelScript : MonoBehaviour {
             float x = CommonUtil.getPosX(list1.Count,130,i,0);
             obj.transform.localPosition = new Vector3(x,0,0);
         }
+
+        if (!isCanShare)
+        {
+            GameUtil.hideGameObject(m_button_share.gameObject);
+        }
     }
 
     public void onClickClose()
@@ -60,7 +66,7 @@ public class ShowRewardPanelScript : MonoBehaviour {
             GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShowRewardPanel") as GameObject;
             GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
 
-            obj.GetComponent<ShowRewardPanelScript>().setData(s_rewardList[0]);
+            obj.GetComponent<ShowRewardPanelScript>().setData(s_rewardList[0],false);
         }
     }
 

@@ -76,7 +76,7 @@ public class Mail_List_Item_Script : MonoBehaviour {
             //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_mailData.m_reward);
             if (!string.IsNullOrEmpty(m_mailData.m_reward))
             {
-                ShowRewardPanelScript.Show(m_mailData.m_reward);
+                ShowRewardPanelScript.Show(m_mailData.m_reward,false);
             }
         }
 

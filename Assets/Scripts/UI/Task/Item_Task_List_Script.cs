@@ -134,7 +134,7 @@ public class Item_Task_List_Script : MonoBehaviour {
                 }
 
                 //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
-                ShowRewardPanelScript.Show(reward);
+                ShowRewardPanelScript.Show(reward,false);
             }
         }
     }
