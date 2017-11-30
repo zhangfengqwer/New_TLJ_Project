@@ -180,7 +180,7 @@ public class TurntablePanelScript : MonoBehaviour
                             GameUtil.changeData(reward);
 
                             // 显示奖励
-                            ShowRewardPanelScript.Show(reward);
+                            ShowRewardPanelScript.Show(reward,true);
 
                             // 显示在转盘通知列表
                             addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));

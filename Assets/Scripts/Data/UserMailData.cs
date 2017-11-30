@@ -126,7 +126,7 @@ public class UserMailData {
                     }
 
                     //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_myMailDataList[i].m_reward);
-                    ShowRewardPanelScript.Show(m_myMailDataList[i].m_reward);
+                    ShowRewardPanelScript.Show(m_myMailDataList[i].m_reward,false);
                 }
             }
         }
