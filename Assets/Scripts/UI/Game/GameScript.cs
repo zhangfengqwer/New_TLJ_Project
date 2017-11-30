@@ -2044,7 +2044,13 @@ public class GameScript : MonoBehaviour
             //int otherLevelPoker = (int)jd["otherLevelPoker"];
             int masterPokerType = (int)jd["masterPokerType"];
             int getAllScore = (int)jd["getAllScore"];
-            
+
+            // 闲家抓到的分数
+            {
+                GameData.getInstance().m_getAllScore = getAllScore;
+                m_textScore.text = GameData.getInstance().m_getAllScore.ToString();
+            }
+
             // 我的手牌
             {
                 for (int i = 0; i < jd["myPokerList"].Count; i++)

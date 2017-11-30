@@ -159,16 +159,14 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     //------------------------------------------------------------------------------------------------------
     public void OnPointerDown(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerDown");
-        //if (m_canTouch)
-        //{
-        //    onClickPoker();
-        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Debug.Log("OnPointerEnter");
+#if UNITY_STANDALONE_WIN
+        return;
+#endif
         if (m_canTouch)
         {
             onClickPoker();
@@ -177,19 +175,15 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerClick");
-        //if (m_canTouch)
-        //{
-        //    onClickPoker();
-        //}
+#if UNITY_STANDALONE_WIN
+        if (m_canTouch)
+        {
+            onClickPoker();
+        }
+#endif
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerUp");
-        //if (m_canTouch)
-        //{
-        //    onClickPoker();
-        //}
     }
 }
