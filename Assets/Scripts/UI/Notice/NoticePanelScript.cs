@@ -42,6 +42,8 @@ public class NoticePanelScript : MonoBehaviour
     // 显示活动
     public void loadHuoDong()
     {
+        m_ListViewScript.clear();
+
         for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
         {
             if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 0)

@@ -183,13 +183,13 @@ public class GameScript : MonoBehaviour
                     }
                 }
 
-                if (canUse)
+                if (!isPVP() && canUse)
                 {
                     m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
                 }
                 else
                 {
-                    m_buttonJiPaiQi.transform.localScale = new Vector3(1,1,1);
+                    m_buttonJiPaiQi.transform.localScale = new Vector3(0,0,0);
                 }
             }
 
