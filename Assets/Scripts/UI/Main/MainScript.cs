@@ -371,7 +371,7 @@ public class MainScript : MonoBehaviour
         // 强制离线
         else if (tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
         {
-            Destroy(LogicEnginerScript.Instance);
+            Destroy(LogicEnginerScript.Instance.gameObject);
             Destroy(PlayServiceSocket.s_instance);
 
             GameObject obj = CommonExitPanelScript.create();
