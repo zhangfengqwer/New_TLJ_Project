@@ -86,6 +86,7 @@ public class AndroidCallBack : MonoBehaviour {
     public void OnShareSuccess(string data)
     {
         LogicEnginerScript.Instance.reqCompleteShare();
+        LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
     }
 
     // 登录结果回调
