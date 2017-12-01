@@ -66,6 +66,9 @@ public class MainScript : MonoBehaviour
             {
                 LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
                 LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
+                print(LogicEnginerScript.Instance);
+                print(LogicEnginerScript.Instance.GetComponent<MainRequest>());
+
                 LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
 
                 if (LogicEnginerScript.Instance.isConnecion())
@@ -312,6 +315,11 @@ public class MainScript : MonoBehaviour
     public void onClickLaBa()
     {
         LaBaPanelScript.create(this);
+    }
+
+    public void OnClickFirstRecharge()
+    {
+        ToastScript.createToast("暂未开放");
     }
 
     public void OnClickMedalHelp()
