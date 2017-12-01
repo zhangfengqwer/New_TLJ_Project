@@ -81,6 +81,7 @@ public class TaskPanelScript : MonoBehaviour {
 
         loadTask();
     }
+
     public void onReceive_GetTask(string data)
     {
         TaskDataScript.getInstance().initJson(data);
