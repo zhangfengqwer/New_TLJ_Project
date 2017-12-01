@@ -124,4 +124,5 @@ public class TaskData
     public int progress;
     public int target;
     public int isover;
+    public int exp;
 }
