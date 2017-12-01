@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using LitJson;
 public class UserData  {
-
+    
     public static string uid { set; get; }
     public static string name { set; get; }
     public static string phone { set; get; }
