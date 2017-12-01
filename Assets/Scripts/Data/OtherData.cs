@@ -11,5 +11,10 @@ public class OtherData
 
     public static Vector2 s_screenSize;
 
-    public static string s_webStorageUrl = "http://p02gqb8lq.bkt.clouddn.com/";
+    // 七牛
+    //public static string s_webStorageUrl = "http://p02gqb8lq.bkt.clouddn.com/";
+
+    // web测试服
+    public static string s_webStorageUrl = "http://hatest.d51v.com/static/game/";
+    
 }
