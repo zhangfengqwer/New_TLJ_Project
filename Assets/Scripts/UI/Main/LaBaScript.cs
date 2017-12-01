@@ -55,6 +55,21 @@ public class LaBaScript : MonoBehaviour {
 
     public void addText(string text)
     {
-        m_data.Add(text);
+        if (m_data.Count == 0)
+        {
+            isEnd = false;
+
+            m_data.Add(text);
+
+            m_text.text = m_data[0];
+            m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25, 40);
+            m_text.transform.localPosition = new Vector3(200, 0, 0);
+
+            m_data.RemoveAt(0);
+        }
+        else
+        {
+            m_data.Add(text);
+        }        
     }
 }
