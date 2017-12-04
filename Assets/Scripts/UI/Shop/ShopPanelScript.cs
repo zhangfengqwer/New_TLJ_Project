@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ShopPanelScript : MonoBehaviour
 {
-    private MainScript m_mainScript = null;
     public Image VipImage;
     public Text VipExplain;
     public Text SlideText;
@@ -28,12 +27,11 @@ public class ShopPanelScript : MonoBehaviour
 
     private List<ShopData> _shopItemDatas;
 
-    public static GameObject create(MainScript mainScript, int type)
+    public static GameObject create(int type)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShopPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
-
-        obj.GetComponent<ShopPanelScript>().m_mainScript = mainScript;
+        
         obj.GetComponent<ShopPanelScript>().SetType(type);
         return obj;
     }
@@ -191,7 +189,7 @@ public class ShopPanelScript : MonoBehaviour
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate()
         {
-            BuyGoodsPanelScript.create(m_mainScript, _shopItemDatas[dataindex].goods_id);
+            BuyGoodsPanelScript.create(_shopItemDatas[dataindex].goods_id);
         });
 
         if (shopItemData.price2 > 0)

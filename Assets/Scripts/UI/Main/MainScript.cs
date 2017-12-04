@@ -280,12 +280,12 @@ public class MainScript : MonoBehaviour
 
     public void OnClickYuanBaoShop()
     {
-        ShopPanelScript.create(this, 2);
+        ShopPanelScript.create(2);
     }
 
     public void OnClickGoldShop()
     {
-        ShopPanelScript.create(this, 1);
+        ShopPanelScript.create(1);
     }
 
     public void OnClickEmail()
@@ -320,7 +320,7 @@ public class MainScript : MonoBehaviour
 
     public void OnClickFirstRecharge()
     {
-        ToastScript.createToast("暂未开放");
+        ShouChongPanelScript.create();
     }
 
     public void OnClickMedalHelp()
