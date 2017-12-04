@@ -123,7 +123,7 @@ public class LoginScript : MonoBehaviour
 
     void OnDestroy()
     {
-        LoginServiceSocket.s_instance.Stop();
+//        LoginServiceSocket.s_instance.Stop();
     }
 
     void Update()

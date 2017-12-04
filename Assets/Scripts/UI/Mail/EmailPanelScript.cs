@@ -38,7 +38,7 @@ public class EmailPanelScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = null;
+//        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = null;
     }
 
     void loadMail()
@@ -114,14 +114,7 @@ public class EmailPanelScript : MonoBehaviour
         m_text_mailNum.text = UserMailData.getInstance().getUserMailDataList().Count + "/50";
 
         //暂无邮件
-        if (UserMailData.getInstance().getUserMailDataList().Count == 0)
-        {
-            m_text_zanwu.transform.localScale = Vector3.one;
-        }
-        else
-        {
-            m_text_zanwu.transform.localScale = Vector3.zero;
-        }
+        m_text_zanwu.transform.localScale = UserMailData.getInstance().getUserMailDataList().Count == 0 ? Vector3.one : Vector3.zero;
     }
 
     public void setMailReaded(int email_id)

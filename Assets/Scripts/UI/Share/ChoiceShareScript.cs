@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ChoiceShareScript : MonoBehaviour {
-
+public class ChoiceShareScript : MonoBehaviour
+{
     public Button ShareFriends;
     public Button ShareFriendsCirle;
 
-    public static GameObject Create(string content,string data)
+    public static GameObject Create(string content, string data)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ChoiceSharePanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
 
-        obj.GetComponent<ChoiceShareScript>().SetClickListener(content,data);
+        obj.GetComponent<ChoiceShareScript>().SetClickListener(content, data);
         return obj;
     }
 
