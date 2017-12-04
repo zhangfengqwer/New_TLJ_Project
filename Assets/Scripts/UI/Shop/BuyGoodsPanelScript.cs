@@ -228,12 +228,64 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickBuy1()
     {
+        if (m_shopData.money_type == 4)
+        {
+            // 判断是否设置过徽章密码
+            {
+                if (!UserData.isSetSecondPsw)
+                {
+                    SetSecondPswPanelScript.create();
+                    ToastScript.createToast("请先设置徽章密码");
+
+                    return;
+                }
+            }
+
+            // 校验徽章密码
+            {
+                if (!OtherData.s_hasCheckSecondPSW)
+                {
+                    CheckSecondPSWPanelScript.create();
+
+                    return;
+                }
+            }
+        }
+
         m_money_type = m_shopData.money_type;
         buy(m_shopData.money_type);
     }
 
     public void onClickBuy2()
     {
+        if (m_shopData.money_type2 == 4)
+        {
+            // 判断是否设置过徽章密码
+            {
+                if (!UserData.isSetSecondPsw)
+                {
+                    SetSecondPswPanelScript.create();
+                    ToastScript.createToast("请先设置徽章密码");
+
+                    return;
+                }
+            }
+
+            // 校验徽章密码
+            {
+                if (!OtherData.s_hasCheckSecondPSW)
+                {
+                    CheckSecondPSWPanelScript.create();
+
+                    return;
+                }
+            }
+        }
+        else
+        {
+            LogUtil.Log("不是会长");
+        }
+
         m_money_type = m_shopData.money_type2;
         buy(m_shopData.money_type2);
     }

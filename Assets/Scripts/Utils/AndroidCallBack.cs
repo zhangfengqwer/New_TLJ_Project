@@ -28,6 +28,12 @@ public class AndroidCallBack : MonoBehaviour {
         }
     }
 
+    // apk版本号
+    public void SetVersionCode(string apkVersion)
+    {
+        OtherData.s_apkVersion = apkVersion;
+    }
+
     // log开关
     public void SetLogIsShow(string isShow)
     {

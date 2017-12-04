@@ -257,6 +257,7 @@ public class MainScript : MonoBehaviour
     public void OnClickHead()
     {
         UserInfoScript.create();
+        //PlayServerTest.joinRoom(5000);
     }
 
     public void OnClickNotice()
@@ -413,29 +414,29 @@ public class MainScript : MonoBehaviour
 
         if (tag.CompareTo(TLJCommon.Consts.Tag_JingJiChang) == 0)
         {
-            int playAction = (int) jd["playAction"];
+            int playAction = (int)jd["playAction"];
 
             switch (playAction)
             {
                 // 加入游戏
-                case (int) TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
-                {
-                    doTask_PlayAction_JoinGame(data);
-                }
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_JoinGame:
+                    {
+                        doTask_PlayAction_JoinGame(data);
+                    }
                     break;
 
                 // 退出游戏
-                case (int) TLJCommon.Consts.PlayAction.PlayAction_ExitPVP:
-                {
-                    doTask_PlayAction_ExitPVP(data);
-                }
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_ExitPVP:
+                    {
+                        doTask_PlayAction_ExitPVP(data);
+                    }
                     break;
 
                 // 开始游戏
-                case (int) TLJCommon.Consts.PlayAction.PlayAction_StartGame:
-                {
-                    doTask_PlayAction_StartGame(data);
-                }
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_StartGame:
+                    {
+                        doTask_PlayAction_StartGame(data);
+                    }
                     break;
             }
         }
