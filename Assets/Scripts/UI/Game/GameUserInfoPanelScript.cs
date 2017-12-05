@@ -60,6 +60,8 @@ public class GameUserInfoPanelScript : MonoBehaviour {
             m_text_meilizhi.text = UserData.gameData.meiliZhi.ToString();
 
             m_gameobj_down.transform.localScale = new Vector3(0, 0, 0);
+
+            m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
         }
         else
         {

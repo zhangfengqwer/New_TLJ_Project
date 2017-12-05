@@ -1,5 +1,7 @@
 ﻿using LitJson;
 using System;
+using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +9,10 @@ using UnityEngine.UI;
 
 public class LoginScript : MonoBehaviour
 {
+    Stopwatch stopwatch = new Stopwatch();
+    int TestCount = 0;
+    int TestAllCout = 500;
+
     public GameObject m_debugLog;
     static public DebugLogScript m_debugLogScript;
 
@@ -234,6 +240,12 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_Login(string data)
     {
+        if (++TestCount == TestAllCout)
+        {
+            stopwatch.Stop();
+            LogUtil.Log("时间：" + stopwatch.ElapsedMilliseconds);
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -242,6 +254,9 @@ public class LoginScript : MonoBehaviour
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
         {
             string uid = jd["uid"].ToString();
+
+            // 压力测试的时候拦截掉下面的逻辑
+            // return;
 
             PlayerPrefs.SetString("account", m_inputAccount.text);
             PlayerPrefs.SetString("password", m_inputPassword.text);
@@ -490,5 +505,34 @@ public class LoginScript : MonoBehaviour
         //NetErrorPanelScript.getInstance().Show();
         //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
         //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+    }
+
+
+
+    //--------------------------------------------------------------------------------------------------------------
+
+    // 测试登录接口压力
+    public void testLoginYaLi()
+    {
+        stopwatch.Start();
+        Thread thread = new Thread(thread_test);
+        thread.Start();
+    }
+
+    private void thread_test()
+    {
+        {
+            JsonData data = new JsonData();
+
+            data["tag"] = "Login";
+            data["account"] = "123";
+            data["password"] = "123";
+            data["passwordtype"] = 1;
+
+            for (int i = 0; i < TestAllCout; i++)
+            {
+                LoginServiceSocket.s_instance.sendMessage(data.ToJson());
+            }
+        }
     }
 }

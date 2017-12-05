@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TLJCommon;
+using System.Threading;
 
 public class MainScript : MonoBehaviour
 {
@@ -259,8 +260,16 @@ public class MainScript : MonoBehaviour
 
     public void OnClickHead()
     {
-        UserInfoScript.create();
-        //PlayServerTest.joinRoom(5000);
+        //UserInfoScript.create();
+        
+
+        Thread thread = new Thread(a);
+        thread.Start();
+    }
+
+    private void a()
+    {
+        PlayServerTest.joinRoom(5000);
     }
 
     public void OnClickNotice()

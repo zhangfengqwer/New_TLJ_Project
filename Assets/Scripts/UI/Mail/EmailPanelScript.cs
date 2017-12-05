@@ -38,7 +38,7 @@ public class EmailPanelScript : MonoBehaviour
 
     private void OnDestroy()
     {
-//        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = null;
+        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = null;
     }
 
     void loadMail()
@@ -234,7 +234,7 @@ public class EmailPanelScript : MonoBehaviour
     public void onReceive_GetMail(string data)
     {
         UserMailData.getInstance().initJson(data);
-
+        
         loadMail();
     }
 }
