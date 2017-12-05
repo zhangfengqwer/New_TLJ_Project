@@ -262,13 +262,13 @@ public class GameScript : MonoBehaviour
             // 我方级数
             {
                 GameData.getInstance().m_myLevelPoker = (int)jd["myLevelPoker"];
-                m_text_myLevelPoker.text = GameData.getInstance().m_myLevelPoker.ToString();
+                m_text_myLevelPoker.text = GameUtil.getPokerNumWithStr(GameData.getInstance().m_myLevelPoker);
             }
 
             // 对方级数
             {
                 GameData.getInstance().m_otherLevelPoker = (int)jd["otherLevelPoker"];
-                m_text_otherLevelPoker.text = GameData.getInstance().m_otherLevelPoker.ToString();
+                m_text_otherLevelPoker.text = GameUtil.getPokerNumWithStr(GameData.getInstance().m_otherLevelPoker);
             }
 
             // 我的队友uid

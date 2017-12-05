@@ -333,4 +333,30 @@ class GameUtil
     {
         obj.transform.localScale = new Vector3(0,0,0);
     }
+
+    public static string getPokerNumWithStr(int num)
+    {
+        if ((num >= 2) && (num <= 10))
+        {
+            return num.ToString();
+        }
+        else if(num == 11)
+        {
+            return "J";
+        }
+        else if (num == 12)
+        {
+            return "Q";
+        }
+        else if (num == 13)
+        {
+            return "K";
+        }
+        else if (num == 14)
+        {
+            return "A";
+        }
+
+        return "";
+    }
 }
