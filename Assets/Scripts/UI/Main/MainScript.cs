@@ -260,16 +260,7 @@ public class MainScript : MonoBehaviour
 
     public void OnClickHead()
     {
-        //UserInfoScript.create();
-        
-
-        Thread thread = new Thread(a);
-        thread.Start();
-    }
-
-    private void a()
-    {
-        PlayServerTest.joinRoom(5000);
+        UserInfoScript.create();
     }
 
     public void OnClickNotice()
