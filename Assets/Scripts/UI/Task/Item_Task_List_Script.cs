@@ -131,6 +131,11 @@ public class Item_Task_List_Script : MonoBehaviour {
         {
             m_parentScript.setTaskOver(task_id);
 
+            if (MainScript.s_instance != null)
+            {
+                MainScript.s_instance.checkRedPoint();
+            }
+
             string reward = TaskDataScript.getInstance().getTaskDataById(task_id).reward;
 
             // 增加奖励

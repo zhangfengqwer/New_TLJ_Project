@@ -8,6 +8,8 @@ using System.Threading;
 
 public class MainScript : MonoBehaviour
 {
+    public static MainScript s_instance = null;
+
     public Image m_notice_redPoint;
     public Image m_task_redPoint;
     public Image m_sign_redPoint;
@@ -40,6 +42,8 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        s_instance = this;
+
         // 禁止多点触摸
         Input.multiTouchEnabled = false;
 
@@ -146,6 +150,7 @@ public class MainScript : MonoBehaviour
 
     void OnDestroy()
     {
+        s_instance = null;
 //        LogicEnginerScript.Instance.m_socketUtil.stop();
         //PlayServiceSocket.getInstance().Stop();
     }
