@@ -20,4 +20,7 @@ public class OtherData
 
     // web测试服
     public static string s_webStorageUrl = "http://hatest.d51v.com/static/game/";
+
+    public static MainScript s_mainScript = null;
+    public static UserInfoScript s_userInfoScript = null;
 }

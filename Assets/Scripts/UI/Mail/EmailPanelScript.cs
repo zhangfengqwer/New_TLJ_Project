@@ -218,9 +218,9 @@ public class EmailPanelScript : MonoBehaviour
         {
             setAllMailReaded();
 
-            if (MainScript.s_instance != null)
+            if (OtherData.s_mainScript != null)
             {
-                MainScript.s_instance.checkRedPoint();
+                OtherData.s_mainScript.checkRedPoint();
             }
         }
     }
