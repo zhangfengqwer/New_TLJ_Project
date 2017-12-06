@@ -100,9 +100,9 @@ public class Mail_List_Item_Script : MonoBehaviour {
         {
             m_parentScript.setMailReaded(email_id);
 
-            if (MainScript.s_instance != null)
+            if (OtherData.s_mainScript != null)
             {
-                MainScript.s_instance.checkRedPoint();
+                OtherData.s_mainScript.checkRedPoint();
             }
 
             //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_mailData.m_reward);

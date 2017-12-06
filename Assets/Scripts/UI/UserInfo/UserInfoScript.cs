@@ -32,8 +32,14 @@ public class UserInfoScript : MonoBehaviour
 
     private void Start()
     {
+        OtherData.s_userInfoScript = this;
         Instance = this;
         InitUI();
+    }
+
+    private void OnDestroy()
+    {
+        OtherData.s_userInfoScript = null;
     }
 
     public void InitUI()
@@ -111,5 +117,10 @@ public class UserInfoScript : MonoBehaviour
     public void OnRealNameClick()
     {
        RealNameScript.create();
+    }
+
+    public void onClickChangeHead()
+    {
+        ChangeHeadPanelScript.create();
     }
 }
