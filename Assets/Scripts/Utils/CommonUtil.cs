@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 class CommonUtil
 {
-
-   
-
     // 格式2017/7/12 15:05:03
     public static string getCurTime()
     {
@@ -175,5 +172,18 @@ class CommonUtil
         int intAsciiCode = (int)asciiEncoding.GetBytes(character)[0];
 
         return intAsciiCode;
+    }
+
+    // data_old:xxxx-xx-xx xx:xx:xx
+    // data_new:xxxx-xx-xx xx:xx:xx
+    static public int tianshucha(string data_old,string data_new)
+    {
+        DateTime d1 = Convert.ToDateTime(data_old);
+        DateTime d2 = Convert.ToDateTime(data_new);
+        DateTime d3 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d1.Year, d1.Month, d1.Day));
+        DateTime d4 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d2.Year, d2.Month, d2.Day));
+        int days = (d4 - d3).Days;
+
+        return days;
     }
 }

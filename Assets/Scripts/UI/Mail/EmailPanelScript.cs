@@ -217,6 +217,11 @@ public class EmailPanelScript : MonoBehaviour
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             setAllMailReaded();
+
+            if (MainScript.s_instance != null)
+            {
+                MainScript.s_instance.checkRedPoint();
+            }
         }
     }
 

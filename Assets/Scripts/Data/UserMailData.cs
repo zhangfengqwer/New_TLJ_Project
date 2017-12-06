@@ -112,11 +112,11 @@ public class UserMailData {
         {
             if (m_myMailDataList[i].m_state == 0)
             {
-                m_myMailDataList[i].m_state = 1;
-
-                // 增加奖励
                 if (!string.IsNullOrEmpty(m_myMailDataList[i].m_reward))
                 {
+                    m_myMailDataList[i].m_state = 1;
+
+                    // 增加奖励
                     {
                         List<CommonClass.Reward> rewardList = UserMailData.getInstance().getUserMailDataById(m_myMailDataList[i].m_email_id).m_rewardList;
                         for (int j = 0; j < rewardList.Count; j++)
@@ -126,7 +126,7 @@ public class UserMailData {
                     }
 
                     //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_myMailDataList[i].m_reward);
-                    ShowRewardPanelScript.Show(m_myMailDataList[i].m_reward,false);
+                    ShowRewardPanelScript.Show(m_myMailDataList[i].m_reward, false);
                 }
             }
         }

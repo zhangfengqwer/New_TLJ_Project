@@ -32,7 +32,34 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
         {
             m_text_title.text = m_mailData.m_title;
-            m_text_time.text = m_mailData.m_time;
+            
+            // 日期
+            {
+                string data_mail = m_mailData.m_time;
+                string data_now = CommonUtil.getCurYear() + "-" + CommonUtil.getCurMonth() + "-" + CommonUtil.getCurDay() + " 0:0:0";
+                int days = CommonUtil.tianshucha(data_mail, data_now);
+
+                if (days == 0)
+                {
+                    m_text_time.text = "今天";
+                }
+                else if (days <= 7)
+                {
+                    m_text_time.text = "1天前";
+                }
+                else if (days <= 30)
+                {
+                    m_text_time.text = "1周前";
+                }
+                else if (days <= 365)
+                {
+                    m_text_time.text = "1月前";
+                }
+                else
+                {
+                    m_text_time.text = "1年前";
+                }
+            }
 
             // 已读
             if (m_mailData.m_state == 1)
@@ -72,6 +99,11 @@ public class Mail_List_Item_Script : MonoBehaviour {
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             m_parentScript.setMailReaded(email_id);
+
+            if (MainScript.s_instance != null)
+            {
+                MainScript.s_instance.checkRedPoint();
+            }
 
             //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(m_mailData.m_reward);
             if (!string.IsNullOrEmpty(m_mailData.m_reward))
