@@ -28,6 +28,11 @@ public class AndroidCallBack : MonoBehaviour {
         }
     }
 
+    public void WeChatLogin_IOS(string result)
+    {
+        ToastScript.createToast(result);
+    }
+
     // apk版本号
     public void SetVersionCode(string apkVersion)
     {

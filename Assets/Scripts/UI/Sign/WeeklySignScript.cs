@@ -50,19 +50,29 @@ public class WeeklySignScript : MonoBehaviour
 
             Destroy(child.gameObject);
 
-            Color color = signObject.GetComponent<Image>().color;
-            color.r = 0.5f;
-            color.g = 0.5f;
-            color.b = 0.5f;
-            name.GetComponent<Text>().color = color;
-            image_prop.GetComponent<Image>().color = color;
-            signObject.GetComponent<Image>().color = color;
+//            Color color = signObject.GetComponent<Image>().color;
+//            color.r = 0.5f;
+//            color.g = 0.5f;
+//            color.b = 0.5f;
+//            name.GetComponent<Text>().color = color;
+//            image_prop.GetComponent<Image>().color = color;
+//            signObject.GetComponent<Image>().color = color;
 
             go.transform.localScale = Vector3.zero;
 
             image_lingqu.transform.localScale = Vector3.one;
             btn_Sign.transform.localScale = Vector3.zero;
             image_Signed.transform.localScale = Vector3.one;
+
+            if (SignData.SignWeekDays == 6)
+            {
+                signObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_big2");
+            }
+            else
+            {
+                signObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_smail2");
+            }
+
             SignData.IsSign = true;
             SignData.SignWeekDays++;
             isSignSuccess = false;
@@ -155,7 +165,6 @@ public class WeeklySignScript : MonoBehaviour
             SignItem signItem = _signItems[i];
 
 
-            Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_smail2");
             var name = Object.transform.GetChild(2);
             var image_lingqu = Object.transform.GetChild(4);
             var image_prop = Object.transform.GetChild(3);
@@ -169,11 +178,13 @@ public class WeeklySignScript : MonoBehaviour
             if (i == 6)
             {
                 var obj = Resources.Load<GameObject>("Prefabs/UI/Item/Item_sign_dalibao");
+                Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_big2");
                 Instantiate(obj, Object.transform);
                 Destroy(prop.gameObject);
             }
             else
             {
+                Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_smail2");
                 prop.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/" + signItem.goods_icon);
             }
 
@@ -182,13 +193,13 @@ public class WeeklySignScript : MonoBehaviour
             {
                 if (i < totalSignDays)
                 {
-                    Color color = Object.GetComponent<Image>().color;
-                    color.r = 0.5f;
-                    color.g = 0.5f;
-                    color.b = 0.5f;
-                    Object.GetComponent<Image>().color = color;
-                    text1.color = color;
-                    prop.color = color;
+//                    Color color = Object.GetComponent<Image>().color;
+//                    color.r = 0.5f;
+//                    color.g = 0.5f;
+//                    color.b = 0.5f;
+//                    Object.GetComponent<Image>().color = color;
+//                    text1.color = color;
+//                    prop.color = color;
 
                     image_lingqu.transform.localScale = Vector3.one;
                 }
@@ -198,7 +209,14 @@ public class WeeklySignScript : MonoBehaviour
                 }
                 if (totalSignDays == i)
                 {
-                    Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_current_smail");
+                    if (i == 6)
+                    {
+                        Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/Item_bg_current_big");
+                    }
+                    else
+                    {
+                        Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_current_smail");
+                    }
                     go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
                     go.transform.localScale = Vector3.one;
                     GameObject.Instantiate(go, guang.transform);
