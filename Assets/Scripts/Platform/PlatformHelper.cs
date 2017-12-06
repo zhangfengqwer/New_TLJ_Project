@@ -722,8 +722,8 @@ public class PlatformHelper
     /// <param name="obj">登录按钮</param>
     /// <param name="func">回调方法名</param>
     /// <param name="data">待回调返回到服务端的数据</param>
-//    [DllImport("__Internal")]
-//        public static extern void CommonLogin(int type, string obj, string func, string data);
+    [DllImport("__Internal")]
+        public static extern void Login(string obj, string func, string data);
 //
 //    [DllImport("__Internal")]
 //        private static extern IntPtr getUniqueIdentifier();
