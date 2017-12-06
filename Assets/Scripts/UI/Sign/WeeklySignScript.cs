@@ -39,8 +39,8 @@ public class WeeklySignScript : MonoBehaviour
         {
             GameObject signObject = signObjects[totalSignDays];
             var name = signObject.transform.GetChild(2);
-            var image_lingqu = signObject.transform.GetChild(3);
-            var image_prop = signObject.transform.GetChild(4);
+            var image_lingqu = signObject.transform.GetChild(4);
+            var image_prop = signObject.transform.GetChild(3);
             var guang = signObject.transform.GetChild(0);
             //取消点击事件
             signObject.GetComponent<Button>().enabled = false;
@@ -154,9 +154,11 @@ public class WeeklySignScript : MonoBehaviour
             GameObject Object = signObjects[i];
             SignItem signItem = _signItems[i];
 
+
+            Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_smail2");
             var name = Object.transform.GetChild(2);
-            var image_lingqu = Object.transform.GetChild(3);
-            var image_prop = Object.transform.GetChild(4);
+            var image_lingqu = Object.transform.GetChild(4);
+            var image_prop = Object.transform.GetChild(3);
             var guang = Object.transform.GetChild(0);
 
 
@@ -196,6 +198,7 @@ public class WeeklySignScript : MonoBehaviour
                 }
                 if (totalSignDays == i)
                 {
+                    Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_current_smail");
                     go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
                     go.transform.localScale = Vector3.one;
                     GameObject.Instantiate(go, guang.transform);
@@ -215,13 +218,13 @@ public class WeeklySignScript : MonoBehaviour
             {
                 if (i < totalSignDays)
                 {
-                    Color color = Object.GetComponent<Image>().color;
-                    color.r = 0.5f;
-                    color.g = 0.5f;
-                    color.b = 0.5f;
-                    Object.GetComponent<Image>().color = color;
-                    text1.color = color;
-                    prop.color = color;
+//                    Color color = Object.GetComponent<Image>().color;
+//                    color.r = 0.5f;
+//                    color.g = 0.5f;
+//                    color.b = 0.5f;
+//                    Object.GetComponent<Image>().color = color;
+//                    text1.color = color;
+//                    prop.color = color;
                     image_lingqu.transform.localScale = Vector3.one;
                 }
                 else
