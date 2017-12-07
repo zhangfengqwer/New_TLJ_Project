@@ -177,6 +177,7 @@ public class BindPhoneScript : MonoBehaviour
     {
         JsonData jsonData = JsonMapper.ToObject(data);
         var code = (int) jsonData["code"];
+        var msg = (string) jsonData["msg"];
         if (code == (int) Consts.Code.Code_OK)
         {
             ToastScript.createToast("绑定手机成功");
@@ -187,7 +188,7 @@ public class BindPhoneScript : MonoBehaviour
         else
         {
             LogUtil.Log("绑定手机失败：" + code);
-            ToastScript.createToast("绑定手机失败");
+            ToastScript.createToast(msg);
         }
     }
 }
