@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class OtherData
 {
+    public enum DefaultLoginType
+    {
+        DefaultLoginType_Default,
+        DefaultLoginType_GuanFang,
+        DefaultLoginType_QQ,
+        DefaultLoginType_WeChat,
+    }
+
+    public static int s_defaultLoginType = (int)DefaultLoginType.DefaultLoginType_Default;
+
     public static string s_apkVersion;              // apk版本号
     public static string s_codeVersion;             // 代码版本
     public static string s_resVersion;              // 资源版本

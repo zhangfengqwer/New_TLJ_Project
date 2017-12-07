@@ -64,6 +64,8 @@ public class ChangeHeadPanelScript : MonoBehaviour {
 
             OtherData.s_mainScript.refreshUI();
             OtherData.s_userInfoScript.InitUI();
+
+            ToastScript.createToast("修改成功");
         }
         else
         {
