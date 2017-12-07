@@ -19,9 +19,12 @@ public class BindPhoneScript : MonoBehaviour
     public Button ButtonSendSms;
     private int time = 20;
     public static int totalTime;
+
     private bool IsStartTime;
+
     //0:绑定手机 1：修改手机
     private static int phone_type;
+
     public GameObject TitleChange;
     public GameObject TitleBind;
 
@@ -33,15 +36,16 @@ public class BindPhoneScript : MonoBehaviour
         phone_type = type;
         return obj;
     }
-    private float nextTime = 1;//一秒之后执行
+
+    private float nextTime = 1; //一秒之后执行
     private Text textSend;
 
     private void Timer1()
     {
         if (nextTime <= Time.time)
         {
-            textSend.text = string.Format("{0:d2}",totalTime % 60);
-            nextTime = Time.time + 1;//到达一秒后加1
+            textSend.text = string.Format("{0:d2}", totalTime % 60);
+            nextTime = Time.time + 1; //到达一秒后加1
             if (totalTime <= 0)
             {
                 IsStartTime = false;
@@ -125,7 +129,6 @@ public class BindPhoneScript : MonoBehaviour
             LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().CallBack =
                 sendVerificationCodeCallBack;
             LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().OnRequest(_phoneNum);
-
         }
         else
         {
@@ -153,13 +156,11 @@ public class BindPhoneScript : MonoBehaviour
                 if (nodeChild.Name.Equals("ResultCode"))
                 {
                     //发送验证码成功
-                    if (value.Equals("1"))
-                    {
-                        totalTime = time;
-                        IsStartTime = true;
-                        ButtonSendSms.interactable = false;
-                    }
-                }else if (nodeChild.Name.Equals("ResultMessageDetails"))
+                    totalTime = time;
+                    IsStartTime = true;
+                    ButtonSendSms.interactable = false;
+                }
+                else if (nodeChild.Name.Equals("ResultMessageDetails"))
                 {
                     ToastScript.createToast(value);
                 }
@@ -175,8 +176,9 @@ public class BindPhoneScript : MonoBehaviour
     private void bindPhoneCallBack(string data)
     {
         JsonData jsonData = JsonMapper.ToObject(data);
-        var code = (int)jsonData["code"];
-        if (code == (int)Consts.Code.Code_OK)
+        var code = (int) jsonData["code"];
+        var msg = (string) jsonData["msg"];
+        if (code == (int) Consts.Code.Code_OK)
         {
             ToastScript.createToast("绑定手机成功");
             UserData.phone = _phoneNum;
@@ -186,7 +188,7 @@ public class BindPhoneScript : MonoBehaviour
         else
         {
             LogUtil.Log("绑定手机失败：" + code);
-            ToastScript.createToast("绑定手机失败");
+            ToastScript.createToast(msg);
         }
     }
 }
