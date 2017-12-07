@@ -159,22 +159,26 @@ public class RememberPokerHelper : MonoBehaviour {
                 List<GameObject> listGo;
                 dictionaryGo.TryGetValue(Type, out listGo);
                 int index = -1;
-                for (int j = 0; j < listPoker.Count; j++)
-                {
-                    var item = listPoker[j];
-                    if (pokerInfo.m_num == item.m_num && pokerInfo.m_pokerType == item.m_pokerType)
+                if (listPoker != null)
+                    for (int j = 0; j < listPoker.Count; j++)
                     {
-                        index = listPoker.IndexOf(item);
-                        listPoker.Remove(item);
-                        break;
+                        var item = listPoker[j];
+                        if (pokerInfo.m_num == item.m_num && pokerInfo.m_pokerType == item.m_pokerType)
+                        {
+                            index = listPoker.IndexOf(item);
+                            listPoker.Remove(item);
+                            break;
+                        }
                     }
-                }
                 if (index == -1) return;
                 try
                 {
-                    GameObject go = listGo[index];
-                    go.GetComponent<Image>().color = Color.gray;
-                    listGo.Remove(go);
+                    if (listGo != null)
+                    {
+                        GameObject go = listGo[index];
+                        go.GetComponent<Image>().color = Color.gray;
+                        listGo.Remove(go);
+                    }
                 }
                 catch (Exception e)
                 {

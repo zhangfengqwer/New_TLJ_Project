@@ -72,7 +72,7 @@ public class PlatformHelper
     {
 
     }
-    public static void WXShareFriendsCircle(string obj, string func, byte[] data)
+    public static void WXShareFriendsCircle(string obj, string func, string data)
     {
 
     }
@@ -343,7 +343,7 @@ public class PlatformHelper
         GetJC().CallStatic("wxShareFriends", obj, func, data);
     }
 
-    public static void WXShareFriendsCircle(string obj, string func, byte[] data)
+    public static void WXShareFriendsCircle(string obj, string func, string data)
     {
         GetJC().CallStatic("wxShareFriendsCircle", obj, func, data);
     }
@@ -691,7 +691,17 @@ public class PlatformHelper
     /// <param name="func">回调方法名</param>
     /// <param name="data">待回调返回到服务端的数据</param>
     [DllImport("__Internal")]
-    public static extern void Login(string obj, string func, string data);
+    public static extern void Login(string obj, string func, string data); 
+
+    [DllImport("__Internal")]
+    public static extern void WXShareFriends(string obj, string func, string data);
+
+    [DllImport("__Internal")]
+    public static extern void WXShareFriendsCircle(string obj, string func,string data);
+
+    [DllImport("__Internal")]
+    public static extern void pay(string payType, string callObj, string callFunc, string data);
+   
 }
 
 #else
@@ -926,7 +936,7 @@ public class PlatformHelper
 
     }
 
-    public static void WXShareFriendsCircle(string obj, string func, byte[] data)
+    public static void WXShareFriendsCircle(string obj, string func, string data)
     {
 
     }

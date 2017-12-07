@@ -30,7 +30,8 @@ public class ChoiceShareScript : MonoBehaviour
 
         ShareFriendsCirle.onClick.AddListener(() =>
         {
-            PlatformHelper.WXShareFriendsCircle("AndroidCallBack", "OnWxShareFriends", new byte[0]);
+
+            PlatformHelper.WXShareFriendsCircle("AndroidCallBack", "OnWxShareFriends", data);
             Destroy(this.gameObject);
         });
     }
