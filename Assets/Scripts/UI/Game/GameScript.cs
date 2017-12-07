@@ -198,6 +198,15 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            // 初始化记牌器
+            {
+                if (m_jiPaiGameObject == null)
+                {
+                    m_jiPaiGameObject = RememberPokerHelper.create();
+                    m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickClose();
+                }
+            }
+
             JsonData jd = JsonMapper.ToObject(jsonData);
             {
                 if (!isPVP())
@@ -544,11 +553,7 @@ public class GameScript : MonoBehaviour
     public void OnClickJiPaiQi()
     {
         // 显示记牌器
-        if (m_jiPaiGameObject == null)
-        {
-            reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jipaiqi);
-        }
-        else
+        if (m_jiPaiGameObject != null)
         {
             m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
         }
@@ -1996,16 +2001,6 @@ public class GameScript : MonoBehaviour
                         break;
                     }
                 }
-
-                // 显示记牌器
-                if (m_jiPaiGameObject == null)
-                {
-                    m_jiPaiGameObject = RememberPokerHelper.create();
-                }
-                else
-                {
-                    m_jiPaiGameObject.GetComponentInChildren<RememberPokerHelper>().OnClickShow();
-                }
             }
         }
     }
@@ -2314,6 +2309,22 @@ public class GameScript : MonoBehaviour
 
                                 m_buttonTiShi.transform.localScale = new Vector3(0, 0, 0);
                             }
+                        }
+                    }
+
+                    // 恢复记牌器数据
+                    {
+                        List<TLJCommon.PokerInfo> list = new List<TLJCommon.PokerInfo>();
+                        for (int i = 0; i < jd["allOutPokerList"].Count; i++)
+                        {
+                            list.Clear();
+
+                            int num = (int)jd["allOutPokerList"][i]["num"];
+                            int pokerType = (int)jd["allOutPokerList"][i]["pokerType"];
+
+                            list.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+
+                            m_jiPaiGameObject.GetComponent<RememberPokerHelper>().UpdateUi(list);
                         }
                     }
                 }
