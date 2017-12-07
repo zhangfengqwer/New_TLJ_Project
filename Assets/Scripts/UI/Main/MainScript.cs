@@ -408,6 +408,27 @@ public class MainScript : MonoBehaviour
                 TurntablePanelScript.s_instance.GetComponent<TurntablePanelScript>().onReceive_TurntableBroadcast(data);
             }
         }
+        // 救济金
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_SupplyGold) == 0)
+        {
+            int todayCount = (int)jd["todayCount"];
+            int goldNum = (int)jd["goldNum"];
+
+            GameUtil.changeData("1:" + goldNum);
+
+            if (todayCount == 1)
+            {
+                ToastScript.createToast("金币低于1500，今日第一次赠送金币" + goldNum);
+            }
+            else if (todayCount == 2)
+            {
+                ToastScript.createToast("金币低于1500，今日第二次赠送金币" + goldNum);
+            }
+            else if (todayCount == 3)
+            {
+                ToastScript.createToast("金币低于1500，今日最后一次赠送金币" + goldNum);
+            }
+        }
         else
         {
             LogUtil.Log("onReceive_Main：未知tag");

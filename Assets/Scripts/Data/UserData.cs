@@ -55,6 +55,17 @@ public class BuffData
 {
     public int prop_id;
     public int buff_num;
+
+    public BuffData()
+    {
+
+    }
+
+    public BuffData(int id,int num)
+    {
+        prop_id = id;
+        buff_num = num;
+    }
 }
 
 public class MyTurntableData

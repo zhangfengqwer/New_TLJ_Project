@@ -47,6 +47,7 @@ public class GameScript : MonoBehaviour
     Vector3 m_screenPos;
     string m_tag = "";
 
+    bool m_isStartGame = false;
     bool m_hasJiPaiQiUse = false;
 
     void Start()
@@ -180,6 +181,8 @@ public class GameScript : MonoBehaviour
     {
         try
         {
+            m_isStartGame = true;
+
             // 记牌器按钮
             {
                 bool canUse = false;
@@ -2328,7 +2331,7 @@ public class GameScript : MonoBehaviour
                     // 恢复记牌器数据
                     {
                         List<TLJCommon.PokerInfo> list = new List<TLJCommon.PokerInfo>();
-                            for (int i = 0; i < jd["allOutPokerList"].Count; i++)
+                        for (int i = 0; i < jd["allOutPokerList"].Count; i++)
                         {
                             list.Clear();
 
@@ -2899,13 +2902,19 @@ public class GameScript : MonoBehaviour
         {
             if (!isPVP())
             {
-                m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
-                m_hasJiPaiQiUse = true;
-
-                // 休闲场有记牌器的情况下自动使用
-                if (m_hasJiPaiQiUse)
+                if (m_isStartGame)
                 {
-                    reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jipaiqi);
+                    if (!m_hasJiPaiQiUse)
+                    {
+                        m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
+                        m_hasJiPaiQiUse = true;
+
+                        // 休闲场有记牌器的情况下自动使用
+                        if (m_hasJiPaiQiUse)
+                        {
+                            reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jipaiqi);
+                        }
+                    }
                 }
             }
         }
@@ -2980,6 +2989,27 @@ public class GameScript : MonoBehaviour
                 OtherData.s_isFromSetToLogin = true;
                 SceneManager.LoadScene("LoginScene");
             });
+        }
+        // 救济金
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_SupplyGold) == 0)
+        {
+            int todayCount = (int)jd["todayCount"];
+            int goldNum = (int)jd["goldNum"];
+
+            GameUtil.changeData("1:" + goldNum);
+
+            if (todayCount == 1)
+            {
+                ToastScript.createToast("金币低于1500，今日第一次赠送金币" + goldNum);
+            }
+            else if (todayCount == 2)
+            {
+                ToastScript.createToast("金币低于1500，今日第二次赠送金币" + goldNum);
+            }
+            else if (todayCount == 3)
+            {
+                ToastScript.createToast("金币低于1500，今日最后一次赠送金币" + goldNum);
+            }
         }
         else
         {
