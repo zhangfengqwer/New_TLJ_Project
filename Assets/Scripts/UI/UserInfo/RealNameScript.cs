@@ -85,7 +85,7 @@ public class RealNameScript : MonoBehaviour
                 UserInfoScript.Instance.InitUI();
             }
            
-            ToastScript.createToast("实名认证成功");
+            ToastScript.createToast("实名认证成功,请去邮箱领取奖励！");
             Destroy(this.gameObject);
         }
         else

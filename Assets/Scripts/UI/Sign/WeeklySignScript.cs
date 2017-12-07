@@ -39,16 +39,16 @@ public class WeeklySignScript : MonoBehaviour
         {
             GameObject signObject = signObjects[totalSignDays];
             var name = signObject.transform.GetChild(2);
-            var image_lingqu = signObject.transform.GetChild(4);
-            var image_prop = signObject.transform.GetChild(3);
+            var image_lingqu = signObject.transform.GetChild(3);
+//            var image_prop = signObject.transform.GetChild(2);
             var guang = signObject.transform.GetChild(0);
             //取消点击事件
             signObject.GetComponent<Button>().enabled = false;
 
             //取消光
-            Transform child = guang.transform.GetChild(0);
-
-            Destroy(child.gameObject);
+//            Transform child = guang.transform.GetChild(0);
+//
+//            Destroy(child.gameObject);
 
 //            Color color = signObject.GetComponent<Image>().color;
 //            color.r = 0.5f;
@@ -58,7 +58,7 @@ public class WeeklySignScript : MonoBehaviour
 //            image_prop.GetComponent<Image>().color = color;
 //            signObject.GetComponent<Image>().color = color;
 
-            go.transform.localScale = Vector3.zero;
+//            go.transform.localScale = Vector3.zero;
 
             image_lingqu.transform.localScale = Vector3.one;
             btn_Sign.transform.localScale = Vector3.zero;
@@ -179,7 +179,7 @@ public class WeeklySignScript : MonoBehaviour
             {
                 var obj = Resources.Load<GameObject>("Prefabs/UI/Item/Item_sign_dalibao");
                 Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_big2");
-                Instantiate(obj, Object.transform);
+                Instantiate(obj, guang.transform);
                 Destroy(prop.gameObject);
             }
             else
@@ -217,9 +217,10 @@ public class WeeklySignScript : MonoBehaviour
                     {
                         Object.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Sign/item_bg_current_smail");
                     }
-                    go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
-                    go.transform.localScale = Vector3.one;
-                    GameObject.Instantiate(go, guang.transform);
+                    //发光
+//                    go = Resources.Load<GameObject>("Prefabs/UI/Other/Sign_guang");
+//                    go.transform.localScale = Vector3.one;
+//                    GameObject.Instantiate(go, guang.transform);
                     Button button = Object.AddComponent<Button>();
                     button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(() =>
