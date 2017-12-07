@@ -16,6 +16,11 @@ public class LoginScript : MonoBehaviour
     public GameObject m_debugLog;
     static public DebugLogScript m_debugLogScript;
 
+    public Button m_button_guanfang;
+    public Button m_button_qq;
+    public Button m_button_wechat;
+    public Button m_button_defaultLogin;
+
     public GameObject m_healthTipPanel;
     public GameObject m_panel_choicePlatform;
     public GameObject m_panel_login;
@@ -86,6 +91,8 @@ public class LoginScript : MonoBehaviour
 
         // 健康忠告提示文字
         m_text_tips.text = GameUtil.getOneTips();
+
+        setLogonTypeUI();
     }
 
     void onInvokeHealthPanel()
@@ -143,6 +150,59 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    void setLogonTypeUI()
+    {
+        {
+            int defaultLoginType = PlayerPrefs.GetInt("DefaultLoginType", (int)OtherData.s_defaultLoginType);
+
+            switch (defaultLoginType)
+            {
+                case (int)OtherData.DefaultLoginType.DefaultLoginType_Default:
+                    {
+                        GameUtil.showGameObject(m_button_guanfang.gameObject);
+                        GameUtil.showGameObject(m_button_qq.gameObject);
+                        GameUtil.showGameObject(m_button_wechat.gameObject);
+
+                        GameUtil.hideGameObject(m_button_defaultLogin.gameObject);
+                    }
+                    break;
+
+                case (int)OtherData.DefaultLoginType.DefaultLoginType_GuanFang:
+                    {
+                        GameUtil.hideGameObject(m_button_guanfang.gameObject);
+                        GameUtil.hideGameObject(m_button_qq.gameObject);
+                        GameUtil.hideGameObject(m_button_wechat.gameObject);
+
+                        GameUtil.showGameObject(m_button_defaultLogin.gameObject);
+
+                        m_button_defaultLogin.transform.Find("Text_LoginType").GetComponent<Text>().text = "官方登录";
+                    }
+                    break;
+
+                case (int)OtherData.DefaultLoginType.DefaultLoginType_QQ:
+                    {
+                        GameUtil.hideGameObject(m_button_guanfang.gameObject);
+                        GameUtil.hideGameObject(m_button_qq.gameObject);
+                        GameUtil.hideGameObject(m_button_wechat.gameObject);
+
+                        GameUtil.showGameObject(m_button_defaultLogin.gameObject);
+                        m_button_defaultLogin.transform.Find("Text_LoginType").GetComponent<Text>().text = "QQ登录";
+                    }
+                    break;
+
+                case (int)OtherData.DefaultLoginType.DefaultLoginType_WeChat:
+                    {
+                        GameUtil.hideGameObject(m_button_guanfang.gameObject);
+                        GameUtil.hideGameObject(m_button_qq.gameObject);
+                        GameUtil.hideGameObject(m_button_wechat.gameObject);
+
+                        GameUtil.showGameObject(m_button_defaultLogin.gameObject);
+                        m_button_defaultLogin.transform.Find("Text_LoginType").GetComponent<Text>().text = "微信登录";
+                    }
+                    break;
+            }
+        }
+    }
 
     public void OnToggleAgree()
     {
@@ -175,11 +235,46 @@ public class LoginScript : MonoBehaviour
         m_panel_register.transform.localScale = new Vector3(1, 1, 1);
     }
 
+    public void onClickChangeLoginType()
+    {
+        PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_Default);
+
+        setLogonTypeUI();
+    }
+
+    public void onClickDefaultLogin()
+    {
+        int defaultLoginType = PlayerPrefs.GetInt("DefaultLoginType", (int)OtherData.s_defaultLoginType);
+
+        switch (defaultLoginType)
+        {
+            case (int)OtherData.DefaultLoginType.DefaultLoginType_GuanFang:
+                {
+                    onClickLogin();
+                }
+                break;
+
+            case (int)OtherData.DefaultLoginType.DefaultLoginType_QQ:
+                {
+                    onClickLogin_qq();
+                }
+                break;
+
+            case (int)OtherData.DefaultLoginType.DefaultLoginType_WeChat:
+                {
+                    onClickLogin_wechat();
+                }
+                break;
+        }
+    }
+
     // 微信登录
     public void onClickLogin_wechat()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
         PlatformHelper.Login("AndroidCallBack", "GetLoginResult", "weixin");
+
+        PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_WeChat);
     }
 
     // QQ登录
@@ -187,6 +282,8 @@ public class LoginScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
         PlatformHelper.Login("AndroidCallBack", "GetLoginResult", "qq");
+
+        PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_QQ);
     }
 
     // 官方登录
@@ -194,6 +291,8 @@ public class LoginScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
         reqLogin();
+
+        PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_GuanFang);
     }
 
     public void onClickQuickRegister()

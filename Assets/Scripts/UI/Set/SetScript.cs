@@ -60,6 +60,8 @@ public class SetScript : MonoBehaviour {
         //LogicEnginerScript.Instance.Stop();
         //LogicEnginerScript.Instance.clear();
 
+        PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_Default);
+
         OtherData.s_isFromSetToLogin = true;
         SceneManager.LoadScene("LoginScene");
 

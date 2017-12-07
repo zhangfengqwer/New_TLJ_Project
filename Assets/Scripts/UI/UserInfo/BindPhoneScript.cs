@@ -187,6 +187,7 @@ public class BindPhoneScript : MonoBehaviour
         else
         {
             LogUtil.Log("绑定手机失败：" + code);
+            ToastScript.createToast("绑定手机失败");
         }
     }
 }
