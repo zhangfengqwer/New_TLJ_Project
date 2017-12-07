@@ -2489,7 +2489,7 @@ public class GameScript : MonoBehaviour
 
     void initMyPokerPos(List<GameObject> objList)
     {
-        int jiange = 30;
+        int jiange = 35;
 
         for (int i = 0; i < objList.Count; i++)
         {
