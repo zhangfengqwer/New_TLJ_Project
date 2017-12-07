@@ -2315,7 +2315,7 @@ public class GameScript : MonoBehaviour
                     // 恢复记牌器数据
                     {
                         List<TLJCommon.PokerInfo> list = new List<TLJCommon.PokerInfo>();
-                        for (int i = 0; i < jd["allOutPokerList"].Count; i++)
+                            for (int i = 0; i < jd["allOutPokerList"].Count; i++)
                         {
                             list.Clear();
 
@@ -2324,6 +2324,7 @@ public class GameScript : MonoBehaviour
 
                             list.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
 
+                            print(list.Count);
                             m_jiPaiGameObject.GetComponent<RememberPokerHelper>().UpdateUi(list);
                         }
                     }

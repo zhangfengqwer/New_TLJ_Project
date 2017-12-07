@@ -31,11 +31,17 @@ public class RememberPokerHelper : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		Init(HeiTaoContent,Consts.PokerType.PokerType_HeiTao);
-		Init(HongContent, Consts.PokerType.PokerType_HongTao);
-		Init(MeiContent, Consts.PokerType.PokerType_MeiHua);
-		Init(FangContent, Consts.PokerType.PokerType_FangKuai);
+    public void Awake ()
+    {
+        InitFirst();
+    }
+
+    private void InitFirst()
+    {
+        Init(HeiTaoContent, Consts.PokerType.PokerType_HeiTao);
+        Init(HongContent, Consts.PokerType.PokerType_HongTao);
+        Init(MeiContent, Consts.PokerType.PokerType_MeiHua);
+        Init(FangContent, Consts.PokerType.PokerType_FangKuai);
 
         xiaoWangList.Add(xiaoWang1);
         xiaoWangList.Add(xiaoWang2);
@@ -44,11 +50,13 @@ public class RememberPokerHelper : MonoBehaviour {
 
         this.transform.localPosition = new Vector3(0, 0, 0);
         startPosition = this.transform.localPosition;
+        print("初始化记牌器完成");
     }
 
-    private void Init(GameObject gameObject, Consts.PokerType pokerType)
+    public void Init(GameObject gameObject, Consts.PokerType pokerType)
     {
         //初始化数据
+      
         List<PokerInfo> heiTaoPokers = new List<PokerInfo>();
         List<GameObject> PokerItems = new List<GameObject>();
         for (int i = 0; i < 2; i++)
@@ -59,7 +67,11 @@ public class RememberPokerHelper : MonoBehaviour {
             }
         }
         heiTaoPokers = heiTaoPokers.OrderByDescending(a => a.m_num).ToList();
-        dicPokerData.Add(pokerType, heiTaoPokers);
+        if (!dicPokerData.ContainsKey(pokerType))
+        {
+            dicPokerData.Add(pokerType, heiTaoPokers);
+        }
+       
         //初始化UI
         for (int i = 0; i < heiTaoPokers.Count; i++)
         {
@@ -108,7 +120,11 @@ public class RememberPokerHelper : MonoBehaviour {
                 }
             }
         }
-        dictionaryGo.Add(pokerType, PokerItems);
+        if (!dictionaryGo.ContainsKey(pokerType))
+        {
+            dictionaryGo.Add(pokerType, PokerItems);
+        }
+       
     }
 
     public void OnClickClose()
@@ -156,8 +172,11 @@ public class RememberPokerHelper : MonoBehaviour {
 
                 List<PokerInfo> listPoker;
                 dicPokerData.TryGetValue(Type, out listPoker);
+                print("dicPokerData:" + dicPokerData.Count);
+               
                 List<GameObject> listGo;
                 dictionaryGo.TryGetValue(Type, out listGo);
+                print("dictionaryGo:" + dicPokerData.Count);
                 int index = -1;
                 if (listPoker != null)
                     for (int j = 0; j < listPoker.Count; j++)
