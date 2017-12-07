@@ -183,6 +183,7 @@ public class RememberPokerHelper : MonoBehaviour {
             }
             else
             {
+                LogUtil.Log("牌的num异常");
                 throw new Exception("牌的num异常");
             }
         }
