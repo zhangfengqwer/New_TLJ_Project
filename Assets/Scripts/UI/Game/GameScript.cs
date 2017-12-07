@@ -2998,6 +2998,8 @@ public class GameScript : MonoBehaviour
 
             GameUtil.changeData("1:" + goldNum);
 
+            m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+
             if (todayCount == 1)
             {
                 ToastScript.createToast("金币低于1500，今日第一次赠送金币" + goldNum);
