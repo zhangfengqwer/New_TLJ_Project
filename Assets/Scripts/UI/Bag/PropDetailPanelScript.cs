@@ -62,7 +62,6 @@ public class PropDetailPanelScript : MonoBehaviour {
         // 其他
         else
         {
-
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
@@ -89,7 +88,10 @@ public class PropDetailPanelScript : MonoBehaviour {
             // 记牌器
             case (int)TLJCommon.Consts.Prop.Prop_jipaiqi:
                 {
-                    // 不用处理
+                    if (OtherData.s_gameScript != null)
+                    {
+                        OtherData.s_gameScript.useProp_jipaiqi();
+                    }
                 }
                 break;
 

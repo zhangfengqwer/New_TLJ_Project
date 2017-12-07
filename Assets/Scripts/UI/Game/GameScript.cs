@@ -47,8 +47,12 @@ public class GameScript : MonoBehaviour
     Vector3 m_screenPos;
     string m_tag = "";
 
+    bool m_hasJiPaiQiUse = false;
+
     void Start()
     {
+        OtherData.s_gameScript = this;
+
         // 禁止多点触摸
         Input.multiTouchEnabled = false;
 
@@ -191,10 +195,12 @@ public class GameScript : MonoBehaviour
                 if (!isPVP() && canUse)
                 {
                     m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
+                    m_hasJiPaiQiUse = true;
                 }
                 else
                 {
                     m_buttonJiPaiQi.transform.localScale = new Vector3(0,0,0);
+                    m_hasJiPaiQiUse = false;
                 }
             }
 
@@ -467,6 +473,7 @@ public class GameScript : MonoBehaviour
 
     void OnDestroy()
     {
+        OtherData.s_gameScript = null;
     }
 
     public void onClickBag()
@@ -1018,6 +1025,12 @@ public class GameScript : MonoBehaviour
                     JueShengJuTiShiPanelScript.checkClose();
 
                     startGame_InitUI(data);
+
+                    // 休闲场有记牌器的情况下自动使用
+                    if (m_hasJiPaiQiUse)
+                    {
+                        reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jipaiqi);
+                    }
                 }
                 break;
 
@@ -2874,6 +2887,24 @@ public class GameScript : MonoBehaviour
                             }
                             break;
                     }
+                }
+            }
+        }
+    }
+
+    public void useProp_jipaiqi()
+    {
+        if (!m_hasJiPaiQiUse)
+        {
+            if (!isPVP())
+            {
+                m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
+                m_hasJiPaiQiUse = true;
+
+                // 休闲场有记牌器的情况下自动使用
+                if (m_hasJiPaiQiUse)
+                {
+                    reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jipaiqi);
                 }
             }
         }
