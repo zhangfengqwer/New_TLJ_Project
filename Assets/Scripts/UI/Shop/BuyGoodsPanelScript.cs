@@ -114,7 +114,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 {
                     m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
                 }
-                m_button_buy1.transform.Find("Text_money_type").GetComponent<Text>().text = "¥购买";
+                m_button_buy1.transform.Find("Text_money_type").GetComponent<Text>().text = "购买";
                 m_button_buy1.transform.Find("Image").localScale = new Vector3(0.7f, 0.7f, 0.7f);
             }
             else if (m_shopData.money_type == 4)
@@ -163,7 +163,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 {
                     m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
                 }
-                m_button_buy2.transform.Find("Text_money_type").GetComponent<Text>().text = "¥购买";
+                m_button_buy2.transform.Find("Text_money_type").GetComponent<Text>().text = "购买";
                 m_button_buy2.transform.Find("Image").localScale = new Vector3(0.7f, 0.7f, 0.7f);
             }
             else if (m_shopData.money_type2 == 4)

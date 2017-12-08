@@ -1083,16 +1083,21 @@ public class GameScript : MonoBehaviour
 
                     // 抢主所用的牌
                     {
-                        for (int i = 0; i < jd["pokerList"].Count; i++)
                         {
-                            int num = (int)jd["pokerList"][i]["num"];
-                            int pokerType = (int)jd["pokerList"][i]["pokerType"];
+                            for (int i = 0; i < jd["pokerList"].Count; i++)
+                            {
+                                int num = (int)jd["pokerList"][i]["num"];
+                                int pokerType = (int)jd["pokerList"][i]["pokerType"];
 
-                            GameData.getInstance().m_masterPokerType = pokerType;
+                                GameData.getInstance().m_masterPokerType = pokerType;
 
-                            outPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-                            GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                                outPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                                GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                            }
                         }
+
+                        // 更新抢主对象数据
+                        m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList, GameData.getInstance().m_beforeQiangzhuPokerList);
                     }
 
                     // 显示出的牌
@@ -1131,8 +1136,15 @@ public class GameScript : MonoBehaviour
                         }
                         else
                         {
-                            CommonUtil.setImageSprite(m_imageMasterPokerType, GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
                             ToastScript.createToast("本局打无主牌");
+
+                            // 抢主所用的牌
+                            {
+                                GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(16, TLJCommon.Consts.PokerType.PokerType_Wang));
+                                GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(16, TLJCommon.Consts.PokerType.PokerType_Wang));
+                            }
+
+                            CommonUtil.setImageSprite(m_imageMasterPokerType, GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
                         }
                     }
 
