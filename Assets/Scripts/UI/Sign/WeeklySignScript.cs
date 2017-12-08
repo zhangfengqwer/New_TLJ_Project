@@ -39,8 +39,16 @@ public class WeeklySignScript : MonoBehaviour
         {
             GameObject signObject = signObjects[totalSignDays];
             var name = signObject.transform.GetChild(2);
-            var image_lingqu = signObject.transform.GetChild(3);
-//            var image_prop = signObject.transform.GetChild(2);
+            Transform image_lingqu;
+            if (SignData.SignWeekDays == 6)
+            {
+                image_lingqu = signObject.transform.GetChild(3);
+            }
+            else
+            {
+                image_lingqu = signObject.transform.GetChild(4);
+            }
+            //            var image_prop = signObject.transform.GetChild(2);
             var guang = signObject.transform.GetChild(0);
             //取消点击事件
             signObject.GetComponent<Button>().enabled = false;

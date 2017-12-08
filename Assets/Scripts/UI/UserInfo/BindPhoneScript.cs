@@ -180,7 +180,7 @@ public class BindPhoneScript : MonoBehaviour
         var msg = (string) jsonData["msg"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            ToastScript.createToast("绑定手机成功");
+            ToastScript.createToast("绑定手机成功,请去邮箱领取奖励！");
             UserData.phone = _phoneNum;
             UserInfoScript.Instance.InitUI();
             Destroy(this.gameObject);
