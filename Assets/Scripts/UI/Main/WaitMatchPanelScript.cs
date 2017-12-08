@@ -9,10 +9,11 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public Text m_text_time;
     public Button m_button_TuiSai;
 
-    public delegate void OnTimerEvent_TimeEnd();
+    public delegate void OnTimerEvent_TimeEnd(bool isContinueGame);
     OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
 
     bool m_isStart = false;
+    bool m_isContinueGame = false;
     float m_time;
 
     public static GameObject create(string gameRoomType)
@@ -65,7 +66,7 @@ public class WaitMatchPanelScript : MonoBehaviour {
                 
                 if (m_onTimerEvent_TimeEnd != null)
                 {
-                    m_onTimerEvent_TimeEnd();
+                    m_onTimerEvent_TimeEnd(m_isContinueGame);
                 }
 
                 Destroy(gameObject);
@@ -78,10 +79,11 @@ public class WaitMatchPanelScript : MonoBehaviour {
         m_onTimerEvent_TimeEnd = onTimerEvent_TimeEnd;
     }
 
-    public void start(float seconds)
+    public void start(float seconds, bool isContinueGame)
     {
         m_time = seconds + 1;
         m_isStart = true;
+        m_isContinueGame = isContinueGame;
 
         m_text_time.text = ((int)m_time).ToString();
     }

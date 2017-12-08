@@ -282,7 +282,7 @@ public class GameScript : MonoBehaviour
             // 级牌
             {
                 GameData.getInstance().m_levelPokerNum = (int)jd["levelPokerNum"];
-                ToastScript.createToast("本局主牌为" + GameData.getInstance().m_levelPokerNum);
+                ToastScript.createToast("本局主牌为" + GameUtil.getPokerNumWithStr(GameData.getInstance().m_levelPokerNum));
             }
 
             // 我方级数
@@ -389,20 +389,30 @@ public class GameScript : MonoBehaviour
         }
     }
 
-    public void showWaitMatchPanel(float time)
+    public void showWaitMatchPanel(float time,bool isContinueGame)
     {
         m_waitMatchPanel = WaitMatchPanelScript.create(GameData.getInstance().getGameRoomType());
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(time);
+        script.start(time, isContinueGame);
     }
 
-    public void onTimerEvent_TimeEnd()
+    public void onTimerEvent_TimeEnd(bool isContinueGame)
     {
-        LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
+        if (isContinueGame)
+        {
+            ToastScript.createToast("同桌玩家没有继续游戏");
 
-        // 让服务端匹配机器人
-        reqWaitMatchTimeOut();
+            //GameUtil.showGameObject(m_buttonStartGame.gameObject);
+            exitRoom();
+        }
+        else
+        {
+            LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
+
+            // 让服务端匹配机器人
+            reqWaitMatchTimeOut();
+        }
     }
 
     void clearData()
@@ -982,7 +992,7 @@ public class GameScript : MonoBehaviour
 
                                 //m_waitOtherPlayer = WaitOtherPlayerScript.create();
 
-                                showWaitMatchPanel(10);
+                                showWaitMatchPanel(10,false);
                             }
                             break;
 
@@ -1328,19 +1338,16 @@ public class GameScript : MonoBehaviour
                         if ((int)jd["hasPoker"] == 1)
                         {
                             GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
-
-                            string str = "有人炒底：";
+                            
                             for (int i = 0; i < jd["pokerList"].Count; i++)
                             {
                                 int num = (int)jd["pokerList"][i]["num"];
                                 int pokerType = (int)jd["pokerList"][i]["pokerType"];
 
                                 GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-
-                                str += (num + "  ");
                             }
 
-                            ToastScript.createToast(str);
+                            ToastScript.createToast("玩家炒底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
 
                             {
                                 // 庄家开始埋底
@@ -1827,7 +1834,7 @@ public class GameScript : MonoBehaviour
                                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
 
                                 //m_waitOtherPlayer = WaitOtherPlayerScript.create();
-                                showWaitMatchPanel(10);
+                                showWaitMatchPanel(10, false);
                             }
                             break;
 
@@ -1856,7 +1863,7 @@ public class GameScript : MonoBehaviour
                                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
 
                                 //m_waitOtherPlayer = WaitOtherPlayerScript.create();
-                                showWaitMatchPanel(10);
+                                showWaitMatchPanel(10,true);
                             }
                             break;
 
@@ -2045,7 +2052,7 @@ public class GameScript : MonoBehaviour
         }
         else
         {
-            //ToastScript.createToast("当前没有加入任何房间");
+            GameUtil.showGameObject(m_buttonStartGame.gameObject);
         }
     }
 
@@ -2349,7 +2356,7 @@ public class GameScript : MonoBehaviour
 
                 case (int)TLJCommon.Consts.RoomState.RoomState_end:
                 {
-                    // 不需要处理
+                    GameUtil.showGameObject(m_buttonStartGame.gameObject);
                 }
                 break;
             }
@@ -3046,12 +3053,14 @@ public class GameScript : MonoBehaviour
 
     void onSocketClose_Logic()
     {
-        LogicEnginerScript.Instance.Stop();
-        PlayServiceSocket.s_instance.Stop();
+        //LogicEnginerScript.Instance.Stop();
+        //PlayServiceSocket.s_instance.Stop();
 
-        NetErrorPanelScript.getInstance().Show();
-        NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
-        NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
+        //NetErrorPanelScript.getInstance().Show();
+        //NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
+        //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
+
+        checkNet();
     }
 
     // 点击网络断开弹框中的重连按钮:logic

@@ -88,27 +88,27 @@ public class PropDetailPanelScript : MonoBehaviour {
             // 记牌器
             case (int)TLJCommon.Consts.Prop.Prop_jipaiqi:
                 {
-                    if (OtherData.s_gameScript != null)
+                    // 增加到buff数据里
                     {
-                        // 增加到buff数据里
+                        bool isFind = false;
+                        for (int i = 0; i < UserData.buffData.Count; i++)
                         {
-                            bool isFind = false;
-                            for (int i = 0; i < UserData.buffData.Count; i++)
+                            if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jipaiqi))
                             {
-                                if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jipaiqi))
-                                {
-                                    isFind = true;
-                                    ++UserData.buffData[i].prop_id;
-                                    break;
-                                }
-                            }
-
-                            if (!isFind)
-                            {
-                                UserData.buffData.Add(new BuffData((int)TLJCommon.Consts.Prop.Prop_jipaiqi,1));
+                                isFind = true;
+                                ++UserData.buffData[i].prop_id;
+                                break;
                             }
                         }
 
+                        if (!isFind)
+                        {
+                            UserData.buffData.Add(new BuffData((int)TLJCommon.Consts.Prop.Prop_jipaiqi, 1));
+                        }
+                    }
+
+                    if (OtherData.s_gameScript != null)
+                    {
                         OtherData.s_gameScript.useProp_jipaiqi();
                     }
                 }

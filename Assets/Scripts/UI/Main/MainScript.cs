@@ -198,7 +198,7 @@ public class MainScript : MonoBehaviour
         VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
 
         checkRedPoint();
-
+        
         NetLoading.getInstance().Close();
     }
 
@@ -214,10 +214,10 @@ public class MainScript : MonoBehaviour
         m_waitMatchPanel = WaitMatchPanelScript.create(gameroomtype);
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(time);
+        script.start(time,false);
     }
 
-    void onTimerEvent_TimeEnd()
+    void onTimerEvent_TimeEnd(bool isContinueGame)
     {
         LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
 
@@ -376,7 +376,7 @@ public class MainScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
         {
             Destroy(LogicEnginerScript.Instance.gameObject);
-            Destroy(PlayServiceSocket.s_instance);
+            Destroy(PlayServiceSocket.s_instance.gameObject);
 
             GameObject obj = CommonExitPanelScript.create();
             obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
@@ -651,7 +651,7 @@ public class MainScript : MonoBehaviour
             //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接Logic服务器成功");
-
+            
             NetLoading.getInstance().Close();
             NetErrorPanelScript.getInstance().Close();
 
@@ -750,7 +750,7 @@ public class MainScript : MonoBehaviour
             //LogUtil.Log("连接服务器成功");
 
             //ToastScript.createToast("连接Play服务器成功");
-
+            
             NetLoading.getInstance().Close();
             NetErrorPanelScript.getInstance().Close();
 

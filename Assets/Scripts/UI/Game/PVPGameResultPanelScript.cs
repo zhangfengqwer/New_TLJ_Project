@@ -60,7 +60,7 @@ public class PVPGameResultPanelScript : MonoBehaviour
 
     void onInvokeTimeOut()
     {
-        m_parentScript.onTimerEvent_TimeEnd();
+        m_parentScript.onTimerEvent_TimeEnd(false);
     }
 
     public void onClickExit()
