@@ -300,7 +300,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
             totalPrice = m_shopData.price2 * m_goods_num;
         }
         
-        switch (m_shopData.money_type)
+        switch (money_type)
         {
             case 1:
                 if (UserData.gold < totalPrice)
