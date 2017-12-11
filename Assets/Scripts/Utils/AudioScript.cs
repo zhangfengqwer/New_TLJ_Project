@@ -181,6 +181,30 @@ public class AudioScript : MonoBehaviour {
         playSound("Audios/yx_jiemianguanbi");
     }
 
+    // 显示奖励
+    public void playSound_ShowReward()
+    {
+        playSound("Audios/yx_getReward");
+    }
+
+    // 出牌时选中牌
+    public void playSound_XuanPai()
+    {
+        playSound("Audios/yx_xuanpai");
+    }
+
+    // 炒底
+    public void playSound_ChaoDi()
+    {
+        playSound("Audios/yx_chaodi");
+    }
+
+    // 不炒底
+    public void playSound_BuChaoDi()
+    {
+        playSound("Audios/yx_buchaodi");
+    }
+
     //----------------------------------------------------------------------------播放 end
 
     //---------------------------------------------------

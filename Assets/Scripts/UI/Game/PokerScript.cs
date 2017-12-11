@@ -169,6 +169,7 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 #endif
         if (m_canTouch)
         {
+            AudioScript.getAudioScript().playSound_XuanPai();
             onClickPoker();
         }
     }
@@ -178,6 +179,7 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 #if UNITY_STANDALONE_WIN
         if (m_canTouch)
         {
+            AudioScript.getAudioScript().playSound_XuanPai();
             onClickPoker();
         }
 #endif

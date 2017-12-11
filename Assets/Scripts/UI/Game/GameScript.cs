@@ -501,6 +501,7 @@ public class GameScript : MonoBehaviour
 
     public void onClickJoinRoom()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         reqJoinRoom();
     }
 
@@ -518,22 +519,27 @@ public class GameScript : MonoBehaviour
 
     public void onClickOutPoker()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         reqOutPoker();
     }
 
+    // 提示
     public void onClickTiShi()
     {
+        AudioScript.getAudioScript().playSound_XuanPai();
         tishi();
     }
 
     public void onClickQiangZhu(List<TLJCommon.PokerInfo> pokerList)
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         //m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         reqQiangZhu(pokerList);
     }
 
     public void onClickChaoDi(List<TLJCommon.PokerInfo> pokerList)
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
         m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         reqChaoDi(pokerList);
     }
@@ -550,6 +556,8 @@ public class GameScript : MonoBehaviour
 
     public void onClickTuoGuan()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
         m_tuoguanObj = TuoGuanPanelScript.create(this);
 
         GameData.getInstance().m_isTuoGuan = true;
@@ -562,6 +570,8 @@ public class GameScript : MonoBehaviour
 
     public void onClickCancelTuoGuan()
     {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
         GameData.getInstance().m_isTuoGuan = false;
 
         if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserData.uid) == 0)
@@ -1360,6 +1370,7 @@ public class GameScript : MonoBehaviour
                                 GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
                             }
 
+                            AudioScript.getAudioScript().playSound_ChaoDi();
                             ToastScript.createToast("玩家炒底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
                             
                             {
@@ -1403,6 +1414,7 @@ public class GameScript : MonoBehaviour
                         }
                         else
                         {
+                            AudioScript.getAudioScript().playSound_BuChaoDi();
                             ToastScript.createToast("不炒底");
                         }
                     }
@@ -1803,9 +1815,7 @@ public class GameScript : MonoBehaviour
                     try
                     {
                         Destroy(m_pvpGameResultPanel);
-
-                        ToastScript.createToast("游戏结束，稍后请在邮箱查看奖励");
-
+                        
                         int mingci = (int)jd["mingci"];
                         string pvpreward = jd["pvpreward"].ToString();
 
@@ -1822,6 +1832,8 @@ public class GameScript : MonoBehaviour
                             GameObject obj = PVPEndPanelScript.create(this);
                             PVPEndPanelScript script = obj.GetComponent<PVPEndPanelScript>();
                             script.setData(mingci, pvpreward);
+
+                            ToastScript.createToast("游戏结束，稍后请在邮箱查看奖励");
                         }
                     }
                     catch (Exception ex)
