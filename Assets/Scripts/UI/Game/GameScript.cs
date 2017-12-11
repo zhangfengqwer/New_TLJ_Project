@@ -744,7 +744,8 @@ public class GameScript : MonoBehaviour
                 if (!CheckOutPoker.checkOutPoker(GameData.getInstance().m_isFreeOutPoker, myOutPokerList, GameData.getInstance().m_curRoundFirstOutPokerList,
                     GameData.getInstance().m_myPokerList, GameData.getInstance().m_levelPokerNum, GameData.getInstance().m_masterPokerType))
                 {
-                    ToastScript.createToast("出的牌不合规则");
+                    ToastScript.createToast("出的牌不合规则:" + myOutPokerList.Count);
+
                     return;
                 }
             }

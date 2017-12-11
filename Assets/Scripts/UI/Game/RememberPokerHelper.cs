@@ -50,7 +50,6 @@ public class RememberPokerHelper : MonoBehaviour {
 
         this.transform.localPosition = new Vector3(0, 0, 0);
         startPosition = this.transform.localPosition;
-        print("初始化记牌器完成");
     }
 
     public void Init(GameObject gameObject, Consts.PokerType pokerType)
@@ -172,11 +171,9 @@ public class RememberPokerHelper : MonoBehaviour {
 
                 List<PokerInfo> listPoker;
                 dicPokerData.TryGetValue(Type, out listPoker);
-                print("dicPokerData:" + dicPokerData.Count);
                
                 List<GameObject> listGo;
                 dictionaryGo.TryGetValue(Type, out listGo);
-                print("dictionaryGo:" + dicPokerData.Count);
                 int index = -1;
                 if (listPoker != null)
                     for (int j = 0; j < listPoker.Count; j++)
