@@ -92,7 +92,10 @@ public class WeeklySignScript : MonoBehaviour
             //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(signItem.goods_prop);
             ShowRewardPanelScript.Show(signItem.goods_prop,false);
 
-            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
+            if (OtherData.s_mainScript != null)
+            {
+                OtherData.s_mainScript.checkRedPoint();
+            }
         }
     }
 
@@ -130,8 +133,12 @@ public class WeeklySignScript : MonoBehaviour
                 }
                 UserData.propData.Add(userPropData);
             }
-            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
-            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
+
+            if (OtherData.s_mainScript != null)
+            {
+                OtherData.s_mainScript.refreshUI();
+                OtherData.s_mainScript.checkRedPoint();
+            }
         }
     }
 

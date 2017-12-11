@@ -318,7 +318,7 @@ public class MainScript : MonoBehaviour
 
     public void onClickLaBa()
     {
-        LaBaPanelScript.create(this);
+        LaBaPanelScript.create();
     }
 
     public void OnClickFirstRecharge()

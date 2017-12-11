@@ -47,7 +47,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         // 喇叭
         if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_laba)
         {
-            LaBaPanelScript.create(GameObject.Find("Canvas").GetComponent<MainScript>());
+            LaBaPanelScript.create();
         }
         // 话费
         else if ((m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_1yuanhuafei) || (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_5yuanhuafei) || (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_10yuanhuafei))
