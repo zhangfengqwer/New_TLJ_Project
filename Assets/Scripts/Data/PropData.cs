@@ -38,7 +38,10 @@ class PropData
         }
         catch (Exception ex)
         {
-            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
+            LogUtil.Log("获取道具表文件出错：" + ex.Message);
+            OtherData.s_getNetEntityFile.GetFileFail("prop.json");
+
+            //throw ex;
         }
     }
 
@@ -64,6 +67,8 @@ class PropData
 
             m_propInfoList.Add(temp);
         }
+
+        OtherData.s_getNetEntityFile.GetFileSuccess("prop.json");
     }
 
     public List<PropInfo> getPropInfoList()

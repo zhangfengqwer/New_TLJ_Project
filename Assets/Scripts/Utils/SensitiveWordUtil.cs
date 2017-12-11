@@ -24,22 +24,16 @@ public class SensitiveWordUtil
         }
         catch (Exception ex)
         {
-            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
+            LogUtil.Log("获取屏蔽词配置文件出错：" + ex.Message);
+            ToastScript.createToast("获取屏蔽词配置文件出错");
+
+            //throw ex;
         }
     }
 
     public static void InitWords(string data)
     {
-        //FileStream fileStream = null;
-        try
-        {
-            //string jsonData = Resources.Load("Entity/stopwords").ToString();
-            WordsDatas = data.Split(',');
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        WordsDatas = data.Split(',');
     }
 
     public static bool IsSensitiveWord(string str)

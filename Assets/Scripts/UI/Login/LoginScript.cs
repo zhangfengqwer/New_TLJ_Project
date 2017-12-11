@@ -38,6 +38,11 @@ public class LoginScript : MonoBehaviour
     public Toggle ToggleAgree;
     private GameObject exitGameObject;
 
+    private void Awake()
+    {
+        OtherData.s_loginScript = this;
+    }
+
     void Start()
     {
         {
@@ -76,23 +81,22 @@ public class LoginScript : MonoBehaviour
         }
         else
         {
-            // 拉取数值表
-            {
-                NetLoading.getInstance().Show();
-                NetConfig.reqNetConfig();
+            NetLoading.getInstance().Show();
 
-                PropData.getInstance().reqNet();
-                ChatData.getInstance().reqNet();
-                HuDongData.getInstance().reqNet();
-                SensitiveWordUtil.reqNet();
-                VipData.reqNet();
-            }
+            // 获取数值表
+            OtherData.s_getNetEntityFile.getNetFile();
         }
 
         // 健康忠告提示文字
         m_text_tips.text = GameUtil.getOneTips();
 
         setLogonTypeUI();
+    }
+
+    public void onGetAllNetFile()
+    {
+        NetLoading.getInstance().Close();
+        init();
     }
 
     void onInvokeHealthPanel()
@@ -115,8 +119,6 @@ public class LoginScript : MonoBehaviour
     // 等获取到服务器配置文件再调用
     public void init()
     {
-        NetLoading.getInstance().Close();
-
         try
         {
             LoginServiceSocket.create();
@@ -136,7 +138,8 @@ public class LoginScript : MonoBehaviour
 
     void OnDestroy()
     {
-//        LoginServiceSocket.s_instance.Stop();
+        OtherData.s_loginScript = null;
+        //        LoginServiceSocket.s_instance.Stop();
     }
 
     void Update()
@@ -604,9 +607,21 @@ public class LoginScript : MonoBehaviour
         //NetErrorPanelScript.getInstance().Show();
         //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
         //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+
+        checkNet();
     }
 
-
+    // 检测服务器是否连接
+    void checkNet()
+    {
+        if (!LoginServiceSocket.s_instance.isConnecion())
+        {
+            //ToastScript.createToast("与Logic服务器断开连接");
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
+        }
+    }
 
     //--------------------------------------------------------------------------------------------------------------
 

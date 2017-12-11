@@ -36,7 +36,6 @@ public class NetConfig
             UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "NetConfig_test.json", httpCallBack);
 
             LogUtil.Log("测试包");
-            ToastScript.createToast("这是测试包");
 
             // 使用本地配置文件
             //            string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
@@ -73,7 +72,7 @@ public class NetConfig
                     str = sr.ReadToEnd().ToString();
                     sr.Close();
                 }
-
+                
                 JsonData jd = JsonMapper.ToObject(str);
 
                 // 登录服务器
@@ -91,15 +90,16 @@ public class NetConfig
                 // 数据库服务器
                 s_mySqlService_ip = jd["MySqlService"]["ip"].ToString();
                 s_mySqlService_port = (int) jd["MySqlService"]["port"];
-
-                GameObject.Find("Login").GetComponent<LoginScript>().init();
-//                GameObject.Find("LogicEnginer").GetComponent<LogicEnginerScript>().InitSocket();
             }
+
+            OtherData.s_getNetEntityFile.GetFileSuccess("NetConfig.json");
         }
         catch (Exception ex)
         {
-            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
-            ToastScript.createToast("读取网络配置文件出错：" + ex.Message);
+            LogUtil.Log("获取网络配置文件出错：" + ex.Message);
+            OtherData.s_getNetEntityFile.GetFileFail("NetConfig.json");
+
+            //throw ex;
         }
     }
 }

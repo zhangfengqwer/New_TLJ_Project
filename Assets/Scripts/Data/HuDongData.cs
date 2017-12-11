@@ -37,7 +37,10 @@ public class HuDongData
         }
         catch (Exception ex)
         {
-            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
+            LogUtil.Log("获取互动配置文件出错：" + ex.Message);
+            OtherData.s_getNetEntityFile.GetFileFail("hudong.json");
+
+            //throw ex;
         }
     }
 
@@ -58,6 +61,8 @@ public class HuDongData
 
             m_hudongDataList.Add(temp);
         }
+
+        OtherData.s_getNetEntityFile.GetFileSuccess("hudong.json");
     }
 
     public List<HuDongProp> getHuDongDataList()

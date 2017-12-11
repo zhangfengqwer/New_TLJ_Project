@@ -37,7 +37,10 @@ class ChatData
         }
         catch (Exception ex)
         {
-            LogUtil.Log("读取网络配置文件出错：" + ex.Message);
+            LogUtil.Log("获取聊天配置文件出错：" + ex.Message);
+            OtherData.s_getNetEntityFile.GetFileFail("chat.json");
+
+            //throw ex;
         }
     }
 
@@ -58,6 +61,8 @@ class ChatData
 
             m_chatTextList.Add(temp);
         }
+
+        OtherData.s_getNetEntityFile.GetFileSuccess("chat.json");
     }
 
     public List<ChatText> getChatTextList()

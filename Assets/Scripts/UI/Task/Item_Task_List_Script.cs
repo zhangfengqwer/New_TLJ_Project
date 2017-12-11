@@ -129,6 +129,8 @@ public class Item_Task_List_Script : MonoBehaviour {
 
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
+            ToastScript.createToast("领取成功");
+
             m_parentScript.setTaskOver(task_id);
 
             if (OtherData.s_mainScript != null)
@@ -142,7 +144,7 @@ public class Item_Task_List_Script : MonoBehaviour {
             if (!string.IsNullOrEmpty(reward))
             {
                 {
-                    
+
                     List<string> tempList = new List<string>();
                     CommonUtil.splitStr(reward, tempList, ':');
 
@@ -150,8 +152,12 @@ public class Item_Task_List_Script : MonoBehaviour {
                 }
 
                 //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
-                ShowRewardPanelScript.Show(reward,false);
+                ShowRewardPanelScript.Show(reward, false);
             }
+        }
+        else
+        {
+            ToastScript.createToast("领取失败");
         }
     }
 }

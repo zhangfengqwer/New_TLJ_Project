@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using LitJson;
+using System;
 
 public class VipData
 {
@@ -16,8 +17,19 @@ public class VipData
 
     private static void httpCallBack(string tag, string data)
     {
-        VipPanelScript.vipDatas = JsonMapper.ToObject<List<VipData>>(data);
-        LogUtil.Log("vipDatas:" + VipPanelScript.vipDatas.Count);
+        try
+        {
+            VipPanelScript.vipDatas = JsonMapper.ToObject<List<VipData>>(data);
+
+            OtherData.s_getNetEntityFile.GetFileSuccess("VipRewardData.json");
+        }
+        catch (Exception ex)
+        {
+            LogUtil.Log("获取VIP数据出错：" + ex.Message);
+            OtherData.s_getNetEntityFile.GetFileFail("VipRewardData.json");
+
+            //throw ex;
+        }
     }
 }
 

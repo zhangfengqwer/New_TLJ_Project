@@ -7,6 +7,7 @@ public class LoginServiceSocket : MonoBehaviour {
     public static LoginServiceSocket s_instance = null;
 
     SocketUtil m_socketUtil;
+    bool m_isConnecion = false;
     bool m_isCloseSocket = false;
     int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
     List<string> m_dataList = new List<string>();
@@ -100,6 +101,11 @@ public class LoginServiceSocket : MonoBehaviour {
         m_socketUtil.stop();
     }
 
+    public bool isConnecion()
+    {
+        return m_isConnecion;
+    }
+
     public void sendMessage(string str)
     {
         m_socketUtil.sendMessage(str);
@@ -126,11 +132,13 @@ public class LoginServiceSocket : MonoBehaviour {
         {
             LogUtil.Log("Login:连接服务器成功");
             m_connectState = 1;
+            m_isConnecion = true;
         }
         else
         {
             LogUtil.Log("Login:连接服务器失败，尝试重新连接");
             m_connectState = 0;
+            m_isConnecion = false;
         }
     }
 
@@ -146,10 +154,12 @@ public class LoginServiceSocket : MonoBehaviour {
         LogUtil.Log("Login:被动与服务器断开连接,尝试重新连接");
 
         m_isCloseSocket = true;
+        m_isConnecion = false;
     }
 
     void onSocketStop()
     {
         LogUtil.Log("Login:主动与服务器断开连接");
+        m_isConnecion = false;
     }
 }
