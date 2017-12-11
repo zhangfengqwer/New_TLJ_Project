@@ -66,8 +66,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
         }
         else
         {
-            var s = (string)jd["msg"];
-            ToastScript.createToast("s");
+            ToastScript.createToast((string)jd["msg"]);
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RememberPokerHelper : MonoBehaviour {
+public class TestPoker : MonoBehaviour {
     public GameObject HeiTaoContent;
     public GameObject HongContent;
     public GameObject MeiContent;
@@ -16,16 +16,19 @@ public class RememberPokerHelper : MonoBehaviour {
     public Image xiaoWang2;
     public Image daWang1;
     public Image daWang2;
+    public Text text;
 
     private Vector3 startPosition;
     private  List<Image> xiaoWangList = new List<Image>();
     private  List<Image> daWangList = new List<Image>();
     private  Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
     private  Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
+    private List<PokerInfo> selectedPokers = new List<PokerInfo>();
+
 
     public static GameObject create()
     {
-        GameObject prefab = Resources.Load("Prefabs/Game/RememberPokerHelper") as GameObject;
+        GameObject prefab = Resources.Load("Prefabs/Game/TestPoker") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
         return obj;
     }
@@ -47,6 +50,57 @@ public class RememberPokerHelper : MonoBehaviour {
         xiaoWangList.Add(xiaoWang2);
         daWangList.Add(daWang1);
         daWangList.Add(daWang2);
+        var xiaopokerInfo = new PokerInfo(15, Consts.PokerType.PokerType_Wang);
+        var dapokerInfo = new PokerInfo(16, Consts.PokerType.PokerType_Wang);
+
+        for (int i = 0; i < xiaoWangList.Count; i++)
+        {
+            var xiaoWang = xiaoWangList[i];
+            var dawang = daWangList[i];
+            var btn = xiaoWang.gameObject.AddComponent<Button>();
+            var image = xiaoWang.GetComponent<Image>();
+            bool isClick = false;
+            btn.onClick.AddListener(() =>
+            {
+                if (!isClick)
+                {
+                    image.color = Color.gray;
+                    selectedPokers.Add(xiaopokerInfo);
+                    isClick = true;
+                    text.text = "当前选择:" + selectedPokers.Count + "张";
+                }
+                else
+                {
+                    image.color = Color.white;
+                    selectedPokers.Remove(xiaopokerInfo);
+                    isClick = false;
+                    text.text = "当前选择:" + selectedPokers.Count + "张";
+                }
+            });
+
+            var btn1 = dawang.gameObject.AddComponent<Button>();
+            var image1 = dawang.GetComponent<Image>();
+            bool isClick1 = false;
+            btn1.onClick.AddListener(() =>
+            {
+                if (!isClick)
+                {
+                    image1.color = Color.gray;
+                    selectedPokers.Add(dapokerInfo);
+                    isClick1 = true;
+                    text.text = "当前选择:" + selectedPokers.Count + "张";
+                }
+                else
+                {
+                    image.color = Color.white;
+                    selectedPokers.Remove(dapokerInfo);
+                    isClick1 = false;
+                    text.text = "当前选择:" + selectedPokers.Count + "张";
+                }
+            });
+
+
+        }
 
         this.transform.localPosition = new Vector3(0, 0, 0);
         startPosition = this.transform.localPosition;
@@ -74,7 +128,30 @@ public class RememberPokerHelper : MonoBehaviour {
         //初始化UI
         for (int i = 0; i < heiTaoPokers.Count; i++)
         {
+            PokerInfo poker = heiTaoPokers[i];
+
             GameObject go = GameObject.Instantiate(ItemPoker, gameObject.transform);
+            var btn = go.AddComponent<Button>();
+            var image = go.GetComponent<Image>();
+            bool isClick = false;
+            btn.onClick.AddListener(() =>
+            {
+                if (!isClick)
+                {
+                    image.color = Color.gray;
+                    selectedPokers.Add(poker);
+                    isClick = true;
+                    text.text = "当前选择:" + selectedPokers.Count + "张";
+                }
+                else
+                {
+                    image.color = Color.white;
+                    selectedPokers.Remove(poker);
+                    isClick = false;
+                    text.text = "当前选择:" + selectedPokers.Count + "张";
+                }
+            });
+
             PokerItems.Add(go);
             string temp = null;
             switch (pokerType)
@@ -93,7 +170,6 @@ public class RememberPokerHelper : MonoBehaviour {
                     break;
             }
             go.transform.Find("Type").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/"+temp, typeof(Sprite)) as Sprite;
-            PokerInfo poker = heiTaoPokers[i];
             int num = poker.m_num;
             if (num >= 2 && num <= 10)
             {
@@ -128,19 +204,21 @@ public class RememberPokerHelper : MonoBehaviour {
 
     public void OnClickClose()
     {
-        this.transform.localScale = Vector3.zero;
+        Destroy(this.gameObject);
     }
 
-    public void OnClickShow()
+    public void OnClickConfirm()
     {
-        this.transform.localPosition = startPosition;
-        if (this.transform.localScale == Vector3.one)
+        if (selectedPokers.Count == 25)
         {
-            this.transform.localScale = Vector3.zero;
+            foreach (var poker in selectedPokers)
+            {
+                LogUtil.Log(poker.m_pokerType + ":" + poker.m_num);
+            }
         }
         else
         {
-            this.transform.localScale = Vector3.one;
+            ToastScript.createToast("牌不是25张");
         }
     }
 
@@ -174,6 +252,7 @@ public class RememberPokerHelper : MonoBehaviour {
                
                 List<GameObject> listGo;
                 dictionaryGo.TryGetValue(Type, out listGo);
+
                 int index = -1;
                 if (listPoker != null)
                     for (int j = 0; j < listPoker.Count; j++)
