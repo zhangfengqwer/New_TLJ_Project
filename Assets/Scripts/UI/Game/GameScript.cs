@@ -1360,7 +1360,7 @@ public class GameScript : MonoBehaviour
                             }
 
                             ToastScript.createToast("玩家炒底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
-
+                            
                             {
                                 // 庄家开始埋底
                                 if (uid.CompareTo(UserData.uid) == 0)

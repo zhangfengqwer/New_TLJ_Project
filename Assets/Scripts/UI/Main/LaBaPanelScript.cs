@@ -5,19 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LaBaPanelScript : MonoBehaviour {
-
-    public MainScript m_mainScript = null;
-
+    
     public GameObject m_havePanel;
     public GameObject m_nohavePanel;
     public InputField m_inputField;
 
-    public static GameObject create(MainScript mainScript)
+    public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/LaBaPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
-
-        obj.GetComponent<LaBaPanelScript>().m_mainScript = mainScript;
+        
 
         return obj;
     }

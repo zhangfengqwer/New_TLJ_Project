@@ -27,7 +27,10 @@ public class GetNoticeRequest : Request {
                 CallBack(result);
             }
 
-            GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
+            if (OtherData.s_mainScript != null)
+            {
+                OtherData.s_mainScript.checkRedPoint();
+            }
             flag = false;
         }
     }

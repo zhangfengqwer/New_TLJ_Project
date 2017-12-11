@@ -18,7 +18,11 @@ public class GetUserInfoRequest : Request
     {
         if (flag)
         {
-            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+            if (OtherData.s_mainScript != null)
+            {
+                OtherData.s_mainScript.refreshUI();
+            }
+
             LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
             flag = false;

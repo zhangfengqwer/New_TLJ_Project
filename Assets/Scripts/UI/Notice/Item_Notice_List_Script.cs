@@ -74,6 +74,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
         NoticeDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
 
-        GameObject.Find("Canvas").GetComponent<MainScript>().checkRedPoint();
+        if (OtherData.s_mainScript != null)
+        {
+            OtherData.s_mainScript.checkRedPoint();
+        }
     }
 }

@@ -191,27 +191,27 @@ class GameUtil
                 UserData.gold = 0;
             }
 
-            if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
+            if (OtherData.s_mainScript != null)
             {
-                GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+                OtherData.s_mainScript.refreshUI();
             }
         }
         else if (id == 2)
         {
             UserData.yuanbao += num;
 
-            if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
+            if (OtherData.s_mainScript != null)
             {
-                GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+                OtherData.s_mainScript.refreshUI();
             }
         }
         else if (id == (int)TLJCommon.Consts.Prop.Prop_huizhang)
         {
             UserData.medal += num;
 
-            if (GameObject.Find("Canvas").GetComponent<MainScript>() != null)
+            if (OtherData.s_mainScript != null)
             {
-                GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+                OtherData.s_mainScript.refreshUI();
             }
         }
         else
@@ -231,7 +231,10 @@ class GameUtil
                 }
             }
 
-            GameObject.Find("Canvas").GetComponent<MainScript>().refreshUI();
+            if (OtherData.s_mainScript != null)
+            {
+                OtherData.s_mainScript.refreshUI();
+            }
         }
     }
 

@@ -11,8 +11,7 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     public Text m_text_baomingfei;
     public Image m_image_baomingfei_icon;
     public PVPGameRoomData m_PVPGameRoomData;
-
-    MainScript m_mainScript;
+    
 
     public static GameObject create()
     {
@@ -50,7 +49,6 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        m_mainScript = GameObject.Find("Canvas").GetComponent<MainScript>();
     }
 	
 	// Update is called once per frame
