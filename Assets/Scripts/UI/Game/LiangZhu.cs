@@ -156,6 +156,8 @@ public class LiangZhu : MonoBehaviour
             {
                 pokerInfos.Add(liangzhuPoker[i]);
             }
+
+            if (pokerInfos.Count == 2) break;
         }
         return pokerInfos;
     }
