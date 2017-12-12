@@ -23,6 +23,7 @@ public class GameScript : MonoBehaviour
     public Button m_buttonChat;
     public Button m_buttonTuoGuan;
     public Button m_buttonJiPaiQi;
+    public Button m_buttonCustomPoker;
     public Text m_textScore;
     public Image m_imageMasterPokerType;
     public Text m_text_myLevelPoker;
@@ -521,6 +522,11 @@ public class GameScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
         reqOutPoker();
+    }
+
+    public void onClickCustomPoker()
+    {
+        TestPoker.create();
     }
 
     // 提示

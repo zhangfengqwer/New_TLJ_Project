@@ -83,7 +83,7 @@ public class TestPoker : MonoBehaviour {
             bool isClick1 = false;
             btn1.onClick.AddListener(() =>
             {
-                if (!isClick)
+                if (!isClick1)
                 {
                     image1.color = Color.gray;
                     selectedPokers.Add(dapokerInfo);
@@ -92,7 +92,7 @@ public class TestPoker : MonoBehaviour {
                 }
                 else
                 {
-                    image.color = Color.white;
+                    image1.color = Color.white;
                     selectedPokers.Remove(dapokerInfo);
                     isClick1 = false;
                     text.text = "当前选择:" + selectedPokers.Count + "张";
@@ -214,7 +214,10 @@ public class TestPoker : MonoBehaviour {
             foreach (var poker in selectedPokers)
             {
                 LogUtil.Log(poker.m_pokerType + ":" + poker.m_num);
+                
             }
+            CustomPokerScript.reqCustomPoker(UserData.uid, selectedPokers);
+            Destroy(this.gameObject);
         }
         else
         {
