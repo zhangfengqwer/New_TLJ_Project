@@ -2730,7 +2730,7 @@ public class GameScript : MonoBehaviour
         }
 
         // 无主牌
-        if ((ZhuPokerType == -1) || (ZhuPokerType == 15) || (ZhuPokerType == 16))
+        if ((ZhuPokerType == -1) || (ZhuPokerType == 4) || (ZhuPokerType == 15) || (ZhuPokerType == 16))
         {
             GameData.getInstance().m_myPokerList.Clear();
 
