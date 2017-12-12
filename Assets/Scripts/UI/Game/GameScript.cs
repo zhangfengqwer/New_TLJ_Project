@@ -1743,7 +1743,7 @@ public class GameScript : MonoBehaviour
                                 {
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                    script.setData(true, GameData.getInstance().m_getAllScore, (int)jd["score"]);
+                                    script.setData(true, GameData.getInstance().m_getAllScore, (int)jd["score"],GameData.getInstance().m_gameRoomType);
 
                                     // 更新金币数量
                                     {
@@ -1772,7 +1772,7 @@ public class GameScript : MonoBehaviour
                                 {
                                     GameObject obj = GameResultPanelScript.create(this);
                                     GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                    script.setData(false, GameData.getInstance().m_getAllScore, (int)jd["score"]);
+                                    script.setData(false, GameData.getInstance().m_getAllScore, (int)jd["score"], GameData.getInstance().m_gameRoomType);
 
                                     // 更新金币数量
                                     {
@@ -1900,7 +1900,7 @@ public class GameScript : MonoBehaviour
 
                         case (int)TLJCommon.Consts.Code.Code_CommonFail:
                             {
-                                ToastScript.createToast("同桌玩家退出，无法继续游戏");
+                                ToastScript.createToast("有玩家退出，无法继续游戏");
 
                                 // 启用开始游戏按钮
                                 m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);

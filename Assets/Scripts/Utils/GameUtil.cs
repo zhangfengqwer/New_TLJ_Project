@@ -362,4 +362,58 @@ class GameUtil
 
         return "";
     }
+
+    public static bool checkCanEnterRoom(string gameRoomType)
+    {
+        if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
+        {
+            if (UserData.gold < 1500)
+            {
+                ToastScript.createToast("金币不足1500，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi) == 0)
+        {
+            if (UserData.gold < 35000)
+            {
+                ToastScript.createToast("金币不足35000，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi) == 0)
+        {
+            if (UserData.gold < 100000)
+            {
+                ToastScript.createToast("金币不足100000，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0)
+        {
+            if (UserData.gold < 1500)
+            {
+                ToastScript.createToast("金币不足1500，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi) == 0)
+        {
+            if (UserData.gold < 35000)
+            {
+                ToastScript.createToast("金币不足35000，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi) == 0)
+        {
+            if (UserData.gold < 100000)
+            {
+                ToastScript.createToast("金币不足100000，请前去购买");
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

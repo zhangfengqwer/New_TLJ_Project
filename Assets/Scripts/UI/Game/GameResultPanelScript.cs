@@ -16,6 +16,8 @@ public class GameResultPanelScript : MonoBehaviour {
     public Text m_text_player_right1;
     public Text m_text_player_right2;
 
+    public string m_gameRoomType;
+
     public static GameObject create(GameScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/GameResultPanel") as GameObject;
@@ -32,8 +34,10 @@ public class GameResultPanelScript : MonoBehaviour {
 		
 	}
 
-    public void setData(bool isWin,int score,int gold)
+    public void setData(bool isWin,int score,int gold,string gameRoomType)
     {
+        m_gameRoomType = gameRoomType;
+
         if (isWin)
         {
             CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_win");
@@ -66,12 +70,24 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void onClickJiXu()
     {
+        if (!GameUtil.checkCanEnterRoom(m_gameRoomType))
+        {
+            onClickExit();
+            return;
+        }
+
         m_parentScript.reqContinueGame();
         Destroy(gameObject);
     }
 
     public void onClickHuanZhuo()
     {
+        if (!GameUtil.checkCanEnterRoom(m_gameRoomType))
+        {
+            onClickExit();
+            return;
+        }
+
         m_parentScript.reqChangeRoom();
         Destroy(gameObject);
     }
