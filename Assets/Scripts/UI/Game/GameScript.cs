@@ -147,7 +147,8 @@ public class GameScript : MonoBehaviour
 
     void checkGameRoomType()
     {
-        CommonUtil.setImageSprite(m_gameRoomLogo, GameUtil.getGameRoomTypeLogoPath(GameData.getInstance().getGameRoomType()));
+        // 设置房间类型logo
+        GameUtil.setGameRoomTypeLogoPath(GameData.getInstance().getGameRoomType(), m_gameRoomLogo);
 
         // 休闲场
         if (!isPVP())
@@ -3017,8 +3018,8 @@ public class GameScript : MonoBehaviour
         // 强制离线
         if (tag.CompareTo(TLJCommon.Consts.Tag_ForceOffline) == 0)
         {
-            Destroy(LogicEnginerScript.Instance);
-            Destroy(PlayServiceSocket.s_instance);
+            Destroy(LogicEnginerScript.Instance.gameObject);
+            Destroy(PlayServiceSocket.s_instance.gameObject);
 
             GameObject obj = CommonExitPanelScript.create();
             obj.GetComponent<CommonExitPanelScript>().ButtonConfirm.onClick.RemoveAllListeners();
