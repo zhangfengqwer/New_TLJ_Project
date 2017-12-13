@@ -565,26 +565,14 @@ public class GameScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
-        m_tuoguanObj = TuoGuanPanelScript.create(this);
-
-        GameData.getInstance().m_isTuoGuan = true;
-
-        if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserData.uid) == 0)
-        {
-            autoOutPoker();
-        }
+        reqSetTuoGuanState(true);
     }
 
     public void onClickCancelTuoGuan()
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
-        GameData.getInstance().m_isTuoGuan = false;
-
-        if (GameData.getInstance().m_curOutPokerPlayerUid.CompareTo(UserData.uid) == 0)
-        {
-            CancelInvoke("onInvokeTuoGuan");
-        }
+        reqSetTuoGuanState(false);
     }
 
     public void OnClickJiPaiQi()
@@ -779,6 +767,18 @@ public class GameScript : MonoBehaviour
         {
             ToastScript.createToast("请选择你要出的牌");
         }
+    }
+
+    public void reqSetTuoGuanState(bool isTuoGuan)
+    {
+        JsonData data = new JsonData();
+
+        data["tag"] = m_tag;
+        data["uid"] = UserData.uid;
+        data["playAction"] = (int)TLJCommon.Consts.PlayAction.PlayAction_SetTuoGuanState;
+        data["isTuoGuan"] = isTuoGuan;
+
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     // 获取游戏内玩家信息
@@ -1573,11 +1573,6 @@ public class GameScript : MonoBehaviour
                                 m_timerScript.start(GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, true);
                                 setTimerPos(uid);
 
-                                if (GameData.getInstance().m_isTuoGuan)
-                                {
-                                    Invoke("onInvokeTuoGuan", GameData.getInstance().m_tuoGuanOutPokerTime);
-                                }
-
                                 if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
                                     (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
                                 {
@@ -1636,6 +1631,43 @@ public class GameScript : MonoBehaviour
                             }
 
                             showOtherOutPoker(outPokerList, uid);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ToastScript.createToast("异常：" + ex.Message);
+                    }
+                }
+                break;
+
+            // 改变托管状态
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_SetTuoGuanState:
+                {
+                    try
+                    {
+                        int code = (int)jd["code"];
+
+                        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+                        {
+                            string uid = (string)jd["uid"];
+                            bool isTuoGuan = (bool)jd["isTuoGuan"];
+
+                            // 托管
+                            if (isTuoGuan)
+                            {
+                                m_tuoguanObj = TuoGuanPanelScript.create(this);
+
+                                GameData.getInstance().m_isTuoGuan = true;
+                            }
+                            // 取消托管
+                            else
+                            {
+                                GameData.getInstance().m_isTuoGuan = false;
+                            }
+                        }
+                        else
+                        {
+                            ToastScript.createToast("改变托管状态失败");
                         }
                     }
                     catch (Exception ex)
@@ -3145,11 +3177,6 @@ public class GameScript : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    void onInvokeTuoGuan()
-    {
-        autoOutPoker();
-    }
-
     // 时间到，自动出牌
     void autoOutPoker()
     {
@@ -3258,14 +3285,12 @@ public class GameScript : MonoBehaviour
             // 出牌
             case TimerScript.TimerType.TimerType_OutPoker:
                 {
-                    if (!GameData.getInstance().m_isTuoGuan)
-                    {
-                        m_tuoguanObj = TuoGuanPanelScript.create(this);
+                    //if (!GameData.getInstance().m_isTuoGuan)
+                    //{
+                    //    m_tuoguanObj = TuoGuanPanelScript.create(this);
 
-                        GameData.getInstance().m_isTuoGuan = true;
-                    }
-
-                    //autoOutPoker();
+                    //    GameData.getInstance().m_isTuoGuan = true;
+                    //}
                 }
                 break;
         }
