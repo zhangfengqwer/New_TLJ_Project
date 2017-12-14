@@ -65,9 +65,8 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void onClickChuJi()
     {
-        if (UserData.gold < 1500)
+        if (!GameUtil.checkCanEnterRoom(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi))
         {
-            ToastScript.createToast("金币不足1500，请前去购买");
             return;
         }
 
@@ -90,9 +89,8 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void onClickZhongJi()
     {
-        if (UserData.gold < 35000)
+        if (!GameUtil.checkCanEnterRoom(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi))
         {
-            ToastScript.createToast("金币不足35000，请前去购买");
             return;
         }
 
@@ -126,9 +124,8 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void onClickGaoJi()
     {
-        if (UserData.gold < 100000)
+        if (!GameUtil.checkCanEnterRoom(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi))
         {
-            ToastScript.createToast("金币不足100000，请前去购买");
             return;
         }
 

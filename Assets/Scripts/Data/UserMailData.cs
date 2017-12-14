@@ -24,7 +24,7 @@ public class UserMailData {
         m_myMailDataList.Clear();
 
         JsonData jd = JsonMapper.ToObject(json);
-        
+
         for (int i = 0; i < jd["mailData"].Count; i++)
         {
             MailData mailData = new MailData();

@@ -15,7 +15,7 @@ public class GameData
     }
 
     public string m_tag = "";
-    string m_gameRoomType = "";
+    public string m_gameRoomType = "";
     public bool m_isPVP = false;
 
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌
@@ -23,7 +23,7 @@ public class GameData
     public List<TLJCommon.PokerInfo> m_curRoundFirstOutPokerList = new List<TLJCommon.PokerInfo>();     // 当前出牌回合第一个人出的牌
     public List<GameObject> m_otherPlayerUIObjList = new List<GameObject>();                            // 另外3各玩家的头像GameObject
     public List<GameObject> m_myPokerObjList = new List<GameObject>();                                  // 我的手牌GameObject
-    public List<List<GameObject>> m_curRoundOutPokerList = new List<List<GameObject>>();                // 当前回合每个玩家出牌列表的列表
+    //public List<List<GameObject>> m_curRoundOutPokerList = new List<List<GameObject>>();                // 当前回合每个玩家出牌列表的列表
     public List<PlayerData> m_playerDataList = new List<PlayerData>();                                  // 本桌4个玩家的信息
 
 
@@ -154,4 +154,6 @@ public class PlayerData
     public int m_meiliZhi;
 
     public int m_score;
+
+    public List<GameObject> m_outPokerObjList = new List<GameObject>();
 }

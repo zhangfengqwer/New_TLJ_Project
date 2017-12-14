@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 class GameUtil
 {
@@ -279,7 +280,7 @@ class GameUtil
         return false;
     }
 
-    public static string getGameRoomTypeLogoPath(string gameroomtype)
+    public static void setGameRoomTypeLogoPath(string gameroomtype,Image gameRoomLogo)
     {
         string path = "";
 
@@ -309,22 +310,42 @@ class GameUtil
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_JinBi_8) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_tiaozhan_2000";
+            path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
+
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "10000";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1,1,1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f,0);
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_JinBi_16) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_tiaozhan_5000";
+            path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
+
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "20000";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f, 0);
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_huafei_1";
+            path = "Sprites/Game/RoomLogo/roomlogo_huafeichang";
+
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "1";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 57;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-34.4f, 53.2f, 0);
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_16) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_huafei_5";
+            path = "Sprites/Game/RoomLogo/roomlogo_huafeichang";
+
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "5";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 57;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-34.4f, 53.2f, 0);
         }
 
-        return path;
+        CommonUtil.setImageSprite(gameRoomLogo, path);
     }
 
     public static void showGameObject(GameObject obj)
@@ -361,5 +382,59 @@ class GameUtil
         }
 
         return "";
+    }
+
+    public static bool checkCanEnterRoom(string gameRoomType)
+    {
+        if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
+        {
+            if (UserData.gold < 1500)
+            {
+                ToastScript.createToast("金币不足1500，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi) == 0)
+        {
+            if (UserData.gold < 35000)
+            {
+                ToastScript.createToast("金币不足35000，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi) == 0)
+        {
+            if (UserData.gold < 100000)
+            {
+                ToastScript.createToast("金币不足100000，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0)
+        {
+            if (UserData.gold < 1500)
+            {
+                ToastScript.createToast("金币不足1500，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi) == 0)
+        {
+            if (UserData.gold < 35000)
+            {
+                ToastScript.createToast("金币不足35000，请前去购买");
+                return false;
+            }
+        }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi) == 0)
+        {
+            if (UserData.gold < 100000)
+            {
+                ToastScript.createToast("金币不足100000，请前去购买");
+                return false;
+            }
+        }
+
+        return true;
     }
 }
