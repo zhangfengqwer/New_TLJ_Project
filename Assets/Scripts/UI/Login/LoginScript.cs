@@ -277,6 +277,8 @@ public class LoginScript : MonoBehaviour
         AudioScript.getAudioScript().playSound_ButtonClick();
         PlatformHelper.Login("AndroidCallBack", "GetLoginResult", "weixin");
 
+        NetLoading.getInstance().Show();
+
         PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_WeChat);
     }
 
@@ -285,6 +287,8 @@ public class LoginScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
         PlatformHelper.Login("AndroidCallBack", "GetLoginResult", "qq");
+
+        NetLoading.getInstance().Show();
 
         PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_QQ);
     }
