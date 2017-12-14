@@ -49,6 +49,8 @@ public class RankListJifenScript : MonoBehaviour
             var Count = goChild.transform.Find("Count");
             var Ranking = goChild.transform.Find("Ranking");
             var Image_icon = goChild.transform.Find("Image_icon");
+            var Image_vip = goChild.transform.Find("Image_vip").GetComponent<Image>();
+            Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(goldRankItemData.recharge));
             Image rankImage = Ranking.GetComponent<Image>();
 
             Count.GetComponent<Text>().text = "" + goldRankItemData.gold;

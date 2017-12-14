@@ -55,7 +55,8 @@ public class RankListCaifuScript : MonoBehaviour
             var Ranking = goChild.transform.Find("Ranking");
             var Image_icon = goChild.transform.Find("Image_icon");
             Image rankImage = Ranking.GetComponent<Image>();
-
+            var Image_vip = goChild.transform.Find("Image_vip").GetComponent<Image>();
+            Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(medalRankItemData.recharge));
             Count.GetComponent<Text>().text = "" + medalRankItemData.medal;
             Image_Head.GetComponent<Image>().sprite =
                 Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);

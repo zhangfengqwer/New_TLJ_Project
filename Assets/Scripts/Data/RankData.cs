@@ -10,6 +10,7 @@ public class GoldRankItemData
     public string name { set; get; }
     public int head { set; get; }
     public int gold { set; get; }
+    public int recharge { set; get; }
 }
 
 public class MedalRankItemData
@@ -17,4 +18,5 @@ public class MedalRankItemData
     public string name { set; get; }
     public int head { set; get; }
     public int medal { set; get; }
+    public int recharge { set; get; }
 }
