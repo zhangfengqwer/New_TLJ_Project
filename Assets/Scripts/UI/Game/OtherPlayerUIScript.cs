@@ -20,6 +20,7 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public Text m_textName;
     public Text m_textGoldNum;
     public Image m_imageZhuangJiaIcon;
+    public Image m_imageVipLevel;
 
     public string m_uid;
     public Direction m_direction = Direction.Direction_Null;
@@ -47,6 +48,11 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void setName(string name)
     {
         m_textName.text = name;
+    }
+
+    public void setVipLevel(int vipLevel)
+    {
+        CommonUtil.setImageSprite(m_imageVipLevel, "Sprites/Vip/user_vip_" + vipLevel);
     }
 
     public void setGoldNum(int goldNum)

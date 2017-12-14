@@ -128,6 +128,7 @@ public class GameData
 
         getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
         getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setName(playerData.m_name);
+        getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().setVipLevel(playerData.m_vipLevel);
 
         if (isPVP)
         {
@@ -152,6 +153,7 @@ public class PlayerData
     public string m_head;
 
     public int m_gold;
+    public int m_vipLevel;
     public int m_allGameCount;
     public int m_winCount;
     public int m_runCount;

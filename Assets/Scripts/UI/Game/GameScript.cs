@@ -2035,6 +2035,7 @@ public class GameScript : MonoBehaviour
             GameData.getInstance().getPlayerDataByUid(uid).m_name = (string)jd["name"];
             GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int)jd["head"];
             GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int)jd["gold"];
+            GameData.getInstance().getPlayerDataByUid(uid).m_vipLevel = (int)jd["vipLevel"];
             GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int)jd["gameData"]["allGameCount"];
             GameData.getInstance().getPlayerDataByUid(uid).m_winCount = (int)jd["gameData"]["winCount"];
             GameData.getInstance().getPlayerDataByUid(uid).m_runCount = (int)jd["gameData"]["runCount"];
