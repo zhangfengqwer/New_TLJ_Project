@@ -72,19 +72,21 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            LogUtil.Log("进入经典初级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi);
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            LogUtil.Log("进入抄底初级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi);
         }
        
         Destroy(gameObject);
 
-        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-        SceneManager.LoadScene("GameScene");
+        if (OtherData.s_mainScript != null)
+        {
+            OtherData.s_mainScript.reqIsJoinRoom();
+        }
+        //GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+        //SceneManager.LoadScene("GameScene");
     }
 
     public void onClickZhongJi()
@@ -96,30 +98,21 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            LogUtil.Log("进入经典中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi);
-
-//            if (UserData.gameData.xianxianJDPrimary < 100)
-//            {
-//                ToastScript.createToast("新手场必须满足100场");
-//                return;
-//            }
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            LogUtil.Log("进入抄底中级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi);
-//            if (UserData.gameData.xianxianCDPrimary < 100)
-//            {
-//                ToastScript.createToast("新手场必须满足100场");
-//                return;
-//            }
         }
      
         Destroy(gameObject);
-        
-        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-        SceneManager.LoadScene("GameScene");
+
+        if (OtherData.s_mainScript != null)
+        {
+            OtherData.s_mainScript.reqIsJoinRoom();
+        }
+        //GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+        //SceneManager.LoadScene("GameScene");
     }
 
     public void onClickGaoJi()
@@ -131,31 +124,20 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
         {
-            LogUtil.Log("进入经典高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi);
-
-//            if (UserData.gameData.xianxianJDMiddle < 300)
-//            {
-//                ToastScript.createToast("精英场必须满足300场");
-//                return;
-//            }
         }
         else if (m_gameChangCiType == GameChangCiType.GameChangCiType_chaodi)
         {
-            LogUtil.Log("进入抄底高级场");
             GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi);
-//            if (UserData.gameData.xianxianCDMiddle < 300)
-//            {
-//                ToastScript.createToast("精英场必须满足300场");
-//                return;
-//            }
         }
-       
 
         Destroy(gameObject);
 
-       
-        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-        SceneManager.LoadScene("GameScene");
+        if (OtherData.s_mainScript != null)
+        {
+            OtherData.s_mainScript.reqIsJoinRoom();
+        }
+        //GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+        //SceneManager.LoadScene("GameScene");
     }
 }
