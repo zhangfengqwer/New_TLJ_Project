@@ -9,13 +9,17 @@ public class MyUIScript : MonoBehaviour {
     public Text m_textName;
     public Text m_textGoldNum;
     public Image m_imageZhuangJiaIcon;
+    public Image m_imageZhuanVipLevel;
+
 
     public string m_uid;
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
+        CommonUtil.setImageSprite(m_imageZhuanVipLevel, "Sprites/Vip/user_vip_" + vipLevel);
+    }
 	
 	// Update is called once per frame
 	void Update () {
