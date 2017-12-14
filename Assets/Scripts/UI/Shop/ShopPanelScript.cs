@@ -214,7 +214,7 @@ public class ShopPanelScript : MonoBehaviour
         }
         else
         {
-            goods_icon.sprite = Resources.Load<Sprite>("Sprites/Icon/icon_rmb");
+            goods_icon.sprite = Resources.Load<Sprite>("Sprites/Icon/icon_rmb_white");
         }
         Text_Price.text = shopItemData.price + "";
         //设置第二个价格
