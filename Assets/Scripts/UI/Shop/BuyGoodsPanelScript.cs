@@ -403,6 +403,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
             LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
             Destroy(gameObject);
+            
         }
         else
         {

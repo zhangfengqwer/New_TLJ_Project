@@ -25,6 +25,10 @@ public class GetUserInfoRequest : Request
 
             LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
             LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+            if (ShopPanelScript.Instance != null)
+            {
+                ShopPanelScript.Instance.InitUserInfo();
+            }
             flag = false;
         }
     }
@@ -46,17 +50,18 @@ public class GetUserInfoRequest : Request
         {
             try
             {
-                UserData.name = (string)jsonData["name"];
-                UserData.phone = (string)jsonData["phone"];
+                UserData.name = (string) jsonData["name"];
+                UserData.phone = (string) jsonData["phone"];
                 UserData.head = "Sprites/Head/head_" + jsonData["head"];
-                UserData.gold = (int)jsonData["gold"];
-                UserData.yuanbao = (int)jsonData["yuanbao"];
-                UserData.medal = (int)jsonData["medal"];
-                UserData.IsRealName = (bool)jsonData["isRealName"];
-                UserData.isSetSecondPsw = (bool)jsonData["isSetSecondPsw"];
-                UserData.rechargeVip = (int)jsonData["recharge_vip"];
+                UserData.gold = (int) jsonData["gold"];
+                UserData.yuanbao = (int) jsonData["yuanbao"];
+                UserData.medal = (int) jsonData["medal"];
+                UserData.IsRealName = (bool) jsonData["isRealName"];
+                UserData.isSetSecondPsw = (bool) jsonData["isSetSecondPsw"];
+                UserData.rechargeVip = (int) jsonData["recharge_vip"];
                 UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
                 UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
+                UserData.userRecharge = JsonMapper.ToObject<List<UserRecharge>>(jsonData["userRecharge"].ToString());
                 UserData.myTurntableData = JsonMapper.ToObject<MyTurntableData>(jsonData["turntableData"].ToString());
             }
             catch (Exception e)
