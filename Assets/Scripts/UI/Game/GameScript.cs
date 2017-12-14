@@ -22,6 +22,7 @@ public class GameScript : MonoBehaviour
     public Button m_buttonMaiDi;
     public Button m_buttonChat;
     public Button m_buttonTuoGuan;
+    public Button m_buttonDiPai;
     public Button m_buttonJiPaiQi;
     public Button m_buttonCustomPoker;
     public Text m_textScore;
@@ -123,6 +124,7 @@ public class GameScript : MonoBehaviour
         m_buttonMaiDi.transform.localScale = new Vector3(0, 0, 0);
         m_buttonChat.transform.localScale = new Vector3(0, 0, 0);
         m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
+        m_buttonDiPai.transform.localScale = new Vector3(0, 0, 0);
 
         // 我的信息
         {
@@ -161,7 +163,10 @@ public class GameScript : MonoBehaviour
         else
         {
             m_button_bag.transform.localScale = new Vector3(0, 0, 0);
-            m_buttonTuoGuan.transform.localScale = new Vector3(0, 0, 0);
+
+            m_buttonTuoGuan.interactable = false;
+            CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray.png");
+
             m_buttonJiPaiQi.transform.localScale = new Vector3(0, 0, 0);
 
             {
@@ -223,10 +228,19 @@ public class GameScript : MonoBehaviour
                 if (!isPVP())
                 {
                     m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                    m_buttonTuoGuan.interactable = true;
+                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                }
+                else
+                {
+                    m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                    m_buttonTuoGuan.interactable = false;
+                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
                 }
 
                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);          // 禁用开始游戏按钮
                 m_buttonChat.transform.localScale = new Vector3(1, 1, 1);
+                m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
                 m_liangzhuObj.transform.localScale = new Vector3(1, 1, 1);
 
                 // 显示左上角提示牌信息
@@ -566,6 +580,20 @@ public class GameScript : MonoBehaviour
         AudioScript.getAudioScript().playSound_ButtonClick();
 
         reqSetTuoGuanState(true);
+    }
+
+    public void onClickDiPai()
+    {
+        AudioScript.getAudioScript().playSound_ButtonClick();
+
+        if (GameData.getInstance().m_dipaiList.Count == 8)
+        {
+            ShowDiPokerScript.create(GameData.getInstance().m_dipaiList);
+        }
+        else
+        {
+            ToastScript.createToast("底牌数据错误");
+        }
     }
 
     public void onClickCancelTuoGuan()
@@ -1278,7 +1306,37 @@ public class GameScript : MonoBehaviour
                 {
                     {
                         string uid = jd["uid"].ToString();
-                        
+
+                        // 最后埋底的人
+                        {
+                            GameData.getInstance().m_lastMaiDiPlayer = uid;
+                            if (GameData.getInstance().m_lastMaiDiPlayer.CompareTo(UserData.uid) == 0)
+                            {
+                                m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
+                                m_buttonDiPai.interactable = true;
+                                CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                            }
+                            else
+                            {
+                                m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
+                                m_buttonDiPai.interactable = false;
+                                CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+                            }
+                        }
+
+                        // 保存底牌
+                        {
+                            GameData.getInstance().m_dipaiList.Clear();
+
+                            for (int i = 0; i < jd["diPokerList"].Count; i++)
+                            {
+                                int num = (int)jd["diPokerList"][i]["num"];
+                                int pokerType = (int)jd["diPokerList"][i]["pokerType"];
+
+                                GameData.getInstance().m_dipaiList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                            }
+                        }
+
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
                             {
@@ -1636,12 +1694,15 @@ public class GameScript : MonoBehaviour
                             if (isTuoGuan)
                             {
                                 m_tuoguanObj = TuoGuanPanelScript.create(this);
+                                CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/game_yituoguan");
 
                                 GameData.getInstance().m_isTuoGuan = true;
                             }
                             // 取消托管
                             else
                             {
+                                CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/game_tuoguan");
+
                                 GameData.getInstance().m_isTuoGuan = false;
                             }
                         }
@@ -2057,7 +2118,7 @@ public class GameScript : MonoBehaviour
             string curOutPokerPlayer = jd["curOutPokerPlayer"].ToString();
             string curRoundFirstPlayer = jd["curRoundFirstPlayer"].ToString();
             string curChaoDiPlayer = jd["curChaoDiPlayer"].ToString();
-
+            
             GameData.getInstance().m_levelPokerNum = (int)jd["levelPokerNum"];
             GameData.getInstance().m_myLevelPoker = (int)jd["myLevelPoker"];
             GameData.getInstance().m_otherLevelPoker = (int)jd["otherLevelPoker"];
@@ -2066,6 +2127,16 @@ public class GameScript : MonoBehaviour
 
             // 闲家抓到的分数
             m_textScore.text = GameData.getInstance().m_getAllScore.ToString();
+
+            // 是否使用了记牌器
+            {
+                bool isUseJiPaiQi = (bool)jd["isUseJiPaiQi"];
+                if (isUseJiPaiQi)
+                {
+                    m_buttonJiPaiQi.transform.localScale = new Vector3(1, 1, 1);
+                    m_hasJiPaiQiUse = true;
+                }
+            }
 
             // 我的手牌
             {
@@ -2080,6 +2151,36 @@ public class GameScript : MonoBehaviour
                 sortMyPokerList(GameData.getInstance().m_masterPokerType);          // 对我的牌进行排序
                 createMyPokerObj();                                                 // 创建我的牌对象
                 checkShowZhuPaiLogo();
+            }
+
+            // 最后埋底的人
+            {
+                GameData.getInstance().m_lastMaiDiPlayer = jd["lastMaiDiPlayer"].ToString();
+                if (GameData.getInstance().m_lastMaiDiPlayer.CompareTo(UserData.uid) == 0)
+                {
+                    m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
+                    m_buttonDiPai.interactable = true;
+                    CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                }
+                else
+                {
+                    m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
+                    m_buttonDiPai.interactable = false;
+                    CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+                }
+            }
+
+            // 底牌
+            {
+                GameData.getInstance().m_dipaiList.Clear();
+
+                for (int i = 0; i < jd["diPokerList"].Count; i++)
+                {
+                    int num = (int)jd["diPokerList"][i]["num"];
+                    int pokerType = (int)jd["diPokerList"][i]["pokerType"];
+
+                    GameData.getInstance().m_dipaiList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                }
             }
 
             //----------------------------------------------------------------------------------------------------------------
@@ -2449,7 +2550,7 @@ public class GameScript : MonoBehaviour
                     for (int i = 0; i < objList.Count; i++)
                     {
                         int x = CommonUtil.getPosX(objList.Count, jiange, i, 0);
-                        objList[i].transform.localPosition = new Vector3(x, -110, 0);
+                        objList[i].transform.localPosition = new Vector3(x, -85, 0);
 
                         // 设置最后渲染
                         //objList[i].transform.SetAsLastSibling();
@@ -2466,7 +2567,7 @@ public class GameScript : MonoBehaviour
         for (int i = 0; i < objList.Count; i++)
         {
             int x = CommonUtil.getPosX(objList.Count, jiange, i, 0);
-            objList[i].transform.localPosition = new Vector3(x, -240, 0);
+            objList[i].transform.localPosition = new Vector3(x, -225, 0);
             objList[i].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
             // 设置最后渲染
