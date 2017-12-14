@@ -31,7 +31,7 @@ public class RealNameScript : MonoBehaviour
     {
         _isCorrectRealName = VerifyRuleUtil.CheckRealName(input.text);
         bool isSensitiveWord = SensitiveWordUtil.IsSensitiveWord(input.text);
-        if(isSensitiveWord)
+        if (isSensitiveWord)
         {
             _isCorrectRealName = false;
             ToastScript.createToast("您的名字有敏感词");
