@@ -1620,6 +1620,12 @@ public class GameScript : MonoBehaviour
                     // 显示出的牌
                     showOtherOutPoker(outPokerList, uid);
 
+                    // 提示和出牌按钮层级高一点
+                    {
+                        m_buttonTiShi.transform.SetAsLastSibling();
+                        m_buttonOutPoker.transform.SetAsLastSibling();
+                    }
+
                     if (isOutPokerOK)
                     {
                         // 刷新记牌器
