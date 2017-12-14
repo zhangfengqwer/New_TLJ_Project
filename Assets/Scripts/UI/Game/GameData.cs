@@ -21,6 +21,7 @@ public class GameData
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌
     public List<TLJCommon.PokerInfo> m_beforeQiangzhuPokerList = new List<TLJCommon.PokerInfo>();       // 上一个人抢主所出的牌
     public List<TLJCommon.PokerInfo> m_curRoundFirstOutPokerList = new List<TLJCommon.PokerInfo>();     // 当前出牌回合第一个人出的牌
+    public List<TLJCommon.PokerInfo> m_dipaiList = new List<TLJCommon.PokerInfo>();                     // 底牌列表
     public List<GameObject> m_otherPlayerUIObjList = new List<GameObject>();                            // 另外3各玩家的头像GameObject
     public List<GameObject> m_myPokerObjList = new List<GameObject>();                                  // 我的手牌GameObject
     //public List<List<GameObject>> m_curRoundOutPokerList = new List<List<GameObject>>();                // 当前回合每个玩家出牌列表的列表
@@ -44,6 +45,7 @@ public class GameData
 
     public string m_teammateUID = "";           // 我的队友uid
     public string m_curOutPokerPlayerUid = "";  // 当前出牌的人uid
+    public string m_lastMaiDiPlayer = "";       // 最后埋底的人
 
     public bool m_isTuoGuan = false;
     public bool m_isFreeOutPoker = false;
@@ -56,11 +58,13 @@ public class GameData
 
         m_teammateUID = "";
         m_curOutPokerPlayerUid = "";
+        m_lastMaiDiPlayer = "";
 
         m_isTuoGuan = false;
         m_isFreeOutPoker = false;
 
         m_myPokerList.Clear();
+        m_dipaiList.Clear();
         m_beforeQiangzhuPokerList.Clear();
         m_curRoundFirstOutPokerList.Clear();
         m_playerDataList.Clear();

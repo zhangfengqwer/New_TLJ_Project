@@ -135,13 +135,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
         if (m_isSelect)
         {
             //gameObject.transform.localPosition -= new Vector3(0,30,0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x,-240,0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x,-225, 0);
             m_isSelect = false;
         }
         else
         {
             //gameObject.transform.localPosition += new Vector3(0, 30, 0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -210, 0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -195, 0);
             m_isSelect = true;
         }
     }
