@@ -15,7 +15,14 @@ public class UserData  {
     public static UserGameData gameData { set; get; }
     public static List<UserPropData> propData = new List<UserPropData>();
     public static List<BuffData> buffData = new List<BuffData>();
+    public static List<UserRecharge> userRecharge;
     public static MyTurntableData myTurntableData = new MyTurntableData();
+}
+
+public class UserRecharge
+{
+    public virtual int goods_id { get; set; }
+    public virtual int recharge_count { get; set; }
 }
 
 public class UserGameData

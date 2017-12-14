@@ -16,12 +16,14 @@ public class ShopPanelScript : MonoBehaviour
     public Toggle MedalToggle;
     public GameObject Shop;
     public GameObject Vip;
-
+    public Text UserYuanBao;
+    public Text UserGold;
+    public Text UserMedal;
 
     private UIWarpContent uiWarpContent;
     private List<string> _list;
     private static List<ShopData> shopDataList;
-
+    public static ShopPanelScript Instance;
     //商品类型，1：金币，2：元宝，3：道具
     private int _type = 2;
 
@@ -31,9 +33,17 @@ public class ShopPanelScript : MonoBehaviour
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/ShopPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
-        
+
         obj.GetComponent<ShopPanelScript>().SetType(type);
         return obj;
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }   
     }
 
     // Use this for initialization
@@ -44,7 +54,7 @@ public class ShopPanelScript : MonoBehaviour
 
 
         InitVip();
-
+        InitUserInfo();
         uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
         uiWarpContent.onInitializeItem = onInitializeItem;
 
@@ -60,6 +70,13 @@ public class ShopPanelScript : MonoBehaviour
         {
             Init();
         }
+    }
+
+    public void InitUserInfo()
+    {
+        UserGold.text = UserData.gold+"";
+        UserYuanBao.text = UserData.yuanbao + "";
+        UserMedal.text = UserData.medal + "";
     }
 
     public void SetType(int type)
@@ -133,15 +150,19 @@ public class ShopPanelScript : MonoBehaviour
         string[] strings = shopItemData.props.Split(':');
         int id = Convert.ToInt32(strings[0]);
 
-        Text goods_price = go.transform.Find("goods_price").GetComponent<Text>();
-        Text goods_price2 = go.transform.Find("goods_price2").GetComponent<Text>();
         Image goods_image = go.transform.Find("goods_image").GetComponent<Image>();
-        Image goods_icon = go.transform.Find("goods_icon").GetComponent<Image>();
         Text goods_des = go.transform.Find("goods_des").GetComponent<Text>();
-        GameObject doublePay = go.transform.Find("goods_price_layout").gameObject;
+        GameObject goods_bg = go.transform.Find("goods_bg").gameObject;
+        var Image_price_bg = goods_bg.transform.GetChild(0);
+        var Image_price_bg1 = goods_bg.transform.GetChild(1);
+        var goods_icon = Image_price_bg.transform.GetChild(0).GetComponent<Image>();
+        var Text_Price = Image_price_bg.transform.GetChild(1).GetComponent<Text>();
+        var goods_icon1 = Image_price_bg1.transform.GetChild(0).GetComponent<Image>();
+        var Text_Price1 = Image_price_bg1.transform.GetChild(1).GetComponent<Text>();
 
-        go.transform.Find("goods_price").localScale = Vector3.one;
-        go.transform.Find("goods_price2").localScale = Vector3.zero;
+        //首充
+        Image Image_first_recharge = go.transform.Find("Image_first_recharge").GetComponent<Image>();
+        GameObject Image_jiazeng = go.transform.Find("Image_jiazeng").gameObject;
 
         goods_des.text = shopItemData.goods_name;
 
@@ -159,14 +180,30 @@ public class ShopPanelScript : MonoBehaviour
         else if (_type == 2)
         {
             goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_yuanbao");
+            if (!string.IsNullOrEmpty(shopItemData.extra_reward))
+            {
+                Image_first_recharge.gameObject.SetActive(true);
+                Image_jiazeng.gameObject.SetActive(true);
+
+                Image_jiazeng.transform.GetChild(0).GetComponent<Text>().text = "加赠" + shopItemData.extra_reward.Split(':')[1] + "元宝";
+            }
         }
         else
         {
             goods_image.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
         }
 
-        //设置价格
-        string price = null;
+        //设置已经首充
+        for (int i = 0; i < UserData.userRecharge.Count; i++)
+        {
+            if (UserData.userRecharge[i].goods_id == shopItemData.goods_id)
+            {
+                Image_first_recharge.gameObject.SetActive(false);
+                Image_jiazeng.gameObject.SetActive(false);
+            }
+        }
+
+        //设置第一个价格
         if (_shopItemDatas[dataindex].money_type == 1)
         {
             goods_icon.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
@@ -177,47 +214,26 @@ public class ShopPanelScript : MonoBehaviour
         }
         else
         {
-            price = "￥";
-            go.transform.Find("goods_icon").localScale = Vector3.zero;
-            go.transform.Find("goods_price2").localScale = Vector3.one;
-            go.transform.Find("goods_price").localScale = Vector3.zero;
-            goods_price2.text = price + _shopItemDatas[dataindex].price;
+            goods_icon.sprite = Resources.Load<Sprite>("Sprites/Icon/icon_rmb");
         }
-        goods_price.text = price + _shopItemDatas[dataindex].price;
-
-        Button button = go.GetComponent<Button>();
-        button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(delegate()
-        {
-            BuyGoodsPanelScript.create(_shopItemDatas[dataindex].goods_id);
-        });
-
+        Text_Price.text = shopItemData.price + "";
+        //设置第二个价格
         if (shopItemData.price2 > 0)
         {
-            doublePay.transform.localScale = Vector3.one;
-            goods_price.transform.localScale = Vector3.zero;
-            goods_icon.transform.localScale = Vector3.zero;
+            Image_price_bg1.gameObject.SetActive(true);
+            goods_icon1.sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
 
-            var FirstPay = doublePay.transform.GetChild(0);
-            var SecondPay = doublePay.transform.GetChild(2);
-            FirstPay.GetChild(0).GetComponent<Image>().sprite = goods_icon.sprite;
-
-            var i = goods_price.text.Length * 14;
-
-            if (i > 52) i = 52;
-            var sizeDelta = FirstPay.GetChild(1).GetComponent<RectTransform>().sizeDelta;
-
-            FirstPay.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(i, sizeDelta.y);
-            FirstPay.GetChild(1).GetComponent<Text>().text = goods_price.text;
-
-            SecondPay.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
-            SecondPay.GetChild(1).GetComponent<Text>().text = shopItemData.price2+"";
-
+            Text_Price1.text = shopItemData.price2 + "";
         }
         else
         {
-            doublePay.transform.localScale = Vector3.zero;
+            Image_price_bg1.gameObject.SetActive(false);
         }
+
+
+        Button button = go.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(delegate() { BuyGoodsPanelScript.create(_shopItemDatas[dataindex].goods_id); });
     }
 
     public void onReceive_GetShop(string data)

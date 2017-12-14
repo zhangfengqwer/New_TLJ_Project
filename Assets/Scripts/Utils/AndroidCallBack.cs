@@ -55,7 +55,8 @@ public class AndroidCallBack : MonoBehaviour {
             jd["nickname"] = name;
             jd["third_id"] = expand;
             jd["platform"] = 102;
-    
+
+            NetLoading.getInstance().Show();
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
 //          
         });
