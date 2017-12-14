@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using LitJson;
+﻿using LitJson;
+using System;
 using TLJCommon;
 using UnityEngine;
 
 public class AndroidCallBack : MonoBehaviour {
+
+    public static String BASE_URL = "http://mapi.javgame.com:14123";
+    public static String WECHAT_LOGIN_URL = BASE_URL + "/api/mlogin/WechatLogin";
+    public static String WECHAT_PAY_URL = BASE_URL + "/api/mpay/wechatPay";
+    public static String ALI_PAY_URL = BASE_URL + "/api/mpay/aplipay";
 
     public delegate void onPauseCallBack();
     public static onPauseCallBack s_onPauseCallBack = null;
@@ -30,7 +32,33 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void WeChatLogin_IOS(string result)
     {
-        ToastScript.createToast(result);
+        var wwwForm = new WWWForm();
+        wwwForm.AddField("gameId", "210");
+        wwwForm.AddField("appId", "wxa2c2802e8fedd592");
+        wwwForm.AddField("code", result);
+        wwwForm.AddField("openId", "");
+        UnityWebReqUtil.Instance.Post(WECHAT_LOGIN_URL, wwwForm, (tag,data) =>
+        {
+            LogUtil.Log(data);
+         
+            var jsonData = JsonMapper.ToObject(data);
+            var code = (int)jsonData["data"]["code"];
+            var name = (string)jsonData["data"]["name"];
+            var expand = (string)jsonData["data"]["expand"];
+            if (code != 1)
+            {
+                LogUtil.Log("微信登录web返回失败");
+                return;
+            }
+            JsonData jd = new JsonData();
+            jd["tag"] = Consts.Tag_Third_Login;
+            jd["nickname"] = name;
+            jd["third_id"] = expand;
+            jd["platform"] = 102;
+    
+            LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
+//          
+        });
     }
 
     // apk版本号
