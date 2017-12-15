@@ -142,6 +142,11 @@ class CommonUtil
             return false;
         }
 
+        if (sourceStr.Length < containStr.Length)
+        {
+            return false;
+        }
+
         for (int i = 0; i <= sourceStr.Length - containStr.Length; i++)
         {
             string temp = "";
