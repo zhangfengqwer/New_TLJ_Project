@@ -56,6 +56,8 @@ public class MailDetailScript : MonoBehaviour {
         List<string> list1 = new List<string>();
         CommonUtil.splitStr(reward, list1, ';');
 
+        EmailReward.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(100 * list1.Count, 100);
+
         for (int i = 0; i < list1.Count; i++)
         {
             List<string> list2 = new List<string>();
