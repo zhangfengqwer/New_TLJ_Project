@@ -146,6 +146,7 @@ public class AndroidCallBack : MonoBehaviour {
             jd["third_id"] = openId;
             jd["platform"] = platform;
 
+            NetLoading.getInstance().Show();
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
         }
         catch (Exception e)
