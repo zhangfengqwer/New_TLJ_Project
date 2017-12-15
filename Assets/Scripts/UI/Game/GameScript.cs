@@ -2294,6 +2294,47 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            // 主牌花色
+            {
+                if(GameData.getInstance().m_masterPokerType != -1)
+                {
+                    GameUtil.showGameObject(m_imageMasterPokerType.gameObject);
+                    GameData.getInstance().m_masterPokerType = GameData.getInstance().m_masterPokerType;
+                    CommonUtil.setImageSprite(m_imageMasterPokerType, GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
+                }
+            }
+
+            // 判断谁是庄家
+            {
+                if (zhuangjiaUID.CompareTo("") != 0)
+                {
+                    if (zhuangjiaUID.CompareTo(UserData.uid) == 0)
+                    {
+                        m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(1, 1, 1);
+                        GameData.getInstance().m_isBanker = 1;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
+                        {
+                            if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(zhuangjiaUID) == 0)
+                            {
+                                GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_imageZhuangJiaIcon.transform.localScale = new Vector3(1, 1, 1);
+
+                                if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(GameData.getInstance().m_teammateUID) == 0)
+                                {
+                                    GameData.getInstance().m_isBanker = 1;
+                                }
+                                else
+                                {
+                                    GameData.getInstance().m_isBanker = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             //----------------------------------------------------------------------------------------------------------------
             switch (roomState)
             {
@@ -2433,48 +2474,7 @@ public class GameScript : MonoBehaviour
                 {
                     GameUtil.hideGameObject(m_liangzhuObj);
                     GameUtil.showGameObject(m_timer);
-
-                    // 主牌花色
-                    {
-                        GameUtil.showGameObject(m_imageMasterPokerType.gameObject);
-                        GameData.getInstance().m_masterPokerType = GameData.getInstance().m_masterPokerType;
-                        CommonUtil.setImageSprite(m_imageMasterPokerType,
-                            GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
-                    }
-
-                    // 判断谁是庄家
-                    {
-                        if (zhuangjiaUID.CompareTo(UserData.uid) == 0)
-                        {
-                            m_myUserInfoUI.GetComponent<MyUIScript>().m_imageZhuangJiaIcon.transform.localScale =
-                                new Vector3(1, 1, 1);
-                            GameData.getInstance().m_isBanker = 1;
-                        }
-                        else
-                        {
-                            for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
-                            {
-                                if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>()
-                                        .m_uid.CompareTo(zhuangjiaUID) == 0)
-                                {
-                                    GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>()
-                                        .m_imageZhuangJiaIcon.transform.localScale = new Vector3(1, 1, 1);
-
-                                    if (GameData.getInstance().m_otherPlayerUIObjList[i]
-                                            .GetComponent<OtherPlayerUIScript>().m_uid
-                                            .CompareTo(GameData.getInstance().m_teammateUID) == 0)
-                                    {
-                                        GameData.getInstance().m_isBanker = 1;
-                                    }
-                                    else
-                                    {
-                                        GameData.getInstance().m_isBanker = 0;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
+                        
                     // 显示当前回合出的牌
                     {
                         for (int i = 0; i < 4; i++)
