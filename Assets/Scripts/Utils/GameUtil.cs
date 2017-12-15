@@ -437,4 +437,52 @@ class GameUtil
 
         return true;
     }
+
+    public static string getRoomName(string gameRoomType)
+    {
+        string roonName = "";
+
+        if (gameRoomType.CompareTo("XiuXian_JingDian_ChuJi") == 0)
+        {
+            roonName = "经典玩法-新手场";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_JingDian_ZhongJi") == 0)
+        {
+            roonName = "经典玩法-精英场";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_JingDian_GaoJi") == 0)
+        {
+            roonName = "经典玩法-大师场";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_ChaoDi_ChuJi") == 0)
+        {
+            roonName = "抄底玩法-新手场";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_ChaoDi_ZhongJi") == 0)
+        {
+            roonName = "抄底玩法-精英场";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_ChaoDi_GaoJi") == 0)
+        {
+            roonName = "抄底玩法-大师场";
+        }
+        else if (gameRoomType.CompareTo("PVP_JinBi_8") == 0)
+        {
+            roonName = "比赛场-10000金币场";
+        }
+        else if (gameRoomType.CompareTo("PVP_JinBi_16") == 0)
+        {
+            roonName = "比赛场-20000金币场";
+        }
+        else if (gameRoomType.CompareTo("PVP_HuaFei_8") == 0)
+        {
+            roonName = "比赛场-1元话费场";
+        }
+        else if (gameRoomType.CompareTo("PVP_HuaFei_16") == 0)
+        {
+            roonName = "比赛场-5元话费场";
+        }
+
+        return roonName;
+    }
 }

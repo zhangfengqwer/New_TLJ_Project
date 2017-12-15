@@ -15,7 +15,7 @@ public class GameData
     }
 
     public string m_tag = "";
-    public string m_gameRoomType = "";
+    string m_gameRoomType = "";
     public bool m_isPVP = false;
 
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌

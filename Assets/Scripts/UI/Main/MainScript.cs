@@ -337,6 +337,13 @@ public class MainScript : MonoBehaviour
         TurntablePanelScript.create();
     }
 
+    public void onClickRetryJoinGame()
+    {
+        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi);
+        SceneManager.LoadScene("GameScene");
+    }
+
     //-----------------------------------------------------------------------------
 
     public void reqWaitMatchTimeOut()
@@ -357,6 +364,19 @@ public class MainScript : MonoBehaviour
         string requestData = jsonData.ToJson();
 
         PlayServiceSocket.s_instance.sendMessage(requestData);
+    }
+
+    // 是否已经加入房间
+    public void reqIsJoinRoom()
+    {
+        NetLoading.getInstance().Show();
+
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_IsJoinGame;
+        data["uid"] = UserData.uid;
+
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
 
     //-----------------------------------------------------------------------------
@@ -479,6 +499,32 @@ public class MainScript : MonoBehaviour
 
             PVPChoiceScript.create();
         }
+        // 是否已经加入房间
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_IsJoinGame) == 0)
+        {
+            doTask_PlayAction_IsJoinGame(data);
+        }
+    }
+
+    void doTask_PlayAction_IsJoinGame(string data)
+    {
+        NetLoading.getInstance().Close();
+
+        JsonData jd = JsonMapper.ToObject(data);
+        int isJoinGame = (int)jd["isJoinGame"];
+
+        if (isJoinGame == 1)
+        {
+            string gameRoomType = jd["gameRoomType"].ToString();
+            string roonName = GameUtil.getRoomName(gameRoomType);
+
+            HasInRoomPanelScript.create("您当前正在" +  roonName +"进行游戏，点击确定回到该房间。", onClickRetryJoinGame);
+        }
+        else
+        {
+            GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+            SceneManager.LoadScene("GameScene");
+        }
     }
 
     void doTask_PlayAction_JoinGame(string data)
@@ -491,7 +537,7 @@ public class MainScript : MonoBehaviour
             case (int) TLJCommon.Consts.Code.Code_OK:
             {
                 int roomId = (int) jd["roomId"];
-                string gameroomtype = (string) jd["gameroomtype"].ToString();
+                string gameroomtype = (string) jd["gameRoomType"].ToString();
 
                 ToastScript.createToast("报名成功");
 
@@ -508,13 +554,16 @@ public class MainScript : MonoBehaviour
                     }
                 }
             }
-                break;
+            break;
 
             case (int) TLJCommon.Consts.Code.Code_CommonFail:
             {
-                ToastScript.createToast("您已加入其它房间，无法开始新游戏");
+                string gameRoomType = jd["gameRoomType"].ToString();
+                string roonName = GameUtil.getRoomName(gameRoomType);
+
+                HasInRoomPanelScript.create("您当前正在" + roonName + "进行游戏，点击确定回到该房间。", onClickRetryJoinGame);
             }
-                break;
+            break;
         }
     }
 
