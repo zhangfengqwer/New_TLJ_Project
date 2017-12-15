@@ -518,7 +518,7 @@ public class MainScript : MonoBehaviour
             string gameRoomType = jd["gameRoomType"].ToString();
             string roonName = GameUtil.getRoomName(gameRoomType);
 
-            HasInRoomPanelScript.create("您当前正在" +  roonName +"进行游戏，点击确定回到该房间。", onClickRetryJoinGame);
+            HasInRoomPanelScript.create("您当前正在：\n" +  roonName +"\n进行游戏，点击确认回到该房间。", onClickRetryJoinGame);
         }
         else
         {
@@ -561,7 +561,7 @@ public class MainScript : MonoBehaviour
                 string gameRoomType = jd["gameRoomType"].ToString();
                 string roonName = GameUtil.getRoomName(gameRoomType);
 
-                HasInRoomPanelScript.create("您当前正在" + roonName + "进行游戏，点击确定回到该房间。", onClickRetryJoinGame);
+                HasInRoomPanelScript.create("您当前正在：\n" + roonName + "\n进行游戏，点击确认回到该房间。", onClickRetryJoinGame);
             }
             break;
         }
