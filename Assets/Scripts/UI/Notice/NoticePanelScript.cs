@@ -9,10 +9,11 @@ public class NoticePanelScript : MonoBehaviour
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
 
-    public Button m_button_tab;
+    public Image m_tab_bg;
+    public Button m_button_huodong;
+    public Button m_button_gonggao;
     public Text m_text_zanwu;
-
-    int m_tabType = 1;      // 1：活动   2：公告
+    public bool m_curShowHuoDong = true;
 
     public static GameObject create()
     {
@@ -42,6 +43,8 @@ public class NoticePanelScript : MonoBehaviour
     // 显示活动
     public void loadHuoDong()
     {
+        m_curShowHuoDong = true;
+
         m_ListViewScript.clear();
 
         for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
@@ -75,6 +78,8 @@ public class NoticePanelScript : MonoBehaviour
     // 显示公告
     public void loadGongGao()
     {
+        m_curShowHuoDong = false;
+
         m_ListViewScript.clear();
         
         for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
@@ -118,22 +123,32 @@ public class NoticePanelScript : MonoBehaviour
         }
     }
 
-    public void onClickTab()
+    public void onClickHuoDong()
     {
-        if (m_tabType == 1)
+        if (m_curShowHuoDong)
         {
-            m_tabType = 2;
-            loadGongGao();
-
-            m_button_tab.GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/biaoti_gonggao", typeof(Sprite)) as Sprite;
+            return;
         }
-        else
+
+        loadHuoDong();
+
+        m_tab_bg.transform.localPosition = new Vector3(-83,0,0);
+        m_button_huodong.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/huodong_xuanze", typeof(Sprite)) as Sprite;
+        m_button_gonggao.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/gonggao_weixuanze", typeof(Sprite)) as Sprite;
+    }
+
+    public void onClickGongGao()
+    {
+        if (!m_curShowHuoDong)
         {
-            m_tabType = 1;
-            loadHuoDong();
-
-            m_button_tab.GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/biaoti_huodong", typeof(Sprite)) as Sprite;
+            return;
         }
+
+        loadGongGao();
+
+        m_tab_bg.transform.localPosition = new Vector3(83, 0, 0);
+        m_button_gonggao.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/gonggao_xuanze", typeof(Sprite)) as Sprite;
+        m_button_huodong.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Notice/huodong_weixuanze", typeof(Sprite)) as Sprite;
     }
 
     public void onReceive_GetNotice(string data)

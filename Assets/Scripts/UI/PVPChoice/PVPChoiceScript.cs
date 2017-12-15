@@ -7,9 +7,11 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public GameObject m_listView;
     ListViewScript m_ListViewScript;
-    
+
+    public Image m_tab_bg;
     public Button m_button_tiaozhansai;
     public Button m_button_huafeisai;
+    public bool m_curShowTiaoZhanSai = true;
 
     public static GameObject create()
     {
@@ -35,21 +37,34 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public void onClickJinBiChang()
     {
+        if (m_curShowTiaoZhanSai)
+        {
+            return;
+        }
+
         showJinBiChang();
     }
 
     public void onClickHuaFeiChang()
     {
+        if (!m_curShowTiaoZhanSai)
+        {
+            return;
+        }
+
         showHuaFeiChang();
     }
 
     public void showJinBiChang()
     {
+        m_curShowTiaoZhanSai = true;
+
         m_ListViewScript.clear();
 
         {
-            m_button_tiaozhansai.GetComponent<Image>().color = new Color(255,255,255,255);
-            m_button_huafeisai.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+            m_tab_bg.transform.localPosition = new Vector3(-83,0,0);
+            m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/tiaozhansai_xuanze", typeof(Sprite)) as Sprite;
+            m_button_huafeisai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/huafeisai_weixuanze", typeof(Sprite)) as Sprite;
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
@@ -72,11 +87,14 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public void showHuaFeiChang()
     {
+        m_curShowTiaoZhanSai = false;
+
         m_ListViewScript.clear();
 
         {
-            m_button_tiaozhansai.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-            m_button_huafeisai.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+            m_tab_bg.transform.localPosition = new Vector3(83, 0, 0);
+            m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/tiaozhansai_weixuanze", typeof(Sprite)) as Sprite;
+            m_button_huafeisai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/huafeisai_xuanze", typeof(Sprite)) as Sprite;
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
