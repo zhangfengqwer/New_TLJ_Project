@@ -2296,7 +2296,7 @@ public class GameScript : MonoBehaviour
 
             // 主牌花色
             {
-                if(GameData.getInstance().m_masterPokerType != -1)
+                //if(GameData.getInstance().m_masterPokerType != -1)
                 {
                     GameUtil.showGameObject(m_imageMasterPokerType.gameObject);
                     GameData.getInstance().m_masterPokerType = GameData.getInstance().m_masterPokerType;

@@ -133,7 +133,7 @@ class GameUtil
 
     static public string getMasterPokerIconPath(int masterPokerType)
     {
-        string path = "";
+        string path = "Sprites/Game/Poker/icon_wuzhu";
         
         if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_FangKuai)
         {
