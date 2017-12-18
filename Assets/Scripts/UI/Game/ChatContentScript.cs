@@ -19,8 +19,8 @@ public class ChatContentScript : MonoBehaviour {
 
         {
             int size = text.Length;
-            int width = size * 32 + 20;
-            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 60);
+            int width = size * 32 + 48;
+            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 86);
         }
 
         switch (textAnchor)

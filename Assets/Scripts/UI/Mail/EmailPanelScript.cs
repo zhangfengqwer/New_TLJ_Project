@@ -88,8 +88,8 @@ public class EmailPanelScript : MonoBehaviour
                 m_button_oneKeyRead.transform.localScale = new Vector3(1, 1, 1);
                 m_button_oneKeyDelete.transform.localScale = new Vector3(1, 1, 1);
 
-                m_button_oneKeyRead.transform.localPosition = new Vector3(-130, -212.41f, 0);
-                m_button_oneKeyDelete.transform.localPosition = new Vector3(130, -212.41f, 0);
+                m_button_oneKeyRead.transform.localPosition = new Vector3(-130, -230.31f, 0);
+                m_button_oneKeyDelete.transform.localPosition = new Vector3(130, -230.31f, 0);
             }
             else
             {
@@ -98,7 +98,7 @@ public class EmailPanelScript : MonoBehaviour
                     m_button_oneKeyRead.transform.localScale = new Vector3(1, 1, 1);
                     m_button_oneKeyDelete.transform.localScale = new Vector3(0, 0, 0);
 
-                    m_button_oneKeyRead.transform.localPosition = new Vector3(0, -212.41f, 0);
+                    m_button_oneKeyRead.transform.localPosition = new Vector3(0, -230.31f, 0);
                 }
 
                 if (canUseOneKeyDelete)
@@ -106,7 +106,7 @@ public class EmailPanelScript : MonoBehaviour
                     m_button_oneKeyDelete.transform.localScale = new Vector3(1, 1, 1);
                     m_button_oneKeyRead.transform.localScale = new Vector3(0, 0, 0);
 
-                    m_button_oneKeyDelete.transform.localPosition = new Vector3(0, -212.41f, 0);
+                    m_button_oneKeyDelete.transform.localPosition = new Vector3(0, -230.31f, 0);
                 }
             }
         }
@@ -152,8 +152,8 @@ public class EmailPanelScript : MonoBehaviour
                 m_button_oneKeyRead.transform.localScale = new Vector3(1, 1, 1);
                 m_button_oneKeyDelete.transform.localScale = new Vector3(1, 1, 1);
 
-                m_button_oneKeyRead.transform.localPosition = new Vector3(-130, -212.41f, 0);
-                m_button_oneKeyDelete.transform.localPosition = new Vector3(130, -212.41f, 0);
+                m_button_oneKeyRead.transform.localPosition = new Vector3(-130, -230.31f, 0);
+                m_button_oneKeyDelete.transform.localPosition = new Vector3(130, -230.31f, 0);
             }
             else
             {
@@ -162,7 +162,7 @@ public class EmailPanelScript : MonoBehaviour
                     m_button_oneKeyRead.transform.localScale = new Vector3(1, 1, 1);
                     m_button_oneKeyDelete.transform.localScale = new Vector3(0, 0, 0);
 
-                    m_button_oneKeyRead.transform.localPosition = new Vector3(0, -212.41f, 0);
+                    m_button_oneKeyRead.transform.localPosition = new Vector3(0, -230.31f, 0);
                 }
 
                 if (canUseOneKeyDelete)
@@ -170,7 +170,7 @@ public class EmailPanelScript : MonoBehaviour
                     m_button_oneKeyDelete.transform.localScale = new Vector3(1, 1, 1);
                     m_button_oneKeyRead.transform.localScale = new Vector3(0, 0, 0);
 
-                    m_button_oneKeyDelete.transform.localPosition = new Vector3(0, -212.41f, 0);
+                    m_button_oneKeyDelete.transform.localPosition = new Vector3(0, -230.31f, 0);
                 }
             }
         }

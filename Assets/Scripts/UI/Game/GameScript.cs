@@ -135,25 +135,6 @@ public class GameScript : MonoBehaviour
             m_myUserInfoUI.GetComponent<MyUIScript>().setName(UserData.name);
             m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserData.uid;
         }
-
-        // 托管状态
-        {
-            if (!isPVP())
-            {
-                m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
-                m_buttonTuoGuan.interactable = true;
-                CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_green");
-            }
-            else
-            {
-                m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
-                m_buttonTuoGuan.interactable = false;
-                CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
-            }
-            
-            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/game_tuoguan");
-            GameData.getInstance().m_isTuoGuan = false;
-        }
     }
 
     bool isPVP()
@@ -224,6 +205,25 @@ public class GameScript : MonoBehaviour
         {
             m_isStartGame = true;
 
+            // 托管状态
+            {
+                if (!isPVP())
+                {
+                    m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                    m_buttonTuoGuan.interactable = true;
+                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                }
+                else
+                {
+                    m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                    m_buttonTuoGuan.interactable = false;
+                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+                }
+
+                CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/game_tuoguan");
+                GameData.getInstance().m_isTuoGuan = false;
+            }
+
             // 记牌器按钮
             {
                 bool canUse = false;
@@ -285,7 +285,7 @@ public class GameScript : MonoBehaviour
                     // 上边的玩家
                     {
                         GameObject obj = OtherPlayerUIScript.create();
-                        obj.transform.localPosition = new Vector3(0, 285, 0);
+                        obj.transform.localPosition = new Vector3(0, 297.27f, 0);
                         obj.GetComponent<OtherPlayerUIScript>().m_direction =
                             OtherPlayerUIScript.Direction.Direction_Up;
 
@@ -2059,10 +2059,8 @@ public class GameScript : MonoBehaviour
                     {
                         if (type == 1)
                         {
-                            string content_text = content_text =
-                                ChatData.getInstance().getChatTextById((int) jd["content_id"]).m_text;
-                            ChatContentScript.createChatContent(content_text, new Vector2(-480, -290),
-                                TextAnchor.MiddleLeft);
+                            string content_text = content_text = ChatData.getInstance().getChatTextById((int) jd["content_id"]).m_text;
+                            ChatContentScript.createChatContent(content_text, new Vector2(-485, -280),TextAnchor.MiddleLeft);
                         }
                         else
                         {
@@ -2073,20 +2071,18 @@ public class GameScript : MonoBehaviour
                     {
                         for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
                         {
-                            if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>()
-                                    .m_uid.CompareTo(uid) == 0)
+                            if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
                             {
-                                switch (GameData.getInstance().m_otherPlayerUIObjList[i]
-                                    .GetComponent<OtherPlayerUIScript>().m_direction)
+                                switch (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_direction)
                                 {
                                     case OtherPlayerUIScript.Direction.Direction_Up:
                                     {
                                         if (type == 1)
                                         {
-                                            string content_text = content_text = ChatData.getInstance()
-                                                .getChatTextById((int) jd["content_id"]).m_text;
-                                            ChatContentScript.createChatContent(content_text, new Vector2(0, 200),
-                                                TextAnchor.MiddleCenter);
+                                            string content_text = content_text = ChatData.getInstance().getChatTextById((int) jd["content_id"]).m_text;
+                                            GameObject obj = ChatContentScript.createChatContent(content_text, new Vector2(-80, 285),TextAnchor.MiddleRight);
+                                            obj.transform.localScale = new Vector3(-1, 1, 1);
+                                            obj.transform.Find("Text").localScale = new Vector3(-1, 1, 1);
                                         }
                                         else
                                         {
@@ -2099,10 +2095,8 @@ public class GameScript : MonoBehaviour
                                     {
                                         if (type == 1)
                                         {
-                                            string content_text = content_text = ChatData.getInstance()
-                                                .getChatTextById((int) jd["content_id"]).m_text;
-                                            ChatContentScript.createChatContent(content_text, new Vector2(-470, 0),
-                                                TextAnchor.MiddleLeft);
+                                            string content_text = content_text = ChatData.getInstance().getChatTextById((int) jd["content_id"]).m_text;
+                                            ChatContentScript.createChatContent(content_text, new Vector2(-470, 0),TextAnchor.MiddleLeft);
                                         }
                                         else
                                         {
@@ -2115,10 +2109,10 @@ public class GameScript : MonoBehaviour
                                     {
                                         if (type == 1)
                                         {
-                                            string content_text = content_text = ChatData.getInstance()
-                                                .getChatTextById((int) jd["content_id"]).m_text;
-                                            ChatContentScript.createChatContent(content_text, new Vector2(480, 0),
-                                                TextAnchor.MiddleRight);
+                                            string content_text = content_text = ChatData.getInstance().getChatTextById((int) jd["content_id"]).m_text;
+                                            GameObject obj = ChatContentScript.createChatContent(content_text, new Vector2(480, 0),TextAnchor.MiddleRight);
+                                            obj.transform.localScale = new Vector3(-1,1,1);
+                                            obj.transform.Find("Text").localScale = new Vector3(-1, 1, 1);
                                         }
                                         else
                                         {
