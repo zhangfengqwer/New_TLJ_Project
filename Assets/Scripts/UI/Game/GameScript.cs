@@ -285,7 +285,7 @@ public class GameScript : MonoBehaviour
                     // 上边的玩家
                     {
                         GameObject obj = OtherPlayerUIScript.create();
-                        obj.transform.localPosition = new Vector3(0, 285, 0);
+                        obj.transform.localPosition = new Vector3(0, 297.27f, 0);
                         obj.GetComponent<OtherPlayerUIScript>().m_direction =
                             OtherPlayerUIScript.Direction.Direction_Up;
 
