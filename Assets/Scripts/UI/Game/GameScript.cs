@@ -135,6 +135,25 @@ public class GameScript : MonoBehaviour
             m_myUserInfoUI.GetComponent<MyUIScript>().setName(UserData.name);
             m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserData.uid;
         }
+
+        // 托管状态
+        {
+            if (!isPVP())
+            {
+                m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                m_buttonTuoGuan.interactable = true;
+                CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+            }
+            else
+            {
+                m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
+                m_buttonTuoGuan.interactable = false;
+                CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+            }
+            
+            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/game_tuoguan");
+            GameData.getInstance().m_isTuoGuan = false;
+        }
     }
 
     bool isPVP()
@@ -1783,16 +1802,14 @@ public class GameScript : MonoBehaviour
                         if (isTuoGuan)
                         {
                             m_tuoguanObj = TuoGuanPanelScript.create(this);
-                            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(),
-                                "Sprites/Game/game_yituoguan");
+                            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(),"Sprites/Game/game_yituoguan");
 
                             GameData.getInstance().m_isTuoGuan = true;
                         }
                         // 取消托管
                         else
                         {
-                            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(),
-                                "Sprites/Game/game_tuoguan");
+                            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(),"Sprites/Game/game_tuoguan");
 
                             GameData.getInstance().m_isTuoGuan = false;
                         }

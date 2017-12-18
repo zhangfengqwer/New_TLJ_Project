@@ -178,7 +178,7 @@ public class LoginScript : MonoBehaviour
 
                         GameUtil.showGameObject(m_button_defaultLogin.gameObject);
 
-                        m_button_defaultLogin.transform.Find("Text_LoginType").GetComponent<Text>().text = "官方登录";
+                        m_button_defaultLogin.transform.Find("Text_LoginType").GetComponent<Text>().text = "账号登录";
                     }
                     break;
 
