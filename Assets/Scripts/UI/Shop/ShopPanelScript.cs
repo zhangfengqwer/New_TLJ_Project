@@ -185,7 +185,7 @@ public class ShopPanelScript : MonoBehaviour
                 Image_first_recharge.gameObject.SetActive(true);
                 Image_jiazeng.gameObject.SetActive(true);
 
-                Image_jiazeng.transform.GetChild(0).GetComponent<Text>().text = "加赠" + shopItemData.extra_reward.Split(':')[1] + "元宝";
+                Image_jiazeng.transform.GetChild(0).GetComponent<Text>().text = shopItemData.extra_reward.Split(':')[1] + "元宝";
             }
         }
         else
