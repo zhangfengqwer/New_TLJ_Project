@@ -1558,6 +1558,7 @@ public class GameScript : MonoBehaviour
                     if ((int) jd["hasPoker"] == 1)
                     {
                         GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
+                        showIsChaoDi(uid,true);
 
                         for (int i = 0; i < jd["pokerList"].Count; i++)
                         {
@@ -1616,6 +1617,8 @@ public class GameScript : MonoBehaviour
                     else
                     {
                         AudioScript.getAudioScript().playSound_BuChaoDi();
+
+                        showIsChaoDi(uid, false);
                         ToastScript.createToast("不抄底");
                     }
                 }
@@ -1707,8 +1710,11 @@ public class GameScript : MonoBehaviour
                         GameData.getInstance().m_getAllScore += getScore;
                         m_textScore.text = GameData.getInstance().m_getAllScore.ToString();
 
+                        // 检查有没有达到80分
                         if ((beforeScore < 80) && (GameData.getInstance().m_getAllScore >= 80))
                         {
+                            AudioScript.getAudioScript().playSound_Po();
+
                             if (GameData.getInstance().m_isBanker == 1)
                             {
                                 ShowImageScript.create("Sprites/Game/img_game_po_fail", new Vector3(0, 0, 0));
@@ -3164,6 +3170,53 @@ public class GameScript : MonoBehaviour
                         {
                             m_timer.transform.localPosition = new Vector3(590, 104, 0);
                         }
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    void showIsChaoDi(string uid,bool isChaoDi)
+    {
+        string imgPath = "";
+        if (isChaoDi)
+        {
+            imgPath = "Sprites/Game/img_game_chaodi";
+        }
+        else
+        {
+            imgPath = "Sprites/Game/img_game_buchaodi";
+        }
+
+        if (uid.CompareTo(UserData.uid) == 0)
+        {
+            ShowImageScript.create(imgPath, new Vector3(-427.33f, -234.64f, 0));
+        }
+        else
+        {
+            for (int i = 0; i < GameData.getInstance().m_otherPlayerUIObjList.Count; i++)
+            {
+                if (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
+                {
+                    switch (GameData.getInstance().m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_direction)
+                    {
+                        case OtherPlayerUIScript.Direction.Direction_Up:
+                            {
+                                ShowImageScript.create(imgPath, new Vector3(-152.2f, 289.5f, 0));
+                            }
+                            break;
+
+                        case OtherPlayerUIScript.Direction.Direction_Left:
+                            {
+                                ShowImageScript.create(imgPath, new Vector3(-410f, 76.5f, 0));
+                            }
+                            break;
+
+                        case OtherPlayerUIScript.Direction.Direction_Right:
+                            {
+                                ShowImageScript.create(imgPath, new Vector3(405.8f, 59.1f, 0));
+                            }
                             break;
                     }
                 }

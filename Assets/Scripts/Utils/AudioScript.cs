@@ -223,6 +223,12 @@ public class AudioScript : MonoBehaviour {
         playSound("Audios/yx_chupai");
     }
 
+    // 破
+    public void playSound_Po()
+    {
+        playSound("Audios/yx_po");
+    }
+
     //----------------------------------------------------------------------------播放 end
 
     //---------------------------------------------------
