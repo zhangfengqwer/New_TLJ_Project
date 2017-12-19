@@ -224,6 +224,13 @@ public class GameScript : MonoBehaviour
                 GameData.getInstance().m_isTuoGuan = false;
             }
 
+            // 底牌按钮状态
+            {
+                m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
+                m_buttonDiPai.interactable = false;
+                CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(),"Sprites/Game/game_btn_gray");
+            }
+
             // 记牌器按钮
             {
                 bool canUse = false;
@@ -1200,7 +1207,22 @@ public class GameScript : MonoBehaviour
             {
                 ToastScript.createToast("玩家抢主");
 
+                string uid = (string)jd["uid"];
+
                 GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
+                    
+                {
+                    PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
+                    if (playerData != null)
+                    {
+                        for (int i = playerData.m_outPokerObjList.Count - 1; i >= 0 ; i--)
+                        {
+                            Destroy(playerData.m_outPokerObjList[i]);
+                        }
+
+                        playerData.m_outPokerObjList.Clear();
+                    }
+                }
 
                 List<TLJCommon.PokerInfo> outPokerList = new List<TLJCommon.PokerInfo>();
 
@@ -1226,7 +1248,7 @@ public class GameScript : MonoBehaviour
                 }
 
                 // 显示出的牌
-                showOtherOutPoker(outPokerList, (string) jd["uid"]);
+                showOtherOutPoker(outPokerList, uid);
 
                 initMyPokerPos(GameData.getInstance().m_myPokerObjList);
             }
@@ -1463,6 +1485,17 @@ public class GameScript : MonoBehaviour
                         }
 
                         initMyPokerPos(GameData.getInstance().m_myPokerObjList);
+
+                        {
+                            // 全部设为未选中状态
+                            for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+                            {
+                                if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+                                {
+                                    GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+                                }
+                            }
+                        }
                     }
                 }
             }

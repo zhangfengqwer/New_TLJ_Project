@@ -489,9 +489,9 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
-        if (m_inputAccount_register.text.Length > 6)
+        if (m_inputAccount_register.text.Length > 10)
         {
-            ToastScript.createToast("账号长度不可超过6个字符");
+            ToastScript.createToast("账号长度不可超过10个字符");
 
             return;
         }

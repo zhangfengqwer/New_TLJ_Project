@@ -9,7 +9,7 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     int m_num;
     int m_pokerType;
-    bool m_isSelect = false;
+    public bool m_isSelect = false;
     public bool m_canTouch = false;
 
     public Image m_image_num;
