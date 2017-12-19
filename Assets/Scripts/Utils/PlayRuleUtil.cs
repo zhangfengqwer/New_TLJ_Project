@@ -1039,14 +1039,19 @@ public class PlayRuleUtil
         {
             for (int i = 0; i < handerPoker.Count; i++)
             {
-                if (handerPoker[i].m_num == mLevelPokerNum)
+                if (handerPoker[i].m_num == mLevelPokerNum )
                 {
                     pokerInfos.Add(handerPoker[i]);
                 }
             }
             return pokerInfos;
+        }else if (liangZhuPoker.Count == 1)
+        {
+            Consts.PokerType mPokerType = liangZhuPoker[0].m_pokerType;
+            List<PokerInfo> doublePoker = PlayRuleUtil.GetDoublePoker(jiPaiAndWang);
+            return doublePoker;
         }
-        else if (liangZhuPoker.Count == 2 || liangZhuPoker.Count == 1)
+        else if (liangZhuPoker.Count == 2)
         {
             Consts.PokerType mPokerType = liangZhuPoker[0].m_pokerType;
             List<PokerInfo> doublePoker = PlayRuleUtil.GetDoublePoker(jiPaiAndWang);
