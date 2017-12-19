@@ -17,6 +17,7 @@ public class GameResultPanelScript : MonoBehaviour {
     public Text m_text_player_right2;
 
     public string m_gameRoomType;
+    public bool m_isWin = true;
 
     public static GameObject create(GameScript parentScript)
     {
@@ -36,6 +37,7 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void setData(bool isWin,int score,int gold,string gameRoomType)
     {
+        m_isWin = isWin;
         m_gameRoomType = gameRoomType;
 
         if (isWin)
@@ -104,5 +106,17 @@ public class GameResultPanelScript : MonoBehaviour {
     public void onClickExit()
     {
         m_parentScript.exitRoom();
+    }
+
+    public void onClickShare()
+    {
+        if (m_isWin)
+        {
+            ChoiceShareScript.Create("我在疯狂升级普通场赢得了胜利，话费、徽章等你来拿！", "");
+        }
+        else
+        {
+            ChoiceShareScript.Create("我赢过许多人却没有输给过你，下载游戏和我一起玩吧！", "");
+        }
     }
 }

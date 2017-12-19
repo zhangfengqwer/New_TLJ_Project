@@ -596,7 +596,7 @@ public class GameScript : MonoBehaviour
 
     public void onClickOutPoker()
     {
-        AudioScript.getAudioScript().playSound_ButtonClick();
+        //AudioScript.getAudioScript().playSound_ButtonClick();
         reqOutPoker();
     }
 
