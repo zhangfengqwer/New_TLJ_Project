@@ -13,6 +13,7 @@ public class ChatPanelScript : MonoBehaviour {
     public GameObject m_listView_emoji;
     ListViewScript m_ListViewScript_emoji;
 
+    public Image m_tab_bg;
     public Button m_button_chat;
     public Button m_button_biaoqing;
 
@@ -38,16 +39,16 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void loadChat()
     {
+        {
+            m_tab_bg.transform.localPosition = new Vector3(-83, 0, 0);
+            m_button_chat.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_chat_xuanze", typeof(Sprite)) as Sprite;
+            m_button_biaoqing.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_emogi_weixuanze", typeof(Sprite)) as Sprite;
+        }
+
         m_ListViewScript_chat.clear();
 
         GameUtil.showGameObject(m_listView_chat);
         GameUtil.hideGameObject(m_listView_emoji);
-
-        {
-            m_button_chat.transform.SetAsLastSibling();
-            m_button_chat.transform.Find("Text").GetComponent<Text>().color = Color.yellow;
-            m_button_biaoqing.transform.Find("Text").GetComponent<Text>().color = Color.gray;
-        }
 
         for (int i = 0; i < ChatData.getInstance().getChatTextList().Count; i++)
         {
@@ -64,16 +65,18 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void loadBiaoQing()
     {
+        {
+            {
+                m_tab_bg.transform.localPosition = new Vector3(83, 0, 0);
+                m_button_chat.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_chat_weixuanze", typeof(Sprite)) as Sprite;
+                m_button_biaoqing.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_emogi_xuanze", typeof(Sprite)) as Sprite;
+            }
+        }
+
         m_ListViewScript_emoji.clear();
 
         GameUtil.hideGameObject(m_listView_chat);
         GameUtil.showGameObject(m_listView_emoji);
-
-        {
-            m_button_biaoqing.transform.SetAsLastSibling();
-            m_button_biaoqing.transform.Find("Text").GetComponent<Text>().color = Color.yellow;
-            m_button_chat.transform.Find("Text").GetComponent<Text>().color = Color.gray;
-        }
 
         {
             GameObject obj = new GameObject();

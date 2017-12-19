@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BuyGoodsPanelScript : MonoBehaviour
 {
+    public Image m_buyCount;
     public Text m_text_goods_name;
     public Text m_text_goods_num;
     //public Text m_text_goods_allPrice;
@@ -67,11 +68,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
             if (m_shopData.goods_type != 3)
             {
-                m_text_goods_num.transform.localScale = new Vector3(0, 0, 0);
-
-                m_button_jian.transform.localScale = new Vector3(0, 0, 0);
-                m_button_jia.transform.localScale = new Vector3(0, 0, 0);
-                m_button_max.transform.localScale = new Vector3(0, 0, 0);
+                m_buyCount.transform.localScale = new Vector3(0, 0, 0);
 
                 m_text_shiduyule.transform.localScale = new Vector3(1,1,1);
             }
