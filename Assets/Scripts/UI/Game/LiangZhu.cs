@@ -136,6 +136,7 @@ public class LiangZhu : MonoBehaviour
 
     private void OnClickLiangzhu(List<PokerInfo> list)
     {
+//        ToastScript.createToast(list[0].m_num+","+list[1].m_num);
         switch (m_useType)
         {
             case UseType.UseType_chaodi:

@@ -1019,7 +1019,7 @@ public class PlayRuleUtil
     }
 
     /// <summary>
-    /// 得到能够亮主的牌
+    /// 只在客户端调用,得到能够亮主的牌
     /// </summary>
     /// <param name="handerPoker"></param>
     /// <param name="liangZhuPoker"></param>
@@ -1044,10 +1044,18 @@ public class PlayRuleUtil
                     pokerInfos.Add(handerPoker[i]);
                 }
             }
+            List<PokerInfo> doublePoker = PlayRuleUtil.GetDoublePoker(jiPaiAndWang);
+            //大小王
+            foreach (var poker in doublePoker)
+            {
+                if (poker.m_pokerType == Consts.PokerType.PokerType_Wang)
+                {
+                    pokerInfos.Add(poker);
+                }
+            }
             return pokerInfos;
         }else if (liangZhuPoker.Count == 1)
         {
-            Consts.PokerType mPokerType = liangZhuPoker[0].m_pokerType;
             List<PokerInfo> doublePoker = PlayRuleUtil.GetDoublePoker(jiPaiAndWang);
             return doublePoker;
         }
@@ -1061,6 +1069,13 @@ public class PlayRuleUtil
                 {
                     pokerInfos.Add(doublePoker[i]);
                     pokerInfos.Add(doublePoker[i + 1]);
+                }
+
+                if (liangZhuPoker[0].m_num == 15 && doublePoker[i].m_num == 16)
+                {
+                    pokerInfos.Add(doublePoker[i]);
+                    pokerInfos.Add(doublePoker[i + 1]);
+//                    ToastScript.createToast("dawang");
                 }
             }
             return pokerInfos;

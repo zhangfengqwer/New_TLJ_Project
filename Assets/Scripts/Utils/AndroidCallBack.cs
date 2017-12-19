@@ -62,6 +62,29 @@ public class AndroidCallBack : MonoBehaviour {
         });
     }
 
+    public void qqLogin_IOS(string result)
+    {
+        var jsonData = JsonMapper.ToObject(result);
+        var accessToken = jsonData["accessToken"].ToString();
+        var openId = jsonData["openId"].ToString();
+        LogUtil.Log(accessToken);
+        LogUtil.Log(openId);
+
+        var url = string.Format("https://graph.qq.com/user/get_user_info?openid={0}&access_token={1}&appid=101436232",
+            openId, accessToken);
+        UnityWebReqUtil.Instance.Get(url, (tag, data) =>
+        {
+            LogUtil.Log(data);
+            var nickname = JsonMapper.ToObject(data)["nickname"].ToString();
+            JsonData jd = new JsonData();
+            jd["tag"] = Consts.Tag_Third_Login;
+            jd["nickname"] = nickname;
+            jd["third_id"] = openId;
+            jd["platform"] = 101;
+            LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
+        });
+    }
+
     // apk版本号
     public void SetVersionCode(string apkVersion)
     {
