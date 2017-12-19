@@ -205,6 +205,24 @@ public class AudioScript : MonoBehaviour {
         playSound("Audios/yx_buchaodi");
     }
 
+    // 胜利
+    public void playSound_Win()
+    {
+        playSound("Audios/yx_win");
+    }
+
+    // 失败
+    public void playSound_Fail()
+    {
+        playSound("Audios/yx_fail");
+    }
+
+    // 出牌
+    public void playSound_ChuPai()
+    {
+        playSound("Audios/yx_chupai");
+    }
+
     //----------------------------------------------------------------------------播放 end
 
     //---------------------------------------------------
