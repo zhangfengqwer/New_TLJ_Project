@@ -229,6 +229,12 @@ public class AudioScript : MonoBehaviour {
         playSound("Audios/yx_po");
     }
 
+    // 拖拉机
+    public void playSound_TuoLaJi()
+    {
+        playSound("Audios/yx_tuolaji");
+    }
+
     //----------------------------------------------------------------------------播放 end
 
     //---------------------------------------------------

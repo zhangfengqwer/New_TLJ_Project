@@ -1769,6 +1769,19 @@ public class GameScript : MonoBehaviour
                         }
                     }
 
+                    // 出牌类型
+                    {
+                        CheckOutPoker.OutPokerType outPokerType = CheckOutPoker.checkOutPokerType(outPokerList, GameData.getInstance().m_levelPokerNum, GameData.getInstance().m_masterPokerType);
+                        switch (outPokerType)
+                        {
+                            case CheckOutPoker.OutPokerType.OutPokerType_TuoLaJi:
+                                {
+                                    AudioScript.getAudioScript().playSound_TuoLaJi();
+                                }
+                                break;
+                        }
+                    }
+
                     // 显示出的牌
                     showOtherOutPoker(outPokerList, uid);
 
