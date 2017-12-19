@@ -10,6 +10,7 @@ public class PVPGameResultPanelScript : MonoBehaviour
     public Image m_image_guang;
     public Image m_image_sidai;
     public Image m_image_result;
+    public Button m_button_share;
     public Button m_button_exit;
     public GameObject m_waitMatch;
 
@@ -39,6 +40,7 @@ public class PVPGameResultPanelScript : MonoBehaviour
             
             m_image_result.SetNativeSize();
 
+            m_button_share.transform.localScale = new Vector3(0, 0, 0);
             m_button_exit.transform.localScale = new Vector3(0,0,0);
 
             Invoke("onInvokeTimeOut", 10);
@@ -61,6 +63,11 @@ public class PVPGameResultPanelScript : MonoBehaviour
     void onInvokeTimeOut()
     {
         m_parentScript.onTimerEvent_TimeEnd(false);
+    }
+
+    public void onClickShare()
+    {
+        ChoiceShareScript.Create("我赢过许多人却没有输给过你，快来帮我赢话费！","");
     }
 
     public void onClickExit()

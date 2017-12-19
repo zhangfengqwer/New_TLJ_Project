@@ -1702,9 +1702,22 @@ public class GameScript : MonoBehaviour
 
                     // 闲家抓到的分数
                     {
+                        int beforeScore = GameData.getInstance().m_getAllScore;
                         int getScore = (int) jd["getScore"];
                         GameData.getInstance().m_getAllScore += getScore;
                         m_textScore.text = GameData.getInstance().m_getAllScore.ToString();
+
+                        if ((beforeScore < 80) && (GameData.getInstance().m_getAllScore >= 80))
+                        {
+                            if (GameData.getInstance().m_isBanker == 1)
+                            {
+                                ShowImageScript.create("Sprites/Game/img_game_po_fail", new Vector3(0, 0, 0));
+                            }
+                            else
+                            {
+                                ShowImageScript.create("Sprites/Game/img_game_po_success", new Vector3(0, 0, 0));
+                            }
+                        }
                     }
 
                     bool isFreeOutPoker = (bool) jd["isFreeOutPoker"];
@@ -1770,6 +1783,8 @@ public class GameScript : MonoBehaviour
                         // 如果是自己出的牌，那么就得删掉这些牌
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
+                            AudioScript.getAudioScript().playSound_ChuPai();
+
                             m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
 
                             for (int i = 0; i < outPokerList.Count; i++)

@@ -40,12 +40,16 @@ public class GameResultPanelScript : MonoBehaviour {
 
         if (isWin)
         {
+            AudioScript.getAudioScript().playSound_Win();
+
             CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_win");
             m_image_result.SetNativeSize();
             m_text_xianjia_score.text = "+" + score;
         }
         else
         {
+            AudioScript.getAudioScript().playSound_Fail();
+
             CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/gameresult_fail");
             m_image_result.SetNativeSize();
             m_text_xianjia_score.text = score.ToString();
