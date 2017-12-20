@@ -59,6 +59,7 @@ public class GameData
         m_teammateUID = "";
         m_curOutPokerPlayerUid = "";
         m_lastMaiDiPlayer = "";
+        m_masterPokerType = -1;
 
         m_isTuoGuan = false;
         m_isFreeOutPoker = false;
