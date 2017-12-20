@@ -519,6 +519,12 @@ public class LoginScript : MonoBehaviour
                 ToastScript.createToast("密码至少6位");
                 return;
             }
+
+            if (m_inputPassword_register.text.Length > 30)
+            {
+                ToastScript.createToast("密码不能超过30位");
+                return;
+            }
         }
 
         NetLoading.getInstance().Show();
