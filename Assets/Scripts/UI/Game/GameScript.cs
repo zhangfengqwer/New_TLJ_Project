@@ -1661,6 +1661,17 @@ public class GameScript : MonoBehaviour
                         GameData.getInstance().m_curOutPokerPlayerUid = uid;
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
+                            {
+                                // 全部设为未选中状态
+                                for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+                                {
+                                    if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
+                                    {
+                                        GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
+                                    }
+                                }
+                            }
+
                             GameData.getInstance().m_isFreeOutPoker = isFreeOutPoker;
 
                             m_buttonOutPoker.transform.localScale = new Vector3(1, 1, 1);
