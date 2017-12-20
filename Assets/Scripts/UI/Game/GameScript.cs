@@ -2098,16 +2098,13 @@ public class GameScript : MonoBehaviour
                     }
                         break;
 
-                    case (int) TLJCommon.Consts.Code.Code_CommonFail:
+                    default:
                     {
                         ToastScript.createToast("有玩家退出，无法继续游戏");
 
-                        // 启用开始游戏按钮
-                        m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);
-                        //Destroy(m_waitOtherPlayer);
-                        Destroy(m_waitMatchPanel);
+                        exitRoom();
                     }
-                        break;
+                    break;
                 }
             }
                 break;
@@ -2117,12 +2114,9 @@ public class GameScript : MonoBehaviour
             {
                 ToastScript.createToast("同桌玩家退出，无法继续游戏");
 
-                // 启用开始游戏按钮
-                m_buttonStartGame.transform.localScale = new Vector3(1, 1, 1);
-                //Destroy(m_waitOtherPlayer);
-                Destroy(m_waitMatchPanel);
+                exitRoom();
             }
-                break;
+            break;
 
             // 聊天
             case (int) TLJCommon.Consts.PlayAction.PlayAction_Chat:
