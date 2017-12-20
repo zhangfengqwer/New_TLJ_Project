@@ -86,6 +86,8 @@ public class RealNameScript : MonoBehaviour
             }
            
             ToastScript.createToast("实名认证成功,请去邮箱领取奖励！");
+            
+            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
             Destroy(this.gameObject);
         }
         else

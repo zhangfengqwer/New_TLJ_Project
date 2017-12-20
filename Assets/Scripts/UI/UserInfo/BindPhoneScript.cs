@@ -181,6 +181,8 @@ public class BindPhoneScript : MonoBehaviour
         if (code == (int) Consts.Code.Code_OK)
         {
             ToastScript.createToast("绑定手机成功,请去邮箱领取奖励！");
+
+            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
             UserData.phone = _phoneNum;
             UserInfoScript.Instance.InitUI();
             Destroy(this.gameObject);
