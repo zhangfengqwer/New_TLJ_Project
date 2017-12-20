@@ -488,7 +488,7 @@ public class GameScript : MonoBehaviour
             LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
 
             // 让服务端匹配机器人
-            reqWaitMatchTimeOut();
+            //reqWaitMatchTimeOut();
         }
     }
 
@@ -772,12 +772,12 @@ public class GameScript : MonoBehaviour
 
     public void reqWaitMatchTimeOut()
     {
-        JsonData jsonData = new JsonData();
-        jsonData["tag"] = GameData.getInstance().m_tag;
-        jsonData["uid"] = UserData.uid;
-        jsonData["playAction"] = (int) TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
+        //JsonData jsonData = new JsonData();
+        //jsonData["tag"] = GameData.getInstance().m_tag;
+        //jsonData["uid"] = UserData.uid;
+        //jsonData["playAction"] = (int) TLJCommon.Consts.PlayAction.PlayAction_WaitMatchTimeOut;
 
-        PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
+        //PlayServiceSocket.s_instance.sendMessage(jsonData.ToJson());
     }
 
     public void reqUseBuff(int prop_id)
