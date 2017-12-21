@@ -1,6 +1,7 @@
 ﻿using LitJson;
 using System;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -457,7 +458,9 @@ public class LoginScript : MonoBehaviour
 
             data["tag"] = "Login";
             data["account"] = m_inputAccount.text;
-            data["password"] = m_inputPassword.text;
+            string md5 = CommonUtil.GetMD5(m_inputPassword.text);
+            LogUtil.Log(md5);
+            data["password"] = md5;
             data["passwordtype"] = 1;
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
