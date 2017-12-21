@@ -701,6 +701,9 @@ public class PlatformHelper
 
     [DllImport("__Internal")]
     public static extern void pay(string payType, string callObj, string callFunc, string data);
+
+    [DllImport("__Internal")]
+    public static extern string GetVersionName();
    
 }
 

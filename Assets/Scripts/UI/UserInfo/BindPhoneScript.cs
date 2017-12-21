@@ -180,7 +180,14 @@ public class BindPhoneScript : MonoBehaviour
         var msg = (string) jsonData["msg"];
         if (code == (int) Consts.Code.Code_OK)
         {
-            ToastScript.createToast("绑定手机成功,请去邮箱领取奖励！");
+            if (phone_type == 0)
+            {
+                ToastScript.createToast("绑定手机成功,请去邮箱领取奖励！");
+            }
+            else
+            {
+                ToastScript.createToast("修改手机成功！");
+            }
 
             LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
             UserData.phone = _phoneNum;
