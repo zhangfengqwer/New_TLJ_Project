@@ -51,7 +51,7 @@ public class GameScript : MonoBehaviour
 
     Vector3 m_screenPos;
 
-    bool m_isStartGame = false;
+    //bool m_isStartGame = false;
     bool m_hasJiPaiQiUse = false;
 
     void Start()
@@ -203,7 +203,8 @@ public class GameScript : MonoBehaviour
     {
         try
         {
-            m_isStartGame = true;
+            //m_isStartGame = true;
+            GameData.getInstance().m_isStartGame = true;
 
             // 托管状态
             {
@@ -1677,14 +1678,11 @@ public class GameScript : MonoBehaviour
                             m_buttonOutPoker.transform.localScale = new Vector3(1, 1, 1);
 
                             // 开始出牌倒计时
-                            m_timerScript.start(GameData.getInstance().m_outPokerTime,
-                                TimerScript.TimerType.TimerType_OutPoker, true);
+                            m_timerScript.start(GameData.getInstance().m_outPokerTime,TimerScript.TimerType.TimerType_OutPoker, true);
                             setTimerPos(uid);
 
-                            if ((GameData.getInstance().getGameRoomType()
-                                     .CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
-                                (GameData.getInstance().getGameRoomType()
-                                     .CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
+                            if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
+                                (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
                             {
                                 m_buttonTiShi.transform.localScale = new Vector3(1, 1, 1);
                             }
@@ -1692,8 +1690,7 @@ public class GameScript : MonoBehaviour
                         else
                         {
                             // 开始出牌倒计时
-                            m_timerScript.start(GameData.getInstance().m_outPokerTime,
-                                TimerScript.TimerType.TimerType_OutPoker, false);
+                            m_timerScript.start(GameData.getInstance().m_outPokerTime,TimerScript.TimerType.TimerType_OutPoker, false);
                             setTimerPos(uid);
 
                             m_buttonTiShi.transform.localScale = new Vector3(0, 0, 0);
@@ -1748,9 +1745,7 @@ public class GameScript : MonoBehaviour
                         {
                             if (GameData.getInstance().m_playerDataList[i].m_uid.CompareTo(uid) == 0)
                             {
-                                for (int j = GameData.getInstance().m_playerDataList[i].m_outPokerObjList.Count - 1;
-                                    j >= 0;
-                                    j--)
+                                for (int j = GameData.getInstance().m_playerDataList[i].m_outPokerObjList.Count - 1;j >= 0;j--)
                                 {
                                     Destroy(GameData.getInstance().m_playerDataList[i].m_outPokerObjList[j]);
                                 }
@@ -1774,8 +1769,7 @@ public class GameScript : MonoBehaviour
                             // 如果是此回合第一个人出的牌
                             if (isFreeOutPoker && isOutPokerOK)
                             {
-                                GameData.getInstance().m_curRoundFirstOutPokerList
-                                    .Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
+                                GameData.getInstance().m_curRoundFirstOutPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
                             }
                         }
                     }
@@ -1816,6 +1810,7 @@ public class GameScript : MonoBehaviour
                             AudioScript.getAudioScript().playSound_ChuPai();
 
                             m_buttonOutPoker.transform.localScale = new Vector3(0, 0, 0);
+                            m_buttonTiShi.transform.localScale = new Vector3(0, 0, 0);
 
                             for (int i = 0; i < outPokerList.Count; i++)
                             {
@@ -2286,7 +2281,14 @@ public class GameScript : MonoBehaviour
         }
         else
         {
-            GameUtil.showGameObject(m_buttonStartGame.gameObject);
+            if (GameData.getInstance().m_isStartGame)
+            {
+                exitRoom();
+            }
+            else
+            {
+                GameUtil.showGameObject(m_buttonStartGame.gameObject);
+            }
         }
     }
 
@@ -3248,7 +3250,8 @@ public class GameScript : MonoBehaviour
         {
             if (!isPVP())
             {
-                if (m_isStartGame)
+                if(GameData.getInstance().m_isStartGame)
+                //if (m_isStartGame)
                 {
                     if (!m_hasJiPaiQiUse)
                     {

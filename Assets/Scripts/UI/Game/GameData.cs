@@ -49,6 +49,7 @@ public class GameData
 
     public bool m_isTuoGuan = false;
     public bool m_isFreeOutPoker = false;
+    public bool m_isStartGame = false;
 
     public string m_startGameJsonData = "";
 
@@ -63,6 +64,7 @@ public class GameData
 
         m_isTuoGuan = false;
         m_isFreeOutPoker = false;
+        m_isStartGame = false;
 
         m_myPokerList.Clear();
         m_dipaiList.Clear();
