@@ -41,6 +41,7 @@ public class SetScript : MonoBehaviour {
         }
 
         m_text_VersionCode.text = OtherData.s_apkVersion;
+
     }
 	
 	// Update is called once per frame

@@ -58,6 +58,11 @@ public class LoginScript : MonoBehaviour
             // 安卓回调
             AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
             AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
+            if (string.IsNullOrEmpty(OtherData.s_apkVersion))
+            {
+                OtherData.s_apkVersion = PlatformHelper.GetVersionName();
+            }
+
         }
 
         ToastScript.clear();
@@ -537,7 +542,7 @@ public class LoginScript : MonoBehaviour
 
             data["tag"] = "QuickRegister";
             data["account"] = m_inputAccount_register.text;
-            data["password"] = m_inputSecondPassword_register.text;
+            data["password"] = CommonUtil.GetMD5(m_inputSecondPassword_register.text);
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
