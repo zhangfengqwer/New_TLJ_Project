@@ -13,6 +13,8 @@ public class SetScript : MonoBehaviour {
     public Slider m_sliderMusic;
     public Slider m_sliderSound;
 
+    public Text m_text_VersionCode;
+
     public bool m_isFromGameLayer = true;
 
     public static GameObject create(bool isFromGameLayer)
@@ -37,6 +39,8 @@ public class SetScript : MonoBehaviour {
             m_button_tuichu.transform.localScale = new Vector3(0, 0, 0);
             m_button_guanyu.transform.localScale = new Vector3(0, 0, 0);
         }
+
+        m_text_VersionCode.text = OtherData.s_apkVersion;
     }
 	
 	// Update is called once per frame
