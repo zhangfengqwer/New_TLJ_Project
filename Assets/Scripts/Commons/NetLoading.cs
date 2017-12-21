@@ -32,6 +32,8 @@ public class NetLoading : MonoBehaviour {
 
         GameObject prefab = Resources.Load("Prefabs/Commons/LoadingPanel") as GameObject;
         s_loadingPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
+
+        Invoke("onInvoke",10);
     }
 
     public void Close()
@@ -42,5 +44,13 @@ public class NetLoading : MonoBehaviour {
 
             s_loadingPanel = null;
         }
+
+        CancelInvoke("onInvoke");
+    }
+
+    void onInvoke()
+    {
+        ToastScript.createToast("网络超时");
+        Close();
     }
 }

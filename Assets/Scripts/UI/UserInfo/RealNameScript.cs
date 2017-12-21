@@ -62,15 +62,22 @@ public class RealNameScript : MonoBehaviour
 
     public void OnClickRealName()
     {
-        if (_isCorrectRealName && _isCorrectIdentification)
+        if (!_isCorrectRealName)
         {
-            LogicEnginerScript.Instance.GetComponent<RealNameRequest>().CallBack = realNameCallBack;
-            LogicEnginerScript.Instance.GetComponent<RealNameRequest>().OnRequest(_realName, _identification);
+            ToastScript.createToast("请输入正确的姓名");
+
+            return;
         }
-        else
+
+        if (!_isCorrectIdentification)
         {
-//            ToastScript.createToast("输入的信息有误");
+            ToastScript.createToast("请输入正确的身份证");
+
+            return;
         }
+        
+        LogicEnginerScript.Instance.GetComponent<RealNameRequest>().CallBack = realNameCallBack;
+        LogicEnginerScript.Instance.GetComponent<RealNameRequest>().OnRequest(_realName, _identification);
     }
 
     private void realNameCallBack(string result)

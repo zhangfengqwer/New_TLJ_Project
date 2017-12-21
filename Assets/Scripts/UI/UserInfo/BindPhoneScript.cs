@@ -111,15 +111,22 @@ public class BindPhoneScript : MonoBehaviour
 
     public void OnClickBindPhone()
     {
-        if (_isCorrectPhone && _isCorrectCode)
+        if (!_isCorrectPhone)
         {
-            LogicEnginerScript.Instance.GetComponent<CheckSmsRequest>().CallBack = bindPhoneCallBack;
-            LogicEnginerScript.Instance.GetComponent<CheckSmsRequest>().OnRequest(_phoneNum, _verificationCode);
+            ToastScript.createToast("请输入正确的手机号");
+
+            return;
         }
-        else
+
+        if (!_isCorrectCode)
         {
-//            ToastScript.createToast("输入的信息有误");
+            ToastScript.createToast("请输入正确的验证码");
+
+            return;
         }
+        
+        LogicEnginerScript.Instance.GetComponent<CheckSmsRequest>().CallBack = bindPhoneCallBack;
+        LogicEnginerScript.Instance.GetComponent<CheckSmsRequest>().OnRequest(_phoneNum, _verificationCode);
     }
 
     public void OnClickSendCode()
