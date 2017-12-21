@@ -221,8 +221,8 @@ public class MainScript : MonoBehaviour
     {
         LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
 
-        // 让服务端匹配机器人
-        reqWaitMatchTimeOut();
+        //// 让服务端匹配机器人
+        //reqWaitMatchTimeOut();
     }
 
     public void onClickEnterXiuXianChang()
