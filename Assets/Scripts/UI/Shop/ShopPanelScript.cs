@@ -100,7 +100,7 @@ public class ShopPanelScript : MonoBehaviour
         }
     }
 
-    private void InitVip()
+    public void InitVip()
     {
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
         int currentVipToTal = VipUtil.GetCurrentVipTotal(vipLevel);
@@ -119,7 +119,7 @@ public class ShopPanelScript : MonoBehaviour
     }
 
 
-    private void Init()
+    public void Init()
     {
         try
         {
