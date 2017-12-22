@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -439,7 +440,8 @@ public class LoginScript : MonoBehaviour
         }
         else if (code == (int) TLJCommon.Consts.Code.Code_CommonFail)
         {
-            ToastScript.createToast("用户已存在");
+            var msg = (string)jd["msg"];
+            ToastScript.createToast(msg);
         }
         else
         {
@@ -541,7 +543,8 @@ public class LoginScript : MonoBehaviour
             JsonData data = new JsonData();
 
             data["tag"] = "QuickRegister";
-            data["account"] = m_inputAccount_register.text;
+            string result = Regex.Replace(m_inputAccount_register.text, @"\p{Cs}", "");//屏蔽emoji 
+            data["account"] = result;
             data["password"] = CommonUtil.GetMD5(m_inputSecondPassword_register.text);
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
