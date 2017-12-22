@@ -96,7 +96,7 @@ public class PropDetailPanelScript : MonoBehaviour {
                             if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jipaiqi))
                             {
                                 isFind = true;
-                                ++UserData.buffData[i].prop_id;
+                                ++UserData.buffData[i].buff_num;
                                 break;
                             }
                         }

@@ -59,11 +59,12 @@ public class LoginScript : MonoBehaviour
             // 安卓回调
             AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
             AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
+
+            // apk版本号
             if (string.IsNullOrEmpty(OtherData.s_apkVersion))
             {
                 OtherData.s_apkVersion = PlatformHelper.GetVersionName();
             }
-
         }
 
         ToastScript.clear();
