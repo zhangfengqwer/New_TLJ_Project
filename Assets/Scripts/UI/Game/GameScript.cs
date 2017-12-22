@@ -426,6 +426,9 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            // 开始获取玩家信息倒计时
+            startDaoJiShi_GetUserInfo_Game();
+
             // 本桌所有人信息
             for (int i = 0; i < jd["userList"].Count; i++)
             {
@@ -464,6 +467,36 @@ public class GameScript : MonoBehaviour
         catch (Exception ex)
         {
             LogUtil.Log("startGame_InitUI()报错：" + ex.Message);
+        }
+    }
+
+    public void startDaoJiShi_GetUserInfo_Game()
+    {
+        Invoke("onInvoke_GetUserInfo_Game", 2);
+    }
+
+    void onInvoke_GetUserInfo_Game()
+    {
+        bool isOK = true;
+
+        for (int i = 0; i < GameData.getInstance().m_playerDataList.Count; i++)
+        {
+            if (string.IsNullOrEmpty(GameData.getInstance().m_playerDataList[i].m_name))
+            {
+                isOK = false;
+
+                //ToastScript.createToast("没有获取到玩家信息：" + GameData.getInstance().m_playerDataList[i].m_uid);
+                reqUserInfo_Game(GameData.getInstance().m_playerDataList[i].m_uid);
+            }
+        }
+
+        if (!isOK)
+        {
+            startDaoJiShi_GetUserInfo_Game();
+        }
+        else
+        {
+            //ToastScript.createToast("所有玩家信息都已经获取到");
         }
     }
 
