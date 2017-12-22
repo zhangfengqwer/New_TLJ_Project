@@ -1231,8 +1231,7 @@ public class GameScript : MonoBehaviour
                     }
                 }
 
-                m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
-                    GameData.getInstance().m_beforeQiangzhuPokerList);
+                m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,GameData.getInstance().m_beforeQiangzhuPokerList);
             }
                 break;
 
@@ -1277,8 +1276,7 @@ public class GameScript : MonoBehaviour
                     }
 
                     // 更新抢主对象数据
-                    m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
-                        GameData.getInstance().m_beforeQiangzhuPokerList);
+                    m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,GameData.getInstance().m_beforeQiangzhuPokerList);
                 }
 
                 // 显示出的牌
@@ -1939,6 +1937,8 @@ public class GameScript : MonoBehaviour
                 {
                     //ToastScript.createToast("游戏结束");
 
+                    bool isContiune = (bool)jd["isContiune"];
+
                     // 闲家抓到的分数
                     {
                         GameData.getInstance().m_getAllScore = (int) jd["getAllScore"];
@@ -1953,10 +1953,12 @@ public class GameScript : MonoBehaviour
                             // 显示pvp结算界面
                             if (GameData.getInstance().m_isPVP)
                             {
-                                m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
-                                PVPGameResultPanelScript script =
-                                    m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
-                                script.setData(true);
+                                if (isContiune)
+                                {
+                                    m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
+                                    PVPGameResultPanelScript script = m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
+                                    script.setData(true);
+                                }
 
                                 // 更新积分
                                 {
@@ -1969,8 +1971,7 @@ public class GameScript : MonoBehaviour
                             {
                                 GameObject obj = GameResultPanelScript.create(this);
                                 GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                script.setData(true, GameData.getInstance().m_getAllScore, (int) jd["score"],
-                                    GameData.getInstance().getGameRoomType());
+                                script.setData(true, GameData.getInstance().m_getAllScore, (int) jd["score"],GameData.getInstance().getGameRoomType());
 
                                 // 更新金币数量
                                 {
@@ -1984,10 +1985,12 @@ public class GameScript : MonoBehaviour
                             // 显示pvp结算界面
                             if (GameData.getInstance().m_isPVP)
                             {
-                                m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
-                                PVPGameResultPanelScript script =
-                                    m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
-                                script.setData(false);
+                                if (isContiune)
+                                {
+                                    m_pvpGameResultPanel = PVPGameResultPanelScript.create(this);
+                                    PVPGameResultPanelScript script = m_pvpGameResultPanel.GetComponent<PVPGameResultPanelScript>();
+                                    script.setData(false);
+                                }
 
                                 // 更新积分
                                 {
@@ -2000,8 +2003,7 @@ public class GameScript : MonoBehaviour
                             {
                                 GameObject obj = GameResultPanelScript.create(this);
                                 GameResultPanelScript script = obj.GetComponent<GameResultPanelScript>();
-                                script.setData(false, GameData.getInstance().m_getAllScore, (int) jd["score"],
-                                    GameData.getInstance().getGameRoomType());
+                                script.setData(false, GameData.getInstance().m_getAllScore, (int) jd["score"],GameData.getInstance().getGameRoomType());
 
                                 // 更新金币数量
                                 {
@@ -2142,6 +2144,15 @@ public class GameScript : MonoBehaviour
             {
                 ToastScript.createToast("同桌玩家退出，无法继续游戏");
 
+                exitRoom();
+            }
+            break;
+
+            // 强制解散房间
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_BreakRoom:
+            {
+                ToastScript.createToast("该房间异常，强制解散房间");
+                    
                 exitRoom();
             }
             break;
@@ -3332,9 +3343,13 @@ public class GameScript : MonoBehaviour
         {
             //LogUtil.Log("连接服务器失败，尝试重新连接");
 
+            //NetErrorPanelScript.getInstance().Show();
+            //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
+            //NetErrorPanelScript.getInstance().setContentText("连接游戏服务器失败，请重新连接");
+
             NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-            NetErrorPanelScript.getInstance().setContentText("连接游戏服务器失败，请重新连接");
+            NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确认回到主界面");
         }
     }
 
@@ -3420,9 +3435,13 @@ public class GameScript : MonoBehaviour
         {
             //LogUtil.Log("连接服务器失败，尝试重新连接");
 
+            //NetErrorPanelScript.getInstance().Show();
+            //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
+            //NetErrorPanelScript.getInstance().setContentText("连接逻辑服务器失败，请重新连接");
+
             NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-            NetErrorPanelScript.getInstance().setContentText("连接逻辑服务器失败，请重新连接");
+            NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确认回到主界面");
         }
     }
 
@@ -3459,17 +3478,23 @@ public class GameScript : MonoBehaviour
     {
         if (!LogicEnginerScript.Instance.isConnecion())
         {
-            //ToastScript.createToast("与Logic服务器断开连接");
+            //NetErrorPanelScript.getInstance().Show();
+            //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
+            //NetErrorPanelScript.getInstance().setContentText("与逻辑服务器断开连接，请重新连接");
+
             NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-            NetErrorPanelScript.getInstance().setContentText("与逻辑服务器断开连接，请重新连接");
+            NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确认回到主界面");
         }
         else if (!PlayServiceSocket.s_instance.isConnecion())
         {
-            //ToastScript.createToast("与Play服务器断开连接");
+            //NetErrorPanelScript.getInstance().Show();
+            //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
+            //NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
+
             NetErrorPanelScript.getInstance().Show();
-            NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-            NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
+            NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
+            NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确认回到主界面");
         }
         else
         {
