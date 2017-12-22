@@ -111,6 +111,12 @@ public class BindPhoneScript : MonoBehaviour
 
     public void OnClickBindPhone()
     {
+        if (string.IsNullOrEmpty(PhoneField.text) || string.IsNullOrEmpty(VerificationCodeField.text))
+        {
+            ToastScript.createToast("输入的内容不能为空");
+
+            return;
+        }
         if (!_isCorrectPhone)
         {
             ToastScript.createToast("请输入正确的手机号");
