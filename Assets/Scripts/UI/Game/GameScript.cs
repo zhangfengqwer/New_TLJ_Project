@@ -120,6 +120,7 @@ public class GameScript : MonoBehaviour
             m_liangzhuObj = LiangZhu.create(this);
             LogUtil.Log("亮主对象  121行");
             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_liangzhu);
+            m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,null);
             m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         }
 
