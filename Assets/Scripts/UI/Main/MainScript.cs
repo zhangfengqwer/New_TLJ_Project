@@ -21,6 +21,7 @@ public class MainScript : MonoBehaviour
     public Text UserAccount;
     public Text UserGold;
     public Text MyGold;
+    public Text MyMedal;
     public Text UserYuanBao;
     public Text UserMedal;
 
@@ -187,6 +188,7 @@ public class MainScript : MonoBehaviour
         // 金币
         UserGold.text = UserData.gold + "";
         MyGold.text = "我的金币:" + UserData.gold;
+        MyMedal.text = "我的徽章:" + UserData.medal;
 
         // 元宝
         UserYuanBao.text = UserData.yuanbao + "";
@@ -409,6 +411,11 @@ public class MainScript : MonoBehaviour
         // 购买元宝结果通知
         else if (tag.CompareTo(TLJCommon.Consts.Tag_BuyYuanBao) == 0)
         {
+            GameObject go = GameObject.Find("PayTypePanel(Clone)");
+            if (go != null)
+            {
+                Destroy(go);
+            }
             var code = (int) jd["code"];
             if (code == (int) Consts.Code.Code_OK)
             {
@@ -419,6 +426,9 @@ public class MainScript : MonoBehaviour
             {
                 ToastScript.createToast("支付失败");
             }
+
+
+
         }
         // 有人使用转盘
         else if (tag.CompareTo(TLJCommon.Consts.Tag_TurntableBroadcast) == 0)

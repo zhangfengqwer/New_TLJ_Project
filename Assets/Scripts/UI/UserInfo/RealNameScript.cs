@@ -62,6 +62,13 @@ public class RealNameScript : MonoBehaviour
 
     public void OnClickRealName()
     {
+        if (string.IsNullOrEmpty(RealNameInputField.text) || string.IsNullOrEmpty(IdentificationInputField.text))
+        {
+            ToastScript.createToast("输入的内容不能为空");
+
+            return;
+        }
+
         if (!_isCorrectRealName)
         {
             ToastScript.createToast("请输入正确的姓名");
@@ -72,7 +79,6 @@ public class RealNameScript : MonoBehaviour
         if (!_isCorrectIdentification)
         {
             ToastScript.createToast("请输入正确的身份证");
-
             return;
         }
         

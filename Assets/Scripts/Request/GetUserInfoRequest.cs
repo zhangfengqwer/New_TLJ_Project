@@ -28,6 +28,9 @@ public class GetUserInfoRequest : Request
             if (ShopPanelScript.Instance != null)
             {
                 ShopPanelScript.Instance.InitUserInfo();
+                ShopPanelScript.Instance.InitVip();
+                ShopPanelScript.Instance.Init();
+                
             }
             flag = false;
         }
