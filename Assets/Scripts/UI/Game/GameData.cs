@@ -28,9 +28,10 @@ public class GameData
     public List<PlayerData> m_playerDataList = new List<PlayerData>();                                  // 本桌4个玩家的信息
 
 
+    public int m_waitMatchTime = 30;            // 匹配队友最长时间
     public int m_outPokerTime = 15;             // 出牌时间 
-    //public float m_tuoGuanOutPokerTime = 2;     // 托管出牌时间 
-    public float m_tuoGuanOutPokerTime = 0.5f;     // 托管出牌时间 
+    public float m_tuoGuanOutPokerTime = 2;     // 托管出牌时间 
+    //public float m_tuoGuanOutPokerTime = 0.5f;     // 托管出牌时间 
     public int m_qiangZhuTime = 10;             // 抢主时间
     public int m_maiDiTime = 40;                // 埋底时间
     public int m_chaodiTime = 10;               // 选择是否炒底时间 

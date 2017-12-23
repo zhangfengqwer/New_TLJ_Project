@@ -541,7 +541,7 @@ public class MainScript : MonoBehaviour
 
                 ToastScript.createToast("报名成功");
 
-                showWaitMatchPanel(10, gameroomtype);
+                showWaitMatchPanel(GameData.getInstance().m_waitMatchTime, gameroomtype);
 
                 // 扣除报名费
                 {

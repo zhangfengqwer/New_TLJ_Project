@@ -118,6 +118,7 @@ public class GameScript : MonoBehaviour
         // 初始化亮主
         {
             m_liangzhuObj = LiangZhu.create(this);
+            LogUtil.Log("亮主对象  121行");
             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_liangzhu);
             m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
         }
@@ -1154,7 +1155,7 @@ public class GameScript : MonoBehaviour
 
                         //m_waitOtherPlayer = WaitOtherPlayerScript.create();
 
-                        showWaitMatchPanel(10, false);
+                        showWaitMatchPanel(GameData.getInstance().m_waitMatchTime, false);
                     }
                         break;
 
@@ -1547,6 +1548,7 @@ public class GameScript : MonoBehaviour
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
                             m_liangzhuObj = LiangZhu.create(this);
+                            LogUtil.Log("亮主对象  1551行");
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
                             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
                             GameData.getInstance().m_beforeQiangzhuPokerList);
@@ -2096,7 +2098,7 @@ public class GameScript : MonoBehaviour
                         m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
 
                         //m_waitOtherPlayer = WaitOtherPlayerScript.create();
-                        showWaitMatchPanel(10, false);
+                        showWaitMatchPanel(GameData.getInstance().m_waitMatchTime, false);
                     }
                         break;
 
@@ -2124,7 +2126,7 @@ public class GameScript : MonoBehaviour
                         m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
 
                         //m_waitOtherPlayer = WaitOtherPlayerScript.create();
-                        showWaitMatchPanel(10, true);
+                        showWaitMatchPanel(GameData.getInstance().m_waitMatchTime, true);
                     }
                         break;
 
@@ -2542,6 +2544,7 @@ public class GameScript : MonoBehaviour
                         if (curChaoDiPlayer.CompareTo(UserData.uid) == 0)
                         {
                             m_liangzhuObj = LiangZhu.create(this);
+                            LogUtil.Log("亮主对象  2547行");
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
                             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
                             GameData.getInstance().m_beforeQiangzhuPokerList);
@@ -3482,6 +3485,8 @@ public class GameScript : MonoBehaviour
             //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
             //NetErrorPanelScript.getInstance().setContentText("与逻辑服务器断开连接，请重新连接");
 
+            Destroy(LogicEnginerScript.Instance.gameObject);
+
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
             NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确认回到主界面");
@@ -3491,6 +3496,8 @@ public class GameScript : MonoBehaviour
             //NetErrorPanelScript.getInstance().Show();
             //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
             //NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
+            
+            Destroy(PlayServiceSocket.s_instance.gameObject);
 
             NetErrorPanelScript.getInstance().Show();
             NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
