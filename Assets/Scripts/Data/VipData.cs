@@ -6,6 +6,7 @@ public class VipData
 {
     public int vipLevel;
     public int medalNum;
+    public int turnTableCount;
     public VipOnce vipOnce;
     public VipWeekly vipWeekly;
 
