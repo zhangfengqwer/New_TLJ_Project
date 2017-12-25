@@ -887,8 +887,8 @@ public class GameScript : MonoBehaviour
                         str += myOutPokerList[i].m_num;
                         str += "  ";
                     }
-                    ToastScript.createToast(str);
-//                    ToastScript.createToast("出的牌不合规则:" + myOutPokerList.Count);
+                    //ToastScript.createToast(str);
+                    ToastScript.createToast("出的牌不合规则:");
                     LogUtil.Log(str);
 
                     return;
@@ -2154,9 +2154,18 @@ public class GameScript : MonoBehaviour
             // 强制解散房间
             case (int)TLJCommon.Consts.PlayAction.PlayAction_BreakRoom:
             {
-                ToastScript.createToast("该房间异常，强制解散房间");
-                    
-                exitRoom();
+                NetErrorPanelScript.getInstance().Show();
+                NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
+                NetErrorPanelScript.getInstance().setContentText("该房间异常，强制解散房间");
+            }
+            break;
+
+            // 匹配失败
+            case (int)TLJCommon.Consts.PlayAction.PlayAction_MatchFail:
+            {
+                NetErrorPanelScript.getInstance().Show();
+                NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
+                NetErrorPanelScript.getInstance().setContentText("匹配队友失败，请稍后再试。");
             }
             break;
 

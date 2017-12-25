@@ -162,6 +162,9 @@ public class TurntablePanelScript : MonoBehaviour
                 }
             }
 
+            // 开始旋转前先禁止此界面可被关闭
+            gameObject.GetComponent<ScaleUtil>().setCanClose(false);
+
             // 轮盘开始转
             {
                 for (int i = 0; i < m_rewardObj_list.Count; i++)
@@ -186,6 +189,9 @@ public class TurntablePanelScript : MonoBehaviour
                             addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
 
                             m_isStartRotate = false;
+
+                            // 旋转结束后允许此界面可被关闭
+                            gameObject.GetComponent<ScaleUtil>().setCanClose(true);
                         });
                     }
                 }

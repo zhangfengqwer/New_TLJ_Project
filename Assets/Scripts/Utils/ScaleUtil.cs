@@ -15,6 +15,8 @@ public class ScaleUtil : MonoBehaviour
     public delegate void CallBack();
     public CallBack m_callBack = null;
 
+    bool m_canClose = true;
+
     // Use this for initialization
     void Start()
     {
@@ -32,8 +34,16 @@ public class ScaleUtil : MonoBehaviour
 
     public void OnClickClose()
     {
-        Destroy(gameObject);
+        if (m_canClose)
+        {
+            Destroy(gameObject);
 
-        AudioScript.getAudioScript().playSound_LayerClose();
+            AudioScript.getAudioScript().playSound_LayerClose();
+        }
+    }
+
+    public void setCanClose(bool canClose)
+    {
+        m_canClose = canClose;
     }
 }

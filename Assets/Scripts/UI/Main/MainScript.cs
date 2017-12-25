@@ -500,6 +500,21 @@ public class MainScript : MonoBehaviour
                         doTask_PlayAction_StartGame(data);
                     }
                     break;
+
+                // 匹配失败
+                case (int)TLJCommon.Consts.PlayAction.PlayAction_MatchFail:
+                    {
+                        if (m_waitMatchPanel != null)
+                        {
+                            Destroy(m_waitMatchPanel);
+                            m_waitMatchPanel = null;
+                        }
+
+                        NetErrorPanelScript.getInstance().Show();
+                        NetErrorPanelScript.getInstance().setOnClickButton(null);
+                        NetErrorPanelScript.getInstance().setContentText("匹配队友失败，请稍后再试。");
+                    }
+                    break;
             }
         }
         // 获取pvp场次信息
