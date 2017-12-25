@@ -218,7 +218,7 @@ public class LoginScript : MonoBehaviour
     {
         var flag = ToggleAgree.isOn;
         var Panel_EnterLogin = this.transform.Find("Panel_EnterLogin");
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             Panel_EnterLogin.transform.GetChild(i).GetComponent<Button>().interactable = flag;
         }

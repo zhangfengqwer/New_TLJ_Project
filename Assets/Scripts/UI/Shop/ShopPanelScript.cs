@@ -113,7 +113,7 @@ public class ShopPanelScript : MonoBehaviour
             vipText = string.Format("<color=#FF0000FF>{0}</color>", "贵族等级已满");
         }
         VipExplain.text = vipText;
-
+        
         SlideText.text = UserData.rechargeVip + "/" + currentVipToTal;
         SliderVip.value = UserData.rechargeVip / (float) currentVipToTal;
     }
