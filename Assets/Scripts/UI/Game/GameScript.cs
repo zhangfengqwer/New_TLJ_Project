@@ -888,7 +888,7 @@ public class GameScript : MonoBehaviour
                         str += "  ";
                     }
                     //ToastScript.createToast(str);
-                    ToastScript.createToast("出的牌不合规则:");
+                    ToastScript.createToast("出的牌不合规则");
                     LogUtil.Log(str);
 
                     return;
@@ -2156,7 +2156,7 @@ public class GameScript : MonoBehaviour
             {
                 NetErrorPanelScript.getInstance().Show();
                 NetErrorPanelScript.getInstance().setOnClickButton(exitRoom);
-                NetErrorPanelScript.getInstance().setContentText("该房间异常，强制解散房间");
+                NetErrorPanelScript.getInstance().setContentText("该房间超时，强制解散房间");
             }
             break;
 

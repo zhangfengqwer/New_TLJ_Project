@@ -46,6 +46,7 @@ public class SensitiveWordUtil
         {
             if (CommonUtil.isStrContain(str, words))
             {
+                LogUtil.Log("敏感词：" + words);
                 return true;
             }
         }
