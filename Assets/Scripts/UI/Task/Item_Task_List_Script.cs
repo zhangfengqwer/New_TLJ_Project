@@ -61,16 +61,17 @@ public class Item_Task_List_Script : MonoBehaviour {
                 }
             }
 
-            // 经验
-            {
-                GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Task_Reward") as GameObject;
-                GameObject obj = GameObject.Instantiate(prefab, this.transform);
+            // 暂时先拿掉
+            //// 经验
+            //{
+            //    GameObject prefab = Resources.Load("Prefabs/UI/Item/Item_Task_Reward") as GameObject;
+            //    GameObject obj = GameObject.Instantiate(prefab, this.transform);
 
-                obj.transform.localPosition = new Vector3(240, 0, 0);
+            //    obj.transform.localPosition = new Vector3(240, 0, 0);
 
-                CommonUtil.setImageSprite(obj.GetComponent<Image>(), "Sprites/Icon/icon_exp");
-                obj.transform.Find("Text").GetComponent<Text>().text = m_taskData.exp.ToString();
-            }
+            //    CommonUtil.setImageSprite(obj.GetComponent<Image>(), "Sprites/Icon/icon_exp");
+            //    obj.transform.Find("Text").GetComponent<Text>().text = m_taskData.exp.ToString();
+            //}
 
             // 奖励
             {

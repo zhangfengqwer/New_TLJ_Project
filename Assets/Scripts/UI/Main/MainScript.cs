@@ -603,25 +603,30 @@ public class MainScript : MonoBehaviour
             {
                 int roomId = (int) jd["roomId"];
                 string gameroomtype = jd["gameroomtype"].ToString();
-                if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
-                {
-                    ToastScript.createToast("退赛成功");
-                }
-                else
-                {
-                    ToastScript.createToast("退赛成功,请到邮箱领取报名费");
 
-                    // 报名费返还通过邮件
-                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
+                if (pvpGameRoomData != null)
+                {
+                    if (pvpGameRoomData.baomingfei.CompareTo("0") == 0)
+                    {
+                        ToastScript.createToast("退赛成功");
+                    }
+                    else
+                    {
+                        ToastScript.createToast("退赛成功,请到邮箱领取报名费");
+
+                        // 报名费返还通过邮件
+                        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                    }
                 }
             }
-                break;
+            break;
 
             case (int) TLJCommon.Consts.Code.Code_CommonFail:
             {
                 ToastScript.createToast("退赛失败，当前并没有加入房间");
             }
-                break;
+            break;
         }
     }
 
