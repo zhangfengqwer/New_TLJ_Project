@@ -328,12 +328,23 @@ public class LoginScript : MonoBehaviour
         OnEnterLoginClick();
     }
 
+    void onApkVerisionIsLow()
+    {
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onApkVerisionIsLow);
+        NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
+    }
+
     void onReceive(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string) jd["tag"];
 
-        if (tag.CompareTo(TLJCommon.Consts.Tag_Login) == 0)
+        if (tag.CompareTo(TLJCommon.Consts.Tag_CheckVerisionCode) == 0)
+        {
+            onReceive_CheckVerisionCode(data);
+        }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_Login) == 0)
         {
             onReceive_Login(data);
         }
@@ -347,6 +358,31 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    void onReceive_CheckVerisionCode(string data)
+    {
+        NetLoading.getInstance().Close();
+
+        JsonData jd = JsonMapper.ToObject(data);
+        int code = (int)jd["code"];
+
+        if (code == (int)TLJCommon.Consts.Code.Code_OK)
+        {
+            string apkVersion = jd["apkVersion"].ToString();
+
+            if (OtherData.s_apkVersion.CompareTo(apkVersion) < 0)
+            {
+                NetErrorPanelScript.getInstance().Show();
+                NetErrorPanelScript.getInstance().setOnClickButton(onApkVerisionIsLow);
+                NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
+            }
+        }
+        else
+        {
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(reqCheckVerisionCode);
+            NetErrorPanelScript.getInstance().setContentText("服务器内部错误");
+        }
+    }
 
     void onReceive_Login(string data)
     {
@@ -449,6 +485,19 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    // 检查版本号
+    public void reqCheckVerisionCode()
+    {
+        NetLoading.getInstance().Show();
+
+        {
+            JsonData data = new JsonData();
+            data["tag"] = TLJCommon.Consts.Tag_CheckVerisionCode;
+
+            LoginServiceSocket.s_instance.sendMessage(data.ToJson());
+        }
+    }
+
     // 请求登录
     public void reqLogin()
     {
@@ -463,7 +512,7 @@ public class LoginScript : MonoBehaviour
         {
             JsonData data = new JsonData();
 
-            data["tag"] = "Login";
+            data["tag"] = TLJCommon.Consts.Tag_Login;
             data["account"] = m_inputAccount.text;
             string md5 = CommonUtil.GetMD5(m_inputPassword.text);
             LogUtil.Log(md5);
@@ -542,7 +591,7 @@ public class LoginScript : MonoBehaviour
         {
             JsonData data = new JsonData();
 
-            data["tag"] = "QuickRegister";
+            data["tag"] = TLJCommon.Consts.Tag_QuickRegister;
 //            string result = Regex.Replace(m_inputAccount_register.text, @"\p{Cs}", "");//屏蔽emoji 
             data["account"] = m_inputAccount_register.text;
             data["password"] = CommonUtil.GetMD5(m_inputSecondPassword_register.text);
@@ -562,6 +611,9 @@ public class LoginScript : MonoBehaviour
 
             NetLoading.getInstance().Close();
             NetErrorPanelScript.getInstance().Close();
+
+            // 检查版本号
+            reqCheckVerisionCode();
         }
         else
         {
