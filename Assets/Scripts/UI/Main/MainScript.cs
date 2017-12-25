@@ -174,6 +174,8 @@ public class MainScript : MonoBehaviour
         else
         {
             //ToastScript.createToast("两个服务器都成功连接");
+
+            reqPVPRoom();
         }
     }
 
@@ -243,7 +245,7 @@ public class MainScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
-        reqPVPRoom();
+        PVPChoiceScript.create();
     }
 
     public void onClickJingDianChang()
@@ -521,8 +523,6 @@ public class MainScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_GetPVPGameRoom) == 0)
         {
             PVPGameRoomDataScript.getInstance().initJson(data);
-
-            PVPChoiceScript.create();
         }
         // 是否已经加入房间
         else if (tag.CompareTo(TLJCommon.Consts.Tag_IsJoinGame) == 0)

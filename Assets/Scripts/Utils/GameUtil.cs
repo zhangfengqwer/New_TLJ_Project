@@ -483,7 +483,11 @@ class GameUtil
                 if (list[0].CompareTo("PVP") == 0)
                 {
                     PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameRoomType);
-                    roonName = pvpGameRoomData.gameroomname;
+
+                    if (pvpGameRoomData != null)
+                    {
+                        roonName = pvpGameRoomData.gameroomname;
+                    }
                 }
             }
         }

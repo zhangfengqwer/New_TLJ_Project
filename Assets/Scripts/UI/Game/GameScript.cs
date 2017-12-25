@@ -1593,7 +1593,9 @@ public class GameScript : MonoBehaviour
                     if ((int) jd["hasPoker"] == 1)
                     {
                         GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
+
                         showIsChaoDi(uid,true);
+                        //ToastScript.createToast("玩家抄底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
 
                         for (int i = 0; i < jd["pokerList"].Count; i++)
                         {
@@ -1605,8 +1607,7 @@ public class GameScript : MonoBehaviour
                         }
 
                         AudioScript.getAudioScript().playSound_ChaoDi();
-                        ToastScript.createToast("玩家抄底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
-
+                        
                         {
                             // 庄家开始埋底
                             if (uid.CompareTo(UserData.uid) == 0)
@@ -1654,7 +1655,7 @@ public class GameScript : MonoBehaviour
                         AudioScript.getAudioScript().playSound_BuChaoDi();
 
                         showIsChaoDi(uid, false);
-                        ToastScript.createToast("不抄底");
+                        //ToastScript.createToast("不抄底");
                     }
                 }
             }
