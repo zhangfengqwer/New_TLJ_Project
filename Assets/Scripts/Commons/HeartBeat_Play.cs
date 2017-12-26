@@ -32,6 +32,8 @@ public class HeartBeat_Play : MonoBehaviour
     {
         CancelInvoke("reqHeartBeat");
         CancelInvoke("onInvoke_timeout");
+
+        s_instance = null;
     }
 
     void onInvoke_timeout()
