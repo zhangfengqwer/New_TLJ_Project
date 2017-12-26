@@ -205,8 +205,7 @@ public class MainScript : MonoBehaviour
         
         NetLoading.getInstance().Close();
     }
-
-
+    
     public void showWaitMatchPanel(float time, string gameroomtype)
     {
         if (m_waitMatchPanel != null)
@@ -858,6 +857,9 @@ public class MainScript : MonoBehaviour
     void onSocketStop_Play()
     {
         //LogUtil.Log("主动与服务器断开连接");
+
+        Destroy(m_waitMatchPanel);
+        m_waitMatchPanel = null;
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
