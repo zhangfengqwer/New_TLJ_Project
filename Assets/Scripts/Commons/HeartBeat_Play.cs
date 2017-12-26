@@ -16,7 +16,7 @@ public class HeartBeat_Play : MonoBehaviour
         {
             if (PlayServiceSocket.s_instance != null)
             {
-                s_instance = PlayServiceSocket.s_instance.GetComponent<HeartBeat_Play>();
+                s_instance = PlayServiceSocket.s_instance.gameObject.GetComponent<HeartBeat_Play>();
             }
         }
 
@@ -26,6 +26,12 @@ public class HeartBeat_Play : MonoBehaviour
     public void startHeartBeat()
     {
         Invoke("reqHeartBeat", m_durTime);        
+    }
+
+    public void stopHeartBeat()
+    {
+        CancelInvoke("reqHeartBeat");
+        CancelInvoke("onInvoke_timeout");
     }
 
     void onInvoke_timeout()
@@ -48,6 +54,7 @@ public class HeartBeat_Play : MonoBehaviour
 
             JsonData data = new JsonData();
             data["tag"] = TLJCommon.Consts.Tag_HeartBeat_Play;
+            data["uid"] = UserData.uid;
 
             PlayServiceSocket.s_instance.sendMessage(data.ToJson());
         }
