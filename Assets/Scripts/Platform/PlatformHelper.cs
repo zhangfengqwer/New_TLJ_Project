@@ -263,6 +263,9 @@ public class PlatformHelper
         return 1;
     }
 
+    public static void DownApk()
+    {
+    }
 }
 #elif UNITY_ANDROID
 /// <summary>
@@ -335,6 +338,11 @@ public class PlatformHelper
     public static void Login(string obj, string func, string data)
     {
         GetJC().CallStatic("login", obj, func, data);
+    }
+
+    public static void DownApk()
+    {
+        GetJC().CallStatic("downLoadApk");
     }
 
     //微信分享

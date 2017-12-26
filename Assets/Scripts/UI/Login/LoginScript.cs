@@ -330,9 +330,19 @@ public class LoginScript : MonoBehaviour
 
     void onApkVerisionIsLow()
     {
+#if UNITY_ANDROID
+        PlatformHelper.DownApk();
+        GameObject go =  GameObject.Find("NetErrorPanel(Clone)");
+        if (go != null)
+        {
+            Destroy(go);
+        }
+#else
+
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onApkVerisionIsLow);
         NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
+#endif
     }
 
     void onReceive(string data)
