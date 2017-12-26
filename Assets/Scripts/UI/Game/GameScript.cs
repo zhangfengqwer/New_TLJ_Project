@@ -79,8 +79,6 @@ public class GameScript : MonoBehaviour
         checkGameRoomType();
 
         m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
-
-        HeartBeat_Play.getInstance().startHeartBeat();
     }
 
     void onInvokeStartMusic()
@@ -99,6 +97,15 @@ public class GameScript : MonoBehaviour
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
         LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
         LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
+
+        if (PlayServiceSocket.s_instance != null)
+        {
+            HeartBeat_Play.getInstance().startHeartBeat();
+        }
+        else
+        {
+            LogUtil.Log("PlayServiceSocket.s_instance == null");
+        }
     }
 
     void initUI()
@@ -602,6 +609,7 @@ public class GameScript : MonoBehaviour
     void OnDestroy()
     {
         OtherData.s_gameScript = null;
+        HeartBeat_Play.getInstance().stopHeartBeat();
     }
 
     public void onClickBag()
