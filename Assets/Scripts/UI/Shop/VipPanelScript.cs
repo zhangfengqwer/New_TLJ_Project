@@ -167,6 +167,14 @@ public class VipPanelScript : MonoBehaviour
                 toggle.isOn = false;
             }
 
+            if (VipUtil.GetVipLevel(UserData.rechargeVip) == 0)
+            {
+                if (i == 0)
+                {
+                    toggle.isOn = true;
+                }
+            }
+
         }
     }
 
