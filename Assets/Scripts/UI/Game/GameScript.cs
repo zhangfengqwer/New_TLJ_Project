@@ -79,6 +79,8 @@ public class GameScript : MonoBehaviour
         checkGameRoomType();
 
         m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+        HeartBeat_Play.getInstance().startHeartBeat();
     }
 
     void onInvokeStartMusic()
@@ -1129,6 +1131,10 @@ public class GameScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_ResumeGame) == 0)
         {
             onReceive_ResumeGame(data);
+        }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_HeartBeat_Play) == 0)
+        {
+            HeartBeat_Play.getInstance().onRespond();
         }
     }
 
