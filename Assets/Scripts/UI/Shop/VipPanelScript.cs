@@ -72,7 +72,9 @@ public class VipPanelScript : MonoBehaviour
                     else
                     {
                         VipText2.gameObject.SetActive(false);
-                    } if (vipData.turnTableCount > 0)
+                    }
+
+                    if (vipData.turnTableCount > 0)
                     {
                         VipText3.gameObject.SetActive(true);
                     }
@@ -80,14 +82,13 @@ public class VipPanelScript : MonoBehaviour
                     {
                         VipText3.gameObject.SetActive(false);
                     }
+
+                  
                     string temp = string.Format(@"比赛场胜利时额外        *{0}",vipData.medalNum);
                     VipText2.text = temp;
                     string temp2 = string.Format(@",每日转盘免费次数加{0}", vipData.turnTableCount);
                     VipText3.text = temp2;
 
-
-                    //                    MedalNumText.text = "*" + vipData.medalNum;
-                    //设置会员一次领取奖励
                     VipWeekOnceChild[0].transform.GetChild(0).GetComponent<Text>().text = "*" + vipData.vipOnce.goldNum;
                     string[] props = vipData.vipOnce.prop.Split(';');
                     foreach (var child in VipWeekOnceChild)
