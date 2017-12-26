@@ -84,7 +84,7 @@ public class VipPanelScript : MonoBehaviour
                     }
 
                   
-                    string temp = string.Format(@"比赛场胜利时额外        *{0}",vipData.medalNum);
+                    string temp = string.Format(@"比赛场第一名额外        *{0}",vipData.medalNum);
                     VipText2.text = temp;
                     string temp2 = string.Format(@",每日转盘免费次数加{0}", vipData.turnTableCount);
                     VipText3.text = temp2;
@@ -165,6 +165,14 @@ public class VipPanelScript : MonoBehaviour
             else
             {
                 toggle.isOn = false;
+            }
+
+            if (VipUtil.GetVipLevel(UserData.rechargeVip) == 0)
+            {
+                if (i == 0)
+                {
+                    toggle.isOn = true;
+                }
             }
 
         }
