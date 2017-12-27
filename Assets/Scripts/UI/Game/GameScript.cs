@@ -779,6 +779,8 @@ public class GameScript : MonoBehaviour
     // 是否已经加入房间
     public void reqIsJoinRoom()
     {
+        NetLoading.getInstance().Show();
+
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_IsJoinGame;
@@ -790,6 +792,8 @@ public class GameScript : MonoBehaviour
     // 请求恢复房间
     public void reqRetryJoinGame()
     {
+        NetLoading.getInstance().Close();
+
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_RetryJoinGame;
@@ -2319,6 +2323,8 @@ public class GameScript : MonoBehaviour
 
     void onReceive_IsJoinGame(string data)
     {
+        NetLoading.getInstance().Close();
+
         JsonData jd = JsonMapper.ToObject(data);
 
         int isJoinGame = (int) jd["isJoinGame"];
@@ -2362,6 +2368,8 @@ public class GameScript : MonoBehaviour
     {
         try
         {
+            NetLoading.getInstance().Close();
+
             clearData();
 
             JsonData jd = JsonMapper.ToObject(data);

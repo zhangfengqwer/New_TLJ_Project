@@ -31,6 +31,8 @@ public class EmailPanelScript : MonoBehaviour
 
         // 拉取邮件
         {
+            NetLoading.getInstance().Show();
+
             LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().CallBack = onReceive_GetMail;
             LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
         }
@@ -241,6 +243,8 @@ public class EmailPanelScript : MonoBehaviour
 
     public void onReceive_GetMail(string data)
     {
+        NetLoading.getInstance().Close();
+
         UserMailData.getInstance().initJson(data);
         
         loadMail();

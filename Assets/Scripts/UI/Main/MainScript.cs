@@ -243,6 +243,7 @@ public class MainScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
+        NetLoading.getInstance().Show();
         reqPVPRoom();
     }
 
@@ -520,6 +521,8 @@ public class MainScript : MonoBehaviour
         // 获取pvp场次信息
         else if (tag.CompareTo(TLJCommon.Consts.Tag_GetPVPGameRoom) == 0)
         {
+            NetLoading.getInstance().Close();
+
             PVPGameRoomDataScript.getInstance().initJson(data);
 
             PVPChoiceScript.create();

@@ -117,6 +117,8 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public void onClickWanCheng()
     {
+        NetLoading.getInstance().Show();
+
         LogicEnginerScript.Instance.GetComponent<CompleteTaskRequest>().setTaskId(int.Parse(gameObject.transform.name));
         LogicEnginerScript.Instance.GetComponent<CompleteTaskRequest>().CallBack = onReceive_CompleteTask;
         LogicEnginerScript.Instance.GetComponent<CompleteTaskRequest>().OnRequest();
@@ -124,6 +126,8 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public void onReceive_CompleteTask(string data)
     {
+        NetLoading.getInstance().Close();
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         int task_id = (int)jd["task_id"];
