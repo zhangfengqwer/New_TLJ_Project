@@ -1594,7 +1594,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("// 通知某人抄底异常：" + ex.Message);
                 }
             }
                 break;
@@ -1756,7 +1757,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("// 通知某人出牌异常：" + ex.Message);
                 }
             }
                 break;
@@ -1911,7 +1913,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("// 玩家出牌异常：" + ex.Message);
                 }
             }
                 break;
@@ -1951,7 +1954,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("// 改变托管状态异常：" + ex.Message);
                 }
             }
                 break;
@@ -2048,7 +2052,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("// 游戏结束异常：" + ex.Message);
                 }
             }
                 break;
@@ -2067,7 +2072,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2101,7 +2107,8 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
+                    LogUtil.Log("// PVP游戏结束异常：" + ex.Message);
                 }
             }
                 break;
@@ -2273,7 +2280,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
 
                     LogUtil.Log("onReceive_PlayGame.PlayAction_Chat异常：" + ex.Message);
                 }
@@ -2418,13 +2425,25 @@ public class GameScript : MonoBehaviour
                     int num = (int) jd["myPokerList"][i]["num"];
                     int pokerType = (int) jd["myPokerList"][i]["pokerType"];
 
-                    GameData.getInstance().m_myPokerList
-                        .Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
+                    GameData.getInstance().m_myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
                 }
 
                 sortMyPokerList(GameData.getInstance().m_masterPokerType); // 对我的牌进行排序
                 createMyPokerObj(); // 创建我的牌对象
                 checkShowZhuPaiLogo();
+            }
+
+            // 上一个人抢主用的牌
+            {
+                GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
+
+                for (int i = 0; i < jd["qiangzhuPokerList"].Count; i++)
+                {
+                    int num = (int)jd["qiangzhuPokerList"][i]["num"];
+                    int pokerType = (int)jd["qiangzhuPokerList"][i]["pokerType"];
+
+                    GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                }
             }
 
             // 最后埋底的人
@@ -2583,8 +2602,7 @@ public class GameScript : MonoBehaviour
 
                             m_liangzhuObj = LiangZhu.create(this);
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
-                            m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
-                            GameData.getInstance().m_beforeQiangzhuPokerList);
+                            m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,GameData.getInstance().m_beforeQiangzhuPokerList);
 
                             // 开始抄底倒计时
                             m_timerScript.start(GameData.getInstance().m_chaodiTime,
