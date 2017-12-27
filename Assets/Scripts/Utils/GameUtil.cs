@@ -312,7 +312,7 @@ class GameUtil
         {
             path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
 
-            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "10000";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "2000";
             gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
             gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1,1,1);
             gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f,0);
@@ -321,7 +321,7 @@ class GameUtil
         {
             path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
 
-            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "20000";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "10000";
             gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
             gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
             gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f, 0);
@@ -468,11 +468,11 @@ class GameUtil
         }
         else if (gameRoomType.CompareTo("PVP_JinBi_8") == 0)
         {
-            roonName = "比赛场-10000金币场";
+            roonName = "比赛场-2000金币场";
         }
         else if (gameRoomType.CompareTo("PVP_JinBi_16") == 0)
         {
-            roonName = "比赛场-20000金币场";
+            roonName = "比赛场-10000金币场";
         }
         else if (gameRoomType.CompareTo("PVP_HuaFei_8") == 0)
         {
