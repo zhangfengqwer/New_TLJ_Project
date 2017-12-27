@@ -8,7 +8,8 @@ public class PlatformHelper
 {
 
     // 是否在About框中显示Logo
-    public static string GetTextOfAbout() {
+    public static string GetTextOfAbout()
+    {
         return "";
     }
 
@@ -22,7 +23,7 @@ public class PlatformHelper
         return 100;
     }
 
-    public static string GetUniqueIdentifier() 
+    public static string GetUniqueIdentifier()
     {
         return "Unity_Editor";
     }
@@ -77,21 +78,22 @@ public class PlatformHelper
 
     }
 
-    public static void iOSLog(string str){
+    public static void iOSLog(string str)
+    {
         LogUtil.Log(str);
     }
 
-    public static void setProductName(string str){}
+    public static void setProductName(string str) { }
 
     /// <summary>
     /// 在外部设置该安装包是否与360等第三方平台合作 
     /// true -- 合作
     /// </summary>
-//    public static void GetIsCollaborate()
-//    {
-//        GlobalData.IsCollaborate = true;
-//
-//    }
+    //    public static void GetIsCollaborate()
+    //    {
+    //        GlobalData.IsCollaborate = true;
+    //
+    //    }
 
     /// <summary>
     /// QQ sina微博账号登录 
@@ -124,12 +126,12 @@ public class PlatformHelper
 
 
 
-    public static void isLoginConnectingScene(bool value){}
+    public static void isLoginConnectingScene(bool value) { }
 
     /// <summary>
     ///  control 91 toolbar show or hide
     /// </summary>
-    public static void show91ToolBar(bool value){}
+    public static void show91ToolBar(bool value) { }
 
     /// <summary>
     /// 是否是第三方SDK 的退出系统 ，如果是第三方系统退出，退出的时候，将要回调
@@ -225,7 +227,7 @@ public class PlatformHelper
     /// 显示LogUtil信息
     /// </summary>
     /// <param name="value"></param>
-    public static void showDebugInfo(string name,string unityInfo)
+    public static void showDebugInfo(string name, string unityInfo)
     {
     }
 
@@ -241,7 +243,8 @@ public class PlatformHelper
      * 4G 4
      * @param value
      */
-    public static int getNetWork() {
+    public static int getNetWork()
+    {
         return 1;
     }
     /**
@@ -259,10 +262,14 @@ public class PlatformHelper
      * 中国电信 3
      * 无卡 0
      */
-    public static int getProvidersName() {
+    public static int getProvidersName()
+    {
         return 1;
     }
 
+    public static void DownApk()
+    {
+    }
 }
 #elif UNITY_ANDROID
 /// <summary>
@@ -335,6 +342,11 @@ public class PlatformHelper
     public static void Login(string obj, string func, string data)
     {
         GetJC().CallStatic("login", obj, func, data);
+    }
+
+    public static void DownApk()
+    {
+        GetJC().CallStatic("downLoadApk");
     }
 
     //微信分享

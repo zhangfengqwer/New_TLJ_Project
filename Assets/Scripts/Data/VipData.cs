@@ -6,13 +6,14 @@ public class VipData
 {
     public int vipLevel;
     public int medalNum;
+    public int turnTableCount;
     public VipOnce vipOnce;
     public VipWeekly vipWeekly;
 
 
     public static void reqNet()
     {
-        UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "VipRewardData.json", httpCallBack);
+//        UnityWebReqUtil.Instance.Get(OtherData.getwebUrl() + "VipRewardData.json", httpCallBack);
     }
 
     private static void httpCallBack(string tag, string data)
