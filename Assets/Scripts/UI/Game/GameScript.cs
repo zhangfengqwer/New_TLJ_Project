@@ -53,6 +53,7 @@ public class GameScript : MonoBehaviour
 
     //bool m_isStartGame = false;
     bool m_hasJiPaiQiUse = false;
+    bool m_hasJiaBeiKaUse = false;
 
     void Start()
     {
@@ -272,6 +273,29 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            // 加倍卡
+            {
+                bool canUse = false;
+                for (int i = 0; i < UserData.buffData.Count; i++)
+                {
+                    if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jiabeika) &&
+                        (UserData.buffData[i].buff_num > 0))
+                    {
+                        canUse = true;
+                        break;
+                    }
+                }
+
+                if (!isPVP() && canUse)
+                {
+                    m_hasJiaBeiKaUse = true;
+                }
+                else
+                {
+                    m_hasJiaBeiKaUse = false;
+                }
+            }
+            
             // 初始化记牌器
             {
                 if (m_jiPaiGameObject == null)
@@ -1224,6 +1248,12 @@ public class GameScript : MonoBehaviour
                 if (m_hasJiPaiQiUse)
                 {
                     reqUseBuff((int) TLJCommon.Consts.Prop.Prop_jipaiqi);
+                }
+
+                // 休闲场有加倍卡的情况下自动使用
+                if (m_hasJiaBeiKaUse)
+                {
+                    reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jiabeika);
                 }
             }
                 break;
@@ -2418,6 +2448,15 @@ public class GameScript : MonoBehaviour
                 }
             }
 
+            // 是否使用了加倍卡
+            {
+                bool isUseJiaBeiKa = (bool)jd["isUseJiaBeiKa"];
+                if (isUseJiaBeiKa)
+                {
+                    m_hasJiaBeiKaUse = true;
+                }
+            }
+
             // 我的手牌
             {
                 for (int i = 0; i < jd["myPokerList"].Count; i++)
@@ -3364,6 +3403,30 @@ public class GameScript : MonoBehaviour
                         if (m_hasJiPaiQiUse)
                         {
                             reqUseBuff((int) TLJCommon.Consts.Prop.Prop_jipaiqi);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void useProp_jiabeika()
+    {
+        if (!m_hasJiaBeiKaUse)
+        {
+            if (!isPVP())
+            {
+                if (GameData.getInstance().m_isStartGame)
+                //if (m_isStartGame)
+                {
+                    if (!m_hasJiaBeiKaUse)
+                    {
+                        m_hasJiaBeiKaUse = true;
+
+                        // 休闲场有记牌器的情况下自动使用
+                        if (m_hasJiaBeiKaUse)
+                        {
+                            reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jiabeika);
                         }
                     }
                 }
