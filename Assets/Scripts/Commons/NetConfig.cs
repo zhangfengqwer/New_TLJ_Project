@@ -31,11 +31,26 @@ public class NetConfig
 
     public static void reqNetConfig()
     {
-        UnityWebReqUtil.Instance.Get(OtherData.getwebUrl() + "NetConfig.json", httpCallBack);
-            
-        //// 使用本地配置文件
-        //string jsonData = Resources.Load("Entity/NetConfig").ToString();
-        //httpCallBack("", jsonData);
+        if (OtherData.s_isTest)
+        {
+            UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "NetConfig_test.json", httpCallBack);
+
+            LogUtil.Log("测试包");
+
+            // 使用本地配置文件
+            //            string jsonData = Resources.Load("Entity/NetConfig_test").ToString();
+            //            httpCallBack("", jsonData);
+        }
+        else
+        {
+            UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "NetConfig.json", httpCallBack);
+
+            LogUtil.Log("线上包");
+
+            //// 使用本地配置文件
+            //string jsonData = Resources.Load("Entity/NetConfig").ToString();
+            //httpCallBack("", jsonData);
+        }
     }
 
     static void httpCallBack(string tag, string data)

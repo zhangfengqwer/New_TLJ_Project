@@ -66,11 +66,9 @@ public class NoticeData
 {
     public int notice_id;
     public string title = "";
-    public string title_limian = "";
     public string content = "";
     public int type = 0;        // 0:活动    1:公告
     public int state = 0;       // 0:未读    1:已读
     public string start_time;
     public string end_time;
-    public string from;
 }

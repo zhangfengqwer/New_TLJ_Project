@@ -21,6 +21,11 @@ public class GetNetEntityFile : MonoBehaviour
         m_fileList.Add(new FileInfo("hudong.json"));
         //m_fileList.Add(new FileInfo("stopwords.txt"));
         m_fileList.Add(new FileInfo("VipRewardData.json"));
+
+        if (OtherData.s_isTest)
+        {
+            ToastScript.createToast("这是测试包");
+        }
     }
 	
 	// Update is called once per frame
@@ -55,10 +60,7 @@ public class GetNetEntityFile : MonoBehaviour
             PropData.getInstance().reqNet();
             ChatData.getInstance().reqNet();
             HuDongData.getInstance().reqNet();
-            if (SensitiveWordUtil.WordsDatas == null || SensitiveWordUtil.WordsDatas.Length == 0)
-            {
-                SensitiveWordUtil.reqNet();
-            }
+            SensitiveWordUtil.reqNet();
             VipData.reqNet();
         }
     }

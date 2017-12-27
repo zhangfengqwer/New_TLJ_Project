@@ -110,15 +110,6 @@ public class LoginScript : MonoBehaviour
     {
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
 
-        if (OtherData.s_isTest)
-        {
-            ToastScript.createToast("这是测试包");
-        }
-        else
-        {
-            LogUtil.Log("这是线上包");
-        }
-
         // 拉取数值表
         {
             NetLoading.getInstance().Show();
@@ -339,19 +330,9 @@ public class LoginScript : MonoBehaviour
 
     void onApkVerisionIsLow()
     {
-#if UNITY_ANDROID
-        PlatformHelper.DownApk();
-        GameObject go =  GameObject.Find("NetErrorPanel(Clone)");
-        if (go != null)
-        {
-            Destroy(go);
-        }
-#else
-
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onApkVerisionIsLow);
         NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
-#endif
     }
 
     void onReceive(string data)
@@ -386,8 +367,6 @@ public class LoginScript : MonoBehaviour
 
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
-            OtherData.s_canRecharge = (bool)jd["canRecharge"];
-
             string apkVersion = jd["apkVersion"].ToString();
 
             if (OtherData.s_apkVersion.CompareTo(apkVersion) < 0)
@@ -535,7 +514,9 @@ public class LoginScript : MonoBehaviour
 
             data["tag"] = TLJCommon.Consts.Tag_Login;
             data["account"] = m_inputAccount.text;
-            data["password"] = CommonUtil.GetMD5(m_inputPassword.text);
+            string md5 = CommonUtil.GetMD5(m_inputPassword.text);
+            LogUtil.Log(md5);
+            data["password"] = md5;
             data["passwordtype"] = 1;
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());

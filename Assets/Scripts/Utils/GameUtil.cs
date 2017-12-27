@@ -308,48 +308,41 @@ class GameUtil
         {
             path = "Sprites/Game/RoomLogo/roomtype_chaodi_dashi";
         }
-        else
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_JinBi_8) == 0)
         {
-            List<string> list = new List<string>();
-            CommonUtil.splitStr(gameroomtype,list,'_');
+            path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
 
-            if (list.Count == 3)
-            {
-                if (list[0].CompareTo("PVP") == 0)
-                {
-                    // pvp金币场
-                    if (list[1].CompareTo("JinBi") == 0)
-                    {
-                        path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "10000";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1,1,1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f,0);
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_JinBi_16) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
 
-                        PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
-                        if (pvpGameRoomData != null)
-                        {
-                            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = pvpGameRoomData.reward_num.ToString();
-                        }
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "20000";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f, 0);
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomlogo_huafeichang";
 
-                        gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 23;
-                        gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
-                        gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-42.0f, -23.2f, 0);
-                    }
-                    // pvp话费场
-                    else if (list[1].CompareTo("HuaFei") == 0)
-                    {
-                        path = "Sprites/Game/RoomLogo/roomlogo_huafeichang";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "1";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 57;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-34.4f, 53.2f, 0);
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_16) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomlogo_huafeichang";
 
-                        PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
-                        if (pvpGameRoomData != null)
-                        {
-                            
-                            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = pvpGameRoomData.reward_num.ToString();
-                        }
-
-                        gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 57;
-                        gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
-                        gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-34.4f, 53.2f, 0);
-                    }
-                }
-            }
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().text = "5";
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().fontSize = 57;
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localScale = new Vector3(1, 1, 1);
+            gameRoomLogo.transform.Find("Text").GetComponent<Text>().transform.localPosition = new Vector3(-34.4f, 53.2f, 0);
         }
 
         CommonUtil.setImageSprite(gameRoomLogo, path);
@@ -473,23 +466,21 @@ class GameUtil
         {
             roonName = "抄底玩法-大师场";
         }
-        else
+        else if (gameRoomType.CompareTo("PVP_JinBi_8") == 0)
         {
-            List<string> list = new List<string>();
-            CommonUtil.splitStr(gameRoomType, list, '_');
-
-            if (list.Count == 3)
-            {
-                if (list[0].CompareTo("PVP") == 0)
-                {
-                    PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameRoomType);
-
-                    if (pvpGameRoomData != null)
-                    {
-                        roonName = pvpGameRoomData.gameroomname;
-                    }
-                }
-            }
+            roonName = "比赛场-10000金币场";
+        }
+        else if (gameRoomType.CompareTo("PVP_JinBi_16") == 0)
+        {
+            roonName = "比赛场-20000金币场";
+        }
+        else if (gameRoomType.CompareTo("PVP_HuaFei_8") == 0)
+        {
+            roonName = "比赛场-1元话费场";
+        }
+        else if (gameRoomType.CompareTo("PVP_HuaFei_16") == 0)
+        {
+            roonName = "比赛场-5元话费场";
         }
 
         return roonName;

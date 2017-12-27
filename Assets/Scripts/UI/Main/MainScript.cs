@@ -174,8 +174,6 @@ public class MainScript : MonoBehaviour
         else
         {
             //ToastScript.createToast("两个服务器都成功连接");
-
-            reqPVPRoom();
         }
     }
 
@@ -205,7 +203,8 @@ public class MainScript : MonoBehaviour
         
         NetLoading.getInstance().Close();
     }
-    
+
+
     public void showWaitMatchPanel(float time, string gameroomtype)
     {
         if (m_waitMatchPanel != null)
@@ -244,7 +243,7 @@ public class MainScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
 
-        PVPChoiceScript.create();
+        reqPVPRoom();
     }
 
     public void onClickJingDianChang()
@@ -522,6 +521,8 @@ public class MainScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_GetPVPGameRoom) == 0)
         {
             PVPGameRoomDataScript.getInstance().initJson(data);
+
+            PVPChoiceScript.create();
         }
         // 是否已经加入房间
         else if (tag.CompareTo(TLJCommon.Consts.Tag_IsJoinGame) == 0)
@@ -602,30 +603,25 @@ public class MainScript : MonoBehaviour
             {
                 int roomId = (int) jd["roomId"];
                 string gameroomtype = jd["gameroomtype"].ToString();
-
-                PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
-                if (pvpGameRoomData != null)
+                if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
                 {
-                    if (pvpGameRoomData.baomingfei.CompareTo("0") == 0)
-                    {
-                        ToastScript.createToast("退赛成功");
-                    }
-                    else
-                    {
-                        ToastScript.createToast("退赛成功,请到邮箱领取报名费");
+                    ToastScript.createToast("退赛成功");
+                }
+                else
+                {
+                    ToastScript.createToast("退赛成功,请到邮箱领取报名费");
 
-                        // 报名费返还通过邮件
-                        LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
-                    }
+                    // 报名费返还通过邮件
+                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 }
             }
-            break;
+                break;
 
             case (int) TLJCommon.Consts.Code.Code_CommonFail:
             {
                 ToastScript.createToast("退赛失败，当前并没有加入房间");
             }
-            break;
+                break;
         }
     }
 
@@ -849,12 +845,6 @@ public class MainScript : MonoBehaviour
     {
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
-        if (m_waitMatchPanel != null)
-        {
-            Destroy(m_waitMatchPanel);
-            m_waitMatchPanel = null;
-        }
-
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
         NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
@@ -863,12 +853,6 @@ public class MainScript : MonoBehaviour
     void onSocketStop_Play()
     {
         //LogUtil.Log("主动与服务器断开连接");
-
-        if (m_waitMatchPanel != null)
-        {
-            Destroy(m_waitMatchPanel);
-            m_waitMatchPanel = null;
-        }
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);

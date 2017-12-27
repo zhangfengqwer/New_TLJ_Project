@@ -41,7 +41,7 @@ public class SetSecondPswRequest : Request
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
-        jsonData["password"] = CommonUtil.GetMD5(data);
+        jsonData["password"] = data;
 
         string requestData = jsonData.ToJson();
         LogicEnginerScript.Instance.SendMyMessage(requestData);

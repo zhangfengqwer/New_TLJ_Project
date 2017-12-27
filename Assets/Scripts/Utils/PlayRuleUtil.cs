@@ -632,7 +632,8 @@ public class PlayRuleUtil
     /// <param name="mPokerType"></param>
     /// <returns></returns>
     public static bool IsContainTypePoke(List<PokerInfo> myRestPokerList, int mLevelPokerNum,
-        Consts.PokerType mPokerType,out List<PokerInfo> typeList)
+        Consts.PokerType mPokerType,
+        out List<PokerInfo> typeList)
     {
         typeList = new List<PokerInfo>();
         for (int i = 0; i < myRestPokerList.Count; i++)

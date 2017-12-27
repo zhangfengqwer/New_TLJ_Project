@@ -8,11 +8,11 @@ using UnityEngine;
 
 public class SensitiveWordUtil
 {
-    public static string[] WordsDatas;
+    private static string[] WordsDatas;
 
     public static void reqNet()
     {
-        UnityWebReqUtil.Instance.Get(OtherData.getwebUrl() + "stopwords.txt", httpCallBack);
+        UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "stopwords.txt", httpCallBack);
     }
 
     static void httpCallBack(string tag, string data)

@@ -53,7 +53,6 @@ public class GameScript : MonoBehaviour
 
     //bool m_isStartGame = false;
     bool m_hasJiPaiQiUse = false;
-    bool m_hasJiaBeiKaUse = false;
 
     void Start()
     {
@@ -98,15 +97,6 @@ public class GameScript : MonoBehaviour
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
         LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
         LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
-
-        if (PlayServiceSocket.s_instance != null)
-        {
-            HeartBeat_Play.getInstance().startHeartBeat();
-        }
-        else
-        {
-            LogUtil.Log("PlayServiceSocket.s_instance == null");
-        }
     }
 
     void initUI()
@@ -127,12 +117,8 @@ public class GameScript : MonoBehaviour
 
         // 初始化亮主
         {
-            if (m_liangzhuObj != null)
-            {
-                Destroy(m_liangzhuObj);
-            }
-
             m_liangzhuObj = LiangZhu.create(this);
+            LogUtil.Log("亮主对象  121行");
             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_liangzhu);
             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,null);
             m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
@@ -273,29 +259,6 @@ public class GameScript : MonoBehaviour
                 }
             }
 
-            // 加倍卡
-            {
-                bool canUse = false;
-                for (int i = 0; i < UserData.buffData.Count; i++)
-                {
-                    if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jiabeika) &&
-                        (UserData.buffData[i].buff_num > 0))
-                    {
-                        canUse = true;
-                        break;
-                    }
-                }
-
-                if (!isPVP() && canUse)
-                {
-                    m_hasJiaBeiKaUse = true;
-                }
-                else
-                {
-                    m_hasJiaBeiKaUse = false;
-                }
-            }
-            
             // 初始化记牌器
             {
                 if (m_jiPaiGameObject == null)
@@ -637,7 +600,6 @@ public class GameScript : MonoBehaviour
     void OnDestroy()
     {
         OtherData.s_gameScript = null;
-        HeartBeat_Play.getInstance().stopHeartBeat();
     }
 
     public void onClickBag()
@@ -812,8 +774,6 @@ public class GameScript : MonoBehaviour
     // 是否已经加入房间
     public void reqIsJoinRoom()
     {
-        NetLoading.getInstance().Show();
-
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_IsJoinGame;
@@ -825,8 +785,6 @@ public class GameScript : MonoBehaviour
     // 请求恢复房间
     public void reqRetryJoinGame()
     {
-        NetLoading.getInstance().Show();
-
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_RetryJoinGame;
@@ -959,8 +917,6 @@ public class GameScript : MonoBehaviour
 
     public void reqSetTuoGuanState(bool isTuoGuan)
     {
-        NetLoading.getInstance().Show();
-
         JsonData data = new JsonData();
 
         data["tag"] = GameData.getInstance().m_tag;
@@ -1174,10 +1130,6 @@ public class GameScript : MonoBehaviour
         {
             onReceive_ResumeGame(data);
         }
-        else if (tag.CompareTo(TLJCommon.Consts.Tag_HeartBeat_Play) == 0)
-        {
-            HeartBeat_Play.getInstance().onRespond();
-        }
     }
 
     void onReceive_PlayGame(string data)
@@ -1254,12 +1206,6 @@ public class GameScript : MonoBehaviour
                 if (m_hasJiPaiQiUse)
                 {
                     reqUseBuff((int) TLJCommon.Consts.Prop.Prop_jipaiqi);
-                }
-
-                // 休闲场有加倍卡的情况下自动使用
-                if (m_hasJiaBeiKaUse)
-                {
-                    reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jiabeika);
                 }
             }
                 break;
@@ -1602,12 +1548,8 @@ public class GameScript : MonoBehaviour
                     {
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
-                            if (m_liangzhuObj != null)
-                            {
-                                Destroy(m_liangzhuObj);
-                            }
                             m_liangzhuObj = LiangZhu.create(this);
-
+                            LogUtil.Log("亮主对象  1551行");
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
                             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
                             GameData.getInstance().m_beforeQiangzhuPokerList);
@@ -1630,8 +1572,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("// 通知某人抄底异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -1652,9 +1593,7 @@ public class GameScript : MonoBehaviour
                     if ((int) jd["hasPoker"] == 1)
                     {
                         GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
-
                         showIsChaoDi(uid,true);
-                        //ToastScript.createToast("玩家抄底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
 
                         for (int i = 0; i < jd["pokerList"].Count; i++)
                         {
@@ -1666,7 +1605,8 @@ public class GameScript : MonoBehaviour
                         }
 
                         AudioScript.getAudioScript().playSound_ChaoDi();
-                        
+                        ToastScript.createToast("玩家抄底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
+
                         {
                             // 庄家开始埋底
                             if (uid.CompareTo(UserData.uid) == 0)
@@ -1714,7 +1654,7 @@ public class GameScript : MonoBehaviour
                         AudioScript.getAudioScript().playSound_BuChaoDi();
 
                         showIsChaoDi(uid, false);
-                        //ToastScript.createToast("不抄底");
+                        ToastScript.createToast("不抄底");
                     }
                 }
             }
@@ -1793,8 +1733,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("// 通知某人出牌异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -1949,8 +1888,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("// 玩家出牌异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -1960,8 +1898,6 @@ public class GameScript : MonoBehaviour
             {
                 try
                 {
-                    NetLoading.getInstance().Close();
-
                     int code = (int) jd["code"];
 
                     if (code == (int) TLJCommon.Consts.Code.Code_OK)
@@ -1992,8 +1928,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("// 改变托管状态异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2090,8 +2025,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("// 游戏结束异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2110,8 +2044,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2145,8 +2078,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
-                    LogUtil.Log("// PVP游戏结束异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2318,7 +2250,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    //ToastScript.createToast("异常：" + ex.Message);
+                    ToastScript.createToast("异常：" + ex.Message);
 
                     LogUtil.Log("onReceive_PlayGame.PlayAction_Chat异常：" + ex.Message);
                 }
@@ -2377,8 +2309,6 @@ public class GameScript : MonoBehaviour
 
     void onReceive_IsJoinGame(string data)
     {
-        NetLoading.getInstance().Close();
-
         JsonData jd = JsonMapper.ToObject(data);
 
         int isJoinGame = (int) jd["isJoinGame"];
@@ -2422,8 +2352,6 @@ public class GameScript : MonoBehaviour
     {
         try
         {
-            NetLoading.getInstance().Close();
-
             clearData();
 
             JsonData jd = JsonMapper.ToObject(data);
@@ -2460,15 +2388,6 @@ public class GameScript : MonoBehaviour
                 }
             }
 
-            // 是否使用了加倍卡
-            {
-                bool isUseJiaBeiKa = (bool)jd["isUseJiaBeiKa"];
-                if (isUseJiaBeiKa)
-                {
-                    m_hasJiaBeiKaUse = true;
-                }
-            }
-
             // 我的手牌
             {
                 for (int i = 0; i < jd["myPokerList"].Count; i++)
@@ -2476,25 +2395,13 @@ public class GameScript : MonoBehaviour
                     int num = (int) jd["myPokerList"][i]["num"];
                     int pokerType = (int) jd["myPokerList"][i]["pokerType"];
 
-                    GameData.getInstance().m_myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
+                    GameData.getInstance().m_myPokerList
+                        .Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
                 }
 
                 sortMyPokerList(GameData.getInstance().m_masterPokerType); // 对我的牌进行排序
                 createMyPokerObj(); // 创建我的牌对象
                 checkShowZhuPaiLogo();
-            }
-
-            // 上一个人抢主用的牌
-            {
-                GameData.getInstance().m_beforeQiangzhuPokerList.Clear();
-
-                for (int i = 0; i < jd["qiangzhuPokerList"].Count; i++)
-                {
-                    int num = (int)jd["qiangzhuPokerList"][i]["num"];
-                    int pokerType = (int)jd["qiangzhuPokerList"][i]["pokerType"];
-
-                    GameData.getInstance().m_beforeQiangzhuPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-                }
             }
 
             // 最后埋底的人
@@ -2646,14 +2553,11 @@ public class GameScript : MonoBehaviour
                     {
                         if (curChaoDiPlayer.CompareTo(UserData.uid) == 0)
                         {
-                            if(m_liangzhuObj != null)
-                            {
-                                Destroy(m_liangzhuObj);
-                            }
-
                             m_liangzhuObj = LiangZhu.create(this);
+                            LogUtil.Log("亮主对象  2547行");
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
-                            m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,GameData.getInstance().m_beforeQiangzhuPokerList);
+                            m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
+                            GameData.getInstance().m_beforeQiangzhuPokerList);
 
                             // 开始抄底倒计时
                             m_timerScript.start(GameData.getInstance().m_chaodiTime,
@@ -3415,30 +3319,6 @@ public class GameScript : MonoBehaviour
                         if (m_hasJiPaiQiUse)
                         {
                             reqUseBuff((int) TLJCommon.Consts.Prop.Prop_jipaiqi);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public void useProp_jiabeika()
-    {
-        if (!m_hasJiaBeiKaUse)
-        {
-            if (!isPVP())
-            {
-                if (GameData.getInstance().m_isStartGame)
-                //if (m_isStartGame)
-                {
-                    if (!m_hasJiaBeiKaUse)
-                    {
-                        m_hasJiaBeiKaUse = true;
-
-                        // 休闲场有记牌器的情况下自动使用
-                        if (m_hasJiaBeiKaUse)
-                        {
-                            reqUseBuff((int)TLJCommon.Consts.Prop.Prop_jiabeika);
                         }
                     }
                 }

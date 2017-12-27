@@ -286,8 +286,6 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     void buy(int money_type)
     {
-       
-
         int totalPrice = 0;
 
         if (money_type == m_shopData.money_type)
@@ -333,12 +331,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
             //人民币购买
             case 3:
-                if (!OtherData.s_canRecharge)
-                {
-                    ToastScript.createToast("元宝购买暂未开放,敬请期待");
-                    return;
-                }
-
+                //ToastScript.createToast("元宝购买暂未开放,敬请期待");
                 if (UserData.IsRealName)
                 {
                     PayTypePanelScript.create(m_shopData);
