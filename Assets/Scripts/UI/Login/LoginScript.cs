@@ -529,9 +529,7 @@ public class LoginScript : MonoBehaviour
 
             data["tag"] = TLJCommon.Consts.Tag_Login;
             data["account"] = m_inputAccount.text;
-            string md5 = CommonUtil.GetMD5(m_inputPassword.text);
-            LogUtil.Log(md5);
-            data["password"] = md5;
+            data["password"] = CommonUtil.GetMD5(m_inputPassword.text);
             data["passwordtype"] = 1;
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
