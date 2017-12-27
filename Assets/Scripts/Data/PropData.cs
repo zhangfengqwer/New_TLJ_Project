@@ -24,7 +24,7 @@ class PropData
 
     public void reqNet()
     {
-        UnityWebReqUtil.Instance.Get(OtherData.s_webStorageUrl + "prop.json", httpCallBack);
+        UnityWebReqUtil.Instance.Get(OtherData.getWebUrl() + "prop.json", httpCallBack);
     }
 
     void httpCallBack(string tag, string data)

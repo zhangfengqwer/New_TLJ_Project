@@ -20,10 +20,12 @@ public class OtherData
 
     public static bool s_isFromSetToLogin = false;
     public static bool s_isFirstOpenGame = true;
-    public static bool s_isTest = true;
+    public static bool s_isTest = false;
     public static bool s_hasCheckSecondPSW = false;
     public static bool s_canRecharge = false;
 
+
+    public static bool s_canRecharge = false;       // 是否开放充值
 
     public static Vector2 s_screenSize;
 
@@ -31,11 +33,26 @@ public class OtherData
     //public static string s_webStorageUrl = "http://p02gqb8lq.bkt.clouddn.com/";
 
     // web测试服
-    public static string s_webStorageUrl = "http://hatest.d51v.com/static/game/";
+    static string s_webStorageUrl_test = "http://hatest.d51v.com/static/game/";
+
+    // web正式服
+    static string s_webStorageUrl = "http://xyyl.hy51v.com/static/game/";
 
     public static LoginScript s_loginScript = null;
     public static GetNetEntityFile s_getNetEntityFile = null;
     public static MainScript s_mainScript = null;
     public static UserInfoScript s_userInfoScript = null;
     public static GameScript s_gameScript = null;
+
+    public static string getWebUrl()
+    {
+        if (s_isTest)
+        {
+            return s_webStorageUrl_test;
+        }
+        else
+        {
+            return s_webStorageUrl;
+        }
+    }
 }
