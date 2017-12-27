@@ -849,6 +849,12 @@ public class MainScript : MonoBehaviour
     {
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
+        if (m_waitMatchPanel != null)
+        {
+            Destroy(m_waitMatchPanel);
+            m_waitMatchPanel = null;
+        }
+
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
         NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
@@ -858,8 +864,11 @@ public class MainScript : MonoBehaviour
     {
         //LogUtil.Log("主动与服务器断开连接");
 
-        Destroy(m_waitMatchPanel);
-        m_waitMatchPanel = null;
+        if (m_waitMatchPanel != null)
+        {
+            Destroy(m_waitMatchPanel);
+            m_waitMatchPanel = null;
+        }
 
         NetErrorPanelScript.getInstance().Show();
         NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
