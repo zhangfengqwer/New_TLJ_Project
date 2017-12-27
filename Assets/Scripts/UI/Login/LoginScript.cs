@@ -114,6 +114,10 @@ public class LoginScript : MonoBehaviour
         {
             ToastScript.createToast("这是测试包");
         }
+        else
+        {
+            LogUtil.Log("这是线上包");
+        }
 
         // 拉取数值表
         {
