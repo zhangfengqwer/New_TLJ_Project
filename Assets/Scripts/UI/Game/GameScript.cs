@@ -117,8 +117,13 @@ public class GameScript : MonoBehaviour
 
         // 初始化亮主
         {
+            if (m_liangzhuObj != null)
+            {
+                Destroy(m_liangzhuObj);
+                m_liangzhuObj = null;
+            }
+
             m_liangzhuObj = LiangZhu.create(this);
-            LogUtil.Log("亮主对象  121行");
             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_liangzhu);
             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,null);
             m_liangzhuObj.transform.localScale = new Vector3(0, 0, 0);
@@ -1548,8 +1553,13 @@ public class GameScript : MonoBehaviour
                     {
                         if (uid.CompareTo(UserData.uid) == 0)
                         {
+                            if (m_liangzhuObj != null)
+                            {
+                                Destroy(m_liangzhuObj);
+                                m_liangzhuObj = null;
+                            }
+
                             m_liangzhuObj = LiangZhu.create(this);
-                            LogUtil.Log("亮主对象  1551行");
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
                             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
                             GameData.getInstance().m_beforeQiangzhuPokerList);
@@ -2553,8 +2563,13 @@ public class GameScript : MonoBehaviour
                     {
                         if (curChaoDiPlayer.CompareTo(UserData.uid) == 0)
                         {
+                            if (m_liangzhuObj != null)
+                            {
+                                Destroy(m_liangzhuObj);
+                                m_liangzhuObj = null;
+                            }
+
                             m_liangzhuObj = LiangZhu.create(this);
-                            LogUtil.Log("亮主对象  2547行");
                             m_liangzhuObj.GetComponent<LiangZhu>().setUseType(LiangZhu.UseType.UseType_chaodi);
                             m_liangzhuObj.GetComponent<LiangZhu>().UpdateUi(GameData.getInstance().m_myPokerList,
                             GameData.getInstance().m_beforeQiangzhuPokerList);
