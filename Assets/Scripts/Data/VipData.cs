@@ -8,6 +8,7 @@ public class VipData
     public int medalNum;
     public VipOnce vipOnce;
     public VipWeekly vipWeekly;
+    public int turnTableCount;
 
 
     public static void reqNet()

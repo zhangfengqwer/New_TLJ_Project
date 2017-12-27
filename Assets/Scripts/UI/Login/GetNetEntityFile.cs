@@ -26,6 +26,10 @@ public class GetNetEntityFile : MonoBehaviour
         {
             ToastScript.createToast("这是测试包");
         }
+        else
+        {
+            LogUtil.Log("这是正式包");
+        }
     }
 	
 	// Update is called once per frame
