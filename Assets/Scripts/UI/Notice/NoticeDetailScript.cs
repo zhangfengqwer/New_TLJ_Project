@@ -7,7 +7,11 @@ public class NoticeDetailScript : MonoBehaviour {
 
     public NoticePanelScript m_parentScript;
 
+    public Text m_title;
     public Text m_content;
+    public Text m_time;
+    public Text m_from;
+
     NoticeData m_noticeData = null;
 
     public static GameObject create(int notice_id, NoticePanelScript parentScript)
@@ -30,6 +34,13 @@ public class NoticeDetailScript : MonoBehaviour {
     public void setNoticeId(int notice_id)
     {
         m_noticeData = NoticelDataScript.getInstance().getNoticeDataById(notice_id);
-        m_content.text = m_noticeData.content;
+        m_title.text = m_noticeData.title_limian;
+
+        string content = m_noticeData.content.Replace("^", "\r\n");
+        LogUtil.Log(content);
+        m_content.text = content;
+
+        m_time.text = m_noticeData.start_time;
+        m_from.text = m_noticeData.from;
     }
 }
