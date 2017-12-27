@@ -117,7 +117,29 @@ public class PropDetailPanelScript : MonoBehaviour {
             // 加倍卡
             case (int)TLJCommon.Consts.Prop.Prop_jiabeika:
                 {
-                    // 不用处理
+                    // 增加到buff数据里
+                    {
+                        bool isFind = false;
+                        for (int i = 0; i < UserData.buffData.Count; i++)
+                        {
+                            if ((UserData.buffData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_jiabeika))
+                            {
+                                isFind = true;
+                                ++UserData.buffData[i].buff_num;
+                                break;
+                            }
+                        }
+
+                        if (!isFind)
+                        {
+                            UserData.buffData.Add(new BuffData((int)TLJCommon.Consts.Prop.Prop_jiabeika, 1));
+                        }
+                    }
+
+                    if (OtherData.s_gameScript != null)
+                    {
+                        OtherData.s_gameScript.useProp_jiabeika();
+                    }
                 }
                 break;
 
