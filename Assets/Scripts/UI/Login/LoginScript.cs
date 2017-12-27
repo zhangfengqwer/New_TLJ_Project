@@ -367,6 +367,8 @@ public class LoginScript : MonoBehaviour
 
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
+            OtherData.s_canRecharge = (bool)jd["canRecharge"];
+
             string apkVersion = jd["apkVersion"].ToString();
 
             if (OtherData.s_apkVersion.CompareTo(apkVersion) < 0)
