@@ -101,7 +101,6 @@ public class VipPanelScript : MonoBehaviour
                         VipWeekOnceChild[j].SetActive(true);
                     }
 
-                    LogUtil.Log(h);
 
                     //处理ui居中
                     if (h <= 2)
