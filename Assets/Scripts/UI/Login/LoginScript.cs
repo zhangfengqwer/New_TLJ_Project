@@ -110,6 +110,11 @@ public class LoginScript : MonoBehaviour
     {
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
 
+        if (OtherData.s_isTest)
+        {
+            ToastScript.createToast("这是测试包");
+        }
+
         // 拉取数值表
         {
             NetLoading.getInstance().Show();
