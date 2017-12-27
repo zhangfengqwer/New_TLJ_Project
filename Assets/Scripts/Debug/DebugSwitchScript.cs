@@ -8,7 +8,7 @@ public class DebugSwitchScript : MonoBehaviour {
 	void Start () {
         if (!OtherData.s_isTest)
         {
-            //GameUtil.hideGameObject(gameObject);
+            GameUtil.hideGameObject(gameObject);
         }
 	}
 	
