@@ -42,7 +42,7 @@ public class CheckSecondPSWRequest : Request
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["account"] = UserData.name;
-        jsonData["password"] = m_secondPSW;
+        jsonData["password"] = CommonUtil.GetMD5(m_secondPSW);
         jsonData["passwordtype"] = 3;
 
         string requestData = jsonData.ToJson();

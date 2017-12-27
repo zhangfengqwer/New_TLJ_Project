@@ -55,7 +55,10 @@ public class GetNetEntityFile : MonoBehaviour
             PropData.getInstance().reqNet();
             ChatData.getInstance().reqNet();
             HuDongData.getInstance().reqNet();
-            SensitiveWordUtil.reqNet();
+            if (SensitiveWordUtil.WordsDatas == null || SensitiveWordUtil.WordsDatas.Length == 0)
+            {
+                SensitiveWordUtil.reqNet();
+            }
             VipData.reqNet();
         }
     }

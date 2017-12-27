@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class SensitiveWordUtil
 {
-    private static string[] WordsDatas;
+    public static string[] WordsDatas;
 
     public static void reqNet()
     {
