@@ -736,6 +736,7 @@ public class GameScript : MonoBehaviour
         if (GameData.getInstance().m_isFreeOutPoker)
         {
             GameData.getInstance().m_myPokerObjList[GameData.getInstance().m_myPokerObjList.Count - 1].GetComponent<PokerScript>().setIsSelect(true);
+            GameData.getInstance().m_myPokerObjList[GameData.getInstance().m_myPokerObjList.Count - 1].GetComponent<PokerScript>().setIsJump(true);
         }
         // 跟牌
         else
@@ -755,6 +756,7 @@ public class GameScript : MonoBehaviour
                             (pokerScript.getPokerType() == (int) listPoker[i].m_pokerType))
                         {
                             pokerScript.setIsSelect(true);
+                            pokerScript.setIsJump(true);
                             break;
                         }
                     }
