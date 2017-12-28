@@ -730,19 +730,12 @@ public class GameScript : MonoBehaviour
     void tishi()
     {
         // 所有牌设为未选中
-        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-        {
-            if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-            {
-                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-            }
-        }
+        PokerScript.setAllPokerWeiXuanZe();
 
         // 自由出牌
         if (GameData.getInstance().m_isFreeOutPoker)
         {
-            GameData.getInstance().m_myPokerObjList[GameData.getInstance().m_myPokerObjList.Count - 1]
-                .GetComponent<PokerScript>().onClickPoker();
+            GameData.getInstance().m_myPokerObjList[GameData.getInstance().m_myPokerObjList.Count - 1].GetComponent<PokerScript>().setIsSelect(true);
         }
         // 跟牌
         else
@@ -756,17 +749,13 @@ public class GameScript : MonoBehaviour
                 {
                     for (int j = GameData.getInstance().m_myPokerObjList.Count - 1; j >= 0; j--)
                     {
-                        PokerScript pokerScript =
-                            GameData.getInstance().m_myPokerObjList[j].GetComponent<PokerScript>();
+                        PokerScript pokerScript =GameData.getInstance().m_myPokerObjList[j].GetComponent<PokerScript>();
 
                         if ((pokerScript.getPokerNum() == listPoker[i].m_num) &&
                             (pokerScript.getPokerType() == (int) listPoker[i].m_pokerType))
                         {
-                            if (!pokerScript.getIsSelect())
-                            {
-                                pokerScript.onClickPoker();
-                                break;
-                            }
+                            pokerScript.setIsSelect(true);
+                            break;
                         }
                     }
                 }
@@ -865,7 +854,7 @@ public class GameScript : MonoBehaviour
             for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
             {
                 PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
-                if (pokerScript.getIsSelect())
+                if (pokerScript.getIsJump())
                 {
                     hasOutPoker = true;
 
@@ -910,13 +899,7 @@ public class GameScript : MonoBehaviour
             m_buttonTiShi.transform.localScale = new Vector3(0, 0, 0);
 
             // 所有牌设为未选中
-            for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-            {
-                if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-                {
-                    GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-                }
-            }
+            PokerScript.setAllPokerWeiXuanZe();
         }
         else
         {
@@ -1045,7 +1028,7 @@ public class GameScript : MonoBehaviour
             for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
             {
                 PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
-                if (pokerScript.getIsSelect())
+                if (pokerScript.getIsJump())
                 {
                     ++selectNum;
 
@@ -1381,14 +1364,7 @@ public class GameScript : MonoBehaviour
                 }
 
                 // 所有牌设为未选中状态
-                for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-                {
-                    PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
-                    if (pokerScript.getIsSelect())
-                    {
-                        pokerScript.onClickPoker();
-                    }
-                }
+                PokerScript.setAllPokerWeiXuanZe();
 
                 checkShowZhuPaiLogo();
             }
@@ -1531,13 +1507,7 @@ public class GameScript : MonoBehaviour
 
                         {
                             // 全部设为未选中状态
-                            for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-                            {
-                                if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-                                {
-                                    GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-                                }
-                            }
+                            PokerScript.setAllPokerWeiXuanZe();
                         }
                     }
                 }
@@ -1712,13 +1682,7 @@ public class GameScript : MonoBehaviour
                         {
                             {
                                 // 全部设为未选中状态
-                                for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-                                {
-                                    if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-                                    {
-                                        GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-                                    }
-                                }
+                                PokerScript.setAllPokerWeiXuanZe();
                             }
 
                             GameData.getInstance().m_isFreeOutPoker = isFreeOutPoker;
@@ -3552,61 +3516,11 @@ public class GameScript : MonoBehaviour
 
         SceneManager.LoadScene("MainScene");
     }
-
-    //// 时间到，自动出牌
-    //void autoOutPoker()
-    //{
-    //    // 自由出牌
-    //    if (GameData.getInstance().m_isFreeOutPoker)
-    //    {
-    //        //ToastScript.createToast("时间到，自动出牌：自由出牌");
-    //        GameData.getInstance().m_myPokerObjList[GameData.getInstance().m_myPokerObjList.Count - 1].GetComponent<PokerScript>().onClickPoker();
-    //        reqOutPoker();
-    //    }
-    //    // 跟牌
-    //    else
-    //    {
-    //        List<TLJCommon.PokerInfo> listPoker = PlayRuleUtil.GetPokerWhenTuoGuan(GameData.getInstance().m_curRoundFirstOutPokerList, GameData.getInstance().m_myPokerList, GameData.getInstance().m_levelPokerNum, GameData.getInstance().m_masterPokerType);
-    //        if (listPoker.Count == GameData.getInstance().m_curRoundFirstOutPokerList.Count)
-    //        {
-    //            for (int i = 0; i < listPoker.Count; i++)
-    //            {
-    //                //ToastScript.createToast("自动出牌：" + listPoker[i].m_num + "  " + listPoker[i].m_pokerType);
-    //                for (int j = GameData.getInstance().m_myPokerObjList.Count - 1; j >= 0; j--)
-    //                {
-    //                    PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[j].GetComponent<PokerScript>();
-
-    //                    if ((pokerScript.getPokerNum() == listPoker[i].m_num) && (pokerScript.getPokerType() == (int)listPoker[i].m_pokerType))
-    //                    {
-    //                        if (!pokerScript.getIsSelect())
-    //                        {
-    //                            pokerScript.onClickPoker();
-    //                            break;
-    //                        }
-    //                    }
-    //                }
-    //            }
-
-    //            reqOutPoker();
-    //        }
-    //        else
-    //        {
-    //            ToastScript.createToast("自动出牌失败：张数不对");
-    //        }
-
-    //    }
-    //}
-
+    
     void onTimerEventTimeEnd()
     {
         // 全部设为未选中状态
-        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
-        {
-            if (GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().getIsSelect())
-            {
-                GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>().onClickPoker();
-            }
-        }
+        PokerScript.setAllPokerWeiXuanZe();
 
         switch (m_timerScript.getTimerType())
         {

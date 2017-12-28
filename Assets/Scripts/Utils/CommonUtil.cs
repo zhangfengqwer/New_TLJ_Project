@@ -191,6 +191,11 @@ class CommonUtil
         image.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 
+    static public void setImageColor(Image image,float r, float g, float b)
+    {
+        image.color = new Color(r / 255.0f, g / 255.0f, b / 255.0f);
+    }
+
     //字符转ASCII码：
     //character长度只能为1
     static public int charToAsc(string character)

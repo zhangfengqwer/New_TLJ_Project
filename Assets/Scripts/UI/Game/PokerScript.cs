@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandler,IPointerClickHandler,IPointerUpHandler
 {
-
     int m_num;
     int m_pokerType;
-    public bool m_isSelect = false;
+
+    bool m_isSelect = false;
+    bool m_isJump = false;
     public bool m_canTouch = false;
 
     public Image m_image_num;
@@ -95,19 +96,6 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
                 }
                 break;
         }
-
-        //if (GameData.getInstance().m_levelPokerNum == num)
-        //{
-        //    showZhuPaiLogo();
-        //}
-        //else if ((GameData.getInstance().m_masterPokerType != -1) && (GameData.getInstance().m_masterPokerType == pokerType))
-        //{
-        //    showZhuPaiLogo();
-        //}
-        //else
-        //{
-        //    closeZhuPaiLogo();
-        //}
     }
 
     public int getPokerNum()
@@ -119,31 +107,52 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     {
         return m_pokerType;
     }
-    
-    public bool getIsSelect()
-    {
-        return m_isSelect;
-    }
 
     public void setIsSelect(bool isSelect)
     {
         m_isSelect = isSelect;
-    }
 
-    public void onClickPoker()
-    {
         if (m_isSelect)
         {
-            //gameObject.transform.localPosition -= new Vector3(0,30,0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x,-225, 0);
-            m_isSelect = false;
+            CommonUtil.setImageColor(gameObject.GetComponent<Image>(), 195, 195, 195);
         }
         else
         {
-            //gameObject.transform.localPosition += new Vector3(0, 30, 0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -195, 0);
-            m_isSelect = true;
+            if (getIsJump())
+            {
+                CommonUtil.setImageColor(gameObject.GetComponent<Image>(), 195, 195, 195);
+            }
+            else
+            {
+                gameObject.GetComponent<Image>().color = Color.white;
+            }
         }
+    }
+
+    bool getIsSelect()
+    {
+        return m_isSelect;
+    }
+
+    public void setIsJump(bool isJump)
+    {
+        m_isJump = isJump;
+
+        gameObject.GetComponent<Image>().color = Color.white;
+
+        if (m_isJump)
+        {
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -195, 0);
+        }
+        else
+        {
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, -225, 0);
+        }
+    }
+
+    public bool getIsJump()
+    {
+        return m_isJump;
     }
 
     public void showZhuPaiLogo()
@@ -163,29 +172,39 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerEnter");
-#if UNITY_STANDALONE_WIN
-        return;
-#endif
         if (m_canTouch)
         {
             AudioScript.getAudioScript().playSound_XuanPai();
-            onClickPoker();
+            
+            setIsSelect(!m_isSelect);
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-#if UNITY_STANDALONE_WIN
-        if (m_canTouch)
-        {
-            AudioScript.getAudioScript().playSound_XuanPai();
-            onClickPoker();
-        }
-#endif
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (m_canTouch)
+        {
+            for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+            {
+                PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
+
+                pokerScript.setIsJump(pokerScript.getIsSelect());
+            }
+        }
+    }
+
+    public static void setAllPokerWeiXuanZe()
+    {
+        for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
+            
+            pokerScript.setIsSelect(false);
+            pokerScript.setIsJump(false);
+        }
     }
 }
