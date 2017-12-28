@@ -433,7 +433,7 @@ public class PlatformHelper
         {
             return "javgame";
         }
-        return GetJC().CallStatic<string>("GetChannelName");    
+        return GetJC().CallStatic<string>("getChannelName");    
     }
 
     public static string GetVersionName () {

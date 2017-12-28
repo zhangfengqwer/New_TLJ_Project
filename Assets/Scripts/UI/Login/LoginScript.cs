@@ -98,9 +98,9 @@ public class LoginScript : MonoBehaviour
         // 健康忠告提示文字
         //m_text_tips.text = GameUtil.getOneTips();
 
-        setLogonTypeUI();
-
         Set3rdLogin();
+
+        setLogonTypeUI();
     }
 
     private void Set3rdLogin()
@@ -110,11 +110,17 @@ public class LoginScript : MonoBehaviour
         {
             m_button_3rdLogin.gameObject.SetActive(true);
             m_button_defaultLogin.gameObject.SetActive(false);
+            m_button_guanfang.gameObject.SetActive(false);
+            m_button_qq.gameObject.SetActive(false);
+            m_button_wechat.gameObject.SetActive(false);
         }
         else
         {
             m_button_3rdLogin.gameObject.SetActive(false);
             m_button_defaultLogin.gameObject.SetActive(true);
+            m_button_guanfang.gameObject.SetActive(true);
+            m_button_qq.gameObject.SetActive(true);
+            m_button_wechat.gameObject.SetActive(true);
         }
 
         m_button_3rdLogin.onClick.AddListener(() =>
