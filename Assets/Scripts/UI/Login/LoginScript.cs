@@ -95,7 +95,7 @@ public class LoginScript : MonoBehaviour
         }
 
         // 健康忠告提示文字
-        m_text_tips.text = GameUtil.getOneTips();
+        //m_text_tips.text = GameUtil.getOneTips();
 
         setLogonTypeUI();
     }

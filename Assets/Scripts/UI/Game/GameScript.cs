@@ -1586,7 +1586,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -1619,7 +1619,7 @@ public class GameScript : MonoBehaviour
                         }
 
                         AudioScript.getAudioScript().playSound_ChaoDi();
-                        ToastScript.createToast("玩家抄底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
+                        //ToastScript.createToast("玩家抄底：" + GameData.getInstance().getPlayerDataByUid(uid).m_name);
 
                         {
                             // 庄家开始埋底
@@ -1668,7 +1668,7 @@ public class GameScript : MonoBehaviour
                         AudioScript.getAudioScript().playSound_BuChaoDi();
 
                         showIsChaoDi(uid, false);
-                        ToastScript.createToast("不抄底");
+                        //ToastScript.createToast("不抄底");
                     }
                 }
             }
@@ -1747,7 +1747,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -1902,7 +1902,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -1942,7 +1942,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2039,7 +2039,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2058,7 +2058,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2092,7 +2092,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
                 }
             }
                 break;
@@ -2264,7 +2264,7 @@ public class GameScript : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ToastScript.createToast("异常：" + ex.Message);
+                    //ToastScript.createToast("异常：" + ex.Message);
 
                     LogUtil.Log("onReceive_PlayGame.PlayAction_Chat异常：" + ex.Message);
                 }
