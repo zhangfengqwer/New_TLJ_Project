@@ -1682,7 +1682,7 @@ public class GameScript : MonoBehaviour
                         {
                             {
                                 // 全部设为未选中状态
-                                PokerScript.setAllPokerWeiXuanZe();
+                                //PokerScript.setAllPokerWeiXuanZe();
                             }
 
                             GameData.getInstance().m_isFreeOutPoker = isFreeOutPoker;
