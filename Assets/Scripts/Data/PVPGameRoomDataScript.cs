@@ -34,9 +34,32 @@ public class PVPGameRoomDataScript
             temp.gameroomtype = (string)jsonData["room_list"][i]["gameroomtype"];
             temp.gameroomname = (string)jsonData["room_list"][i]["gameroomname"];
             temp.kaisairenshu = (int)jsonData["room_list"][i]["kaisairenshu"];
-            temp.baomingfei = (string)jsonData["room_list"][i]["baomingfei"];
-            temp.reward = (string)jsonData["room_list"][i]["reward"];
             temp.baomingrenshu = (int)jsonData["room_list"][i]["baomingrenshu"];
+
+            // 报名费
+            {
+                temp.baomingfei = (string)jsonData["room_list"][i]["baomingfei"];
+
+                if (temp.baomingfei.CompareTo("0") != 0)
+                {
+                    List<string> list = new List<string>();
+                    CommonUtil.splitStr(temp.baomingfei, list, ':');
+
+                    temp.baomingfei_id = int.Parse(list[0]);
+                    temp.baomingfei_num = int.Parse(list[1]);
+                }
+            }
+
+            // 奖励
+            {
+                temp.reward = (string)jsonData["room_list"][i]["reward"];
+
+                List<string> list = new List<string>();
+                CommonUtil.splitStr(temp.reward,list,':');
+
+                temp.reward_id = int.Parse(list[0]);
+                temp.reward_num = int.Parse(list[1]);
+            }
 
             // 已报名人数增加点
             temp.baomingrenshu += RandomUtil.getRandom(100, 200);
@@ -87,8 +110,14 @@ public class PVPGameRoomData
     public string gameroomtype;
     public string gameroomname;
     public int kaisairenshu;
+
     public string baomingfei;
+    public int baomingfei_id;
+    public int baomingfei_num;
+
     public string reward;
+    public int reward_id;
+    public int reward_num;
 
     public int baomingrenshu;
 }
