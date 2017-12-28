@@ -40,7 +40,7 @@ public class NoticeDetailScript : MonoBehaviour {
         LogUtil.Log(content);
         m_content.text = content;
 
-        m_time.text = m_noticeData.start_time;
+        //m_time.text = m_noticeData.start_time;
         m_from.text = m_noticeData.from;
     }
 }
