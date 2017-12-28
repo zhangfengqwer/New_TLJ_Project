@@ -22,6 +22,7 @@ public class LoginScript : MonoBehaviour
     public Button m_button_qq;
     public Button m_button_wechat;
     public Button m_button_defaultLogin;
+    public Button m_button_3rdLogin;
 
     public GameObject m_healthTipPanel;
     public GameObject m_panel_choicePlatform;
@@ -98,6 +99,30 @@ public class LoginScript : MonoBehaviour
         //m_text_tips.text = GameUtil.getOneTips();
 
         setLogonTypeUI();
+
+        Set3rdLogin();
+    }
+
+    private void Set3rdLogin()
+    {
+        bool is3RdLogin = ChannelHelper.Is3RdLogin();
+        if (is3RdLogin)
+        {
+            m_button_3rdLogin.gameObject.SetActive(true);
+            m_button_defaultLogin.gameObject.SetActive(false);
+        }
+        else
+        {
+            m_button_3rdLogin.gameObject.SetActive(false);
+            m_button_defaultLogin.gameObject.SetActive(true);
+        }
+
+        m_button_3rdLogin.onClick.AddListener(() =>
+        {
+            string channelName = PlatformHelper.GetChannelName();
+            AudioScript.getAudioScript().playSound_ButtonClick();
+            PlatformHelper.Login("AndroidCallBack", "GetLoginResult", channelName);
+        });
     }
 
     public void onGetAllNetFile()
@@ -218,7 +243,7 @@ public class LoginScript : MonoBehaviour
     {
         var flag = ToggleAgree.isOn;
         var Panel_EnterLogin = this.transform.Find("Panel_EnterLogin");
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             Panel_EnterLogin.transform.GetChild(i).GetComponent<Button>().interactable = flag;
         }
