@@ -40,7 +40,10 @@ public class SensitiveWordUtil
 
     public static bool IsSensitiveWord(string str)
     {
-        if (string.IsNullOrEmpty(str)) return false;
+        if (string.IsNullOrEmpty(str))
+        {
+            return false;
+        }
       
         foreach (var words in WordsDatas)
         {
@@ -51,5 +54,34 @@ public class SensitiveWordUtil
             }
         }
         return false;
+    }
+
+    public static string deleteSensitiveWord(string str)
+    {
+        string final_str = str;
+        if (string.IsNullOrEmpty(final_str))
+        {
+            return final_str;
+        }
+
+        foreach (var words in WordsDatas)
+        {
+            if (CommonUtil.isStrContain(final_str, words))
+            {
+                LogUtil.Log("敏感词：" + words);
+
+                string temp = "";
+                for (int i = 0; i < words.Length; i++)
+                {
+                    LogUtil.Log("a");
+                    temp += "*";
+                }
+
+                final_str = final_str.Replace(words, temp);
+                LogUtil.Log(final_str + "  " + temp);
+            }
+        }
+
+        return final_str;
     }
 }

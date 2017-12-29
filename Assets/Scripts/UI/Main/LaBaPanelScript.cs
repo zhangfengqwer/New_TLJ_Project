@@ -50,9 +50,9 @@ public class LaBaPanelScript : MonoBehaviour {
 
     public void onClickSend()
     {
-        if (m_inputField.text.Length > 30)
+        if (m_inputField.text.Length > 20)
         {
-            ToastScript.createToast("发送内容不可超过30个字符");
+            ToastScript.createToast("发送内容不可超过20个字符");
 
             return;
         }
@@ -64,18 +64,13 @@ public class LaBaPanelScript : MonoBehaviour {
             return;
         }
 
-        if (SensitiveWordUtil.IsSensitiveWord(m_inputField.text))
-        {
-            ToastScript.createToast("您的内容有敏感词");
-
-            return;
-        }
-
         for (int i = 0; i < UserData.propData.Count; i++)
         {
             if ((UserData.propData[i].prop_id == 106) && ((UserData.propData[i].prop_num > 0)))
             {
-                LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().SetText(UserData.name + "：" + m_inputField.text);
+                string content = SensitiveWordUtil.deleteSensitiveWord(m_inputField.text);
+
+                LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().SetText(UserData.name + "：" + content);
                 LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().CallBack = onReceive_UseLaBa;
                 LogicEnginerScript.Instance.GetComponent<UseLaBaRequest>().OnRequest();
 
