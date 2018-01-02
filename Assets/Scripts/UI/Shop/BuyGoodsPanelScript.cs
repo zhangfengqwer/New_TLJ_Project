@@ -8,7 +8,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
 {
     public Image m_buyCount;
     public Text m_text_goods_name;
+
     public Text m_text_goods_num;
+
     //public Text m_text_goods_allPrice;
     public Image m_text_goods_icon;
 
@@ -70,7 +72,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
             {
                 m_buyCount.transform.localScale = new Vector3(0, 0, 0);
 
-                m_text_shiduyule.transform.localScale = new Vector3(1,1,1);
+                m_text_shiduyule.transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
@@ -85,8 +87,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
         {
             if (m_shopData.money_type == 1)
             {
-                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(1));
-                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath(1));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price * m_goods_num).ToString();
                 if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -95,8 +99,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
             else if (m_shopData.money_type == 2)
             {
-                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(2));
-                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath(2));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price * m_goods_num).ToString();
                 if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -105,8 +111,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
             else if (m_shopData.money_type == 3)
             {
-                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(3));
-                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath(3));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price * m_goods_num).ToString();
                 if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -116,8 +124,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
             else if (m_shopData.money_type == 4)
             {
-                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath((int)TLJCommon.Consts.Prop.Prop_huizhang));
-                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy1.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath((int) TLJCommon.Consts.Prop.Prop_huizhang));
+                m_button_buy1.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price * m_goods_num).ToString();
                 if ((m_shopData.price * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy1.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -134,8 +144,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
         {
             if (m_shopData.money_type2 == 1)
             {
-                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(1));
-                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath(1));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price2 * m_goods_num).ToString();
                 if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -144,8 +156,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
             else if (m_shopData.money_type2 == 2)
             {
-                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(2));
-                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath(2));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price2 * m_goods_num).ToString();
                 if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -154,8 +168,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
             else if (m_shopData.money_type2 == 3)
             {
-                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(3));
-                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath(3));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price2 * m_goods_num).ToString();
                 if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -165,8 +181,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
             else if (m_shopData.money_type2 == 4)
             {
-                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath((int)TLJCommon.Consts.Prop.Prop_huizhang));
-                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text = (m_shopData.price2 * m_goods_num).ToString();
+                CommonUtil.setImageSprite(m_button_buy2.transform.Find("Image").GetComponent<Image>(),
+                    GameUtil.getPropIconPath((int) TLJCommon.Consts.Prop.Prop_huizhang));
+                m_button_buy2.transform.Find("Text_price").GetComponent<Text>().text =
+                    (m_shopData.price2 * m_goods_num).ToString();
                 if ((m_shopData.price2 * m_goods_num).ToString().Length >= 5)
                 {
                     m_button_buy2.transform.Find("Text_price").GetComponent<Text>().fontSize = 23;
@@ -176,7 +194,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
         }
         else
         {
-            m_button_buy1.transform.localPosition = new Vector3(0, -155,0);
+            m_button_buy1.transform.localPosition = new Vector3(0, -155, 0);
             GameUtil.hideGameObject(m_button_buy2.gameObject);
         }
     }
@@ -286,19 +304,17 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     void buy(int money_type)
     {
-       
-
         int totalPrice = 0;
 
         if (money_type == m_shopData.money_type)
         {
             totalPrice = m_shopData.price * m_goods_num;
         }
-        else if(money_type == m_shopData.money_type2)
+        else if (money_type == m_shopData.money_type2)
         {
             totalPrice = m_shopData.price2 * m_goods_num;
         }
-        
+
         switch (money_type)
         {
             case 1:
@@ -309,10 +325,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 }
                 else
                 {
-                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>()
+                        .setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
-
                 }
                 break;
 
@@ -324,10 +340,10 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 }
                 else
                 {
-                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>()
+                        .setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
-
                 }
                 break;
 
@@ -341,17 +357,23 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
                 if (UserData.IsRealName)
                 {
-                    PayTypePanelScript.create(m_shopData);
+                    if (!ChannelHelper.Is3RdLogin())
+                    {
+                        PayTypePanelScript.create(m_shopData);
+                    }
+                    else
+                    {
+                        PlatformHelper.pay(ChannelHelper.GetChannelName(), "AndroidCallBack", "GetPayResult", SetRequest(m_shopData));
+                    }
                     Destroy(this.gameObject);
-                    //                    ToastScript.createToast("元宝购买暂未开放,敬请期待");
-                    //                    return;
                 }
                 else
                 {
-                    CommonExitPanelScript commonExit = CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>();
+                    CommonExitPanelScript commonExit =
+                        CommonExitPanelScript.create().GetComponent<CommonExitPanelScript>();
                     commonExit.TextContent.text = "您还未实名,无法购买";
                     commonExit.ButtonClose.gameObject.SetActive(true);
-                    commonExit.ButtonConfirm.onClick.AddListener(delegate ()
+                    commonExit.ButtonConfirm.onClick.AddListener(delegate()
                     {
                         RealNameScript.create();
                         Destroy(commonExit.gameObject);
@@ -367,22 +389,24 @@ public class BuyGoodsPanelScript : MonoBehaviour
                 }
                 else
                 {
-                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
+                    LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>()
+                        .setGoodsInfo(m_shopData.goods_id, m_goods_num, money_type);
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().CallBack = onReceive_BuyGoods;
                     LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
-
                 }
                 break;
         }
     }
 
-    public void GetPayResult(string data)
+    private string SetRequest(ShopData shopData)
     {
-        if ("支付成功".Equals(data))
-        {
-            LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().setGoodsInfo(m_shopData.goods_id, m_goods_num,3);
-            LogicEnginerScript.Instance.GetComponent<BuyGoodsRequest>().OnRequest();
-        }
+        JsonData data = new JsonData();
+        data["uid"] = UserData.uid;
+        data["goods_id"] = shopData.goods_id;
+        data["goods_num"] = 1;
+        data["goods_name"] = shopData.goods_name;
+        data["price"] = shopData.price;
+        return data.ToJson();
     }
 
 
@@ -401,13 +425,12 @@ public class BuyGoodsPanelScript : MonoBehaviour
             {
                 ToastScript.createToast("购买成功,请去背包中查看");
             }
-         
+
             //更新背包数据
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = MainScript.onReceive_GetUserBag;
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
             LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
             Destroy(gameObject);
-            
         }
         else
         {

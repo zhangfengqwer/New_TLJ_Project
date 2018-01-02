@@ -22,14 +22,6 @@ public class GetNetEntityFile : MonoBehaviour
         //m_fileList.Add(new FileInfo("stopwords.txt"));
         m_fileList.Add(new FileInfo("VipRewardData.json"));
 
-        if (OtherData.s_isTest)
-        {
-            ToastScript.createToast("这是测试包");
-        }
-        else
-        {
-            LogUtil.Log("这是正式包");
-        }
     }
 	
 	// Update is called once per frame

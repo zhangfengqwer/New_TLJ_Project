@@ -161,13 +161,13 @@ public class AndroidCallBack : MonoBehaviour {
             JsonData jsonData = JsonMapper.ToObject(data);
             var openId = (string)jsonData["code"];
             var nickname = (string)jsonData["nickname"];
-            var platform = (string)jsonData["platform"];
+            var channelname = (string)jsonData["channelname"];
 
             JsonData jd = new JsonData();
             jd["tag"] = Consts.Tag_Third_Login;
             jd["nickname"] = nickname;
             jd["third_id"] = openId;
-            jd["platform"] = platform;
+            jd["channelname"] = channelname;
 
             NetLoading.getInstance().Show();
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
@@ -176,5 +176,10 @@ public class AndroidCallBack : MonoBehaviour {
         {
             Console.WriteLine(e);
         }
+    }
+
+    public void GetPayResult(string data)
+    {
+        LogUtil.Log("Unity收到支付回调:" + data);
     }
 }

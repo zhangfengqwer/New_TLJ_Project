@@ -34,13 +34,13 @@ public class PayTypePanelScript : MonoBehaviour
     public void OnClickAliPay()
     {
         var data = SetRequest();
-        PlatformHelper.pay(Constants.PAY_TYPE_ALIPAY, this.gameObject.name, "GetPayResult", data.ToJson());
+        PlatformHelper.pay(Constants.PAY_TYPE_ALIPAY, "AndroidCallBack", "GetPayResult", data.ToJson());
     }
 
     public void OnClickWeChatPay()
     {
         var data = SetRequest();
 
-        PlatformHelper.pay(Constants.PAY_TYPE_WX,this.gameObject.name, "GetPayResult", data.ToJson());
+        PlatformHelper.pay(Constants.PAY_TYPE_WX, "AndroidCallBack", "GetPayResult", data.ToJson());
     }
 }
