@@ -30,10 +30,10 @@ public class OtherData
     //public static string s_webStorageUrl = "http://p02gqb8lq.bkt.clouddn.com/";
 
     // web测试服
-    static string s_webStorageUrl_test = "http://hatest.d51v.com/static/game/";
+    static string s_webStorageUrl_test = "http://fwdown.hy51v.com/test/file/";
 
     // web正式服
-    static string s_webStorageUrl = "http://xyyl.hy51v.com/static/game/";
+    static string s_webStorageUrl = "http://fwdown.hy51v.com/online/file/";    
 
     public static LoginScript s_loginScript = null;
     public static GetNetEntityFile s_getNetEntityFile = null;
