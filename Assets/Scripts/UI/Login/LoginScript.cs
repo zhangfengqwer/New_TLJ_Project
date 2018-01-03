@@ -101,6 +101,16 @@ public class LoginScript : MonoBehaviour
         Set3rdLogin();
 
         setLogonTypeUI();
+
+
+        if (OtherData.s_isTest)
+        {
+            ToastScript.createToast("这是测试包");
+        }
+        else
+        {
+            LogUtil.Log("这是正式包");
+        }
     }
 
     private void Set3rdLogin()

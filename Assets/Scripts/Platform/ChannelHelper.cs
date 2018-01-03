@@ -15,4 +15,9 @@ public class ChannelHelper  {
         }
         return false;
     }
+
+    public static string GetChannelName()
+    {
+        return PlatformHelper.GetChannelName();
+    }
 }
