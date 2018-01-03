@@ -145,8 +145,8 @@ public class LoginScript : MonoBehaviour
         // 拉取数值表
         {
             NetLoading.getInstance().Show();
-            NetConfig.reqNetConfig();
 
+            NetConfig.reqNetConfig();
             PropData.getInstance().reqNet();
             ChatData.getInstance().reqNet();
             HuDongData.getInstance().reqNet();
@@ -419,6 +419,7 @@ public class LoginScript : MonoBehaviour
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
             OtherData.s_canRecharge = (bool)jd["canRecharge"];
+            OtherData.s_canDebug = (bool)jd["canDebug"];
 
             string apkVersion = jd["apkVersion"].ToString();
 

@@ -911,6 +911,8 @@ public class GameScript : MonoBehaviour
 
     public void reqSetTuoGuanState(bool isTuoGuan)
     {
+        NetLoading.getInstance().Show();
+
         JsonData data = new JsonData();
 
         data["tag"] = GameData.getInstance().m_tag;
@@ -1878,6 +1880,8 @@ public class GameScript : MonoBehaviour
             {
                 try
                 {
+                    NetLoading.getInstance().Close();
+
                     int code = (int) jd["code"];
 
                     if (code == (int) TLJCommon.Consts.Code.Code_OK)
