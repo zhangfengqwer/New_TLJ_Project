@@ -53,7 +53,7 @@ public class VipPanelScript : MonoBehaviour
             VipData vipData = vipDatas[i];
             var VipTab = Content.transform.GetChild(i).gameObject;
             VipTab.transform.Find("Text").GetComponent<Text>().text = "贵族" + (i + 1);
-            VipTab.transform.Find("Text").GetComponent<Text>().font = Resources.Load<Font>("Fonts/FANGZHENGKATONG");
+            VipTab.transform.Find("Text").GetComponent<Text>().font = Resources.Load<Font>("Fonts/STXINWEI");
 
             var toggle = VipTab.GetComponent<Toggle>();
 
