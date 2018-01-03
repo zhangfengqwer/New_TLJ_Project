@@ -6,7 +6,7 @@ public class DebugSwitchScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (!OtherData.s_isTest)
+        if (!OtherData.s_canDebug)
         {
             GameUtil.hideGameObject(gameObject);
         }
