@@ -8,6 +8,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
 {
     public Image m_buyCount;
     public Text m_text_goods_name;
+    public Text m_text_goods_desc;
 
     public Text m_text_goods_num;
 
@@ -56,14 +57,29 @@ public class BuyGoodsPanelScript : MonoBehaviour
         if (m_shopData != null)
         {
             m_text_goods_name.text = m_shopData.goods_name;
+
             m_text_goods_num.text = m_goods_num.ToString();
+
+            List<string> list_str = new List<string>();
+            CommonUtil.splitStr(m_shopData.props, list_str, ':');
+            int prop_id = int.Parse(list_str[0]);
 
             // 道具图标
             {
-                List<string> list_str = new List<string>();
-                CommonUtil.splitStr(m_shopData.props, list_str, ':');
-                LogUtil.Log(GameUtil.getPropIconPath(int.Parse(list_str[0])));
-                CommonUtil.setImageSprite(m_text_goods_icon, GameUtil.getPropIconPath(int.Parse(list_str[0])));
+                
+                CommonUtil.setImageSprite(m_text_goods_icon, GameUtil.getPropIconPath(prop_id));
+            }
+
+            // 道具描述
+            {
+                if ((prop_id != 1) && (prop_id != 2))
+                {
+                    PropInfo propInfo = PropData.getInstance().getPropInfoById(prop_id);
+                    if (propInfo != null)
+                    {
+                        m_text_goods_desc.text = propInfo.m_desc;
+                    }
+                }
             }
 
             refreshPrice();

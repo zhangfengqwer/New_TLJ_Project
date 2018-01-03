@@ -12,6 +12,8 @@ public class NoticePanelScript : MonoBehaviour
     public Image m_tab_bg;
     public Button m_button_huodong;
     public Button m_button_gonggao;
+    public Image m_image_huodong_redPoint;
+    public Image m_image_gonggao_redPoint;
     public Text m_text_zanwu;
     public bool m_curShowHuoDong = true;
 
@@ -40,6 +42,49 @@ public class NoticePanelScript : MonoBehaviour
         if (LogicEnginerScript.Instance != null)
         {
             LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().CallBack = null;
+        }
+    }
+
+    public void checkRedPoint()
+    {
+        bool isShowRedPoint_huodong = false;
+        bool isShowRedPoint_gonggao = false;
+        for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
+        {
+            // 活动
+            if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 0)
+            {
+                if (NoticelDataScript.getInstance().getNoticeDataList()[i].state == 0)
+                {
+                    isShowRedPoint_huodong = true;
+                }
+            }
+            // 公告
+            else if (NoticelDataScript.getInstance().getNoticeDataList()[i].type == 1)
+            {
+                if (NoticelDataScript.getInstance().getNoticeDataList()[i].state == 0)
+                {
+                    isShowRedPoint_gonggao = true;
+                }
+            }
+        }
+
+        if (isShowRedPoint_huodong)
+        {
+            GameUtil.showGameObject(m_image_huodong_redPoint.gameObject);
+        }
+        else
+        {
+            GameUtil.hideGameObject(m_image_huodong_redPoint.gameObject);
+        }
+
+        if (isShowRedPoint_gonggao)
+        {
+            GameUtil.showGameObject(m_image_gonggao_redPoint.gameObject);
+        }
+        else
+        {
+            GameUtil.hideGameObject(m_image_gonggao_redPoint.gameObject);
         }
     }
 
@@ -122,8 +167,12 @@ public class NoticePanelScript : MonoBehaviour
             if (m_ListViewScript.getItemList()[i].GetComponent<Item_Notice_List_Script>().getNoticeData().notice_id == notice_id)
             {
                 m_ListViewScript.getItemList()[i].GetComponent<Item_Notice_List_Script>().m_redPoint.transform.localScale = new Vector3(0, 0, 0);
+
+                break;
             }
         }
+
+        checkRedPoint();
     }
 
     public void onClickHuoDong()
@@ -157,6 +206,8 @@ public class NoticePanelScript : MonoBehaviour
     public void onReceive_GetNotice(string data)
     {
         NoticelDataScript.getInstance().initJson(data);
+
+        checkRedPoint();
 
         loadHuoDong();
     }
