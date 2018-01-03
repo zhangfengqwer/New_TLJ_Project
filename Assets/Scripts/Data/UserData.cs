@@ -10,6 +10,7 @@ public class UserData  {
     public static int medal{ set; get; }
     public static int yuanbao { set; get; }
     public static int rechargeVip { set; get; }
+    public static int vipLevel { set; get; }
     public static bool IsRealName { set; get; }
     public static bool isSetSecondPsw { set; get; }
     public static UserGameData gameData { set; get; }

@@ -18,6 +18,7 @@ public class MainScript : MonoBehaviour
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
     public GameObject m_xiuxianchang;
+    public Image m_nickName_bg;
     public Text UserAccount;
     public Text UserGold;
     public Text MyGold;
@@ -195,9 +196,14 @@ public class MainScript : MonoBehaviour
 
         // 徽章
         UserMedal.text = UserData.medal + "";
-        int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
 
-        VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
+        // 贵族
+        GameUtil.setNickNameFontColor(UserAccount, UserData.vipLevel);
+        VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + UserData.vipLevel);
+        if (UserData.vipLevel > 0)
+        {
+            CommonUtil.setImageSprite(m_nickName_bg, "Sprites/Common/vipname_bg");
+        }
 
         checkRedPoint();
         

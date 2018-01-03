@@ -10,7 +10,7 @@ public class MyUIScript : MonoBehaviour {
     public Text m_textGoldNum;
     public Image m_imageZhuangJiaIcon;
     public Image m_imageZhuanVipLevel;
-
+    public Image m_nickName_bg;
 
     public string m_uid;
 
@@ -34,6 +34,7 @@ public class MyUIScript : MonoBehaviour {
     public void setName(string name)
     {
         m_textName.text = name;
+        GameUtil.setNickNameFontColor(m_textName, UserData.vipLevel);
     }
 
     public void setGoldNum(int goldNum)

@@ -53,6 +53,8 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void setVipLevel(int vipLevel)
     {
         CommonUtil.setImageSprite(m_imageVipLevel, "Sprites/Vip/user_vip_" + vipLevel);
+        
+        GameUtil.setNickNameFontColor(m_textName,vipLevel);
     }
 
     public void setGoldNum(int goldNum)
