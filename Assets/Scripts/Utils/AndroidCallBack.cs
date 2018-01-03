@@ -54,7 +54,7 @@ public class AndroidCallBack : MonoBehaviour {
             jd["tag"] = Consts.Tag_Third_Login;
             jd["nickname"] = name;
             jd["third_id"] = expand;
-            jd["platform"] = 102;
+            jd["channelname"] = "wechat";
 
             NetLoading.getInstance().Show();
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
@@ -80,7 +80,7 @@ public class AndroidCallBack : MonoBehaviour {
             jd["tag"] = Consts.Tag_Third_Login;
             jd["nickname"] = nickname;
             jd["third_id"] = openId;
-            jd["platform"] = 101;
+            jd["channelname"] = "qq";
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
         });
     }
