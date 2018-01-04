@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AndroidTool  : EditorWindow{
 
-    string myString = "hello world";
 
     [MenuItem("Apk/生成Apk")]
     public static void ShowWindow()

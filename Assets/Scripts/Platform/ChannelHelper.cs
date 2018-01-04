@@ -1,12 +1,19 @@
-﻿
-public class ChannelHelper  {
+﻿using System.Collections.Generic;
 
-    public static string[] ChannelList = { "huawei", "360", "vivo" };
+public class ChannelHelper
+{
+    public static Dictionary<string, string> ChannelDic = new Dictionary<string, string>
+    {
+        {"huawei", "华为"},
+        {"360", "360"},
+        {"vivo", "vivo"},
+        {"yyb", "应用宝"},
+    };
 
     public static bool Is3RdLogin()
     {
         string channelName = PlatformHelper.GetChannelName();
-        foreach (var channel in ChannelList)
+        foreach (var channel in ChannelDic.Keys)
         {
             if (channel.Equals(channelName))
             {
@@ -16,8 +23,15 @@ public class ChannelHelper  {
         return false;
     }
 
-    public static string GetChannelName()
+    public static string GetChannelAllName()
     {
-        return PlatformHelper.GetChannelName();
+        string channelName = PlatformHelper.GetChannelName();
+        string channelAllName;
+        if (ChannelDic.TryGetValue(channelName, out channelAllName))
+        {
+            return channelAllName;
+        }
+
+        return "";
     }
 }
