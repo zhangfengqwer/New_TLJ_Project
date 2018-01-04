@@ -108,6 +108,7 @@ public class LoginScript : MonoBehaviour
     {
         bool is3RdLogin = ChannelHelper.Is3RdLogin();
         string channelAllName = ChannelHelper.GetChannelAllName();
+        LogUtil.Log("渠道号:" + PlatformHelper.GetChannelName() +",渠道名:"+ channelAllName);
 
         if (is3RdLogin)
         {
@@ -116,9 +117,9 @@ public class LoginScript : MonoBehaviour
             m_button_guanfang.gameObject.SetActive(false);
             m_button_qq.gameObject.SetActive(false);
             m_button_wechat.gameObject.SetActive(false);
-
             var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
             childText.text = channelAllName + "账号登录";
+
         }
         else
         {
@@ -127,6 +128,8 @@ public class LoginScript : MonoBehaviour
             m_button_guanfang.gameObject.SetActive(true);
             m_button_qq.gameObject.SetActive(true);
             m_button_wechat.gameObject.SetActive(true);
+            var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
+            childText.text = channelAllName + "账号登录";
         }
 
         m_button_3rdLogin.onClick.AddListener(() =>

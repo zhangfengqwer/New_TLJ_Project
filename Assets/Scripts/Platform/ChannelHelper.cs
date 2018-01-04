@@ -7,6 +7,7 @@ public class ChannelHelper
         {"huawei", "华为"},
         {"360", "360"},
         {"vivo", "vivo"},
+        {"yyb", "应用宝"},
     };
 
     public static bool Is3RdLogin()
@@ -25,7 +26,6 @@ public class ChannelHelper
     public static string GetChannelAllName()
     {
         string channelName = PlatformHelper.GetChannelName();
-        LogUtil.Log("渠道号:" + channelName);
         string channelAllName;
         if (ChannelDic.TryGetValue(channelName, out channelAllName))
         {
