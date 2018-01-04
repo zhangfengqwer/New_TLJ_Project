@@ -379,7 +379,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
                     }
                     else
                     {
-                        PlatformHelper.pay(ChannelHelper.GetChannelName(), "AndroidCallBack", "GetPayResult", SetRequest(m_shopData));
+                        PlatformHelper.pay(PlatformHelper.GetChannelName(), "AndroidCallBack", "GetPayResult", SetRequest(m_shopData));
                     }
                     Destroy(this.gameObject);
                 }
