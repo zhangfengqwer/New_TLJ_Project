@@ -16,6 +16,7 @@ public class LaBaScript : MonoBehaviour {
     {
         m_data.Add("系统：" + GameUtil.getOneTips());
         m_text.text = m_data[0];
+        m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25f, 40);
 
         InvokeRepeating("onTextMove", 0.05f, 0.05f);
     }
@@ -39,6 +40,8 @@ public class LaBaScript : MonoBehaviour {
                 m_data.Add("系统：" + GameUtil.getOneTips());
                 m_text.text = m_data[0];
             }
+
+            m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25f, 40);
         }
     }
 
@@ -50,7 +53,7 @@ public class LaBaScript : MonoBehaviour {
             m_data.Add(text);
 
             m_text.text = m_data[0];
-            m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25, 40);
+            m_text.GetComponent<RectTransform>().sizeDelta = new Vector2(m_text.text.Length * 25f, 40);
             m_text.transform.localPosition = new Vector3(200, 0, 0);
         }
         else
