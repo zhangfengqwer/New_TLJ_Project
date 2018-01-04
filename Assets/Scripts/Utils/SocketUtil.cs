@@ -235,6 +235,22 @@ public class SocketUtil
                             continue;
                         }
                     }
+                    else
+                    {
+                        if (!m_isNormalStop)
+                        {
+                            LogUtil.Log("SocketUtil----被动与服务端连接断开  " + m_ipAddress.ToString() + "  " + m_ipPort);
+
+                            m_isStart = false;
+
+                            if (m_onSocketEvent_Close != null)
+                            {
+                                m_onSocketEvent_Close();
+                            }
+                        }
+
+                        return;
+                    }
 
                     int read = m_socket.Receive(len, len.Length, SocketFlags.None);
 
