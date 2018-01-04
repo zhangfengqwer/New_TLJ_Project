@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
@@ -101,7 +102,6 @@ public class LoginScript : MonoBehaviour
         Set3rdLogin();
 
         setLogonTypeUI();
-      
     }
 
     private void Set3rdLogin()

@@ -24,7 +24,7 @@ public class SocketUtil
     Socket m_socket = null;
     IPAddress m_ipAddress = null;
     int m_ipPort = 0;
-    
+
     bool m_isStart = false;
     bool m_isNormalStop = false;
 
@@ -52,7 +52,7 @@ public class SocketUtil
         m_onSocketEvent_Stop = onSocketEvent_Stop;
     }
 
-    public void init(string ip,int port)
+    public void init(string ip, int port)
     {
         try
         {
@@ -99,7 +99,7 @@ public class SocketUtil
             {
                 m_socket.Close();
 
-                if(m_onSocketEvent_Stop != null)
+                if (m_onSocketEvent_Stop != null)
                 {
                     m_onSocketEvent_Stop();
                 }
@@ -196,12 +196,12 @@ public class SocketUtil
 
                 reces = reces.Replace("\r\n", "");
 
-//                LogUtil.Log("SocketUtil----收到服务端消息：" + reces);
+                //                LogUtil.Log("SocketUtil----收到服务端消息：" + reces);
 
                 if (reces.CompareTo("") != 0)
                 {
                     List<string> list = new List<string>();
-                    bool b = CommonUtil.splitStrIsPerfect(reces, list , m_packEndFlag);
+                    bool b = CommonUtil.splitStrIsPerfect(reces, list, m_packEndFlag);
 
                     if (b)
                     {
