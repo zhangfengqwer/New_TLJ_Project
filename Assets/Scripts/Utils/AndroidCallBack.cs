@@ -143,6 +143,8 @@ public class AndroidCallBack : MonoBehaviour {
         {
             s_onResumeCallBack();
         }
+
+        NetLoading.getInstance().Close();
     }
 
     // 分享成功
