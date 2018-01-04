@@ -42,7 +42,8 @@ public class RankListCaifuScript : MonoBehaviour
             if (medalRankItemData.name.Equals(UserData.name))
             {
                 mymedalRank = i + 1 + "";
-                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
+                //goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
+                goChild.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
             }
 
 
@@ -61,6 +62,11 @@ public class RankListCaifuScript : MonoBehaviour
             Image_Head.GetComponent<Image>().sprite =
                 Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
             Name.GetComponent<Text>().text = medalRankItemData.name;
+            if (VipUtil.GetVipLevel(medalRankItemData.recharge) > 0)
+            {
+                Name.GetComponent<Text>().color = new Color(253 / (float)255, 239 / (float)255, 82 / (float)255, 1);
+            }
+
             Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
 
             Image_icon.localScale = new Vector3((float) 1.2, (float) 1.2, 1);
