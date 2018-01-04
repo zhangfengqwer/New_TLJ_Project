@@ -210,7 +210,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
         }
         else
         {
-            m_button_buy1.transform.localPosition = new Vector3(0, -155, 0);
+            m_button_buy1.transform.localPosition = new Vector3(0, -183.1f, 0);
             GameUtil.hideGameObject(m_button_buy2.gameObject);
         }
     }
