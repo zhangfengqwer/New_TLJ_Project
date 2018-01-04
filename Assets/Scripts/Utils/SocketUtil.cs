@@ -214,7 +214,6 @@ public class SocketUtil
                         byte[] body = new byte[len];
                         Buffer.BlockCopy(bytes, 0, body, 0, body.Length);
                         packageBody = CombineBytes(packageBody, body);
-
                         continue;
                     }
 
