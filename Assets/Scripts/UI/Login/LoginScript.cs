@@ -352,7 +352,6 @@ public class LoginScript : MonoBehaviour
     {
         AudioScript.getAudioScript().playSound_ButtonClick();
         reqLogin();
-
         PlayerPrefs.SetInt("DefaultLoginType", (int)OtherData.DefaultLoginType.DefaultLoginType_GuanFang);
     }
 
@@ -584,6 +583,8 @@ public class LoginScript : MonoBehaviour
 
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
+
+        
     }
 
     // 请求注册
