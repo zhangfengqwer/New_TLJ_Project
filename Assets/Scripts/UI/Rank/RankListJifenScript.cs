@@ -38,7 +38,8 @@ public class RankListJifenScript : MonoBehaviour
             if (goldRankItemData.name.Equals(UserData.name))
             {
                 myGoldRank = i + 1 + "";
-                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
+//                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
+                goChild.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
             }
 
             goChild.layer = Content.layer;
@@ -56,6 +57,11 @@ public class RankListJifenScript : MonoBehaviour
             Count.GetComponent<Text>().text = "" + goldRankItemData.gold;
             Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
             Name.GetComponent<Text>().text = goldRankItemData.name;
+            if (VipUtil.GetVipLevel(goldRankItemData.recharge) > 0)
+            {
+                Name.GetComponent<Text>().color = new Color(253 / (float)255, 239 / (float)255, 82 / (float)255, 1);
+            }
+            //GameUtil.setNickNameFontColor(Name.GetComponent<Text>(), VipUtil.GetVipLevel(goldRankItemData.recharge));
 
             Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
 
