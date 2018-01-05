@@ -442,9 +442,6 @@ public class GameScript : MonoBehaviour
                 }
             }
 
-            // 开始获取玩家信息倒计时
-            startDaoJiShi_GetUserInfo_Game();
-
             // 本桌所有人信息
             for (int i = 0; i < jd["userList"].Count; i++)
             {
@@ -474,10 +471,6 @@ public class GameScript : MonoBehaviour
                         m_myUserInfoUI.GetComponent<MyUIScript>().m_textGoldNum.text = UserData.gold.ToString();
                     }
                 }
-                else
-                {
-                    reqUserInfo_Game(uid);
-                }
             }
         }
         catch (Exception ex)
@@ -485,37 +478,7 @@ public class GameScript : MonoBehaviour
             LogUtil.Log("startGame_InitUI()报错：" + ex.Message);
         }
     }
-
-    public void startDaoJiShi_GetUserInfo_Game()
-    {
-        Invoke("onInvoke_GetUserInfo_Game", 2);
-    }
-
-    void onInvoke_GetUserInfo_Game()
-    {
-        bool isOK = true;
-
-        for (int i = 0; i < GameData.getInstance().m_playerDataList.Count; i++)
-        {
-            if (string.IsNullOrEmpty(GameData.getInstance().m_playerDataList[i].m_name))
-            {
-                isOK = false;
-
-                //ToastScript.createToast("没有获取到玩家信息：" + GameData.getInstance().m_playerDataList[i].m_uid);
-                reqUserInfo_Game(GameData.getInstance().m_playerDataList[i].m_uid);
-            }
-        }
-
-        if (!isOK)
-        {
-            startDaoJiShi_GetUserInfo_Game();
-        }
-        else
-        {
-            //ToastScript.createToast("所有玩家信息都已经获取到");
-        }
-    }
-
+    
     public void showWaitMatchPanel(float time, bool isContinueGame)
     {
         m_waitMatchPanel = WaitMatchPanelScript.create(GameData.getInstance().getGameRoomType());
@@ -929,18 +892,6 @@ public class GameScript : MonoBehaviour
         data["uid"] = UserData.uid;
         data["playAction"] = (int) TLJCommon.Consts.PlayAction.PlayAction_SetTuoGuanState;
         data["isTuoGuan"] = isTuoGuan;
-
-        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
-    }
-
-    // 获取游戏内玩家信息
-    public void reqUserInfo_Game(string uid)
-    {
-        JsonData data = new JsonData();
-
-        data["tag"] = TLJCommon.Consts.Tag_UserInfo_Game;
-        data["uid"] = uid;
-        data["isClientReq"] = 1;
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
     }
@@ -2266,16 +2217,19 @@ public class GameScript : MonoBehaviour
         {
             string uid = (string) jd["uid"];
 
-            GameData.getInstance().getPlayerDataByUid(uid).m_name = (string) jd["name"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int) jd["head"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int) jd["gold"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_vipLevel = (int) jd["vipLevel"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int) jd["gameData"]["allGameCount"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_winCount = (int) jd["gameData"]["winCount"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_runCount = (int) jd["gameData"]["runCount"];
-            GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = (int) jd["gameData"]["meiliZhi"];
+            if (UserData.uid.CompareTo(uid) != 0)
+            {
+                GameData.getInstance().getPlayerDataByUid(uid).m_name = (string)jd["name"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int)jd["head"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int)jd["gold"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_vipLevel = (int)jd["vipLevel"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int)jd["gameData"]["allGameCount"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_winCount = (int)jd["gameData"]["winCount"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_runCount = (int)jd["gameData"]["runCount"];
+                GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = (int)jd["gameData"]["meiliZhi"];
 
-            GameData.getInstance().setOtherPlayerUI(uid, isPVP());
+                GameData.getInstance().setOtherPlayerUI(uid, isPVP());
+            }
         }
     }
 
