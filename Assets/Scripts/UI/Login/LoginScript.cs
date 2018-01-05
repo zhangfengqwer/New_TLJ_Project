@@ -659,7 +659,7 @@ public class LoginScript : MonoBehaviour
 //            string result = Regex.Replace(m_inputAccount_register.text, @"\p{Cs}", "");//屏蔽emoji 
             data["account"] = m_inputAccount_register.text;
             data["password"] = CommonUtil.GetMD5(m_inputSecondPassword_register.text);
-
+            data["channelname"] = PlatformHelper.GetChannelName();
             LoginServiceSocket.s_instance.sendMessage(data.ToJson());
         }
     }

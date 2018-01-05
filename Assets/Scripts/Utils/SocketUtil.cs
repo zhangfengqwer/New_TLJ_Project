@@ -195,29 +195,29 @@ public class SocketUtil
         bool isEnd = true;
         ushort size = 0;
         //当前读取的长度
-        int i = 0;
+        int alreadyReaderCount = 0;
         //当前读取的字节流
-        byte[] packageBody = new byte[] { };
+        byte[] alreadyReaderBody = new byte[] { };
         while (m_isStart)
         {
             try
             {
                 if (!isEnd)
                 {
-                    int temp = size - i;
-                    var bytes = new byte[temp];
-                    int len = m_socket.Receive(bytes, bytes.Length, SocketFlags.None);
-                    if (len == 0) continue;
-                    if (len < temp)
+                    int left = size - alreadyReaderCount;
+                    var bytes = new byte[left];
+                    int currentReadCount = m_socket.Receive(bytes, bytes.Length, SocketFlags.None);
+                    if (currentReadCount == 0) continue;
+                    if (currentReadCount < left)
                     {
-                        i += len;
-                        byte[] body = new byte[len];
+                        alreadyReaderCount += currentReadCount;
+                        byte[] body = new byte[currentReadCount];
                         Buffer.BlockCopy(bytes, 0, body, 0, body.Length);
-                        packageBody = CombineBytes(packageBody, body);
+                        alreadyReaderBody = CombineBytes(alreadyReaderBody, body);
                         continue;
                     }
 
-                    byte[] combineBytes = CombineBytes(packageBody, bytes);
+                    byte[] combineBytes = CombineBytes(alreadyReaderBody, bytes);
                     result = Encoding.UTF8.GetString(combineBytes);
                     isEnd = true;
                     m_onSocketEvent_Receive(result);
@@ -256,18 +256,18 @@ public class SocketUtil
                     if (read != 0)
                     {
                         size = (ushort) BitConverter.ToInt16(len, 0);
-                        packageBody = new byte[size];
-                        i = m_socket.Receive(packageBody, packageBody.Length, SocketFlags.None);
-                        if (i < size)
+                        alreadyReaderBody = new byte[size];
+                        alreadyReaderCount = m_socket.Receive(alreadyReaderBody, alreadyReaderBody.Length, SocketFlags.None);
+                        if (alreadyReaderCount < size)
                         {
-                            var body = new byte[i];
-                            Buffer.BlockCopy(packageBody, 0, body, 0, body.Length);
-                            packageBody = body;
+                            var body = new byte[alreadyReaderCount];
+                            Buffer.BlockCopy(alreadyReaderBody, 0, body, 0, body.Length);
+                            alreadyReaderBody = body;
                             isEnd = false;
                         }
                         else
                         {
-                            result = Encoding.UTF8.GetString(packageBody, 0, packageBody.Length);
+                            result = Encoding.UTF8.GetString(alreadyReaderBody, 0, alreadyReaderBody.Length);
                             isEnd = true;
                             m_onSocketEvent_Receive(result);
                         }
