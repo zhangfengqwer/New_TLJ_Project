@@ -97,6 +97,15 @@ public class GameScript : MonoBehaviour
         LogicEnginerScript.Instance.GetComponent<MainRequest>().CallBack = onReceive_Main;
         LogicEnginerScript.Instance.setOnLogicService_Connect(onSocketConnect_Logic);
         LogicEnginerScript.Instance.setOnLogicService_Close(onSocketClose_Logic);
+
+        if (PlayServiceSocket.s_instance != null)
+        {
+            HeartBeat_Play.getInstance().startHeartBeat();
+        }
+        else
+        {
+            LogUtil.Log("PlayServiceSocket.s_instance == null");
+        }
     }
 
     void initUI()
@@ -605,6 +614,7 @@ public class GameScript : MonoBehaviour
     void OnDestroy()
     {
         OtherData.s_gameScript = null;
+        HeartBeat_Play.getInstance().stopHeartBeat();
     }
 
     public void onClickBag()
@@ -1125,6 +1135,10 @@ public class GameScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_ResumeGame) == 0)
         {
             onReceive_ResumeGame(data);
+        }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_HeartBeat_Play) == 0)
+        {
+            HeartBeat_Play.getInstance().onRespond();
         }
     }
 
