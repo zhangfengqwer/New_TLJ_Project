@@ -488,7 +488,7 @@ class GameUtil
 
     static public void setNickNameFontColor(Text text, int vipLevel)
     {
-        if (vipLevel > 1)
+        if (vipLevel >= 1)
         {
             text.color = new Color(255.0f / 255.0f, 223.0f / 255.0f, 114.0f / 255.0f);
         }
