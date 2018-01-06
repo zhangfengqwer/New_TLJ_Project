@@ -8,7 +8,7 @@ public class HeartBeat_Play : MonoBehaviour
     static HeartBeat_Play s_instance = null;
 
     float m_durTime = 5.0f;
-    float m_waitTime = 3.0f;
+    float m_waitTime = 10.0f;
 
     public static HeartBeat_Play getInstance()
     {
