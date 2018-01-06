@@ -426,6 +426,16 @@ public class LoginScript : MonoBehaviour
 
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
+            bool isStopServer = (bool)jd["isStopServer"];
+            if (isStopServer)
+            {
+                NetErrorPanelScript.getInstance().Show();
+                NetErrorPanelScript.getInstance().setOnClickButton(onServerIsStop);
+                NetErrorPanelScript.getInstance().setContentText("服务器正在维护，请稍后登录。");
+
+                return;
+            }
+
             OtherData.s_canRecharge = (bool)jd["canRecharge"];
             OtherData.s_canDebug = (bool)jd["canDebug"];
 
@@ -545,6 +555,13 @@ public class LoginScript : MonoBehaviour
         {
             ToastScript.createToast("服务器内部错误");
         }
+    }
+
+    void onServerIsStop()
+    {
+        NetErrorPanelScript.getInstance().Show();
+        NetErrorPanelScript.getInstance().setOnClickButton(onServerIsStop);
+        NetErrorPanelScript.getInstance().setContentText("服务器正在维护，请稍后登录。");
     }
 
     // 检查版本号
