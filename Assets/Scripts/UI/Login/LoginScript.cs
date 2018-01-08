@@ -38,6 +38,7 @@ public class LoginScript : MonoBehaviour
     public InputField m_inputSecondPassword_register;
 
     public Text m_text_tips;
+    public Text m_text_chubanhao;
 
     public Toggle ToggleAgree;
     private GameObject exitGameObject;
@@ -82,6 +83,9 @@ public class LoginScript : MonoBehaviour
 
         m_panel_login.transform.localScale = new Vector3(0, 0, 0);
         m_panel_register.transform.localScale = new Vector3(0, 0, 0);
+
+        // 出版号
+        m_text_chubanhao.text = PlayerPrefs.GetString("banhao","");
 
         if (!OtherData.s_isFromSetToLogin)
         {
@@ -446,6 +450,11 @@ public class LoginScript : MonoBehaviour
                 NetErrorPanelScript.getInstance().Show();
                 NetErrorPanelScript.getInstance().setOnClickButton(onApkVerisionIsLow);
                 NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
+            }
+
+            {
+                string banbao = jd["banhao"].ToString();
+                PlayerPrefs.SetString("banhao", banbao);
             }
         }
         else
