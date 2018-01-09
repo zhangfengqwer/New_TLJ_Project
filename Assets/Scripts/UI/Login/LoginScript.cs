@@ -91,6 +91,8 @@ public class LoginScript : MonoBehaviour
         {
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
             Invoke("onInvokeHealthPanel", 3);
+
+            ILRuntimeUtil.getInstance().downDll();
         }
         else
         {

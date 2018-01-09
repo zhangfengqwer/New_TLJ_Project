@@ -41,6 +41,7 @@ public class OtherData
     public static MainScript s_mainScript = null;
     public static UserInfoScript s_userInfoScript = null;
     public static GameScript s_gameScript = null;
+    public static MedalExplainPanelScript s_medalExplainPanelScript = null;
 
     public static string getWebUrl()
     {
