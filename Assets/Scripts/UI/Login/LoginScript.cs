@@ -43,6 +43,8 @@ public class LoginScript : MonoBehaviour
     public Toggle ToggleAgree;
     private GameObject exitGameObject;
 
+    public int m_codeVersion = 1;
+
     private void Awake()
     {
         OtherData.s_loginScript = this;
@@ -50,6 +52,13 @@ public class LoginScript : MonoBehaviour
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "Start", null, null);
+            return;
+        }
+
         {
             // 禁止多点触摸
             Input.multiTouchEnabled = false;
@@ -62,11 +71,6 @@ public class LoginScript : MonoBehaviour
             // 安卓回调
             AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
             AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
-//            if (string.IsNullOrEmpty(OtherData.s_apkVersion))
-//            {
-//                OtherData.s_apkVersion = PlatformHelper.GetVersionName();
-//            }
-
         }
 
         ToastScript.clear();
@@ -91,8 +95,6 @@ public class LoginScript : MonoBehaviour
         {
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
             Invoke("onInvokeHealthPanel", 3);
-
-            ILRuntimeUtil.getInstance().downDll();
         }
         else
         {
@@ -402,6 +404,13 @@ public class LoginScript : MonoBehaviour
 
     void onReceive(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string) jd["tag"];
 
@@ -425,6 +434,13 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_CheckVerisionCode(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_CheckVerisionCode"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_CheckVerisionCode", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -454,6 +470,14 @@ public class LoginScript : MonoBehaviour
                 NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
             }
 
+            // 代码版本
+            {
+                m_codeVersion = (int)jd["codeVersion"];
+                
+                NetLoading.getInstance().Show();
+                ILRuntimeUtil.getInstance().downDll(OtherData.getWebUrl() + "hotfix/HotFix_Project-" + m_codeVersion + ".dll");
+            }
+
             {
                 string banbao = jd["banhao"].ToString();
                 PlayerPrefs.SetString("banhao", banbao);
@@ -469,6 +493,13 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_Login(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_Login"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_Login", null, data);
+            return;
+        }
+
         if (++TestCount == TestAllCout)
         {
             stopwatch.Stop();
@@ -510,6 +541,13 @@ public class LoginScript : MonoBehaviour
 
     private void onReceive_Third_Login(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_Third_Login"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_Third_Login", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -541,6 +579,13 @@ public class LoginScript : MonoBehaviour
 
     void onReceive_QuickRegister(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_QuickRegister"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_QuickRegister", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -578,6 +623,13 @@ public class LoginScript : MonoBehaviour
     // 检查版本号
     public void reqCheckVerisionCode()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "reqCheckVerisionCode"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "reqCheckVerisionCode", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
 
         {
@@ -591,6 +643,13 @@ public class LoginScript : MonoBehaviour
     // 请求登录
     public void reqLogin()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "reqLogin"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "reqLogin", null, null);
+            return;
+        }
+
         if ((m_inputAccount.text.CompareTo("") == 0) || (m_inputPassword.text.CompareTo("") == 0))
         {
             ToastScript.createToast("请输入账号密码");
@@ -618,6 +677,13 @@ public class LoginScript : MonoBehaviour
     // 请求注册
     public void reqQuickRegister()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "reqQuickRegister"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "reqQuickRegister", null, null);
+            return;
+        }
+
         if ((m_inputAccount_register.text.CompareTo("") == 0) ||
             (m_inputSecondPassword_register.text.CompareTo("") == 0) ||
             (m_inputPassword_register.text.CompareTo("") == 0))
