@@ -104,7 +104,6 @@ public class LoginScript : MonoBehaviour
         //m_text_tips.text = GameUtil.getOneTips();
 
         Set3rdLogin();
-
         setLogonTypeUI();
     }
 
@@ -206,9 +205,18 @@ public class LoginScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (exitGameObject == null)
+            LogUtil.Log("第三方返回:" + PlatformHelper.isThirdSDKQuit());
+
+            if (PlatformHelper.isThirdSDKQuit())
             {
-                exitGameObject = ExitGamePanelScript.create();
+                PlatformHelper.thirdSDKQuit("AnroidCallBack", "", "");
+            }
+            else
+            {
+                if (exitGameObject == null)
+                {
+                    exitGameObject = ExitGamePanelScript.create();
+                }
             }
         }
     }

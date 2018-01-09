@@ -184,4 +184,9 @@ public class AndroidCallBack : MonoBehaviour {
     {
         LogUtil.Log("Unity收到支付回调:" + data);
     }
+
+    public void Back2Login(string data)
+    {
+        SetScript.Instance.OnClickChangeAccount();
+    }
 }

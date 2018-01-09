@@ -26,6 +26,15 @@ public class SetScript : MonoBehaviour {
 
         return obj;
     }
+    public static SetScript Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     // Use this for initialization
     void Start ()

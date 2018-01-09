@@ -5,7 +5,7 @@ public class ChannelHelper
     public static Dictionary<string, string> ChannelDic = new Dictionary<string, string>
     {
         {"huawei", "华为"},
-        {"360", "360"},
+        {"qihoo360", "360"},
         {"vivo", "vivo"},
         {"yyb", "应用宝"},
     };

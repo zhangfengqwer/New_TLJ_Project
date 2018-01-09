@@ -66,7 +66,6 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
             // 道具图标
             {
-                
                 CommonUtil.setImageSprite(m_text_goods_icon, GameUtil.getPropIconPath(prop_id));
             }
 
@@ -373,6 +372,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
                 if (UserData.IsRealName)
                 {
+#if UNITY_ANDROID
                     if (!ChannelHelper.Is3RdLogin())
                     {
                         PayTypePanelScript.create(m_shopData);
@@ -381,6 +381,11 @@ public class BuyGoodsPanelScript : MonoBehaviour
                     {
                         PlatformHelper.pay(PlatformHelper.GetChannelName(), "AndroidCallBack", "GetPayResult", SetRequest(m_shopData));
                     }
+#elif UNITY_IPHONE
+                    PlatformHelper.pay(PlatformHelper.GetChannelName(), "AndroidCallBack", "GetPayResult",SetRequest(m_shopData));
+#else 
+                     PayTypePanelScript.create(m_shopData);
+#endif
                     Destroy(this.gameObject);
                 }
                 else

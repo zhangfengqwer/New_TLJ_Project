@@ -141,10 +141,18 @@ public class MainScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (exitGameObject == null)
+            if (PlatformHelper.isThirdSDKQuit())
             {
-                exitGameObject = ExitGamePanelScript.create();
+                PlatformHelper.thirdSDKQuit("AnroidCallBack", "", "");
             }
+            else
+            {
+                if (exitGameObject == null)
+                {
+                    exitGameObject = ExitGamePanelScript.create();
+                }
+            }
+           
         }
     }
 

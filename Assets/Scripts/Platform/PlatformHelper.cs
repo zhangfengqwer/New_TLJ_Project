@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 #if UNITY_EDITOR
 public class PlatformHelper
 {
-
     // 是否在About框中显示Logo
     public static string GetTextOfAbout()
     {
@@ -45,6 +44,7 @@ public class PlatformHelper
     {
         return "1.5?";
     }
+
     /// <summary>
     /// 获取渠道类型  
     /// </summary>
@@ -55,6 +55,7 @@ public class PlatformHelper
     {
         return "";
     }
+
     /// <summary>
     /// 获取渠道相关参数  
     /// </summary>
@@ -66,16 +67,14 @@ public class PlatformHelper
 
     public static void Login(string obj, string func, string data)
     {
-
     }
 
     public static void WXShareFriends(string obj, string func, string data)
     {
-
     }
+
     public static void WXShareFriendsCircle(string obj, string func, string data)
     {
-
     }
 
     public static void iOSLog(string str)
@@ -83,7 +82,9 @@ public class PlatformHelper
         LogUtil.Log(str);
     }
 
-    public static void setProductName(string str) { }
+    public static void setProductName(string str)
+    {
+    }
 
     /// <summary>
     /// 在外部设置该安装包是否与360等第三方平台合作 
@@ -94,7 +95,6 @@ public class PlatformHelper
     //        GlobalData.IsCollaborate = true;
     //
     //    }
-
     /// <summary>
     /// QQ sina微博账号登录 
     /// 
@@ -105,33 +105,47 @@ public class PlatformHelper
     /// <param name="data">待回调返回到服务端的数据</param>
     public static void CommonLogin(int type, string obj, string func, string data)
     {
-
     }
 
     public static void setLoginResponse(string loginResponse)
     {
-
     }
 
-    public static void closeService() { }
+    public static void closeService()
+    {
+    }
 
-    public static bool ForceUpdate() { return false; }
-
-
-    public static void onUmUserEvent(int type, String eventID, String label) { }
-
-    public static string getAndroidStringConfig(String name) { return null; }
-
-    public static string getOrderExpand() { return ""; }
+    public static bool ForceUpdate()
+    {
+        return false;
+    }
 
 
+    public static void onUmUserEvent(int type, String eventID, String label)
+    {
+    }
 
-    public static void isLoginConnectingScene(bool value) { }
+    public static string getAndroidStringConfig(String name)
+    {
+        return null;
+    }
+
+    public static string getOrderExpand()
+    {
+        return "";
+    }
+
+
+    public static void isLoginConnectingScene(bool value)
+    {
+    }
 
     /// <summary>
     ///  control 91 toolbar show or hide
     /// </summary>
-    public static void show91ToolBar(bool value) { }
+    public static void show91ToolBar(bool value)
+    {
+    }
 
     /// <summary>
     /// 是否是第三方SDK 的退出系统 ，如果是第三方系统退出，退出的时候，将要回调
@@ -216,6 +230,7 @@ public class PlatformHelper
     public static void setThirdCenterVisible(bool value)
     {
     }
+
     /// <summary>
     /// 弹出交叉推广
     /// </summary>
@@ -223,6 +238,7 @@ public class PlatformHelper
     public static void popupExchangeService()
     {
     }
+
     /// <summary>
     /// 显示LogUtil信息
     /// </summary>
@@ -234,6 +250,7 @@ public class PlatformHelper
     public static void pay(string payType, string callObj, string callFunc, string data)
     {
     }
+
     /**
      * 取联网方式
      * 无联网 0
@@ -247,6 +264,7 @@ public class PlatformHelper
     {
         return 1;
     }
+
     /**
      * 1表示测试包
      */
@@ -271,8 +289,7 @@ public class PlatformHelper
     {
     }
 }
-#elif UNITY_ANDROID
-/// <summary>
+#elif UNITY_ANDROID /// <summary>
 /// 控制所有对本地化的调用 （除了MallAndroidHelper ，因为MallAndroidHelper 对本地调用比较多而且复杂 。所有Android 调用会调 UnityHelper 类 。
 /// </summary>
 public class PlatformHelper
@@ -716,7 +733,20 @@ public class PlatformHelper
 
     [DllImport("__Internal")]
     public static extern string GetVersionName();
-   
+
+    public static string GetChannelName()
+    {
+        return "ios";
+    }
+
+    public static bool isThirdSDKQuit()
+    {
+        return false;
+    }
+
+    public static void thirdSDKQuit(string callObj, string callFunc, string data)
+    {
+    }
 }
 
 #else
@@ -965,9 +995,25 @@ public class PlatformHelper
     {
         return "1";
     }
+
+    public static string GetChannelName()
+    {
+        return "ios";
+    }
+
+    public static bool isThirdSDKQuit()
+    {
+        return false;
+    }
+
+    public static void thirdSDKQuit(string callObj, string callFunc, string data)
+    {
+    }
 }
 
 #endif
 
 
-public class HelperPlatform : PlatformHelper { }
+public class HelperPlatform : PlatformHelper
+{
+}
