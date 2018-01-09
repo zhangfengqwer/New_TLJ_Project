@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class RandomUtil
+public class RandomUtil
 {
     static int s_count = 0;
 
