@@ -202,14 +202,19 @@ public class AndroidCallBack : MonoBehaviour {
     public void OnIOSPaySuccess(string data)
     {
         LogUtil.Log("Unity收到IOS支付回调:" + data);
+        var strings = data.Split('|');
+        string productId = strings[0];
+        string receiptdata = strings[1];
 
         JsonData jd = new JsonData();
-        jd["receipt-data"] = data;
+        jd["receipt-data"] = receiptdata;
         string receipt = jd.ToJson();
 
         var jsonData = new JsonData();
         jsonData["tag"] = "ios_pay";
+        jsonData["uid"] = UserData.uid;
         jsonData["data"] = receipt;
+        jsonData["productId"] = productId;
 
         LogUtil.Log("消息:" + jsonData.ToJson());
     }
