@@ -198,4 +198,19 @@ public class AndroidCallBack : MonoBehaviour {
     {
         SetScript.Instance.OnClickChangeAccount();
     }
+
+    public void OnIOSPaySuccess(string data)
+    {
+        LogUtil.Log("Unity收到IOS支付回调:" + data);
+
+        JsonData jd = new JsonData();
+        jd["receipt-data"] = data;
+        string receipt = jd.ToJson();
+
+        var jsonData = new JsonData();
+        jsonData["tag"] = "ios_pay";
+        jsonData["data"] = receipt;
+
+        LogUtil.Log("消息:" + jsonData.ToJson());
+    }
 }
