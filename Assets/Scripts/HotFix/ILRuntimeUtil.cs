@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class ILRuntimeUtil : MonoBehaviour
@@ -24,19 +25,19 @@ public class ILRuntimeUtil : MonoBehaviour
         return s_appdomain;
     }
 
-    public void downDll()
+    public void downDll(string url)
     {
         if (s_appdomain == null)
         {
             s_appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
         }
 
-        StartCoroutine(LoadHotFixAssembly());
+        StartCoroutine(LoadHotFixAssembly(url));
     }
 
-    IEnumerator LoadHotFixAssembly()
+    IEnumerator LoadHotFixAssembly(string url)
     {
-        WWW www = new WWW(OtherData.getWebUrl() + "hotfix/HotFix_Project.dll");
+        WWW www = new WWW(url);
 
         while (!www.isDone)
         {
@@ -50,12 +51,14 @@ public class ILRuntimeUtil : MonoBehaviour
 
         byte[] dll = www.bytes;
         www.Dispose();
-
+        
         using (System.IO.MemoryStream fs = new MemoryStream(dll))
 //        s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
 
         InitializeILRuntime();
         OnHotFixLoaded();
+
+        
     }
 
     void InitializeILRuntime()
@@ -66,7 +69,33 @@ public class ILRuntimeUtil : MonoBehaviour
     void OnHotFixLoaded()
     {
         Debug.Log("OnHotFixLoaded");
-        //HelloWorld，第一次方法调用
-        //s_appdomain.Invoke("HotFix_Project.InstanceClass", "StaticFunTest", null, null);
+
+        NetLoading.getInstance().Close();
+        PlayerPrefs.SetInt("codeVersion", OtherData.s_loginScript.m_codeVersion);
+    }
+
+    /*funcName:类名.函数名 如：“MedalExplainPanelScript.onClickSetPsw”
+    * 如果有的函数有多个重载，则这样写：MedalExplainPanelScript.onClickSetPsw(1)、MedalExplainPanelScript.onClickSetPsw(2)
+    */
+    public bool checkDllClassHasFunc(string className,string funcName)
+    {
+        if (s_appdomain == null)
+        {
+            s_appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
+        }
+
+        string param = className + "." + funcName;
+        object obj = s_appdomain.Invoke("HotFix_Project.ClassRegister", "checkClassHasFunc", null, param);
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if ((bool)obj)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

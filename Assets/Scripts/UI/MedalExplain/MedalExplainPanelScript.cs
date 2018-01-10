@@ -10,7 +10,12 @@ public class MedalExplainPanelScript : MonoBehaviour {
     private void Awake()
     {
         OtherData.s_medalExplainPanelScript = this;
-        ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript_hotfix", "awake_fix", null, null);
+
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalExplainPanelScript", "Awake"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript", "Awake", null, null);
+            return;
+        }
     }
 
     // Use this for initialization
@@ -37,8 +42,11 @@ public class MedalExplainPanelScript : MonoBehaviour {
 
     public void onClickSetPsw()
     {
-        Debug.Log(ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript_hotfix", "onClickSetPsw_fix", null, null));
-        return;
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalExplainPanelScript", "onClickSetPsw"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript", "onClickSetPsw", null, null);
+            return;
+        }
 
         SetSecondPswPanelScript.create();
         Destroy(gameObject);

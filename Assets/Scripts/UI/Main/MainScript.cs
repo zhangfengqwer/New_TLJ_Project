@@ -39,10 +39,20 @@ public class MainScript : MonoBehaviour
     private static GameObject logicEnginer;
     private static GameObject playEnginer;
 
+    private void Awake()
+    {
+        OtherData.s_mainScript = this;
+    }
+
     // Use this for initialization
     void Start()
     {
-        OtherData.s_mainScript = this;
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "Start", null, null);
+            return;
+        }
 
         // 禁止多点触摸
         Input.multiTouchEnabled = false;
@@ -118,8 +128,6 @@ public class MainScript : MonoBehaviour
         }
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
-
-       
     }
 
     void onInvokeStartMusic()
@@ -188,6 +196,13 @@ public class MainScript : MonoBehaviour
 
     public void refreshUI()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "refreshUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "refreshUI", null, null);
+            return;
+        }
+
         // 头像
         m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
 
@@ -243,6 +258,13 @@ public class MainScript : MonoBehaviour
 
     public void onClickEnterXiuXianChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickEnterXiuXianChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickEnterXiuXianChang", null, null);
+            return;
+        }
+
         AudioScript.getAudioScript().playSound_ButtonClick();
         //SceneManager.LoadScene("GameScene");
 
@@ -255,6 +277,13 @@ public class MainScript : MonoBehaviour
 
     public void onClickEnterJingJiChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickEnterJingJiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickEnterJingJiChang", null, null);
+            return;
+        }
+
         AudioScript.getAudioScript().playSound_ButtonClick();
 
         NetLoading.getInstance().Show();
@@ -263,11 +292,25 @@ public class MainScript : MonoBehaviour
 
     public void onClickJingDianChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickJingDianChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickJingDianChang", null, null);
+            return;
+        }
+
         GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
     }
 
     public void onClickChaoDiChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickChaoDiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickChaoDiChang", null, null);
+            return;
+        }
+
         GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
     }
 
@@ -280,82 +323,194 @@ public class MainScript : MonoBehaviour
 
     public void OnClickHead()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickHead"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickHead", null, null);
+            return;
+        }
+
         UserInfoScript.create();
     }
 
     public void OnClickNotice()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickNotice"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickNotice", null, null);
+            return;
+        }
+
         NoticePanelScript.create();
     }
 
     public void OnClickSign()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickSign"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickSign", null, null);
+            return;
+        }
+
         WeeklySignScript.create();
     }
 
     public void OnClickInventory()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickInventory"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickInventory", null, null);
+            return;
+        }
+
         BagPanelScript.create(false);
     }
 
     public void OnClickYuanBaoShop()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickYuanBaoShop"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickYuanBaoShop", null, null);
+            return;
+        }
+
         ShopPanelScript.create(2);
     }
 
     public void OnClickGoldShop()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickGoldShop"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickGoldShop", null, null);
+            return;
+        }
+
         ShopPanelScript.create(1);
     }
 
     public void OnClickEmail()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickEmail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickEmail", null, null);
+            return;
+        }
+
         EmailPanelScript.create();
     }
 
     public void OnClickSetting()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickSetting"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickSetting", null, null);
+            return;
+        }
+
         SetScript.create(false);
     }
 
     public void OnClickKeFu()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickKeFu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickKeFu", null, null);
+            return;
+        }
+
         KeFuPanelScript.create();
     }
 
     public void OnClickTask()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickTask"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickTask", null, null);
+            return;
+        }
+
         TaskPanelScript.create();
     }
 
     public void OnClickShare()
     {
-       ChoiceShareScript.Create("疯狂升级天天玩，玩就有话费奖品抱回家！", "");
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickShare"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickShare", null, null);
+            return;
+        }
+
+        ChoiceShareScript.Create("疯狂升级天天玩，玩就有话费奖品抱回家！", "");
     }
 
     public void onClickLaBa()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickLaBa"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickLaBa", null, null);
+            return;
+        }
+
         LaBaPanelScript.create();
     }
 
     public void OnClickFirstRecharge()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickFirstRecharge"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickFirstRecharge", null, null);
+            return;
+        }
+
         ShouChongPanelScript.create();
     }
 
     public void OnClickMedalHelp()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "OnClickMedalHelp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "OnClickMedalHelp", null, null);
+            return;
+        }
+
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/MedalExplainPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
     }
 
     public void onClickZhuanPan()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickZhuanPan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickZhuanPan", null, null);
+            return;
+        }
+
         TurntablePanelScript.create();
     }
 
     public void onClickRetryJoinGame()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickRetryJoinGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickRetryJoinGame", null, null);
+            return;
+        }
+
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
         GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi);
         SceneManager.LoadScene("GameScene");
@@ -365,6 +520,13 @@ public class MainScript : MonoBehaviour
 
     public void reqWaitMatchTimeOut()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "reqWaitMatchTimeOut"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "reqWaitMatchTimeOut", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = TLJCommon.Consts.Tag_JingJiChang;
         jsonData["uid"] = UserData.uid;
@@ -375,6 +537,13 @@ public class MainScript : MonoBehaviour
 
     public void reqPVPRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "reqPVPRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "reqPVPRoom", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = TLJCommon.Consts.Tag_GetPVPGameRoom;
         jsonData["uid"] = UserData.uid;
@@ -386,6 +555,13 @@ public class MainScript : MonoBehaviour
     // 是否已经加入房间
     public void reqIsJoinRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "reqIsJoinRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "reqIsJoinRoom", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
 
         JsonData data = new JsonData();
@@ -399,6 +575,13 @@ public class MainScript : MonoBehaviour
     //-----------------------------------------------------------------------------
     public void onReceive_Main(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onReceive_Main"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onReceive_Main", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string) jd["tag"];
 
@@ -480,10 +663,55 @@ public class MainScript : MonoBehaviour
         }
     }
 
+    public static void onReceive_GetUserBag(string data)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onReceive_GetUserBag"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onReceive_GetUserBag", null, data);
+            return;
+        }
+
+        {
+            LogUtil.Log("处理背包回调");
+            JsonData jsonData = JsonMapper.ToObject(data);
+            var code = (int)jsonData["code"];
+            if (code == (int)Consts.Code.Code_OK)
+            {
+                UserData.propData = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
+                for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)
+                {
+                    PropInfo propInfo = PropData.getInstance().getPropInfoList()[i];
+                    for (int j = 0; j < UserData.propData.Count; j++)
+                    {
+                        UserPropData userPropData = UserData.propData[j];
+                        if (propInfo.m_id == userPropData.prop_id)
+                        {
+                            userPropData.prop_icon = propInfo.m_icon;
+                            userPropData.prop_name = propInfo.m_name;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ToastScript.createToast("用户背包数据错误");
+                return;
+            }
+        }
+    }
+
     //---------------------------------------------------------------------------------
 
     void onSocketReceive_Play(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onSocketReceive_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onSocketReceive_Play", null, data);
+            return;
+        }
+
         LogUtil.Log("Play:收到服务器消息:" + data);
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -550,6 +778,13 @@ public class MainScript : MonoBehaviour
 
     void doTask_PlayAction_IsJoinGame(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_IsJoinGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "doTask_PlayAction_IsJoinGame", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -571,6 +806,13 @@ public class MainScript : MonoBehaviour
 
     void doTask_PlayAction_JoinGame(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_JoinGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "doTask_PlayAction_JoinGame", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
@@ -611,6 +853,13 @@ public class MainScript : MonoBehaviour
 
     void doTask_PlayAction_ExitPVP(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_ExitPVP"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "doTask_PlayAction_ExitPVP", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 
@@ -644,12 +893,26 @@ public class MainScript : MonoBehaviour
 
     void doTask_PlayAction_StartGame(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_StartGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "doTask_PlayAction_StartGame", null, data);
+            return;
+        }
+
         GameData.getInstance().m_startGameJsonData = data;
         SceneManager.LoadScene("GameScene");
     }
 
     public void checkRedPoint()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "checkRedPoint"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "checkRedPoint", null, null);
+            return;
+        }
+
         // 活动
         {
             bool isShowRedPoint = false;
@@ -770,38 +1033,6 @@ public class MainScript : MonoBehaviour
             NetErrorPanelScript.getInstance().setContentText("连接服务器失败，请重新连接");
         }
     }
-
-    public static void onReceive_GetUserBag(string data)
-    {
-        {
-            LogUtil.Log("处理背包回调");
-            JsonData jsonData = JsonMapper.ToObject(data);
-            var code = (int) jsonData["code"];
-            if (code == (int) Consts.Code.Code_OK)
-            {
-                UserData.propData = JsonMapper.ToObject<List<UserPropData>>(jsonData["prop_list"].ToString());
-                for (int i = 0; i < PropData.getInstance().getPropInfoList().Count; i++)
-                {
-                    PropInfo propInfo = PropData.getInstance().getPropInfoList()[i];
-                    for (int j = 0; j < UserData.propData.Count; j++)
-                    {
-                        UserPropData userPropData = UserData.propData[j];
-                        if (propInfo.m_id == userPropData.prop_id)
-                        {
-                            userPropData.prop_icon = propInfo.m_icon;
-                            userPropData.prop_name = propInfo.m_name;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                ToastScript.createToast("用户背包数据错误");
-                return;
-            }
-        }
-    }
-
 
     void onSocketClose_Logic()
     {

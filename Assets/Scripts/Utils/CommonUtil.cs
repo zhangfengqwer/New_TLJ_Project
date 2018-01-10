@@ -6,7 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-class CommonUtil
+public class CommonUtil
 {
     // 格式2017/7/12 15:05:03
     public static string getCurTime()
