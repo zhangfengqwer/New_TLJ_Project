@@ -86,7 +86,7 @@ public class ILRuntimeUtil : MonoBehaviour
         object obj = s_appdomain.Invoke("HotFix_Project.ClassRegister", "checkClassHasFunc", null, param);
         if (obj == null)
         {
-            LogUtil.Log("dll不存在"+param);
+            //LogUtil.Log("dll不存在"+param);
             return false;
         }
 
@@ -95,7 +95,7 @@ public class ILRuntimeUtil : MonoBehaviour
             return true;
         }
 
-        LogUtil.Log("dll不存在" + param);
+        //LogUtil.Log("dll不存在" + param);
 
         return false;
     }
