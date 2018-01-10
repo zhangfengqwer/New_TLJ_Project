@@ -2985,8 +2985,7 @@ public class GameScript : MonoBehaviour
                             int pokerType = (int) jd["allOutPokerList"][i]["pokerType"];
 
                             list.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType) pokerType));
-
-                            print(list.Count);
+                                
                             m_jiPaiGameObject.GetComponent<RememberPokerHelper>().UpdateUi(list);
                         }
                     }
@@ -3161,15 +3160,6 @@ public class GameScript : MonoBehaviour
             // 设置最后渲染
             objList[i].transform.SetAsLastSibling();
         }
-
-        //// 让当前已出的牌（包括抢主的牌）显示在最上面
-        //for (int i = 0; i < GameData.getInstance().m_curRoundOutPokerList.Count; i++)
-        //{
-        //    for (int j = i; j < GameData.getInstance().m_curRoundOutPokerList[i].Count; j++)
-        //    {
-        //        GameData.getInstance().m_curRoundOutPokerList[i][j].transform.SetAsLastSibling();
-        //    }
-        //}
     }
 
     void sortMyPokerList(int ZhuPokerType)
