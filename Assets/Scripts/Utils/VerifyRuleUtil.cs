@@ -9,6 +9,13 @@ public class VerifyRuleUtil
 
     public static bool CheckRealName(string text)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckRealName"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckRealName", null, text);
+            return b;
+        }
+
         bool _isCorrectRealName;
         if (text.Length > 1)
         {
@@ -35,6 +42,13 @@ public class VerifyRuleUtil
     /// <returns></returns> 
     public static bool CheckIDCard(string idNumber)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckIDCard", null, idNumber);
+            return b;
+        }
+
         if (idNumber.Length == 18)
         {
             bool check = CheckIDCard18(idNumber);
@@ -57,6 +71,13 @@ public class VerifyRuleUtil
     /// </summary> 
     private static bool CheckIDCard18(string idNumber)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard18"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckIDCard18", null, idNumber);
+            return b;
+        }
+
         long n = 0;
         if (long.TryParse(idNumber.Remove(17), out n) == false
             || n < Math.Pow(10, 16) || long.TryParse(idNumber.Replace('x', '0').Replace('X', '0'), out n) == false)
@@ -97,6 +118,13 @@ public class VerifyRuleUtil
     /// </summary> 
     private static bool CheckIDCard15(string idNumber)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard15"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckIDCard15", null, idNumber);
+            return b;
+        }
+
         long n = 0;
         if (long.TryParse(idNumber, out n) == false || n < Math.Pow(10, 14))
         {
@@ -118,11 +146,25 @@ public class VerifyRuleUtil
 
     public static bool CheckPhone(string inputText)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckPhone"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckPhone", null, inputText);
+            return b;
+        }
+
         return Regex.IsMatch(inputText, @"^[1]+\d{10}");
     }
 
     public static bool CheckVerificationCode(string inputText)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckVerificationCode"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckVerificationCode", null, inputText);
+            return b;
+        }
+
         return Regex.IsMatch(inputText, @"\d{6}");
     }
 }

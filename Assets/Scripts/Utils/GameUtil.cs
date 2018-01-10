@@ -10,6 +10,13 @@ public class GameUtil
     // 找出一组牌中某种花色的单牌
     public static List<TLJCommon.PokerInfo> choiceSinglePoker(List<TLJCommon.PokerInfo> myPokerList, TLJCommon.Consts.PokerType pokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "choiceSinglePoker"))
+        {
+            List<TLJCommon.PokerInfo> list = (List<TLJCommon.PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "choiceSinglePoker", null, myPokerList, pokerType);
+            return list;
+        }
+
         // 先筛选出同花色的牌
         List<TLJCommon.PokerInfo> pokerList = new List<TLJCommon.PokerInfo>();
         for (int i = myPokerList.Count - 1; i >= 0 ; i--)
@@ -59,6 +66,13 @@ public class GameUtil
     // 找出一组牌中某种花色的对子
     public static List<TLJCommon.PokerInfo> choiceDoublePoker(List<TLJCommon.PokerInfo> myPokerList, TLJCommon.Consts.PokerType pokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "choiceDoublePoker"))
+        {
+            List<TLJCommon.PokerInfo> list = (List<TLJCommon.PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "choiceDoublePoker", null, myPokerList, pokerType);
+            return list;
+        }
+
         // 先筛选出同花色的牌
         List<TLJCommon.PokerInfo> pokerList = new List<TLJCommon.PokerInfo>();
         for (int i = myPokerList.Count - 1; i >= 0; i--)
@@ -107,6 +121,13 @@ public class GameUtil
 
     static public string getPropIconPath(int prop_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getPropIconPath"))
+        {
+            string str = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getPropIconPath", null, prop_id);
+            return str;
+        }
+
         string path = "";
 
         // 金币
@@ -133,6 +154,13 @@ public class GameUtil
 
     static public string getMasterPokerIconPath(int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getMasterPokerIconPath"))
+        {
+            string str = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getMasterPokerIconPath", null, masterPokerType);
+            return str;
+        }
+
         string path = "Sprites/Game/Poker/icon_wuzhu";
         
         if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_FangKuai)
@@ -168,6 +196,13 @@ public class GameUtil
      */
     static public void changeData(string reward)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "changeData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "changeData", null, reward);
+            return;
+        }
+
         List<string> list = new List<string>();
         CommonUtil.splitStr(reward,list,':');
 
@@ -183,6 +218,13 @@ public class GameUtil
      */
     static public void changeData(int id , int num)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "changeData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "changeData", null, id,num);
+            return;
+        }
+
         if (id == 1)
         {
             UserData.gold += num;
@@ -241,6 +283,13 @@ public class GameUtil
 
     public static string getOneTips()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getOneTips"))
+        {
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getOneTips", null, null);
+            return s;
+        }
+
         string str = "";
 
         int i = RandomUtil.getRandom(1, 3);
@@ -282,6 +331,13 @@ public class GameUtil
 
     public static void setGameRoomTypeLogoPath(string gameroomtype,Image gameRoomLogo)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "setGameRoomTypeLogoPath"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "setGameRoomTypeLogoPath", null, gameroomtype, gameRoomLogo);
+            return;
+        }
+
         string path = "";
 
         if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
@@ -386,6 +442,13 @@ public class GameUtil
 
     public static bool checkCanEnterRoom(string gameRoomType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "checkCanEnterRoom"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "checkCanEnterRoom", null, gameRoomType);
+            return b;
+        }
+
         if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
         {
             if (UserData.gold < 1500)
@@ -440,6 +503,13 @@ public class GameUtil
 
     public static string getRoomName(string gameRoomType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getRoomName"))
+        {
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getRoomName", null, gameRoomType);
+            return s;
+        }
+
         string roonName = "";
 
         if (gameRoomType.CompareTo("XiuXian_JingDian_ChuJi") == 0)
@@ -488,6 +558,13 @@ public class GameUtil
 
     static public void setNickNameFontColor(Text text, int vipLevel)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "setNickNameFontColor"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "setNickNameFontColor", null, text, vipLevel);
+            return;
+        }
+
         if (vipLevel >= 1)
         {
             text.color = new Color(255.0f / 255.0f, 223.0f / 255.0f, 114.0f / 255.0f);
