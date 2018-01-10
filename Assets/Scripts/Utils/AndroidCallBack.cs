@@ -32,6 +32,14 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void WeChatLogin_IOS(string result)
     {
+        if (OtherData.s_isTest)
+        {
+            WECHAT_LOGIN_URL = "http://mapi.javgame.com:14123/mlogin/WechatLogin";
+        }
+        else
+        {
+            WECHAT_LOGIN_URL = "http://fkmpay.51v.cn/api/mlogin/WechatLogin";
+        }
         var wwwForm = new WWWForm();
         wwwForm.AddField("gameId", "210");
         wwwForm.AddField("appId", "wxa2c2802e8fedd592");
@@ -54,7 +62,7 @@ public class AndroidCallBack : MonoBehaviour {
             jd["tag"] = Consts.Tag_Third_Login;
             jd["nickname"] = name;
             jd["third_id"] = expand;
-            jd["channelname"] = "wechat";
+            jd["channelname"] = "ios";
 
             NetLoading.getInstance().Show();
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
@@ -64,6 +72,7 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void qqLogin_IOS(string result)
     {
+        LogUtil.Log("收到iosqq登录回调:" + result);
         var jsonData = JsonMapper.ToObject(result);
         var accessToken = jsonData["accessToken"].ToString();
         var openId = jsonData["openId"].ToString();
@@ -80,7 +89,7 @@ public class AndroidCallBack : MonoBehaviour {
             jd["tag"] = Consts.Tag_Third_Login;
             jd["nickname"] = nickname;
             jd["third_id"] = openId;
-            jd["channelname"] = "qq";
+            jd["channelname"] = "ios";
             LoginServiceSocket.s_instance.sendMessage(jd.ToJson());
         });
     }
