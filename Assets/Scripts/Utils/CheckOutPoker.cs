@@ -20,9 +20,17 @@ public class CheckOutPoker
         List<TLJCommon.PokerInfo> beforeOutPokerList, List<TLJCommon.PokerInfo> myRestPokerList,
         int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker", "checkOutPoker"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker", "checkOutPoker", null, isFreeOutPoker, myOutPokerList, beforeOutPokerList, myRestPokerList);
+            return b;
+        }
+
         PlayRuleUtil.SetPokerWeight(beforeOutPokerList, mLevelPokerNum, (Consts.PokerType)masterPokerType);
         PlayRuleUtil.SetPokerWeight(myOutPokerList, mLevelPokerNum, (Consts.PokerType)masterPokerType);
         PlayRuleUtil.SetPokerWeight(myRestPokerList, mLevelPokerNum, (Consts.PokerType)masterPokerType);
+
         // 自由出牌
         if (isFreeOutPoker)
         {
@@ -51,6 +59,7 @@ public class CheckOutPoker
                     return false;
                 }
             }
+
             switch (CheckOutPoker.checkOutPokerType(beforeOutPokerList, mLevelPokerNum, masterPokerType))
             {
                 //第一个人是单牌
@@ -78,7 +87,6 @@ public class CheckOutPoker
                     //出的是副牌
                     else
                     {
-
                         if (PlayRuleUtil.IsAllMasterPoker(myRestPokerList, mLevelPokerNum, masterPokerType))
                         {
                             return true;
@@ -105,6 +113,7 @@ public class CheckOutPoker
 
                 }
                 break;
+
                 //第一个人是对子
                 case CheckOutPoker.OutPokerType.OutPokerType_Double:
                     {
@@ -128,6 +137,7 @@ public class CheckOutPoker
                                         return false;
                                     }
                                 }
+
                                 //出的主牌中包含对子
                                 List<PokerInfo> masterDoublePoker;
                                 if (PlayRuleUtil.IsContainDoublePoker(masterPoker,out masterDoublePoker))
@@ -350,6 +360,13 @@ public class CheckOutPoker
 
     public static OutPokerType checkOutPokerType(List<TLJCommon.PokerInfo> outPokerList, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker", "checkOutPokerType"))
+        {
+            OutPokerType outPokerType = (OutPokerType)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker", "checkOutPokerType", null, outPokerList, mLevelPokerNum, masterPokerType);
+            return outPokerType;
+        }
+
         PlayRuleUtil.SetPokerWeight(outPokerList, mLevelPokerNum, (Consts.PokerType) masterPokerType);
 
         int count = outPokerList.Count;

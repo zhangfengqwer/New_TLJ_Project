@@ -15,6 +15,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static bool IsTuolaji(List<PokerInfo> playerOutPokerList, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsTuolaji"))
+        {
+            bool b= (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsTuolaji", null, playerOutPokerList, mLevelPokerNum, masterPokerType);
+            return b;
+        }
+
         if (playerOutPokerList.Count % 2 == 0 && playerOutPokerList.Count >= 4)
         {
             //都是主牌或者都是同一花色的副牌
@@ -48,6 +55,13 @@ public class PlayRuleUtil
     //单牌是否为主牌
     public static bool IsMasterPoker(PokerInfo pokerInfo, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsMasterPoker"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsMasterPoker", null, pokerInfo, mLevelPokerNum, masterPokerType);
+            return b;
+        }
+
         if (pokerInfo.m_num == mLevelPokerNum || pokerInfo.m_pokerType == (Consts.PokerType) masterPokerType
             || pokerInfo.m_pokerType == Consts.PokerType.PokerType_Wang)
         {
@@ -68,6 +82,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static bool IsAllMasterPoker(List<PokerInfo> list, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsAllMasterPoker"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsAllMasterPoker", null, list, mLevelPokerNum, masterPokerType);
+            return b;
+        }
+
         for (int i = 0; i < list.Count; i++)
         {
             if (!IsMasterPoker(list[i], mLevelPokerNum, masterPokerType))
@@ -86,6 +107,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static bool IsAllFuPoker(List<PokerInfo> list, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsAllFuPoker"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsAllFuPoker", null, list, mLevelPokerNum, masterPokerType);
+            return b;
+        }
+
         for (int i = 0; i < list.Count - 1; i++)
         {
             if (list[i].m_num == mLevelPokerNum || list[i].m_pokerType == (Consts.PokerType) masterPokerType)
@@ -113,6 +141,13 @@ public class PlayRuleUtil
     public static List<PokerInfo> SetPokerWeight(List<PokerInfo> list, int levelPokerNum,
         Consts.PokerType masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "SetPokerWeight"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "SetPokerWeight", null, list, levelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         for (int i = 0; i < list.Count; i++)
         {
             PokerInfo pokerInfo = list[i];
@@ -150,167 +185,19 @@ public class PlayRuleUtil
         return list;
     }
 
-    /// <summary>
-    ///  给weight重新赋值，从2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
-    ///  17为大王，16为小王，15为主级牌,14为副级牌
-    ///  无主情况下,16为大王,15为小王，14为级牌
-    /// </summary>
-    /// <param name="room">房间数据</param>
-    /// <returns></returns>
-//    public static void SetAllPokerWeight(RoomData room)
-//    {
-//        List<PlayerData> playerDatas = room.getPlayerDataList();
-//        for (int i = 0; i < playerDatas.Count; i++)
-//        {
-//            PlayerData playerData = playerDatas[i];
-//            List<PokerInfo> pokerInfos = playerData.getPokerList();
-//            SetPokerWeight(pokerInfos, room.m_levelPokerNum, (Consts.PokerType) room.m_masterPokerType);
-//        }
-//    }
-//
-//    /// <summary>
-//    /// 得到甩牌是否成功后的牌
-//    /// </summary>
-//    /// <param name="room"></param>
-//    /// <param name="outPokerList"></param>
-//    /// <returns></returns>
-//    public static List<PokerInfo> GetShuaiPaiPoker(RoomData room, List<PokerInfo> outPokerList)
-//    {
-//        List<PokerInfo> resultList = new List<PokerInfo>();
-//        //设置牌的权重
-//        SetPokerWeight(outPokerList, room.m_levelPokerNum, (Consts.PokerType) room.m_masterPokerType);
-//
-//        List<PlayerData> playerDatas = room.getPlayerDataList();
-//
-//        //设置牌的权重
-//        foreach (var playerData in playerDatas)
-//        {
-//            SetPokerWeight(playerData.m_curOutPokerList, room.m_levelPokerNum,
-//                (Consts.PokerType) room.m_masterPokerType);
-//            SetPokerWeight(playerData.getPokerList(), room.m_levelPokerNum, (Consts.PokerType) room.m_masterPokerType);
-//        }
-//        //得到甩牌的对子
-//        List<PokerInfo> firestDoubleList = GetDoublePoker(outPokerList);
-//        //得到甩牌的单牌
-//        List<PokerInfo> firestSingleList = GetSinglePoker(outPokerList, firestDoubleList);
-//
-//        //甩牌中最小的单牌
-//
-//        PokerInfo minSingle = null;
-//        if (firestSingleList.Count > 0)
-//        {
-//            minSingle = firestSingleList[0];
-//        }
-//        //TLJ_PlayService.PlayService.log.Info("有几个玩家：" + playerDatas.Count);
-//
-//        //如果甩的牌都是主牌
-//        if (IsAllMasterPoker(outPokerList, room.m_levelPokerNum, room.m_masterPokerType))
-//        {
-//            for (int i = 0; i < playerDatas.Count; i++)
-//            {
-//                if (playerDatas[i].m_uid == room.m_curRoundFirstPlayer.m_uid)
-//                {
-//                    continue;
-//                }
-//                //得到其余玩家的手牌
-//                List<PokerInfo> pokerList = playerDatas[i].getPokerList();
-//                List<PokerInfo> masterPoker = GetMasterPoker(pokerList, room.m_levelPokerNum, room.m_masterPokerType);
-//                if (masterPoker.Count > 0)
-//                {
-//                    //得到主牌中的对子和单牌
-//                    List<PokerInfo> OtherDoubleleList = GetDoublePoker(masterPoker);
-//                    List<PokerInfo> OtherSingleList = GetSinglePoker(masterPoker, OtherDoubleleList);
-//                    //没有单牌
-//                    if (firestSingleList.Count == 0)
-//                    {
-//                        List<List<PokerInfo>> OtherTlj;
-//                        List<PokerInfo> compareDoublePoker = CompareDoublePoker(firestDoubleList, OtherDoubleleList,
-//                            room.m_levelPokerNum, room.m_masterPokerType, out OtherTlj);
-//                        if (compareDoublePoker.Count > 0) return compareDoublePoker;
-//                    }
-//                    //最小的单牌牌都比其他玩家手牌中的最大主牌大
-//                    else if (minSingle.m_weight >= masterPoker[masterPoker.Count - 1].m_weight)
-//                    {
-//                        List<List<PokerInfo>> OtherTlj;
-//                        List<PokerInfo> compareDoublePoke = CompareDoublePoker(firestDoubleList, OtherDoubleleList,
-//                            room.m_levelPokerNum, room.m_masterPokerType, out OtherTlj);
-//                        if (compareDoublePoke.Count > 0) return compareDoublePoke;
-//                    }
-//                    //甩牌失败,单牌比别人小
-//                    else
-//                    {
-//                        TLJ_PlayService.PlayService.log.Info("甩牌失败,单牌比别人小");
-//                        resultList.Add(minSingle);
-//                        return resultList;
-//                    }
-//                }
-//                //其他玩家没有主牌
-//                else
-//                {
-//                    //该玩家牌大，不作处理
-//                }
-//            }
-//        }
-//        //同花色的副牌
-//        else if (IsAllFuPoker(outPokerList, room.m_levelPokerNum, room.m_masterPokerType))
-//        {
-//            Consts.PokerType mPokerType = outPokerList[0].m_pokerType;
-//            for (int i = 0; i < playerDatas.Count; i++)
-//            {
-//                if (playerDatas[i].m_uid == room.m_curRoundFirstPlayer.m_uid)
-//                {
-//                    continue;
-//                }
-//                //得到其余玩家的手牌
-//                List<PokerInfo> pokerList = playerDatas[i].getPokerList();
-//                //得到指定花色的牌
-//                List<PokerInfo> pokerByType = GetPokerByType(pokerList, room.m_levelPokerNum, mPokerType);
-//
-//                if (pokerByType.Count > 0)
-//                {
-//                    //得到副牌中的对子和单牌
-//                    List<PokerInfo> OtherDoubleleList = GetDoublePoker(pokerByType);
-//                    List<PokerInfo> OtherSingleList = GetSinglePoker(pokerByType, OtherDoubleleList);
-//                    //没有单牌
-//                    if (firestSingleList.Count == 0)
-//                    {
-//                        List<List<PokerInfo>> OtherTlj;
-//                        List<PokerInfo> compareDoublePoke = CompareDoublePoker(firestDoubleList, OtherDoubleleList,
-//                            room.m_levelPokerNum, room.m_masterPokerType, out OtherTlj);
-//                        if (compareDoublePoke.Count > 0) return compareDoublePoke;
-//                    }
-//                    //最小的单牌牌都比其他玩家手牌中的最大主牌大
-//                    else if (minSingle.m_weight >= pokerByType[pokerByType.Count - 1].m_weight)
-//                    {
-//                        List<List<PokerInfo>> OtherTlj;
-//                        List<PokerInfo> compareDoublePoke = CompareDoublePoker(firestDoubleList, OtherDoubleleList,
-//                            room.m_levelPokerNum, room.m_masterPokerType, out OtherTlj);
-//                        if (compareDoublePoke.Count > 0) return compareDoublePoke;
-//                    }
-//                    //甩牌失败,单牌比别人小
-//                    else
-//                    {
-//                        TLJ_PlayService.PlayService.log.Info("甩牌失败,单牌比别人小");
-//                        resultList.Add(minSingle);
-//                        return resultList;
-//                    }
-//                }
-//                //其他玩家没有副牌
-//                else
-//                {
-//                    //该玩家牌大，不作处理
-//                }
-//            }
-//        }
-//        return resultList;
-//    }
-
-
     //比较甩牌中的对子
     public static List<PokerInfo> CompareDoublePoker(List<PokerInfo> firestDoubleList,
         List<PokerInfo> OtherDoubleleList,
         int mLevelPokerNum, int mMasterPokerType, out List<List<PokerInfo>> OtherTlj)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "CompareDoublePoker"))
+        {
+            OtherTlj = new List<List<PokerInfo>>();
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "CompareDoublePoker", null, firestDoubleList, OtherDoubleleList, mLevelPokerNum, mMasterPokerType, OtherTlj);
+            return list_temp;
+        }
+
         List<PokerInfo> list = new List<PokerInfo>();
         OtherTlj = new List<List<PokerInfo>>();
         //继续比较对子
@@ -385,37 +272,6 @@ public class PlayRuleUtil
                     else
                     {
                     }
-
-                    //                    if (OtherAllTlj.Count > 0)
-                    //                    {
-                    //                        List<PokerInfo> pokerInfos = OtherAllTlj[OtherAllTlj.Count - 1];
-                    //                        if (firestDoubleList[0].m_weight >= pokerInfos[pokerInfos.Count - 1].m_weight)
-                    //                        {
-                    //                            //该玩家牌大，不作处理
-                    //                        }
-                    //                        else
-                    //                        {
-                    //                            //甩牌失败,单牌大，但是对子比别人小
-                    //                            list.Add(firestDoubleList[0]);
-                    //                            list.Add(firestDoubleList[1]);
-                    //                            return list;
-                    //                        }
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        //最小的牌都比其他玩家手牌中的最大主牌大
-                    //                        if (firestDoubleList[0].m_weight >= OtherDoubleleList[OtherDoubleleList.Count - 1].m_weight)
-                    //                        {
-                    //                            //该玩家牌大，不作处理
-                    //                        }
-                    //                        //甩牌失败,单牌大，但是对子比别人小
-                    //                        else
-                    //                        {
-                    //                            list.Add(firestDoubleList[0]);
-                    //                            list.Add(firestDoubleList[1]);
-                    //                            return list;
-                    //                        }
-                    //                    }
                 }
             }
             //其他玩家没有对子，甩牌成功
@@ -435,6 +291,13 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetPokerByType(List<PokerInfo> pokerList, int mLevelPokerNum,
         Consts.PokerType mPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerByType"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerByType", null, pokerList, mLevelPokerNum, mPokerType);
+            return list_temp;
+        }
+
         List<PokerInfo> list = new List<PokerInfo>();
         for (int i = 0; i < pokerList.Count; i++)
         {
@@ -455,6 +318,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static List<PokerInfo> GetSinglePoker(List<PokerInfo> PokerList, List<PokerInfo> DoubleList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetSinglePoker"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetSinglePoker", null, PokerList, DoubleList);
+            return list_temp;
+        }
+
         List<PokerInfo> firestSingleList = new List<PokerInfo>();
         firestSingleList = firestSingleList.Union(PokerList.Except(DoubleList).ToList()).ToList();
         return firestSingleList.OrderBy(a => a.m_weight).ToList();
@@ -468,6 +338,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static List<PokerInfo> GetDoublePoker(List<PokerInfo> PokerList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetDoublePoker"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetDoublePoker", null, PokerList);
+            return list_temp;
+        }
+
         List<PokerInfo> firestDoubleList = new List<PokerInfo>();
         for (int i = 0; i < PokerList.Count - 1; i++)
         {
@@ -494,6 +371,13 @@ public class PlayRuleUtil
     public static List<List<PokerInfo>> GetAllTljFromDouble(List<PokerInfo> doubleList, int mLevelPokerNum,
         int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetAllTljFromDouble"))
+        {
+            List<List<PokerInfo>> list_temp = (List<List<PokerInfo>>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetAllTljFromDouble", null, doubleList, mLevelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         List<List<PokerInfo>> list = new List<List<PokerInfo>>();
 
         List<PokerInfo> tempDoub = new List<PokerInfo>();
@@ -524,6 +408,13 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetTuoLaJi(List<PokerInfo> playerOutPokerList, int mLevelPokerNum,
         int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetTuoLaJi"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetTuoLaJi", null, playerOutPokerList, mLevelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         List<PokerInfo> pokerInfos = new List<PokerInfo>();
         if (playerOutPokerList.Count % 2 == 0 && playerOutPokerList.Count >= 4)
         {
@@ -567,6 +458,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static List<PokerInfo> GetMasterPoker(List<PokerInfo> pokerInfos, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetMasterPoker"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetMasterPoker", null, pokerInfos, mLevelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         List<PokerInfo> pokers = new List<PokerInfo>();
         for (int i = 0; i < pokerInfos.Count; i++)
         {
@@ -588,6 +486,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static bool IsContainMasterPoker(List<PokerInfo> myRestPokerList, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsContainMasterPoker"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsContainMasterPoker", null, myRestPokerList, mLevelPokerNum, masterPokerType);
+            return b;
+        }
+
         for (int i = 0; i < myRestPokerList.Count; i++)
         {
             PokerInfo myRestPoker = myRestPokerList[i];
@@ -609,6 +514,14 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static bool IsContainDoublePoker(List<PokerInfo> myRestPokerList, out List<PokerInfo> doublePoker)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsContainDoublePoker"))
+        {
+            doublePoker = new List<PokerInfo>();
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsContainDoublePoker", null, myRestPokerList, doublePoker);
+            return b;
+        }
+
         doublePoker = new List<PokerInfo>();
         if (myRestPokerList.Count < 2) return false;
         for (int i = 0; i < myRestPokerList.Count - 1; i++)
@@ -635,6 +548,14 @@ public class PlayRuleUtil
         Consts.PokerType mPokerType,
         out List<PokerInfo> typeList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsContainTypePoke"))
+        {
+            typeList = new List<PokerInfo>();
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsContainTypePoke", null, myRestPokerList, mLevelPokerNum, mPokerType, typeList);
+            return b;
+        }
+
         typeList = new List<PokerInfo>();
         for (int i = 0; i < myRestPokerList.Count; i++)
         {
@@ -666,6 +587,13 @@ public class PlayRuleUtil
     public static bool IsSendByTuoLaJi(List<PokerInfo> myOutPokerList, List<PokerInfo> myPokerByType,
         List<PokerInfo> OutPokerType, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsSendByTuoLaJi"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsSendByTuoLaJi", null, myOutPokerList, myPokerByType, OutPokerType, mLevelPokerNum, masterPokerType);
+            return b;
+        }
+
         int count = myOutPokerList.Count;
         if (myPokerByType.Count <= count) return OutPokerType.Count == myPokerByType.Count;
 
@@ -699,6 +627,13 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetPokerWhenTuoGuan(List<PokerInfo> firstPokerList, List<PokerInfo> myPokerList,
         int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenTuoGuan"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenTuoGuan", null, firstPokerList, myPokerList, mLevelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         List<PokerInfo> tempAll = new List<PokerInfo>();
         foreach (var poker in myPokerList)
         {
@@ -804,6 +739,13 @@ public class PlayRuleUtil
     private static void GetPokerWhenShuaiP(List<PokerInfo> firstPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempAll, int count, List<PokerInfo> tempList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenShuaiP"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenShuaiP", null, firstPokerList, masterPoker, tempAll, count, tempList);
+            return;
+        }
+
         List<PokerInfo> firstDoublePoker = GetDoublePoker(firstPokerList);
         List<PokerInfo> firstSinglePoker = GetSinglePoker(firstPokerList, firstDoublePoker);
         //从手牌中去除该类型的牌
@@ -868,6 +810,13 @@ public class PlayRuleUtil
     private static void GetPokerWhenTlj(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempList, int count, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenTlj"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenTlj", null, myPokerList, masterPoker, tempList, count, mLevelPokerNum,masterPokerType);
+            return;
+        }
+
         //从手牌中去除该类型的牌
         foreach (var poker in masterPoker)
         {
@@ -941,6 +890,13 @@ public class PlayRuleUtil
     private static void GetPokerWhenDouble(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenDouble"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenDouble", null, myPokerList, masterPoker, tempList);
+            return;
+        }
+
         //从手牌中去除该类型的牌
         foreach (var poker in masterPoker)
         {
@@ -979,6 +935,13 @@ public class PlayRuleUtil
     private static void GetPokerWhenSingle(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenSingle"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenSingle", null, myPokerList, masterPoker, tempList);
+            return;
+        }
+
         //从手牌中去除该类型的牌
         foreach (var poker in masterPoker)
         {
@@ -1006,6 +969,13 @@ public class PlayRuleUtil
     /// <returns></returns>
     public static List<PokerInfo> GetJiPaiAndWang(List<PokerInfo> masterPoker, int mLevelPokerNum)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetJiPaiAndWang"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetJiPaiAndWang", null, masterPoker, mLevelPokerNum);
+            return list_temp;
+        }
+
         List<PokerInfo> pokerInfos = new List<PokerInfo>();
         for (int i = 0; i < masterPoker.Count; i++)
         {
@@ -1030,6 +1000,13 @@ public class PlayRuleUtil
         int mLevelPokerNum,
         int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetLiangzhuPoker"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetLiangzhuPoker", null, handerPoker, liangZhuPoker, mLevelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         List<PokerInfo> pokerInfos = new List<PokerInfo>();
         List<PokerInfo> jiPaiAndWang = PlayRuleUtil.GetJiPaiAndWang(handerPoker, mLevelPokerNum);
         if (jiPaiAndWang.Count == 0) return pokerInfos;
@@ -1089,6 +1066,13 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetPokerWhenFirst(List<PokerInfo> handerPoker, int mLevelPokerNum,
         int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenFirst"))
+        {
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenFirst", null, handerPoker, mLevelPokerNum, masterPokerType);
+            return list_temp;
+        }
+
         SetPokerWeight(handerPoker, mLevelPokerNum, (Consts.PokerType) masterPokerType);
 
         List<PokerInfo> result = new List<PokerInfo>();
@@ -1150,6 +1134,13 @@ public class PlayRuleUtil
 
     public static int GetDiPaiBeiLv(List<PokerInfo> pokers, int mLevelPokerNum, int masterPokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetDiPaiBeiLv"))
+        {
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetDiPaiBeiLv", null, pokers, mLevelPokerNum, masterPokerType);
+            return i;
+        }
+
         SetPokerWeight(pokers, mLevelPokerNum, (Consts.PokerType) masterPokerType);
         var tuoLaJi = GetTuoLaJi(pokers, mLevelPokerNum, masterPokerType);
         if (tuoLaJi.Count > 0) return 8;

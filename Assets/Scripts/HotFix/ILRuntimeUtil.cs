@@ -10,6 +10,8 @@ public class ILRuntimeUtil : MonoBehaviour
     static ILRuntimeUtil s_instance = null;
     static AppDomain s_appdomain = null;
 
+    static List<string> s_funcList = new List<string>();
+
     public static ILRuntimeUtil getInstance()
     {
         return s_instance;
@@ -68,8 +70,42 @@ public class ILRuntimeUtil : MonoBehaviour
     {
         Debug.Log("OnHotFixLoaded");
 
+        /*
+         * 保存dll所有的类-函数数据，这样只用调用一次dll就行了，不用每次都要问一下dll是否有xxx类-函数
+         * 避免来回调用dll浪费时间
+         */
+        {
+            s_funcList.Clear();
+            List<string> funcList = (List<string>)s_appdomain.Invoke("HotFix_Project.ClassRegister", "getFuncList", null, null);
+            if (funcList != null)
+            {
+                for (int i = 0; i < funcList.Count; i++)
+                {
+                    LogUtil.Log("dll包含的类-函数：" + funcList[i]);
+                    s_funcList.Add(funcList[i]);
+                }
+            }
+            else
+            {
+                LogUtil.Log("没有dll可用");
+            }
+        }
+
         NetLoading.getInstance().Close();
         PlayerPrefs.SetInt("codeVersion", OtherData.s_loginScript.m_codeVersion);
+    }
+
+    public static bool checkClassHasFunc(string funcName)
+    {
+        for (int i = 0; i < s_funcList.Count; i++)
+        {
+            if (s_funcList[i].CompareTo(funcName) == 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /*funcName:类名.函数名 如：“MedalExplainPanelScript.onClickSetPsw”
@@ -83,20 +119,7 @@ public class ILRuntimeUtil : MonoBehaviour
         }
 
         string param = className + "." + funcName;
-        object obj = s_appdomain.Invoke("HotFix_Project.ClassRegister", "checkClassHasFunc", null, param);
-        if (obj == null)
-        {
-            //LogUtil.Log("dll不存在"+param);
-            return false;
-        }
 
-        if ((bool)obj)
-        {
-            return true;
-        }
-
-        //LogUtil.Log("dll不存在" + param);
-
-        return false;
+        return checkClassHasFunc(param);
     }
 }
