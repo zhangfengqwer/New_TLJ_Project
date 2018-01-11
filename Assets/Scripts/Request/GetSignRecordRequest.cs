@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class GetSignRecordRequest : Request
 {
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     private void Awake()
     {
@@ -29,6 +29,13 @@ public class GetSignRecordRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetSignRecordRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetSignRecordRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -38,6 +45,13 @@ public class GetSignRecordRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetSignRecordRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetSignRecordRequest", "OnResponse", null, data);
+            return;
+        }
+
         JsonData jsonData = JsonMapper.ToObject(data);
         var code = (int) jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)

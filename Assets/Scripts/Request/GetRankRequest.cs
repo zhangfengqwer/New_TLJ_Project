@@ -9,8 +9,8 @@ public class GetRankRequest : Request
     public delegate void GetRankCallBack(string result);
     public GetRankCallBack CallBack = null;
 
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     private void Awake()
     {
@@ -32,6 +32,13 @@ public class GetRankRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetRankRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetRankRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -41,6 +48,13 @@ public class GetRankRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetRankRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetRankRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

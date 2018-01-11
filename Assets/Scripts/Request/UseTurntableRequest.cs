@@ -9,8 +9,8 @@ public class UseTurntableRequest : Request
     public delegate void UseTurntableCallBack(string result);
     public UseTurntableCallBack CallBack = null;
 
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     public int type = 1;
 
@@ -34,6 +34,13 @@ public class UseTurntableRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseTurntableRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseTurntableRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -44,6 +51,13 @@ public class UseTurntableRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseTurntableRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseTurntableRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

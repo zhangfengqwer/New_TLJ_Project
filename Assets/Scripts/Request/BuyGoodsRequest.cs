@@ -9,12 +9,12 @@ public class BuyGoodsRequest : Request
     public delegate void BuyGoodsCallBack(string result);
     public BuyGoodsCallBack CallBack;
 
-    int m_goods_id;
-    int m_goods_num;
-    int m_money_type;
+    public int m_goods_id;
+    public int m_goods_num;
+    public int m_money_type;
 
-    private bool flag;
-    private string result;
+    public bool flag;
+    public string result;
 
     public void setGoodsInfo(int goods_id, int goods_num, int money_type)
     {
@@ -39,6 +39,13 @@ public class BuyGoodsRequest : Request
     
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -52,6 +59,13 @@ public class BuyGoodsRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class HuDongData
 {
-    static HuDongData s_instance = null;
+    public static HuDongData s_instance = null;
 
-    List<HuDongProp> m_hudongDataList = new List<HuDongProp>();
+    public List<HuDongProp> m_hudongDataList = new List<HuDongProp>();
 
     public static HuDongData getInstance()
     {
@@ -28,6 +28,13 @@ public class HuDongData
 
     void httpCallBack(string tag, string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData", "httpCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuDongData", "httpCallBack", null, tag, data);
+            return;
+        }
+
         try
         {
             // 读取配置文件
@@ -46,6 +53,13 @@ public class HuDongData
 
     public void init(string jsonData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData", "init"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuDongData", "init", null, jsonData);
+            return;
+        }
+
         m_hudongDataList.Clear();
 
         // string jsonData = Resources.Load("Entity/hudong").ToString();

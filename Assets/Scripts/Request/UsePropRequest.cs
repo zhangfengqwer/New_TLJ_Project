@@ -5,8 +5,8 @@ using TLJCommon;
 using UnityEngine;
 
 public class UsePropRequest : Request {
-    private bool flag;
-    private string result;
+    public bool flag;
+    public string result;
 
     private void Awake()
     {
@@ -31,8 +31,16 @@ public class UsePropRequest : Request {
 
     public delegate void UsePropCallBack(string result);
     public UsePropCallBack CallBack;
+
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UsePropRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UsePropRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -43,6 +51,13 @@ public class UsePropRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UsePropRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UsePropRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
 //        LogicEnginerScript.Instance._getUserBagRequest.OnRequest();

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class TurntableDataScript
+public class TurntableDataScript
 {
-    static TurntableDataScript s_instance = null;
+    public static TurntableDataScript s_instance = null;
 
-    List<TurntableData> m_dataList = new List<TurntableData>();
+    public List<TurntableData> m_dataList = new List<TurntableData>();
 
     public static TurntableDataScript getInstance()
     {
@@ -27,6 +27,13 @@ class TurntableDataScript
 
     public void initJson(string json)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableDataScript", "initJson"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableDataScript", "initJson", null, json);
+            return;
+        }
+
         m_dataList.Clear();
 
         {

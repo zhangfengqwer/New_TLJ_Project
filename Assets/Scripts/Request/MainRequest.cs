@@ -9,7 +9,7 @@ public class MainRequest : Request
     public delegate void MainCallBack(string result);
     public MainCallBack CallBack = null;
 
-    List<string> m_dataList = new List<string>();
+    public List<string> m_dataList = new List<string>();
 
     private void Awake()
     {

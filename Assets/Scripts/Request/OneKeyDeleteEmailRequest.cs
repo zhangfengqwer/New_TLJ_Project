@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class OneKeyDeleteEmailRequest : Request
 {
-    private int emailId;
-    private bool flag;
-    private string result;
+    public int emailId;
+    public bool flag;
+    public string result;
 
     private void Awake()
     {
@@ -29,6 +29,13 @@ public class OneKeyDeleteEmailRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyDeleteEmailRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyDeleteEmailRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -38,6 +45,13 @@ public class OneKeyDeleteEmailRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyDeleteEmailRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyDeleteEmailRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

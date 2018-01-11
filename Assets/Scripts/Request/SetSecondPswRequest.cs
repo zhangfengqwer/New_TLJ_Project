@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class SetSecondPswRequest : Request
 {
-    bool flag;
-    string result;
-    string data;
+    public bool flag;
+    public string result;
+    public string data;
 
     public delegate void SetSecondPSWCallBack(string result);
     public SetSecondPSWCallBack CallBack = null;
@@ -38,6 +38,13 @@ public class SetSecondPswRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -49,6 +56,13 @@ public class SetSecondPswRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

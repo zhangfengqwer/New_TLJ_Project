@@ -6,9 +6,9 @@ using System;
 
 public class PVPGameRoomDataScript
 {
-    static PVPGameRoomDataScript s_instance = null;
+    public static PVPGameRoomDataScript s_instance = null;
 
-    List<PVPGameRoomData> m_dataList = new List<PVPGameRoomData>();
+    public List<PVPGameRoomData> m_dataList = new List<PVPGameRoomData>();
 
     public static PVPGameRoomDataScript getInstance()
     {
@@ -22,6 +22,13 @@ public class PVPGameRoomDataScript
 
     public void initJson(string json)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameRoomDataScript", "initJson"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameRoomDataScript", "initJson", null, json);
+            return;
+        }
+
         m_dataList.Clear();
 
         JsonData jsonData = JsonMapper.ToObject(json);

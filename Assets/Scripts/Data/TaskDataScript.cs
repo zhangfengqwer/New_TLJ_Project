@@ -6,9 +6,9 @@ using UnityEngine;
 public class TaskDataScript
 {
 
-    static TaskDataScript s_taskData = null;
+    public static TaskDataScript s_taskData = null;
 
-    List<TaskData> m_taskDataList = new List<TaskData>();
+    public List<TaskData> m_taskDataList = new List<TaskData>();
 
     public static TaskDataScript getInstance()
     {
@@ -22,6 +22,13 @@ public class TaskDataScript
 
     public void initJson(string json)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "initJson"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript", "initJson", null, json);
+            return;
+        }
+
         m_taskDataList.Clear();
 
         JsonData jsonData = JsonMapper.ToObject(json);
@@ -53,6 +60,13 @@ public class TaskDataScript
     // 任务设为已完成
     public void setTaskIsOver(int task_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "setTaskIsOver"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript", "setTaskIsOver", null, task_id);
+            return;
+        }
+
         for (int i = 0; i < m_taskDataList.Count; i++)
         {
             if (m_taskDataList[i].task_id == task_id)
@@ -68,6 +82,13 @@ public class TaskDataScript
     // 可领取的置顶,已领取的放最下面
     void sortTask()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "sortTask"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript", "sortTask", null, null);
+            return;
+        }
+
         List<TaskData> list_kelingqu = new List<TaskData>();
         List<TaskData> list_weiwancheng = new List<TaskData>();
         List<TaskData> list_yilingqu = new List<TaskData>();

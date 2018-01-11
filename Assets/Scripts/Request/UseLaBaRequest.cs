@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class UseLaBaRequest : Request
 {
-    bool flag;
-    string result;
-    string text;
+    public bool flag;
+    public string result;
+    public string text;
 
     public delegate void UseLabaCallBack(string result);
     public UseLabaCallBack CallBack = null;
@@ -38,6 +38,13 @@ public class UseLaBaRequest : Request
    
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseLaBaRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseLaBaRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -48,6 +55,13 @@ public class UseLaBaRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseLaBaRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseLaBaRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

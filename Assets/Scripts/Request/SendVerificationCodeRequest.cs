@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class SendVerificationCodeRequest : Request {
 
-    private bool flag = false;
-    private string result;
-    private string phoneNum;
+    public bool flag = false;
+    public string result;
+    public string phoneNum;
+
     private void Awake()
     {
         Tag = Consts.Tag_SendSMS;
@@ -36,6 +37,13 @@ public class SendVerificationCodeRequest : Request {
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SendVerificationCodeRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SendVerificationCodeRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -46,6 +54,13 @@ public class SendVerificationCodeRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SendVerificationCodeRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SendVerificationCodeRequest", "OnResponse", null, data);
+            return;
+        }
+
         JsonData jsonData = JsonMapper.ToObject(data);
         var code = (int)jsonData["code"];
         if (code == (int)Consts.Code.Code_OK)

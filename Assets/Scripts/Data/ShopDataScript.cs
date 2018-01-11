@@ -6,9 +6,9 @@ using System;
 
 public class ShopDataScript
 {
-    static ShopDataScript s_shopData = null;
+    public static ShopDataScript s_shopData = null;
 
-    List<ShopData> m_shopDataList = new List<ShopData>();
+    public List<ShopData> m_shopDataList = new List<ShopData>();
 
     public static ShopDataScript getInstance()
     {
@@ -22,6 +22,13 @@ public class ShopDataScript
 
     public void initJson(string json)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopDataScript", "initJson"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopDataScript", "initJson", null, json);
+            return;
+        }
+
         m_shopDataList.Clear();
 
         JsonData jsonData = JsonMapper.ToObject(json);

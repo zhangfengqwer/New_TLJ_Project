@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class PropData
+public class PropData
 {
-    static PropData s_instance = null;
+    public static PropData s_instance = null;
 
-    List<PropInfo> m_propInfoList = new List<PropInfo>();
+    public List<PropInfo> m_propInfoList = new List<PropInfo>();
 
     public static PropData getInstance()
     {
@@ -29,6 +29,13 @@ class PropData
 
     void httpCallBack(string tag, string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropData", "httpCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropData", "httpCallBack", null, tag, data);
+            return;
+        }
+
         try
         {
             // 读取配置文件
@@ -47,6 +54,13 @@ class PropData
 
     public void init(string jsonData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropData", "init"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropData", "init", null, jsonData);
+            return;
+        }
+
         m_propInfoList.Clear();
 
         //// 使用本地配置文件

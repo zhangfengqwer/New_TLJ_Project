@@ -9,8 +9,8 @@ public class GetUserBagRequest : Request {
     public delegate void GetUserBagCallBack(string result);
     public GetUserBagCallBack CallBack = null;
 
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     private void Awake()
     {
@@ -33,6 +33,13 @@ public class GetUserBagRequest : Request {
     // Use this for initialization
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserBagRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserBagRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -42,6 +49,13 @@ public class GetUserBagRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserBagRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserBagRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

@@ -45,6 +45,13 @@ public class OtherData
 
     public static string getWebUrl()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherData", "getWebUrl"))
+        {
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherData", "getWebUrl", null, null);
+            return s;
+        }
+
         if (s_isTest)
         {
             return s_webStorageUrl_test;

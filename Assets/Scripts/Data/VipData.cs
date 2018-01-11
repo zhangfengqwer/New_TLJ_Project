@@ -13,11 +13,25 @@ public class VipData
 
     public static void reqNet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData", "reqNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipData", "reqNet", null, null);
+            return;
+        }
+
         UnityWebReqUtil.Instance.Get(OtherData.getWebUrl() + "VipRewardData.json", httpCallBack);
     }
 
     private static void httpCallBack(string tag, string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData", "httpCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipData", "httpCallBack", null, tag, data);
+            return;
+        }
+
         try
         {
             VipPanelScript.vipDatas = JsonMapper.ToObject<List<VipData>>(data);

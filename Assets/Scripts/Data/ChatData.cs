@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class ChatData
+public class ChatData
 {
-    static ChatData s_instance = null;
+    public static ChatData s_instance = null;
 
-    List<ChatText> m_chatTextList = new List<ChatText>();
+    public List<ChatText> m_chatTextList = new List<ChatText>();
 
     public static ChatData getInstance()
     {
@@ -23,11 +23,25 @@ class ChatData
 
     public void reqNet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData", "reqNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData", "reqNet", null, null);
+            return;
+        }
+
         UnityWebReqUtil.Instance.Get(OtherData.getWebUrl() + "chat.json", httpCallBack);
     }
 
     void httpCallBack(string tag, string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData", "httpCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData", "httpCallBack", null, tag, data);
+            return;
+        }
+
         try
         {
             // 读取配置文件
@@ -46,6 +60,13 @@ class ChatData
 
     public void init(string jsonData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData", "init"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData", "init", null, jsonData);
+            return;
+        }
+
         m_chatTextList.Clear();
 
         // string jsonData = Resources.Load("Entity/chat").ToString();

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CheckSmsRequest : Request {
 
-    private bool flag = false;
-    private string result;
-    private string phoneNum;
-    private string code;
+    public bool flag = false;
+    public string result;
+    public string phoneNum;
+    public string code;
+
     private void Awake()
     {
         Tag = Consts.Tag_CheckSMS;
@@ -36,6 +37,13 @@ public class CheckSmsRequest : Request {
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSmsRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSmsRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -47,6 +55,13 @@ public class CheckSmsRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSmsRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSmsRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

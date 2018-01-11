@@ -10,8 +10,8 @@ public class GetNoticeRequest : Request {
     public delegate void GetNoticeCallBack(string result);
     public GetNoticeCallBack CallBack = null;
 
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     private void Awake()
     {
@@ -38,6 +38,13 @@ public class GetNoticeRequest : Request {
     // Use this for initialization
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNoticeRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNoticeRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -47,6 +54,13 @@ public class GetNoticeRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNoticeRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNoticeRequest", "OnResponse", null, data);
+            return;
+        }
+
         JsonData jsonData = JsonMapper.ToObject(data);
         var code = (int)jsonData["code"];
         if (code == (int)Consts.Code.Code_OK)

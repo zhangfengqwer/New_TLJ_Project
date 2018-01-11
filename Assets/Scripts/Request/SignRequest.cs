@@ -15,7 +15,8 @@ public class SignRequest : Request {
 
     public SignCallBack CallBack;
 
-    private string goods_prop;
+    public string goods_prop;
+
     public void OnRequest(string goodProp)
     {
         goods_prop = goodProp;
@@ -24,6 +25,13 @@ public class SignRequest : Request {
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SignRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SignRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -33,6 +41,13 @@ public class SignRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SignRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SignRequest", "OnResponse", null, data);
+            return;
+        }
+
         JsonData jsonData = JsonMapper.ToObject(data);
         var code = (int)jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)

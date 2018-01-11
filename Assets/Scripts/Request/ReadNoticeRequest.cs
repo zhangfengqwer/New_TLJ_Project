@@ -5,9 +5,9 @@ using TLJCommon;
 using UnityEngine;
 
 public class ReadNoticeRequest : Request {
-    private int noticeId;
-    private bool flag;
-    private string result;
+    public int noticeId;
+    public bool flag;
+    public string result;
 
     private void Awake()
     {
@@ -32,6 +32,13 @@ public class ReadNoticeRequest : Request {
     // Use this for initialization
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ReadNoticeRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ReadNoticeRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -42,6 +49,13 @@ public class ReadNoticeRequest : Request {
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ReadNoticeRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ReadNoticeRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

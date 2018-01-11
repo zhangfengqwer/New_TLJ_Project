@@ -9,8 +9,8 @@ public class GetTurntableRequest : Request
     public delegate void GetTurntableCallBack(string result);
     public GetTurntableCallBack CallBack = null;
 
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     private void Awake()
     {
@@ -32,6 +32,13 @@ public class GetTurntableRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetTurntableRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetTurntableRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
 
@@ -41,6 +48,13 @@ public class GetTurntableRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetTurntableRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetTurntableRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

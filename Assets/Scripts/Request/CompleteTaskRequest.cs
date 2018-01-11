@@ -9,9 +9,9 @@ public class CompleteTaskRequest : Request
     public delegate void CompleteTaskCallBack(string result);
     public CompleteTaskCallBack CallBack;
 
-    private int taskId;
-    private bool flag;
-    private string result;
+    public int taskId;
+    public bool flag;
+    public string result;
 
     public void setTaskId(int id)
     {
@@ -35,6 +35,13 @@ public class CompleteTaskRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CompleteTaskRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CompleteTaskRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -45,6 +52,13 @@ public class CompleteTaskRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CompleteTaskRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CompleteTaskRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

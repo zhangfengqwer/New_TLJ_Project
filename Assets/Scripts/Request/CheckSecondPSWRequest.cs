@@ -9,10 +9,10 @@ public class CheckSecondPSWRequest : Request
     public delegate void CallBack(string result);
     public CallBack m_callBack = null;
 
-    string m_secondPSW;
+    public string m_secondPSW;
 
-    private bool flag = false;
-    private string result;
+    public bool flag = false;
+    public string result;
 
     private void Awake()
     {
@@ -39,6 +39,13 @@ public class CheckSecondPSWRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["account"] = UserData.name;
@@ -51,6 +58,13 @@ public class CheckSecondPSWRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

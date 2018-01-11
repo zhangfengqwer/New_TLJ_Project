@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class TurntableBroadcastDataScript
+public class TurntableBroadcastDataScript
 {
-    static TurntableBroadcastDataScript s_instance = null;
+    public static TurntableBroadcastDataScript s_instance = null;
 
-    List<TurntableBroadcastData> m_dataList = new List<TurntableBroadcastData>();
+    public List<TurntableBroadcastData> m_dataList = new List<TurntableBroadcastData>();
 
     public static TurntableBroadcastDataScript getInstance()
     {
@@ -23,6 +23,13 @@ class TurntableBroadcastDataScript
 
     public void addData(string name,int reward_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "addData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "addData", null, name, reward_id);
+            return;
+        }
+
         TurntableBroadcastData temp = new TurntableBroadcastData();
 
         temp.m_name = name;

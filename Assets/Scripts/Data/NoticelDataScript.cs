@@ -6,9 +6,9 @@ using System;
 
 public class NoticelDataScript
 {
-    static NoticelDataScript s_noticeData = null;
+    public static NoticelDataScript s_noticeData = null;
 
-    List<NoticeData> m_noticeDataList = new List<NoticeData>();
+    public List<NoticeData> m_noticeDataList = new List<NoticeData>();
 
     public static NoticelDataScript getInstance()
     {
@@ -22,6 +22,13 @@ public class NoticelDataScript
 
     public void initJson(string json)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticelDataScript", "initJson"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticelDataScript", "initJson", null, json);
+            return;
+        }
+
         m_noticeDataList.Clear();
         
         JsonData jsonData = JsonMapper.ToObject(json);
@@ -51,6 +58,13 @@ public class NoticelDataScript
     // 设为已读
     public void setNoticeReaded(int notice_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticelDataScript", "setNoticeReaded"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticelDataScript", "setNoticeReaded", null, notice_id);
+            return;
+        }
+
         for (int i = 0; i < m_noticeDataList.Count; i++)
         {
             if (m_noticeDataList[i].notice_id == notice_id)

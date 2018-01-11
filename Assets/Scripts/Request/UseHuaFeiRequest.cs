@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class UseHuaFeiRequest : Request
 {
-    bool flag;
-    string result;
-    int m_prop_id;
-    string m_phone;
+    public bool flag;
+    public string result;
+    public int m_prop_id;
+    public string m_phone;
 
     public delegate void UseHuaFeiCallBack(string result);
     public UseHuaFeiCallBack CallBack;
@@ -37,6 +37,13 @@ public class UseHuaFeiRequest : Request
 
     public override void OnRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiRequest", "OnRequest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiRequest", "OnRequest", null, null);
+            return;
+        }
+
         JsonData jsonData = new JsonData();
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
@@ -49,6 +56,13 @@ public class UseHuaFeiRequest : Request
 
     public override void OnResponse(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiRequest", "OnResponse"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiRequest", "OnResponse", null, data);
+            return;
+        }
+
         result = data;
         flag = true;
     }

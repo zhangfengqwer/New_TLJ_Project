@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class UserMailData {
 
-    static UserMailData s_userMailData = null;
+    public static UserMailData s_userMailData = null;
 
-    List<MailData> m_myMailDataList = new List<MailData>();
+    public List<MailData> m_myMailDataList = new List<MailData>();
 
     public static UserMailData getInstance()
     {
@@ -21,6 +21,13 @@ public class UserMailData {
 
     public void initJson(string json)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "initJson"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "initJson", null, json);
+            return;
+        }
+
         m_myMailDataList.Clear();
 
         JsonData jd = JsonMapper.ToObject(json);
@@ -85,6 +92,13 @@ public class UserMailData {
     // 邮件设为已读
     public void setMailReaded(int email_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "setMailReaded"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "setMailReaded", null, email_id);
+            return;
+        }
+
         for (int i = 0; i < m_myMailDataList.Count; i++)
         {
             if (m_myMailDataList[i].m_email_id == email_id)
@@ -108,6 +122,13 @@ public class UserMailData {
     // 所有邮件设为已读
     public void setAllMailReaded()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "setAllMailReaded"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "setAllMailReaded", null, null);
+            return;
+        }
+
         for (int i = 0; i < m_myMailDataList.Count; i++)
         {
             if (m_myMailDataList[i].m_state == 0)
@@ -135,6 +156,13 @@ public class UserMailData {
     // 删除邮件
     public void deleteMail(int email_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "deleteMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "deleteMail", null, email_id);
+            return;
+        }
+
         for (int i = 0; i < m_myMailDataList.Count; i++)
         {
             if (m_myMailDataList[i].m_email_id == email_id)
@@ -148,6 +176,13 @@ public class UserMailData {
     // 删除所有邮件:必须是已读的
     public void deleteAllMail()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "deleteAllMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "deleteAllMail", null, null);
+            return;
+        }
+
         for (int i = m_myMailDataList.Count - 1; i >= 0; i--)
         {
             if (m_myMailDataList[i].m_state == 1)
