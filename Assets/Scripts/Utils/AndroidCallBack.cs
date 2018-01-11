@@ -198,4 +198,37 @@ public class AndroidCallBack : MonoBehaviour {
     {
         SetScript.Instance.OnClickChangeAccount();
     }
+
+    public void OnIOSPaySuccess(string data)
+    {
+        LogUtil.Log("Unity收到IOS支付回调:" + data);
+        var strings = data.Split('|');
+        string productId = strings[0];
+        string receiptdata = strings[1];
+
+        JsonData jd = new JsonData();
+        jd["receipt-data"] = receiptdata;
+        string receipt = jd.ToJson();
+
+        var jsonData = new JsonData();
+        jsonData["tag"] = Consts.Tag_IOS_Pay;
+        jsonData["uid"] = UserData.uid;
+        jsonData["data"] = receipt;
+        jsonData["productId"] = productId;
+
+        LogUtil.Log("消息:" + jsonData.ToJson());
+        LogicEnginerScript.Instance.SendMyMessage(jsonData.ToJson());
+    }
+
+    public void ShowLoad(string data)
+    {
+        NetLoading.getInstance().Show();
+    }
+
+    public void CloseLoad(string data)
+    {
+        NetLoading.getInstance().Close();
+    }
+
+
 }
