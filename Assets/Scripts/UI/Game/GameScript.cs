@@ -31,28 +31,28 @@ public class GameScript : MonoBehaviour
     public Text m_text_otherLevelPoker;
 
     // 倒计时
-    GameObject m_timer;
+    public GameObject m_timer;
 
-    TimerScript m_timerScript;
+    public TimerScript m_timerScript;
 
     // 记牌器
-    GameObject m_jiPaiGameObject = null;
+    public GameObject m_jiPaiGameObject = null;
 
     // 托管
-    GameObject m_tuoguanObj = null;
+    public GameObject m_tuoguanObj = null;
 
     public GameObject m_myUserInfoUI;
 
     //GameObject m_waitOtherPlayer;
-    GameObject m_waitMatchPanel = null;
+    public GameObject m_waitMatchPanel = null;
 
-    GameObject m_liangzhuObj = null;
-    GameObject m_pvpGameResultPanel = null;
+    public GameObject m_liangzhuObj = null;
+    public GameObject m_pvpGameResultPanel = null;
 
-    Vector3 m_screenPos;
+    public Vector3 m_screenPos;
 
     //bool m_isStartGame = false;
-    bool m_hasJiPaiQiUse = false;
+    public bool m_hasJiPaiQiUse = false;
 
     private void Awake()
     {
@@ -179,6 +179,13 @@ public class GameScript : MonoBehaviour
 
     bool isPVP()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript", "isPVP"))
+        {
+            bool temp = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "isPVP", null, null);
+            return temp;
+        }
+
         bool b = false;
         List<string> list = new List<string>();
         CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
@@ -221,7 +228,7 @@ public class GameScript : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript", "setCommonUI"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "setCommonUI", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "setCommonUI", null, gameRoomType);
             return;
         }
 
@@ -526,6 +533,13 @@ public class GameScript : MonoBehaviour
     
     public void showWaitMatchPanel(float time, bool isContinueGame)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript", "showWaitMatchPanel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "showWaitMatchPanel", null, time,isContinueGame);
+            return;
+        }
+
         m_waitMatchPanel = WaitMatchPanelScript.create(GameData.getInstance().getGameRoomType());
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
@@ -739,7 +753,7 @@ public class GameScript : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript", "onClickQiangZhu"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "onClickQiangZhu", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "onClickQiangZhu", null, pokerList);
             return;
         }
 
@@ -3849,6 +3863,13 @@ public class GameScript : MonoBehaviour
     // 检测服务器是否连接
     void checkNet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CompleteTaskRequest", "checkNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CompleteTaskRequest", "checkNet", null, null);
+            return;
+        }
+
         if (!LogicEnginerScript.Instance.isConnecion())
         {
             //NetErrorPanelScript.getInstance().Show();
@@ -3976,12 +3997,26 @@ public class GameScript : MonoBehaviour
     //--------------------------------------------------------------------------------------------------
     void onPauseCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript", "onPauseCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "onPauseCallBack", null, null);
+            return;
+        }
+
         //LogicEnginerScript.Instance.Stop();
         //PlayServiceSocket.s_instance.Stop();
     }
 
     void onResumeCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript", "onResumeCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript", "onResumeCallBack", null, null);
+            return;
+        }
+
         //NetErrorPanelScript.getInstance().Show();
         //NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
         //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");

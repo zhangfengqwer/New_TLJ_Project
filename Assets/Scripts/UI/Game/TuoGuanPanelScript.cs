@@ -18,6 +18,13 @@ public class TuoGuanPanelScript : MonoBehaviour {
 
     public void onClickCalcel()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript", "onClickCalcel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuoGuanPanelScript", "onClickCalcel", null, null);
+            return;
+        }
+
         m_parentScript.onClickCancelTuoGuan();
         Destroy(gameObject);
     }

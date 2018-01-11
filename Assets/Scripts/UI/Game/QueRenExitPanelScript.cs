@@ -30,11 +30,25 @@ public class QueRenExitPanelScript : MonoBehaviour {
 
     public void OnClickQueRen()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript", "OnClickQueRen"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript", "OnClickQueRen", null, null);
+            return;
+        }
+
         m_parentScript.exitRoom();
     }
 
     public void OnClickCancel()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript", "OnClickCancel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript", "OnClickCancel", null, null);
+            return;
+        }
+
         Destroy(s_gameobject);
         s_gameobject = null;
     }

@@ -25,6 +25,13 @@ public class GameNetErrorPanelScript : MonoBehaviour {
 
     public void onClickBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameNetErrorPanelScript", "onClickBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameNetErrorPanelScript", "onClickBack", null, null);
+            return;
+        }
+
         SceneManager.LoadScene("MainScene");
     }
 }

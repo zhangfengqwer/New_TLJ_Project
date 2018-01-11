@@ -10,7 +10,7 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
 
     public Text m_text_price;
 
-    HuDongProp m_huDongProp;
+    public HuDongProp m_huDongProp;
 
     // Use this for initialization
     void Start()
@@ -20,6 +20,13 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
 
     public void setHuDongPropData(HuDongProp huDongProp)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script", "setHuDongPropData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script", "setHuDongPropData", null, huDongProp);
+            return;
+        }
+
         m_huDongProp = huDongProp;
 
         {
@@ -35,6 +42,13 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
 
     public void onClickItem()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script", "onClickItem"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script", "onClickItem", null, null);
+            return;
+        }
+
         LogUtil.Log(gameObject.transform.name);
 
         ToastScript.createToast("暂未开放");

@@ -18,12 +18,12 @@ public class TestPoker : MonoBehaviour {
     public Image daWang2;
     public Text text;
 
-    private Vector3 startPosition;
-    private  List<Image> xiaoWangList = new List<Image>();
-    private  List<Image> daWangList = new List<Image>();
-    private  Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
-    private  Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
-    private List<PokerInfo> selectedPokers = new List<PokerInfo>();
+    public Vector3 startPosition;
+    public List<Image> xiaoWangList = new List<Image>();
+    public List<Image> daWangList = new List<Image>();
+    public Dictionary<Consts.PokerType, List<PokerInfo>> dicPokerData = new Dictionary<Consts.PokerType, List<PokerInfo>>();
+    public Dictionary<Consts.PokerType, List<GameObject>> dictionaryGo = new Dictionary<Consts.PokerType, List<GameObject>>();
+    public List<PokerInfo> selectedPokers = new List<PokerInfo>();
 
 
     public static GameObject create()
@@ -41,6 +41,13 @@ public class TestPoker : MonoBehaviour {
 
     private void InitFirst()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "InitFirst"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "InitFirst", null, null);
+            return;
+        }
+
         Init(HeiTaoContent, Consts.PokerType.PokerType_HeiTao);
         Init(HongContent, Consts.PokerType.PokerType_HongTao);
         Init(MeiContent, Consts.PokerType.PokerType_MeiHua);
@@ -108,8 +115,15 @@ public class TestPoker : MonoBehaviour {
 
     public void Init(GameObject gameObject, Consts.PokerType pokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "Init"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "Init", null, gameObject,pokerType);
+            return;
+        }
+
         //初始化数据
-      
+
         List<PokerInfo> heiTaoPokers = new List<PokerInfo>();
         List<GameObject> PokerItems = new List<GameObject>();
         for (int i = 0; i < 2; i++)
@@ -209,6 +223,13 @@ public class TestPoker : MonoBehaviour {
 
     public void OnClickConfirm()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "OnClickConfirm"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "OnClickConfirm", null, null);
+            return;
+        }
+
         if (selectedPokers.Count == 25)
         {
             foreach (var poker in selectedPokers)
@@ -227,6 +248,13 @@ public class TestPoker : MonoBehaviour {
 
     public void UpdateUi(List<PokerInfo> list)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "UpdateUi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "UpdateUi", null, list);
+            return;
+        }
+
         for (int i = 0; i < list.Count; i++)
         {
             PokerInfo pokerInfo = list[i];

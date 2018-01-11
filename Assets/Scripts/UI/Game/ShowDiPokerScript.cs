@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShowDiPokerScript : MonoBehaviour {
 
-    static GameObject ShowDiPokerObj = null;
+    public static GameObject ShowDiPokerObj = null;
 
     public static GameObject create(List<TLJCommon.PokerInfo> dipaiList)
     {
@@ -25,11 +25,25 @@ public class ShowDiPokerScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "Start", null, null);
+            return;
+        }
+
         Invoke("showEnd", 2.0f);
     }
 
     void showEnd()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "showEnd"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "showEnd", null, null);
+            return;
+        }
+
         //for (int i = gameObject.transform.childCount - 1; i >= 0 ; i--)
         //{
         //    Destroy(gameObject.transform.GetChild(i));
@@ -46,6 +60,13 @@ public class ShowDiPokerScript : MonoBehaviour {
 
     public void setData(List<TLJCommon.PokerInfo> dipaiList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "setData", null, dipaiList);
+            return;
+        }
+
         List<GameObject> objList = new List<GameObject>();
 
         for (int i = 0; i < dipaiList.Count; i++)
@@ -65,6 +86,13 @@ public class ShowDiPokerScript : MonoBehaviour {
 
     void initPokerPos(List<GameObject> objList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "initPokerPos"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "initPokerPos", null, objList);
+            return;
+        }
+
         int jiange = 35;
 
         for (int i = 0; i < objList.Count; i++)

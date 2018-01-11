@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class JueShengJuTiShiPanelScript : MonoBehaviour {
 
-    static GameObject s_instance = null;
+    public static GameObject s_instance = null;
 
     public static GameObject show()
     {

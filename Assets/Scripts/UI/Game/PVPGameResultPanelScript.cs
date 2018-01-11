@@ -32,6 +32,13 @@ public class PVPGameResultPanelScript : MonoBehaviour
 
     public void setData(bool isWin)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "setData", null, isWin);
+            return;
+        }
+
         if (isWin)
         {
             CommonUtil.setImageSprite(m_image_guang, "Sprites/GameResult/fangsheguang_liang");
@@ -62,16 +69,37 @@ public class PVPGameResultPanelScript : MonoBehaviour
 
     void onInvokeTimeOut()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onInvokeTimeOut"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "onInvokeTimeOut", null, null);
+            return;
+        }
+
         m_parentScript.onTimerEvent_TimeEnd(false);
     }
 
     public void onClickShare()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onClickShare"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "onClickShare", null, null);
+            return;
+        }
+
         ChoiceShareScript.Create("我赢过许多人却没有输给过你，快来帮我赢话费！","");
     }
 
     public void onClickExit()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onClickExit"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "onClickExit", null, null);
+            return;
+        }
+
         m_parentScript.exitRoom();
     }
 }

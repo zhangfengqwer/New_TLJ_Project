@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandler,IPointerClickHandler,IPointerUpHandler
 {
-    int m_num;
-    int m_pokerType;
+    public int m_num;
+    public int m_pokerType;
 
-    bool m_isSelect = false;
-    bool m_isJump = false;
+    public bool m_isSelect = false;
+    public bool m_isJump = false;
     public bool m_canTouch = false;
 
     public Image m_image_num;
@@ -38,6 +38,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void initPoker(int num,int pokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "initPoker"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "initPoker", null, num, pokerType);
+            return;
+        }
+
         m_num = num;
         m_pokerType = pokerType;
         
@@ -110,6 +117,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void setIsSelect(bool isSelect)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "setIsSelect"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "setIsSelect", null, isSelect);
+            return;
+        }
+
         m_isSelect = isSelect;
 
         if (m_isSelect)
@@ -136,6 +150,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void setIsJump(bool isJump)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "setIsJump"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "setIsJump", null, isJump);
+            return;
+        }
+
         m_isJump = isJump;
 
         gameObject.GetComponent<Image>().color = Color.white;
@@ -199,6 +220,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public static void setAllPokerWeiXuanZe()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "setAllPokerWeiXuanZe"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "setAllPokerWeiXuanZe", null, null);
+            return;
+        }
+
         for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
         {
             PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();

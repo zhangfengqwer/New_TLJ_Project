@@ -8,16 +8,16 @@ public class ChatPanelScript : MonoBehaviour {
     public GameScript m_parentScript;
 
     public GameObject m_listView_chat;
-    ListViewScript m_ListViewScript_chat;
+    public ListViewScript m_ListViewScript_chat;
 
     public GameObject m_listView_emoji;
-    ListViewScript m_ListViewScript_emoji;
+    public ListViewScript m_ListViewScript_emoji;
 
     public Image m_tab_bg;
     public Button m_button_chat;
     public Button m_button_biaoqing;
 
-    bool m_canChat = true;
+    public bool m_canChat = true;
 
     public static GameObject create(GameScript parent)
     {
@@ -31,6 +31,13 @@ public class ChatPanelScript : MonoBehaviour {
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "Start", null, null);
+            return;
+        }
+
         m_ListViewScript_chat = m_listView_chat.GetComponent<ListViewScript>();
         m_ListViewScript_emoji = m_listView_emoji.GetComponent<ListViewScript>();
 
@@ -39,6 +46,13 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void loadChat()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "loadChat"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "loadChat", null, null);
+            return;
+        }
+
         {
             m_tab_bg.transform.localPosition = new Vector3(-83, 0, 0);
             m_button_chat.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_chat_xuanze", typeof(Sprite)) as Sprite;
@@ -65,6 +79,13 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void loadBiaoQing()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "loadBiaoQing"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "loadBiaoQing", null, null);
+            return;
+        }
+
         {
             {
                 m_tab_bg.transform.localPosition = new Vector3(83, 0, 0);
@@ -124,6 +145,13 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void reqChat(ChatText chatText)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "reqChat"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "reqChat", null, chatText);
+            return;
+        }
+
         if (m_canChat)
         {
             m_canChat = false;
@@ -139,6 +167,13 @@ public class ChatPanelScript : MonoBehaviour {
 
     public void reqChat_emoji(int id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "reqChat_emoji"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "reqChat_emoji", null, id);
+            return;
+        }
+
         if (m_canChat)
         {
             m_canChat = false;

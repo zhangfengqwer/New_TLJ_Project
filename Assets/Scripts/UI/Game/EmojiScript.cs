@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class EmojiScript : MonoBehaviour
 {
-    float m_zhenlv = 5;
-    int m_emoji_id = 1;
-    int m_curindex = 0;
-    int repeatCount = 0;
+    public float m_zhenlv = 5;
+    public int m_emoji_id = 1;
+    public int m_curindex = 0;
+    public int repeatCount = 0;
 
-    Image m_image;
+    public Image m_image;
 
     public static GameObject create(int emoji_id,Vector2 pos)
     {

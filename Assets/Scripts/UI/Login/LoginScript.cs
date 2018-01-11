@@ -990,6 +990,13 @@ public class LoginScript : MonoBehaviour
     // 检测服务器是否连接
     void checkNet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "checkNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "checkNet", null, null);
+            return;
+        }
+
         if (!LoginServiceSocket.s_instance.isConnecion())
         {
             //ToastScript.createToast("与Logic服务器断开连接");

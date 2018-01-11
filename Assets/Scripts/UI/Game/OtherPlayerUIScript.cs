@@ -38,20 +38,47 @@ public class OtherPlayerUIScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "Start", null, null);
+            return;
+        }
     }
 
     public void setHead(string headPath)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setHead"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setHead", null, headPath);
+            return;
+        }
+
         gameObject.GetComponent<Image>().sprite = Resources.Load("Sprites/Head/head_1", typeof(Sprite)) as Sprite;
     }
 
     public void setName(string name)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setName"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setName", null, name);
+            return;
+        }
+
         m_textName.text = name;
     }
 
     public void setVipLevel(int vipLevel)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setVipLevel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setVipLevel", null, vipLevel);
+            return;
+        }
+
         CommonUtil.setImageSprite(m_imageVipLevel, "Sprites/Vip/user_vip_" + vipLevel);
         
         GameUtil.setNickNameFontColor(m_textName,vipLevel);
@@ -59,11 +86,25 @@ public class OtherPlayerUIScript : MonoBehaviour {
 
     public void setGoldNum(int goldNum)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setGoldNum"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setGoldNum", null, goldNum);
+            return;
+        }
+
         m_textGoldNum.text = goldNum.ToString();
     }
 
     public void onClickHead()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "onClickHead"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "onClickHead", null, null);
+            return;
+        }
+
         GameUserInfoPanelScript.create(m_uid);
     }
 }

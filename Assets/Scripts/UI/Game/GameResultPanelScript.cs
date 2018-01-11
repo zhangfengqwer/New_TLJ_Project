@@ -37,6 +37,13 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void setData(bool isWin,int score,int gold,string gameRoomType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "setData", null, isWin, score, gold, gameRoomType);
+            return;
+        }
+
         m_isWin = isWin;
         m_gameRoomType = gameRoomType;
 
@@ -76,6 +83,13 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void onClickJiXu()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickJiXu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickJiXu", null, null);
+            return;
+        }
+
         if (!GameUtil.checkCanEnterRoom(m_gameRoomType))
         {
             onClickExit();
@@ -88,6 +102,13 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void onClickHuanZhuo()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickHuanZhuo"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickHuanZhuo", null, null);
+            return;
+        }
+
         if (!GameUtil.checkCanEnterRoom(m_gameRoomType))
         {
             onClickExit();
@@ -100,16 +121,37 @@ public class GameResultPanelScript : MonoBehaviour {
 
     public void onClickClose()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickClose"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickClose", null, null);
+            return;
+        }
+
         Destroy(gameObject);
     }
 
     public void onClickExit()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickExit"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickExit", null, null);
+            return;
+        }
+
         m_parentScript.exitRoom();
     }
 
     public void onClickShare()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickShare"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickShare", null, null);
+            return;
+        }
+
         if (m_isWin)
         {
             ChoiceShareScript.Create("我在疯狂升级普通场赢得了胜利，话费、徽章等你来拿！", "");

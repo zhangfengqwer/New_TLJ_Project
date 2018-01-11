@@ -17,7 +17,7 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     public Text m_text_meilizhi;
 
     public GameObject m_scrollView;
-    ScrollViewScript m_scrollViewScript;
+    public ScrollViewScript m_scrollViewScript;
 
     public static GameObject create(string uid)
     {
@@ -31,6 +31,13 @@ public class GameUserInfoPanelScript : MonoBehaviour {
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript", "Start", null, null);
+            return;
+        }
+
         m_scrollViewScript = m_scrollView.GetComponent<ScrollViewScript>();
 
         loadHuDongDaoJu();
@@ -38,6 +45,13 @@ public class GameUserInfoPanelScript : MonoBehaviour {
 
     public void setPlayer(string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript", "setPlayer"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript", "setPlayer", null, uid);
+            return;
+        }
+
         if (uid.CompareTo(UserData.uid) == 0)
         {
             m_text_name.text = UserData.name;
@@ -92,6 +106,13 @@ public class GameUserInfoPanelScript : MonoBehaviour {
 
     public void loadHuDongDaoJu()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript", "loadHuDongDaoJu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript", "loadHuDongDaoJu", null, null);
+            return;
+        }
+
         m_scrollViewScript.clear();
 
         for (int i = 0; i < HuDongData.getInstance().getHuDongDataList().Count; i++)

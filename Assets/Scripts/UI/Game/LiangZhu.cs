@@ -11,7 +11,7 @@ public class LiangZhu : MonoBehaviour
         UseType_liangzhu,
         UseType_chaodi,
     }
-    private GameScript m_parentScript;
+    public GameScript m_parentScript;
 
     public Button ButtonWang;
     public Button ButtonHei;
@@ -20,8 +20,8 @@ public class LiangZhu : MonoBehaviour
     public Text textLiangzhu;
     public Button ButtonFang;
     public GameObject GiveUp;
-    private List<PokerInfo> liangzhuPoker;
-    private List<PokerInfo> handerPoker;
+    public List<PokerInfo> liangzhuPoker;
+    public List<PokerInfo> handerPoker;
 
     public UseType m_useType;
 
@@ -42,6 +42,13 @@ public class LiangZhu : MonoBehaviour
 
     public void UpdateUi(List<PokerInfo> handerPoker, List<PokerInfo> lastLiangZhuPoker)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "UpdateUi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "UpdateUi", null, handerPoker, lastLiangZhuPoker);
+            return;
+        }
+
         this.handerPoker = handerPoker;
          
         ButtonFang.interactable = false;
@@ -105,38 +112,86 @@ public class LiangZhu : MonoBehaviour
 
     public void OnClickHei()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickHei"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickHei", null, null);
+            return;
+        }
+
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
         UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_HeiTao));
     }
     public void OnClickhong()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickhong"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickhong", null, null);
+            return;
+        }
+
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
         UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_HongTao));
     }
     public void OnClickMei()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickMei"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickMei", null, null);
+            return;
+        }
+
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
         UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_MeiHua));
     }
     public void OnClickFang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickFang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickFang", null, null);
+            return;
+        }
+
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
         UpdateUi(handerPoker, GetPokerTypePoker(Consts.PokerType.PokerType_FangKuai));
     }
     public void OnClickWang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickWang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickWang", null, null);
+            return;
+        }
+
         OnClickLiangzhu(GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
         UpdateUi(handerPoker,GetPokerTypePoker(Consts.PokerType.PokerType_Wang));
     }
 
     public void OnClickGiveUp()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickGiveUp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickGiveUp", null, null);
+            return;
+        }
+
         m_parentScript.onClickChaoDi(new List<PokerInfo>());
     }
 
     private void OnClickLiangzhu(List<PokerInfo> list)
     {
-//        ToastScript.createToast(list[0].m_num+","+list[1].m_num);
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickLiangzhu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickLiangzhu", null, list);
+            return;
+        }
+        
         switch (m_useType)
         {
             case UseType.UseType_chaodi:
@@ -150,6 +205,13 @@ public class LiangZhu : MonoBehaviour
 
     private List<PokerInfo> GetPokerTypePoker(Consts.PokerType pokerType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "GetPokerTypePoker"))
+        {
+            List<PokerInfo> list = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "GetPokerTypePoker", null, pokerType);
+            return list;
+        }
+
         List<PokerInfo> pokerInfos = new List<PokerInfo>();
         for (int i = 0; i < liangzhuPoker.Count; i++)
         {

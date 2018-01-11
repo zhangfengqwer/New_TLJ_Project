@@ -11,7 +11,7 @@ public class Item_chat_List_Script : MonoBehaviour {
     public Text m_text_content;
     public Button m_button_item;
 
-    ChatText m_chatText;
+    public ChatText m_chatText;
 
     // Use this for initialization
     void Start()
@@ -21,6 +21,13 @@ public class Item_chat_List_Script : MonoBehaviour {
 
     public void setChatData(ChatText chatText)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script", "setChatData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script", "setChatData", null, chatText);
+            return;
+        }
+
         m_chatText = chatText;
         
         m_text_content.text = m_chatText.m_text;
@@ -33,6 +40,13 @@ public class Item_chat_List_Script : MonoBehaviour {
     
     public void onClickItem()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script", "onClickItem"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script", "onClickItem", null, null);
+            return;
+        }
+
         LogUtil.Log("聊天："+ m_chatText.m_text);
         m_parentScript.reqChat(m_chatText);
     }

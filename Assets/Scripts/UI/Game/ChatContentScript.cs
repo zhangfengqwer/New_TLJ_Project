@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ChatContentScript : MonoBehaviour {
 
-    Text m_text;
+    public Text m_text;
 
     public static GameObject createChatContent(string text,Vector2 pos, TextAnchor textAnchor)
     {

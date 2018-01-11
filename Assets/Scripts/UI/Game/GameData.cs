@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameData
 {
-    static GameData s_instance = null;
+    public static GameData s_instance = null;
     public static GameData getInstance()
     {
         if (s_instance == null)
@@ -15,7 +15,7 @@ public class GameData
     }
 
     public string m_tag = "";
-    string m_gameRoomType = "";
+    public string m_gameRoomType = "";
     public bool m_isPVP = false;
 
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌
@@ -56,6 +56,13 @@ public class GameData
 
     public void clear()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "clear"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "clear", null, null);
+            return;
+        }
+
         m_getAllScore = 0;
 
         m_teammateUID = "";
@@ -78,6 +85,13 @@ public class GameData
 
     public void setGameRoomType(string gameRoomType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "setGameRoomType"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "setGameRoomType", null, gameRoomType);
+            return;
+        }
+
         m_gameRoomType = gameRoomType;
 
         List<string> list = new List<string>();
@@ -102,6 +116,13 @@ public class GameData
 
     public PlayerData getPlayerDataByUid(string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "getPlayerDataByUid"))
+        {
+            PlayerData playerData = (PlayerData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "getPlayerDataByUid", null, uid);
+            return playerData;
+        }
+
         for (int i = 0; i < m_playerDataList.Count ; i++)
         {
             if (m_playerDataList[i].m_uid.CompareTo(uid) == 0)
@@ -115,6 +136,13 @@ public class GameData
 
     public GameObject getOtherPlayerUIByUid(string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "getOtherPlayerUIByUid"))
+        {
+            GameObject o = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "getOtherPlayerUIByUid", null, uid);
+            return o;
+        }
+
         for (int i = 0; i < m_otherPlayerUIObjList.Count; i++)
         {
             if (m_otherPlayerUIObjList[i].GetComponent<OtherPlayerUIScript>().m_uid.CompareTo(uid) == 0)
@@ -128,6 +156,13 @@ public class GameData
 
     public void setOtherPlayerUI(string uid,bool isPVP)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "setOtherPlayerUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "setOtherPlayerUI", null, uid, isPVP);
+            return;
+        }
+
         PlayerData playerData = getPlayerDataByUid(uid);
 
         getOtherPlayerUIByUid(uid).GetComponent<OtherPlayerUIScript>().m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);

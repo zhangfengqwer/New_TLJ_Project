@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class WaitOtherPlayerScript : MonoBehaviour {
 
     public string m_showText;
-    Text m_text;
-    int m_time_index = 1;
+    public Text m_text;
+    public int m_time_index = 1;
 
     public static GameObject create()
     {
@@ -27,6 +27,13 @@ public class WaitOtherPlayerScript : MonoBehaviour {
 
     void timer()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "timer"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitOtherPlayerScript", "timer", null, null);
+            return;
+        }
+
         switch (m_time_index)
         {
             case 1:

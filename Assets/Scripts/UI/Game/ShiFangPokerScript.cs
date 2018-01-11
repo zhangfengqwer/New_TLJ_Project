@@ -17,6 +17,13 @@ public class ShiFangPokerScript : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShiFangPokerScript", "OnPointerDown"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShiFangPokerScript", "OnPointerDown", null, eventData);
+            return;
+        }
+
         PokerScript.setAllPokerWeiXuanZe();
     }
 }

@@ -34,6 +34,13 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     public void setData(int mingci,string pvpreward)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "setData", null, mingci, pvpreward);
+            return;
+        }
+
         m_text_mingci.text = mingci.ToString();
 
         List<string> list1 = new List<string>();
@@ -61,12 +68,26 @@ public class PVPEndPanelScript : MonoBehaviour {
 
     public void onClickExit()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "onClickExit"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "onClickExit", null, null);
+            return;
+        }
+
         //m_parentScript.onClickExitRoom();
         SceneManager.LoadScene("MainScene");
     }
 
     public void onClickShare()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "onClickShare"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "onClickShare", null, null);
+            return;
+        }
+
         //m_parentScript.onClickExitRoom();
         //        ToastScript.createToast("暂未开放");
         ChoiceShareScript.Create("我在疯狂升级比赛场赢得了胜利，话费、徽章等你来拿！", "");
