@@ -211,11 +211,24 @@ public class AndroidCallBack : MonoBehaviour {
         string receipt = jd.ToJson();
 
         var jsonData = new JsonData();
-        jsonData["tag"] = "ios_pay";
+        jsonData["tag"] = Consts.Tag_IOS_Pay;
         jsonData["uid"] = UserData.uid;
         jsonData["data"] = receipt;
         jsonData["productId"] = productId;
 
         LogUtil.Log("消息:" + jsonData.ToJson());
+        LogicEnginerScript.Instance.SendMyMessage(jsonData.ToJson());
     }
+
+    public void ShowLoad(string data)
+    {
+        NetLoading.getInstance().Show();
+    }
+
+    public void CloseLoad(string data)
+    {
+        NetLoading.getInstance().Close();
+    }
+
+
 }
