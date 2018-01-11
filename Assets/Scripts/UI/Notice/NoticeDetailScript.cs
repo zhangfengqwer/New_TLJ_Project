@@ -12,7 +12,7 @@ public class NoticeDetailScript : MonoBehaviour {
     public Text m_time;
     public Text m_from;
 
-    NoticeData m_noticeData = null;
+    public NoticeData m_noticeData = null;
 
     public static GameObject create(int notice_id, NoticePanelScript parentScript)
     {
@@ -28,11 +28,23 @@ public class NoticeDetailScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticeDetailScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticeDetailScript", "Start", null, null);
+            return;
+        }
     }
 
     public void setNoticeId(int notice_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticeDetailScript", "setNoticeId"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticeDetailScript", "setNoticeId", null, notice_id);
+            return;
+        }
+
         m_noticeData = NoticelDataScript.getInstance().getNoticeDataById(notice_id);
         m_title.text = m_noticeData.title_limian;
 

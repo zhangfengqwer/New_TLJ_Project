@@ -12,18 +12,18 @@ public class BindPhoneScript : MonoBehaviour
 {
     public InputField PhoneField;
     public InputField VerificationCodeField;
-    private bool _isCorrectPhone;
-    private bool _isCorrectCode;
-    private string _phoneNum;
-    private string _verificationCode;
+    public bool _isCorrectPhone;
+    public bool _isCorrectCode;
+    public string _phoneNum;
+    public string _verificationCode;
     public Button ButtonSendSms;
-    private int time = 20;
+    public int time = 20;
     public static int totalTime;
 
-    private bool IsStartTime;
+    public bool IsStartTime;
 
     //0:绑定手机 1：修改手机
-    private static int phone_type;
+    public static int phone_type;
 
     public GameObject TitleChange;
     public GameObject TitleBind;
@@ -37,11 +37,18 @@ public class BindPhoneScript : MonoBehaviour
         return obj;
     }
 
-    private float nextTime = 1; //一秒之后执行
-    private Text textSend;
+    public float nextTime = 1; //一秒之后执行
+    public Text textSend;
 
     private void Timer1()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Timer1"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "Timer1", null, null);
+            return;
+        }
+
         if (nextTime <= Time.time)
         {
             textSend.text = string.Format("{0:d2}", totalTime % 60);
@@ -57,6 +64,13 @@ public class BindPhoneScript : MonoBehaviour
 
     private void Update()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Update"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "Update", null, null);
+            return;
+        }
+
         if (IsStartTime)
         {
             Timer1();
@@ -66,6 +80,13 @@ public class BindPhoneScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "Start", null, null);
+            return;
+        }
+
         if (phone_type == 0)
         {
             TitleBind.transform.localScale = Vector3.one;
@@ -91,6 +112,13 @@ public class BindPhoneScript : MonoBehaviour
 
     public void GetPhoneNum(InputField input)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "GetPhoneNum"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "GetPhoneNum", null, input);
+            return;
+        }
+
         _isCorrectPhone = VerifyRuleUtil.CheckPhone(input.text);
         LogUtil.Log(_isCorrectPhone);
         if (_isCorrectPhone)
@@ -101,6 +129,13 @@ public class BindPhoneScript : MonoBehaviour
 
     public void GetVerificationCode(InputField input)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "GetVerificationCode"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "GetVerificationCode", null, input);
+            return;
+        }
+
         _isCorrectCode = VerifyRuleUtil.CheckVerificationCode(input.text);
         LogUtil.Log(_isCorrectCode);
         if (_isCorrectCode)
@@ -111,6 +146,13 @@ public class BindPhoneScript : MonoBehaviour
 
     public void OnClickBindPhone()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "OnClickBindPhone"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "OnClickBindPhone", null, null);
+            return;
+        }
+
         if (string.IsNullOrEmpty(PhoneField.text) || string.IsNullOrEmpty(VerificationCodeField.text))
         {
             ToastScript.createToast("输入的内容不能为空");
@@ -137,6 +179,13 @@ public class BindPhoneScript : MonoBehaviour
 
     public void OnClickSendCode()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "OnClickSendCode"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "OnClickSendCode", null, null);
+            return;
+        }
+
         if (_isCorrectPhone)
         {
             LogicEnginerScript.Instance.GetComponent<SendVerificationCodeRequest>().CallBack =
@@ -152,6 +201,13 @@ public class BindPhoneScript : MonoBehaviour
     //发送验证码
     private void sendVerificationCodeCallBack(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "sendVerificationCodeCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "sendVerificationCodeCallBack", null, null);
+            return;
+        }
+
         try
         {
             JsonData jsonData = JsonMapper.ToObject(data);
@@ -188,6 +244,13 @@ public class BindPhoneScript : MonoBehaviour
     //绑定手机回调
     private void bindPhoneCallBack(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "bindPhoneCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "bindPhoneCallBack", null, data);
+            return;
+        }
+
         JsonData jsonData = JsonMapper.ToObject(data);
         var code = (int) jsonData["code"];
         var msg = (string) jsonData["msg"];

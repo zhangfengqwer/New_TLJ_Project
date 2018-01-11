@@ -44,6 +44,13 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void setGameChangCiType(GameChangCiType gameChangCiType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "setGameChangCiType"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "setGameChangCiType", null, gameChangCiType);
+            return;
+        }
+
         m_gameChangCiType = gameChangCiType;
 
         if (m_gameChangCiType == GameChangCiType.GameChangCiType_jingdian)
@@ -65,6 +72,13 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void onClickChuJi()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "onClickChuJi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "onClickChuJi", null, null);
+            return;
+        }
+
         if (!GameUtil.checkCanEnterRoom(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi))
         {
             return;
@@ -91,6 +105,13 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void onClickZhongJi()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "onClickZhongJi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "onClickZhongJi", null, null);
+            return;
+        }
+
         if (!GameUtil.checkCanEnterRoom(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi))
         {
             return;
@@ -117,6 +138,13 @@ public class GameLevelChoiceScript : MonoBehaviour {
 
     public void onClickGaoJi()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "onClickGaoJi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "onClickGaoJi", null, null);
+            return;
+        }
+
         if (!GameUtil.checkCanEnterRoom(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi))
         {
             return;

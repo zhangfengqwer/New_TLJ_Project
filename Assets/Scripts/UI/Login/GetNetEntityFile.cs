@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GetNetEntityFile : MonoBehaviour
 {
-    List<FileInfo> m_fileList = new List<FileInfo>();
+    public List<FileInfo> m_fileList = new List<FileInfo>();
 
     private void Awake()
     {
@@ -15,6 +15,13 @@ public class GetNetEntityFile : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "Start", null, null);
+            return;
+        }
+
         m_fileList.Add(new FileInfo("NetConfig.json"));
         m_fileList.Add(new FileInfo("prop.json"));
         m_fileList.Add(new FileInfo("chat.json"));
@@ -38,6 +45,13 @@ public class GetNetEntityFile : MonoBehaviour
     // 获取数值表
     public void getNetFile()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "getNetFile"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "getNetFile", null, null);
+            return;
+        }
+
         Invoke("onInvoke",6);
 
         // 恢复初始状态
@@ -66,6 +80,13 @@ public class GetNetEntityFile : MonoBehaviour
 
     void onInvoke()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onInvoke"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "onInvoke", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         NetErrorPanelScript.getInstance().Show();
@@ -75,6 +96,13 @@ public class GetNetEntityFile : MonoBehaviour
 
     public void GetFileSuccess(string fileName)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "GetFileSuccess"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "GetFileSuccess", null, fileName);
+            return;
+        }
+
         for (int i = 0; i < m_fileList.Count; i++)
         {
             if (m_fileList[i].m_fileName.CompareTo(fileName) == 0)
@@ -107,6 +135,13 @@ public class GetNetEntityFile : MonoBehaviour
 
     public void GetFileFail(string fileName)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "GetFileFail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "GetFileFail", null, fileName);
+            return;
+        }
+
         {
             for (int i = 0; i < m_fileList.Count; i++)
             {
@@ -145,6 +180,13 @@ public class GetNetEntityFile : MonoBehaviour
 
     void onClick_retryGetNetFile()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onClick_retryGetNetFile"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "onClick_retryGetNetFile", null, null);
+            return;
+        }
+
         NetErrorPanelScript.getInstance().Close();
 
         getNetFile();

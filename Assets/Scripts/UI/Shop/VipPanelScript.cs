@@ -31,6 +31,13 @@ public class VipPanelScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipPanelScript", "Start", null, null);
+            return;
+        }
+
         InitVip();
         if (vipDatas == null || vipDatas.Count == 0)
         {
@@ -179,6 +186,13 @@ public class VipPanelScript : MonoBehaviour
 
     private void InitVip()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipPanelScript", "InitVip"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipPanelScript", "InitVip", null, null);
+            return;
+        }
+
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
         int currentVipToTal = VipUtil.GetCurrentVipTotal(vipLevel);
         MyVipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/shop_vip_" + vipLevel);

@@ -11,6 +11,7 @@ public class MedalExplainPanelScript : MonoBehaviour {
     {
         OtherData.s_medalExplainPanelScript = this;
 
+        // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalExplainPanelScript", "Awake"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript", "Awake", null, null);
@@ -21,6 +22,13 @@ public class MedalExplainPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalExplainPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript", "Start", null, null);
+            return;
+        }
+
         if (UserData.isSetSecondPsw)
         {
             CommonUtil.setImageSprite(m_button_setSecondPsw.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalExplain/anniu_zi_ysz");
@@ -42,6 +50,7 @@ public class MedalExplainPanelScript : MonoBehaviour {
 
     public void onClickSetPsw()
     {
+        // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalExplainPanelScript", "onClickSetPsw"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalExplainPanelScript", "onClickSetPsw", null, null);

@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class HasInRoomPanelScript : MonoBehaviour {
 
     public delegate void OnClickButton();
-    OnClickButton m_OnClickButton = null;
-
+    public OnClickButton m_OnClickButton = null;
     public Text m_content;
 
     public static GameObject create(string text, OnClickButton onClickButton)
@@ -26,8 +25,13 @@ public class HasInRoomPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HasInRoomPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HasInRoomPanelScript", "Start", null, null);
+            return;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,6 +40,13 @@ public class HasInRoomPanelScript : MonoBehaviour {
 
     public void onClickOK()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HasInRoomPanelScript", "onClickOK"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HasInRoomPanelScript", "onClickOK", null, null);
+            return;
+        }
+
         if (m_OnClickButton != null)
         {
             m_OnClickButton();

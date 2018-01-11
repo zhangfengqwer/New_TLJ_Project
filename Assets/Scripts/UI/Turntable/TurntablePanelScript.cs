@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class TurntablePanelScript : MonoBehaviour
 {
     public GameObject m_listView;
-    ListViewScript m_ListViewScript;
+    public ListViewScript m_ListViewScript;
 
     public Image m_image_neiyuan;
     public Image m_image_deng1;
@@ -21,10 +21,10 @@ public class TurntablePanelScript : MonoBehaviour
 
     public Text m_text_myLuckyValue;
 
-    List<GameObject> m_rewardObj_list = new List<GameObject>();
+    public List<GameObject> m_rewardObj_list = new List<GameObject>();
 
-    bool m_isStartRotate = false;
-    GameObject m_targetGameObject;
+    public bool m_isStartRotate = false;
+    public GameObject m_targetGameObject;
 
     public static GameObject s_instance = null;
 
@@ -39,6 +39,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "Start", null, null);
+            return;
+        }
+
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
         m_button_free.transform.Find("Text").GetComponent<Text>().text = UserData.myTurntableData.freeCount.ToString();
@@ -63,6 +70,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     void onInvokeDeng()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onInvokeDeng"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onInvokeDeng", null, null);
+            return;
+        }
+
         if (m_image_deng1.transform.localScale.x == 0)
         {
             m_image_deng1.transform.localScale = new Vector3(1,1,1);
@@ -77,11 +91,25 @@ public class TurntablePanelScript : MonoBehaviour
 
     void onInvokeAdd1()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onInvokeAdd1"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onInvokeAdd1", null, null);
+            return;
+        }
+
         GameUtil.hideGameObject(m_image_add1.gameObject);
     }
 
     void loadReward()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "loadReward"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "loadReward", null, null);
+            return;
+        }
+
         m_rewardObj_list.Clear();
 
         for (int i = 0; i < TurntableDataScript.getInstance().getDataList().Count; i++)
@@ -126,6 +154,13 @@ public class TurntablePanelScript : MonoBehaviour
     // 获取转盘数据
     void onReceive_GetTurntable(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_GetTurntable"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onReceive_GetTurntable", null, data);
+            return;
+        }
+
         TurntableDataScript.getInstance().initJson(data);
         loadReward();
     }
@@ -133,6 +168,13 @@ public class TurntablePanelScript : MonoBehaviour
     // 使用转盘
     void onReceive_UseTurntable(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_UseTurntable"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onReceive_UseTurntable", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
 
         int code = (int)jd["code"];
@@ -208,6 +250,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onReceive_TurntableBroadcast(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_TurntableBroadcast"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onReceive_TurntableBroadcast", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
 
         {
@@ -231,6 +280,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void addTurntableBroadcast(string name,int reward_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "addTurntableBroadcast"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "addTurntableBroadcast", null, name, reward_id);
+            return;
+        }
+
         try
         {
             TurntableBroadcastDataScript.getInstance().addData(name, reward_id);
@@ -274,6 +330,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickFree()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickFree"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickFree", null, null);
+            return;
+        }
+
         if (m_isStartRotate)
         {
             return;
@@ -292,6 +355,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickHuiZhang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickHuiZhang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickHuiZhang", null, null);
+            return;
+        }
+
         // 判断是否设置过徽章密码
         {
             if (!UserData.isSetSecondPsw)
@@ -376,6 +446,13 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void reqUseZhuanPan(int type)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "reqUseZhuanPan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "reqUseZhuanPan", null, type);
+            return;
+        }
+
         // 使用转盘
         {
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
@@ -386,12 +463,26 @@ public class TurntablePanelScript : MonoBehaviour
 
     public void onClickFree_tip()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickFree_tip"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickFree_tip", null, null);
+            return;
+        }
+
         string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级贵族等级获得贵族特权，即可增加抽奖机会。";
         TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
 
     public void onClickHuiZhang_tip()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickHuiZhang_tip"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickHuiZhang_tip", null, null);
+            return;
+        }
+
         string tip = "1、使用徽章进行抽奖，每日可获得三次抽奖机会。\r\n2、通过比赛场获得胜利可赢取徽章奖励。";
         TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }

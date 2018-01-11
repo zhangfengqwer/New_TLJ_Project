@@ -14,7 +14,7 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public Button m_button_item;
 
-    MailData m_mailData;
+    public MailData m_mailData;
 
     // Use this for initialization
     void Start () {
@@ -28,6 +28,13 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public void setMailData(MailData mailData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "setMailData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "setMailData", null, mailData);
+            return;
+        }
+
         m_mailData = mailData;
 
         {
@@ -76,6 +83,13 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public void onClickItem()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "onClickItem"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "onClickItem", null, null);
+            return;
+        }
+
         // 未领取的邮件先请求服务器
         if (m_mailData.m_state == 0)
         {
@@ -92,6 +106,13 @@ public class Mail_List_Item_Script : MonoBehaviour {
 
     public void onReceive_ReadMail(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "onReceive_ReadMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "onReceive_ReadMail", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         int email_id = (int)jd["email_id"];

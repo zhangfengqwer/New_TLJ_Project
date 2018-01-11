@@ -16,9 +16,15 @@ public class TurntableTipPanelScript : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableTipPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableTipPanelScript", "Start", null, null);
+            return;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,6 +33,13 @@ public class TurntableTipPanelScript : MonoBehaviour {
 
     public void setTip(string tip)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableTipPanelScript", "setTip"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableTipPanelScript", "setTip", null, tip);
+            return;
+        }
+
         m_text_tip.text = tip;
     }
 }

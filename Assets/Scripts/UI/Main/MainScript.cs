@@ -29,15 +29,15 @@ public class MainScript : MonoBehaviour
     public GameObject m_laba;
     public GameObject m_headIcon;
 
-    private GameObject m_waitMatchPanel = null;
-    private GameObject exitGameObject;
-    LaBaScript m_laBaScript;
+    public GameObject m_waitMatchPanel = null;
+    public GameObject exitGameObject;
+    public LaBaScript m_laBaScript;
 
     //发送验证码的倒计时
-    private float nextTime = 1; //一秒之后执行
+    public float nextTime = 1; //一秒之后执行
 
-    private static GameObject logicEnginer;
-    private static GameObject playEnginer;
+    public static GameObject logicEnginer;
+    public static GameObject playEnginer;
 
     private void Awake()
     {
@@ -132,12 +132,26 @@ public class MainScript : MonoBehaviour
 
     void onInvokeStartMusic()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onInvokeStartMusic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onInvokeStartMusic", null, null);
+            return;
+        }
+
         AudioScript.getAudioScript().playMusic_MainBg();
     }
 
 
     void Update()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "Update"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "Update", null, null);
+            return;
+        }
+
         if (BindPhoneScript.totalTime > 0)
         {
             if (nextTime <= Time.time)
@@ -174,6 +188,13 @@ public class MainScript : MonoBehaviour
     // 检测服务器是否连接
     void checkNet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "checkNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "checkNet", null, null);
+            return;
+        }
+
         if (!LogicEnginerScript.Instance.isConnecion())
         {
             //ToastScript.createToast("与Logic服务器断开连接");
@@ -236,6 +257,13 @@ public class MainScript : MonoBehaviour
 
     public void showWaitMatchPanel(float time, string gameroomtype)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "showWaitMatchPanel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "showWaitMatchPanel", null, time, gameroomtype);
+            return;
+        }
+
         if (m_waitMatchPanel != null)
         {
             Destroy(m_waitMatchPanel);
@@ -250,6 +278,13 @@ public class MainScript : MonoBehaviour
 
     void onTimerEvent_TimeEnd(bool isContinueGame)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onTimerEvent_TimeEnd"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onTimerEvent_TimeEnd", null, isContinueGame);
+            return;
+        }
+
         LogUtil.Log("暂时没有匹配到玩家,请求匹配机器人");
 
         //// 让服务端匹配机器人
@@ -316,6 +351,13 @@ public class MainScript : MonoBehaviour
 
     public void onClickXiuXianChang_back()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onClickXiuXianChang_back"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript", "onClickXiuXianChang_back", null, null);
+            return;
+        }
+
         m_button_xiuxianchang.transform.localScale = new Vector3(1, 1, 1);
         m_button_jingjichang.transform.localScale = new Vector3(1, 1, 1);
         m_xiuxianchang.transform.localScale = new Vector3(0, 0, 0);

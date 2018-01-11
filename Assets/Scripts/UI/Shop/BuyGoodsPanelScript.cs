@@ -22,12 +22,12 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public Button m_button_buy2;
     public Text m_text_shiduyule;
 
-    ShopData m_shopData = null;
+    public ShopData m_shopData = null;
 
-    int m_goods_num = 1;
-    int m_goods_buy_maxNum = 10;
+    public int m_goods_num = 1;
+    public int m_goods_buy_maxNum = 10;
 
-    int m_money_type;
+    public int m_money_type;
 
     public static GameObject create(int goods_id)
     {
@@ -42,6 +42,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "Start", null, null);
+            return;
+        }
+
         m_button_jian.interactable = false;
     }
 
@@ -52,6 +59,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void setGoodsId(int goods_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "setGoodsId"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "setGoodsId", null, goods_id);
+            return;
+        }
+
         m_shopData = ShopDataScript.getInstance().getShopDataById(goods_id);
 
         if (m_shopData != null)
@@ -98,6 +112,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     void refreshPrice()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "refreshPrice"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "refreshPrice", null, null);
+            return;
+        }
+
         if (m_shopData.price != 0)
         {
             if (m_shopData.money_type == 1)
@@ -216,6 +237,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickJian()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickJian"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickJian", null, null);
+            return;
+        }
+
         m_button_jia.interactable = true;
 
         if ((--m_goods_num) == 1)
@@ -230,6 +258,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickJia()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickJia"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickJia", null, null);
+            return;
+        }
+
         m_button_jian.interactable = true;
 
         if ((++m_goods_num) == m_goods_buy_maxNum)
@@ -244,6 +279,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickMax()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickMax"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickMax", null, null);
+            return;
+        }
+
         m_goods_num = m_goods_buy_maxNum;
         m_text_goods_num.text = m_goods_num.ToString();
 
@@ -255,6 +297,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickBuy1()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickBuy1"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickBuy1", null, null);
+            return;
+        }
+
         if (m_shopData.money_type == 4)
         {
             // 判断是否设置过徽章密码
@@ -285,6 +334,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onClickBuy2()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickBuy2"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickBuy2", null, null);
+            return;
+        }
+
         if (m_shopData.money_type2 == 4)
         {
             // 判断是否设置过徽章密码
@@ -319,6 +375,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     void buy(int money_type)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "buy"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "buy", null, money_type);
+            return;
+        }
+
         int totalPrice = 0;
 
         if (money_type == m_shopData.money_type)
@@ -421,6 +484,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     private string SetRequest(ShopData shopData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "SetRequest"))
+        {
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "SetRequest", null, shopData);
+            return s;
+        }
+
         JsonData data = new JsonData();
         data["uid"] = UserData.uid;
         data["goods_id"] = shopData.goods_id;
@@ -433,6 +503,13 @@ public class BuyGoodsPanelScript : MonoBehaviour
 
     public void onReceive_BuyGoods(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onReceive_BuyGoods"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onReceive_BuyGoods", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
 

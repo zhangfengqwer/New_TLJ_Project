@@ -14,7 +14,7 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public Button m_button_wancheng;
 
-    TaskData m_taskData;
+    public TaskData m_taskData;
 
     // Use this for initialization
     void Start()
@@ -30,6 +30,13 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public void setTaskData(TaskData taskData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "setTaskData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "setTaskData", null, taskData);
+            return;
+        }
+
         m_taskData = taskData;
 
         {
@@ -109,6 +116,13 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public void setTaskIsOver()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "setTaskIsOver"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "setTaskIsOver", null, null);
+            return;
+        }
+
         m_button_wancheng.interactable = false;
         CommonUtil.setImageSprite(m_button_wancheng.GetComponent<Image>(), "Sprites/Task/anniu_yilingque");
         m_button_wancheng.GetComponent<Image>().SetNativeSize();
@@ -117,6 +131,13 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public void onClickWanCheng()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "onClickWanCheng"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "onClickWanCheng", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
 
         LogicEnginerScript.Instance.GetComponent<CompleteTaskRequest>().setTaskId(int.Parse(gameObject.transform.name));
@@ -126,6 +147,13 @@ public class Item_Task_List_Script : MonoBehaviour {
 
     public void onReceive_CompleteTask(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "onReceive_CompleteTask"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "onReceive_CompleteTask", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);

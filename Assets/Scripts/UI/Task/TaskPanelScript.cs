@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class TaskPanelScript : MonoBehaviour {
 
     public GameObject m_listView;
-    ListViewScript m_ListViewScript;
+    public ListViewScript m_ListViewScript;
 
-    bool m_isScaleEnd = false;
-    bool m_hasGetData = false;
+    public bool m_isScaleEnd = false;
+    public bool m_hasGetData = false;
 
     public static GameObject create()
     {
@@ -22,6 +22,13 @@ public class TaskPanelScript : MonoBehaviour {
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "Start", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
 
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
@@ -37,6 +44,13 @@ public class TaskPanelScript : MonoBehaviour {
 
     void scaleCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "scaleCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "scaleCallBack", null, null);
+            return;
+        }
+
         m_isScaleEnd = true;
 
         if (m_hasGetData)
@@ -49,6 +63,13 @@ public class TaskPanelScript : MonoBehaviour {
 
     public void loadTask()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "loadTask"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "loadTask", null, null);
+            return;
+        }
+
         m_ListViewScript.clear();
 
         for (int i = 0; i < TaskDataScript.getInstance().getTaskDataList().Count; i++)
@@ -68,6 +89,13 @@ public class TaskPanelScript : MonoBehaviour {
 
     public void setTaskOver(int task_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "setTaskOver"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "setTaskOver", null, task_id);
+            return;
+        }
+
         TaskDataScript.getInstance().setTaskIsOver(task_id);
 
         for (int i = 0; i < m_ListViewScript.getItemList().Count; i++)
@@ -84,6 +112,13 @@ public class TaskPanelScript : MonoBehaviour {
 
     public void onReceive_GetTask(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "onReceive_GetTask"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "onReceive_GetTask", null, data);
+            return;
+        }
+
         TaskDataScript.getInstance().initJson(data);
 
         //loadTask();

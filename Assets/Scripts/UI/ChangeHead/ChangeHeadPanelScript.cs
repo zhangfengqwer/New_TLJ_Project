@@ -35,6 +35,13 @@ public class ChangeHeadPanelScript : MonoBehaviour {
 
     public void onClickOK()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "onClickOK"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "onClickOK", null, null);
+            return;
+        }
+
         if (m_choiceHead == 0)
         {
             ToastScript.createToast("请选择头像");
@@ -52,6 +59,13 @@ public class ChangeHeadPanelScript : MonoBehaviour {
 
     void onReceive_ChangeHead(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "onReceive_ChangeHead"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "onReceive_ChangeHead", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);

@@ -8,15 +8,15 @@ using UnityEngine.UI;
 
 public class WeeklySignScript : MonoBehaviour
 {
-    private List<GameObject> signObjects = new List<GameObject>();
+    public List<GameObject> signObjects = new List<GameObject>();
     public GameObject content;
     public Button btn_Sign;
     public Image image_Signed;
-    private int totalSignDays;
+    public int totalSignDays;
     public static List<SignItem> _signItems;
-    private bool isSignSuccess = false;
+    public bool isSignSuccess = false;
 
-    private GameObject go;
+    public GameObject go;
 
     public static GameObject create()
     {
@@ -28,12 +28,26 @@ public class WeeklySignScript : MonoBehaviour
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "Start", null, null);
+            return;
+        }
+
         InitData();
         InitUi();
     }
 
     private void Update()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "Update"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "Update", null, null);
+            return;
+        }
+
         //签到成功后，做的一些ui操作
         if (isSignSuccess)
         {
@@ -101,6 +115,13 @@ public class WeeklySignScript : MonoBehaviour
 
     private void AddProp(string prop)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "AddProp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "AddProp", null, prop);
+            return;
+        }
+
         List<string> list = new List<String>();
         CommonUtil.splitStr(prop, list, ';');
         for (int i = 0; i < list.Count; i++)
@@ -147,6 +168,13 @@ public class WeeklySignScript : MonoBehaviour
     /// </summary>
     private void InitData()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "InitData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "InitData", null, null);
+            return;
+        }
+
         totalSignDays = SignData.SignWeekDays;
 
 
@@ -168,6 +196,13 @@ public class WeeklySignScript : MonoBehaviour
     /// </summary>
     private void InitUi()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "InitUi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "InitUi", null, null);
+            return;
+        }
+
         //签到过，按钮不可点击
         if (SignData.IsSign)
         {
@@ -275,6 +310,13 @@ public class WeeklySignScript : MonoBehaviour
 
     public void SignCallBack(bool flag)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "SignCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "SignCallBack", null, flag);
+            return;
+        }
+
         isSignSuccess = flag;
         if (!flag)
         {

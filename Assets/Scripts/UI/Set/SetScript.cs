@@ -39,6 +39,13 @@ public class SetScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "Start", null, null);
+            return;
+        }
+
         m_sliderMusic.value = AudioScript.getAudioScript().getMusicVolume();
         m_sliderSound.value = AudioScript.getAudioScript().getSoundVolume();
 
@@ -71,6 +78,13 @@ public class SetScript : MonoBehaviour {
 
     public void OnClickChangeAccount()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "OnClickChangeAccount"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "OnClickChangeAccount", null, null);
+            return;
+        }
+
         //LogicEnginerScript.Instance.Stop();
         //LogicEnginerScript.Instance.clear();
 
@@ -85,11 +99,25 @@ public class SetScript : MonoBehaviour {
 
     public void OnClickExit()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "OnClickExit"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "OnClickExit", null, null);
+            return;
+        }
+
         Application.Quit();
     }
 
     public void OnClickAbout()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "OnClickAbout"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "OnClickAbout", null, null);
+            return;
+        }
+
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/AboutPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
     }

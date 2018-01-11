@@ -22,6 +22,13 @@ public class ChoiceShareScript : MonoBehaviour
 
     public void SetClickListener(string content, string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript", "SetClickListener"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChoiceShareScript", "SetClickListener", null, content, data);
+            return;
+        }
+
         ShareFriends.onClick.AddListener(() =>
         {
             PlatformHelper.WXShareFriends("AndroidCallBack", "OnWxShareFriends", content);

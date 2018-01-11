@@ -20,6 +20,13 @@ public class SetSecondPswPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript", "Start", null, null);
+            return;
+        }
+
         LogicEnginerScript.Instance.GetComponent<SetSecondPswRequest>().CallBack = onReceive_SetSecondPsw;
     }
 	
@@ -30,6 +37,13 @@ public class SetSecondPswPanelScript : MonoBehaviour {
 
     public void onClickOK()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "onClickOK"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript", "onClickOK", null, null);
+            return;
+        }
+
         if ((m_inputField_mima.text.CompareTo("") == 0) ||
             (m_inputField_querenmima.text.CompareTo("") == 0))
         {
@@ -74,6 +88,13 @@ public class SetSecondPswPanelScript : MonoBehaviour {
 
     public void onReceive_SetSecondPsw(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "onReceive_SetSecondPsw"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript", "onReceive_SetSecondPsw", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
 
         int code = (int)jd["code"];
