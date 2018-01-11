@@ -32,6 +32,13 @@ public class UserInfoScript : MonoBehaviour
 
     private void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserInfoScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserInfoScript", "Start", null, null);
+            return;
+        }
+
         OtherData.s_userInfoScript = this;
         Instance = this;
         InitUI();
@@ -44,6 +51,13 @@ public class UserInfoScript : MonoBehaviour
 
     public void InitUI()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserInfoScript", "InitUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserInfoScript", "InitUI", null, null);
+            return;
+        }
+
         nickName.text = UserData.name;
         account.text = UserData.uid;
         gold.text = UserData.gold.ToString();
@@ -106,21 +120,49 @@ public class UserInfoScript : MonoBehaviour
 
     public void OnBindPhoneClick()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserInfoScript", "OnBindPhoneClick"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserInfoScript", "OnBindPhoneClick", null, null);
+            return;
+        }
+
         BindPhoneScript.create(0);
     }
 
     public void OnChangePhoneClick()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserInfoScript", "OnChangePhoneClick"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserInfoScript", "OnChangePhoneClick", null, null);
+            return;
+        }
+
         BindPhoneScript.create(1);
     }
 
     public void OnRealNameClick()
     {
-       RealNameScript.create();
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserInfoScript", "OnRealNameClick"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserInfoScript", "OnRealNameClick", null, null);
+            return;
+        }
+
+        RealNameScript.create();
     }
 
     public void onClickChangeHead()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserInfoScript", "onClickChangeHead"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserInfoScript", "onClickChangeHead", null, null);
+            return;
+        }
+
         ChangeHeadPanelScript.create();
     }
 }

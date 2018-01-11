@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class ShowRewardPanelScript : MonoBehaviour {
 
-    static List<string> s_rewardList = new List<string>();
+    public static List<string> s_rewardList = new List<string>();
 
     public Image m_image_itemContent;
     public Button m_button_share;
 
     public static void Show(string reward, bool isCanShare)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "Show"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "Show", null, reward, isCanShare);
+            return;
+        }
+
         if (s_rewardList.Count == 0)
         {
             s_rewardList.Add(reward);
@@ -29,6 +36,13 @@ public class ShowRewardPanelScript : MonoBehaviour {
 
     public void setData(string reward, bool isCanShare)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "setData", null, reward, isCanShare);
+            return;
+        }
+
         List<string> list1 = new List<string>();
         CommonUtil.splitStr(reward,list1,';');
 
@@ -58,6 +72,13 @@ public class ShowRewardPanelScript : MonoBehaviour {
 
     public void onClickClose()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "onClickClose"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "onClickClose", null, null);
+            return;
+        }
+
         s_rewardList.RemoveAt(0);
         Destroy(gameObject);
 
@@ -72,6 +93,13 @@ public class ShowRewardPanelScript : MonoBehaviour {
 
     public void onClickShare()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "onClickShare"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "onClickShare", null, null);
+            return;
+        }
+
         ChoiceShareScript.Create("疯狂升级天天玩，玩就有话费奖品抱回家！","");
     }
 }

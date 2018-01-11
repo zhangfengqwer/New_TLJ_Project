@@ -16,7 +16,7 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
     public Button m_button_baoming;
 
-    PVPGameRoomData m_PVPGameRoomData;
+    public PVPGameRoomData m_PVPGameRoomData;
 
     // Use this for initialization
     void Start () {
@@ -31,6 +31,13 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
     public void setPVPGameRoomData(PVPGameRoomData PVPGameRoomData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "setPVPGameRoomData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "setPVPGameRoomData", null, PVPGameRoomData);
+            return;
+        }
+
         m_PVPGameRoomData = PVPGameRoomData;
 
         m_text_changci.text = m_PVPGameRoomData.gameroomname;
@@ -65,12 +72,26 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
     void onInvoke()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "onInvoke"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "onInvoke", null, null);
+            return;
+        }
+
         int i = RandomUtil.getRandom(-30,30);
         m_text_baomingrenshu.text = "已报名人数：" + (m_PVPGameRoomData.baomingrenshu + i);
     }
 
     public void onClickBaoMing()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "onClickBaoMing"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "onClickBaoMing", null, null);
+            return;
+        }
+
         // 检查是否有足够的报名费
         {
             if (m_PVPGameRoomData.baomingfei.CompareTo("0") != 0)

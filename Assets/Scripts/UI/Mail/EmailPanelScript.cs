@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EmailPanelScript : MonoBehaviour
 {
     public GameObject m_listView;
-    ListViewScript m_ListViewScript;
+    public ListViewScript m_ListViewScript;
 
     public Button m_button_oneKeyRead;
     public Button m_button_oneKeyDelete;
@@ -24,6 +24,13 @@ public class EmailPanelScript : MonoBehaviour
 
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "Start", null, null);
+            return;
+        }
+
         m_button_oneKeyRead.transform.localScale = new Vector3(0, 0, 0);
         m_button_oneKeyDelete.transform.localScale = new Vector3(0, 0, 0);
 
@@ -46,8 +53,15 @@ public class EmailPanelScript : MonoBehaviour
         }
     }
 
-    void loadMail()
+    public void loadMail()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "loadMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "loadMail", null, null);
+            return;
+        }
+
         m_ListViewScript.clear();
         
         for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
@@ -124,6 +138,13 @@ public class EmailPanelScript : MonoBehaviour
 
     public void setMailReaded(int email_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "setMailReaded"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "setMailReaded", null, email_id);
+            return;
+        }
+
         UserMailData.getInstance().setMailReaded(email_id);
 
         for (int i = 0; i < m_ListViewScript.getItemList().Count; i++)
@@ -183,6 +204,13 @@ public class EmailPanelScript : MonoBehaviour
 
     public void deleteMail(int email_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "deleteMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "deleteMail", null, email_id);
+            return;
+        }
+
         UserMailData.getInstance().deleteMail(email_id);
 
         loadMail();
@@ -190,6 +218,13 @@ public class EmailPanelScript : MonoBehaviour
 
     public void setAllMailReaded()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "setAllMailReaded"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "setAllMailReaded", null, null);
+            return;
+        }
+
         UserMailData.getInstance().setAllMailReaded();
 
         loadMail();
@@ -197,6 +232,13 @@ public class EmailPanelScript : MonoBehaviour
 
     public void deleteAllMail()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "deleteAllMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "deleteAllMail", null, null);
+            return;
+        }
+
         UserMailData.getInstance().deleteAllMail();
 
         loadMail();
@@ -204,18 +246,39 @@ public class EmailPanelScript : MonoBehaviour
 
     public void onClickOneKeyReadMail()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onClickOneKeyReadMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onClickOneKeyReadMail", null, null);
+            return;
+        }
+
         LogicEnginerScript.Instance.GetComponent<OneKeyReadEmailRequest>().CallBack = onReceive_OneKeyReadMail;
         LogicEnginerScript.Instance.GetComponent<OneKeyReadEmailRequest>().OnRequest();
     }
 
     public void onClickOneKeyDeleteMail()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onClickOneKeyDeleteMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onClickOneKeyDeleteMail", null, null);
+            return;
+        }
+
         LogicEnginerScript.Instance.GetComponent<OneKeyDeleteEmailRequest>().CallBack = onReceive_OneKeyDeleteMail;
         LogicEnginerScript.Instance.GetComponent<OneKeyDeleteEmailRequest>().OnRequest();
     }
 
     public void onReceive_OneKeyReadMail(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onReceive_OneKeyReadMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onReceive_OneKeyReadMail", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
 
@@ -232,6 +295,13 @@ public class EmailPanelScript : MonoBehaviour
 
     public void onReceive_OneKeyDeleteMail(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onReceive_OneKeyDeleteMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onReceive_OneKeyDeleteMail", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
 
@@ -243,6 +313,13 @@ public class EmailPanelScript : MonoBehaviour
 
     public void onReceive_GetMail(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onReceive_GetMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onReceive_GetMail", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         UserMailData.getInstance().initJson(data);

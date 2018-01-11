@@ -14,7 +14,7 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public Button m_button_item;
 
-    NoticeData m_noticeData;
+    public NoticeData m_noticeData;
 
     // Use this for initialization
     void Start () {
@@ -28,6 +28,13 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public void setNoticeData(NoticeData noticeData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "setNoticeData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "setNoticeData", null, noticeData);
+            return;
+        }
+
         m_noticeData = noticeData;
 
         {
@@ -44,11 +51,25 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public NoticeData getNoticeData()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "getNoticeData"))
+        {
+            NoticeData noticeData = (NoticeData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "getNoticeData", null, null);
+            return noticeData;
+        }
+
         return m_noticeData;
     }
 
     public void onClickItem()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "onClickItem"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "onClickItem", null, null);
+            return;
+        }
+
         if (NoticelDataScript.getInstance().getNoticeDataById(int.Parse(gameObject.transform.name)).state == 1)
         {
             NoticeDetailScript.create(int.Parse(gameObject.transform.name), m_parentScript);
@@ -63,6 +84,13 @@ public class Item_Notice_List_Script : MonoBehaviour {
 
     public void onReceive_ReadNotice(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "onReceive_ReadNotice"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "onReceive_ReadNotice", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         int notice_id = (int)jd["notice_id"];

@@ -21,6 +21,13 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript", "Start", null, null);
+            return;
+        }
+
         LogicEnginerScript.Instance.GetComponent<CheckSecondPSWRequest>().m_callBack = onReceive_CheckSecondPSW;
     }
 	
@@ -32,6 +39,13 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
 
     public void onClickOK()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "onClickOK"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript", "onClickOK", null, null);
+            return;
+        }
+
         // 检测密码是否合格
         {
             if (m_inputField_psw.text.CompareTo("") == 0)
@@ -70,6 +84,13 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
 
     void onReceive_CheckSecondPSW(string result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "onReceive_CheckSecondPSW"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript", "onReceive_CheckSecondPSW", null, result);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(result);

@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class RankListJifenScript : MonoBehaviour
 {
-    private UIWarpContent uiWarpContent;
-    private List<GoldRankItemData> _GoldRankList;
+    public UIWarpContent uiWarpContent;
+    public List<GoldRankItemData> _GoldRankList;
     public GameObject Content;
     public GameObject Item;
     public Text JifenRank;
     public Text JifenCount;
     public static RankListJifenScript Instance;
-    private string myGoldRank;
+    public string myGoldRank;
 
     void Start()
     {
@@ -26,6 +26,13 @@ public class RankListJifenScript : MonoBehaviour
 
     public void InitUI()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListJifenScript", "InitUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListJifenScript", "InitUI", null, null);
+            return;
+        }
+
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;

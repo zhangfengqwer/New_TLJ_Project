@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PVPChoiceScript : MonoBehaviour {
 
     public GameObject m_listView;
-    ListViewScript m_ListViewScript;
+    public ListViewScript m_ListViewScript;
 
     public Image m_tab_bg;
     public Button m_button_tiaozhansai;
@@ -24,6 +24,13 @@ public class PVPChoiceScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "Start", null, null);
+            return;
+        }
+
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
         showJinBiChang();
@@ -37,6 +44,13 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public void onClickJinBiChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "onClickJinBiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "onClickJinBiChang", null, null);
+            return;
+        }
+
         if (m_curShowTiaoZhanSai)
         {
             return;
@@ -47,6 +61,13 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public void onClickHuaFeiChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "onClickHuaFeiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "onClickHuaFeiChang", null, null);
+            return;
+        }
+
         if (!m_curShowTiaoZhanSai)
         {
             return;
@@ -57,6 +78,13 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public void showJinBiChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "showJinBiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "showJinBiChang", null, null);
+            return;
+        }
+
         m_curShowTiaoZhanSai = true;
 
         m_ListViewScript.clear();
@@ -87,6 +115,13 @@ public class PVPChoiceScript : MonoBehaviour {
 
     public void showHuaFeiChang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "showHuaFeiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "showHuaFeiChang", null, null);
+            return;
+        }
+
         m_curShowTiaoZhanSai = false;
 
         m_ListViewScript.clear();

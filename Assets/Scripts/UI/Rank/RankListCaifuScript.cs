@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class RankListCaifuScript : MonoBehaviour
 {
-    private UIWarpContent uiWarpContent;
+    public UIWarpContent uiWarpContent;
     public GameObject Content;
     public GameObject Item;
     public Text CaifuRank;
     public Text CaifuCount;
-    private string mymedalRank;
-    private static List<MedalRankItemData> _medalRankItemDatas;
+    public string mymedalRank;
+    public static List<MedalRankItemData> _medalRankItemDatas;
 
     public static RankListCaifuScript Instance;
 
@@ -30,7 +30,14 @@ public class RankListCaifuScript : MonoBehaviour
 
     public void InitUI()
     {
-//        mymedalRank = null;
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript", "InitUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListCaifuScript", "InitUI", null, null);
+            return;
+        }
+
+        //        mymedalRank = null;
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;

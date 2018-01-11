@@ -12,11 +12,10 @@ public class PropDetailPanelScript : MonoBehaviour {
     public Text m_text_desc;
     public Image m_image_icon;
     public Button m_button_use;
-    PropInfo m_propInfo = null;
+    public PropInfo m_propInfo = null;
 
     public static GameObject create(int prop_id, BagPanelScript parentScript)
     {
-       
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/PropDetailPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
@@ -27,6 +26,13 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void setPropId(int prop_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "setPropId"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "setPropId", null, prop_id);
+            return;
+        }
+
         m_propInfo = PropData.getInstance().getPropInfoById(prop_id);
 
         if (m_propInfo != null)
@@ -44,6 +50,13 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void onClickUseProp()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "onClickUseProp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "onClickUseProp", null, null);
+            return;
+        }
+
         // 喇叭
         if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_laba)
         {
@@ -70,6 +83,13 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     public void onReceive_UseProp(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "onReceive_UseProp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "onReceive_UseProp", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
@@ -83,6 +103,13 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     void useProp(int id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "useProp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "useProp", null, id);
+            return;
+        }
+
         switch (id)
         {
             // 记牌器
@@ -181,6 +208,13 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     void UpdatePropData()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "UpdatePropData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "UpdatePropData", null, null);
+            return;
+        }
+
         List<UserPropData> userPropDatas = UserData.propData;
 
         for (int i = 0; i < userPropDatas.Count; i++)

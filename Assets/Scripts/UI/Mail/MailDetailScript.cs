@@ -9,7 +9,7 @@ public class MailDetailScript : MonoBehaviour {
     public EmailPanelScript m_parentScript;
     public GameObject EmailReward;
     public Text m_content;
-    MailData m_mailData = null;
+    public MailData m_mailData = null;
 
     public static GameObject create(int email_id, EmailPanelScript parentScript)
     {
@@ -35,6 +35,13 @@ public class MailDetailScript : MonoBehaviour {
 
     public void setEmailId(int email_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "setEmailId"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "setEmailId", null, email_id);
+            return;
+        }
+
         for (int i = 0; i < UserMailData.getInstance().getUserMailDataList().Count; i++)
         {
             if (UserMailData.getInstance().getUserMailDataList()[i].m_email_id == email_id)
@@ -51,6 +58,13 @@ public class MailDetailScript : MonoBehaviour {
 
     public void setData(string reward)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "setData", null, reward);
+            return;
+        }
+
         if (string.IsNullOrEmpty(reward)) return;
 
         List<string> list1 = new List<string>();
@@ -79,6 +93,13 @@ public class MailDetailScript : MonoBehaviour {
 
     public void onClickDelete()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "onClickDelete"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "onClickDelete", null, null);
+            return;
+        }
+
         LogicEnginerScript.Instance.GetComponent<DeleteEmailRequest>().setEmailId(m_mailData.m_email_id);
         LogicEnginerScript.Instance.GetComponent<DeleteEmailRequest>().CallBack = onReceive_DeleteMail;
         LogicEnginerScript.Instance.GetComponent<DeleteEmailRequest>().OnRequest();
@@ -86,6 +107,13 @@ public class MailDetailScript : MonoBehaviour {
 
     public void onReceive_DeleteMail(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "onReceive_DeleteMail"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "onReceive_DeleteMail", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         int email_id = (int)jd["email_id"];

@@ -8,10 +8,10 @@ public class RealNameScript : MonoBehaviour
 {
     public InputField RealNameInputField;
     public InputField IdentificationInputField;
-    private bool _isCorrectRealName;
-    private bool _isCorrectIdentification;
-    private string _realName;
-    private string _identification;
+    public bool _isCorrectRealName;
+    public bool _isCorrectIdentification;
+    public string _realName;
+    public string _identification;
 
     public static GameObject create()
     {
@@ -23,12 +23,26 @@ public class RealNameScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "Start", null, null);
+            return;
+        }
+
         RealNameInputField.onEndEdit.AddListener(delegate { GetRealName(RealNameInputField); });
         IdentificationInputField.onEndEdit.AddListener(delegate { GetIdentification(IdentificationInputField); });
     }
 
     public void GetRealName(InputField input)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "GetRealName"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "GetRealName", null, input);
+            return;
+        }
+
         _isCorrectRealName = VerifyRuleUtil.CheckRealName(input.text);
         bool isSensitiveWord = SensitiveWordUtil.IsSensitiveWord(input.text);
         if (isSensitiveWord)
@@ -49,6 +63,13 @@ public class RealNameScript : MonoBehaviour
 
     public void GetIdentification(InputField input)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "GetIdentification"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "GetIdentification", null, input);
+            return;
+        }
+
         _isCorrectIdentification = VerifyRuleUtil.CheckIDCard(input.text);
         if (_isCorrectIdentification)
         {
@@ -62,6 +83,13 @@ public class RealNameScript : MonoBehaviour
 
     public void OnClickRealName()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "OnClickRealName"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "OnClickRealName", null, null);
+            return;
+        }
+
         if (string.IsNullOrEmpty(RealNameInputField.text) || string.IsNullOrEmpty(IdentificationInputField.text))
         {
             ToastScript.createToast("输入的内容不能为空");
@@ -88,6 +116,13 @@ public class RealNameScript : MonoBehaviour
 
     private void realNameCallBack(string result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "realNameCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "realNameCallBack", null, result);
+            return;
+        }
+
         JsonData jsonData = JsonMapper.ToObject(result);
         var code = (int) jsonData["code"];
         if (code == (int) Consts.Code.Code_OK)

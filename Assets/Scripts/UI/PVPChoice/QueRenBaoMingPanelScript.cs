@@ -23,6 +23,13 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
 
     public void setData(PVPGameRoomData pVPGameRoomData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "setData", null, pVPGameRoomData);
+            return;
+        }
+
         m_PVPGameRoomData = pVPGameRoomData;
 
         m_text_roomname.text = m_PVPGameRoomData.gameroomname;
@@ -58,6 +65,13 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
 
     public void onClickBaoMing()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "onClickBaoMing"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "onClickBaoMing", null, null);
+            return;
+        }
+
         Destroy(gameObject);
         reqJoinRoom();
     }
@@ -66,6 +80,13 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     // 请求加入房间
     public void reqJoinRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "reqJoinRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "reqJoinRoom", null, null);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_JingJiChang;

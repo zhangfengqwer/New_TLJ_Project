@@ -10,11 +10,11 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public Button m_button_TuiSai;
 
     public delegate void OnTimerEvent_TimeEnd(bool isContinueGame);
-    OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
+    public OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
 
-    bool m_isStart = false;
-    bool m_isContinueGame = false;
-    float m_time;
+    public bool m_isStart = false;
+    public bool m_isContinueGame = false;
+    public float m_time;
 
     public static GameObject create(string gameRoomType)
     {
@@ -34,11 +34,25 @@ public class WaitMatchPanelScript : MonoBehaviour {
 
     public void onClickTuiSai()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "onClickTuiSai"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "onClickTuiSai", null, null);
+            return;
+        }
+
         reqExitRoom();
     }
 
     public void checkHideTuiSai(string gameRoomType)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "checkHideTuiSai"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "checkHideTuiSai", null, gameRoomType);
+            return;
+        }
+
         // 休闲场
         List<string> list = new List<string>();
         CommonUtil.splitStr(GameData.getInstance().getGameRoomType(), list, '_');
@@ -51,6 +65,13 @@ public class WaitMatchPanelScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "Update"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "Update", null, null);
+            return;
+        }
+
         if (m_isStart)
         {
             m_time -= Time.deltaTime;
@@ -81,6 +102,13 @@ public class WaitMatchPanelScript : MonoBehaviour {
 
     public void start(float seconds, bool isContinueGame)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "start", null, seconds, isContinueGame);
+            return;
+        }
+
         m_time = seconds + 1;
         m_isStart = true;
         m_isContinueGame = isContinueGame;
@@ -90,6 +118,13 @@ public class WaitMatchPanelScript : MonoBehaviour {
 
     public void stop()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "stop"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "stop", null, null);
+            return;
+        }
+
         gameObject.transform.localScale = new Vector3(0, 0, 0);
 
         m_isStart = false;
@@ -101,6 +136,13 @@ public class WaitMatchPanelScript : MonoBehaviour {
     // 请求退出房间
     public void reqExitRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "reqExitRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "reqExitRoom", null, null);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_JingJiChang;

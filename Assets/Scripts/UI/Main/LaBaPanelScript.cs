@@ -21,6 +21,13 @@ public class LaBaPanelScript : MonoBehaviour {
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "Start", null, null);
+            return;
+        }
+
         bool isHaveLaBa = false;
         for (int i = 0; i < UserData.propData.Count; i++)
         {
@@ -43,6 +50,13 @@ public class LaBaPanelScript : MonoBehaviour {
 
     public void onClickBuy()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "onClickBuy"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "onClickBuy", null, null);
+            return;
+        }
+
         Destroy(gameObject);
 
         ShopPanelScript.create(3);
@@ -50,6 +64,13 @@ public class LaBaPanelScript : MonoBehaviour {
 
     public void onClickSend()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "onClickSend"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "onClickSend", null, null);
+            return;
+        }
+
         if (m_inputField.text.Length > 20)
         {
             ToastScript.createToast("发送内容不可超过20个字符");
@@ -81,6 +102,13 @@ public class LaBaPanelScript : MonoBehaviour {
 
     public void onReceive_UseLaBa(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "onReceive_UseLaBa"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "onReceive_UseLaBa", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         if (code == (int)TLJCommon.Consts.Code.Code_OK)

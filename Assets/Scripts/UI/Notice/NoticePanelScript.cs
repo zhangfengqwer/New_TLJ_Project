@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class NoticePanelScript : MonoBehaviour
 {
     public GameObject m_listView;
-    ListViewScript m_ListViewScript;
+    public ListViewScript m_ListViewScript;
 
     public Image m_tab_bg;
     public Button m_button_huodong;
@@ -28,6 +28,13 @@ public class NoticePanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "Start", null, null);
+            return;
+        }
+
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
         // 拉取公告活动
@@ -47,6 +54,13 @@ public class NoticePanelScript : MonoBehaviour
 
     public void checkRedPoint()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "checkRedPoint"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "checkRedPoint", null, null);
+            return;
+        }
+
         bool isShowRedPoint_huodong = false;
         bool isShowRedPoint_gonggao = false;
         for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
@@ -91,6 +105,13 @@ public class NoticePanelScript : MonoBehaviour
     // 显示活动
     public void loadHuoDong()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "loadHuoDong"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "loadHuoDong", null, null);
+            return;
+        }
+
         m_curShowHuoDong = true;
 
         m_ListViewScript.clear();
@@ -126,6 +147,13 @@ public class NoticePanelScript : MonoBehaviour
     // 显示公告
     public void loadGongGao()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "loadGongGao"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "loadGongGao", null, null);
+            return;
+        }
+
         m_curShowHuoDong = false;
 
         m_ListViewScript.clear();
@@ -160,6 +188,13 @@ public class NoticePanelScript : MonoBehaviour
 
     public void setNoticeReaded(int notice_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "setNoticeReaded"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "setNoticeReaded", null, notice_id);
+            return;
+        }
+
         NoticelDataScript.getInstance().setNoticeReaded(notice_id);
 
         for (int i = 0; i < m_ListViewScript.getItemList().Count; i++)
@@ -177,6 +212,13 @@ public class NoticePanelScript : MonoBehaviour
 
     public void onClickHuoDong()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "onClickHuoDong"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "onClickHuoDong", null, null);
+            return;
+        }
+
         if (m_curShowHuoDong)
         {
             return;
@@ -191,6 +233,13 @@ public class NoticePanelScript : MonoBehaviour
 
     public void onClickGongGao()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "onClickGongGao"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "onClickGongGao", null, null);
+            return;
+        }
+
         if (!m_curShowHuoDong)
         {
             return;
@@ -205,6 +254,13 @@ public class NoticePanelScript : MonoBehaviour
 
     public void onReceive_GetNotice(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "onReceive_GetNotice"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "onReceive_GetNotice", null, data);
+            return;
+        }
+
         NoticelDataScript.getInstance().initJson(data);
 
         checkRedPoint();

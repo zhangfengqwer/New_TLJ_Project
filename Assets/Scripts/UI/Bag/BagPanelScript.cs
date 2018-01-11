@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class BagPanelScript : MonoBehaviour
 {
-    private UIWarpContent uiWarpContent;
+    public UIWarpContent uiWarpContent;
     public static BagPanelScript Instance = null;
     public bool m_isFromGameLayer = true;
     public GameObject NoProp;
@@ -25,12 +25,21 @@ public class BagPanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "Start", null, null);
+            return;
+        }
+
         if (Instance == null)
         {
             Instance = this;
         }
+
         uiWarpContent = gameObject.transform.GetComponentInChildren<UIWarpContent>();
         uiWarpContent.onInitializeItem = onInitializeItem;
+
         // 拉取背包数据
         if (!m_isFromGameLayer)
         {
@@ -53,11 +62,25 @@ public class BagPanelScript : MonoBehaviour
 
     public void deleteItem(int dataindex)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "deleteItem"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "deleteItem", null, dataindex);
+            return;
+        }
+
         uiWarpContent.DelItem(dataindex);
     }
 
     public void UpdateUI()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "UpdateUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "UpdateUI", null, null);
+            return;
+        }
+
         if (Instance != null)
         {
             for (int i = UserData.propData.Count - 1; i >= 0; i--)
@@ -85,6 +108,12 @@ public class BagPanelScript : MonoBehaviour
 
     private void onInitializeItem(GameObject go, int dataindex)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "onInitializeItem"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "onInitializeItem", null, go, dataindex);
+            return;
+        }
 
         Text propName = go.transform.Find("PropName").GetComponent<Text>();
         Image propImage = go.transform.Find("PropImage").GetComponent<Image>();
@@ -103,6 +132,13 @@ public class BagPanelScript : MonoBehaviour
     
     public void onReceive_GetUserBag(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "onReceive_GetUserBag"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "onReceive_GetUserBag", null, data);
+            return;
+        }
+
         {
             JsonData jsonData = JsonMapper.ToObject(data);
             var code = (int)jsonData["code"];

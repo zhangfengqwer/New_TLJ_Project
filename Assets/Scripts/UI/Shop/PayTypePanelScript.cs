@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PayTypePanelScript : MonoBehaviour
 {
-    private ShopData _shopData;
+    public ShopData _shopData;
 
     public static GameObject create(ShopData shopData)
     {
@@ -22,6 +22,13 @@ public class PayTypePanelScript : MonoBehaviour
 
     private JsonData SetRequest()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "SetRequest"))
+        {
+            JsonData jd = (JsonData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "SetRequest", null, null);
+            return jd;
+        }
+
         JsonData data = new JsonData();
         data["uid"] = UserData.uid;
         data["goods_id"] = _shopData.goods_id;
@@ -33,12 +40,26 @@ public class PayTypePanelScript : MonoBehaviour
 
     public void OnClickAliPay()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "OnClickAliPay"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "OnClickAliPay", null, null);
+            return;
+        }
+
         var data = SetRequest();
         PlatformHelper.pay(Constants.PAY_TYPE_ALIPAY, "AndroidCallBack", "GetPayResult", data.ToJson());
     }
 
     public void OnClickWeChatPay()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "OnClickWeChatPay"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "OnClickWeChatPay", null, null);
+            return;
+        }
+
         var data = SetRequest();
 
         PlatformHelper.pay(Constants.PAY_TYPE_WX, "AndroidCallBack", "GetPayResult", data.ToJson());
