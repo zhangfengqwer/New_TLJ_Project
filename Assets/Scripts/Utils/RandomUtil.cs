@@ -9,6 +9,13 @@ public class RandomUtil
 
     public static int getRandom(int start, int end)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RandomUtil", "getRandom"))
+        {
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RandomUtil", "getRandom", null, start, end);
+            return i;
+        }
+
         if (++s_count >= 99999)
         {
             s_count = 0;

@@ -1,16 +1,16 @@
 ﻿
 public class VipUtil
 {
-	private static int vip1 = 6;
-	private static int vip2 = 30;
-	private static int vip3 = 98;
-	private static int vip4 = 320;
-	private static int vip5 = 888;
-	private static int vip6 = 1600;
-	private static int vip7 = 5000;
-	private static int vip8 = 10000;
-	private static int vip9 = 18000;
-	private static int vip10 = 30000;
+    public static int vip1 = 6;
+    public static int vip2 = 30;
+    public static int vip3 = 98;
+    public static int vip4 = 320;
+    public static int vip5 = 888;
+    public static int vip6 = 1600;
+    public static int vip7 = 5000;
+    public static int vip8 = 10000;
+    public static int vip9 = 18000;
+    public static int vip10 = 30000;
 	
 	
 	

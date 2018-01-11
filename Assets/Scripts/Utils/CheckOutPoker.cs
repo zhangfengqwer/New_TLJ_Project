@@ -23,7 +23,7 @@ public class CheckOutPoker
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker", "checkOutPoker"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker", "checkOutPoker", null, isFreeOutPoker, myOutPokerList, beforeOutPokerList, myRestPokerList);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker", "checkOutPoker", null, isFreeOutPoker, myOutPokerList, beforeOutPokerList, myRestPokerList, mLevelPokerNum, masterPokerType);
             return b;
         }
 

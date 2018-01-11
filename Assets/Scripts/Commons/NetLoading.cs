@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class NetLoading : MonoBehaviour {
 
-    static NetLoading s_instance = null;
-    GameObject s_loadingPanel = null;
+    public static NetLoading s_instance = null;
+    public GameObject s_loadingPanel = null;
 
     public static NetLoading getInstance()
     {
@@ -25,6 +25,13 @@ public class NetLoading : MonoBehaviour {
 
     public void Show()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading", "Show"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading", "Show", null, null);
+            return;
+        }
+
         if (s_loadingPanel != null)
         {
             Destroy(s_loadingPanel);
@@ -50,6 +57,13 @@ public class NetLoading : MonoBehaviour {
 
     void onInvoke()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading", "onInvoke"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading", "onInvoke", null, null);
+            return;
+        }
+
         ToastScript.createToast("网络超时");
         Close();
     }

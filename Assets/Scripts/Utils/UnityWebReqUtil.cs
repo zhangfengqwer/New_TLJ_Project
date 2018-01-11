@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class UnityWebReqUtil:MonoBehaviour
 {
-    private static UnityWebReqUtil _Instance;
+    public static UnityWebReqUtil _Instance;
 
     public delegate void CallBack(string tag, string data);
 

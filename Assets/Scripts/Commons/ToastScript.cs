@@ -6,10 +6,10 @@ using System;
 
 public class ToastScript : MonoBehaviour {
 
-    Canvas m_canvas;
-    static Text m_text;
+    public Canvas m_canvas;
+    public static Text m_text;
 
-    static List<GameObject> s_toactObj = new List<GameObject>();
+    public static List<GameObject> s_toactObj = new List<GameObject>();
 
 	// Use this for initialization
 	void Start ()
@@ -47,6 +47,13 @@ public class ToastScript : MonoBehaviour {
 
     void setData(GameObject obj, string text)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ToastScript", "setData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ToastScript", "setData", null, obj, text);
+            return;
+        }
+
         m_text.text = text;
 
         m_canvas = GameObject.Find("Canvas_High").GetComponent<Canvas>();
