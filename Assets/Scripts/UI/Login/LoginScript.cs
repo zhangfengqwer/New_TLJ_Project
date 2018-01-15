@@ -607,7 +607,7 @@ public class LoginScript : MonoBehaviour
             // 代码版本
             {
                 m_codeVersion = (int)jd["codeVersion"];
-                
+
                 NetLoading.getInstance().Show();
                 ILRuntimeUtil.getInstance().downDll(OtherData.getWebUrl() + "hotfix/HotFix_Project-" + m_codeVersion + ".dll");
             }

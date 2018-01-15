@@ -22,8 +22,13 @@ public class UseHuiZhangZhuanPanPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript", "Start", null, null);
+            return;
+        }
+    }
 
     public void setData(TurntablePanelScript parentScript, int needHuiZhangNum)
     {

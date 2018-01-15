@@ -21,6 +21,13 @@ public class ChangeHeadPanelScript : MonoBehaviour {
     void Start ()
     {
         s_instance = this;
+
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "Start", null, null);
+            return;
+        }
     }
 	
 	// Update is called once per frame

@@ -35,6 +35,16 @@ public class LiangZhu : MonoBehaviour
         return obj;
     }
 
+    private void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "Start", null, null);
+            return;
+        }
+    }
+
     public void setUseType(UseType useType)
     {
         m_useType = useType;

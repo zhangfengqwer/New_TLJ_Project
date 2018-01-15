@@ -34,6 +34,16 @@ public class ShowRewardPanelScript : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "Start", null, null);
+            return;
+        }
+    }
+
     public void setData(string reward, bool isCanShare)
     {
         // 优先使用热更新的代码

@@ -32,8 +32,13 @@ public class GameResultPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "Start", null, null);
+            return;
+        }
+    }
 
     public void setData(bool isWin,int score,int gold,string gameRoomType)
     {

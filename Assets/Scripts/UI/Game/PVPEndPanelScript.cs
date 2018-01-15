@@ -25,11 +25,12 @@ public class PVPEndPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-//        ShareObject.GetComponent<Button>().onClick.RemoveAllListeners();
-//        ShareObject.GetComponent<Button>().onClick.AddListener(() =>
-//        {
-//            ShareObject.transform.localScale = Vector3.zero;
-//        });
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "Start", null, null);
+            return;
+        }
     }
 
     public void setData(int mingci,string pvpreward)

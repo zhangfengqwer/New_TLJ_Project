@@ -24,8 +24,13 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript", "Start", null, null);
+            return;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -48,6 +53,8 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
             return;
         }
 
+        NetLoading.getInstance().Show();
+
         LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().SetData(m_propInfo.m_id, m_inputField_phone.text);
         LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().CallBack = onReceive_UseHuaFei;
         LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().OnRequest();
@@ -61,6 +68,8 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript", "onReceive_UseHuaFei", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
