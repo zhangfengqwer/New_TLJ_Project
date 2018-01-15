@@ -20,8 +20,13 @@ public class PVP_List_Item_Script : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "Start", null, null);
+            return;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()

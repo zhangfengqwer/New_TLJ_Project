@@ -20,6 +20,13 @@ public class WaitOtherPlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitOtherPlayerScript", "Start", null, null);
+            return;
+        }
+
         m_text = gameObject.GetComponent<Text>();
 
         InvokeRepeating("timer", 0.1f, 0.5f);

@@ -11,7 +11,6 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     public Text m_text_baomingfei;
     public Image m_image_baomingfei_icon;
     public PVPGameRoomData m_PVPGameRoomData;
-    
 
     public static GameObject create()
     {
@@ -19,6 +18,17 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         return obj;
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "Start", null, null);
+            return;
+        }
     }
 
     public void setData(PVPGameRoomData pVPGameRoomData)
@@ -51,11 +61,6 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
             m_image_baomingfei_icon.transform.localScale = new Vector3(1, 1, 1);
             CommonUtil.setImageSprite(m_image_baomingfei_icon,GameUtil.getPropIconPath(int.Parse(list[0])));
         }
-    }
-
-    // Use this for initialization
-    void Start ()
-    {
     }
 	
 	// Update is called once per frame

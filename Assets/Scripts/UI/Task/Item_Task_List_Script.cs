@@ -19,7 +19,12 @@ public class Item_Task_List_Script : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "Start", null, null);
+            return;
+        }
     }
 
     // Update is called once per frame

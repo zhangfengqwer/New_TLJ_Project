@@ -24,6 +24,16 @@ public class PropDetailPanelScript : MonoBehaviour {
         return obj;
     }
 
+    private void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "Start", null, null);
+            return;
+        }
+    }
+
     public void setPropId(int prop_id)
     {
         // 优先使用热更新的代码
@@ -75,6 +85,8 @@ public class PropDetailPanelScript : MonoBehaviour {
         // 其他
         else
         {
+            NetLoading.getInstance().Show();
+
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
@@ -89,6 +101,8 @@ public class PropDetailPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "onReceive_UseProp", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];

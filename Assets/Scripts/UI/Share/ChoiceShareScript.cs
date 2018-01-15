@@ -15,6 +15,16 @@ public class ChoiceShareScript : MonoBehaviour
         return obj;
     }
 
+    private void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChoiceShareScript", "Start", null, null);
+            return;
+        }
+    }
+
     public void OnClickShareClose()
     {
         Destroy(this.gameObject);

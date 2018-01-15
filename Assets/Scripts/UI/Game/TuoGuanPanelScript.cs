@@ -16,6 +16,16 @@ public class TuoGuanPanelScript : MonoBehaviour {
         return obj;
     }
 
+    private void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuoGuanPanelScript", "Start", null, null);
+            return;
+        }
+    }
+
     public void onClickCalcel()
     {
         // 优先使用热更新的代码

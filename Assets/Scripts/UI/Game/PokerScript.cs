@@ -28,6 +28,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 	// Use this for initialization
 	void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "Start", null, null);
+            return;
+        }
+
         m_isSelect = false;
     }
 	

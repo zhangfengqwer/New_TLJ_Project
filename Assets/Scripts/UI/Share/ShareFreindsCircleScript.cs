@@ -14,8 +14,13 @@ public class ShareFreindsCircleScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
-	}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShareFreindsCircleScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShareFreindsCircleScript", "Start", null, null);
+            return;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -50,11 +50,14 @@ public class ChatContentScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        m_text = gameObject.transform.Find("Text").GetComponent<Text>();
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatContentScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatContentScript", "Start", null, null);
+            return;
+        }
 
-        //m_text.alignment = TextAnchor.MiddleRight;
-        //m_text.alignment = TextAnchor.MiddleLeft;
-        //m_text.alignment = TextAnchor.MiddleCenter;
+        m_text = gameObject.transform.Find("Text").GetComponent<Text>();
         
         Invoke("showEnd", 3.0f);
     }

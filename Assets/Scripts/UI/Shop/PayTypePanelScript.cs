@@ -15,6 +15,16 @@ public class PayTypePanelScript : MonoBehaviour
         return obj;
     }
 
+    private void Start()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "Start", null, null);
+            return;
+        }
+    }
+
     public void SetShopData(ShopData shopData)
     {
         _shopData = shopData;

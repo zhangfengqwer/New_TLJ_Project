@@ -17,6 +17,13 @@ public class RankListCaifuScript : MonoBehaviour
 
     void Start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListCaifuScript", "Start", null, null);
+            return;
+        }
+
         Instance = this;
 //        InitData();
 //        InitUI();

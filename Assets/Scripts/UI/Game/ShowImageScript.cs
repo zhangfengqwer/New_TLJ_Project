@@ -21,6 +21,13 @@ public class ShowImageScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowImageScript", "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowImageScript", "Start", null, null);
+            return;
+        }
+
         Invoke("onInvoke", 2.0f);
 	}
 	
