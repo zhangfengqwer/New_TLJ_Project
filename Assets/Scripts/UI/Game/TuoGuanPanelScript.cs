@@ -18,6 +18,8 @@ public class TuoGuanPanelScript : MonoBehaviour {
 
     private void Start()
     {
+        OtherData.s_tuoGuanPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript", "Start"))
         {

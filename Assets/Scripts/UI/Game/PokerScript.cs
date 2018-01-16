@@ -150,7 +150,7 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
         }
     }
 
-    bool getIsSelect()
+    public bool getIsSelect()
     {
         return m_isSelect;
     }

@@ -187,7 +187,7 @@ public class ChatPanelScript : MonoBehaviour {
         }
     }
 
-    void onInvoke()
+    public void onInvoke()
     {
         m_canChat = true;
     }

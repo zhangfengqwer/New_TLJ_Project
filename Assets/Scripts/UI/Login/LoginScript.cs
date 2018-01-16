@@ -111,7 +111,7 @@ public class LoginScript : MonoBehaviour
         setLogonTypeUI();
     }
 
-    private void Set3rdLogin()
+    public void Set3rdLogin()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "Set3rdLogin"))
@@ -171,7 +171,7 @@ public class LoginScript : MonoBehaviour
         init();
     }
 
-    void onInvokeHealthPanel()
+    public void onInvokeHealthPanel()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onInvokeHealthPanel"))
@@ -264,7 +264,7 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    void setLogonTypeUI()
+    public void setLogonTypeUI()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "setLogonTypeUI"))
@@ -516,7 +516,7 @@ public class LoginScript : MonoBehaviour
         OnEnterLoginClick();
     }
 
-    void onApkVerisionIsLow()
+    public void onApkVerisionIsLow()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onApkVerisionIsLow"))
@@ -540,7 +540,7 @@ public class LoginScript : MonoBehaviour
 #endif
     }
 
-    void onReceive(string data)
+    public void onReceive(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive"))
@@ -570,7 +570,7 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    void onReceive_CheckVerisionCode(string data)
+    public void onReceive_CheckVerisionCode(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_CheckVerisionCode"))
@@ -629,7 +629,7 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    void onReceive_Login(string data)
+    public void onReceive_Login(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_Login"))
@@ -677,7 +677,7 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    private void onReceive_Third_Login(string data)
+    public void onReceive_Third_Login(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_Third_Login"))
@@ -715,7 +715,7 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    void onReceive_QuickRegister(string data)
+    public void onReceive_QuickRegister(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_QuickRegister"))
@@ -751,7 +751,7 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    void onServerIsStop()
+    public void onServerIsStop()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onServerIsStop"))
@@ -904,7 +904,7 @@ public class LoginScript : MonoBehaviour
     }
 
     //-------------------------------------------------------------------------------------------------------
-    void onSocketConnect(bool result)
+    public void onSocketConnect(bool result)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onSocketConnect"))
@@ -935,14 +935,14 @@ public class LoginScript : MonoBehaviour
         }
     }
 
-    void onSocketReceive(string data)
+    public void onSocketReceive(string data)
     {
         //LogUtil.Log("收到服务器消息:" + data);
 
         onReceive(data);
     }
 
-    void onSocketClose()
+    public void onSocketClose()
     {
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
@@ -951,7 +951,7 @@ public class LoginScript : MonoBehaviour
         NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
-    void onSocketStop()
+    public void onSocketStop()
     {
         //LogUtil.Log("主动与服务器断开连接");
 
@@ -961,7 +961,7 @@ public class LoginScript : MonoBehaviour
     }
 
     // 点击网络断开弹框中的重连按钮
-    void onClickChongLian()
+    public void onClickChongLian()
     {
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
@@ -975,14 +975,14 @@ public class LoginScript : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------------------
-    void onPauseCallBack()
+    public void onPauseCallBack()
     {
         //LoginServiceSocket.s_instance.Stop();
         //LogicEnginerScript.Instance.Stop();
         //PlayServiceSocket.s_instance.Stop();
     }
 
-    void onResumeCallBack()
+    public void onResumeCallBack()
     {
         //NetErrorPanelScript.getInstance().Show();
         //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
@@ -992,7 +992,7 @@ public class LoginScript : MonoBehaviour
     }
 
     // 检测服务器是否连接
-    void checkNet()
+    public void checkNet()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "checkNet"))
@@ -1020,7 +1020,7 @@ public class LoginScript : MonoBehaviour
         thread.Start();
     }
 
-    private void thread_test()
+    public void thread_test()
     {
         {
             JsonData data = new JsonData();

@@ -11,32 +11,32 @@ public class LogicEnginerScript : MonoBehaviour
     public static LogicEnginerScript Instance;
 
     public SocketUtil m_socketUtil;
-   
-    private Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
-    private List<Request> requestList = new List<Request>();
+
+    public Dictionary<string, Request> requestDic = new Dictionary<string, Request>();
+    public List<Request> requestList = new List<Request>();
 
     //请求
-    private GetSignRecordRequest _getSignRecordRequest;
-    private GetUserInfoRequest _getUserInfoRequest;
-    private GetEmailRequest _getEmailRequest;
-    private GetNoticeRequest _getNoticeRequest;
-    private MainRequest _mainRequest;
-    private GetRankRequest _getRankRequest;
-    private GetTaskRequest _getTaskRequest;
+    public GetSignRecordRequest _getSignRecordRequest;
+    public GetUserInfoRequest _getUserInfoRequest;
+    public GetEmailRequest _getEmailRequest;
+    public GetNoticeRequest _getNoticeRequest;
+    public MainRequest _mainRequest;
+    public GetRankRequest _getRankRequest;
+    public GetTaskRequest _getTaskRequest;
     [HideInInspector] public GetUserBagRequest _getUserBagRequest;
 
     //判断loading中是否返回所有需要的信息
     public static List<bool> IsSuccessList = new List<bool>();
 
-    bool m_isConnecion = false;
-    bool m_isCloseSocket = false;
-    int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
+    public bool m_isConnecion = false;
+    public bool m_isCloseSocket = false;
+    public int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
 
     public delegate void OnLogicService_Close();                        // 与服务器断开
-    OnLogicService_Close m_onLogicService_Close = null;
+    public OnLogicService_Close m_onLogicService_Close = null;
 
     public delegate void OnLogicService_Connect(bool result);           // 连接服务器结果
-    OnLogicService_Connect m_onLogicService_Connect = null;
+    public OnLogicService_Connect m_onLogicService_Connect = null;
 
     public static GameObject create()
     {
@@ -117,11 +117,11 @@ public class LogicEnginerScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void AddRequest()
+    public void AddRequest()
     {
     }
 
-    private void InitRequest()
+    public void InitRequest()
     {
         _getSignRecordRequest = GetComponent<GetSignRecordRequest>();
         _getUserInfoRequest = GetComponent<GetUserInfoRequest>();
@@ -161,7 +161,7 @@ public class LogicEnginerScript : MonoBehaviour
         m_onLogicService_Close = onLogicService_Close;
     }
 
-    private void onSocketConnect(bool result)
+    public void onSocketConnect(bool result)
     {
         if (result)
         {
@@ -177,20 +177,20 @@ public class LogicEnginerScript : MonoBehaviour
         }
     }
 
-    private void onSocketStop()
+    public void onSocketStop()
     {
         LogUtil.Log("logic:主动与服务器断开连接");
         m_isConnecion = false;
     }
 
-    private void onSocketClose()
+    public void onSocketClose()
     {
         LogUtil.Log("logic:被动与服务器断开连接,尝试重新连接");
         m_isCloseSocket = true;
         m_isConnecion = false;
     }
 
-    private void onSocketReceive(string data)
+    public void onSocketReceive(string data)
     {
         LogUtil.Log("收到服务器消息:" + data);
         try
@@ -238,7 +238,7 @@ public class LogicEnginerScript : MonoBehaviour
     }
 
     //收到金币排行榜回调
-    private void onReceive_GetGoldRank(string data)
+    public void onReceive_GetGoldRank(string data)
     {
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int) jd["code"];
@@ -260,7 +260,7 @@ public class LogicEnginerScript : MonoBehaviour
         }
     }
 
-    private void onReceive_GetUserBag(string result)
+    public void onReceive_GetUserBag(string result)
     {
         JsonData jsonData = JsonMapper.ToObject(result);
         var code = (int) jsonData["code"];

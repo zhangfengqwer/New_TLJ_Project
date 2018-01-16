@@ -15,6 +15,8 @@ public class GetNetEntityFile : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_getNetEntityFile = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "Start"))
         {
@@ -78,7 +80,7 @@ public class GetNetEntityFile : MonoBehaviour
         }
     }
 
-    void onInvoke()
+    public void onInvoke()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onInvoke"))
@@ -178,7 +180,7 @@ public class GetNetEntityFile : MonoBehaviour
         }
     }
 
-    void onClick_retryGetNetFile()
+    public void onClick_retryGetNetFile()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onClick_retryGetNetFile"))

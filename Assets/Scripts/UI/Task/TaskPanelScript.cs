@@ -22,6 +22,8 @@ public class TaskPanelScript : MonoBehaviour {
 
     void Start()
     {
+        OtherData.s_taskPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "Start"))
         {
@@ -42,7 +44,7 @@ public class TaskPanelScript : MonoBehaviour {
         }
     }
 
-    void scaleCallBack()
+    public void scaleCallBack()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "scaleCallBack"))

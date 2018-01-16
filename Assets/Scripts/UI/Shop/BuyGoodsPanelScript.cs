@@ -42,6 +42,8 @@ public class BuyGoodsPanelScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        OtherData.s_buyGoodsPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "Start"))
         {
@@ -110,7 +112,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
         }
     }
 
-    void refreshPrice()
+    public void refreshPrice()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "refreshPrice"))
@@ -373,7 +375,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
         buy(m_shopData.money_type2);
     }
 
-    void buy(int money_type)
+    public void buy(int money_type)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "buy"))
@@ -482,7 +484,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
         }
     }
 
-    private string SetRequest(ShopData shopData)
+    public string SetRequest(ShopData shopData)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "SetRequest"))

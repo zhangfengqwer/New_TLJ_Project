@@ -39,6 +39,8 @@ public class TurntablePanelScript : MonoBehaviour
 
     void Start()
     {
+        OtherData.s_turntablePanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "Start"))
         {
@@ -68,7 +70,7 @@ public class TurntablePanelScript : MonoBehaviour
     {
     }
 
-    void onInvokeDeng()
+    public void onInvokeDeng()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onInvokeDeng"))
@@ -89,7 +91,7 @@ public class TurntablePanelScript : MonoBehaviour
         }
     }
 
-    void onInvokeAdd1()
+    public void onInvokeAdd1()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onInvokeAdd1"))
@@ -101,7 +103,7 @@ public class TurntablePanelScript : MonoBehaviour
         GameUtil.hideGameObject(m_image_add1.gameObject);
     }
 
-    void loadReward()
+    public void loadReward()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "loadReward"))
@@ -152,7 +154,7 @@ public class TurntablePanelScript : MonoBehaviour
     }
 
     // 获取转盘数据
-    void onReceive_GetTurntable(string data)
+    public void onReceive_GetTurntable(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_GetTurntable"))
@@ -166,7 +168,7 @@ public class TurntablePanelScript : MonoBehaviour
     }
 
     // 使用转盘
-    void onReceive_UseTurntable(string data)
+    public void onReceive_UseTurntable(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_UseTurntable"))

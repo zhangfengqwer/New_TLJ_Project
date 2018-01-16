@@ -13,7 +13,7 @@ public class UsePropRequest : Request {
         Tag = Consts.Tag_UseProp;
     }
 
-    private int propId;
+    public int propId;
     public void SetPropId(int id)
     {
         propId = id;

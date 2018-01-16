@@ -5,7 +5,7 @@ using System.Text;
 
 public class RandomUtil
 {
-    static int s_count = 0;
+    public static int s_count = 0;
 
     public static int getRandom(int start, int end)
     {
@@ -28,7 +28,7 @@ public class RandomUtil
         return ran.Next(start, end + 1);
     }
 
-    static long getTimeStamp()
+    public static long getTimeStamp()
     {
         TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
         return Convert.ToInt64(ts.TotalMilliseconds);

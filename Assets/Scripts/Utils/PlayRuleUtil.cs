@@ -736,7 +736,7 @@ public class PlayRuleUtil
         return resultList;
     }
 
-    private static void GetPokerWhenShuaiP(List<PokerInfo> firstPokerList, List<PokerInfo> masterPoker,
+    public static void GetPokerWhenShuaiP(List<PokerInfo> firstPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempAll, int count, List<PokerInfo> tempList)
     {
         // 优先使用热更新的代码
@@ -807,7 +807,7 @@ public class PlayRuleUtil
         }
     }
 
-    private static void GetPokerWhenTlj(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
+    public static void GetPokerWhenTlj(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempList, int count, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
@@ -887,7 +887,7 @@ public class PlayRuleUtil
         }
     }
 
-    private static void GetPokerWhenDouble(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
+    public static void GetPokerWhenDouble(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempList)
     {
         // 优先使用热更新的代码
@@ -932,7 +932,7 @@ public class PlayRuleUtil
         }
     }
 
-    private static void GetPokerWhenSingle(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
+    public static void GetPokerWhenSingle(List<PokerInfo> myPokerList, List<PokerInfo> masterPoker,
         List<PokerInfo> tempList)
     {
         // 优先使用热更新的代码

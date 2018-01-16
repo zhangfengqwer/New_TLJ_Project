@@ -25,6 +25,8 @@ public class BagPanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_bagPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "Start"))
         {
@@ -106,7 +108,7 @@ public class BagPanelScript : MonoBehaviour
         }
     }
 
-    private void onInitializeItem(GameObject go, int dataindex)
+    public void onInitializeItem(GameObject go, int dataindex)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "onInitializeItem"))

@@ -20,6 +20,8 @@ public class WaitOtherPlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_waitOtherPlayerScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "Start"))
         {
@@ -32,7 +34,7 @@ public class WaitOtherPlayerScript : MonoBehaviour {
         InvokeRepeating("timer", 0.1f, 0.5f);
     }
 
-    void timer()
+    public void timer()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "timer"))

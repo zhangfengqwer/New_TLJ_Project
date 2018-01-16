@@ -17,6 +17,8 @@ public class RankListCaifuScript : MonoBehaviour
 
     void Start()
     {
+        OtherData.s_rankListCaifuScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript", "Start"))
         {

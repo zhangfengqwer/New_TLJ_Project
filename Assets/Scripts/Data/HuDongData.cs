@@ -26,7 +26,7 @@ public class HuDongData
         UnityWebReqUtil.Instance.Get(OtherData.getWebUrl() + "hudong.json", httpCallBack);
     }
 
-    void httpCallBack(string tag, string data)
+    public void httpCallBack(string tag, string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData", "httpCallBack"))

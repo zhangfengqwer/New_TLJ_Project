@@ -15,14 +15,14 @@ public class TimerScript : MonoBehaviour
     }
 
     public Text m_textTime;
-    TimerType m_timerType;
+    public TimerType m_timerType;
 
     public delegate void OnTimerEvent_TimeEnd();
-    OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
+    public OnTimerEvent_TimeEnd m_onTimerEvent_TimeEnd = null;
 
-    bool m_isNeedCallBack = true;
-    bool m_isStart = false;
-    float m_time;
+    public bool m_isNeedCallBack = true;
+    public bool m_isStart = false;
+    public float m_time;
 
     public static GameObject createTimer()
     {

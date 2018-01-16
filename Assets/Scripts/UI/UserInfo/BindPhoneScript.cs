@@ -40,7 +40,7 @@ public class BindPhoneScript : MonoBehaviour
     public float nextTime = 1; //一秒之后执行
     public Text textSend;
 
-    private void Timer1()
+    public void Timer1()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Timer1"))
@@ -80,6 +80,8 @@ public class BindPhoneScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        OtherData.s_bindPhoneScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Start"))
         {
@@ -199,7 +201,7 @@ public class BindPhoneScript : MonoBehaviour
     }
 
     //发送验证码
-    private void sendVerificationCodeCallBack(string data)
+    public void sendVerificationCodeCallBack(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "sendVerificationCodeCallBack"))
@@ -242,7 +244,7 @@ public class BindPhoneScript : MonoBehaviour
     }
 
     //绑定手机回调
-    private void bindPhoneCallBack(string data)
+    public void bindPhoneCallBack(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "bindPhoneCallBack"))

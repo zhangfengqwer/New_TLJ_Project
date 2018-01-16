@@ -19,7 +19,7 @@ public class XuanZhuanScript : MonoBehaviour {
         
 	}
 
-    void onInvoke()
+    public void onInvoke()
     {
         if (RandomUtil.getRandom(1, 2) == 1)
         {

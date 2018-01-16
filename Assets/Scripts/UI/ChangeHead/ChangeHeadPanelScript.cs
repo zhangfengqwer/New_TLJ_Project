@@ -20,6 +20,8 @@ public class ChangeHeadPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_changeHeadPanelScript = this;
+
         s_instance = this;
 
         // 优先使用热更新的代码
@@ -64,7 +66,7 @@ public class ChangeHeadPanelScript : MonoBehaviour {
         }
     }
 
-    void onReceive_ChangeHead(string data)
+    public void onReceive_ChangeHead(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "onReceive_ChangeHead"))

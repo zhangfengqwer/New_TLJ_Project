@@ -10,7 +10,7 @@ public class BisaiAnimationScript : MonoBehaviour {
 	    InitSprites();
 	}
 
-    private void InitSprites()
+    public void InitSprites()
     {
         
     }

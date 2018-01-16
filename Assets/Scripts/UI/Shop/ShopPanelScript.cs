@@ -49,6 +49,8 @@ public class ShopPanelScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        OtherData.s_shopPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "Start"))
         {
@@ -179,7 +181,7 @@ public class ShopPanelScript : MonoBehaviour
         }
     }
 
-    private void onInitializeItem(GameObject go, int dataindex)
+    public void onInitializeItem(GameObject go, int dataindex)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "onInitializeItem"))

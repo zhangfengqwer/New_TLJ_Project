@@ -12,6 +12,8 @@ public class LaBaScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        OtherData.s_laBaScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript", "Start"))
         {
@@ -26,7 +28,7 @@ public class LaBaScript : MonoBehaviour {
         InvokeRepeating("onTextMove", 0.05f, 0.05f);
     }
 
-    void onTextMove()
+    public void onTextMove()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript", "onTextMove"))

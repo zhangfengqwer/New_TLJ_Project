@@ -80,7 +80,7 @@ public class TaskDataScript
     }
 
     // 可领取的置顶,已领取的放最下面
-    void sortTask()
+    public void sortTask()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "sortTask"))

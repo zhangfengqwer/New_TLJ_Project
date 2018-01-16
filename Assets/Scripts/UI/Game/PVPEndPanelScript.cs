@@ -25,6 +25,8 @@ public class PVPEndPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        OtherData.s_pvpEndPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "Start"))
         {

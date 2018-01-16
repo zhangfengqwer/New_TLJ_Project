@@ -6,20 +6,20 @@ public class LoginServiceSocket : MonoBehaviour {
 
     public static LoginServiceSocket s_instance = null;
 
-    SocketUtil m_socketUtil;
-    bool m_isConnecion = false;
-    bool m_isCloseSocket = false;
-    int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
-    List<string> m_dataList = new List<string>();
+    public SocketUtil m_socketUtil;
+    public bool m_isConnecion = false;
+    public bool m_isCloseSocket = false;
+    public int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
+    public List<string> m_dataList = new List<string>();
 
     public delegate void OnLoginService_Receive(string data);           // 收到服务器消息
-    OnLoginService_Receive m_onLoginService_Receive = null;
+    public OnLoginService_Receive m_onLoginService_Receive = null;
 
     public delegate void OnLoginService_Close();                        // 与服务器断开
-    OnLoginService_Close m_onLoginService_Close = null;
+    public OnLoginService_Close m_onLoginService_Close = null;
 
     public delegate void OnLoginService_Connect(bool result);           // 连接服务器结果
-    OnLoginService_Connect m_onLoginService_Connect = null;
+    public OnLoginService_Connect m_onLoginService_Connect = null;
 
     public static GameObject create()
     {
@@ -126,7 +126,7 @@ public class LoginServiceSocket : MonoBehaviour {
         m_onLoginService_Close = onLoginService_Close;
     }
 
-    void onSocketConnect(bool result)
+    public void onSocketConnect(bool result)
     {
         if (result)
         {
@@ -142,14 +142,14 @@ public class LoginServiceSocket : MonoBehaviour {
         }
     }
 
-    void onSocketReceive(string data)
+    public void onSocketReceive(string data)
     {
         LogUtil.Log("收到服务器消息:" + data);
 
         m_dataList.Add(data);
     }
 
-    void onSocketClose()
+    public void onSocketClose()
     {
         LogUtil.Log("Login:被动与服务器断开连接,尝试重新连接");
 
@@ -157,7 +157,7 @@ public class LoginServiceSocket : MonoBehaviour {
         m_isConnecion = false;
     }
 
-    void onSocketStop()
+    public void onSocketStop()
     {
         LogUtil.Log("Login:主动与服务器断开连接");
         m_isConnecion = false;

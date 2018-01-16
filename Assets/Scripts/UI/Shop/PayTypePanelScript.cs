@@ -30,7 +30,7 @@ public class PayTypePanelScript : MonoBehaviour
         _shopData = shopData;
     }
 
-    private JsonData SetRequest()
+    public JsonData SetRequest()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "SetRequest"))

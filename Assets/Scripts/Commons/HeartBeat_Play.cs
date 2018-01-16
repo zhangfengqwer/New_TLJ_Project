@@ -50,7 +50,7 @@ public class HeartBeat_Play : MonoBehaviour
         s_instance = null;
     }
 
-    void onInvoke_timeout()
+    public void onInvoke_timeout()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "onInvoke_timeout"))
@@ -69,7 +69,7 @@ public class HeartBeat_Play : MonoBehaviour
         }
     }
 
-    void reqHeartBeat()
+    public void reqHeartBeat()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "reqHeartBeat"))

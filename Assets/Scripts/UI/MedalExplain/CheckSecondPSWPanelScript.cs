@@ -21,6 +21,8 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_checkSecondPSWPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "Start"))
         {
@@ -82,7 +84,7 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
         LogicEnginerScript.Instance.GetComponent<CheckSecondPSWRequest>().OnRequest();
     }
 
-    void onReceive_CheckSecondPSW(string result)
+    public void onReceive_CheckSecondPSW(string result)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "onReceive_CheckSecondPSW"))

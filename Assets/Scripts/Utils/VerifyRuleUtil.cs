@@ -69,7 +69,7 @@ public class VerifyRuleUtil
     /// <summary> 
     /// 18位身份证号码验证 
     /// </summary> 
-    private static bool CheckIDCard18(string idNumber)
+    public static bool CheckIDCard18(string idNumber)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard18"))
@@ -116,7 +116,7 @@ public class VerifyRuleUtil
     /// <summary> 
     /// 16位身份证号码验证 
     /// </summary> 
-    private static bool CheckIDCard15(string idNumber)
+    public static bool CheckIDCard15(string idNumber)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard15"))
