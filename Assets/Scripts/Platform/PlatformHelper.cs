@@ -288,6 +288,11 @@ public class PlatformHelper
     public static void DownApk()
     {
     }
+
+    public static bool IsThirdLogin()
+    {
+        return false;
+    }
 }
 #elif UNITY_ANDROID /// <summary>
 /// 控制所有对本地化的调用 （除了MallAndroidHelper ，因为MallAndroidHelper 对本地调用比较多而且复杂 。所有Android 调用会调 UnityHelper 类 。
@@ -364,6 +369,11 @@ public class PlatformHelper
     public static void DownApk()
     {
         GetJC().CallStatic("downLoadApk");
+    }
+
+    public static bool IsThirdLogin()
+    {
+        return GetJC().CallStatic<bool>("isThirdLogin");
     }
 
     //微信分享
@@ -746,6 +756,11 @@ public class PlatformHelper
 
     public static void thirdSDKQuit(string callObj, string callFunc, string data)
     {
+    }
+
+    public static bool IsThirdLogin()
+    {
+        return false;
     }
 }
 
