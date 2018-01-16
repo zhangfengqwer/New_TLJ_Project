@@ -57,7 +57,7 @@ public class PVPGameResultPanelScript : MonoBehaviour
             m_button_share.transform.localScale = new Vector3(0, 0, 0);
             m_button_exit.transform.localScale = new Vector3(0,0,0);
 
-            Invoke("onInvokeTimeOut", 10);
+            Invoke("onInvokeTimeOut", 30);
         }
         else
         {

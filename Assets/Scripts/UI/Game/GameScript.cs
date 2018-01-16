@@ -2537,16 +2537,24 @@ public class GameScript : MonoBehaviour
 
             if (UserData.uid.CompareTo(uid) != 0)
             {
-                GameData.getInstance().getPlayerDataByUid(uid).m_name = (string)jd["name"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int)jd["head"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int)jd["gold"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_vipLevel = (int)jd["vipLevel"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int)jd["gameData"]["allGameCount"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_winCount = (int)jd["gameData"]["winCount"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_runCount = (int)jd["gameData"]["runCount"];
-                GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = (int)jd["gameData"]["meiliZhi"];
+                PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
+                if (playerData != null)
+                {
+                    GameData.getInstance().getPlayerDataByUid(uid).m_name = (string)jd["name"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int)jd["head"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int)jd["gold"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_vipLevel = (int)jd["vipLevel"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int)jd["gameData"]["allGameCount"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_winCount = (int)jd["gameData"]["winCount"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_runCount = (int)jd["gameData"]["runCount"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_meiliZhi = (int)jd["gameData"]["meiliZhi"];
 
-                GameData.getInstance().setOtherPlayerUI(uid, isPVP());
+                    GameData.getInstance().setOtherPlayerUI(uid, isPVP());
+                }
+                else
+                {
+                    ToastScript.createToast("没有此人：" + (string)jd["name"]);
+                }
             }
         }
     }

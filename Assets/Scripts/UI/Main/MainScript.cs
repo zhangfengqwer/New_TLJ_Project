@@ -212,6 +212,9 @@ public class MainScript : MonoBehaviour
         else
         {
             //ToastScript.createToast("两个服务器都成功连接");
+
+            NetLoading.getInstance().Show();
+            reqPVPRoom();
         }
     }
 
@@ -320,9 +323,7 @@ public class MainScript : MonoBehaviour
         }
 
         AudioScript.getAudioScript().playSound_ButtonClick();
-
-        NetLoading.getInstance().Show();
-        reqPVPRoom();
+        PVPChoiceScript.create();
     }
 
     public void onClickJingDianChang()
@@ -808,8 +809,6 @@ public class MainScript : MonoBehaviour
             NetLoading.getInstance().Close();
 
             PVPGameRoomDataScript.getInstance().initJson(data);
-
-            PVPChoiceScript.create();
         }
         // 是否已经加入房间
         else if (tag.CompareTo(TLJCommon.Consts.Tag_IsJoinGame) == 0)
@@ -903,32 +902,37 @@ public class MainScript : MonoBehaviour
         }
 
         JsonData jd = JsonMapper.ToObject(data);
-        int code = (int) jd["code"];
+        int code = (int)jd["code"];
 
         switch (code)
         {
-            case (int) TLJCommon.Consts.Code.Code_OK:
-            {
-                int roomId = (int) jd["roomId"];
-                string gameroomtype = jd["gameroomtype"].ToString();
-                if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_PVP_HuaFei_8) == 0)
+            case (int)TLJCommon.Consts.Code.Code_OK:
                 {
-                    ToastScript.createToast("退赛成功");
-                }
-                else
-                {
-                    ToastScript.createToast("退赛成功,请到邮箱领取报名费");
+                    int roomId = (int)jd["roomId"];
+                    string gameroomtype = jd["gameroomtype"].ToString();
 
-                    // 报名费返还通过邮件
-                    LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                    PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
+                    if (pvpGameRoomData != null)
+                    {
+                        if (pvpGameRoomData.baomingfei.CompareTo("0") == 0)
+                        {
+                            ToastScript.createToast("退赛成功");
+                        }
+                        else
+                        {
+                            ToastScript.createToast("退赛成功,请到邮箱领取报名费");
+
+                            // 报名费返还通过邮件
+                            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+                        }
+                    }
                 }
-            }
                 break;
 
-            case (int) TLJCommon.Consts.Code.Code_CommonFail:
-            {
-                ToastScript.createToast("退赛失败，当前并没有加入房间");
-            }
+            case (int)TLJCommon.Consts.Code.Code_CommonFail:
+                {
+                    ToastScript.createToast("退赛失败，当前并没有加入房间");
+                }
                 break;
         }
     }
