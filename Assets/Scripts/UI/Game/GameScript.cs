@@ -2140,6 +2140,7 @@ public class GameScript : MonoBehaviour
                                 }
                             }
 
+                            PokerScript.setAllPokerWeiXuanZe();
                             initMyPokerPos(GameData.getInstance().m_myPokerObjList);
                         }
                     }
