@@ -39,7 +39,7 @@ public class TestPoker : MonoBehaviour {
         InitFirst();
     }
 
-    private void InitFirst()
+    public void InitFirst()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "InitFirst"))

@@ -82,7 +82,7 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
         LogicEnginerScript.Instance.GetComponent<CheckSecondPSWRequest>().OnRequest();
     }
 
-    void onReceive_CheckSecondPSW(string result)
+    public void onReceive_CheckSecondPSW(string result)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "onReceive_CheckSecondPSW"))

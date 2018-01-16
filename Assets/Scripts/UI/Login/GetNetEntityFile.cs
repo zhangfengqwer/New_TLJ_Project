@@ -78,7 +78,7 @@ public class GetNetEntityFile : MonoBehaviour
         }
     }
 
-    void onInvoke()
+    public void onInvoke()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onInvoke"))
@@ -178,7 +178,7 @@ public class GetNetEntityFile : MonoBehaviour
         }
     }
 
-    void onClick_retryGetNetFile()
+    public void onClick_retryGetNetFile()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onClick_retryGetNetFile"))

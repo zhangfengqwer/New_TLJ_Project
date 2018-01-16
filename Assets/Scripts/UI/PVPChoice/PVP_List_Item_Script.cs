@@ -75,7 +75,7 @@ public class PVP_List_Item_Script : MonoBehaviour {
         InvokeRepeating("onInvoke",5,5);
     }
 
-    void onInvoke()
+    public void onInvoke()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "onInvoke"))

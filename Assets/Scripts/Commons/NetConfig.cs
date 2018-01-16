@@ -39,7 +39,7 @@ public class NetConfig
         //httpCallBack("", jsonData);
     }
 
-    static void httpCallBack(string tag, string data)
+    public static void httpCallBack(string tag, string data)
     {
         try
         {

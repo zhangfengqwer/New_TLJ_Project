@@ -193,7 +193,7 @@ public class LiangZhu : MonoBehaviour
         m_parentScript.onClickChaoDi(new List<PokerInfo>());
     }
 
-    private void OnClickLiangzhu(List<PokerInfo> list)
+    public void OnClickLiangzhu(List<PokerInfo> list)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickLiangzhu"))
@@ -213,7 +213,7 @@ public class LiangZhu : MonoBehaviour
         }
     }
 
-    private List<PokerInfo> GetPokerTypePoker(Consts.PokerType pokerType)
+    public List<PokerInfo> GetPokerTypePoker(Consts.PokerType pokerType)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "GetPokerTypePoker"))

@@ -3,6 +3,17 @@ using System.Collections.Generic;
 
 public class AudioScript : MonoBehaviour {
 
+    public static GameObject s_audioObj = null;
+    public static AudioScript s_audioScript;
+
+    //#背景音乐只会有一个;
+    public AudioSource m_musicPlayer;
+    //#音效会同时播放多个，所以用List;
+    public List<AudioSource> m_soundPlayer;
+
+    public float m_musicVolume = 1.0f;
+    public float m_soundVolume = 1.0f;
+
     static public AudioScript getAudioScript ()
     {
         if(!s_audioObj)
@@ -23,7 +34,7 @@ public class AudioScript : MonoBehaviour {
         initSoundPlayer();
     }
 
-    void initMusicPlayer ()
+    public void initMusicPlayer ()
     {
         m_musicVolume = PlayerPrefs.GetFloat("MusicVolume",1.0f);
 
@@ -39,7 +50,7 @@ public class AudioScript : MonoBehaviour {
         player.playOnAwake = false;
     }
 
-    void initSoundPlayer ()
+    public void initSoundPlayer ()
     {
         m_soundVolume = PlayerPrefs.GetFloat("SoundVolume", 1.0f);
 
@@ -57,14 +68,14 @@ public class AudioScript : MonoBehaviour {
         player.playOnAwake = false;
     }
 
-    void playMusic (string audioPath)
+    public void playMusic (string audioPath)
     {
         m_musicPlayer.clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
         m_musicPlayer.Play();
         m_musicPlayer.volume = m_musicVolume;
     }
 
-    void playSound (string audioPath)
+    public void playSound (string audioPath)
     {
         for(int i = 0; i < m_soundPlayer.Count; i++)
         {
@@ -236,17 +247,4 @@ public class AudioScript : MonoBehaviour {
     }
 
     //----------------------------------------------------------------------------播放 end
-
-    //---------------------------------------------------
-    static GameObject s_audioObj = null;
-    static AudioScript s_audioScript;
-
-
-    //#背景音乐只会有一个;
-    AudioSource m_musicPlayer;
-    //#音效会同时播放多个，所以用List;
-    List<AudioSource> m_soundPlayer;
-
-    float m_musicVolume = 1.0f;
-    float m_soundVolume = 1.0f;
 }

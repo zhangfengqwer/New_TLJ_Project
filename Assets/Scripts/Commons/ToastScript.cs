@@ -45,7 +45,7 @@ public class ToastScript : MonoBehaviour {
         s_toactObj.Clear();
     }
 
-    void setData(GameObject obj, string text)
+    public void setData(GameObject obj, string text)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ToastScript", "setData"))

@@ -115,7 +115,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         }
     }
 
-    void useProp(int id)
+    public void useProp(int id)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "useProp"))
@@ -220,7 +220,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         }
     }
 
-    void UpdatePropData()
+    public void UpdatePropData()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "UpdatePropData"))

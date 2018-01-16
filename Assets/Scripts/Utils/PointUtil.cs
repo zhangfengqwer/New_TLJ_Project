@@ -11,11 +11,11 @@ public class PointUtil : MonoBehaviour, IPointerDownHandler,IPointerUpHandler, I
 
     public UnityEvent onLongPress = new UnityEvent();
 
-    private bool isPointerDown = false;
-    private bool longPressTriggered = false;
-    private float timePressStarted;
+    public bool isPointerDown = false;
+    public bool longPressTriggered = false;
+    public float timePressStarted;
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         //        if (isPointerDown && !longPressTriggered)
         //        {

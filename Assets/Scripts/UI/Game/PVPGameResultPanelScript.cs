@@ -72,7 +72,7 @@ public class PVPGameResultPanelScript : MonoBehaviour
         m_image_result.SetNativeSize();
     }
 
-    void onInvokeTimeOut()
+    public void onInvokeTimeOut()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onInvokeTimeOut"))

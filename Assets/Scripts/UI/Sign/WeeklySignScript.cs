@@ -113,7 +113,7 @@ public class WeeklySignScript : MonoBehaviour
         }
     }
 
-    private void AddProp(string prop)
+    public void AddProp(string prop)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "AddProp"))
@@ -166,7 +166,7 @@ public class WeeklySignScript : MonoBehaviour
     /// <summary>
     /// 初始化数据
     /// </summary>
-    private void InitData()
+    public void InitData()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "InitData"))
@@ -194,7 +194,7 @@ public class WeeklySignScript : MonoBehaviour
     /// <summary>
     /// 初始化ui   
     /// </summary>
-    private void InitUi()
+    public void InitUi()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "InitUi"))

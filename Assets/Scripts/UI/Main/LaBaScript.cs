@@ -26,7 +26,7 @@ public class LaBaScript : MonoBehaviour {
         InvokeRepeating("onTextMove", 0.05f, 0.05f);
     }
 
-    void onTextMove()
+    public void onTextMove()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript", "onTextMove"))

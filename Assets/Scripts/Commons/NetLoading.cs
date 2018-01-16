@@ -55,7 +55,7 @@ public class NetLoading : MonoBehaviour {
         CancelInvoke("onInvoke");
     }
 
-    void onInvoke()
+    public void onInvoke()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading", "onInvoke"))

@@ -18,7 +18,7 @@ public class GameLevelChoiceScript : MonoBehaviour {
         GameChangCiType_chaodi,
     }
 
-    GameChangCiType m_gameChangCiType;
+    public GameChangCiType m_gameChangCiType;
 
     public static GameObject create(GameChangCiType gameChangCiType)
     {

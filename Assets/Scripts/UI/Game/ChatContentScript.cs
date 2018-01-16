@@ -67,7 +67,7 @@ public class ChatContentScript : MonoBehaviour {
 		
 	}
 
-    void showEnd()
+    public void showEnd()
     {
         Destroy(gameObject);
     }

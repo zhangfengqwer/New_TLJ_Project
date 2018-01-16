@@ -6,20 +6,20 @@ public class PlayServiceSocket: MonoBehaviour
 {
     public static PlayServiceSocket s_instance = null;
 
-    SocketUtil m_socketUtil;
-    bool m_isConnecion = false;
-    bool m_isCloseSocket = false;
-    int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
-    List<string> m_dataList = new List<string>();
+    public SocketUtil m_socketUtil;
+    public bool m_isConnecion = false;
+    public bool m_isCloseSocket = false;
+    public int m_connectState = 2;             // 0:连接失败  1:连接成功   2:无状态
+    public List<string> m_dataList = new List<string>();
     
     public delegate void OnPlayService_Receive(string data);            // 收到服务器消息
-    OnPlayService_Receive m_onPlayService_Receive = null;
+    public OnPlayService_Receive m_onPlayService_Receive = null;
 
     public delegate void OnPlayService_Close();                         // 与服务器断开
-    OnPlayService_Close m_onPlayService_Close = null;
+    public OnPlayService_Close m_onPlayService_Close = null;
 
     public delegate void OnPlayService_Connect(bool result);           // 连接服务器结果
-    OnPlayService_Connect m_onPlayService_Connect = null;
+    public OnPlayService_Connect m_onPlayService_Connect = null;
 
     public static GameObject create()
     {
@@ -140,7 +140,7 @@ public class PlayServiceSocket: MonoBehaviour
         m_onPlayService_Close = onPlayService_Close;
     }
 
-    void onSocketConnect(bool result)
+    public void onSocketConnect(bool result)
     {
         if (result)
         {
@@ -156,14 +156,14 @@ public class PlayServiceSocket: MonoBehaviour
         }
     }
 
-    void onSocketReceive(string data)
+    public void onSocketReceive(string data)
     {
         LogUtil.Log("收到服务器消息:" + data);
 
         m_dataList.Add(data);
     }
 
-    void onSocketClose()
+    public void onSocketClose()
     {
         LogUtil.Log("Play:被动与服务器断开连接,尝试重新连接");
 
@@ -171,7 +171,7 @@ public class PlayServiceSocket: MonoBehaviour
         m_isConnecion = false;
     }
 
-    void onSocketStop()
+    public void onSocketStop()
     {
         LogUtil.Log("Play:主动与服务器断开连接");
         m_isConnecion = false;

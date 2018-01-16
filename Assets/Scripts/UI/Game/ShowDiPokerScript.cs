@@ -35,7 +35,7 @@ public class ShowDiPokerScript : MonoBehaviour {
         Invoke("showEnd", 2.0f);
     }
 
-    void showEnd()
+    public void showEnd()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "showEnd"))
@@ -84,7 +84,7 @@ public class ShowDiPokerScript : MonoBehaviour {
         initPokerPos(objList);
     }
 
-    void initPokerPos(List<GameObject> objList)
+    public void initPokerPos(List<GameObject> objList)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "initPokerPos"))

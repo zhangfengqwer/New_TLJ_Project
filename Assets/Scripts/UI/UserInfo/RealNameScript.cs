@@ -114,7 +114,7 @@ public class RealNameScript : MonoBehaviour
         LogicEnginerScript.Instance.GetComponent<RealNameRequest>().OnRequest(_realName, _identification);
     }
 
-    private void realNameCallBack(string result)
+    public void realNameCallBack(string result)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "realNameCallBack"))

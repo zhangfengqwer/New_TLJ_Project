@@ -7,15 +7,15 @@ public class ScaleUtil : MonoBehaviour
 {
     public float endScale = 1;
     public float startScale = 0.9f;
-    private float currentScale;
+    public float currentScale;
     public Transform target;
     public float speed = 1f;
-    private bool scaleTag = false;
+    public bool scaleTag = false;
 
     public delegate void CallBack();
     public CallBack m_callBack = null;
 
-    bool m_canClose = true;
+    public bool m_canClose = true;
 
     // Use this for initialization
     void Start()

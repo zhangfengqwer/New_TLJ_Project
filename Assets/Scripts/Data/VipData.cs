@@ -23,7 +23,7 @@ public class VipData
         UnityWebReqUtil.Instance.Get(OtherData.getWebUrl() + "VipRewardData.json", httpCallBack);
     }
 
-    private static void httpCallBack(string tag, string data)
+    public static void httpCallBack(string tag, string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData", "httpCallBack"))

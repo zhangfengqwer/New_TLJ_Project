@@ -57,7 +57,7 @@ public class EmojiScript : MonoBehaviour
         InvokeRepeating("onInvoke", 1.0f / m_zhenlv, 1.0f / m_zhenlv);
     }
 
-    void onInvoke()
+    public void onInvoke()
     {
         try
         {

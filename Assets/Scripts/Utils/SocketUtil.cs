@@ -19,22 +19,22 @@ public class SocketUtil
 
     public delegate void OnSocketEvent_Stop(); // 与服务器正常断开连接
 
-    OnSocketEvent_Connect m_onSocketEvent_Connect = null;
-    OnSocketEvent_Receive m_onSocketEvent_Receive = null;
-    OnSocketEvent_Close m_onSocketEvent_Close = null;
-    OnSocketEvent_Stop m_onSocketEvent_Stop = null;
+    public OnSocketEvent_Connect m_onSocketEvent_Connect = null;
+    public OnSocketEvent_Receive m_onSocketEvent_Receive = null;
+    public OnSocketEvent_Close m_onSocketEvent_Close = null;
+    public OnSocketEvent_Stop m_onSocketEvent_Stop = null;
 
-    Socket m_socket = null;
-    IPAddress m_ipAddress = null;
-    int m_ipPort = 0;
+    public Socket m_socket = null;
+    public IPAddress m_ipAddress = null;
+    public int m_ipPort = 0;
 
-    bool m_isStart = false;
-    bool m_isNormalStop = false;
+    public bool m_isStart = false;
+    public bool m_isNormalStop = false;
 
     // 数据包尾部标识
-    char m_packStartFlag = (char) 1;
+    public char m_packStartFlag = (char) 1;
 
-    string m_endStr = "";
+    public string m_endStr = "";
 
     public void setOnSocketEvent_Connect(OnSocketEvent_Connect onSocketEvent_Connect)
     {
@@ -116,7 +116,7 @@ public class SocketUtil
         }
     }
 
-    void CreateConnectionInThread()
+    public void CreateConnectionInThread()
     {
         try
         {
@@ -189,7 +189,7 @@ public class SocketUtil
         }
     }
 
-    private void StartReceive()
+    public void StartReceive()
     {
         string result = null;
         bool isEnd = true;
@@ -294,7 +294,7 @@ public class SocketUtil
         }
     }
 
-    private byte[] CombineBytes(byte[] data1, byte[] data2)
+    public byte[] CombineBytes(byte[] data1, byte[] data2)
     {
         byte[] data = new byte[data1.Length + data2.Length];
         Buffer.BlockCopy(data1, 0, data, 0, data1.Length); //这种方法仅适用于字节数组
@@ -302,7 +302,7 @@ public class SocketUtil
         return data;
     }
 
-    bool checkSocketIsInit()
+    public bool checkSocketIsInit()
     {
         if (m_ipAddress == null || m_ipPort == 0)
         {

@@ -15,7 +15,7 @@ public class SensitiveWordUtil
         UnityWebReqUtil.Instance.Get(OtherData.getWebUrl() + "stopwords.txt", httpCallBack);
     }
 
-    static void httpCallBack(string tag, string data)
+    public static void httpCallBack(string tag, string data)
     {
         try
         {

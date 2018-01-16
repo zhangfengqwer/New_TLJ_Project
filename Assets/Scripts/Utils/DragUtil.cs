@@ -5,8 +5,8 @@ using System.Collections;
 
 public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
-    private RectTransform _rectTransform;
-    private Vector3 offset = new Vector3((float) 3.7, (float) 2.3, 0);
+    public RectTransform _rectTransform;
+    public Vector3 offset = new Vector3((float) 3.7, (float) 2.3, 0);
 
     private void Start()
     {
@@ -41,7 +41,7 @@ public class DragUtil : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// set position of the dragged game object
     /// </summary>
     /// <param name="eventData"></param>
-    private void SetDraggedPosition(PointerEventData eventData)
+    public void SetDraggedPosition(PointerEventData eventData)
     {
         // transform the screen point to world point int rectangle
         Vector3 globalMousePos;

@@ -64,7 +64,7 @@ public class ChangeHeadPanelScript : MonoBehaviour {
         }
     }
 
-    void onReceive_ChangeHead(string data)
+    public void onReceive_ChangeHead(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "onReceive_ChangeHead"))

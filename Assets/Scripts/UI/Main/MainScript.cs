@@ -130,7 +130,7 @@ public class MainScript : MonoBehaviour
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
     }
 
-    void onInvokeStartMusic()
+    public void onInvokeStartMusic()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onInvokeStartMusic"))
@@ -186,7 +186,7 @@ public class MainScript : MonoBehaviour
     }
 
     // 检测服务器是否连接
-    void checkNet()
+    public void checkNet()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "checkNet"))
@@ -276,7 +276,7 @@ public class MainScript : MonoBehaviour
         script.start(time,false);
     }
 
-    void onTimerEvent_TimeEnd(bool isContinueGame)
+    public void onTimerEvent_TimeEnd(bool isContinueGame)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onTimerEvent_TimeEnd"))
@@ -745,7 +745,7 @@ public class MainScript : MonoBehaviour
 
     //---------------------------------------------------------------------------------
 
-    void onSocketReceive_Play(string data)
+    public void onSocketReceive_Play(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "onSocketReceive_Play"))
@@ -818,7 +818,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void doTask_PlayAction_IsJoinGame(string data)
+    public void doTask_PlayAction_IsJoinGame(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_IsJoinGame"))
@@ -846,7 +846,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void doTask_PlayAction_JoinGame(string data)
+    public void doTask_PlayAction_JoinGame(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_JoinGame"))
@@ -893,7 +893,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void doTask_PlayAction_ExitPVP(string data)
+    public void doTask_PlayAction_ExitPVP(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_ExitPVP"))
@@ -933,7 +933,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void doTask_PlayAction_StartGame(string data)
+    public void doTask_PlayAction_StartGame(string data)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript", "doTask_PlayAction_StartGame"))
@@ -1038,7 +1038,7 @@ public class MainScript : MonoBehaviour
 
     //-------------------------------------Logic服务器相关----------------------------------------
 
-    void onSocketConnect_Logic(bool result)
+    public void onSocketConnect_Logic(bool result)
     {
         NetLoading.getInstance().Close();
 
@@ -1076,7 +1076,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void onSocketClose_Logic()
+    public void onSocketClose_Logic()
     {
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
@@ -1085,7 +1085,7 @@ public class MainScript : MonoBehaviour
         NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");
     }
 
-    void onSocketStop_Logic()
+    public void onSocketStop_Logic()
     {
         //LogUtil.Log("主动与服务器断开连接");
 
@@ -1095,7 +1095,7 @@ public class MainScript : MonoBehaviour
     }
 
     // 点击网络断开弹框中的重连按钮
-    void onClickChongLian_Logic()
+    public void onClickChongLian_Logic()
     {
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
@@ -1105,7 +1105,7 @@ public class MainScript : MonoBehaviour
 
     //-------------------------------------Play服务器相关----------------------------------------
 
-    void onSocketConnect_Play(bool result)
+    public void onSocketConnect_Play(bool result)
     {
         NetLoading.getInstance().Close();
 
@@ -1131,7 +1131,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    void onSocketClose_Play()
+    public void onSocketClose_Play()
     {
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
@@ -1146,7 +1146,7 @@ public class MainScript : MonoBehaviour
         NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
     }
 
-    void onSocketStop_Play()
+    public void onSocketStop_Play()
     {
         //LogUtil.Log("主动与服务器断开连接");
 
@@ -1162,7 +1162,7 @@ public class MainScript : MonoBehaviour
     }
 
     // 点击网络断开弹框中的重连按钮
-    void onClickChongLian_Play()
+    public void onClickChongLian_Play()
     {
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
@@ -1170,13 +1170,13 @@ public class MainScript : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------------------
-    void onPauseCallBack()
+    public void onPauseCallBack()
     {
         //LogicEnginerScript.Instance.Stop();
         //PlayServiceSocket.s_instance.Stop();
     }
 
-    void onResumeCallBack()
+    public void onResumeCallBack()
     {
         //if (m_waitMatchPanel != null)
         //{

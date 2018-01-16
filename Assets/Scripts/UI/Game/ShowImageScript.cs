@@ -36,7 +36,7 @@ public class ShowImageScript : MonoBehaviour
 		
 	}
 
-    void onInvoke()
+    public void onInvoke()
     {
         Destroy(gameObject);
     }
