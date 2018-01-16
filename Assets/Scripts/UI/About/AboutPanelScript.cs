@@ -6,6 +6,8 @@ public class AboutPanelScript : MonoBehaviour
 {
     private void Start()
     {
+        OtherData.s_aboutPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AboutPanelScript", "Start"))
         {

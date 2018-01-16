@@ -32,6 +32,8 @@ public class GameResultPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_gameResultPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "Start"))
         {

@@ -39,6 +39,8 @@ public class TurntablePanelScript : MonoBehaviour
 
     void Start()
     {
+        OtherData.s_turntablePanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "Start"))
         {

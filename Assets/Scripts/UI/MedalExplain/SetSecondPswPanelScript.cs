@@ -20,6 +20,8 @@ public class SetSecondPswPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_setSecondPswPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "Start"))
         {

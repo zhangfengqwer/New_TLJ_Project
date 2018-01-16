@@ -26,6 +26,8 @@ public class PropDetailPanelScript : MonoBehaviour {
 
     private void Start()
     {
+        OtherData.s_propDetailPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "Start"))
         {

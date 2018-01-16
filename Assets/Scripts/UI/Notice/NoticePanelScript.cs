@@ -28,6 +28,8 @@ public class NoticePanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        OtherData.s_noticePanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "Start"))
         {

@@ -25,6 +25,8 @@ public class BagPanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_bagPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "Start"))
         {

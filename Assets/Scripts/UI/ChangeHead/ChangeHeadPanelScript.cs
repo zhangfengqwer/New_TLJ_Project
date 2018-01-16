@@ -20,6 +20,8 @@ public class ChangeHeadPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_changeHeadPanelScript = this;
+
         s_instance = this;
 
         // 优先使用热更新的代码

@@ -14,6 +14,8 @@ public class ExitGamePanelScript : MonoBehaviour {
 
     private void Start()
     {
+        OtherData.s_exitGamePanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript", "Start"))
         {

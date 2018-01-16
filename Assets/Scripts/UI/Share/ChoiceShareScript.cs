@@ -17,6 +17,8 @@ public class ChoiceShareScript : MonoBehaviour
 
     private void Start()
     {
+        OtherData.s_choiceShareScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript", "Start"))
         {

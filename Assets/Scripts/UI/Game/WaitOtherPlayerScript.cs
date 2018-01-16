@@ -20,6 +20,8 @@ public class WaitOtherPlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_waitOtherPlayerScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "Start"))
         {

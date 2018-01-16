@@ -23,6 +23,8 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        OtherData.s_queRenBaoMingPanelScript = this;
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "Start"))
         {
