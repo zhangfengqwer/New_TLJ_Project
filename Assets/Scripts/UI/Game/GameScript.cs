@@ -2553,7 +2553,7 @@ public class GameScript : MonoBehaviour
                 }
                 else
                 {
-                    ToastScript.createToast("没有此人：" + (string)jd["name"]);
+                    ToastScript.createToast("没有此人信息：" + (string)jd["name"]);
                 }
             }
         }
