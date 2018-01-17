@@ -54,9 +54,9 @@ public class LoginScript : MonoBehaviour
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -115,9 +115,9 @@ public class LoginScript : MonoBehaviour
     public void Set3rdLogin()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "Set3rdLogin"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "Set3rdLogin"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "Set3rdLogin", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "Set3rdLogin", null, null);
             return;
         }
 
@@ -162,9 +162,9 @@ public class LoginScript : MonoBehaviour
     public void onGetAllNetFile()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onGetAllNetFile"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onGetAllNetFile"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onGetAllNetFile", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onGetAllNetFile", null, null);
             return;
         }
 
@@ -175,9 +175,9 @@ public class LoginScript : MonoBehaviour
     public void onInvokeHealthPanel()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onInvokeHealthPanel"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onInvokeHealthPanel"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onInvokeHealthPanel", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onInvokeHealthPanel", null, null);
             return;
         }
 
@@ -209,9 +209,9 @@ public class LoginScript : MonoBehaviour
     public void init()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "init", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "init", null, null);
             return;
         }
 
@@ -241,9 +241,9 @@ public class LoginScript : MonoBehaviour
     void Update()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "Update"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "Update"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "Update", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "Update", null, null);
             return;
         }
 
@@ -268,9 +268,9 @@ public class LoginScript : MonoBehaviour
     public void setLogonTypeUI()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "setLogonTypeUI"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "setLogonTypeUI"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "setLogonTypeUI", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "setLogonTypeUI", null, null);
             return;
         }
 
@@ -329,9 +329,9 @@ public class LoginScript : MonoBehaviour
     public void OnToggleAgree()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "OnToggleAgree"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "OnToggleAgree"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "OnToggleAgree", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "OnToggleAgree", null, null);
             return;
         }
 
@@ -348,9 +348,9 @@ public class LoginScript : MonoBehaviour
     public void OnEnterLoginClick()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "OnEnterLoginClick"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "OnEnterLoginClick"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "OnEnterLoginClick", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "OnEnterLoginClick", null, null);
             return;
         }
 
@@ -363,9 +363,9 @@ public class LoginScript : MonoBehaviour
     public void OnEnterRegisterClick()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "OnEnterRegisterClick"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "OnEnterRegisterClick"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "OnEnterRegisterClick", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "OnEnterRegisterClick", null, null);
             return;
         }
 
@@ -381,9 +381,9 @@ public class LoginScript : MonoBehaviour
     public void onClickChangeLoginType()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickChangeLoginType"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickChangeLoginType"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickChangeLoginType", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickChangeLoginType", null, null);
             return;
         }
 
@@ -395,9 +395,9 @@ public class LoginScript : MonoBehaviour
     public void onClickDefaultLogin()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickDefaultLogin"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickDefaultLogin"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickDefaultLogin", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickDefaultLogin", null, null);
             return;
         }
 
@@ -429,9 +429,9 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_wechat()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickLogin_wechat"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickLogin_wechat"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickLogin_wechat", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickLogin_wechat", null, null);
             return;
         }
 
@@ -446,9 +446,9 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_qq()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickLogin_qq"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickLogin_qq"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickLogin_qq", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickLogin_qq", null, null);
             return;
         }
 
@@ -463,9 +463,9 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickLogin"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickLogin"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickLogin", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickLogin", null, null);
             return;
         }
 
@@ -477,9 +477,9 @@ public class LoginScript : MonoBehaviour
     public void onClickQuickRegister()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickQuickRegister"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickQuickRegister"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickQuickRegister", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickQuickRegister", null, null);
             return;
         }
 
@@ -490,9 +490,9 @@ public class LoginScript : MonoBehaviour
     public void onClickLogin_close()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickLogin_close"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickLogin_close"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickLogin_close", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickLogin_close", null, null);
             return;
         }
 
@@ -506,9 +506,9 @@ public class LoginScript : MonoBehaviour
     public void onClickRegister_close()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onClickRegister_close"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickRegister_close"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onClickRegister_close", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickRegister_close", null, null);
             return;
         }
 
@@ -520,9 +520,9 @@ public class LoginScript : MonoBehaviour
     public void onApkVerisionIsLow()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onApkVerisionIsLow"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onApkVerisionIsLow"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onApkVerisionIsLow", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onApkVerisionIsLow", null, null);
             return;
         }
 
@@ -544,9 +544,9 @@ public class LoginScript : MonoBehaviour
     public void onReceive(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onReceive"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onReceive", null, data);
             return;
         }
 
@@ -574,9 +574,9 @@ public class LoginScript : MonoBehaviour
     public void onReceive_CheckVerisionCode(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_CheckVerisionCode"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onReceive_CheckVerisionCode"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_CheckVerisionCode", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onReceive_CheckVerisionCode", null, data);
             return;
         }
 
@@ -633,9 +633,9 @@ public class LoginScript : MonoBehaviour
     public void onReceive_Login(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_Login"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onReceive_Login"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_Login", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onReceive_Login", null, data);
             return;
         }
 
@@ -681,9 +681,9 @@ public class LoginScript : MonoBehaviour
     public void onReceive_Third_Login(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_Third_Login"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onReceive_Third_Login"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_Third_Login", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onReceive_Third_Login", null, data);
             return;
         }
 
@@ -719,9 +719,9 @@ public class LoginScript : MonoBehaviour
     public void onReceive_QuickRegister(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onReceive_QuickRegister"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onReceive_QuickRegister"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onReceive_QuickRegister", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onReceive_QuickRegister", null, data);
             return;
         }
 
@@ -755,9 +755,9 @@ public class LoginScript : MonoBehaviour
     public void onServerIsStop()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onServerIsStop"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onServerIsStop"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onServerIsStop", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onServerIsStop", null, null);
             return;
         }
 
@@ -770,9 +770,9 @@ public class LoginScript : MonoBehaviour
     public void reqCheckVerisionCode()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "reqCheckVerisionCode"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "reqCheckVerisionCode"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "reqCheckVerisionCode", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "reqCheckVerisionCode", null, null);
             return;
         }
 
@@ -790,9 +790,9 @@ public class LoginScript : MonoBehaviour
     public void reqLogin()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "reqLogin"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "reqLogin"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "reqLogin", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "reqLogin", null, null);
             return;
         }
 
@@ -824,9 +824,9 @@ public class LoginScript : MonoBehaviour
     public void reqQuickRegister()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "reqQuickRegister"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "reqQuickRegister"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "reqQuickRegister", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "reqQuickRegister", null, null);
             return;
         }
 
@@ -908,9 +908,9 @@ public class LoginScript : MonoBehaviour
     public void onSocketConnect(bool result)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "onSocketConnect"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onSocketConnect"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "onSocketConnect", null, result);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onSocketConnect", null, result);
             return;
         }
 
@@ -996,9 +996,9 @@ public class LoginScript : MonoBehaviour
     public void checkNet()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript", "checkNet"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "checkNet"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript", "checkNet", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "checkNet", null, null);
             return;
         }
 
