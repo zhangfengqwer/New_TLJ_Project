@@ -49,6 +49,13 @@ public class LoginScript : MonoBehaviour
     {
         OtherData.s_channelName = PlatformHelper.GetChannelName();
         OtherData.s_loginScript = this;
+
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "Awake"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "Awake", null, null);
+            return;
+        }
     }
 
     void Start()

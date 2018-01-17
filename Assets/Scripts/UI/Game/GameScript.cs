@@ -79,9 +79,8 @@ public class GameScript : MonoBehaviour
 
         AudioScript.getAudioScript().stopMusic();
 
-        // 3秒后播放背景音乐,每隔75秒重复播放背景音乐
-        InvokeRepeating("onInvokeStartMusic", 3, 75);
-
+        startBgm();
+        
         initData();
 
         initUI();
@@ -89,6 +88,12 @@ public class GameScript : MonoBehaviour
         checkGameRoomType();
 
         m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
+    }
+
+    public void startBgm()
+    {
+        // 3秒后播放背景音乐,每隔75秒重复播放背景音乐
+        InvokeRepeating("onInvokeStartMusic", 3, 75);
     }
 
     public void onInvokeStartMusic()
