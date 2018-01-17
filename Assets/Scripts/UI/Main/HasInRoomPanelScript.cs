@@ -28,9 +28,9 @@ public class HasInRoomPanelScript : MonoBehaviour {
         OtherData.s_hasInRoomPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HasInRoomPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HasInRoomPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HasInRoomPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HasInRoomPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -43,9 +43,9 @@ public class HasInRoomPanelScript : MonoBehaviour {
     public void onClickOK()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HasInRoomPanelScript", "onClickOK"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HasInRoomPanelScript_hotfix", "onClickOK"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HasInRoomPanelScript", "onClickOK", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HasInRoomPanelScript_hotfix", "onClickOK", null, null);
             return;
         }
 

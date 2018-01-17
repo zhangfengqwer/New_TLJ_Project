@@ -26,9 +26,9 @@ public class RealNameScript : MonoBehaviour
         OtherData.s_realNameScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -39,9 +39,9 @@ public class RealNameScript : MonoBehaviour
     public void GetRealName(InputField input)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "GetRealName"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript_hotfix", "GetRealName"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "GetRealName", null, input);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript_hotfix", "GetRealName", null, input);
             return;
         }
 
@@ -66,9 +66,9 @@ public class RealNameScript : MonoBehaviour
     public void GetIdentification(InputField input)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "GetIdentification"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript_hotfix", "GetIdentification"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "GetIdentification", null, input);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript_hotfix", "GetIdentification", null, input);
             return;
         }
 
@@ -86,9 +86,9 @@ public class RealNameScript : MonoBehaviour
     public void OnClickRealName()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "OnClickRealName"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript_hotfix", "OnClickRealName"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "OnClickRealName", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript_hotfix", "OnClickRealName", null, null);
             return;
         }
 
@@ -119,9 +119,9 @@ public class RealNameScript : MonoBehaviour
     public void realNameCallBack(string result)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript", "realNameCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RealNameScript_hotfix", "realNameCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript", "realNameCallBack", null, result);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RealNameScript_hotfix", "realNameCallBack", null, result);
             return;
         }
 

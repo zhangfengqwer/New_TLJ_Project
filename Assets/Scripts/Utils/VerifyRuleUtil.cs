@@ -10,9 +10,9 @@ public class VerifyRuleUtil
     public static bool CheckRealName(string text)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckRealName"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil_hotfix", "CheckRealName"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckRealName", null, text);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil_hotfix", "CheckRealName", null, text);
             return b;
         }
 
@@ -43,9 +43,9 @@ public class VerifyRuleUtil
     public static bool CheckIDCard(string idNumber)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil_hotfix", "CheckIDCard"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckIDCard", null, idNumber);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil_hotfix", "CheckIDCard", null, idNumber);
             return b;
         }
 
@@ -72,9 +72,9 @@ public class VerifyRuleUtil
     public static bool CheckIDCard18(string idNumber)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard18"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil_hotfix", "CheckIDCard18"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckIDCard18", null, idNumber);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil_hotfix", "CheckIDCard18", null, idNumber);
             return b;
         }
 
@@ -119,9 +119,9 @@ public class VerifyRuleUtil
     public static bool CheckIDCard15(string idNumber)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckIDCard15"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil_hotfix", "CheckIDCard15"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckIDCard15", null, idNumber);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil_hotfix", "CheckIDCard15", null, idNumber);
             return b;
         }
 
@@ -147,9 +147,9 @@ public class VerifyRuleUtil
     public static bool CheckPhone(string inputText)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckPhone"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil_hotfix", "CheckPhone"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckPhone", null, inputText);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil_hotfix", "CheckPhone", null, inputText);
             return b;
         }
 
@@ -159,9 +159,9 @@ public class VerifyRuleUtil
     public static bool CheckVerificationCode(string inputText)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil", "CheckVerificationCode"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VerifyRuleUtil_hotfix", "CheckVerificationCode"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil", "CheckVerificationCode", null, inputText);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VerifyRuleUtil_hotfix", "CheckVerificationCode", null, inputText);
             return b;
         }
 

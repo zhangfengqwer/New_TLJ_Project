@@ -18,9 +18,9 @@ public class PayTypePanelScript : MonoBehaviour
     private void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -33,9 +33,9 @@ public class PayTypePanelScript : MonoBehaviour
     public JsonData SetRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "SetRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript_hotfix", "SetRequest"))
         {
-            JsonData jd = (JsonData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "SetRequest", null, null);
+            JsonData jd = (JsonData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript_hotfix", "SetRequest", null, null);
             return jd;
         }
 
@@ -51,9 +51,9 @@ public class PayTypePanelScript : MonoBehaviour
     public void OnClickAliPay()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "OnClickAliPay"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript_hotfix", "OnClickAliPay"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "OnClickAliPay", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript_hotfix", "OnClickAliPay", null, null);
             return;
         }
 
@@ -64,9 +64,9 @@ public class PayTypePanelScript : MonoBehaviour
     public void OnClickWeChatPay()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript", "OnClickWeChatPay"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PayTypePanelScript_hotfix", "OnClickWeChatPay"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript", "OnClickWeChatPay", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PayTypePanelScript_hotfix", "OnClickWeChatPay", null, null);
             return;
         }
 

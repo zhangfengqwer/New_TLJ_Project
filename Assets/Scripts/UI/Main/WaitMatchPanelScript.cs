@@ -32,9 +32,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
         OtherData.s_waitMatchPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -42,9 +42,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public void onClickTuiSai()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "onClickTuiSai"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "onClickTuiSai"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "onClickTuiSai", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "onClickTuiSai", null, null);
             return;
         }
 
@@ -54,9 +54,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public void checkHideTuiSai(string gameRoomType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "checkHideTuiSai"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "checkHideTuiSai"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "checkHideTuiSai", null, gameRoomType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "checkHideTuiSai", null, gameRoomType);
             return;
         }
 
@@ -73,9 +73,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
 	void Update ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "Update"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "Update"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "Update", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "Update", null, null);
             return;
         }
 
@@ -110,9 +110,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public void start(float seconds, bool isContinueGame)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "start", null, seconds, isContinueGame);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "start", null, seconds, isContinueGame);
             return;
         }
 
@@ -126,9 +126,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public void stop()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "stop"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "stop"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "stop", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "stop", null, null);
             return;
         }
 
@@ -144,9 +144,9 @@ public class WaitMatchPanelScript : MonoBehaviour {
     public void reqExitRoom()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript", "reqExitRoom"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "reqExitRoom"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript", "reqExitRoom", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "reqExitRoom", null, null);
             return;
         }
 

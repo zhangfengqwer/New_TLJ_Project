@@ -17,9 +17,9 @@ public class VipUtil
 	public static int GetVipLevel(int recharge)
 	{
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipUtil", "GetVipLevel"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipUtil_hotfix", "GetVipLevel"))
         {
-            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipUtil", "GetVipLevel", null, recharge);
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipUtil_hotfix", "GetVipLevel", null, recharge);
             return i;
         }
 
@@ -41,9 +41,9 @@ public class VipUtil
 	public static int GetCurrentVipTotal(int vipLevel)
 	{
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipUtil", "GetCurrentVipTotal"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipUtil_hotfix", "GetCurrentVipTotal"))
         {
-            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipUtil", "GetCurrentVipTotal", null, vipLevel);
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipUtil_hotfix", "GetCurrentVipTotal", null, vipLevel);
             return i;
         }
 

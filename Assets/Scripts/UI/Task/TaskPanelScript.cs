@@ -25,9 +25,9 @@ public class TaskPanelScript : MonoBehaviour {
         OtherData.s_taskPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -47,9 +47,9 @@ public class TaskPanelScript : MonoBehaviour {
     public void scaleCallBack()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "scaleCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript_hotfix", "scaleCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "scaleCallBack", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript_hotfix", "scaleCallBack", null, null);
             return;
         }
 
@@ -66,9 +66,9 @@ public class TaskPanelScript : MonoBehaviour {
     public void loadTask()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "loadTask"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript_hotfix", "loadTask"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "loadTask", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript_hotfix", "loadTask", null, null);
             return;
         }
 
@@ -92,9 +92,9 @@ public class TaskPanelScript : MonoBehaviour {
     public void setTaskOver(int task_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "setTaskOver"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript_hotfix", "setTaskOver"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "setTaskOver", null, task_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript_hotfix", "setTaskOver", null, task_id);
             return;
         }
 
@@ -115,9 +115,9 @@ public class TaskPanelScript : MonoBehaviour {
     public void onReceive_GetTask(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript", "onReceive_GetTask"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskPanelScript_hotfix", "onReceive_GetTask"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript", "onReceive_GetTask", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskPanelScript_hotfix", "onReceive_GetTask", null, data);
             return;
         }
 

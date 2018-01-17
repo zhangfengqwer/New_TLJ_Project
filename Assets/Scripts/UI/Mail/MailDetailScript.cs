@@ -28,9 +28,9 @@ public class MailDetailScript : MonoBehaviour {
         OtherData.s_mailDetailScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -43,9 +43,9 @@ public class MailDetailScript : MonoBehaviour {
     public void setEmailId(int email_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "setEmailId"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript_hotfix", "setEmailId"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "setEmailId", null, email_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript_hotfix", "setEmailId", null, email_id);
             return;
         }
 
@@ -66,9 +66,9 @@ public class MailDetailScript : MonoBehaviour {
     public void setData(string reward)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "setData", null, reward);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript_hotfix", "setData", null, reward);
             return;
         }
 
@@ -101,9 +101,9 @@ public class MailDetailScript : MonoBehaviour {
     public void onClickDelete()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "onClickDelete"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript_hotfix", "onClickDelete"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "onClickDelete", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript_hotfix", "onClickDelete", null, null);
             return;
         }
 
@@ -115,9 +115,9 @@ public class MailDetailScript : MonoBehaviour {
     public void onReceive_DeleteMail(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript", "onReceive_DeleteMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MailDetailScript_hotfix", "onReceive_DeleteMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript", "onReceive_DeleteMail", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MailDetailScript_hotfix", "onReceive_DeleteMail", null, data);
             return;
         }
 

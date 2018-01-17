@@ -11,9 +11,9 @@ public class GameUtil
     public static List<TLJCommon.PokerInfo> choiceSinglePoker(List<TLJCommon.PokerInfo> myPokerList, TLJCommon.Consts.PokerType pokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "choiceSinglePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "choiceSinglePoker"))
         {
-            List<TLJCommon.PokerInfo> list = (List<TLJCommon.PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "choiceSinglePoker", null, myPokerList, pokerType);
+            List<TLJCommon.PokerInfo> list = (List<TLJCommon.PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "choiceSinglePoker", null, myPokerList, pokerType);
             return list;
         }
 
@@ -67,9 +67,9 @@ public class GameUtil
     public static List<TLJCommon.PokerInfo> choiceDoublePoker(List<TLJCommon.PokerInfo> myPokerList, TLJCommon.Consts.PokerType pokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "choiceDoublePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "choiceDoublePoker"))
         {
-            List<TLJCommon.PokerInfo> list = (List<TLJCommon.PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "choiceDoublePoker", null, myPokerList, pokerType);
+            List<TLJCommon.PokerInfo> list = (List<TLJCommon.PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "choiceDoublePoker", null, myPokerList, pokerType);
             return list;
         }
 
@@ -122,9 +122,9 @@ public class GameUtil
     static public string getPropIconPath(int prop_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getPropIconPath"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getPropIconPath"))
         {
-            string str = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getPropIconPath", null, prop_id);
+            string str = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getPropIconPath", null, prop_id);
             return str;
         }
 
@@ -155,9 +155,9 @@ public class GameUtil
     static public string getMasterPokerIconPath(int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getMasterPokerIconPath"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getMasterPokerIconPath"))
         {
-            string str = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getMasterPokerIconPath", null, masterPokerType);
+            string str = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getMasterPokerIconPath", null, masterPokerType);
             return str;
         }
 
@@ -197,9 +197,9 @@ public class GameUtil
     static public void changeData(string reward)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "changeData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "changeData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "changeData", null, reward);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "changeData", null, reward);
             return;
         }
 
@@ -219,9 +219,9 @@ public class GameUtil
     static public void changeData(int id , int num)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "changeData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "changeData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "changeData", null, id,num);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "changeData", null, id,num);
             return;
         }
 
@@ -284,9 +284,9 @@ public class GameUtil
     public static string getOneTips()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getOneTips"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getOneTips"))
         {
-            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getOneTips", null, null);
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getOneTips", null, null);
             return s;
         }
 
@@ -332,9 +332,9 @@ public class GameUtil
     public static void setGameRoomTypeLogoPath(string gameroomtype,Image gameRoomLogo)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "setGameRoomTypeLogoPath"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "setGameRoomTypeLogoPath"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "setGameRoomTypeLogoPath", null, gameroomtype, gameRoomLogo);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "setGameRoomTypeLogoPath", null, gameroomtype, gameRoomLogo);
             return;
         }
 
@@ -449,9 +449,9 @@ public class GameUtil
     public static bool checkCanEnterRoom(string gameRoomType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "checkCanEnterRoom"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "checkCanEnterRoom"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "checkCanEnterRoom", null, gameRoomType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "checkCanEnterRoom", null, gameRoomType);
             return b;
         }
 
@@ -510,9 +510,9 @@ public class GameUtil
     public static string getRoomName(string gameRoomType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "getRoomName"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getRoomName"))
         {
-            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "getRoomName", null, gameRoomType);
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getRoomName", null, gameRoomType);
             return s;
         }
 
@@ -567,9 +567,9 @@ public class GameUtil
     static public void setNickNameFontColor(Text text, int vipLevel)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil", "setNickNameFontColor"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "setNickNameFontColor"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil", "setNickNameFontColor", null, text, vipLevel);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "setNickNameFontColor", null, text, vipLevel);
             return;
         }
 

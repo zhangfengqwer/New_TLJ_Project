@@ -20,9 +20,9 @@ public class Item_Task_List_Script : MonoBehaviour {
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script_hotfix", "Start", null, null);
             return;
         }
     }
@@ -36,9 +36,9 @@ public class Item_Task_List_Script : MonoBehaviour {
     public void setTaskData(TaskData taskData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "setTaskData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script_hotfix", "setTaskData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "setTaskData", null, taskData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script_hotfix", "setTaskData", null, taskData);
             return;
         }
 
@@ -122,9 +122,9 @@ public class Item_Task_List_Script : MonoBehaviour {
     public void setTaskIsOver()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "setTaskIsOver"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script_hotfix", "setTaskIsOver"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "setTaskIsOver", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script_hotfix", "setTaskIsOver", null, null);
             return;
         }
 
@@ -137,9 +137,9 @@ public class Item_Task_List_Script : MonoBehaviour {
     public void onClickWanCheng()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "onClickWanCheng"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script_hotfix", "onClickWanCheng"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "onClickWanCheng", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script_hotfix", "onClickWanCheng", null, null);
             return;
         }
 
@@ -153,9 +153,9 @@ public class Item_Task_List_Script : MonoBehaviour {
     public void onReceive_CompleteTask(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script", "onReceive_CompleteTask"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Task_List_Script_hotfix", "onReceive_CompleteTask"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script", "onReceive_CompleteTask", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Task_List_Script_hotfix", "onReceive_CompleteTask", null, data);
             return;
         }
 

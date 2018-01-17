@@ -43,9 +43,9 @@ public class BindPhoneScript : MonoBehaviour
     public void Timer1()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Timer1"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "Timer1"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "Timer1", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "Timer1", null, null);
             return;
         }
 
@@ -65,9 +65,9 @@ public class BindPhoneScript : MonoBehaviour
     private void Update()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Update"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "Update"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "Update", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "Update", null, null);
             return;
         }
 
@@ -83,9 +83,9 @@ public class BindPhoneScript : MonoBehaviour
         OtherData.s_bindPhoneScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -115,9 +115,9 @@ public class BindPhoneScript : MonoBehaviour
     public void GetPhoneNum(InputField input)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "GetPhoneNum"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "GetPhoneNum"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "GetPhoneNum", null, input);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "GetPhoneNum", null, input);
             return;
         }
 
@@ -132,9 +132,9 @@ public class BindPhoneScript : MonoBehaviour
     public void GetVerificationCode(InputField input)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "GetVerificationCode"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "GetVerificationCode"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "GetVerificationCode", null, input);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "GetVerificationCode", null, input);
             return;
         }
 
@@ -149,9 +149,9 @@ public class BindPhoneScript : MonoBehaviour
     public void OnClickBindPhone()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "OnClickBindPhone"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "OnClickBindPhone"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "OnClickBindPhone", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "OnClickBindPhone", null, null);
             return;
         }
 
@@ -182,9 +182,9 @@ public class BindPhoneScript : MonoBehaviour
     public void OnClickSendCode()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "OnClickSendCode"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "OnClickSendCode"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "OnClickSendCode", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "OnClickSendCode", null, null);
             return;
         }
 
@@ -204,9 +204,9 @@ public class BindPhoneScript : MonoBehaviour
     public void sendVerificationCodeCallBack(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "sendVerificationCodeCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "sendVerificationCodeCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "sendVerificationCodeCallBack", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "sendVerificationCodeCallBack", null, null);
             return;
         }
 
@@ -247,9 +247,9 @@ public class BindPhoneScript : MonoBehaviour
     public void bindPhoneCallBack(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript", "bindPhoneCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BindPhoneScript_hotfix", "bindPhoneCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript", "bindPhoneCallBack", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BindPhoneScript_hotfix", "bindPhoneCallBack", null, data);
             return;
         }
 

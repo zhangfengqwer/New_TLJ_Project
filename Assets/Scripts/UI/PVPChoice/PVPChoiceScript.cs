@@ -27,9 +27,9 @@ public class PVPChoiceScript : MonoBehaviour {
         OtherData.s_pvpChoiceScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -47,9 +47,9 @@ public class PVPChoiceScript : MonoBehaviour {
     public void onClickJinBiChang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "onClickJinBiChang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript_hotfix", "onClickJinBiChang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "onClickJinBiChang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "onClickJinBiChang", null, null);
             return;
         }
 
@@ -64,9 +64,9 @@ public class PVPChoiceScript : MonoBehaviour {
     public void onClickHuaFeiChang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "onClickHuaFeiChang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript_hotfix", "onClickHuaFeiChang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "onClickHuaFeiChang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "onClickHuaFeiChang", null, null);
             return;
         }
 
@@ -81,9 +81,9 @@ public class PVPChoiceScript : MonoBehaviour {
     public void showJinBiChang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "showJinBiChang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript_hotfix", "showJinBiChang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "showJinBiChang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "showJinBiChang", null, null);
             return;
         }
 
@@ -118,9 +118,9 @@ public class PVPChoiceScript : MonoBehaviour {
     public void showHuaFeiChang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript", "showHuaFeiChang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript_hotfix", "showHuaFeiChang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript", "showHuaFeiChang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "showHuaFeiChang", null, null);
             return;
         }
 

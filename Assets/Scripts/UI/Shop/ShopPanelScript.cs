@@ -52,9 +52,9 @@ public class ShopPanelScript : MonoBehaviour
         OtherData.s_shopPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -84,9 +84,9 @@ public class ShopPanelScript : MonoBehaviour
     public void InitUserInfo()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "InitUserInfo"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "InitUserInfo"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "InitUserInfo", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "InitUserInfo", null, null);
             return;
         }
 
@@ -98,9 +98,9 @@ public class ShopPanelScript : MonoBehaviour
     public void SetType(int type)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "SetType"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "SetType"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "SetType", null, type);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "SetType", null, type);
             return;
         }
 
@@ -126,9 +126,9 @@ public class ShopPanelScript : MonoBehaviour
     public void InitVip()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "InitVip"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "InitVip"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "InitVip", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "InitVip", null, null);
             return;
         }
 
@@ -152,9 +152,9 @@ public class ShopPanelScript : MonoBehaviour
     public void Init()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "Init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "Init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "Init", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "Init", null, null);
             return;
         }
 
@@ -184,9 +184,9 @@ public class ShopPanelScript : MonoBehaviour
     public void onInitializeItem(GameObject go, int dataindex)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "onInitializeItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "onInitializeItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "onInitializeItem", null, go, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "onInitializeItem", null, go, dataindex);
             return;
         }
 
@@ -283,9 +283,9 @@ public class ShopPanelScript : MonoBehaviour
     public void onReceive_GetShop(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "onReceive_GetShop"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "onReceive_GetShop"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "onReceive_GetShop", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "onReceive_GetShop", null, data);
             return;
         }
 
@@ -307,9 +307,9 @@ public class ShopPanelScript : MonoBehaviour
     public void IsJinbiToggle(bool IsClick)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "IsJinbiToggle"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "IsJinbiToggle"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "IsJinbiToggle", null, IsClick);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "IsJinbiToggle", null, IsClick);
             return;
         }
 
@@ -323,9 +323,9 @@ public class ShopPanelScript : MonoBehaviour
     public void IsYuanBaoToggle(bool IsClick)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "IsYuanBaoToggle"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "IsYuanBaoToggle"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "IsYuanBaoToggle", null, IsClick);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "IsYuanBaoToggle", null, IsClick);
             return;
         }
 
@@ -339,9 +339,9 @@ public class ShopPanelScript : MonoBehaviour
     public void IsPropToggle(bool IsClick)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "IsPropToggle"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "IsPropToggle"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "IsPropToggle", null, IsClick);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "IsPropToggle", null, IsClick);
             return;
         }
 
@@ -355,9 +355,9 @@ public class ShopPanelScript : MonoBehaviour
     public void IsMedalToggle(bool IsClick)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "IsMedalToggle"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "IsMedalToggle"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "IsMedalToggle", null, IsClick);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "IsMedalToggle", null, IsClick);
             return;
         }
 
@@ -372,9 +372,9 @@ public class ShopPanelScript : MonoBehaviour
     public void OnClickVipHelp()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "OnClickVipHelp"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "OnClickVipHelp"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "OnClickVipHelp", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "OnClickVipHelp", null, null);
             return;
         }
 
@@ -385,9 +385,9 @@ public class ShopPanelScript : MonoBehaviour
     public void OnClickVipBack()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript", "OnClickVipBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopPanelScript_hotfix", "OnClickVipBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript", "OnClickVipBack", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopPanelScript_hotfix", "OnClickVipBack", null, null);
             return;
         }
 

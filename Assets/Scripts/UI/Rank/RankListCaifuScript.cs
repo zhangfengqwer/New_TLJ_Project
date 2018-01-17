@@ -20,9 +20,9 @@ public class RankListCaifuScript : MonoBehaviour
         OtherData.s_rankListCaifuScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListCaifuScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListCaifuScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -40,9 +40,9 @@ public class RankListCaifuScript : MonoBehaviour
     public void InitUI()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript", "InitUI"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListCaifuScript_hotfix", "InitUI"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListCaifuScript", "InitUI", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListCaifuScript_hotfix", "InitUI", null, null);
             return;
         }
 

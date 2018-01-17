@@ -19,9 +19,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script_hotfix", "Start", null, null);
             return;
         }
     }
@@ -34,9 +34,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
     public void setNoticeData(NoticeData noticeData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "setNoticeData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script_hotfix", "setNoticeData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "setNoticeData", null, noticeData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script_hotfix", "setNoticeData", null, noticeData);
             return;
         }
 
@@ -57,9 +57,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
     public NoticeData getNoticeData()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "getNoticeData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script_hotfix", "getNoticeData"))
         {
-            NoticeData noticeData = (NoticeData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "getNoticeData", null, null);
+            NoticeData noticeData = (NoticeData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script_hotfix", "getNoticeData", null, null);
             return noticeData;
         }
 
@@ -69,9 +69,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
     public void onClickItem()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "onClickItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script_hotfix", "onClickItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "onClickItem", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script_hotfix", "onClickItem", null, null);
             return;
         }
 
@@ -90,9 +90,9 @@ public class Item_Notice_List_Script : MonoBehaviour {
     public void onReceive_ReadNotice(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script", "onReceive_ReadNotice"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_Notice_List_Script_hotfix", "onReceive_ReadNotice"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script", "onReceive_ReadNotice", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_Notice_List_Script_hotfix", "onReceive_ReadNotice", null, data);
             return;
         }
 

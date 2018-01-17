@@ -41,9 +41,9 @@ public class SensitiveWordUtil
     public static bool IsSensitiveWord(string str)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SensitiveWordUtil", "IsSensitiveWord"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SensitiveWordUtil_hotfix", "IsSensitiveWord"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SensitiveWordUtil", "IsSensitiveWord", null, str);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SensitiveWordUtil_hotfix", "IsSensitiveWord", null, str);
             return b;
         }
 
@@ -66,9 +66,9 @@ public class SensitiveWordUtil
     public static string deleteSensitiveWord(string str)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SensitiveWordUtil", "deleteSensitiveWord"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SensitiveWordUtil_hotfix", "deleteSensitiveWord"))
         {
-            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SensitiveWordUtil", "deleteSensitiveWord", null, str);
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SensitiveWordUtil_hotfix", "deleteSensitiveWord", null, str);
             return s;
         }
 

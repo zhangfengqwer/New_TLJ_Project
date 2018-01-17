@@ -21,9 +21,9 @@ public class CheckOutPoker
         int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker", "checkOutPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker_hotfix", "checkOutPoker"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker", "checkOutPoker", null, isFreeOutPoker, myOutPokerList, beforeOutPokerList, myRestPokerList, mLevelPokerNum, masterPokerType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker_hotfix", "checkOutPoker", null, isFreeOutPoker, myOutPokerList, beforeOutPokerList, myRestPokerList, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -361,9 +361,9 @@ public class CheckOutPoker
     public static OutPokerType checkOutPokerType(List<TLJCommon.PokerInfo> outPokerList, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker", "checkOutPokerType"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckOutPoker_hotfix", "checkOutPokerType"))
         {
-            OutPokerType outPokerType = (OutPokerType)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker", "checkOutPokerType", null, outPokerList, mLevelPokerNum, masterPokerType);
+            OutPokerType outPokerType = (OutPokerType)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckOutPoker_hotfix", "checkOutPokerType", null, outPokerList, mLevelPokerNum, masterPokerType);
             return outPokerType;
         }
 

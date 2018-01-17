@@ -30,9 +30,9 @@ public class OneKeyReadEmailRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyReadEmailRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyReadEmailRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyReadEmailRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyReadEmailRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -46,9 +46,9 @@ public class OneKeyReadEmailRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyReadEmailRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyReadEmailRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyReadEmailRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyReadEmailRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

@@ -31,9 +31,9 @@ public class NoticePanelScript : MonoBehaviour
         OtherData.s_noticePanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -57,9 +57,9 @@ public class NoticePanelScript : MonoBehaviour
     public void checkRedPoint()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "checkRedPoint"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "checkRedPoint"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "checkRedPoint", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "checkRedPoint", null, null);
             return;
         }
 
@@ -108,9 +108,9 @@ public class NoticePanelScript : MonoBehaviour
     public void loadHuoDong()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "loadHuoDong"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "loadHuoDong"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "loadHuoDong", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "loadHuoDong", null, null);
             return;
         }
 
@@ -150,9 +150,9 @@ public class NoticePanelScript : MonoBehaviour
     public void loadGongGao()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "loadGongGao"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "loadGongGao"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "loadGongGao", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "loadGongGao", null, null);
             return;
         }
 
@@ -191,9 +191,9 @@ public class NoticePanelScript : MonoBehaviour
     public void setNoticeReaded(int notice_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "setNoticeReaded"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "setNoticeReaded"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "setNoticeReaded", null, notice_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "setNoticeReaded", null, notice_id);
             return;
         }
 
@@ -215,9 +215,9 @@ public class NoticePanelScript : MonoBehaviour
     public void onClickHuoDong()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "onClickHuoDong"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "onClickHuoDong"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "onClickHuoDong", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "onClickHuoDong", null, null);
             return;
         }
 
@@ -236,9 +236,9 @@ public class NoticePanelScript : MonoBehaviour
     public void onClickGongGao()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "onClickGongGao"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "onClickGongGao"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "onClickGongGao", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "onClickGongGao", null, null);
             return;
         }
 
@@ -257,9 +257,9 @@ public class NoticePanelScript : MonoBehaviour
     public void onReceive_GetNotice(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript", "onReceive_GetNotice"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "onReceive_GetNotice"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript", "onReceive_GetNotice", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "onReceive_GetNotice", null, data);
             return;
         }
 

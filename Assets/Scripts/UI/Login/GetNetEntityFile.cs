@@ -18,9 +18,9 @@ public class GetNetEntityFile : MonoBehaviour
         OtherData.s_getNetEntityFile = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile_hotfix", "Start", null, null);
             return;
         }
 
@@ -48,9 +48,9 @@ public class GetNetEntityFile : MonoBehaviour
     public void getNetFile()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "getNetFile"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile_hotfix", "getNetFile"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "getNetFile", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile_hotfix", "getNetFile", null, null);
             return;
         }
 
@@ -83,9 +83,9 @@ public class GetNetEntityFile : MonoBehaviour
     public void onInvoke()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onInvoke"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile_hotfix", "onInvoke"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "onInvoke", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile_hotfix", "onInvoke", null, null);
             return;
         }
 
@@ -99,9 +99,9 @@ public class GetNetEntityFile : MonoBehaviour
     public void GetFileSuccess(string fileName)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "GetFileSuccess"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile_hotfix", "GetFileSuccess"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "GetFileSuccess", null, fileName);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile_hotfix", "GetFileSuccess", null, fileName);
             return;
         }
 
@@ -138,9 +138,9 @@ public class GetNetEntityFile : MonoBehaviour
     public void GetFileFail(string fileName)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "GetFileFail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile_hotfix", "GetFileFail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "GetFileFail", null, fileName);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile_hotfix", "GetFileFail", null, fileName);
             return;
         }
 
@@ -183,9 +183,9 @@ public class GetNetEntityFile : MonoBehaviour
     public void onClick_retryGetNetFile()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile", "onClick_retryGetNetFile"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetNetEntityFile_hotfix", "onClick_retryGetNetFile"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile", "onClick_retryGetNetFile", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetNetEntityFile_hotfix", "onClick_retryGetNetFile", null, null);
             return;
         }
 
