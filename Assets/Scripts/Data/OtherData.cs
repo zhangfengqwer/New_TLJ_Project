@@ -90,9 +90,9 @@ public class OtherData
     public static string getWebUrl()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherData", "getWebUrl"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherData_hotfix", "getWebUrl"))
         {
-            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherData", "getWebUrl", null, null);
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherData_hotfix", "getWebUrl", null, null);
             return s;
         }
 

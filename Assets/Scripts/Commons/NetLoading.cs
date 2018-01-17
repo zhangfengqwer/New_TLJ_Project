@@ -26,9 +26,9 @@ public class NetLoading : MonoBehaviour {
     public void Show()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading", "Show"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading_hotfix", "Show"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading", "Show", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading_hotfix", "Show", null, null);
             return;
         }
 
@@ -58,9 +58,9 @@ public class NetLoading : MonoBehaviour {
     public void onInvoke()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading", "onInvoke"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading_hotfix", "onInvoke"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading", "onInvoke", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading_hotfix", "onInvoke", null, null);
             return;
         }
 

@@ -25,9 +25,9 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -40,9 +40,9 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     public void onClickQueRen()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript", "onClickQueRen"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript_hotfix", "onClickQueRen"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript", "onClickQueRen", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript_hotfix", "onClickQueRen", null, null);
             return;
         }
 
@@ -63,9 +63,9 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     public void onReceive_UseHuaFei(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript", "onReceive_UseHuaFei"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuaFeiPanelScript_hotfix", "onReceive_UseHuaFei"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript", "onReceive_UseHuaFei", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript_hotfix", "onReceive_UseHuaFei", null, data);
             return;
         }
 

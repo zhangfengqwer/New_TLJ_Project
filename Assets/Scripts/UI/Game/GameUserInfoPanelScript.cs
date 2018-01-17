@@ -32,9 +32,9 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -46,9 +46,9 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     public void setPlayer(string uid)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript", "setPlayer"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript_hotfix", "setPlayer"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript", "setPlayer", null, uid);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript_hotfix", "setPlayer", null, uid);
             return;
         }
 
@@ -107,9 +107,9 @@ public class GameUserInfoPanelScript : MonoBehaviour {
     public void loadHuDongDaoJu()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript", "loadHuDongDaoJu"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript_hotfix", "loadHuDongDaoJu"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript", "loadHuDongDaoJu", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript_hotfix", "loadHuDongDaoJu", null, null);
             return;
         }
 

@@ -30,9 +30,9 @@ public class NetErrorPanelScript : MonoBehaviour
     public void Show()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript", "Show"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript_hotfix", "Show"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript", "Show", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript_hotfix", "Show", null, null);
             return;
         }
 
@@ -62,9 +62,9 @@ public class NetErrorPanelScript : MonoBehaviour
     public void onClickChongLian()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript", "onClickChongLian"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript_hotfix", "onClickChongLian"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript", "onClickChongLian", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript_hotfix", "onClickChongLian", null, null);
             return;
         }
 
@@ -86,9 +86,9 @@ public class NetErrorPanelScript : MonoBehaviour
     public void setContentText(string str)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript", "setContentText"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript_hotfix", "setContentText"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript", "setContentText", null, str);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript_hotfix", "setContentText", null, str);
             return;
         }
 

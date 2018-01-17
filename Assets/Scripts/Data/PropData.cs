@@ -30,9 +30,9 @@ public class PropData
     public void httpCallBack(string tag, string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropData", "httpCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropData_hotfix", "httpCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropData", "httpCallBack", null, tag, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropData_hotfix", "httpCallBack", null, tag, data);
             return;
         }
 
@@ -55,9 +55,9 @@ public class PropData
     public void init(string jsonData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropData", "init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropData_hotfix", "init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropData", "init", null, jsonData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropData_hotfix", "init", null, jsonData);
             return;
         }
 

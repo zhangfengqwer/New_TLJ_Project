@@ -35,9 +35,9 @@ public class GameResultPanelScript : MonoBehaviour {
         OtherData.s_gameResultPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -45,9 +45,9 @@ public class GameResultPanelScript : MonoBehaviour {
     public void setData(bool isWin,int score,int gold,string gameRoomType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "setData", null, isWin, score, gold, gameRoomType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "setData", null, isWin, score, gold, gameRoomType);
             return;
         }
 
@@ -91,9 +91,9 @@ public class GameResultPanelScript : MonoBehaviour {
     public void onClickJiXu()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickJiXu"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "onClickJiXu"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickJiXu", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "onClickJiXu", null, null);
             return;
         }
 
@@ -110,9 +110,9 @@ public class GameResultPanelScript : MonoBehaviour {
     public void onClickHuanZhuo()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickHuanZhuo"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "onClickHuanZhuo"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickHuanZhuo", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "onClickHuanZhuo", null, null);
             return;
         }
 
@@ -129,9 +129,9 @@ public class GameResultPanelScript : MonoBehaviour {
     public void onClickClose()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickClose"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "onClickClose"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickClose", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "onClickClose", null, null);
             return;
         }
 
@@ -141,9 +141,9 @@ public class GameResultPanelScript : MonoBehaviour {
     public void onClickExit()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickExit"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "onClickExit"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickExit", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "onClickExit", null, null);
             return;
         }
 
@@ -153,9 +153,9 @@ public class GameResultPanelScript : MonoBehaviour {
     public void onClickShare()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript", "onClickShare"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameResultPanelScript_hotfix", "onClickShare"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript", "onClickShare", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameResultPanelScript_hotfix", "onClickShare", null, null);
             return;
         }
 

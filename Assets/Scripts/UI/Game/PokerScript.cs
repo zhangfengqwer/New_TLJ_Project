@@ -29,9 +29,9 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 	void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -46,9 +46,9 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     public void initPoker(int num,int pokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "initPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript_hotfix", "initPoker"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "initPoker", null, num, pokerType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript_hotfix", "initPoker", null, num, pokerType);
             return;
         }
 
@@ -125,9 +125,9 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     public void setIsSelect(bool isSelect)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "setIsSelect"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript_hotfix", "setIsSelect"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "setIsSelect", null, isSelect);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript_hotfix", "setIsSelect", null, isSelect);
             return;
         }
 
@@ -158,9 +158,9 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     public void setIsJump(bool isJump)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "setIsJump"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript_hotfix", "setIsJump"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "setIsJump", null, isJump);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript_hotfix", "setIsJump", null, isJump);
             return;
         }
 
@@ -228,9 +228,9 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
     public static void setAllPokerWeiXuanZe()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript", "setAllPokerWeiXuanZe"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript_hotfix", "setAllPokerWeiXuanZe"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript", "setAllPokerWeiXuanZe", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript_hotfix", "setAllPokerWeiXuanZe", null, null);
             return;
         }
 

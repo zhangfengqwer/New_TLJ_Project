@@ -14,9 +14,9 @@ public class VipData
     public static void reqNet()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData", "reqNet"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData_hotfix", "reqNet"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipData", "reqNet", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipData_hotfix", "reqNet", null, null);
             return;
         }
 
@@ -26,9 +26,9 @@ public class VipData
     public static void httpCallBack(string tag, string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData", "httpCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipData_hotfix", "httpCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipData", "httpCallBack", null, tag, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipData_hotfix", "httpCallBack", null, tag, data);
             return;
         }
 

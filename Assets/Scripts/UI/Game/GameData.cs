@@ -57,9 +57,9 @@ public class GameData
     public void clear()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "clear"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData_hotfix", "clear"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "clear", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData_hotfix", "clear", null, null);
             return;
         }
 
@@ -86,9 +86,9 @@ public class GameData
     public void setGameRoomType(string gameRoomType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "setGameRoomType"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData_hotfix", "setGameRoomType"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "setGameRoomType", null, gameRoomType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData_hotfix", "setGameRoomType", null, gameRoomType);
             return;
         }
 
@@ -117,9 +117,9 @@ public class GameData
     public PlayerData getPlayerDataByUid(string uid)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "getPlayerDataByUid"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData_hotfix", "getPlayerDataByUid"))
         {
-            PlayerData playerData = (PlayerData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "getPlayerDataByUid", null, uid);
+            PlayerData playerData = (PlayerData)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData_hotfix", "getPlayerDataByUid", null, uid);
             return playerData;
         }
 
@@ -137,9 +137,9 @@ public class GameData
     public GameObject getOtherPlayerUIByUid(string uid)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "getOtherPlayerUIByUid"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData_hotfix", "getOtherPlayerUIByUid"))
         {
-            GameObject o = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "getOtherPlayerUIByUid", null, uid);
+            GameObject o = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData_hotfix", "getOtherPlayerUIByUid", null, uid);
             return o;
         }
 
@@ -157,9 +157,9 @@ public class GameData
     public void setOtherPlayerUI(string uid,bool isPVP)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData", "setOtherPlayerUI"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameData_hotfix", "setOtherPlayerUI"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData", "setOtherPlayerUI", null, uid, isPVP);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameData_hotfix", "setOtherPlayerUI", null, uid, isPVP);
             return;
         }
 

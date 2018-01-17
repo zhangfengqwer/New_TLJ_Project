@@ -32,9 +32,9 @@ public class ChatPanelScript : MonoBehaviour {
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -47,9 +47,9 @@ public class ChatPanelScript : MonoBehaviour {
     public void loadChat()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "loadChat"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript_hotfix", "loadChat"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "loadChat", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript_hotfix", "loadChat", null, null);
             return;
         }
 
@@ -80,9 +80,9 @@ public class ChatPanelScript : MonoBehaviour {
     public void loadBiaoQing()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "loadBiaoQing"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript_hotfix", "loadBiaoQing"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "loadBiaoQing", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript_hotfix", "loadBiaoQing", null, null);
             return;
         }
 
@@ -146,9 +146,9 @@ public class ChatPanelScript : MonoBehaviour {
     public void reqChat(ChatText chatText)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "reqChat"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript_hotfix", "reqChat"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "reqChat", null, chatText);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript_hotfix", "reqChat", null, chatText);
             return;
         }
 
@@ -168,9 +168,9 @@ public class ChatPanelScript : MonoBehaviour {
     public void reqChat_emoji(int id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript", "reqChat_emoji"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatPanelScript_hotfix", "reqChat_emoji"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript", "reqChat_emoji", null, id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatPanelScript_hotfix", "reqChat_emoji", null, id);
             return;
         }
 

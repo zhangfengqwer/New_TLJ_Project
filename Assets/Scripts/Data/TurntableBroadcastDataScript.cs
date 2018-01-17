@@ -24,9 +24,9 @@ public class TurntableBroadcastDataScript
     public void addData(string name,int reward_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "addData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "addData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "addData", null, name, reward_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript_hotfix", "addData", null, name, reward_id);
             return;
         }
 

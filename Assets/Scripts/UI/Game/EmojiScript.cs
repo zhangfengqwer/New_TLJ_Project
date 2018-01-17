@@ -40,9 +40,9 @@ public class EmojiScript : MonoBehaviour
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmojiScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmojiScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmojiScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmojiScript_hotfix", "Start", null, null);
             return;
         }
     }

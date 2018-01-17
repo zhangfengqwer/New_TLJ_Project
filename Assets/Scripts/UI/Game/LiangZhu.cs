@@ -38,9 +38,9 @@ public class LiangZhu : MonoBehaviour
     private void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "Start", null, null);
             return;
         }
     }
@@ -53,9 +53,9 @@ public class LiangZhu : MonoBehaviour
     public void UpdateUi(List<PokerInfo> handerPoker, List<PokerInfo> lastLiangZhuPoker)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "UpdateUi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "UpdateUi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "UpdateUi", null, handerPoker, lastLiangZhuPoker);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "UpdateUi", null, handerPoker, lastLiangZhuPoker);
             return;
         }
 
@@ -123,9 +123,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickHei()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickHei"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickHei"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickHei", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickHei", null, null);
             return;
         }
 
@@ -135,9 +135,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickhong()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickhong"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickhong"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickhong", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickhong", null, null);
             return;
         }
 
@@ -147,9 +147,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickMei()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickMei"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickMei"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickMei", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickMei", null, null);
             return;
         }
 
@@ -159,9 +159,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickFang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickFang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickFang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickFang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickFang", null, null);
             return;
         }
 
@@ -171,9 +171,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickWang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickWang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickWang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickWang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickWang", null, null);
             return;
         }
 
@@ -184,9 +184,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickGiveUp()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickGiveUp"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickGiveUp"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickGiveUp", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickGiveUp", null, null);
             return;
         }
 
@@ -196,9 +196,9 @@ public class LiangZhu : MonoBehaviour
     public void OnClickLiangzhu(List<PokerInfo> list)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "OnClickLiangzhu"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "OnClickLiangzhu"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "OnClickLiangzhu", null, list);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "OnClickLiangzhu", null, list);
             return;
         }
         
@@ -216,9 +216,9 @@ public class LiangZhu : MonoBehaviour
     public List<PokerInfo> GetPokerTypePoker(Consts.PokerType pokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu", "GetPokerTypePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LiangZhu_hotfix", "GetPokerTypePoker"))
         {
-            List<PokerInfo> list = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu", "GetPokerTypePoker", null, pokerType);
+            List<PokerInfo> list = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LiangZhu_hotfix", "GetPokerTypePoker", null, pokerType);
             return list;
         }
 

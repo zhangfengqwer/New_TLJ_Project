@@ -23,9 +23,9 @@ public class TaskDataScript
     public void initJson(string json)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "initJson"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript_hotfix", "initJson"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript", "initJson", null, json);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript_hotfix", "initJson", null, json);
             return;
         }
 
@@ -61,9 +61,9 @@ public class TaskDataScript
     public void setTaskIsOver(int task_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "setTaskIsOver"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript_hotfix", "setTaskIsOver"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript", "setTaskIsOver", null, task_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript_hotfix", "setTaskIsOver", null, task_id);
             return;
         }
 
@@ -83,9 +83,9 @@ public class TaskDataScript
     public void sortTask()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript", "sortTask"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TaskDataScript_hotfix", "sortTask"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript", "sortTask", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TaskDataScript_hotfix", "sortTask", null, null);
             return;
         }
 

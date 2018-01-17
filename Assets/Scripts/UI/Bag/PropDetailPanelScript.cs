@@ -29,9 +29,9 @@ public class PropDetailPanelScript : MonoBehaviour {
         OtherData.s_propDetailPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -39,9 +39,9 @@ public class PropDetailPanelScript : MonoBehaviour {
     public void setPropId(int prop_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "setPropId"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "setPropId"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "setPropId", null, prop_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "setPropId", null, prop_id);
             return;
         }
 
@@ -63,9 +63,9 @@ public class PropDetailPanelScript : MonoBehaviour {
     public void onClickUseProp()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "onClickUseProp"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "onClickUseProp"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "onClickUseProp", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "onClickUseProp", null, null);
             return;
         }
 
@@ -98,9 +98,9 @@ public class PropDetailPanelScript : MonoBehaviour {
     public void onReceive_UseProp(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "onReceive_UseProp"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "onReceive_UseProp"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "onReceive_UseProp", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "onReceive_UseProp", null, data);
             return;
         }
 
@@ -120,9 +120,9 @@ public class PropDetailPanelScript : MonoBehaviour {
     public void useProp(int id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "useProp"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "useProp"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "useProp", null, id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "useProp", null, id);
             return;
         }
 
@@ -225,9 +225,9 @@ public class PropDetailPanelScript : MonoBehaviour {
     public void UpdatePropData()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript", "UpdatePropData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "UpdatePropData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript", "UpdatePropData", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "UpdatePropData", null, null);
             return;
         }
 

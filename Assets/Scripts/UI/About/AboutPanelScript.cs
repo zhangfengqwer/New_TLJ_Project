@@ -9,9 +9,9 @@ public class AboutPanelScript : MonoBehaviour
         OtherData.s_aboutPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AboutPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AboutPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AboutPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AboutPanelScript_hotfix", "Start", null, null);
             return;
         }
     }

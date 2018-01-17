@@ -23,9 +23,9 @@ public class PVPGameRoomDataScript
     public void initJson(string json)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameRoomDataScript", "initJson"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameRoomDataScript_hotfix", "initJson"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameRoomDataScript", "initJson", null, json);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameRoomDataScript_hotfix", "initJson", null, json);
             return;
         }
 

@@ -51,9 +51,9 @@ public class ChatContentScript : MonoBehaviour {
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatContentScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatContentScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatContentScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatContentScript_hotfix", "Start", null, null);
             return;
         }
 

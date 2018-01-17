@@ -16,9 +16,9 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script_hotfix", "Start", null, null);
             return;
         }
     }
@@ -26,9 +26,9 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
     public void setHuDongPropData(HuDongProp huDongProp)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script", "setHuDongPropData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script_hotfix", "setHuDongPropData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script", "setHuDongPropData", null, huDongProp);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script_hotfix", "setHuDongPropData", null, huDongProp);
             return;
         }
 
@@ -48,9 +48,9 @@ public class Item_hudong_Scroll_Script : MonoBehaviour {
     public void onClickItem()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script", "onClickItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_hudong_Scroll_Script_hotfix", "onClickItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script", "onClickItem", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_hudong_Scroll_Script_hotfix", "onClickItem", null, null);
             return;
         }
 

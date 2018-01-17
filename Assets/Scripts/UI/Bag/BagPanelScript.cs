@@ -28,9 +28,9 @@ public class BagPanelScript : MonoBehaviour
         OtherData.s_bagPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -65,9 +65,9 @@ public class BagPanelScript : MonoBehaviour
     public void deleteItem(int dataindex)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "deleteItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript_hotfix", "deleteItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "deleteItem", null, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript_hotfix", "deleteItem", null, dataindex);
             return;
         }
 
@@ -77,9 +77,9 @@ public class BagPanelScript : MonoBehaviour
     public void UpdateUI()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "UpdateUI"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript_hotfix", "UpdateUI"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "UpdateUI", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript_hotfix", "UpdateUI", null, null);
             return;
         }
 
@@ -111,9 +111,9 @@ public class BagPanelScript : MonoBehaviour
     public void onInitializeItem(GameObject go, int dataindex)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "onInitializeItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript_hotfix", "onInitializeItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "onInitializeItem", null, go, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript_hotfix", "onInitializeItem", null, go, dataindex);
             return;
         }
 
@@ -135,9 +135,9 @@ public class BagPanelScript : MonoBehaviour
     public void onReceive_GetUserBag(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript", "onReceive_GetUserBag"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BagPanelScript_hotfix", "onReceive_GetUserBag"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript", "onReceive_GetUserBag", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BagPanelScript_hotfix", "onReceive_GetUserBag", null, data);
             return;
         }
 

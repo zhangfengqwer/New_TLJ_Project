@@ -23,9 +23,9 @@ public class ShopDataScript
     public void initJson(string json)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopDataScript", "initJson"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShopDataScript_hotfix", "initJson"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopDataScript", "initJson", null, json);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShopDataScript_hotfix", "initJson", null, json);
             return;
         }
 

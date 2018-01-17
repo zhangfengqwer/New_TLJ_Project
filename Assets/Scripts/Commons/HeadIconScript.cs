@@ -16,9 +16,9 @@ public class HeadIconScript : MonoBehaviour {
     public void setIcon(string path)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeadIconScript", "setIcon"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeadIconScript_hotfix", "setIcon"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeadIconScript", "setIcon", null, path);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeadIconScript_hotfix", "setIcon", null, path);
             return;
         }
 

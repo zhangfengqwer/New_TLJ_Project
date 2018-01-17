@@ -16,9 +16,9 @@ public class GameNetErrorPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameNetErrorPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameNetErrorPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameNetErrorPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameNetErrorPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -31,9 +31,9 @@ public class GameNetErrorPanelScript : MonoBehaviour {
     public void onClickBack()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameNetErrorPanelScript", "onClickBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameNetErrorPanelScript_hotfix", "onClickBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameNetErrorPanelScript", "onClickBack", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameNetErrorPanelScript_hotfix", "onClickBack", null, null);
             return;
         }
 

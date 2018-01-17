@@ -25,9 +25,9 @@ public class ChangeHeadPanelScript : MonoBehaviour {
         s_instance = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -45,9 +45,9 @@ public class ChangeHeadPanelScript : MonoBehaviour {
     public void onClickOK()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "onClickOK"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "onClickOK"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "onClickOK", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript_hotfix", "onClickOK", null, null);
             return;
         }
 
@@ -69,9 +69,9 @@ public class ChangeHeadPanelScript : MonoBehaviour {
     public void onReceive_ChangeHead(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript", "onReceive_ChangeHead"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "onReceive_ChangeHead"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript", "onReceive_ChangeHead", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript_hotfix", "onReceive_ChangeHead", null, data);
             return;
         }
 

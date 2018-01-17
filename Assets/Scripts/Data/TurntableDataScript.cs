@@ -28,9 +28,9 @@ public class TurntableDataScript
     public void initJson(string json)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableDataScript", "initJson"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableDataScript_hotfix", "initJson"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableDataScript", "initJson", null, json);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableDataScript_hotfix", "initJson", null, json);
             return;
         }
 

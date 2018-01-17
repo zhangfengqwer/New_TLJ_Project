@@ -22,9 +22,9 @@ public class UserMailData {
     public void initJson(string json)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "initJson"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData_hotfix", "initJson"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "initJson", null, json);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData_hotfix", "initJson", null, json);
             return;
         }
 
@@ -93,9 +93,9 @@ public class UserMailData {
     public void setMailReaded(int email_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "setMailReaded"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData_hotfix", "setMailReaded"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "setMailReaded", null, email_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData_hotfix", "setMailReaded", null, email_id);
             return;
         }
 
@@ -123,9 +123,9 @@ public class UserMailData {
     public void setAllMailReaded()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "setAllMailReaded"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData_hotfix", "setAllMailReaded"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "setAllMailReaded", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData_hotfix", "setAllMailReaded", null, null);
             return;
         }
 
@@ -157,9 +157,9 @@ public class UserMailData {
     public void deleteMail(int email_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "deleteMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData_hotfix", "deleteMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "deleteMail", null, email_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData_hotfix", "deleteMail", null, email_id);
             return;
         }
 
@@ -177,9 +177,9 @@ public class UserMailData {
     public void deleteAllMail()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData", "deleteAllMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserMailData_hotfix", "deleteAllMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData", "deleteAllMail", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserMailData_hotfix", "deleteAllMail", null, null);
             return;
         }
 

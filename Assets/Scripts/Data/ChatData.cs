@@ -24,9 +24,9 @@ public class ChatData
     public void reqNet()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData", "reqNet"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData_hotfix", "reqNet"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData", "reqNet", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData_hotfix", "reqNet", null, null);
             return;
         }
 
@@ -36,9 +36,9 @@ public class ChatData
     public void httpCallBack(string tag, string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData", "httpCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData_hotfix", "httpCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData", "httpCallBack", null, tag, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData_hotfix", "httpCallBack", null, tag, data);
             return;
         }
 
@@ -61,9 +61,9 @@ public class ChatData
     public void init(string jsonData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData", "init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChatData_hotfix", "init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData", "init", null, jsonData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChatData_hotfix", "init", null, jsonData);
             return;
         }
 

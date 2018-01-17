@@ -29,9 +29,9 @@ public class HuDongData
     public void httpCallBack(string tag, string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData", "httpCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData_hotfix", "httpCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuDongData", "httpCallBack", null, tag, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuDongData_hotfix", "httpCallBack", null, tag, data);
             return;
         }
 
@@ -54,9 +54,9 @@ public class HuDongData
     public void init(string jsonData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData", "init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuDongData_hotfix", "init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuDongData", "init", null, jsonData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuDongData_hotfix", "init", null, jsonData);
             return;
         }
 

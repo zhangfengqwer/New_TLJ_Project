@@ -39,9 +39,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -49,9 +49,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void setHead(string headPath)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setHead"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript_hotfix", "setHead"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setHead", null, headPath);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "setHead", null, headPath);
             return;
         }
 
@@ -61,9 +61,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void setName(string name)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setName"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript_hotfix", "setName"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setName", null, name);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "setName", null, name);
             return;
         }
 
@@ -73,9 +73,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void setVipLevel(int vipLevel)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setVipLevel"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript_hotfix", "setVipLevel"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setVipLevel", null, vipLevel);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "setVipLevel", null, vipLevel);
             return;
         }
 
@@ -87,9 +87,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void setGoldNum(int goldNum)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "setGoldNum"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript_hotfix", "setGoldNum"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "setGoldNum", null, goldNum);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "setGoldNum", null, goldNum);
             return;
         }
 
@@ -99,9 +99,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
     public void onClickHead()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript", "onClickHead"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherPlayerUIScript_hotfix", "onClickHead"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript", "onClickHead", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "onClickHead", null, null);
             return;
         }
 

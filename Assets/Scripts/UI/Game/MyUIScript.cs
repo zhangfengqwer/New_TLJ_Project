@@ -18,9 +18,9 @@ public class MyUIScript : MonoBehaviour {
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -36,9 +36,9 @@ public class MyUIScript : MonoBehaviour {
     public void setHead(string headPath)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript", "setHead"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript_hotfix", "setHead"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript", "setHead", null, headPath);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript_hotfix", "setHead", null, headPath);
             return;
         }
 
@@ -48,9 +48,9 @@ public class MyUIScript : MonoBehaviour {
     public void setName(string name)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript", "setName"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript_hotfix", "setName"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript", "setName", null, name);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript_hotfix", "setName", null, name);
             return;
         }
 
@@ -61,9 +61,9 @@ public class MyUIScript : MonoBehaviour {
     public void setGoldNum(int goldNum)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript", "setGoldNum"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript_hotfix", "setGoldNum"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript", "setGoldNum", null, goldNum);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript_hotfix", "setGoldNum", null, goldNum);
             return;
         }
 
@@ -73,9 +73,9 @@ public class MyUIScript : MonoBehaviour {
     public void onClickHead()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript", "onClickHead"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MyUIScript_hotfix", "onClickHead"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript", "onClickHead", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MyUIScript_hotfix", "onClickHead", null, null);
             return;
         }
 

@@ -26,9 +26,9 @@ public class HeartBeat_Play : MonoBehaviour
     public void startHeartBeat()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "startHeartBeat"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play_hotfix", "startHeartBeat"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play", "startHeartBeat", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play_hotfix", "startHeartBeat", null, null);
             return;
         }
 
@@ -38,9 +38,9 @@ public class HeartBeat_Play : MonoBehaviour
     public void stopHeartBeat()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "stopHeartBeat"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play_hotfix", "stopHeartBeat"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play", "stopHeartBeat", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play_hotfix", "stopHeartBeat", null, null);
             return;
         }
 
@@ -53,9 +53,9 @@ public class HeartBeat_Play : MonoBehaviour
     public void onInvoke_timeout()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "onInvoke_timeout"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play_hotfix", "onInvoke_timeout"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play", "onInvoke_timeout", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play_hotfix", "onInvoke_timeout", null, null);
             return;
         }
 
@@ -72,9 +72,9 @@ public class HeartBeat_Play : MonoBehaviour
     public void reqHeartBeat()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "reqHeartBeat"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play_hotfix", "reqHeartBeat"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play", "reqHeartBeat", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play_hotfix", "reqHeartBeat", null, null);
             return;
         }
 
@@ -99,9 +99,9 @@ public class HeartBeat_Play : MonoBehaviour
     public void onRespond()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play", "onRespond"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HeartBeat_Play_hotfix", "onRespond"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play", "onRespond", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HeartBeat_Play_hotfix", "onRespond", null, null);
             return;
         }
 

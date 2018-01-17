@@ -28,9 +28,9 @@ public class PVPEndPanelScript : MonoBehaviour {
         OtherData.s_pvpEndPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -38,9 +38,9 @@ public class PVPEndPanelScript : MonoBehaviour {
     public void setData(int mingci,string pvpreward)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "setData", null, mingci, pvpreward);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript_hotfix", "setData", null, mingci, pvpreward);
             return;
         }
 
@@ -72,9 +72,9 @@ public class PVPEndPanelScript : MonoBehaviour {
     public void onClickExit()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "onClickExit"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript_hotfix", "onClickExit"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "onClickExit", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript_hotfix", "onClickExit", null, null);
             return;
         }
 
@@ -85,9 +85,9 @@ public class PVPEndPanelScript : MonoBehaviour {
     public void onClickShare()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript", "onClickShare"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript_hotfix", "onClickShare"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript", "onClickShare", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript_hotfix", "onClickShare", null, null);
             return;
         }
 

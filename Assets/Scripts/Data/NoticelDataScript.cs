@@ -23,9 +23,9 @@ public class NoticelDataScript
     public void initJson(string json)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticelDataScript", "initJson"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticelDataScript_hotfix", "initJson"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticelDataScript", "initJson", null, json);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticelDataScript_hotfix", "initJson", null, json);
             return;
         }
 
@@ -59,9 +59,9 @@ public class NoticelDataScript
     public void setNoticeReaded(int notice_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticelDataScript", "setNoticeReaded"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticelDataScript_hotfix", "setNoticeReaded"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticelDataScript", "setNoticeReaded", null, notice_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticelDataScript_hotfix", "setNoticeReaded", null, notice_id);
             return;
         }
 

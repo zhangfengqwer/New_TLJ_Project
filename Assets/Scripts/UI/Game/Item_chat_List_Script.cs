@@ -17,9 +17,9 @@ public class Item_chat_List_Script : MonoBehaviour {
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script_hotfix", "Start", null, null);
             return;
         }
     }
@@ -27,9 +27,9 @@ public class Item_chat_List_Script : MonoBehaviour {
     public void setChatData(ChatText chatText)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script", "setChatData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script_hotfix", "setChatData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script", "setChatData", null, chatText);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script_hotfix", "setChatData", null, chatText);
             return;
         }
 
@@ -46,9 +46,9 @@ public class Item_chat_List_Script : MonoBehaviour {
     public void onClickItem()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script", "onClickItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Item_chat_List_Script_hotfix", "onClickItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script", "onClickItem", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Item_chat_List_Script_hotfix", "onClickItem", null, null);
             return;
         }
 
