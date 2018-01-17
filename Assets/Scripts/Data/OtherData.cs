@@ -20,7 +20,7 @@ public class OtherData
 
     public static bool s_isFromSetToLogin = false;
     public static bool s_isFirstOpenGame = true;
-    public static bool s_isTest = true;
+    public static bool s_isTest = false;
     public static bool s_canDebug = false;
     public static bool s_hasCheckSecondPSW = false;
     public static bool s_canRecharge = false; // 是否开放充值
