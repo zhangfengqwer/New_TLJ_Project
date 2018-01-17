@@ -65,6 +65,11 @@ public class ILRuntimeUtil : MonoBehaviour
     void InitializeILRuntime()
     {
         //这里做一些ILRuntime的注册
+        s_appdomain.DelegateManager.RegisterMethodDelegate<int>();
+        //带返回值的委托的话需要用RegisterFunctionDelegate，返回类型为最后一个
+        s_appdomain.DelegateManager.RegisterFunctionDelegate<int, string>();
+        //Action<string> 的参数为一个string
+        s_appdomain.DelegateManager.RegisterMethodDelegate<string>();
         s_appdomain.DelegateManager.RegisterMethodDelegate<System.String>();
 
         s_appdomain.DelegateManager.RegisterDelegateConvertor<GetUserBagRequest.GetUserBagCallBack>((act) =>
@@ -72,6 +77,22 @@ public class ILRuntimeUtil : MonoBehaviour
             return new GetUserBagRequest.GetUserBagCallBack((result) =>
             {
                 ((System.Action<System.String>)act)(result);
+            });
+        });
+
+        s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<float>>((action) =>
+        {
+            return new UnityEngine.Events.UnityAction<float>((a) =>
+            {
+                ((System.Action<float>)action)(a);
+            });
+        });
+
+        s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<object>>((action) =>
+        {
+            return new UnityEngine.Events.UnityAction<object>((a) =>
+            {
+                ((System.Action<object>)action)(a);
             });
         });
 
