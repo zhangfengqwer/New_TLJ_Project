@@ -14,9 +14,10 @@ public class OtherData
 
     public static int s_defaultLoginType = (int) DefaultLoginType.DefaultLoginType_Default;
 
-    public static string s_apkVersion = "1.0.50"; // apk版本号
-    public static string s_codeVersion; // 代码版本
-    public static string s_resVersion; // 资源版本
+    public static string s_channelName = "";               // 渠道号
+    public static string s_apkVersion = "1.0.50";       // apk版本号
+    public static string s_codeVersion;                 // 代码版本
+    public static string s_resVersion;                  // 资源版本
 
     public static bool s_isFromSetToLogin = false;
     public static bool s_isFirstOpenGame = true;

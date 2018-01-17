@@ -47,6 +47,7 @@ public class LoginScript : MonoBehaviour
 
     private void Awake()
     {
+        OtherData.s_channelName = PlatformHelper.GetChannelName();
         OtherData.s_loginScript = this;
     }
 
@@ -122,7 +123,7 @@ public class LoginScript : MonoBehaviour
 
         bool is3RdLogin = ChannelHelper.Is3RdLogin();
         string channelAllName = ChannelHelper.GetChannelAllName();
-        LogUtil.Log("渠道号:" + PlatformHelper.GetChannelName() +",渠道名:"+ channelAllName);
+        LogUtil.Log("渠道号:" + OtherData.s_channelName + ",渠道名:"+ channelAllName);
 
         bool isThirdLogin = PlatformHelper.IsThirdLogin();
 
@@ -153,7 +154,7 @@ public class LoginScript : MonoBehaviour
         m_button_3rdLogin.onClick.AddListener(() =>
         {
             AudioScript.getAudioScript().playSound_ButtonClick();
-            PlatformHelper.Login("AndroidCallBack", "GetLoginResult", PlatformHelper.GetChannelName());
+            PlatformHelper.Login("AndroidCallBack", "GetLoginResult", OtherData.s_channelName);
             NetLoading.getInstance().Show();
         });
     }
