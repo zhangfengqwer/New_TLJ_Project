@@ -63,7 +63,16 @@ public class ILRuntimeUtil : MonoBehaviour
 
     void InitializeILRuntime()
     {
-        //这里做一些ILRuntime的注册，HelloWorld示例暂时没有需要注册的
+        //这里做一些ILRuntime的注册
+        s_appdomain.DelegateManager.RegisterMethodDelegate<System.String>();
+
+        s_appdomain.DelegateManager.RegisterDelegateConvertor<GetUserBagRequest.GetUserBagCallBack>((act) =>
+        {
+            return new GetUserBagRequest.GetUserBagCallBack((result) =>
+            {
+                ((System.Action<System.String>)act)(result);
+            });
+        });
     }
 
     void OnHotFixLoaded()
