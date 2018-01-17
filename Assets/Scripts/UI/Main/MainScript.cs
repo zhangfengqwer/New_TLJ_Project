@@ -142,6 +142,15 @@ public class MainScript : MonoBehaviour
         AudioScript.getAudioScript().playMusic_MainBg();
     }
 
+    public GameObject getLogicEnginerObj()
+    {
+        return logicEnginer;
+    }
+
+    public GameObject getPlayEnginerObj()
+    {
+        return playEnginer;
+    }
 
     void Update()
     {
