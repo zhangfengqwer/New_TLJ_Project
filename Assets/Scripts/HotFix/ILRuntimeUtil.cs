@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using System;
 
 public class ILRuntimeUtil : MonoBehaviour
 {
     static ILRuntimeUtil s_instance = null;
-    static AppDomain s_appdomain = null;
+    static ILRuntime.Runtime.Enviorment.AppDomain s_appdomain = null;
 
     static List<string> s_funcList = new List<string>();
 
@@ -22,7 +23,7 @@ public class ILRuntimeUtil : MonoBehaviour
         s_instance = this;
     }
 
-    public AppDomain getAppDomain()
+    public ILRuntime.Runtime.Enviorment.AppDomain getAppDomain()
     {
         return s_appdomain;
     }
@@ -74,6 +75,13 @@ public class ILRuntimeUtil : MonoBehaviour
             });
         });
 
+        s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((act) =>
+        {
+            return new UnityEngine.Events.UnityAction(() =>
+            {
+                ((Action)act)();
+            });
+        });
     }
 
     void OnHotFixLoaded()
