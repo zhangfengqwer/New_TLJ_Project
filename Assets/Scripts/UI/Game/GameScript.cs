@@ -650,7 +650,12 @@ public class GameScript : MonoBehaviour
     public void OnDestroy()
     {
         OtherData.s_gameScript = null;
-        HeartBeat_Play.getInstance().stopHeartBeat();
+
+        if (HeartBeat_Play.getInstance() != null)
+        {
+            HeartBeat_Play.getInstance().stopHeartBeat();
+        }
+     
     }
 
     public void onClickBag()
