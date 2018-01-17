@@ -65,8 +65,7 @@ public class MainScript : MonoBehaviour
 
         AudioScript.getAudioScript().stopMusic();
 
-        // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
-        InvokeRepeating("onInvokeStartMusic", 3, 55);
+        startBgm();
 
         // 逻辑服务器
         {
@@ -130,6 +129,12 @@ public class MainScript : MonoBehaviour
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
     }
 
+    public void startBgm()
+    {
+        // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
+        InvokeRepeating("onInvokeStartMusic", 3, 55);
+    }
+
     public void onInvokeStartMusic()
     {
         // 优先使用热更新的代码
@@ -147,9 +152,19 @@ public class MainScript : MonoBehaviour
         return logicEnginer;
     }
 
+    public void setLogicEnginerObj(GameObject obj)
+    {
+        logicEnginer = obj;
+    }
+
     public GameObject getPlayEnginerObj()
     {
         return playEnginer;
+    }
+
+    public void setPlayEnginerObj(GameObject obj)
+    {
+        playEnginer = obj;
     }
 
     void Update()
