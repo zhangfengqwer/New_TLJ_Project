@@ -49,8 +49,6 @@ public class GameScript : MonoBehaviour
     public GameObject m_liangzhuObj = null;
     public GameObject m_pvpGameResultPanel = null;
 
-    public Vector3 m_screenPos;
-
     //bool m_isStartGame = false;
     public bool m_hasJiPaiQiUse = false;
 
@@ -86,8 +84,6 @@ public class GameScript : MonoBehaviour
         initUI();
 
         checkGameRoomType();
-
-        m_screenPos = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     public void startBgm()
