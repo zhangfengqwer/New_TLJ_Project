@@ -102,8 +102,9 @@ public class RankListJifenScript : MonoBehaviour
             }
         }
 
-        if (myGoldRank == null)
+        if (string.IsNullOrEmpty(myGoldRank))
         {
+            LogUtil.Log("未上榜");
             JifenRank.text = "我的排名:未上榜";
         }
         else

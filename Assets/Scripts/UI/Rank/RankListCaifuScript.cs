@@ -106,9 +106,10 @@ public class RankListCaifuScript : MonoBehaviour
                 RankText.text = i + 1 + "";
             }
         }
-
-        if (mymedalRank == null)
+       
+        if (string.IsNullOrEmpty(mymedalRank))
         {
+            LogUtil.Log("未上榜");
             CaifuRank.text = "我的排名:未上榜";
         }
         else
