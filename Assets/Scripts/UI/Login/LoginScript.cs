@@ -1037,4 +1037,14 @@ public class LoginScript : MonoBehaviour
             }
         }
     }
+
+    public void onDllGetOver()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onDllGetOver"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onDllGetOver", null, null);
+            return;
+        }
+    }
 }

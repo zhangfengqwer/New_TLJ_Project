@@ -124,6 +124,8 @@ public class ILRuntimeUtil : MonoBehaviour
 
         NetLoading.getInstance().Close();
         PlayerPrefs.SetInt("codeVersion", OtherData.s_loginScript.m_codeVersion);
+
+        OtherData.s_loginScript.onDllGetOver();
     }
 
     public static bool checkClassHasFunc(string funcName)
