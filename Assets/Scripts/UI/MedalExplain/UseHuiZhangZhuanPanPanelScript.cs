@@ -23,9 +23,9 @@ public class UseHuiZhangZhuanPanPanelScript : MonoBehaviour {
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -33,9 +33,9 @@ public class UseHuiZhangZhuanPanPanelScript : MonoBehaviour {
     public void setData(TurntablePanelScript parentScript, int needHuiZhangNum)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript", "setData", null, parentScript, needHuiZhangNum);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript_hotfix", "setData", null, parentScript, needHuiZhangNum);
             return;
         }
 
@@ -48,9 +48,9 @@ public class UseHuiZhangZhuanPanPanelScript : MonoBehaviour {
     public void onClickOK()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript", "onClickOK"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseHuiZhangZhuanPanPanelScript_hotfix", "onClickOK"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript", "onClickOK", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuiZhangZhuanPanPanelScript_hotfix", "onClickOK", null, null);
             return;
         }
 

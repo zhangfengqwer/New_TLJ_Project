@@ -30,9 +30,9 @@ public class GetSignRecordRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetSignRecordRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetSignRecordRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetSignRecordRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetSignRecordRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -46,9 +46,9 @@ public class GetSignRecordRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetSignRecordRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetSignRecordRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetSignRecordRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetSignRecordRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

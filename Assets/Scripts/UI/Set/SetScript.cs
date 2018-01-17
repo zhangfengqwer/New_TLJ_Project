@@ -42,9 +42,9 @@ public class SetScript : MonoBehaviour {
         OtherData.s_setScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -81,9 +81,9 @@ public class SetScript : MonoBehaviour {
     public void OnClickChangeAccount()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "OnClickChangeAccount"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript_hotfix", "OnClickChangeAccount"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "OnClickChangeAccount", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript_hotfix", "OnClickChangeAccount", null, null);
             return;
         }
 
@@ -102,9 +102,9 @@ public class SetScript : MonoBehaviour {
     public void OnClickExit()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "OnClickExit"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript_hotfix", "OnClickExit"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "OnClickExit", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript_hotfix", "OnClickExit", null, null);
             return;
         }
 
@@ -114,9 +114,9 @@ public class SetScript : MonoBehaviour {
     public void OnClickAbout()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript", "OnClickAbout"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetScript_hotfix", "OnClickAbout"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript", "OnClickAbout", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetScript_hotfix", "OnClickAbout", null, null);
             return;
         }
 

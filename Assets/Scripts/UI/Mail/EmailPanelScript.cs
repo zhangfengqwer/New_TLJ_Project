@@ -27,9 +27,9 @@ public class EmailPanelScript : MonoBehaviour
         OtherData.s_emailPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -58,9 +58,9 @@ public class EmailPanelScript : MonoBehaviour
     public void loadMail()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "loadMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "loadMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "loadMail", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "loadMail", null, null);
             return;
         }
 
@@ -141,9 +141,9 @@ public class EmailPanelScript : MonoBehaviour
     public void setMailReaded(int email_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "setMailReaded"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "setMailReaded"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "setMailReaded", null, email_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "setMailReaded", null, email_id);
             return;
         }
 
@@ -207,9 +207,9 @@ public class EmailPanelScript : MonoBehaviour
     public void deleteMail(int email_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "deleteMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "deleteMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "deleteMail", null, email_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "deleteMail", null, email_id);
             return;
         }
 
@@ -221,9 +221,9 @@ public class EmailPanelScript : MonoBehaviour
     public void setAllMailReaded()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "setAllMailReaded"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "setAllMailReaded"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "setAllMailReaded", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "setAllMailReaded", null, null);
             return;
         }
 
@@ -235,9 +235,9 @@ public class EmailPanelScript : MonoBehaviour
     public void deleteAllMail()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "deleteAllMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "deleteAllMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "deleteAllMail", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "deleteAllMail", null, null);
             return;
         }
 
@@ -249,9 +249,9 @@ public class EmailPanelScript : MonoBehaviour
     public void onClickOneKeyReadMail()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onClickOneKeyReadMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "onClickOneKeyReadMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onClickOneKeyReadMail", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "onClickOneKeyReadMail", null, null);
             return;
         }
 
@@ -262,9 +262,9 @@ public class EmailPanelScript : MonoBehaviour
     public void onClickOneKeyDeleteMail()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onClickOneKeyDeleteMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "onClickOneKeyDeleteMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onClickOneKeyDeleteMail", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "onClickOneKeyDeleteMail", null, null);
             return;
         }
 
@@ -275,9 +275,9 @@ public class EmailPanelScript : MonoBehaviour
     public void onReceive_OneKeyReadMail(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onReceive_OneKeyReadMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "onReceive_OneKeyReadMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onReceive_OneKeyReadMail", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "onReceive_OneKeyReadMail", null, data);
             return;
         }
 
@@ -298,9 +298,9 @@ public class EmailPanelScript : MonoBehaviour
     public void onReceive_OneKeyDeleteMail(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onReceive_OneKeyDeleteMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "onReceive_OneKeyDeleteMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onReceive_OneKeyDeleteMail", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "onReceive_OneKeyDeleteMail", null, data);
             return;
         }
 
@@ -316,9 +316,9 @@ public class EmailPanelScript : MonoBehaviour
     public void onReceive_GetMail(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript", "onReceive_GetMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EmailPanelScript_hotfix", "onReceive_GetMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript", "onReceive_GetMail", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EmailPanelScript_hotfix", "onReceive_GetMail", null, data);
             return;
         }
 

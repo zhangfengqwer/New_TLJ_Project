@@ -21,9 +21,9 @@ public class TuoGuanPanelScript : MonoBehaviour {
         OtherData.s_tuoGuanPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuoGuanPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuoGuanPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -31,9 +31,9 @@ public class TuoGuanPanelScript : MonoBehaviour {
     public void onClickCalcel()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript", "onClickCalcel"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuoGuanPanelScript_hotfix", "onClickCalcel"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuoGuanPanelScript", "onClickCalcel", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuoGuanPanelScript_hotfix", "onClickCalcel", null, null);
             return;
         }
 

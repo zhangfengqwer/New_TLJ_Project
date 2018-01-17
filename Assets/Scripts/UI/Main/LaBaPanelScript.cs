@@ -24,9 +24,9 @@ public class LaBaPanelScript : MonoBehaviour {
         OtherData.s_laBaPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -53,9 +53,9 @@ public class LaBaPanelScript : MonoBehaviour {
     public void onClickBuy()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "onClickBuy"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript_hotfix", "onClickBuy"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "onClickBuy", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript_hotfix", "onClickBuy", null, null);
             return;
         }
 
@@ -67,9 +67,9 @@ public class LaBaPanelScript : MonoBehaviour {
     public void onClickSend()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "onClickSend"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript_hotfix", "onClickSend"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "onClickSend", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript_hotfix", "onClickSend", null, null);
             return;
         }
 
@@ -105,9 +105,9 @@ public class LaBaPanelScript : MonoBehaviour {
     public void onReceive_UseLaBa(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript", "onReceive_UseLaBa"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaPanelScript_hotfix", "onReceive_UseLaBa"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript", "onReceive_UseLaBa", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaPanelScript_hotfix", "onReceive_UseLaBa", null, data);
             return;
         }
 

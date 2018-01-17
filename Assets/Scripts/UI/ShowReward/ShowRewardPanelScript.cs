@@ -13,9 +13,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
     public static void Show(string reward, bool isCanShare)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "Show"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript_hotfix", "Show"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "Show", null, reward, isCanShare);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript_hotfix", "Show", null, reward, isCanShare);
             return;
         }
 
@@ -39,9 +39,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
         OtherData.s_showRewardPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -49,9 +49,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
     public void setData(string reward, bool isCanShare)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "setData", null, reward, isCanShare);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript_hotfix", "setData", null, reward, isCanShare);
             return;
         }
 
@@ -85,9 +85,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
     public void onClickClose()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "onClickClose"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript_hotfix", "onClickClose"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "onClickClose", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript_hotfix", "onClickClose", null, null);
             return;
         }
 
@@ -106,9 +106,9 @@ public class ShowRewardPanelScript : MonoBehaviour {
     public void onClickShare()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript", "onClickShare"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowRewardPanelScript_hotfix", "onClickShare"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript", "onClickShare", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowRewardPanelScript_hotfix", "onClickShare", null, null);
             return;
         }
 

@@ -34,9 +34,9 @@ public class GetUserBagRequest : Request {
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserBagRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserBagRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserBagRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserBagRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -50,9 +50,9 @@ public class GetUserBagRequest : Request {
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserBagRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserBagRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserBagRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserBagRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

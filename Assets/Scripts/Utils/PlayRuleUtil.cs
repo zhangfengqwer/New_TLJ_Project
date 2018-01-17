@@ -16,9 +16,9 @@ public class PlayRuleUtil
     public static bool IsTuolaji(List<PokerInfo> playerOutPokerList, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsTuolaji"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsTuolaji"))
         {
-            bool b= (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsTuolaji", null, playerOutPokerList, mLevelPokerNum, masterPokerType);
+            bool b= (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsTuolaji", null, playerOutPokerList, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -56,9 +56,9 @@ public class PlayRuleUtil
     public static bool IsMasterPoker(PokerInfo pokerInfo, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsMasterPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsMasterPoker"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsMasterPoker", null, pokerInfo, mLevelPokerNum, masterPokerType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsMasterPoker", null, pokerInfo, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -83,9 +83,9 @@ public class PlayRuleUtil
     public static bool IsAllMasterPoker(List<PokerInfo> list, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsAllMasterPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsAllMasterPoker"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsAllMasterPoker", null, list, mLevelPokerNum, masterPokerType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsAllMasterPoker", null, list, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -108,9 +108,9 @@ public class PlayRuleUtil
     public static bool IsAllFuPoker(List<PokerInfo> list, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsAllFuPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsAllFuPoker"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsAllFuPoker", null, list, mLevelPokerNum, masterPokerType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsAllFuPoker", null, list, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -142,9 +142,9 @@ public class PlayRuleUtil
         Consts.PokerType masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "SetPokerWeight"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "SetPokerWeight"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "SetPokerWeight", null, list, levelPokerNum, masterPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "SetPokerWeight", null, list, levelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -191,10 +191,10 @@ public class PlayRuleUtil
         int mLevelPokerNum, int mMasterPokerType, out List<List<PokerInfo>> OtherTlj)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "CompareDoublePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "CompareDoublePoker"))
         {
             OtherTlj = new List<List<PokerInfo>>();
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "CompareDoublePoker", null, firestDoubleList, OtherDoubleleList, mLevelPokerNum, mMasterPokerType, OtherTlj);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "CompareDoublePoker", null, firestDoubleList, OtherDoubleleList, mLevelPokerNum, mMasterPokerType, OtherTlj);
             return list_temp;
         }
 
@@ -292,9 +292,9 @@ public class PlayRuleUtil
         Consts.PokerType mPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerByType"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerByType"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerByType", null, pokerList, mLevelPokerNum, mPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerByType", null, pokerList, mLevelPokerNum, mPokerType);
             return list_temp;
         }
 
@@ -319,9 +319,9 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetSinglePoker(List<PokerInfo> PokerList, List<PokerInfo> DoubleList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetSinglePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetSinglePoker"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetSinglePoker", null, PokerList, DoubleList);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetSinglePoker", null, PokerList, DoubleList);
             return list_temp;
         }
 
@@ -339,9 +339,9 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetDoublePoker(List<PokerInfo> PokerList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetDoublePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetDoublePoker"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetDoublePoker", null, PokerList);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetDoublePoker", null, PokerList);
             return list_temp;
         }
 
@@ -372,9 +372,9 @@ public class PlayRuleUtil
         int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetAllTljFromDouble"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetAllTljFromDouble"))
         {
-            List<List<PokerInfo>> list_temp = (List<List<PokerInfo>>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetAllTljFromDouble", null, doubleList, mLevelPokerNum, masterPokerType);
+            List<List<PokerInfo>> list_temp = (List<List<PokerInfo>>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetAllTljFromDouble", null, doubleList, mLevelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -409,9 +409,9 @@ public class PlayRuleUtil
         int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetTuoLaJi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetTuoLaJi"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetTuoLaJi", null, playerOutPokerList, mLevelPokerNum, masterPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetTuoLaJi", null, playerOutPokerList, mLevelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -459,9 +459,9 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetMasterPoker(List<PokerInfo> pokerInfos, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetMasterPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetMasterPoker"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetMasterPoker", null, pokerInfos, mLevelPokerNum, masterPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetMasterPoker", null, pokerInfos, mLevelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -487,9 +487,9 @@ public class PlayRuleUtil
     public static bool IsContainMasterPoker(List<PokerInfo> myRestPokerList, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsContainMasterPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsContainMasterPoker"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsContainMasterPoker", null, myRestPokerList, mLevelPokerNum, masterPokerType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsContainMasterPoker", null, myRestPokerList, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -515,10 +515,10 @@ public class PlayRuleUtil
     public static bool IsContainDoublePoker(List<PokerInfo> myRestPokerList, out List<PokerInfo> doublePoker)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsContainDoublePoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsContainDoublePoker"))
         {
             doublePoker = new List<PokerInfo>();
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsContainDoublePoker", null, myRestPokerList, doublePoker);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsContainDoublePoker", null, myRestPokerList, doublePoker);
             return b;
         }
 
@@ -549,10 +549,10 @@ public class PlayRuleUtil
         out List<PokerInfo> typeList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsContainTypePoke"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsContainTypePoke"))
         {
             typeList = new List<PokerInfo>();
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsContainTypePoke", null, myRestPokerList, mLevelPokerNum, mPokerType, typeList);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsContainTypePoke", null, myRestPokerList, mLevelPokerNum, mPokerType, typeList);
             return b;
         }
 
@@ -588,9 +588,9 @@ public class PlayRuleUtil
         List<PokerInfo> OutPokerType, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "IsSendByTuoLaJi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "IsSendByTuoLaJi"))
         {
-            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "IsSendByTuoLaJi", null, myOutPokerList, myPokerByType, OutPokerType, mLevelPokerNum, masterPokerType);
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "IsSendByTuoLaJi", null, myOutPokerList, myPokerByType, OutPokerType, mLevelPokerNum, masterPokerType);
             return b;
         }
 
@@ -628,9 +628,9 @@ public class PlayRuleUtil
         int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenTuoGuan"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerWhenTuoGuan"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenTuoGuan", null, firstPokerList, myPokerList, mLevelPokerNum, masterPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerWhenTuoGuan", null, firstPokerList, myPokerList, mLevelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -740,9 +740,9 @@ public class PlayRuleUtil
         List<PokerInfo> tempAll, int count, List<PokerInfo> tempList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenShuaiP"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerWhenShuaiP"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenShuaiP", null, firstPokerList, masterPoker, tempAll, count, tempList);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerWhenShuaiP", null, firstPokerList, masterPoker, tempAll, count, tempList);
             return;
         }
 
@@ -811,9 +811,9 @@ public class PlayRuleUtil
         List<PokerInfo> tempList, int count, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenTlj"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerWhenTlj"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenTlj", null, myPokerList, masterPoker, tempList, count, mLevelPokerNum,masterPokerType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerWhenTlj", null, myPokerList, masterPoker, tempList, count, mLevelPokerNum,masterPokerType);
             return;
         }
 
@@ -891,9 +891,9 @@ public class PlayRuleUtil
         List<PokerInfo> tempList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenDouble"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerWhenDouble"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenDouble", null, myPokerList, masterPoker, tempList);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerWhenDouble", null, myPokerList, masterPoker, tempList);
             return;
         }
 
@@ -936,9 +936,9 @@ public class PlayRuleUtil
         List<PokerInfo> tempList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenSingle"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerWhenSingle"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenSingle", null, myPokerList, masterPoker, tempList);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerWhenSingle", null, myPokerList, masterPoker, tempList);
             return;
         }
 
@@ -970,9 +970,9 @@ public class PlayRuleUtil
     public static List<PokerInfo> GetJiPaiAndWang(List<PokerInfo> masterPoker, int mLevelPokerNum)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetJiPaiAndWang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetJiPaiAndWang"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetJiPaiAndWang", null, masterPoker, mLevelPokerNum);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetJiPaiAndWang", null, masterPoker, mLevelPokerNum);
             return list_temp;
         }
 
@@ -1001,9 +1001,9 @@ public class PlayRuleUtil
         int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetLiangzhuPoker"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetLiangzhuPoker"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetLiangzhuPoker", null, handerPoker, liangZhuPoker, mLevelPokerNum, masterPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetLiangzhuPoker", null, handerPoker, liangZhuPoker, mLevelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -1067,9 +1067,9 @@ public class PlayRuleUtil
         int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetPokerWhenFirst"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetPokerWhenFirst"))
         {
-            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetPokerWhenFirst", null, handerPoker, mLevelPokerNum, masterPokerType);
+            List<PokerInfo> list_temp = (List<PokerInfo>)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetPokerWhenFirst", null, handerPoker, mLevelPokerNum, masterPokerType);
             return list_temp;
         }
 
@@ -1135,9 +1135,9 @@ public class PlayRuleUtil
     public static int GetDiPaiBeiLv(List<PokerInfo> pokers, int mLevelPokerNum, int masterPokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil", "GetDiPaiBeiLv"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PlayRuleUtil_hotfix", "GetDiPaiBeiLv"))
         {
-            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil", "GetDiPaiBeiLv", null, pokers, mLevelPokerNum, masterPokerType);
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PlayRuleUtil_hotfix", "GetDiPaiBeiLv", null, pokers, mLevelPokerNum, masterPokerType);
             return i;
         }
 

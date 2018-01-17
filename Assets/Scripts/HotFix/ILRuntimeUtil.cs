@@ -72,7 +72,8 @@ public class ILRuntimeUtil : MonoBehaviour
             {
                 ((System.Action<System.String>)act)(result);
             });
-        });
+        });
+
     }
 
     void OnHotFixLoaded()

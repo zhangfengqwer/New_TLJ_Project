@@ -28,9 +28,9 @@ public class QueRenExitPanelScript : MonoBehaviour {
         OtherData.s_queRenExitPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -38,9 +38,9 @@ public class QueRenExitPanelScript : MonoBehaviour {
     public void OnClickQueRen()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript", "OnClickQueRen"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript_hotfix", "OnClickQueRen"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript", "OnClickQueRen", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript_hotfix", "OnClickQueRen", null, null);
             return;
         }
 
@@ -50,9 +50,9 @@ public class QueRenExitPanelScript : MonoBehaviour {
     public void OnClickCancel()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript", "OnClickCancel"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenExitPanelScript_hotfix", "OnClickCancel"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript", "OnClickCancel", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenExitPanelScript_hotfix", "OnClickCancel", null, null);
             return;
         }
 

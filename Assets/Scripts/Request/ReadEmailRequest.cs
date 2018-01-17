@@ -35,9 +35,9 @@ public class ReadEmailRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ReadEmailRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ReadEmailRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ReadEmailRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ReadEmailRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -52,9 +52,9 @@ public class ReadEmailRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ReadEmailRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ReadEmailRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ReadEmailRequest", "OnResponse", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ReadEmailRequest_hotfix", "OnResponse", null, null);
             return;
         }
 

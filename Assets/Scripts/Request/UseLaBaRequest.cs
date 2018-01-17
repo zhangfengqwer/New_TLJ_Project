@@ -39,9 +39,9 @@ public class UseLaBaRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseLaBaRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseLaBaRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseLaBaRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseLaBaRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -56,9 +56,9 @@ public class UseLaBaRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseLaBaRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UseLaBaRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseLaBaRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseLaBaRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

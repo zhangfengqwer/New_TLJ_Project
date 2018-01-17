@@ -9,9 +9,9 @@ public class UserAgreeMentScript : MonoBehaviour {
         OtherData.s_userAgreeMentScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserAgreeMentScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UserAgreeMentScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserAgreeMentScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UserAgreeMentScript_hotfix", "Start", null, null);
             return;
         }
     }

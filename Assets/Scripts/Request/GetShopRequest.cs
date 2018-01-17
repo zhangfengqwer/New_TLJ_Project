@@ -33,9 +33,9 @@ public class GetShopRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetShopRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetShopRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetShopRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetShopRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -48,9 +48,9 @@ public class GetShopRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetShopRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetShopRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetShopRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetShopRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

@@ -24,9 +24,9 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
         OtherData.s_checkSecondPSWPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -42,9 +42,9 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
     public void onClickOK()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "onClickOK"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript_hotfix", "onClickOK"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript", "onClickOK", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript_hotfix", "onClickOK", null, null);
             return;
         }
 
@@ -87,9 +87,9 @@ public class CheckSecondPSWPanelScript : MonoBehaviour {
     public void onReceive_CheckSecondPSW(string result)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript", "onReceive_CheckSecondPSW"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("CheckSecondPSWPanelScript_hotfix", "onReceive_CheckSecondPSW"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript", "onReceive_CheckSecondPSW", null, result);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.CheckSecondPSWPanelScript_hotfix", "onReceive_CheckSecondPSW", null, result);
             return;
         }
 

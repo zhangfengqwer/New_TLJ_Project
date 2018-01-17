@@ -10,9 +10,9 @@ public class RandomUtil
     public static int getRandom(int start, int end)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RandomUtil", "getRandom"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RandomUtil_hotfix", "getRandom"))
         {
-            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RandomUtil", "getRandom", null, start, end);
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RandomUtil_hotfix", "getRandom", null, start, end);
             return i;
         }
 

@@ -17,9 +17,9 @@ public class ExitGamePanelScript : MonoBehaviour {
         OtherData.s_exitGamePanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ExitGamePanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ExitGamePanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -27,9 +27,9 @@ public class ExitGamePanelScript : MonoBehaviour {
     public void OnClickQueRen()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript", "OnClickQueRen"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript_hotfix", "OnClickQueRen"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ExitGamePanelScript", "OnClickQueRen", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ExitGamePanelScript_hotfix", "OnClickQueRen", null, null);
             return;
         }
 
@@ -43,9 +43,9 @@ public class ExitGamePanelScript : MonoBehaviour {
     public void OnClickCancel()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript", "OnClickCancel"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ExitGamePanelScript_hotfix", "OnClickCancel"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ExitGamePanelScript", "OnClickCancel", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ExitGamePanelScript_hotfix", "OnClickCancel", null, null);
             return;
         }
 

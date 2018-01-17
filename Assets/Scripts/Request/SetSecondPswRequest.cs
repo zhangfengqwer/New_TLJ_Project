@@ -39,9 +39,9 @@ public class SetSecondPswRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -57,9 +57,9 @@ public class SetSecondPswRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

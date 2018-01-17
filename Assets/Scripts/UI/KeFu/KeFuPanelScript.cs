@@ -18,9 +18,9 @@ public class KeFuPanelScript : MonoBehaviour {
         OtherData.s_keFuPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("KeFuPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("KeFuPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.KeFuPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.KeFuPanelScript_hotfix", "Start", null, null);
             return;
         }
     }

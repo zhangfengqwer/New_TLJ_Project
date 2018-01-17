@@ -30,9 +30,9 @@ public class OneKeyDeleteEmailRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyDeleteEmailRequest", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyDeleteEmailRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyDeleteEmailRequest", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyDeleteEmailRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -46,9 +46,9 @@ public class OneKeyDeleteEmailRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyDeleteEmailRequest", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OneKeyDeleteEmailRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyDeleteEmailRequest", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OneKeyDeleteEmailRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

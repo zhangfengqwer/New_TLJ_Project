@@ -20,9 +20,9 @@ public class ChoiceShareScript : MonoBehaviour
         OtherData.s_choiceShareScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChoiceShareScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChoiceShareScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -35,9 +35,9 @@ public class ChoiceShareScript : MonoBehaviour
     public void SetClickListener(string content, string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript", "SetClickListener"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChoiceShareScript_hotfix", "SetClickListener"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChoiceShareScript", "SetClickListener", null, content, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChoiceShareScript_hotfix", "SetClickListener", null, content, data);
             return;
         }
 

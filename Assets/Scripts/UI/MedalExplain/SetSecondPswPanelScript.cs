@@ -23,9 +23,9 @@ public class SetSecondPswPanelScript : MonoBehaviour {
         OtherData.s_setSecondPswPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -40,9 +40,9 @@ public class SetSecondPswPanelScript : MonoBehaviour {
     public void onClickOK()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "onClickOK"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript_hotfix", "onClickOK"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript", "onClickOK", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript_hotfix", "onClickOK", null, null);
             return;
         }
 
@@ -91,9 +91,9 @@ public class SetSecondPswPanelScript : MonoBehaviour {
     public void onReceive_SetSecondPsw(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript", "onReceive_SetSecondPsw"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SetSecondPswPanelScript_hotfix", "onReceive_SetSecondPsw"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript", "onReceive_SetSecondPsw", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SetSecondPswPanelScript_hotfix", "onReceive_SetSecondPsw", null, data);
             return;
         }
 

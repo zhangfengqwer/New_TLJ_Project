@@ -34,9 +34,9 @@ public class VipPanelScript : MonoBehaviour
         OtherData.s_vipPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -189,9 +189,9 @@ public class VipPanelScript : MonoBehaviour
     public void InitVip()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipPanelScript", "InitVip"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("VipPanelScript_hotfix", "InitVip"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipPanelScript", "InitVip", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.VipPanelScript_hotfix", "InitVip", null, null);
             return;
         }
 

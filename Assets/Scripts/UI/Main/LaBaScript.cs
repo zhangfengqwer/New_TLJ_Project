@@ -15,9 +15,9 @@ public class LaBaScript : MonoBehaviour {
         OtherData.s_laBaScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -31,9 +31,9 @@ public class LaBaScript : MonoBehaviour {
     public void onTextMove()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript", "onTextMove"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript_hotfix", "onTextMove"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaScript", "onTextMove", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaScript_hotfix", "onTextMove", null, null);
             return;
         }
 
@@ -62,9 +62,9 @@ public class LaBaScript : MonoBehaviour {
     public void addText(string text)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript", "addText"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LaBaScript_hotfix", "addText"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaScript", "addText", null, text);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LaBaScript_hotfix", "addText", null, text);
             return;
         }
 

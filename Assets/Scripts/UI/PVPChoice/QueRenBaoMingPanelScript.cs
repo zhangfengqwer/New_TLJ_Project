@@ -26,9 +26,9 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
         OtherData.s_queRenBaoMingPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -36,9 +36,9 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     public void setData(PVPGameRoomData pVPGameRoomData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "setData", null, pVPGameRoomData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript_hotfix", "setData", null, pVPGameRoomData);
             return;
         }
 
@@ -73,9 +73,9 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     public void onClickBaoMing()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "onClickBaoMing"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript_hotfix", "onClickBaoMing"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "onClickBaoMing", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript_hotfix", "onClickBaoMing", null, null);
             return;
         }
 
@@ -88,9 +88,9 @@ public class QueRenBaoMingPanelScript : MonoBehaviour {
     public void reqJoinRoom()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript", "reqJoinRoom"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("QueRenBaoMingPanelScript_hotfix", "reqJoinRoom"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript", "reqJoinRoom", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.QueRenBaoMingPanelScript_hotfix", "reqJoinRoom", null, null);
             return;
         }
 

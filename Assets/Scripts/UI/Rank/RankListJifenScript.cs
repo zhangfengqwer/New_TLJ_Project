@@ -19,9 +19,9 @@ public class RankListJifenScript : MonoBehaviour
         OtherData.s_rankListJifenScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListJifenScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListJifenScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListJifenScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListJifenScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -36,9 +36,9 @@ public class RankListJifenScript : MonoBehaviour
     public void InitUI()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListJifenScript", "InitUI"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RankListJifenScript_hotfix", "InitUI"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListJifenScript", "InitUI", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RankListJifenScript_hotfix", "InitUI", null, null);
             return;
         }
 

@@ -21,9 +21,9 @@ public class PVP_List_Item_Script : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script_hotfix", "Start", null, null);
             return;
         }
     }
@@ -37,9 +37,9 @@ public class PVP_List_Item_Script : MonoBehaviour {
     public void setPVPGameRoomData(PVPGameRoomData PVPGameRoomData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "setPVPGameRoomData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script_hotfix", "setPVPGameRoomData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "setPVPGameRoomData", null, PVPGameRoomData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script_hotfix", "setPVPGameRoomData", null, PVPGameRoomData);
             return;
         }
 
@@ -78,9 +78,9 @@ public class PVP_List_Item_Script : MonoBehaviour {
     public void onInvoke()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "onInvoke"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script_hotfix", "onInvoke"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "onInvoke", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script_hotfix", "onInvoke", null, null);
             return;
         }
 
@@ -91,9 +91,9 @@ public class PVP_List_Item_Script : MonoBehaviour {
     public void onClickBaoMing()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script", "onClickBaoMing"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVP_List_Item_Script_hotfix", "onClickBaoMing"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script", "onClickBaoMing", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVP_List_Item_Script_hotfix", "onClickBaoMing", null, null);
             return;
         }
 

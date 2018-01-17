@@ -17,9 +17,9 @@ public class ShouChongPanelScript : MonoBehaviour {
         OtherData.s_shouChongPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShouChongPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShouChongPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShouChongPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShouChongPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -32,9 +32,9 @@ public class ShouChongPanelScript : MonoBehaviour {
     public void onClickChongZhi()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShouChongPanelScript", "onClickChongZhi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShouChongPanelScript_hotfix", "onClickChongZhi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShouChongPanelScript", "onClickChongZhi", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShouChongPanelScript_hotfix", "onClickChongZhi", null, null);
             return;
         }
 

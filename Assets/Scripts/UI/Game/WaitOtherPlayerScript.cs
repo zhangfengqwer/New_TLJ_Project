@@ -23,9 +23,9 @@ public class WaitOtherPlayerScript : MonoBehaviour {
         OtherData.s_waitOtherPlayerScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitOtherPlayerScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitOtherPlayerScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -37,9 +37,9 @@ public class WaitOtherPlayerScript : MonoBehaviour {
     public void timer()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript", "timer"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitOtherPlayerScript_hotfix", "timer"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitOtherPlayerScript", "timer", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitOtherPlayerScript_hotfix", "timer", null, null);
             return;
         }
 

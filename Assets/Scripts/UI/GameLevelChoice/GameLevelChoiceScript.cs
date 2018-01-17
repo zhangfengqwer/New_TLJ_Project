@@ -36,9 +36,9 @@ public class GameLevelChoiceScript : MonoBehaviour {
         OtherData.s_gameLevelChoiceScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -52,9 +52,9 @@ public class GameLevelChoiceScript : MonoBehaviour {
     public void setGameChangCiType(GameChangCiType gameChangCiType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "setGameChangCiType"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript_hotfix", "setGameChangCiType"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "setGameChangCiType", null, gameChangCiType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript_hotfix", "setGameChangCiType", null, gameChangCiType);
             return;
         }
 
@@ -80,9 +80,9 @@ public class GameLevelChoiceScript : MonoBehaviour {
     public void onClickChuJi()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "onClickChuJi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript_hotfix", "onClickChuJi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "onClickChuJi", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript_hotfix", "onClickChuJi", null, null);
             return;
         }
 
@@ -113,9 +113,9 @@ public class GameLevelChoiceScript : MonoBehaviour {
     public void onClickZhongJi()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "onClickZhongJi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript_hotfix", "onClickZhongJi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "onClickZhongJi", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript_hotfix", "onClickZhongJi", null, null);
             return;
         }
 
@@ -146,9 +146,9 @@ public class GameLevelChoiceScript : MonoBehaviour {
     public void onClickGaoJi()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript", "onClickGaoJi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameLevelChoiceScript_hotfix", "onClickGaoJi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript", "onClickGaoJi", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameLevelChoiceScript_hotfix", "onClickGaoJi", null, null);
             return;
         }
 

@@ -19,9 +19,9 @@ public class Mail_List_Item_Script : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script_hotfix", "Start", null, null);
             return;
         }
     }
@@ -34,9 +34,9 @@ public class Mail_List_Item_Script : MonoBehaviour {
     public void setMailData(MailData mailData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "setMailData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script_hotfix", "setMailData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "setMailData", null, mailData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script_hotfix", "setMailData", null, mailData);
             return;
         }
 
@@ -89,9 +89,9 @@ public class Mail_List_Item_Script : MonoBehaviour {
     public void onClickItem()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "onClickItem"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script_hotfix", "onClickItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "onClickItem", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script_hotfix", "onClickItem", null, null);
             return;
         }
 
@@ -112,9 +112,9 @@ public class Mail_List_Item_Script : MonoBehaviour {
     public void onReceive_ReadMail(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script", "onReceive_ReadMail"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Mail_List_Item_Script_hotfix", "onReceive_ReadMail"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script", "onReceive_ReadMail", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Mail_List_Item_Script_hotfix", "onReceive_ReadMail", null, data);
             return;
         }
 

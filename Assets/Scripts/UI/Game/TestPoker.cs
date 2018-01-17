@@ -42,9 +42,9 @@ public class TestPoker : MonoBehaviour {
     public void InitFirst()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "InitFirst"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker_hotfix", "InitFirst"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "InitFirst", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker_hotfix", "InitFirst", null, null);
             return;
         }
 
@@ -116,9 +116,9 @@ public class TestPoker : MonoBehaviour {
     public void Init(GameObject gameObject, Consts.PokerType pokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "Init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker_hotfix", "Init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "Init", null, gameObject,pokerType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker_hotfix", "Init", null, gameObject,pokerType);
             return;
         }
 
@@ -224,9 +224,9 @@ public class TestPoker : MonoBehaviour {
     public void OnClickConfirm()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "OnClickConfirm"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker_hotfix", "OnClickConfirm"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "OnClickConfirm", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker_hotfix", "OnClickConfirm", null, null);
             return;
         }
 
@@ -249,9 +249,9 @@ public class TestPoker : MonoBehaviour {
     public void UpdateUi(List<PokerInfo> list)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker", "UpdateUi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TestPoker_hotfix", "UpdateUi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker", "UpdateUi", null, list);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TestPoker_hotfix", "UpdateUi", null, list);
             return;
         }
 

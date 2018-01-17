@@ -31,9 +31,9 @@ public class NoticeDetailScript : MonoBehaviour {
         OtherData.s_noticeDetailScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticeDetailScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticeDetailScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticeDetailScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticeDetailScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -41,9 +41,9 @@ public class NoticeDetailScript : MonoBehaviour {
     public void setNoticeId(int notice_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticeDetailScript", "setNoticeId"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticeDetailScript_hotfix", "setNoticeId"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticeDetailScript", "setNoticeId", null, notice_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticeDetailScript_hotfix", "setNoticeId", null, notice_id);
             return;
         }
 

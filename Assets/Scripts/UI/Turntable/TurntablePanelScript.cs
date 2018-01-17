@@ -42,9 +42,9 @@ public class TurntablePanelScript : MonoBehaviour
         OtherData.s_turntablePanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -73,9 +73,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onInvokeDeng()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onInvokeDeng"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onInvokeDeng"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onInvokeDeng", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onInvokeDeng", null, null);
             return;
         }
 
@@ -94,9 +94,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onInvokeAdd1()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onInvokeAdd1"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onInvokeAdd1"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onInvokeAdd1", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onInvokeAdd1", null, null);
             return;
         }
 
@@ -106,9 +106,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void loadReward()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "loadReward"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "loadReward"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "loadReward", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "loadReward", null, null);
             return;
         }
 
@@ -157,9 +157,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onReceive_GetTurntable(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_GetTurntable"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onReceive_GetTurntable"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onReceive_GetTurntable", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onReceive_GetTurntable", null, data);
             return;
         }
 
@@ -171,9 +171,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onReceive_UseTurntable(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_UseTurntable"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onReceive_UseTurntable"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onReceive_UseTurntable", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onReceive_UseTurntable", null, data);
             return;
         }
 
@@ -253,9 +253,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onReceive_TurntableBroadcast(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onReceive_TurntableBroadcast"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onReceive_TurntableBroadcast"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onReceive_TurntableBroadcast", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onReceive_TurntableBroadcast", null, data);
             return;
         }
 
@@ -283,9 +283,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void addTurntableBroadcast(string name,int reward_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "addTurntableBroadcast"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "addTurntableBroadcast"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "addTurntableBroadcast", null, name, reward_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "addTurntableBroadcast", null, name, reward_id);
             return;
         }
 
@@ -333,9 +333,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onClickFree()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickFree"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onClickFree"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickFree", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onClickFree", null, null);
             return;
         }
 
@@ -358,9 +358,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onClickHuiZhang()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickHuiZhang"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onClickHuiZhang"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickHuiZhang", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onClickHuiZhang", null, null);
             return;
         }
 
@@ -449,9 +449,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void reqUseZhuanPan(int type)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "reqUseZhuanPan"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "reqUseZhuanPan"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "reqUseZhuanPan", null, type);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "reqUseZhuanPan", null, type);
             return;
         }
 
@@ -466,9 +466,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onClickFree_tip()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickFree_tip"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onClickFree_tip"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickFree_tip", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onClickFree_tip", null, null);
             return;
         }
 
@@ -479,9 +479,9 @@ public class TurntablePanelScript : MonoBehaviour
     public void onClickHuiZhang_tip()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript", "onClickHuiZhang_tip"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onClickHuiZhang_tip"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript", "onClickHuiZhang_tip", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onClickHuiZhang_tip", null, null);
             return;
         }
 

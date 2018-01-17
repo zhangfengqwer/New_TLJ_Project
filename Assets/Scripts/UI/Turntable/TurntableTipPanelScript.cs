@@ -21,9 +21,9 @@ public class TurntableTipPanelScript : MonoBehaviour {
         OtherData.s_turntableTipPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableTipPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableTipPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableTipPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableTipPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -36,9 +36,9 @@ public class TurntableTipPanelScript : MonoBehaviour {
     public void setTip(string tip)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableTipPanelScript", "setTip"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntableTipPanelScript_hotfix", "setTip"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableTipPanelScript", "setTip", null, tip);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntableTipPanelScript_hotfix", "setTip", null, tip);
             return;
         }
 

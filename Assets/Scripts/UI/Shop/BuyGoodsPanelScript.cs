@@ -45,9 +45,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
         OtherData.s_buyGoodsPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -62,9 +62,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void setGoodsId(int goods_id)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "setGoodsId"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "setGoodsId"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "setGoodsId", null, goods_id);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "setGoodsId", null, goods_id);
             return;
         }
 
@@ -115,9 +115,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void refreshPrice()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "refreshPrice"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "refreshPrice"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "refreshPrice", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "refreshPrice", null, null);
             return;
         }
 
@@ -240,9 +240,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void onClickJian()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickJian"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "onClickJian"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickJian", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "onClickJian", null, null);
             return;
         }
 
@@ -261,9 +261,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void onClickJia()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickJia"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "onClickJia"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickJia", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "onClickJia", null, null);
             return;
         }
 
@@ -282,9 +282,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void onClickMax()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickMax"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "onClickMax"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickMax", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "onClickMax", null, null);
             return;
         }
 
@@ -300,9 +300,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void onClickBuy1()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickBuy1"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "onClickBuy1"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickBuy1", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "onClickBuy1", null, null);
             return;
         }
 
@@ -337,9 +337,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void onClickBuy2()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onClickBuy2"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "onClickBuy2"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onClickBuy2", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "onClickBuy2", null, null);
             return;
         }
 
@@ -378,9 +378,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void buy(int money_type)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "buy"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "buy"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "buy", null, money_type);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "buy", null, money_type);
             return;
         }
 
@@ -487,9 +487,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public string SetRequest(ShopData shopData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "SetRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "SetRequest"))
         {
-            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "SetRequest", null, shopData);
+            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "SetRequest", null, shopData);
             return s;
         }
 
@@ -506,9 +506,9 @@ public class BuyGoodsPanelScript : MonoBehaviour
     public void onReceive_BuyGoods(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript", "onReceive_BuyGoods"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("BuyGoodsPanelScript_hotfix", "onReceive_BuyGoods"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript", "onReceive_BuyGoods", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.BuyGoodsPanelScript_hotfix", "onReceive_BuyGoods", null, data);
             return;
         }
 

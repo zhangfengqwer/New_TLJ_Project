@@ -31,9 +31,9 @@ public class WeeklySignScript : MonoBehaviour
         OtherData.s_weeklySignScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -44,9 +44,9 @@ public class WeeklySignScript : MonoBehaviour
     private void Update()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "Update"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript_hotfix", "Update"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "Update", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript_hotfix", "Update", null, null);
             return;
         }
 
@@ -118,9 +118,9 @@ public class WeeklySignScript : MonoBehaviour
     public void AddProp(string prop)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "AddProp"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript_hotfix", "AddProp"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "AddProp", null, prop);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript_hotfix", "AddProp", null, prop);
             return;
         }
 
@@ -171,9 +171,9 @@ public class WeeklySignScript : MonoBehaviour
     public void InitData()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "InitData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript_hotfix", "InitData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "InitData", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript_hotfix", "InitData", null, null);
             return;
         }
 
@@ -199,9 +199,9 @@ public class WeeklySignScript : MonoBehaviour
     public void InitUi()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "InitUi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript_hotfix", "InitUi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "InitUi", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript_hotfix", "InitUi", null, null);
             return;
         }
 
@@ -313,9 +313,9 @@ public class WeeklySignScript : MonoBehaviour
     public void SignCallBack(bool flag)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript", "SignCallBack"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WeeklySignScript_hotfix", "SignCallBack"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript", "SignCallBack", null, flag);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WeeklySignScript_hotfix", "SignCallBack", null, flag);
             return;
         }
 
