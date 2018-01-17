@@ -26,9 +26,9 @@ public class ShowDiPokerScript : MonoBehaviour {
     void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript_hotfix", "Start", null, null);
             return;
         }
 
@@ -38,9 +38,9 @@ public class ShowDiPokerScript : MonoBehaviour {
     public void showEnd()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "showEnd"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript_hotfix", "showEnd"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "showEnd", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript_hotfix", "showEnd", null, null);
             return;
         }
 
@@ -61,9 +61,9 @@ public class ShowDiPokerScript : MonoBehaviour {
     public void setData(List<TLJCommon.PokerInfo> dipaiList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "setData", null, dipaiList);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript_hotfix", "setData", null, dipaiList);
             return;
         }
 
@@ -87,9 +87,9 @@ public class ShowDiPokerScript : MonoBehaviour {
     public void initPokerPos(List<GameObject> objList)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript", "initPokerPos"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShowDiPokerScript_hotfix", "initPokerPos"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript", "initPokerPos", null, objList);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShowDiPokerScript_hotfix", "initPokerPos", null, objList);
             return;
         }
 

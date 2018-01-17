@@ -30,9 +30,9 @@ public class PVPGameResultPanelScript : MonoBehaviour
         OtherData.s_pvpGameResultPanelScript = this;
 
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -40,9 +40,9 @@ public class PVPGameResultPanelScript : MonoBehaviour
     public void setData(bool isWin)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "setData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript_hotfix", "setData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "setData", null, isWin);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript_hotfix", "setData", null, isWin);
             return;
         }
 
@@ -77,9 +77,9 @@ public class PVPGameResultPanelScript : MonoBehaviour
     public void onInvokeTimeOut()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onInvokeTimeOut"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript_hotfix", "onInvokeTimeOut"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "onInvokeTimeOut", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript_hotfix", "onInvokeTimeOut", null, null);
             return;
         }
 
@@ -89,9 +89,9 @@ public class PVPGameResultPanelScript : MonoBehaviour
     public void onClickShare()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onClickShare"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript_hotfix", "onClickShare"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "onClickShare", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript_hotfix", "onClickShare", null, null);
             return;
         }
 
@@ -101,9 +101,9 @@ public class PVPGameResultPanelScript : MonoBehaviour
     public void onClickExit()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript", "onClickExit"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPGameResultPanelScript_hotfix", "onClickExit"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript", "onClickExit", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPGameResultPanelScript_hotfix", "onClickExit", null, null);
             return;
         }
 

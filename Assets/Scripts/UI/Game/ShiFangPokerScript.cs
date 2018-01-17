@@ -9,9 +9,9 @@ public class ShiFangPokerScript : MonoBehaviour, IPointerDownHandler
     void Start ()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShiFangPokerScript", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShiFangPokerScript_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShiFangPokerScript", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShiFangPokerScript_hotfix", "Start", null, null);
             return;
         }
     }
@@ -24,9 +24,9 @@ public class ShiFangPokerScript : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShiFangPokerScript", "OnPointerDown"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShiFangPokerScript_hotfix", "OnPointerDown"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShiFangPokerScript", "OnPointerDown", null, eventData);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShiFangPokerScript_hotfix", "OnPointerDown", null, eventData);
             return;
         }
 

@@ -33,9 +33,9 @@ public class RememberPokerHelper : MonoBehaviour {
     private void Start()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper", "Start"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper_hotfix", "Start"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper", "Start", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper_hotfix", "Start", null, null);
             return;
         }
     }
@@ -49,9 +49,9 @@ public class RememberPokerHelper : MonoBehaviour {
     public void InitFirst()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper", "InitFirst"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper_hotfix", "InitFirst"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper", "InitFirst", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper_hotfix", "InitFirst", null, null);
             return;
         }
 
@@ -72,9 +72,9 @@ public class RememberPokerHelper : MonoBehaviour {
     public void Init(GameObject gameObject, Consts.PokerType pokerType)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper", "Init"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper_hotfix", "Init"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper", "Init", null, gameObject, pokerType);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper_hotfix", "Init", null, gameObject, pokerType);
             return;
         }
 
@@ -158,9 +158,9 @@ public class RememberPokerHelper : MonoBehaviour {
     public void OnClickShow()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper", "OnClickShow"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper_hotfix", "OnClickShow"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper", "OnClickShow", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper_hotfix", "OnClickShow", null, null);
             return;
         }
 
@@ -178,9 +178,9 @@ public class RememberPokerHelper : MonoBehaviour {
     public void UpdateUi(List<PokerInfo> list)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper", "UpdateUi"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("RememberPokerHelper_hotfix", "UpdateUi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper", "UpdateUi", null, list);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.RememberPokerHelper_hotfix", "UpdateUi", null, list);
             return;
         }
 
