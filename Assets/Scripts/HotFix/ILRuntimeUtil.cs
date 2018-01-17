@@ -88,14 +88,6 @@ public class ILRuntimeUtil : MonoBehaviour
             });
         });
 
-        s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<object>>((action) =>
-        {
-            return new UnityEngine.Events.UnityAction<object>((a) =>
-            {
-                ((System.Action<object>)action)(a);
-            });
-        });
-
         s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((act) =>
         {
             return new UnityEngine.Events.UnityAction(() =>
