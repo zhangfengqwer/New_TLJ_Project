@@ -48,68 +48,32 @@ public class LoginScript : MonoBehaviour
     private void Awake()
     {
         OtherData.s_channelName = PlatformHelper.GetChannelName();
+        OtherData.s_channelName = "huawei";
         OtherData.s_loginScript = this;
     }
 
     void Start()
     {
+        NetLoading.getInstance().Show();
+        OtherConfigScript.getInstance().reqNet();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "Start", null, null);
             return;
         }
+    }
 
+    public void getOtherConfigOver()
+    {
+        // 拉取热更dll
         {
-            // 禁止多点触摸
-            Input.multiTouchEnabled = false;
+            m_codeVersion = OtherConfigScript.getInstance().m_CodeVersion;
 
-            // 永不息屏
-            Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-            OtherData.s_screenSize = new Vector2(Screen.width, Screen.height);
-
-            // 安卓回调
-            AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
-            AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
-        }
-
-        ToastScript.clear();
-
-        {
-            GameUtil.hideGameObject(m_debugLog);
-
-            // 用于打印屏幕日志
-            m_debugLogScript = m_debugLog.GetComponent<DebugLogScript>();
-        }
-
-        m_inputAccount.text = PlayerPrefs.GetString("account", "");
-        m_inputPassword.text = PlayerPrefs.GetString("password", "");
-
-        m_panel_login.transform.localScale = new Vector3(0, 0, 0);
-        m_panel_register.transform.localScale = new Vector3(0, 0, 0);
-
-        // 出版号
-        m_text_chubanhao.text = PlayerPrefs.GetString("banhao","");
-
-        if (!OtherData.s_isFromSetToLogin)
-        {
-            m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
-            Invoke("onInvokeHealthPanel", 3);
-        }
-        else
-        {
             NetLoading.getInstance().Show();
-
-            // 获取数值表
-            OtherData.s_getNetEntityFile.getNetFile();
+            ILRuntimeUtil.getInstance().downDll(OtherData.getWebUrl() + "hotfix/HotFix_Project-" + m_codeVersion + ".dll");
         }
-
-        // 健康忠告提示文字
-        //m_text_tips.text = GameUtil.getOneTips();
-
-        Set3rdLogin();
-        setLogonTypeUI();
     }
 
     public void Set3rdLogin()
@@ -609,13 +573,13 @@ public class LoginScript : MonoBehaviour
                 NetErrorPanelScript.getInstance().setContentText("您的客户端版本过低，请更新到最新版本。");
             }
 
-            // 代码版本
-            {
-                m_codeVersion = (int)jd["codeVersion"];
+            //// 代码版本
+            //{
+            //    m_codeVersion = (int)jd["codeVersion"];
 
-                NetLoading.getInstance().Show();
-                ILRuntimeUtil.getInstance().downDll(OtherData.getWebUrl() + "hotfix/HotFix_Project-" + m_codeVersion + ".dll");
-            }
+            //    NetLoading.getInstance().Show();
+            //    ILRuntimeUtil.getInstance().downDll(OtherData.getWebUrl() + "hotfix/HotFix_Project-" + m_codeVersion + ".dll");
+            //}
 
             {
                 string banbao = jd["banhao"].ToString();
@@ -1038,6 +1002,18 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    public void showHealth()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "showHealth"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "showHealth", null, null);
+            return;
+        }
+
+        Invoke("onInvokeHealthPanel", 3);
+    }
+
     public void onDllGetOver()
     {
         // 优先使用热更新的代码
@@ -1046,5 +1022,56 @@ public class LoginScript : MonoBehaviour
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onDllGetOver", null, null);
             return;
         }
+
+        {
+            // 禁止多点触摸
+            Input.multiTouchEnabled = false;
+
+            // 永不息屏
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+            OtherData.s_screenSize = new Vector2(Screen.width, Screen.height);
+
+            // 安卓回调
+            AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+            AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
+        }
+
+        ToastScript.clear();
+
+        {
+            GameUtil.hideGameObject(m_debugLog);
+
+            // 用于打印屏幕日志
+            m_debugLogScript = m_debugLog.GetComponent<DebugLogScript>();
+        }
+
+        m_inputAccount.text = PlayerPrefs.GetString("account", "");
+        m_inputPassword.text = PlayerPrefs.GetString("password", "");
+
+        m_panel_login.transform.localScale = new Vector3(0, 0, 0);
+        m_panel_register.transform.localScale = new Vector3(0, 0, 0);
+
+        // 出版号
+        m_text_chubanhao.text = PlayerPrefs.GetString("banhao", "");
+
+        if (!OtherData.s_isFromSetToLogin)
+        {
+            m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
+            showHealth();
+        }
+        else
+        {
+            NetLoading.getInstance().Show();
+
+            // 获取数值表
+            OtherData.s_getNetEntityFile.getNetFile();
+        }
+
+        // 健康忠告提示文字
+        //m_text_tips.text = GameUtil.getOneTips();
+
+        Set3rdLogin();
+        setLogonTypeUI();
     }
 }
