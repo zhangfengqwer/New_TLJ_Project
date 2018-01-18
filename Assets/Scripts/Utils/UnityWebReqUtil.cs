@@ -16,7 +16,6 @@ public class UnityWebReqUtil:MonoBehaviour
             if (_Instance == null)
             {
                 _Instance = new UnityWebReqUtil();
-
                 GameObject obj = new GameObject("UnityWebReqUtil");
                 obj.transform.name = "UnityWebReqUtil";
                 MonoBehaviour.DontDestroyOnLoad(obj);
