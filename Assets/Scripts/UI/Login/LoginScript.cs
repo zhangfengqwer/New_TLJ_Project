@@ -61,6 +61,9 @@ public class LoginScript : MonoBehaviour
             {
                 m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
             }
+
+            Set3rdLogin();
+            setLogonTypeUI();
         }
 
         NetLoading.getInstance().Show();
@@ -1076,8 +1079,5 @@ public class LoginScript : MonoBehaviour
 
         // 健康忠告提示文字
         //m_text_tips.text = GameUtil.getOneTips();
-
-        Set3rdLogin();
-        setLogonTypeUI();
     }
 }
