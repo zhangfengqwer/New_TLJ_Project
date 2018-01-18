@@ -95,6 +95,14 @@ public class ILRuntimeUtil : MonoBehaviour
                 ((Action)act)();
             });
         });
+
+        s_appdomain.DelegateManager.RegisterDelegateConvertor<NetErrorPanelScript.OnClickButton>((act) =>
+        {
+            return new NetErrorPanelScript.OnClickButton(() =>
+            {
+                ((Action)act)();
+            });
+        });
     }
 
     void OnHotFixLoaded()
