@@ -48,12 +48,21 @@ public class LoginScript : MonoBehaviour
     private void Awake()
     {
         OtherData.s_channelName = PlatformHelper.GetChannelName();
-        OtherData.s_channelName = "huawei";
         OtherData.s_loginScript = this;
     }
 
     void Start()
     {
+        {
+            m_panel_login.transform.localScale = new Vector3(0, 0, 0);
+            m_panel_register.transform.localScale = new Vector3(0, 0, 0);
+
+            if (!OtherData.s_isFromSetToLogin)
+            {
+                m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
         NetLoading.getInstance().Show();
         OtherConfigScript.getInstance().reqNet();
 
@@ -1048,10 +1057,7 @@ public class LoginScript : MonoBehaviour
 
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
-
-        m_panel_login.transform.localScale = new Vector3(0, 0, 0);
-        m_panel_register.transform.localScale = new Vector3(0, 0, 0);
-
+        
         // 出版号
         m_text_chubanhao.text = PlayerPrefs.GetString("banhao", "");
 
