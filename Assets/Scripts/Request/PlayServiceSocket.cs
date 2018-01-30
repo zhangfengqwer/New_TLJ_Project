@@ -34,14 +34,12 @@ public class PlayServiceSocket: MonoBehaviour
         s_instance = this.GetComponent<PlayServiceSocket>();
 
         m_socketUtil = new SocketUtil();
-        m_socketUtil.init(NetConfig.s_playService_ip, NetConfig.s_playService_port);
+        m_socketUtil.init(NetConfig.s_playService_ip, NetConfig.s_playService_yuming, NetConfig.s_playService_port);
 
         m_socketUtil.setOnSocketEvent_Connect(onSocketConnect);
         m_socketUtil.setOnSocketEvent_Receive(onSocketReceive);
         m_socketUtil.setOnSocketEvent_Close(onSocketClose);
         m_socketUtil.setOnSocketEvent_Stop(onSocketStop);
-
-        m_socketUtil.init(NetConfig.s_playService_ip, NetConfig.s_playService_port);
 
         DontDestroyOnLoad(gameObject);
     }

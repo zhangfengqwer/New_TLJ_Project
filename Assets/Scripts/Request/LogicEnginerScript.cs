@@ -147,7 +147,7 @@ public class LogicEnginerScript : MonoBehaviour
         m_socketUtil.setOnSocketEvent_Close(onSocketClose);
         m_socketUtil.setOnSocketEvent_Stop(onSocketStop);
 
-        m_socketUtil.init(NetConfig.s_logicService_ip, NetConfig.s_logicService_port);
+        m_socketUtil.init(NetConfig.s_logicService_ip, NetConfig.s_logicService_yuming, NetConfig.s_logicService_port);
         m_socketUtil.start();
     }
 

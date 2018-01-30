@@ -26,6 +26,7 @@ public class SocketUtil
 
     public Socket m_socket = null;
     public IPAddress m_ipAddress = null;
+    public string m_yuming;
     public int m_ipPort = 0;
 
     public bool m_isStart = false;
@@ -56,11 +57,12 @@ public class SocketUtil
         m_onSocketEvent_Stop = onSocketEvent_Stop;
     }
 
-    public void init(string ip, int port)
+    public void init(string ip,string yuming, int port)
     {
         try
         {
             m_ipAddress = IPAddress.Parse(ip);
+            m_yuming = yuming;
             m_ipPort = port;
         }
         catch (Exception e)
@@ -120,8 +122,28 @@ public class SocketUtil
     {
         try
         {
-            m_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint ipEndPort = new IPEndPoint(m_ipAddress, m_ipPort);
+            IPAddress ip;
+            IPHostEntry IPinfo = Dns.GetHostEntry(m_yuming);
+            if (IPinfo.AddressList.Length <= 0)
+            {
+                ToastScript.createToast("域名解析出错");
+                return;
+            }
+
+            ip = IPinfo.AddressList[0];
+
+            LogUtil.Log("ip = " + ip.ToString());
+
+            IPEndPoint ipEndPort = new IPEndPoint(ip, m_ipPort);
+            if (ip.AddressFamily.CompareTo(AddressFamily.InterNetworkV6) == 0)
+            {
+                m_socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
+            }
+            else
+            {
+                m_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            }
+
             m_socket.Connect(ipEndPort);
             m_isStart = true;
             m_isNormalStop = false;
@@ -130,6 +152,50 @@ public class SocketUtil
                 m_onSocketEvent_Connect(true);
             }
             StartReceive();
+
+            //            IPAddress ip;
+
+            //#if UNITY_ANDROID
+            //            ip = m_ipAddress;
+            //#endif
+
+            //#if UNITY_IPHONE
+            //            IPHostEntry IPinfo = Dns.GetHostEntry(m_yuming);
+            //            if (IPinfo.AddressList.Length <= 0)
+            //            {
+            //                ToastScript.createToast("域名解析出错");
+            //                return;
+            //            }
+            //            else
+            //            {
+            //                LogUtil.Log("域名解析为：" + IPinfo.AddressList[0]);
+            //            }
+            //            ip = new IPinfo.AddressList[0];
+            //#endif
+
+            //#if UNITY_STANDALONE_WIN
+            //            ip = m_ipAddress;
+            //#endif
+            //            LogUtil.Log("ip = " + ip.ToString());
+
+            //            IPEndPoint ipEndPort = new IPEndPoint(m_ipAddress, m_ipPort);
+            //            if (ip.AddressFamily.CompareTo(AddressFamily.InterNetworkV6) == 0)
+            //            {
+            //                m_socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
+            //            }
+            //            else
+            //            {
+            //                m_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //            }
+
+            //            m_socket.Connect(ipEndPort);
+            //            m_isStart = true;
+            //            m_isNormalStop = false;
+            //            if (m_onSocketEvent_Connect != null)
+            //            {
+            //                m_onSocketEvent_Connect(true);
+            //            }
+            //            StartReceive();
         }
         catch (SocketException ex)
         {
