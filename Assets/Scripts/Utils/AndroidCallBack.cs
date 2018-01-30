@@ -38,7 +38,7 @@ public class AndroidCallBack : MonoBehaviour {
         }
         else
         {
-            WECHAT_LOGIN_URL = "http://fkmpay.51v.cn/api/mlogin/WechatLogin";
+            WECHAT_LOGIN_URL = "http://fkmpay.51v.cn/mlogin/WechatLogin";
         }
         var wwwForm = new WWWForm();
         wwwForm.AddField("gameId", "210");
@@ -50,9 +50,9 @@ public class AndroidCallBack : MonoBehaviour {
             LogUtil.Log(data);
          
             var jsonData = JsonMapper.ToObject(data);
-            var code = (int)jsonData["data"]["code"];
-            var name = (string)jsonData["data"]["name"];
-            var expand = (string)jsonData["data"]["expand"];
+            var code = (int)jsonData["code"];
+            var name = (string)jsonData["name"];
+            var expand = (string)jsonData["expand"]["unionid"];
             if (code != 1)
             {
                 LogUtil.Log("微信登录web返回失败");
