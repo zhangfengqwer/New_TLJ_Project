@@ -48,6 +48,7 @@ public class LoginScript : MonoBehaviour
     private void Awake()
     {
         OtherData.s_channelName = PlatformHelper.GetChannelName();
+        //OtherData.s_channelName = "ios";
         OtherData.s_loginScript = this;
     }
 

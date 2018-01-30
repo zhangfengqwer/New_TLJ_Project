@@ -34,7 +34,7 @@ public class LoginServiceSocket : MonoBehaviour {
         s_instance = this.GetComponent<LoginServiceSocket>();
 
         m_socketUtil = new SocketUtil();
-        m_socketUtil.init(NetConfig.s_loginService_ip, NetConfig.s_loginService_port);
+        m_socketUtil.init(NetConfig.s_loginService_ip, NetConfig.s_loginService_yuming, NetConfig.s_loginService_port);
 
         m_socketUtil.setOnSocketEvent_Connect(onSocketConnect);
         m_socketUtil.setOnSocketEvent_Receive(onSocketReceive);
