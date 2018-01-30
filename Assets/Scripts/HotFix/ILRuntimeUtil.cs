@@ -31,6 +31,8 @@ public class ILRuntimeUtil : MonoBehaviour
 
     public void downDll(string url)
     {
+        LogUtil.Log("dll下载地址：" + url);
+
         m_url = url;
         if (s_appdomain == null)
         {
