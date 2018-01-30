@@ -28,6 +28,9 @@ public class UnityWebReqUtil:MonoBehaviour
 
     public void Get(string url, CallBack callback)
     {
+        // 防止缓存
+        url += ("?" + CommonUtil.getCurTime());
+
         StartCoroutine(DoGet(url, callback));
     }
 
