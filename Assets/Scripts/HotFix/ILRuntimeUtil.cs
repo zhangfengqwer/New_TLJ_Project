@@ -10,6 +10,7 @@ public class ILRuntimeUtil : MonoBehaviour
 {
     static ILRuntimeUtil s_instance = null;
     static ILRuntime.Runtime.Enviorment.AppDomain s_appdomain = null;
+    public string m_url = "";
 
     static List<string> s_funcList = new List<string>();
 
@@ -30,6 +31,7 @@ public class ILRuntimeUtil : MonoBehaviour
 
     public void downDll(string url)
     {
+        m_url = url;
         if (s_appdomain == null)
         {
             s_appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
@@ -47,19 +49,38 @@ public class ILRuntimeUtil : MonoBehaviour
             yield return null;
         }
 
-        if (!string.IsNullOrEmpty(www.error))
+        try
         {
-            UnityEngine.Debug.LogError(www.error);
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                UnityEngine.Debug.LogError(www.error);
+            }
+
+            byte[] dll = www.bytes;
+            www.Dispose();
+
+            using (System.IO.MemoryStream fs = new MemoryStream(dll))
+            s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+
+            InitializeILRuntime();
+            OnHotFixLoaded();
         }
+        catch (Exception ex)
+        {
+            LogUtil.Log("LoadHotFixAssembly异常：" + ex);
 
-        byte[] dll = www.bytes;
-        www.Dispose();
-        
-        using (System.IO.MemoryStream fs = new MemoryStream(dll))
-        s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+            NetLoading.getInstance().Close();
 
-        InitializeILRuntime();
-        OnHotFixLoaded();
+            NetErrorPanelScript.getInstance().Show();
+            NetErrorPanelScript.getInstance().setOnClickButton(onClickDownDll);
+            NetErrorPanelScript.getInstance().setContentText("获取文件失败，请重新获取");
+        }
+    }
+
+    void onClickDownDll()
+    {
+        NetLoading.getInstance().Show();
+        downDll(m_url);
     }
 
     void InitializeILRuntime()
