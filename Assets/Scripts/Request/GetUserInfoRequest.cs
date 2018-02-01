@@ -62,20 +62,20 @@ public class GetUserInfoRequest : Request
         }
 
         JsonData jsonData = JsonMapper.ToObject(data);
-        var code = (int) jsonData["code"];
-        if (code == (int) Consts.Code.Code_OK)
+        var code = (int)jsonData["code"];
+        if (code == (int)Consts.Code.Code_OK)
         {
             try
             {
-                UserData.name = (string) jsonData["name"];
-                UserData.phone = (string) jsonData["phone"];
+                UserData.name = (string)jsonData["name"];
+                UserData.phone = (string)jsonData["phone"];
                 UserData.head = "Sprites/Head/head_" + jsonData["head"];
-                UserData.gold = (int) jsonData["gold"];
-                UserData.yuanbao = (int) jsonData["yuanbao"];
-                UserData.medal = (int) jsonData["medal"];
-                UserData.IsRealName = (bool) jsonData["isRealName"];
-                UserData.isSetSecondPsw = (bool) jsonData["isSetSecondPsw"];
-                UserData.rechargeVip = (int) jsonData["recharge_vip"];
+                UserData.gold = (int)jsonData["gold"];
+                UserData.yuanbao = (int)jsonData["yuanbao"];
+                UserData.medal = (int)jsonData["medal"];
+                UserData.IsRealName = (bool)jsonData["isRealName"];
+                UserData.isSetSecondPsw = (bool)jsonData["isSetSecondPsw"];
+                UserData.rechargeVip = (int)jsonData["recharge_vip"];
                 UserData.vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
                 UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());
                 UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
@@ -94,4 +94,5 @@ public class GetUserInfoRequest : Request
             LogUtil.Log("用户信息数据错误：" + code);
         }
     }
+
 }
