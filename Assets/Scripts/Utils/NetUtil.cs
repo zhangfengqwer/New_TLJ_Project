@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-class NetListen
+public class NetListen
 {
     virtual public void onNetListen(string tag , string data) {}
     virtual public void onNetListen(string data) { }
@@ -14,7 +14,7 @@ class NetListen
     virtual public void onNetListenError(string tag) { }
 }
 
-class ReqParameter:Object
+public class ReqParameter :Object
 {
     public NetListen m_netListen;
     public string m_tag;
@@ -28,14 +28,14 @@ class ReqParameter:Object
     }
 }
 
-class NetUtil
+public class NetUtil
 {
-    static NetUtil s_netUtil = null;
+    public static NetUtil s_netUtil = null;
 
     //IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-    IPAddress ipAddress = IPAddress.Parse("10.224.5.62");
-    int ipPort = 10001;
-    IPEndPoint iPEndPoint;
+    public IPAddress ipAddress = IPAddress.Parse("10.224.5.62");
+    public int ipPort = 10001;
+    public IPEndPoint iPEndPoint;
 
     public static NetUtil getInstance()
     {
@@ -49,12 +49,26 @@ class NetUtil
 
     public void reqNet(NetListen netListen, string tag, string reqData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetUtil_hotfix", "reqNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetUtil_hotfix", "reqNet", null, netListen, tag, reqData);
+            return;
+        }
+
         Thread t1 = new Thread(new ParameterizedThreadStart(ReqServer));
         t1.Start(new ReqParameter(netListen , tag , reqData));
     }
 
-    void ReqServer(object reqData)
+    public void ReqServer(object reqData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetUtil_hotfix", "ReqServer"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetUtil_hotfix", "ReqServer", null, reqData);
+            return;
+        }
+
         ReqParameter reqParameter = (ReqParameter)reqData;
 
         try
@@ -92,15 +106,28 @@ class NetUtil
         }
     }
 
-    void sendmessage(Socket socket, string sendData)
+    public void sendmessage(Socket socket, string sendData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetUtil_hotfix", "sendmessage"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetUtil_hotfix", "sendmessage", null, socket, sendData);
+            return;
+        }
+
         byte[] bytes = new byte[1024];
         bytes = Encoding.ASCII.GetBytes(sendData);
         socket.Send(bytes);
     }
 
-    string receive(Socket socket)
+    public string receive(Socket socket)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetUtil_hotfix", "receive"))
+        {
+            return (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetUtil_hotfix", "receive", null, socket);
+        }
+
         byte[] rece = new byte[1024];
         int recelong = socket.Receive(rece, rece.Length, 0);
         string reces = Encoding.ASCII.GetString(rece, 0, recelong);

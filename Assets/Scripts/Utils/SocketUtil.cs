@@ -59,6 +59,13 @@ public class SocketUtil
 
     public void init(string ip,string yuming, int port)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "init"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "init", null, ip, yuming, port);
+            return;
+        }
+
         try
         {
             m_ipAddress = IPAddress.Parse(ip);
@@ -73,6 +80,13 @@ public class SocketUtil
 
     public void start()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "start", null, null);
+            return;
+        }
+
         if (!checkSocketIsInit())
         {
             return;
@@ -91,6 +105,13 @@ public class SocketUtil
 
     public void stop()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "stop"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "stop", null, null);
+            return;
+        }
+
         if (!checkSocketIsInit())
         {
             return;
@@ -120,6 +141,13 @@ public class SocketUtil
 
     public void CreateConnectionInThread()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "CreateConnectionInThread"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "CreateConnectionInThread", null, null);
+            return;
+        }
+
         try
         {
             IPAddress ip;
@@ -212,6 +240,13 @@ public class SocketUtil
 
     public void sendMessage(string sendData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "sendMessage"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "sendMessage", null, sendData);
+            return;
+        }
+
         if (!checkSocketIsInit())
         {
             return;
@@ -257,6 +292,13 @@ public class SocketUtil
 
     public void StartReceive()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "StartReceive"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "StartReceive", null, null);
+            return;
+        }
+
         string result = null;
         bool isEnd = true;
         ushort size = 0;
@@ -370,6 +412,12 @@ public class SocketUtil
 
     public bool checkSocketIsInit()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("SocketUtil_hotfix", "checkSocketIsInit"))
+        {
+            return (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.SocketUtil_hotfix", "checkSocketIsInit", null, null);
+        }
+
         if (m_ipAddress == null || m_ipPort == 0)
         {
             LogUtil.Log("SocketUtil----没有设置IP和端口");

@@ -918,6 +918,13 @@ public class LoginScript : MonoBehaviour
 
     public void onSocketReceive(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onSocketReceive"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onSocketReceive", null, data);
+            return;
+        }
+
         //LogUtil.Log("收到服务器消息:" + data);
 
         onReceive(data);
@@ -925,6 +932,13 @@ public class LoginScript : MonoBehaviour
 
     public void onSocketClose()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onSocketClose"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onSocketClose", null, null);
+            return;
+        }
+
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
         NetErrorPanelScript.getInstance().Show();
@@ -934,6 +948,13 @@ public class LoginScript : MonoBehaviour
 
     public void onSocketStop()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onSocketStop"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onSocketStop", null, null);
+            return;
+        }
+
         //LogUtil.Log("主动与服务器断开连接");
 
         NetErrorPanelScript.getInstance().Show();
@@ -944,6 +965,13 @@ public class LoginScript : MonoBehaviour
     // 点击网络断开弹框中的重连按钮
     public void onClickChongLian()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onClickChongLian"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onClickChongLian", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
         LoginServiceSocket.s_instance.startConnect();
@@ -951,6 +979,13 @@ public class LoginScript : MonoBehaviour
 
     public void OnClickXieYi()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "OnClickXieYi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "OnClickXieYi", null, null);
+            return;
+        }
+
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Panel/UserAgreeMentPanel"),
             GameObject.Find("Canvas_Middle").transform);
     }
@@ -958,6 +993,13 @@ public class LoginScript : MonoBehaviour
     //--------------------------------------------------------------------------------------------------
     public void onPauseCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onPauseCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onPauseCallBack", null, null);
+            return;
+        }
+
         //LoginServiceSocket.s_instance.Stop();
         //LogicEnginerScript.Instance.Stop();
         //PlayServiceSocket.s_instance.Stop();
@@ -965,6 +1007,13 @@ public class LoginScript : MonoBehaviour
 
     public void onResumeCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "onResumeCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "onResumeCallBack", null, null);
+            return;
+        }
+
         //NetErrorPanelScript.getInstance().Show();
         //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian);
         //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，请重新连接");

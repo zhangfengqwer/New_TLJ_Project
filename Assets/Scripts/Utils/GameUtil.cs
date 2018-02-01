@@ -194,12 +194,12 @@ public class GameUtil
     /*
      * 101:1000
      */
-    static public void changeData(string reward)
+    static public void changeDataWithStr(string reward)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "changeData"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "changeDataWithStr"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "changeData", null, reward);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "changeDataWithStr", null, reward);
             return;
         }
 
