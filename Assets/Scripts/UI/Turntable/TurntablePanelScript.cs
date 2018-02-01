@@ -63,11 +63,16 @@ public class TurntablePanelScript : MonoBehaviour
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().OnRequest();
         }
 
-        InvokeRepeating("onInvokeDeng",0.5f,0.5f);
+        startPaoMaDeng();
     }
 
     private void Update()
     {
+    }
+
+    public void startPaoMaDeng()
+    {
+        InvokeRepeating("onInvokeDeng", 0.5f, 0.5f);
     }
 
     public void onInvokeDeng()
@@ -224,7 +229,7 @@ public class TurntablePanelScript : MonoBehaviour
                             string reward = TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward;
 
                             // 加到内存
-                            GameUtil.changeData(reward);
+                            GameUtil.changeDataWithStr(reward);
 
                             // 显示奖励
                             ShowRewardPanelScript.Show(reward,true);
@@ -242,12 +247,17 @@ public class TurntablePanelScript : MonoBehaviour
             }
 
             GameUtil.showGameObject(m_image_add1.gameObject);
-            Invoke("onInvokeAdd1",2.0f);
+            startAdd1();
         }
         else
         {
             ToastScript.createToast("使用失败");
         }
+    }
+
+    public void startAdd1()
+    {
+        Invoke("onInvokeAdd1", 2.0f);
     }
 
     public void onReceive_TurntableBroadcast(string data)

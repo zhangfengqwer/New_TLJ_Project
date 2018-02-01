@@ -149,21 +149,47 @@ public class MainScript : MonoBehaviour
 
     public GameObject getLogicEnginerObj()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "getLogicEnginerObj"))
+        {
+            return (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "getLogicEnginerObj", null, null);
+        }
+
         return logicEnginer;
     }
 
     public void setLogicEnginerObj(GameObject obj)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "setLogicEnginerObj"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "setLogicEnginerObj", null, obj);
+            return;
+        }
+
         logicEnginer = obj;
     }
 
     public GameObject getPlayEnginerObj()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "getPlayEnginerObj"))
+        {
+            return (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "getPlayEnginerObj", null, null);
+        }
+
         return playEnginer;
     }
 
     public void setPlayEnginerObj(GameObject obj)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "setPlayEnginerObj"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "setPlayEnginerObj", null, obj);
+            return;
+        }
+
         playEnginer = obj;
     }
 
@@ -204,8 +230,15 @@ public class MainScript : MonoBehaviour
 
     void OnDestroy()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "OnDestroy"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "OnDestroy", null, null);
+            return;
+        }
+
         OtherData.s_mainScript = null;
-//        LogicEnginerScript.Instance.m_socketUtil.stop();
+        //LogicEnginerScript.Instance.m_socketUtil.stop();
         //PlayServiceSocket.getInstance().Stop();
     }
 
@@ -709,7 +742,7 @@ public class MainScript : MonoBehaviour
             int todayCount = (int)jd["todayCount"];
             int goldNum = (int)jd["goldNum"];
 
-            GameUtil.changeData("1:" + goldNum);
+            GameUtil.changeDataWithStr("1:" + goldNum);
 
             if (todayCount == 1)
             {
@@ -1068,6 +1101,13 @@ public class MainScript : MonoBehaviour
 
     public void onSocketConnect_Logic(bool result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onSocketConnect_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onSocketConnect_Logic", null, result);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         if (result)
@@ -1106,6 +1146,13 @@ public class MainScript : MonoBehaviour
 
     public void onSocketClose_Logic()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onSocketClose_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onSocketClose_Logic", null, null);
+            return;
+        }
+
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
         NetErrorPanelScript.getInstance().Show();
@@ -1115,6 +1162,13 @@ public class MainScript : MonoBehaviour
 
     public void onSocketStop_Logic()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onSocketStop_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onSocketStop_Logic", null, null);
+            return;
+        }
+
         //LogUtil.Log("主动与服务器断开连接");
 
         NetErrorPanelScript.getInstance().Show();
@@ -1125,6 +1179,13 @@ public class MainScript : MonoBehaviour
     // 点击网络断开弹框中的重连按钮
     public void onClickChongLian_Logic()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickChongLian_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickChongLian_Logic", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
         LogicEnginerScript.Instance.startConnect();
@@ -1135,6 +1196,13 @@ public class MainScript : MonoBehaviour
 
     public void onSocketConnect_Play(bool result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onSocketConnect_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onSocketConnect_Play", null, result);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         if (result)
@@ -1161,6 +1229,13 @@ public class MainScript : MonoBehaviour
 
     public void onSocketClose_Play()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onSocketClose_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onSocketClose_Play", null, null);
+            return;
+        }
+
         //LogUtil.Log("被动与服务器断开连接,尝试重新连接");
 
         if (m_waitMatchPanel != null)
@@ -1176,6 +1251,13 @@ public class MainScript : MonoBehaviour
 
     public void onSocketStop_Play()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onSocketStop_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onSocketStop_Play", null, null);
+            return;
+        }
+
         //LogUtil.Log("主动与服务器断开连接");
 
         if (m_waitMatchPanel != null)
@@ -1192,6 +1274,13 @@ public class MainScript : MonoBehaviour
     // 点击网络断开弹框中的重连按钮
     public void onClickChongLian_Play()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickChongLian_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickChongLian_Play", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
         PlayServiceSocket.s_instance.startConnect();
@@ -1200,12 +1289,26 @@ public class MainScript : MonoBehaviour
     //--------------------------------------------------------------------------------------------------
     public void onPauseCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onPauseCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onPauseCallBack", null, null);
+            return;
+        }
+
         //LogicEnginerScript.Instance.Stop();
         //PlayServiceSocket.s_instance.Stop();
     }
 
     public void onResumeCallBack()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onResumeCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onResumeCallBack", null, null);
+            return;
+        }
+
         //if (m_waitMatchPanel != null)
         //{
         //    Destroy(m_waitMatchPanel);

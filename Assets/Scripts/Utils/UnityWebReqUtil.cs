@@ -28,13 +28,20 @@ public class UnityWebReqUtil:MonoBehaviour
 
     public void Get(string url, CallBack callback)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("UnityWebReqUtil_hotfix", "Get"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UnityWebReqUtil_hotfix", "Get", null, url, callback);
+            return;
+        }
+
         // 防止缓存
         url += ("?" + CommonUtil.getCurTime());
 
         StartCoroutine(DoGet(url, callback));
     }
 
-    IEnumerator DoGet(string url, CallBack callback)
+    public IEnumerator DoGet(string url, CallBack callback)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {

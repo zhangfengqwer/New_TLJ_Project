@@ -51,6 +51,13 @@ public class NetErrorPanelScript : MonoBehaviour
 
     public void Close()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetErrorPanelScript_hotfix", "Close"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetErrorPanelScript_hotfix", "Close", null, null);
+            return;
+        }
+
         if (s_netErrorPanel != null)
         {
             Destroy(s_netErrorPanel);

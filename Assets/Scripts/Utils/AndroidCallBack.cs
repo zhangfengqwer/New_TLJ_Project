@@ -32,6 +32,13 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void WeChatLogin_IOS(string result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "WeChatLogin_IOS"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "WeChatLogin_IOS", null, result);
+            return;
+        }
+
         if (OtherData.s_isTest)
         {
             WECHAT_LOGIN_URL = "http://mapi.javgame.com:14123/mlogin/WechatLogin";
@@ -72,6 +79,13 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void qqLogin_IOS(string result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "qqLogin_IOS"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "qqLogin_IOS", null, result);
+            return;
+        }
+
         LogUtil.Log("收到iosqq登录回调:" + result);
         var jsonData = JsonMapper.ToObject(result);
         var accessToken = jsonData["accessToken"].ToString();
@@ -97,12 +111,26 @@ public class AndroidCallBack : MonoBehaviour {
     // apk版本号
     public void SetVersionCode(string apkVersion)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "SetVersionCode"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "SetVersionCode", null, apkVersion);
+            return;
+        }
+
         OtherData.s_apkVersion = apkVersion;
     }
 
     // log开关
     public void SetLogIsShow(string isShow)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "SetLogIsShow"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "SetLogIsShow", null, isShow);
+            return;
+        }
+
         //显示log
         if ("0".Equals(isShow))
         {
@@ -119,6 +147,13 @@ public class AndroidCallBack : MonoBehaviour {
     // 身是否是测试包
     public void SetIsTest(string isTest)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "SetIsTest"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "SetIsTest", null, isTest);
+            return;
+        }
+
         //正式包
         if ("0".Equals(isTest))
         {
@@ -133,6 +168,13 @@ public class AndroidCallBack : MonoBehaviour {
     // 回到后台
     public void OnPauseCallBack(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "OnPauseCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "OnPauseCallBack", null, data);
+            return;
+        }
+
         if (s_onPauseCallBack != null)
         {
             s_onPauseCallBack();
@@ -142,6 +184,13 @@ public class AndroidCallBack : MonoBehaviour {
     // 回到前台
     public void OnResumeCallBack(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "OnResumeCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "OnResumeCallBack", null, data);
+            return;
+        }
+
         if (OtherData.s_isFirstOpenGame)
         {
             OtherData.s_isFirstOpenGame = false;
@@ -159,6 +208,13 @@ public class AndroidCallBack : MonoBehaviour {
     // 分享成功
     public void OnShareSuccess(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "OnShareSuccess"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "OnShareSuccess", null, data);
+            return;
+        }
+
         LogicEnginerScript.Instance.reqCompleteShare();
         LogicEnginerScript.Instance.GetComponent<GetTaskRequest>().OnRequest();
     }
@@ -166,6 +222,13 @@ public class AndroidCallBack : MonoBehaviour {
     // 登录结果回调
     public void GetLoginResult(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "GetLoginResult"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "GetLoginResult", null, data);
+            return;
+        }
+
         LogUtil.Log("Unity收到:" + data);
         try
         {
@@ -191,16 +254,37 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void GetPayResult(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "GetPayResult"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "GetPayResult", null, data);
+            return;
+        }
+
         LogUtil.Log("Unity收到支付回调:" + data);
     }
 
     public void Back2Login(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "Back2Login"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "Back2Login", null, data);
+            return;
+        }
+
         SetScript.Instance.OnClickChangeAccount();
     }
 
     public void OnIOSPaySuccess(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "OnIOSPaySuccess"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "OnIOSPaySuccess", null, data);
+            return;
+        }
+
         LogUtil.Log("Unity收到IOS支付回调:" + data);
         var strings = data.Split('|');
         string productId = strings[0];
@@ -222,11 +306,25 @@ public class AndroidCallBack : MonoBehaviour {
 
     public void ShowLoad(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "ShowLoad"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "ShowLoad", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Show();
     }
 
     public void CloseLoad(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("AndroidCallBack_hotfix", "CloseLoad"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.AndroidCallBack_hotfix", "CloseLoad", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
     }
 

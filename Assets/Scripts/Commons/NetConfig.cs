@@ -40,6 +40,13 @@ public class NetConfig
 
     public static void httpCallBack(string tag, string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetConfig_hotfix", "httpCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetConfig_hotfix", "httpCallBack", null, tag, data);
+            return;
+        }
+
         try
         {
             // 读取配置文件

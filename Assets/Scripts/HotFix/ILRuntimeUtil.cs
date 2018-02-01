@@ -127,6 +127,13 @@ public class ILRuntimeUtil : MonoBehaviour
             });
         });
 
+        s_appdomain.DelegateManager.RegisterDelegateConvertor<DG.Tweening.TweenCallback>((act) =>
+        {
+            return new DG.Tweening.TweenCallback(() =>
+            {
+                ((Action)act)();
+            });
+        });
     }
 
     void OnHotFixLoaded()

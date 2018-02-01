@@ -7,6 +7,7 @@ public class NetLoading : MonoBehaviour {
 
     public static NetLoading s_instance = null;
     public GameObject s_loadingPanel = null;
+    public int m_showTime = 10;
 
     public static NetLoading getInstance()
     {
@@ -40,11 +41,30 @@ public class NetLoading : MonoBehaviour {
         GameObject prefab = Resources.Load("Prefabs/Commons/LoadingPanel") as GameObject;
         s_loadingPanel = GameObject.Instantiate(prefab, GameObject.Find("Canvas_High").transform);
 
-        Invoke("onInvoke",10);
+        startTimer();
+    }
+
+    public void startTimer()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading_hotfix", "startTimer"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading_hotfix", "startTimer", null, null);
+            return;
+        }
+
+        Invoke("onInvoke", m_showTime);
     }
 
     public void Close()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NetLoading_hotfix", "Close"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NetLoading_hotfix", "Close", null, null);
+            return;
+        }
+
         if (s_loadingPanel != null)
         {
             Destroy(s_loadingPanel);
