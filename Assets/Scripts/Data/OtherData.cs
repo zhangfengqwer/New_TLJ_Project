@@ -25,6 +25,7 @@ public class OtherData
     public static bool s_canDebug = false;
     public static bool s_hasCheckSecondPSW = false;
     public static bool s_canRecharge = false; // 是否开放充值
+    public static bool s_hasShouChong = false;
 
     public static Vector2 s_screenSize;
 

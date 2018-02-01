@@ -81,7 +81,7 @@ public class GetUserInfoRequest : Request
                 UserData.buffData = JsonMapper.ToObject<List<BuffData>>(jsonData["BuffData"].ToString());
                 UserData.userRecharge = JsonMapper.ToObject<List<UserRecharge>>(jsonData["userRecharge"].ToString());
                 UserData.myTurntableData = JsonMapper.ToObject<MyTurntableData>(jsonData["turntableData"].ToString());
-                OtherData_hotfix.s_hasShouChong = (bool)jsonData["hasShouChong"];
+                OtherData.s_hasShouChong = (bool)jsonData["hasShouChong"];
             }
             catch (Exception e)
             {

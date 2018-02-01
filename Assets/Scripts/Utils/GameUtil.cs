@@ -225,6 +225,7 @@ public class GameUtil
             return;
         }
 
+        LogUtil.Log("changeData---" + id + "  " + num);
         if (id == 1)
         {
             UserData.gold += num;
@@ -259,10 +260,13 @@ public class GameUtil
         }
         else
         {
+            bool isFind = false;
             for (int i = 0; i < UserData.propData.Count; i++)
             {
                 if (UserData.propData[i].prop_id == id)
                 {
+                    isFind = true;
+
                     UserData.propData[i].prop_num += num;
 
                     if (UserData.propData[i].prop_num <= 0)
@@ -271,6 +275,22 @@ public class GameUtil
                     }
 
                     break;
+                }
+            }
+
+            if (!isFind)
+            {
+                LogUtil.Log("新增物品");
+                PropInfo propInfo = PropData.getInstance().getPropInfoById(id);
+                if (propInfo != null)
+                {
+                    UserPropData userPropData = new UserPropData();
+                    userPropData.prop_id = id;
+                    userPropData.prop_num = num;
+                    userPropData.prop_name = propInfo.m_name;
+                    userPropData.prop_icon = propInfo.m_icon;
+
+                    UserData.propData.Add(userPropData);
                 }
             }
 

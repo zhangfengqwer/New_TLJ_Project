@@ -309,6 +309,12 @@ public class MainScript : MonoBehaviour
             CommonUtil.setImageSprite(m_nickName_bg, "Sprites/Common/vipname_bg");
         }
 
+        // 首冲
+        if (OtherData.s_hasShouChong)
+        {
+            GameObject.Find("Canvas").transform.Find("ButtonList").Find("shouchong").localScale = new Vector3(0, 0, 0);
+        }
+
         checkRedPoint();
         
         NetLoading.getInstance().Close();
