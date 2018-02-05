@@ -21,7 +21,7 @@ public class OtherData
 
     public static bool s_isFromSetToLogin = false;
     public static bool s_isFirstOpenGame = true;
-    public static bool s_isTest = false;
+    public static bool s_isTest = true;
     public static bool s_canDebug = false;
     public static bool s_hasCheckSecondPSW = false;
     public static bool s_canRecharge = false; // 是否开放充值
@@ -87,7 +87,8 @@ public class OtherData
     public static WaitMatchPanelScript s_waitMatchPanelScript = null;
     public static WaitOtherPlayerScript s_waitOtherPlayerScript = null;
     public static WeeklySignScript s_weeklySignScript = null;
-    
+    public static OldPlayerBindPanelScript s_oldPlayerBindPanelScript = null;
+
     public static string getWebUrl()
     {
         // 优先使用热更新的代码

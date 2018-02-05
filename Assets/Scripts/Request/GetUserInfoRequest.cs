@@ -75,6 +75,7 @@ public class GetUserInfoRequest : Request
                 UserData.medal = (int)jsonData["medal"];
                 UserData.IsRealName = (bool)jsonData["isRealName"];
                 UserData.isSetSecondPsw = (bool)jsonData["isSetSecondPsw"];
+                //UserData.isOldPlayerBind = (bool)jsonData["isOldPlayerBind"];
                 UserData.rechargeVip = (int)jsonData["recharge_vip"];
                 UserData.vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
                 UserData.gameData = JsonMapper.ToObject<UserGameData>(jsonData["gameData"].ToString());

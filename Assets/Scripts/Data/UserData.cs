@@ -13,6 +13,7 @@ public class UserData  {
     public static int vipLevel { set; get; }
     public static bool IsRealName { set; get; }
     public static bool isSetSecondPsw { set; get; }
+    public static bool isOldPlayerBind { set; get; }
     public static UserGameData gameData { set; get; }
     public static List<UserPropData> propData = new List<UserPropData>();
     public static List<BuffData> buffData = new List<BuffData>();
