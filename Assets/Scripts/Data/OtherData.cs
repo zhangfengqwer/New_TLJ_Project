@@ -21,7 +21,7 @@ public class OtherData
 
     public static bool s_isFromSetToLogin = false;
     public static bool s_isFirstOpenGame = true;
-    public static bool s_isTest = true;
+    public static bool s_isTest = false;
     public static bool s_canDebug = false;
     public static bool s_hasCheckSecondPSW = false;
     public static bool s_canRecharge = false; // 是否开放充值
@@ -96,6 +96,16 @@ public class OtherData
         {
             string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherData_hotfix", "getWebUrl", null, null);
             return s;
+        }
+
+        //正式包
+        if ("0".Equals(PlatformHelper.getIsTest()))
+        {
+            s_isTest = false;
+        }
+        else
+        {
+            s_isTest = true;
         }
 
         if (s_isTest)

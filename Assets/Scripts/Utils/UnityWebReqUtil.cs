@@ -38,6 +38,8 @@ public class UnityWebReqUtil:MonoBehaviour
         // 防止缓存
         url += ("?" + CommonUtil.getCurTime());
 
+        LogUtil.Log("web请求：" + url);
+
         StartCoroutine(DoGet(url, callback));
     }
 

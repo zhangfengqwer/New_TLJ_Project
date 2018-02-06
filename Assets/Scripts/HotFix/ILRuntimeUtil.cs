@@ -133,7 +133,8 @@ public class ILRuntimeUtil : MonoBehaviour
             {
                 ((Action)act)();
             });
-        });
+        });
+
     }
 
     void OnHotFixLoaded()
