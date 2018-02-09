@@ -773,6 +773,11 @@ public class PlatformHelper
     {
         return false;
     }
+
+    public static string GetMacId()
+    {
+        return "1";
+    }
 }
 
 #else
