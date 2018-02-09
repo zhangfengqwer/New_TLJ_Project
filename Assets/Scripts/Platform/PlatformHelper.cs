@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
+using LitJson;
 
 
 #if UNITY_EDITOR
@@ -293,6 +294,11 @@ public class PlatformHelper
     {
         return false;
     }
+
+    public static string GetMacId()
+    {
+        return "1";
+    }
 }
 #elif UNITY_ANDROID /// <summary>
 /// 控制所有对本地化的调用 （除了MallAndroidHelper ，因为MallAndroidHelper 对本地调用比较多而且复杂 。所有Android 调用会调 UnityHelper 类 。
@@ -328,6 +334,11 @@ public class PlatformHelper
     public static string GetUniqueIdentifier() 
     {
         return "";
+    }
+    
+    public static string GetMacId()
+    {
+        return GetJC().CallStatic<string>("getUniqueId");;
     }
 
     /// <summary>

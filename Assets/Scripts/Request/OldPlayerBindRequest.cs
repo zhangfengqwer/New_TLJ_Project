@@ -44,6 +44,7 @@ public class OldPlayerBindRequest : Request
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
         jsonData["old_uid"] = m_oldUid;
+        jsonData["machine_id"] = PlatformHelper.GetMacId();
         jsonData["from"] = OtherData.s_channelName;
 
         string requestData = jsonData.ToJson();
