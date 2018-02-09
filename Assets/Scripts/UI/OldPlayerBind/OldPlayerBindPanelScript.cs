@@ -78,6 +78,8 @@ public class OldPlayerBindPanelScript : MonoBehaviour
             ToastScript.createToast("绑定成功，请去邮箱领取奖励");
             
             LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
+
+            Destroy(gameObject);
         }
         else if (code == (int)Consts.Code.Code_OldPlayerUidIsNotExist)
         {
