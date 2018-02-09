@@ -76,7 +76,8 @@ public class OldPlayerBindPanelScript : MonoBehaviour
         if (code == (int)Consts.Code.Code_OK)
         {
             ToastScript.createToast("绑定成功，请去邮箱领取奖励");
-            // 小红点点亮
+            
+            LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
         }
         else if (code == (int)Consts.Code.Code_OldPlayerUidIsNotExist)
         {
@@ -88,7 +89,11 @@ public class OldPlayerBindPanelScript : MonoBehaviour
         }
         else if (code == (int)Consts.Code.Code_TheUidIsBind)
         {
-            ToastScript.createToast("您已经绑定过，不可重复绑定");
+            ToastScript.createToast("您的账号已经绑定过，不可重复绑定");
+        }
+        else if (code == (int)Consts.Code.Code_ThePhoneIsBindOldUid)
+        {
+            ToastScript.createToast("您的手机已绑定过，不可重复绑定");
         }
         else
         {
