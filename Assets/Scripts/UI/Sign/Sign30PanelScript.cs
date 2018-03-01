@@ -113,7 +113,6 @@ public class Sign30PanelScript : MonoBehaviour {
             if ((i + 1) == CommonUtil.getCurDay())
             {
                 // 当天的方块专门设置一个颜色
-                //CommonUtil.setImageSprite(obj.GetComponent<Image>(), "Sprites/Sign30/item_choice_reward");
                 CommonUtil.setImageColor(obj.GetComponent<Image>(), 255, 253, 113);
 
                 setBtnSignState(CommonUtil.getCurDay());
@@ -345,6 +344,7 @@ public class Sign30PanelScript : MonoBehaviour {
         {
             if (Sign30Data.getInstance().getSign30DataContentList()[i].type == 1)
             {
+                // 选中的那天的方块设置专门的颜色
                 if (Sign30Data.getInstance().getSign30DataContentList()[i].day == day)
                 {
                     CommonUtil.setImageColor(transform.Find("Image_bg/" + i.ToString()).GetComponent<Image>(), 255, 253, 113);
