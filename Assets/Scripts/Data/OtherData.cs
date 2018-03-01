@@ -88,6 +88,8 @@ public class OtherData
     public static WaitOtherPlayerScript s_waitOtherPlayerScript = null;
     public static WeeklySignScript s_weeklySignScript = null;
     public static OldPlayerBindPanelScript s_oldPlayerBindPanelScript = null;
+    public static Sign30PanelScript s_sign30PanelScript = null;
+    public static Sign30LeiJiPanelScript s_sign30LeiJiPanelScript = null;
 
     public static string getWebUrl()
     {

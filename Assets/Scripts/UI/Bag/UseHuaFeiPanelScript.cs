@@ -9,7 +9,10 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     public InputField m_inputField_phone;
 
     public PropInfo m_propInfo = null;
+    public Text m_text_time;
+    public Button m_btn_queren;
 
+    public int m_shengyuTime = 0;
 
     public static GameObject create(PropInfo propInfo)
     {
@@ -29,6 +32,42 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.UseHuaFeiPanelScript_hotfix", "Start", null, null);
             return;
+        }
+
+        // 保存当前充值时间
+        {
+            string beforeTime = PlayerPrefs.GetString("beforeChongZhiHuaFeiTime", "2018-2-27 0:0:0");
+            string nowtime = CommonUtil.getCurYear() + "-" + CommonUtil.getCurMonth() + "-" + CommonUtil.getCurDay() + " " +
+                          CommonUtil.getCurHour() + ":" + CommonUtil.getCurMinute() + ":" + CommonUtil.getCurSecond();
+
+            
+            int seconds = CommonUtil.miaoshucha(beforeTime, nowtime);
+            Debug.Log(seconds);
+            if (seconds < 60)
+            {
+                m_btn_queren.interactable = false;
+
+                m_shengyuTime = (60 - seconds);
+                m_text_time.text = m_shengyuTime.ToString();
+                m_text_time.transform.localScale = new Vector3(1,1,1);
+                InvokeRepeating("onInvokeTime", 1,1);
+            }
+        }
+    }
+
+    public void onInvokeTime()
+    {
+        --m_shengyuTime;
+
+        if (m_shengyuTime >= 0)
+        {
+            m_text_time.text = m_shengyuTime.ToString();
+        }
+        else
+        {
+            m_btn_queren.interactable = true;
+            m_text_time.transform.localScale = new Vector3(0, 0, 0);
+            CancelInvoke("onInvokeTime");
         }
     }
 	
@@ -71,6 +110,14 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
 
         NetLoading.getInstance().Close();
 
+        // 保存当前充值时间
+        {
+            string time = CommonUtil.getCurYear() + "-" + CommonUtil.getCurMonth() + "-" + CommonUtil.getCurDay() + " " +
+                          CommonUtil.getCurHour() + ":" + CommonUtil.getCurMinute() + ":" + CommonUtil.getCurSecond();
+
+            PlayerPrefs.SetString("beforeChongZhiHuaFeiTime", time);
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
         if (code == (int) TLJCommon.Consts.Code.Code_OK)
@@ -82,6 +129,14 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
             if (BagPanelScript.Instance != null)
             {
                 BagPanelScript.Instance.UpdateUI();
+            }
+
+            // 保存当前充值时间
+            {
+                string time = CommonUtil.getCurYear() + "-" + CommonUtil.getCurMonth() + "-" + CommonUtil.getCurDay() + " " +
+                              CommonUtil.getCurHour() + ":" + CommonUtil.getCurMinute() + ":" + CommonUtil.getCurSecond();
+
+                PlayerPrefs.SetString("beforeChongZhiHuaFeiTime",time);
             }
 
             Destroy(gameObject);

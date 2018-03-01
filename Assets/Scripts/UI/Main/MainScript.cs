@@ -96,6 +96,7 @@ public class MainScript : MonoBehaviour
                     LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetSign30RewardRequest>().OnRequest();
                 }
                 else
                 {
@@ -460,7 +461,8 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        WeeklySignScript.create();
+        Sign30PanelScript.create();
+        //WeeklySignScript.create();
     }
 
     public void OnClickInventory()
@@ -1082,7 +1084,7 @@ public class MainScript : MonoBehaviour
 
         // 签到
         {
-            if (!SignData.IsSign)
+            if (!Sign30RecordData.getInstance().todayIsSign())
             {
                 m_sign_redPoint.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1147,6 +1149,7 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetSign30RewardRequest>().OnRequest();
             }
 
             // 检测服务器是否连接

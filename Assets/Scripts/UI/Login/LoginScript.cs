@@ -48,7 +48,7 @@ public class LoginScript : MonoBehaviour
     private void Awake()
     {
         OtherData.s_channelName = PlatformHelper.GetChannelName();
-        //OtherData.s_channelName = "ios";
+        //OtherData.s_channelName = "huawei";
         OtherData.s_loginScript = this;
     }
 
@@ -1076,7 +1076,12 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
-        Invoke("onInvokeHealthPanel", 3);
+        startHealthTimer(0.5f);
+    }
+
+    public void startHealthTimer(float time)
+    {
+        Invoke("onInvokeHealthPanel", time);
     }
 
     public void onDllGetOver()
