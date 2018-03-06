@@ -8,6 +8,7 @@ public class ChannelHelper
         {"qihoo360", "360"},
         {"vivo", "vivo"},
         {"yyb", "应用宝"},
+        {"baidu", "百度"},
     };
 
     public static bool Is3RdLogin()
