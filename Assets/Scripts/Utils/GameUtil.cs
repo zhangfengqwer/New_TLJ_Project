@@ -360,7 +360,11 @@ public class GameUtil
 
         string path = "";
 
-        if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
+        if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_jingdian_common";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
         {
             path = "Sprites/Game/RoomLogo/roomtype_jingdian_xinshou";
         }
@@ -371,6 +375,10 @@ public class GameUtil
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi) == 0)
         {
             path = "Sprites/Game/RoomLogo/roomtype_jingdian_dashi";
+        }
+        else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common) == 0)
+        {
+            path = "Sprites/Game/RoomLogo/roomtype_chaodi_common";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0)
         {
@@ -538,7 +546,11 @@ public class GameUtil
 
         string roonName = "";
 
-        if (gameRoomType.CompareTo("XiuXian_JingDian_ChuJi") == 0)
+        if (gameRoomType.CompareTo("XiuXian_JingDian_Common") == 0)
+        {
+            roonName = "经典玩法";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_JingDian_ChuJi") == 0)
         {
             roonName = "经典玩法-新手场";
         }
@@ -549,6 +561,10 @@ public class GameUtil
         else if (gameRoomType.CompareTo("XiuXian_JingDian_GaoJi") == 0)
         {
             roonName = "经典玩法-大师场";
+        }
+        else if (gameRoomType.CompareTo("XiuXian_ChaoDi_Common") == 0)
+        {
+            roonName = "抄底玩法";
         }
         else if (gameRoomType.CompareTo("XiuXian_ChaoDi_ChuJi") == 0)
         {
@@ -601,5 +617,39 @@ public class GameUtil
         {
             CommonUtil.setFontColor(text, 255, 255, 255);
         }
+    }
+
+    static public int getPropIdFromReward(string reward)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getPropIdFromReward"))
+        {
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getPropIdFromReward", null, reward);
+            return i;
+        }
+
+        List<string> list1 = new List<string>();
+        CommonUtil.splitStr(reward, list1, ':');
+            
+        int prop_id = int.Parse(list1[0]);
+
+        return prop_id;
+    }
+
+    static public int getPropNumFromReward(string reward)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getPropNumFromReward"))
+        {
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getPropNumFromReward", null, reward);
+            return i;
+        }
+
+        List<string> list1 = new List<string>();
+        CommonUtil.splitStr(reward, list1, ':');
+        
+        int prop_num = int.Parse(list1[1]);
+
+        return prop_num;
     }
 }

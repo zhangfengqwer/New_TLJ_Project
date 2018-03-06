@@ -10,6 +10,7 @@ public class Sign30PanelScript : MonoBehaviour {
     public GameObject m_obj_leiji2;
     public GameObject m_obj_leiji3;
     public GameObject m_obj_leiji4;
+
     public Text m_text_lianxuqiandaotianshu;
     public Text m_text_time;
 
@@ -30,7 +31,7 @@ public class Sign30PanelScript : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         OtherData.s_sign30PanelScript = this;
 
@@ -49,11 +50,11 @@ public class Sign30PanelScript : MonoBehaviour {
 
         initUI();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     public void initUI()
     {
@@ -247,7 +248,7 @@ public class Sign30PanelScript : MonoBehaviour {
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(result);
-        
+
         int code = (int)jd["code"];
         int type = (int)jd["type"];
 
@@ -259,7 +260,7 @@ public class Sign30PanelScript : MonoBehaviour {
             // 奖励加到内存
             {
                 List<string> list1 = new List<string>();
-                CommonUtil.splitStr(reward_prop,list1,';');
+                CommonUtil.splitStr(reward_prop, list1, ';');
                 for (int i = 0; i < list1.Count; i++)
                 {
                     List<string> list2 = new List<string>();
@@ -271,8 +272,8 @@ public class Sign30PanelScript : MonoBehaviour {
                     GameUtil.changeData(prop_id, prop_num);
                 }
             }
-            
-            ShowRewardPanelScript.Show(reward_prop,false);
+
+            ShowRewardPanelScript.Show(reward_prop, false);
 
             switch (type)
             {
@@ -307,6 +308,14 @@ public class Sign30PanelScript : MonoBehaviour {
                             obj.transform.Find("Image_yiqian").localScale = new Vector3(1, 1, 1);
                             obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
                         }
+
+                        Destroy(OtherData.s_buQianQueRenPanelScript.gameObject);
+
+                        // 扣除补签费
+                        GameUtil.changeData(1, -OtherData.s_buQianQueRenPanelScript.getBuQianGoldHuaFei());
+
+                        // 增加补签次数
+                        ++Sign30RecordData.getInstance().m_curMonthBuQianCount;
                     }
                     break;
 
@@ -369,6 +378,23 @@ public class Sign30PanelScript : MonoBehaviour {
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Sign30PanelScript_hotfix", "onClickSign", null, null);
             return;
+        }
+
+        // 请求签到
+        {
+            Sign30DataContent temp = Sign30Data.getInstance().getSign30DataById(m_curChoiceId);
+
+            if (temp.type == 1)
+            {
+                // 补签
+                if (temp.day < CommonUtil.getCurDay())
+                {
+                    // 显示补签确认界面
+                    BuQianQueRenPanelScript.create();
+                    
+                    return;
+                }
+            }
         }
 
         reqSign(m_curChoiceId);

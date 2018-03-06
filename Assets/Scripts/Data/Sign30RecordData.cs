@@ -11,6 +11,8 @@ public class Sign30RecordData {
     public List<int> m_sign30RecordList = new List<int>();
     public List<int> m_sign30LeiJiRecordList = new List<int>();
 
+    public int m_curMonthBuQianCount = 0;
+
     public static Sign30RecordData getInstance()
     {
         if (s_instance == null)
@@ -37,6 +39,7 @@ public class Sign30RecordData {
 
             JsonData jsonData = JsonMapper.ToObject(json);
             string record = jsonData["record"].ToString();
+            m_curMonthBuQianCount = (int)jsonData["curMonthBuQianCount"];
 
             List<string> list = new List<string>();
             CommonUtil.splitStr(record, list, ',');
@@ -53,6 +56,9 @@ public class Sign30RecordData {
                     m_sign30LeiJiRecordList.Add(id);
                 }
             }
+
+            // 显示新人推广
+            OtherData.s_mainScript.checkShowNewPlayerTuiGuang();
 
             return true;
         }

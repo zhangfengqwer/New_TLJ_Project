@@ -130,6 +130,20 @@ public class MainScript : MonoBehaviour
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
     }
 
+    // 显示新人推广礼
+    public bool checkShowNewPlayerTuiGuang()
+    {
+        if (PlayerPrefs.GetInt("isShowNewPlayerTuiGuang_" + UserData.uid, 0) == 0)
+        {
+            NewPlayerShowTuiGuangPanelScript.create();
+            PlayerPrefs.SetInt("isShowNewPlayerTuiGuang_" + UserData.uid, 1);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public void startBgm()
     {
         // 3秒后播放背景音乐,每隔55秒重复播放背景音乐
@@ -399,7 +413,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
+        reqIsJoinRoom();
+        //GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
     }
 
     public void onClickChaoDiChang()
@@ -411,7 +427,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common);
+        reqIsJoinRoom();
+        //GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
     }
 
     public void onClickXiuXianChang_back()
@@ -437,7 +455,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        UserInfoScript.create();
+        //UserInfoScript.create();
+        //TuiGuangYouLiPanelScript.create();
+        MedalDuiHuanPanelScript.create();
     }
 
     public void OnClickNotice()
@@ -632,7 +652,7 @@ public class MainScript : MonoBehaviour
         }
 
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi);
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
         SceneManager.LoadScene("GameScene");
     }
 
@@ -744,9 +764,6 @@ public class MainScript : MonoBehaviour
             {
                 ToastScript.createToast("支付失败");
             }
-
-
-
         }
         // 有人使用转盘
         else if (tag.CompareTo(TLJCommon.Consts.Tag_TurntableBroadcast) == 0)

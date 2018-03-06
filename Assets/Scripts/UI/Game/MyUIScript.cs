@@ -11,6 +11,7 @@ public class MyUIScript : MonoBehaviour {
     public Image m_imageZhuangJiaIcon;
     public Image m_imageZhuanVipLevel;
     public Image m_nickName_bg;
+    public Text m_textFuWuFei;
 
     public string m_uid;
 

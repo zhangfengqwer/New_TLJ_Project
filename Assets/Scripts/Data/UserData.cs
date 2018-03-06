@@ -6,6 +6,7 @@ public class UserData  {
     public static string name { set; get; }
     public static string phone { set; get; }
     public static string head { set ; get; }
+    public static string myTuiGuangCode { set; get; }
     public static int gold{ set; get; }
     public static int medal{ set; get; }
     public static int yuanbao { set; get; }
