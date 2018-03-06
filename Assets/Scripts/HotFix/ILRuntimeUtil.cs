@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using System;
+using LitJson;
 
 public class ILRuntimeUtil : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ILRuntimeUtil : MonoBehaviour
     public string m_url = "";
 
     static List<string> s_funcList = new List<string>();
+    private string fileInfoPath;
 
     public static ILRuntimeUtil getInstance()
     {
@@ -39,7 +41,28 @@ public class ILRuntimeUtil : MonoBehaviour
             s_appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
         }
 
-        StartCoroutine(LoadHotFixAssembly(url));
+        if (Application.isMobilePlatform)
+            fileInfoPath = Application.persistentDataPath + "/streamingAssets" + "/hotfix.dll";
+        else
+            fileInfoPath = Application.dataPath + "/../streamingAssets" + "/hotfix.dll";
+
+        LogUtil.Log("dll保存地址：" + fileInfoPath);
+        string dllVersion = PlayerPrefs.GetString("dllVersion", "");
+        if (string.IsNullOrEmpty(dllVersion) || !dllVersion.Equals(url) || !File.Exists(fileInfoPath))
+        {
+            LogUtil.Log("下载dll");
+            StartCoroutine(LoadHotFixAssembly(url));
+        }
+        else
+        {
+            LogUtil.Log("加载缓存dll");
+            using (FileStream fs = new FileStream(fileInfoPath, FileMode.Open))
+            {
+                s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+            }
+            InitializeILRuntime();
+            OnHotFixLoaded();
+        }
     }
 
     IEnumerator LoadHotFixAssembly(string url)
@@ -61,8 +84,19 @@ public class ILRuntimeUtil : MonoBehaviour
             byte[] dll = www.bytes;
             www.Dispose();
 
-            using (System.IO.MemoryStream fs = new MemoryStream(dll))
-            s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+            if (!Directory.Exists(Path.GetDirectoryName(fileInfoPath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(fileInfoPath));
+            }
+            using (System.IO.MemoryStream ms = new MemoryStream(dll))
+            {
+                using (FileStream fs = new FileStream(fileInfoPath, FileMode.Create))
+                {
+                    s_appdomain.LoadAssembly(ms, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+                    fs.Write(dll, 0, dll.Length);
+                    PlayerPrefs.SetString("dllVersion", url);
+                }
+            }
 
             InitializeILRuntime();
             OnHotFixLoaded();
@@ -99,42 +133,29 @@ public class ILRuntimeUtil : MonoBehaviour
         {
             return new GetUserBagRequest.GetUserBagCallBack((result) =>
             {
-                ((System.Action<System.String>)act)(result);
+                ((System.Action<System.String>) act)(result);
             });
         });
 
         s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<float>>((action) =>
         {
-            return new UnityEngine.Events.UnityAction<float>((a) =>
-            {
-                ((System.Action<float>)action)(a);
-            });
+            return new UnityEngine.Events.UnityAction<float>((a) => { ((System.Action<float>) action)(a); });
         });
 
         s_appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((act) =>
         {
-            return new UnityEngine.Events.UnityAction(() =>
-            {
-                ((Action)act)();
-            });
+            return new UnityEngine.Events.UnityAction(() => { ((Action) act)(); });
         });
 
         s_appdomain.DelegateManager.RegisterDelegateConvertor<NetErrorPanelScript.OnClickButton>((act) =>
         {
-            return new NetErrorPanelScript.OnClickButton(() =>
-            {
-                ((Action)act)();
-            });
+            return new NetErrorPanelScript.OnClickButton(() => { ((Action) act)(); });
         });
 
         s_appdomain.DelegateManager.RegisterDelegateConvertor<DG.Tweening.TweenCallback>((act) =>
         {
-            return new DG.Tweening.TweenCallback(() =>
-            {
-                ((Action)act)();
-            });
+            return new DG.Tweening.TweenCallback(() => { ((Action) act)(); });
         });
-
     }
 
     void OnHotFixLoaded()
@@ -147,7 +168,8 @@ public class ILRuntimeUtil : MonoBehaviour
          */
         {
             s_funcList.Clear();
-            List<string> funcList = (List<string>)s_appdomain.Invoke("HotFix_Project.ClassRegister", "getFuncList", null, null);
+            List<string> funcList =
+                (List<string>) s_appdomain.Invoke("HotFix_Project.ClassRegister", "getFuncList", null, null);
             if (funcList != null)
             {
                 for (int i = 0; i < funcList.Count; i++)
@@ -184,7 +206,7 @@ public class ILRuntimeUtil : MonoBehaviour
     /*funcName:类名.函数名 如：“MedalExplainPanelScript.onClickSetPsw”
     * 如果有的函数有多个重载，则这样写：MedalExplainPanelScript.onClickSetPsw(1)、MedalExplainPanelScript.onClickSetPsw(2)
     */
-    public bool checkDllClassHasFunc(string className,string funcName)
+    public bool checkDllClassHasFunc(string className, string funcName)
     {
         if (s_appdomain == null)
         {
