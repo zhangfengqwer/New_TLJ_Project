@@ -96,7 +96,6 @@ public class OtherData
     public static MedalDuiHuanPanelScript s_medalDuiHuanPanelScript = null;
     public static MedalDuiHuanQueRenPanelScript s_medalDuiHuanQueRenPanelScript = null;
     public static BuQianQueRenPanelScript s_buQianQueRenPanelScript = null;
-    public static Notice s_notice = null;
 
     public static string getWebUrl()
     {
