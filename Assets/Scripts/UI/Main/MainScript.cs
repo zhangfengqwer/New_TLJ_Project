@@ -455,9 +455,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        //UserInfoScript.create();
+        UserInfoScript.create();
         //TuiGuangYouLiPanelScript.create();
-        MedalDuiHuanPanelScript.create();
+        //MedalDuiHuanPanelScript.create();
     }
 
     public void OnClickNotice()

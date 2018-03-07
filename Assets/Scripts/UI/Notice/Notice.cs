@@ -19,6 +19,7 @@ public class Notice : MonoBehaviour {
     public ToggleGroup toggleGroup;
 
     private List<ActivityData> activityDatas;
+    public GameObject RightBg;
 
     // Use this for initialization
 	void Start ()
@@ -53,7 +54,7 @@ public class Notice : MonoBehaviour {
         }
 
         toggle.onValueChanged.RemoveAllListeners();
-        toggle.onValueChanged.AddListener((b) => OnToggleValueChange(go,b));
+        toggle.onValueChanged.AddListener((b) => OnToggleValueChange(go,b,dataindex));
 
         //设置数据
         ActivityData activityData = activityDatas[dataindex];
@@ -62,16 +63,24 @@ public class Notice : MonoBehaviour {
 
     }
 
-    public void OnToggleValueChange(GameObject go, bool isOn)
+    public void OnToggleValueChange(GameObject go, bool isOn, int dataindex)
     {
-        
+        Debug.Log("isOn" + isOn);
+        GameObject panel = null;
         if (isOn)
         {
             go.transform.GetChild(0).gameObject.SetActive(false);
+            panel = ActivityManager.getActivityPanel(dataindex);
+            if (panel != null)
+            {
+                panel.transform.SetParent(RightBg.transform);
+                panel.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
         else
         {
             go.transform.GetChild(0).gameObject.SetActive(true);
+           
         }
     }
 
