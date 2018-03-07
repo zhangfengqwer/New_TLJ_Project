@@ -7,13 +7,13 @@ public class ActivityManager
 {
     public static GameObject s_panel = null;
 
-    public static GameObject getActivityPanel(int activity_id)
+    public static GameObject getActivityPanel(Activity.ActivityData activity)
     {
         if (s_panel != null)
         {
             GameObject.Destroy(s_panel);
         }
-
+        int activity_id = activity.ActivityId;
         switch (activity_id)
         {
             // 大礼来袭
