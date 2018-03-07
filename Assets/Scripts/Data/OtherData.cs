@@ -15,7 +15,7 @@ public class OtherData
     public static int s_defaultLoginType = (int) DefaultLoginType.DefaultLoginType_Default;
 
     public static string s_channelName = "";            // 渠道号
-    public static string s_apkVersion = "1.0.50";       // apk版本号
+    public static string s_apkVersion = "1.1.0";       // apk版本号
     public static string s_codeVersion;                 // 代码版本
     public static string s_resVersion;                  // 资源版本
 
@@ -88,7 +88,16 @@ public class OtherData
     public static WaitOtherPlayerScript s_waitOtherPlayerScript = null;
     public static WeeklySignScript s_weeklySignScript = null;
     public static OldPlayerBindPanelScript s_oldPlayerBindPanelScript = null;
+    public static Sign30PanelScript s_sign30PanelScript = null;
+    public static Sign30LeiJiPanelScript s_sign30LeiJiPanelScript = null;
+    public static TuiGuangYouLiPanelScript s_tuiGuangYouLiPanelScript = null;
+    public static ShuRuTuiGuangCodePanelScript s_shuRuTuiGuangCodePanelScript = null;
+    public static NewPlayerShowTuiGuangPanelScript s_newPlayerShowTuiGuangPanelScript = null;
+    public static MedalDuiHuanPanelScript s_medalDuiHuanPanelScript = null;
+    public static MedalDuiHuanQueRenPanelScript s_medalDuiHuanQueRenPanelScript = null;
+    public static BuQianQueRenPanelScript s_buQianQueRenPanelScript = null;
 
+    
     public static string getWebUrl()
     {
         // 优先使用热更新的代码

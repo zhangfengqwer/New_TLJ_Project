@@ -11,11 +11,6 @@ public class TurntablePanelScript : MonoBehaviour
     public GameObject m_listView;
     public ListViewScript m_ListViewScript;
 
-    public Image m_image_neiyuan;
-    public Image m_image_deng1;
-    public Image m_image_deng2;
-    public Image m_image_add1;
-
     public Button m_button_free;
     public Button m_button_huizhang;
 
@@ -23,6 +18,9 @@ public class TurntablePanelScript : MonoBehaviour
 
     public List<GameObject> m_rewardObj_list = new List<GameObject>();
 
+    public GameObject m_curInGameObject;
+    public int m_maxRunRotateCount = 3;
+    public int m_curRunRotateCount = 0;
     public bool m_isStartRotate = false;
     public GameObject m_targetGameObject;
 
@@ -55,57 +53,15 @@ public class TurntablePanelScript : MonoBehaviour
 
         m_text_myLuckyValue.text = UserData.myTurntableData.luckyValue.ToString();
 
-        GameUtil.hideGameObject(m_image_add1.gameObject);
-
         // 获取转盘数据
         {
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = onReceive_GetTurntable;
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().OnRequest();
         }
-
-        startPaoMaDeng();
     }
 
     private void Update()
     {
-    }
-
-    public void startPaoMaDeng()
-    {
-        InvokeRepeating("onInvokeDeng", 0.5f, 0.5f);
-    }
-
-    public void onInvokeDeng()
-    {
-        // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onInvokeDeng"))
-        {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onInvokeDeng", null, null);
-            return;
-        }
-
-        if (m_image_deng1.transform.localScale.x == 0)
-        {
-            m_image_deng1.transform.localScale = new Vector3(1,1,1);
-            m_image_deng2.transform.localScale = new Vector3(0,0,0);
-        }
-        else
-        {
-            m_image_deng1.transform.localScale = new Vector3(0,0,0);
-            m_image_deng2.transform.localScale = new Vector3(1,1,1);
-        }
-    }
-
-    public void onInvokeAdd1()
-    {
-        // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onInvokeAdd1"))
-        {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onInvokeAdd1", null, null);
-            return;
-        }
-
-        GameUtil.hideGameObject(m_image_add1.gameObject);
     }
 
     public void loadReward()
@@ -121,39 +77,34 @@ public class TurntablePanelScript : MonoBehaviour
 
         for (int i = 0; i < TurntableDataScript.getInstance().getDataList().Count; i++)
         {
-            GameObject prefab = Resources.Load("Prefabs/UI/Other/Turntable_reward") as GameObject;
-            GameObject obj = Instantiate(prefab, m_image_neiyuan.transform);
-            obj.transform.localRotation = Quaternion.Euler(0,0,(-36 * i) - 18);
+            GameObject obj = gameObject.transform.Find("Image_bg/Left/Reward/Item" + (i + 1).ToString()).gameObject;
 
             m_rewardObj_list.Add(obj);
 
             // 具体数据
             {
-                int id = TurntableDataScript.getInstance().getDataList()[i].m_id;
+                TurntableData temp = TurntableDataScript.getInstance().getDataList()[i];
+
+                int id = temp.m_id;
                 obj.transform.name = id.ToString();
 
-                string reward = TurntableDataScript.getInstance().getDataList()[i].m_reward;
+                string reward = temp.m_reward;
                 List<string> list = new List<string>();
-                CommonUtil.splitStr(reward,list,':');
+                CommonUtil.splitStr(reward, list, ':');
                 int prop_id = int.Parse(list[0]);
                 int prop_num = int.Parse(list[1]);
 
-                PropInfo propInfo = PropData.getInstance().getPropInfoById(prop_id);
-
                 // 图标
-                CommonUtil.setImageSprite(obj.transform.Find("Image_icon").GetComponent<Image>(), "Sprites/Icon/Prop/" + propInfo.m_icon);
-                
-                // 名称
-                obj.transform.Find("Text_name").GetComponent<Text>().text = propInfo.m_name;
+                CommonUtil.setImageSprite(obj.transform.Find("Image_icon").GetComponent<Image>(), GameUtil.getPropIconPath(prop_id));
 
                 // 数量
                 obj.transform.Find("Text_num").GetComponent<Text>().text = prop_num.ToString();
-            }
 
-            if (i % 2 != 0)
-            {
-                obj.transform.Find("Text_name").GetComponent<Text>().color = Color.white;
-                obj.transform.Find("Text_num").GetComponent<Text>().color = Color.white;
+                // 徽章角标
+                if (temp.m_isHuiZhang)
+                {
+                    obj.transform.Find("Image_huizhangjiaobiao").localScale = new Vector3(1,1,1);
+                }
             }
         }
     }
@@ -221,33 +172,12 @@ public class TurntablePanelScript : MonoBehaviour
                     if (m_rewardObj_list[i].transform.name.CompareTo(reward_id.ToString()) == 0)
                     {
                         m_targetGameObject = m_rewardObj_list[i];
-                        
-                        int angle = -360 * 2 - (int)(m_targetGameObject.transform.localEulerAngles.z);
+                        startRunRotate();
 
-                        m_image_neiyuan.GetComponent<RectTransform>().DORotate(new Vector3(0, 0, angle), 4.0f, RotateMode.FastBeyond360).OnComplete<Tween>(delegate () 
-                        {
-                            string reward = TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward;
-
-                            // 加到内存
-                            GameUtil.changeDataWithStr(reward);
-
-                            // 显示奖励
-                            ShowRewardPanelScript.Show(reward,true);
-
-                            // 显示在转盘通知列表
-                            addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
-
-                            m_isStartRotate = false;
-
-                            // 旋转结束后允许此界面可被关闭
-                            gameObject.GetComponent<ScaleUtil>().setCanClose(true);
-                        });
+                        break;
                     }
                 }
             }
-
-            GameUtil.showGameObject(m_image_add1.gameObject);
-            startAdd1();
         }
         else
         {
@@ -255,9 +185,83 @@ public class TurntablePanelScript : MonoBehaviour
         }
     }
 
-    public void startAdd1()
+    public void startRunRotate()
     {
-        Invoke("onInvokeAdd1", 2.0f);
+        m_curRunRotateCount = 0;
+        
+        m_curInGameObject = m_rewardObj_list[0];
+
+        for (int i = 0; i < m_rewardObj_list.Count; i++)
+        {
+            if (m_curInGameObject.name.CompareTo(m_rewardObj_list[i].name) == 0)
+            {
+                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/zj");
+            }
+            else
+            {
+                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/wzj");
+            }
+        }
+
+        InvokeRepeating("onInvokeRunRotate",0.1f,0.1f);
+    }
+
+    public void onInvokeRunRotate()
+    {
+        int index = m_rewardObj_list.IndexOf(m_curInGameObject);
+        if (index == (m_rewardObj_list.Count - 1))
+        {
+            index = 0;
+        }
+        else
+        {
+            ++index;
+        }
+
+        m_curInGameObject = m_rewardObj_list[index];
+
+        for (int i = 0; i < m_rewardObj_list.Count; i++)
+        {
+            if (m_curInGameObject.name.CompareTo(m_rewardObj_list[i].name) == 0)
+            {
+                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/zj");
+            }
+            else
+            {
+                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/wzj");
+            }
+        }
+
+        if (m_curInGameObject.name.CompareTo(m_targetGameObject.name) == 0)
+        {
+            if (++m_curRunRotateCount == m_maxRunRotateCount)
+            {
+                CancelInvoke("onInvokeRunRotate");
+
+                Invoke("onInvokeRunRotateEnd",1);
+            }
+        }
+    }
+
+    public void onInvokeRunRotateEnd()
+    {
+        {
+            string reward = TurntableDataScript.getInstance().getDataById(int.Parse(m_targetGameObject.transform.name)).m_reward;
+
+            // 加到内存
+            GameUtil.changeDataWithStr(reward);
+
+            // 显示奖励
+            ShowRewardPanelScript.Show(reward, true);
+
+            // 显示在转盘通知列表
+            addTurntableBroadcast(UserData.name, int.Parse(m_targetGameObject.transform.name));
+
+            m_isStartRotate = false;
+
+            // 旋转结束后允许此界面可被关闭
+            gameObject.GetComponent<ScaleUtil>().setCanClose(true);
+        }
     }
 
     public void onReceive_TurntableBroadcast(string data)
@@ -313,13 +317,17 @@ public class TurntablePanelScript : MonoBehaviour
                     {
                         TurntableBroadcastData temp = TurntableBroadcastDataScript.getInstance().getTurntableBroadcastDataList()[i];
 
-                        string reward = TurntableDataScript.getInstance().getDataById(temp.m_reward_id).m_reward;
-                        int prop_id = CommonUtil.splitStr_Start(reward, ':');
-                        int prop_num = CommonUtil.splitStr_End(reward, ':');
-                        string prop_name = PropData.getInstance().getPropInfoById(prop_id).m_name;
+                        TurntableData data = TurntableDataScript.getInstance().getDataById(temp.m_reward_id);
+                        if (data != null)
+                        {
+                            string reward = TurntableDataScript.getInstance().getDataById(temp.m_reward_id).m_reward;
+                            int prop_id = CommonUtil.splitStr_Start(reward, ':');
+                            int prop_num = CommonUtil.splitStr_End(reward, ':');
+                            string prop_name = PropData.getInstance().getPropInfoById(prop_id).m_name;
 
-                        string content = "恭喜" + temp.m_name + "获得" + prop_name + "*" + prop_num;
-                        obj.transform.Find("Text").GetComponent<Text>().text = content;
+                            string content = "恭喜" + temp.m_name + "获得" + prop_name + "*" + prop_num;
+                            obj.transform.Find("Text").GetComponent<Text>().text = content;
+                        }
                     }
 
                     m_ListViewScript.addItem(obj);
@@ -374,6 +382,11 @@ public class TurntablePanelScript : MonoBehaviour
             return;
         }
 
+        if (m_isStartRotate)
+        {
+            return;
+        }
+
         // 判断是否设置过徽章密码
         {
             if (!UserData.isSetSecondPsw)
@@ -393,11 +406,6 @@ public class TurntablePanelScript : MonoBehaviour
 
                 return;
             }
-        }
-
-        if (m_isStartRotate)
-        {
-            return;
         }
 
         int needHuiZhangNum = 3;
@@ -482,6 +490,11 @@ public class TurntablePanelScript : MonoBehaviour
             return;
         }
 
+        if (m_isStartRotate)
+        {
+            return;
+        }
+
         string tip = "1、每进行一局游戏可获得一次抽奖机会（每日每人可获得三次抽奖机会哦~）。\r\n2、升级贵族等级获得贵族特权，即可增加抽奖机会。";
         TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
@@ -492,6 +505,11 @@ public class TurntablePanelScript : MonoBehaviour
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onClickHuiZhang_tip"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onClickHuiZhang_tip", null, null);
+            return;
+        }
+
+        if (m_isStartRotate)
+        {
             return;
         }
 

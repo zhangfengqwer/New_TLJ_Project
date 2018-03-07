@@ -36,6 +36,7 @@ public class PVPChoiceScript : MonoBehaviour {
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
         showJinBiChang();
+        showMyBaoMingFei(true);
     }
 	
 	// Update is called once per frame
@@ -58,6 +59,7 @@ public class PVPChoiceScript : MonoBehaviour {
             return;
         }
 
+        showMyBaoMingFei(true);
         showJinBiChang();
     }
 
@@ -75,6 +77,7 @@ public class PVPChoiceScript : MonoBehaviour {
             return;
         }
 
+        showMyBaoMingFei(false);
         showHuaFeiChang();
     }
 
@@ -150,5 +153,54 @@ public class PVPChoiceScript : MonoBehaviour {
         }
 
         m_ListViewScript.addItemEnd();
+    }
+
+    public void showMyBaoMingFei(bool isGold)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPChoiceScript_hotfix", "showMyBaoMingFei"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "showMyBaoMingFei", null, isGold);
+            return;
+        }
+
+        {
+            int num = 0;
+
+            if (isGold)
+            {
+                num = UserData.gold;
+            }
+            else
+            {
+                for (int i = 0; i < UserData.propData.Count; i++)
+                {
+                    if (UserData.propData[i].prop_id == (int)TLJCommon.Consts.Prop.Prop_lanzuanshi)
+                    {
+                        num = UserData.propData[i].prop_num;
+                        break;
+                    }
+                }
+            }
+
+            if (num > 99999)
+            {
+                num = num / 10000;
+                transform.Find("Image_bg/mybaomingfei").GetComponent<Text>().text = "我的     :" + num.ToString() + "万+";
+            }
+            else
+            {
+                transform.Find("Image_bg/mybaomingfei").GetComponent<Text>().text = "我的     :" + num.ToString();
+            }
+
+            if (isGold)
+            {
+                CommonUtil.setImageSprite(transform.Find("Image_bg/mybaomingfei/Image").GetComponent<Image>(), GameUtil.getPropIconPath(1));
+            }
+            else
+            {
+                CommonUtil.setImageSprite(transform.Find("Image_bg/mybaomingfei/Image").GetComponent<Image>(), GameUtil.getPropIconPath(107));
+            }
+        }
     }
 }

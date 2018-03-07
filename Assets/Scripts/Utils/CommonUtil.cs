@@ -56,6 +56,21 @@ public class CommonUtil
         return DateTime.Now.Day;
     }
 
+    static public int getCurHour()
+    {
+        return DateTime.Now.Hour;
+    }
+
+    static public int getCurMinute()
+    {
+        return DateTime.Now.Minute;
+    }
+
+    static public int getCurSecond()
+    {
+        return DateTime.Now.Second;
+    }
+
     static public bool splitStrIsPerfect(string str, List<string> list, char c)
     {
         bool b = false;
@@ -196,9 +211,28 @@ public class CommonUtil
         image.color = new Color(r / 255.0f, g / 255.0f, b / 255.0f);
     }
 
+    static public void setImageColor(Image image, float r, float g, float b,float a)
+    {
+        image.color = new Color(r / 255.0f, g / 255.0f, b / 255.0f,a / 255.0f);
+    }
+
     static public void setFontColor(Text text, float r, float g, float b)
     {
         text.color = new Color(r / 255.0f, g / 255.0f, b / 255.0f);
+    }
+
+    static public void setButtonEnable(Button btn , bool enable)
+    {
+        if (enable)
+        {
+            btn.interactable = true;
+            setImageColor(btn.transform.Find("Image").GetComponent<Image>(), 255, 255, 255, 255);
+        }
+        else
+        {
+            btn.interactable = false;
+            setImageColor(btn.transform.Find("Image").GetComponent<Image>(), 255, 255, 255, 125);
+        }
     }
 
     //字符转ASCII码：
@@ -211,6 +245,7 @@ public class CommonUtil
         return intAsciiCode;
     }
 
+    // 天数差
     // data_old:xxxx-xx-xx xx:xx:xx
     // data_new:xxxx-xx-xx xx:xx:xx
     static public int tianshucha(string data_old,string data_new)
@@ -222,5 +257,26 @@ public class CommonUtil
         int days = (d4 - d3).Days;
 
         return days;
+    }
+
+    // 秒数差
+    // data_old:xxxx-xx-xx xx:xx:xx
+    // data_new:xxxx-xx-xx xx:xx:xx
+    static public int miaoshucha(string data_old, string data_new)
+    {
+        DateTime d1 = Convert.ToDateTime(data_old);
+        DateTime d2 = Convert.ToDateTime(data_new);
+        DateTime d3 = Convert.ToDateTime(string.Format("{0}-{1}-{2} {3}:{4}:{5}", d1.Year, d1.Month, d1.Day, d1.Hour, d1.Minute, d1.Second));
+        DateTime d4 = Convert.ToDateTime(string.Format("{0}-{1}-{2} {3}:{4}:{5}", d2.Year, d2.Month, d2.Day, d2.Hour, d2.Minute, d2.Second));
+
+        int days = (d4 - d3).Days;
+        int hours = (d4 - d3).Hours;
+        int minutes = (d4 - d3).Minutes;
+        int seconds = (d4 - d3).Seconds;
+
+        TimeSpan t1 = new TimeSpan(days, hours, minutes, seconds);
+        int i = (int)t1.TotalSeconds;
+
+        return i;
     }
 }

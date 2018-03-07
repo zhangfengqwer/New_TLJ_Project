@@ -96,6 +96,7 @@ public class MainScript : MonoBehaviour
                     LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                     LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                    LogicEnginerScript.Instance.GetComponent<GetSign30RewardRequest>().OnRequest();
                 }
                 else
                 {
@@ -127,6 +128,20 @@ public class MainScript : MonoBehaviour
         }
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
+    }
+
+    // 显示新人推广礼
+    public bool checkShowNewPlayerTuiGuang()
+    {
+        if (PlayerPrefs.GetInt("isShowNewPlayerTuiGuang_" + UserData.uid, 0) == 0)
+        {
+            NewPlayerShowTuiGuangPanelScript.create();
+            PlayerPrefs.SetInt("isShowNewPlayerTuiGuang_" + UserData.uid, 1);
+
+            return true;
+        }
+
+        return false;
     }
 
     public void startBgm()
@@ -398,7 +413,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
+        reqIsJoinRoom();
+        //GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
     }
 
     public void onClickChaoDiChang()
@@ -410,7 +427,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common);
+        reqIsJoinRoom();
+        //GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
     }
 
     public void onClickXiuXianChang_back()
@@ -436,7 +455,9 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        UserInfoScript.create();
+        //UserInfoScript.create();
+        //TuiGuangYouLiPanelScript.create();
+        MedalDuiHuanPanelScript.create();
     }
 
     public void OnClickNotice()
@@ -460,7 +481,8 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        WeeklySignScript.create();
+        Sign30PanelScript.create();
+        //WeeklySignScript.create();
     }
 
     public void OnClickInventory()
@@ -630,7 +652,7 @@ public class MainScript : MonoBehaviour
         }
 
         GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi);
+        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
         SceneManager.LoadScene("GameScene");
     }
 
@@ -742,9 +764,6 @@ public class MainScript : MonoBehaviour
             {
                 ToastScript.createToast("支付失败");
             }
-
-
-
         }
         // 有人使用转盘
         else if (tag.CompareTo(TLJCommon.Consts.Tag_TurntableBroadcast) == 0)
@@ -1082,7 +1101,7 @@ public class MainScript : MonoBehaviour
 
         // 签到
         {
-            if (!SignData.IsSign)
+            if (!Sign30RecordData.getInstance().todayIsSign())
             {
                 m_sign_redPoint.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -1147,6 +1166,7 @@ public class MainScript : MonoBehaviour
                 LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetEmailRequest>().OnRequest();
                 LogicEnginerScript.Instance.GetComponent<GetNoticeRequest>().OnRequest();
+                LogicEnginerScript.Instance.GetComponent<GetSign30RewardRequest>().OnRequest();
             }
 
             // 检测服务器是否连接

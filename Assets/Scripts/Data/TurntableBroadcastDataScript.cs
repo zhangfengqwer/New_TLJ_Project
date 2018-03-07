@@ -11,6 +11,8 @@ public class TurntableBroadcastDataScript
 
     public List<TurntableBroadcastData> m_dataList = new List<TurntableBroadcastData>();
 
+    public int broadcastMaxNum = 9;
+
     public static TurntableBroadcastDataScript getInstance()
     {
         if (s_instance == null)
@@ -37,7 +39,7 @@ public class TurntableBroadcastDataScript
 
         m_dataList.Add(temp);
 
-        if (m_dataList.Count > 5)
+        if (m_dataList.Count > broadcastMaxNum)
         {
             m_dataList.RemoveAt(0);
         }

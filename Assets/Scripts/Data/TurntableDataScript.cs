@@ -44,8 +44,9 @@ public class TurntableDataScript
                 int id = (int)jd["turntable_list"][i]["id"];
                 string reward = (string)jd["turntable_list"][i]["reward"];
                 int probability = (int)jd["turntable_list"][i]["probability"];
+                bool isHuiZhang = (id < 50 ? false:true);
 
-                TurntableData temp = new TurntableData(id, reward, probability);
+                TurntableData temp = new TurntableData(id, reward, probability, isHuiZhang);
                 m_dataList.Add(temp);
             }
         }
@@ -77,11 +78,13 @@ public class TurntableData
     public int m_id;
     public string m_reward;
     public int m_probability;
+    public bool m_isHuiZhang;
 
-    public TurntableData(int id, string reward, int probability)
+    public TurntableData(int id, string reward, int probability,bool isHuiZhang)
     {
         m_id = id;
         m_reward = reward;
         m_probability = probability;
+        m_isHuiZhang = isHuiZhang;
     }
 }

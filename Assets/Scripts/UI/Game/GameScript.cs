@@ -1443,13 +1443,13 @@ public class GameScript : MonoBehaviour
 
                         showWaitMatchPanel(GameData.getInstance().m_waitMatchTime, false);
                     }
-                        break;
+                    break;
 
                     case (int) TLJCommon.Consts.Code.Code_CommonFail:
                     {
                         ToastScript.createToast("您已加入其它房间，无法开始新游戏");
                     }
-                        break;
+                    break;
                 }
             }
                 break;
@@ -1485,6 +1485,17 @@ public class GameScript : MonoBehaviour
                 Destroy(m_pvpGameResultPanel);
                 JueShengJuTiShiPanelScript.checkClose();
 
+                // 休闲场扣除报名费：金币*200
+                {
+                    if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common) == 0) ||
+                        (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common) == 0))
+                    {
+                        GameUtil.changeData(1, -200);
+
+                        m_myUserInfoUI.GetComponent<MyUIScript>().m_textFuWuFei.GetComponent<Animation>().Play("game_fuwufei");
+                    }
+                }
+                
                 startGame_InitUI(data);
 
                 // 休闲场有记牌器的情况下自动使用
@@ -1986,11 +1997,12 @@ public class GameScript : MonoBehaviour
                             m_timerScript.start(GameData.getInstance().m_outPokerTime,TimerScript.TimerType.TimerType_OutPoker, true);
                             setTimerPos(uid);
 
-                            if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
-                                (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
-                            {
-                                m_buttonTiShi.transform.localScale = new Vector3(1, 1, 1);
-                            }
+                            //// 只有初级场可以用提示按钮
+                            //if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
+                            //    (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
+                            //{
+                            //    m_buttonTiShi.transform.localScale = new Vector3(1, 1, 1);
+                            //}
                         }
                         else
                         {
@@ -2990,13 +3002,12 @@ public class GameScript : MonoBehaviour
                                     TimerScript.TimerType.TimerType_OutPoker, true);
                                 setTimerPos(curOutPokerPlayer);
 
-                                if ((GameData.getInstance().getGameRoomType()
-                                         .CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
-                                    (GameData.getInstance().getGameRoomType()
-                                         .CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
-                                {
-                                    m_buttonTiShi.transform.localScale = new Vector3(1, 1, 1);
-                                }
+                                //// 只有初级场可以用提示按钮
+                                //if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0) ||
+                                //(GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0))
+                                //{
+                                //    m_buttonTiShi.transform.localScale = new Vector3(1, 1, 1);
+                                //}
                             }
                             else
                             {
