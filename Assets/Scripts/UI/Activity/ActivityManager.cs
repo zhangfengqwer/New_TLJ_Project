@@ -23,7 +23,7 @@ public class ActivityManager
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
                         s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/activity/activity_1.jpg");
 
                         Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
 
@@ -66,7 +66,7 @@ public class ActivityManager
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
                         s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/activity/activity_2.jpg");
 
                         Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
 
@@ -90,7 +90,7 @@ public class ActivityManager
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
                         s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/activity/activity_3.jpg");
 
                         Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
 
@@ -113,6 +113,9 @@ public class ActivityManager
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/activity/activity_4.jpg");
+
                     }
                 }
                 break;
