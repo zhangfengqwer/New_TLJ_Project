@@ -24,6 +24,8 @@ public class Notice : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        OtherData.s_notice = this;
+
         LogicEnginerScript.Instance.GetComponent<GetAcitivityRequest>().CallBack = GetActivityData;
         LogicEnginerScript.Instance.GetComponent<GetAcitivityRequest>().OnRequest();
 
