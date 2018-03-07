@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class ActivityManager
 {
+    public static GameObject s_panel = null;
+
     public static GameObject getActivityPanel(int activity_id)
     {
-        GameObject panel = null;
+        if (s_panel != null)
+        {
+            GameObject.Destroy(s_panel);
+        }
 
         switch (activity_id)
         {
@@ -16,11 +21,11 @@ public class ActivityManager
                 {
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
-                        panel = GameObject.Instantiate(prefabs);
-                        panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
+                        s_panel = GameObject.Instantiate(prefabs);
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
 
-                        Activity_image_button_Script script = panel.GetComponent<Activity_image_button_Script>();
+                        Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
 
                         {
                             script.m_btn1.transform.localPosition = new Vector3(-200, 0, 0);
@@ -36,7 +41,7 @@ public class ActivityManager
                             script.m_btn2.transform.Find("Text").GetComponent<Text>().text = "前往获得";
                             script.m_btn2.onClick.AddListener(() =>
                             {
-                                GameObject.Destroy(panel);
+                                GameObject.Destroy(s_panel);
                                 OtherData.s_mainScript.onClickEnterXiuXianChang();
                             });
                         }
@@ -46,7 +51,7 @@ public class ActivityManager
                             script.m_btn3.transform.Find("Text").GetComponent<Text>().text = "前往获得";
                             script.m_btn3.onClick.AddListener(() =>
                             {
-                                GameObject.Destroy(panel);
+                                GameObject.Destroy(s_panel);
                                 TuiGuangYouLiPanelScript.create();
                             });
                         }
@@ -59,16 +64,16 @@ public class ActivityManager
                 {
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
-                        panel = GameObject.Instantiate(prefabs);
-                        panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
+                        s_panel = GameObject.Instantiate(prefabs);
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
 
-                        Activity_image_button_Script script = panel.GetComponent<Activity_image_button_Script>();
+                        Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
 
                         script.m_btn1.transform.Find("Text").GetComponent<Text>().text = "前往";
                         script.m_btn1.onClick.AddListener(() =>
                         {
-                            GameObject.Destroy(panel);
+                            GameObject.Destroy(s_panel);
                             PVPChoiceScript.create();
                         });
 
@@ -83,16 +88,16 @@ public class ActivityManager
                 {
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
-                        panel = GameObject.Instantiate(prefabs);
-                        panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
+                        s_panel = GameObject.Instantiate(prefabs);
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown("http://fwdown.hy51v.com/test/file/share-5.jpg");
 
-                        Activity_image_button_Script script = panel.GetComponent<Activity_image_button_Script>();
+                        Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
 
                         script.m_btn1.transform.Find("Text").GetComponent<Text>().text = "前往";
                         script.m_btn1.onClick.AddListener(() =>
                         {
-                            GameObject.Destroy(panel);
+                            GameObject.Destroy(s_panel);
                             OldPlayerBindPanelScript.create();
                         });
 
@@ -107,7 +112,7 @@ public class ActivityManager
                 {
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
-                        panel = GameObject.Instantiate(prefabs);
+                        s_panel = GameObject.Instantiate(prefabs);
                     }
                 }
                 break;
@@ -117,13 +122,13 @@ public class ActivityManager
                     // 使用热更新的代码
                     if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ActivityManager_hotfix", "getActivityPanel"))
                     {
-                        panel = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ActivityManager_hotfix", "getActivityPanel", null, activity_id);
-                        return panel;
+                        s_panel = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ActivityManager_hotfix", "getActivityPanel", null, activity_id);
+                        return s_panel;
                     }
                 }
                 break;
         }
 
-        return panel;
+        return s_panel;
     }
 }
