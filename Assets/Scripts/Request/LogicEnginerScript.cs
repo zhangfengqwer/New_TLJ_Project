@@ -210,7 +210,7 @@ public class LogicEnginerScript : MonoBehaviour
         }
         catch (Exception e)
         {
-            LogUtil.Log("LogicEnginerScript.onSocketReceive异常：" + e.Message);
+            LogUtil.Log("LogicEnginerScript.onSocketReceive异常：" + e);
         }
     }
 

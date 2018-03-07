@@ -28,16 +28,12 @@ public class NoticePanelScript : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-        OtherData.s_noticePanelScript = this;
-
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NoticePanelScript_hotfix", "Start", null, null);
             return;
         }
-
-        m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
         // 拉取公告活动
         {
