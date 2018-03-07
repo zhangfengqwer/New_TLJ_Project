@@ -41,7 +41,7 @@ public class ActivityManager
                             script.m_btn2.transform.Find("Text").GetComponent<Text>().text = "前往获得";
                             script.m_btn2.onClick.AddListener(() =>
                             {
-                                GameObject.Destroy(OtherData.s_notice.gameObject);
+                                GameObject.Destroy(OtherData.s_activity.gameObject);
                                 OtherData.s_mainScript.onClickEnterXiuXianChang();
                             });
                         }
@@ -51,7 +51,7 @@ public class ActivityManager
                             script.m_btn3.transform.Find("Text").GetComponent<Text>().text = "前往获得";
                             script.m_btn3.onClick.AddListener(() =>
                             {
-                                GameObject.Destroy(OtherData.s_notice.gameObject);
+                                GameObject.Destroy(OtherData.s_activity.gameObject);
                                 TuiGuangYouLiPanelScript.create();
                             });
                         }
@@ -73,7 +73,7 @@ public class ActivityManager
                         script.m_btn1.transform.Find("Text").GetComponent<Text>().text = "前往";
                         script.m_btn1.onClick.AddListener(() =>
                         {
-                            GameObject.Destroy(OtherData.s_notice.gameObject);
+                            GameObject.Destroy(OtherData.s_activity.gameObject);
                             PVPChoiceScript.create();
                         });
 
@@ -97,7 +97,7 @@ public class ActivityManager
                         script.m_btn1.transform.Find("Text").GetComponent<Text>().text = "前往";
                         script.m_btn1.onClick.AddListener(() =>
                         {
-                            GameObject.Destroy(OtherData.s_notice.gameObject);
+                            GameObject.Destroy(OtherData.s_activity.gameObject);
                             OldPlayerBindPanelScript.create();
                         });
 

@@ -14,10 +14,10 @@ public class OtherData
 
     public static int s_defaultLoginType = (int) DefaultLoginType.DefaultLoginType_Default;
 
-    public static string s_channelName = "";            // 渠道号
-    public static string s_apkVersion = "1.1.0";       // apk版本号
-    public static string s_codeVersion;                 // 代码版本
-    public static string s_resVersion;                  // 资源版本
+    public static string s_channelName = ""; // 渠道号
+    public static string s_apkVersion = "1.1.0"; // apk版本号
+    public static string s_codeVersion; // 代码版本
+    public static string s_resVersion; // 资源版本
 
     public static bool s_isFromSetToLogin = false;
     public static bool s_isFirstOpenGame = true;
@@ -96,6 +96,7 @@ public class OtherData
     public static MedalDuiHuanPanelScript s_medalDuiHuanPanelScript = null;
     public static MedalDuiHuanQueRenPanelScript s_medalDuiHuanQueRenPanelScript = null;
     public static BuQianQueRenPanelScript s_buQianQueRenPanelScript = null;
+    public static Activity s_activity = null;
     public static Notice s_notice = null;
 
     public static string getWebUrl()
@@ -103,7 +104,7 @@ public class OtherData
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("OtherData_hotfix", "getWebUrl"))
         {
-            string s = (string)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherData_hotfix", "getWebUrl", null, null);
+            string s = (string) ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherData_hotfix", "getWebUrl", null, null);
             return s;
         }
 
