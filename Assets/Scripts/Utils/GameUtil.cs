@@ -652,4 +652,52 @@ public class GameUtil
 
         return prop_num;
     }
+
+    static public int getMyPropNumById(int id)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUtil_hotfix", "getMyPropNumById"))
+        {
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUtil_hotfix", "getMyPropNumById", null, id);
+            return i;
+        }
+
+        int num = 0;
+
+        switch (id)
+        {
+            case 1:
+                {
+                    num = UserData.gold;
+                }
+                break;
+
+            case 2:
+                {
+                    num = UserData.yuanbao;
+                }
+                break;
+
+            case 110:
+                {
+                    num = UserData.medal;
+                }
+                break;
+
+            default:
+                {
+                    for (int i = 0; i < UserData.propData.Count; i++)
+                    {
+                        if (UserData.propData[i].prop_id == id)
+                        {
+                            num = UserData.propData[i].prop_num;
+                            break;
+                        }
+                    }
+                }
+                break;
+        }
+
+        return num;
+    }
 }
