@@ -218,6 +218,8 @@ public class MedalDuiHuanQueRenPanelScript : MonoBehaviour {
         }
         else
         {
+            NetLoading.getInstance().Show();
+
             LogicEnginerScript.Instance.GetComponent<MedalDuiHuanRequest>().goods_id = m_medalDuiHuanRewardData.goods_id;
             LogicEnginerScript.Instance.GetComponent<MedalDuiHuanRequest>().num = m_goods_num;
             LogicEnginerScript.Instance.GetComponent<MedalDuiHuanRequest>().CallBack = onReceive_BuyGoods;
@@ -233,6 +235,8 @@ public class MedalDuiHuanQueRenPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalDuiHuanQueRenPanelScript_hotfix", "onReceive_BuyGoods", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];

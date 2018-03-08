@@ -50,7 +50,9 @@ public class ShuRuTuiGuangCodePanelScript : MonoBehaviour {
         {
             ToastScript.createToast("请输入推广码");
         }
-        
+
+        NetLoading.getInstance().Show();
+
         LogicEnginerScript.Instance.GetComponent<BindTuiGuangCodeRequest>().CallBack = onCallBackBindTuiGuangCode;
         LogicEnginerScript.Instance.GetComponent<BindTuiGuangCodeRequest>().tuiguangcode = tuiguangcode;
         LogicEnginerScript.Instance.GetComponent<BindTuiGuangCodeRequest>().OnRequest();
@@ -64,6 +66,8 @@ public class ShuRuTuiGuangCodePanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShuRuTuiGuangCodePanelScript_hotfix", "onCallBackBindTuiGuangCode", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         JsonData jsonData = JsonMapper.ToObject(data);
         int code = (int)jsonData["code"];

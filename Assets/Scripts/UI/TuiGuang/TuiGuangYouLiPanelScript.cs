@@ -53,6 +53,8 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
         m_text_myTuiGuangCode.text = "我的推广码：" + UserData.myTuiGuangCode;
         m_listview_player = m_obj_tuiGuangList.GetComponent<ListViewScript>();
 
+        NetLoading.getInstance().Show();
+
         LogicEnginerScript.Instance.GetComponent<MyTuiGuangYouLiDataRequest>().CallBack = onCallBackMyTuiGuangYouLiData;
         LogicEnginerScript.Instance.GetComponent<MyTuiGuangYouLiDataRequest>().OnRequest();
     }
@@ -65,6 +67,8 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuiGuangYouLiPanelScript_hotfix", "onCallBackMyTuiGuangYouLiData", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         MyTuiGuangData.getInstance().initJson(data);
 
@@ -300,6 +304,8 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
             return;
         }
 
+        NetLoading.getInstance().Show();
+
         LogicEnginerScript.Instance.GetComponent<OneKeyGetAllTuiGuangRewardRequest>().CallBack = onCallBackOneKeyGetAllTuiGuangReward;
         LogicEnginerScript.Instance.GetComponent<OneKeyGetAllTuiGuangRewardRequest>().OnRequest();
     }
@@ -324,6 +330,8 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuiGuangYouLiPanelScript_hotfix", "onCallBackOneKeyGetAllTuiGuangReward", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         JsonData jsonData = JsonMapper.ToObject(data);
         int code = (int)jsonData["code"];

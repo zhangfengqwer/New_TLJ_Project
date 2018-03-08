@@ -277,6 +277,7 @@ public class Sign30PanelScript : MonoBehaviour {
 
             switch (type)
             {
+                // 今天签到
                 case 1:
                     {
                         ToastScript.createToast("签到成功");
@@ -291,10 +292,13 @@ public class Sign30PanelScript : MonoBehaviour {
                             obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
 
                             OtherData.s_mainScript.checkRedPoint();
+
+                            setBtnSignState(Sign30Data.getInstance().getSign30DataById(id).day);
                         }
                     }
                     break;
 
+                // 补签
                 case 2:
                     {
                         ToastScript.createToast("补签成功");
@@ -316,9 +320,12 @@ public class Sign30PanelScript : MonoBehaviour {
 
                         // 增加补签次数
                         ++Sign30RecordData.getInstance().m_curMonthBuQianCount;
+
+                        setBtnSignState(Sign30Data.getInstance().getSign30DataById(id).day);
                     }
                     break;
 
+                // 累计签到奖励
                 case 3:
                     {
                         Destroy(OtherData.s_sign30LeiJiPanelScript.gameObject);
