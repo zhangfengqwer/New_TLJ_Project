@@ -57,10 +57,13 @@ public class DownAssetBundlesScript : MonoBehaviour
 
     IEnumerator onStartDown()
     {
-        UnityWebRequest request = UnityWebRequest.Get("http://fwdown.hy51v.com/online/file/AssetBundles/" + m_needDownlist[m_curDownIndex]);
+        string url = "http://fwdown.hy51v.com/online/file/AssetBundles/" + m_needDownlist[m_curDownIndex];
+        UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.Send();
 
-        AssetBundle myLoadedAssetBundle = AssetBundle.LoadFromMemory(request.downloadHandler.data);
+        byte[] bytes = request.downloadHandler.data;
+
+        AssetBundle myLoadedAssetBundle = AssetBundle.LoadFromMemory(bytes);
         for (int i = 0; i < AssetBundlesManager.getInstance().m_assetBundlesDatalist.Count; i++)
         {
             if (AssetBundlesManager.getInstance().m_assetBundlesDatalist[i].m_name.CompareTo(m_needDownlist[m_curDownIndex]) == 0)
@@ -69,8 +72,6 @@ public class DownAssetBundlesScript : MonoBehaviour
                 break;
             }
         }
-
-        byte[] bytes = request.downloadHandler.data;
 
         //保存ab到本地
         string filePath = fileRootPath + "/" + m_needDownlist[m_curDownIndex];
