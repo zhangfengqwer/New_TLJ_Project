@@ -85,7 +85,25 @@ public class Activity_huafeisuipian_Script : MonoBehaviour {
 
     public void onClickDuiHuan(GameObject obj)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_huafeisuipian_Script_hotfix", "onClickDuiHuan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_huafeisuipian_Script_hotfix", "onClickDuiHuan", null, obj);
+            return;
+        }
+
         int duihuan_id = int.Parse(obj.transform.name);
+
+        {
+            HuaFeiSuiPianDuiHuanDataContent temp = HuaFeiSuiPianDuiHuanData.getInstance().getDataById(duihuan_id);
+
+            if (GameUtil.getMyPropNumById(temp.material_id) < temp.material_num)
+            {
+                ToastScript.createToast("碎片不足");
+
+                return;
+            }
+        }
 
         NetLoading.getInstance().Show();
 

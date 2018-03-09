@@ -118,7 +118,6 @@ public class ActivityManager
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_huafeisuipian") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
-
                     }
                 }
                 break;
