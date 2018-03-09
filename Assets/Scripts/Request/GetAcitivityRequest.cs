@@ -28,9 +28,9 @@ public class GetAcitivityRequest : Request
     public override void OnRequest()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserInfoRequest_hotfix", "OnRequest"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetAcitivityRequest_hotfix", "OnRequest"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserInfoRequest_hotfix", "OnRequest", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetAcitivityRequest_hotfix", "OnRequest", null, null);
             return;
         }
 
@@ -43,9 +43,9 @@ public class GetAcitivityRequest : Request
     public override void OnResponse(string data)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetUserInfoRequest_hotfix", "OnResponse"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GetAcitivityRequest_hotfix", "OnResponse"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetUserInfoRequest_hotfix", "OnResponse", null, data);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GetAcitivityRequest_hotfix", "OnResponse", null, data);
             return;
         }
 

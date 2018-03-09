@@ -55,6 +55,8 @@ public class TurntablePanelScript : MonoBehaviour
 
         // 获取转盘数据
         {
+            NetLoading.getInstance().Show();
+
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = onReceive_GetTurntable;
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().OnRequest();
         }
@@ -119,6 +121,8 @@ public class TurntablePanelScript : MonoBehaviour
             return;
         }
 
+        NetLoading.getInstance().Close();
+
         TurntableDataScript.getInstance().initJson(data);
         loadReward();
     }
@@ -132,6 +136,8 @@ public class TurntablePanelScript : MonoBehaviour
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onReceive_UseTurntable", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
 
@@ -475,6 +481,8 @@ public class TurntablePanelScript : MonoBehaviour
 
         // 使用转盘
         {
+            NetLoading.getInstance().Show();
+
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().CallBack = onReceive_UseTurntable;
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().type = type;
             LogicEnginerScript.Instance.GetComponent<UseTurntableRequest>().OnRequest();

@@ -97,8 +97,9 @@ public class ActivityManager
                         s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown(url);
 
                         Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
-
-                        script.m_btn1.transform.Find("Text").GetComponent<Text>().text = "前往";
+                        
+                        script.m_btn1.transform.localPosition = new Vector3(163.5f, 14.62f, 0);
+                        script.m_btn1.transform.Find("Text").GetComponent<Text>().text = "前往获得";
                         script.m_btn1.onClick.AddListener(() =>
                         {
                             GameObject.Destroy(OtherData.s_activity.gameObject);
@@ -115,11 +116,8 @@ public class ActivityManager
             case 4:
                 {
                     {
-                        GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
+                        GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_huafeisuipian") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
-                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
-                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown(url);
-
                     }
                 }
                 break;

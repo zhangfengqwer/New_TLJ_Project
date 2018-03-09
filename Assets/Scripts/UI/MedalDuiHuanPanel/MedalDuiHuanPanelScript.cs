@@ -54,6 +54,8 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
 
         m_text_myMedalNum.text = UserData.medal.ToString();
 
+        NetLoading.getInstance().Show();
+
         LogicEnginerScript.Instance.GetComponent<GetMedalDuiHuanRewardRequest>().CallBack = onCallBackGetMedalDuiHuanReward;
         LogicEnginerScript.Instance.GetComponent<GetMedalDuiHuanRewardRequest>().OnRequest();
     }
@@ -72,6 +74,8 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalDuiHuanPanelScript_hotfix", "onCallBackGetMedalDuiHuanReward", null, data);
             return;
         }
+
+        NetLoading.getInstance().Close();
 
         MedalDuiHuanRewardData.getInstance().initJson(data);
 
