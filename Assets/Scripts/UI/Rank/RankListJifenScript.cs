@@ -102,7 +102,8 @@ public class RankListJifenScript : MonoBehaviour
             Image rankImage = Ranking.GetComponent<Image>();
 
             Count.GetComponent<Text>().text = "" + goldRankItemData.gold;
-            Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
+            //Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Head/head_" + goldRankItemData.head);
+            goChild.GetComponent<HeadIconScript>().setIcon("head_" + goldRankItemData.head);
             Name.GetComponent<Text>().text = goldRankItemData.name;
             if (VipUtil.GetVipLevel(goldRankItemData.recharge) > 0)
             {

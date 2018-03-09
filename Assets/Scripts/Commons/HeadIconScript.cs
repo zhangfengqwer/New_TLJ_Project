@@ -7,11 +7,10 @@ public class HeadIconScript : MonoBehaviour {
 
     public Image m_icon;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-		
-	}
+    }
 
     public void setIcon(string path)
     {
@@ -22,6 +21,13 @@ public class HeadIconScript : MonoBehaviour {
             return;
         }
 
-        m_icon.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        if (string.IsNullOrEmpty(path))
+        {
+            return;
+        }
+
+        Debug.Log("----------------------------------------------------"+path);
+        m_icon.sprite = AssetBundlesManager.getInstance().getAssetBundlesDataByName("head.unity3d").LoadAsset<Sprite>(path);
+        //m_icon.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 }

@@ -1,17 +1,21 @@
 ﻿using LitJson;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class LoginScript : MonoBehaviour
 {
+    public GameObject m_obj_DownAssetBundles;
+
     public Stopwatch stopwatch = new Stopwatch();
     public int TestCount = 0;
     public int TestAllCout = 500;
@@ -163,6 +167,27 @@ public class LoginScript : MonoBehaviour
 
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
 
+        if (!m_obj_DownAssetBundles.GetComponent<DownAssetBundlesScript>().checkDown())
+        {
+            UnityEngine.Debug.Log("不需要下载ab包");
+
+            netDataDown();
+        }
+        else
+        {
+            UnityEngine.Debug.Log("需要下载ab包");
+        }        
+    }
+
+    public void netDataDown()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("LoginScript_hotfix", "netDataDown"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.LoginScript_hotfix", "netDataDown", null, null);
+            return;
+        }
+
         // 拉取数值表
         {
             NetLoading.getInstance().Show();
@@ -184,7 +209,7 @@ public class LoginScript : MonoBehaviour
             LogUtil.Log("这是正式包");
         }
     }
-    
+
     // 等获取到服务器配置文件再调用
     public void init()
     {

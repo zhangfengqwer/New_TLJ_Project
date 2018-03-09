@@ -83,7 +83,8 @@ public class ChangeHeadPanelScript : MonoBehaviour {
 
         if (code == (int)TLJCommon.Consts.Code.Code_OK)
         {
-            UserData.head = "Sprites/Head/head_" + m_choiceHead;
+            //UserData.head = "Sprites/Head/head_" + m_choiceHead;
+            UserData.head = "head_" + m_choiceHead;
 
             OtherData.s_mainScript.refreshUI();
             OtherData.s_userInfoScript.InitUI();
