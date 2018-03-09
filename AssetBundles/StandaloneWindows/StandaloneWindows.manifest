@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 741586698
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: head.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: vip.unity3d
+      Dependencies: {}

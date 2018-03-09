@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class NoticePanelScript : MonoBehaviour
@@ -27,7 +28,8 @@ public class NoticePanelScript : MonoBehaviour
 
     // Use this for initialization
     void Start ()
-	{
+    {
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NoticePanelScript_hotfix", "Start"))
         {
