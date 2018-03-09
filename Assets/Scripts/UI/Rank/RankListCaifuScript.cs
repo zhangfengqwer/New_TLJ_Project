@@ -103,8 +103,8 @@ public class RankListCaifuScript : MonoBehaviour
             var Image_vip = goChild.transform.Find("Image_vip").GetComponent<Image>();
             Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(medalRankItemData.recharge));
             Count.GetComponent<Text>().text = "" + medalRankItemData.medal;
-            Image_Head.GetComponent<Image>().sprite =
-                Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
+            //Image_Head.GetComponent<Image>().sprite =Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
+            goChild.GetComponent<HeadIconScript>().setIcon("head_" + medalRankItemData.head);
             Name.GetComponent<Text>().text = medalRankItemData.name;
             if (VipUtil.GetVipLevel(medalRankItemData.recharge) > 0)
             {

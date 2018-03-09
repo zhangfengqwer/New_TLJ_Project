@@ -70,7 +70,8 @@ public class GetUserInfoRequest : Request
                 UserData.name = (string)jsonData["name"];
                 UserData.phone = (string)jsonData["phone"];
                 UserData.myTuiGuangCode = (string)jsonData["myTuiGuangCode"];
-                UserData.head = "Sprites/Head/head_" + jsonData["head"];
+                //UserData.head = "Sprites/Head/head_" + jsonData["head"];
+                UserData.head = "head_" + jsonData["head"];
                 UserData.gold = (int)jsonData["gold"];
                 UserData.yuanbao = (int)jsonData["yuanbao"];
                 UserData.medal = (int)jsonData["medal"];
