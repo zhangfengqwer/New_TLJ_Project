@@ -42,9 +42,9 @@ public class ILRuntimeUtil : MonoBehaviour
         }
 
         if (Application.isMobilePlatform)
-            fileInfoPath = Application.persistentDataPath + "/streamingAssets" + "/hotfix.dll";
+            fileInfoPath = DownAssetBundlesScript.fileRootPath + "/hotfix.dll";
         else
-            fileInfoPath = Application.dataPath + "/../streamingAssets" + "/hotfix.dll";
+            fileInfoPath = DownAssetBundlesScript.fileRootPath + "/hotfix.dll";
 
         LogUtil.Log("dll保存地址：" + fileInfoPath);
         string dllVersion = PlayerPrefs.GetString("dllVersion", "");
