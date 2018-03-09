@@ -166,7 +166,7 @@ public class RankListCaifuScript : MonoBehaviour
         Count.GetComponent<Text>().text = "" + UserData.medal;
         string s = "Sprites/Head/head_" + UserData.head;
         LogUtil.Log("head" + s);
-        Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>(UserData.head);
+        Image_Head.GetComponent<Image>().sprite = AssetBundlesManager.getInstance().getAssetBundlesDataByName("head.unity3d").LoadAsset<Sprite>(UserData.head);
         Name.GetComponent<Text>().text = UserData.name;
         if (VipUtil.GetVipLevel(UserData.rechargeVip) > 0)
         {

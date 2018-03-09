@@ -57,16 +57,30 @@ public class DownAssetBundlesScript : MonoBehaviour
 
     IEnumerator onStartDown()
     {
-        string url = "http://fwdown.hy51v.com/online/file/AssetBundles/" + m_needDownlist[m_curDownIndex];
+        string url;
+
+#if UNITY_ANDROID
+        url = OtherData.getWebUrl() + "AssetBundles/android/" + m_needDownlist[m_curDownIndex];
+#endif
+
+#if UNITY_IPHONE
+        url = OtherData.getWebUrl() + "AssetBundles/ios/" + m_needDownlist[m_curDownIndex];
+#endif
+
+#if UNITY_STANDALONE_WIN
+        url = OtherData.getWebUrl() + "AssetBundles/pc/" + m_needDownlist[m_curDownIndex];
+#endif
+        
+        string ab_name = m_needDownlist[m_curDownIndex];
+        LogUtil.Log("下载ab:" + ab_name + "    " + url);
+
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.Send();
 
-        byte[] bytes = request.downloadHandler.data;
-
-        AssetBundle myLoadedAssetBundle = AssetBundle.LoadFromMemory(bytes);
+        AssetBundle myLoadedAssetBundle = AssetBundle.LoadFromMemory(request.downloadHandler.data);
         for (int i = 0; i < AssetBundlesManager.getInstance().m_assetBundlesDatalist.Count; i++)
         {
-            if (AssetBundlesManager.getInstance().m_assetBundlesDatalist[i].m_name.CompareTo(m_needDownlist[m_curDownIndex]) == 0)
+            if (AssetBundlesManager.getInstance().m_assetBundlesDatalist[i].m_name.CompareTo(ab_name) == 0)
             {
                 AssetBundlesManager.getInstance().m_assetBundlesDatalist[i].m_assetBundle = myLoadedAssetBundle;
                 break;
@@ -74,16 +88,20 @@ public class DownAssetBundlesScript : MonoBehaviour
         }
 
         //保存ab到本地
-        string filePath = fileRootPath + "/" + m_needDownlist[m_curDownIndex];
-
-        if (!Directory.Exists(Path.GetDirectoryName(filePath)))
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-        }
+            byte[] bytes = request.downloadHandler.data;
 
-        using (FileStream fs = new FileStream(filePath, FileMode.Create))
-        {
-            fs.Write(bytes, 0, bytes.Length);
+            string filePath = fileRootPath + "/" + ab_name;
+
+            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            }
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                fs.Write(bytes, 0, bytes.Length);
+            }
         }
 
         {
