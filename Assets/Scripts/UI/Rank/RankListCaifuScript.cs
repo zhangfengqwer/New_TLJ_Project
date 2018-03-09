@@ -10,6 +10,7 @@ public class RankListCaifuScript : MonoBehaviour
     public GameObject Item;
     public Text CaifuRank;
     public Text CaifuCount;
+    public GameObject MyRank;
     public string mymedalRank;
     public static List<MedalRankItemData> _medalRankItemDatas;
 
@@ -50,15 +51,42 @@ public class RankListCaifuScript : MonoBehaviour
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;
-        ContentRect.sizeDelta = new Vector2(0, itemRectSizeDelta.y * _medalRankItemDatas.Count);
+
+        //自己是否上榜
         for (int i = 0; i < _medalRankItemDatas.Count; i++)
         {
-            GameObject goChild = GameObject.Instantiate(Item, Content.transform);
+            if (_medalRankItemDatas[i].name.Equals(UserData.name))
+            {
+                mymedalRank = i + 1 + "";
+            }
+        }
+
+        float f;
+        if (string.IsNullOrEmpty(mymedalRank))
+        {
+            f = itemRectSizeDelta.y * _medalRankItemDatas.Count;
+        }
+        else
+        {
+            LogUtil.Log("----1");
+            f = itemRectSizeDelta.y * (_medalRankItemDatas.Count - 1);
+        }
+        ContentRect.sizeDelta = new Vector2(0, f);
+        for (int i = 0; i < _medalRankItemDatas.Count; i++)
+        {
             MedalRankItemData medalRankItemData = _medalRankItemDatas[i];
+
+            if (medalRankItemData.name.Equals(UserData.name))
+            {
+                continue;
+            }
+
+            GameObject goChild = GameObject.Instantiate(Item, Content.transform);
+
             if (medalRankItemData.name.Equals(UserData.name))
             {
                 mymedalRank = i + 1 + "";
-                //goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
+                //                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
                 goChild.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
             }
 
@@ -118,5 +146,65 @@ public class RankListCaifuScript : MonoBehaviour
         }
 
         CaifuCount.text = "我的徽章:" + UserData.medal;
+
+        InitMyRank();
+    }
+
+    private void InitMyRank()
+    {
+        var Text_Ranking = MyRank.transform.Find("Text_Ranking");
+        Text RankText = Text_Ranking.GetComponent<Text>();
+        var Image_Head = MyRank.transform.Find("Image_Head");
+        var Name = MyRank.transform.Find("Name");
+        var Count = MyRank.transform.Find("Count");
+        var Ranking = MyRank.transform.Find("Ranking");
+        var Image_icon = MyRank.transform.Find("Image_icon");
+        var Image_vip = MyRank.transform.Find("Image_vip").GetComponent<Image>();
+        Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(UserData.rechargeVip));
+        Image rankImage = Ranking.GetComponent<Image>();
+
+        Count.GetComponent<Text>().text = "" + UserData.medal;
+        string s = "Sprites/Head/head_" + UserData.head;
+        LogUtil.Log("head" + s);
+        Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>(UserData.head);
+        Name.GetComponent<Text>().text = UserData.name;
+        if (VipUtil.GetVipLevel(UserData.rechargeVip) > 0)
+        {
+            Name.GetComponent<Text>().color = new Color(253 / (float)255, 239 / (float)255, 82 / (float)255, 1);
+        }
+
+        MyRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
+
+        Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
+
+        if (string.IsNullOrEmpty(mymedalRank))
+        {
+            Text_Ranking.gameObject.SetActive(true);
+            Ranking.gameObject.SetActive(false);
+            RankText.text = "无";
+        }
+        else
+        {
+            int i = int.Parse(mymedalRank) - 1;
+            if (i < 3)
+            {
+                Text_Ranking.gameObject.SetActive(false);
+                Ranking.gameObject.SetActive(true);
+                if (i == 1)
+                {
+                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_2");
+                }
+                else if (i == 2)
+                {
+                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_3");
+                }
+            }
+            else
+            {
+                Text_Ranking.gameObject.SetActive(true);
+                Ranking.gameObject.SetActive(false);
+                RankText.text = i + 1 + "";
+            }
+        }
     }
 }

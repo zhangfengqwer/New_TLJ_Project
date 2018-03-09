@@ -9,10 +9,13 @@ public class RankListJifenScript : MonoBehaviour
     public List<GoldRankItemData> _GoldRankList;
     public GameObject Content;
     public GameObject Item;
+    public GameObject MyRank;
+    private int myRankLevel;
     public Text JifenRank;
     public Text JifenCount;
     public static RankListJifenScript Instance;
     public string myGoldRank;
+
 
     void Start()
     {
@@ -45,11 +48,39 @@ public class RankListJifenScript : MonoBehaviour
         RectTransform ContentRect = Content.GetComponent<RectTransform>();
         RectTransform ItemRect = Item.GetComponent<RectTransform>();
         Vector2 itemRectSizeDelta = ItemRect.sizeDelta;
-        ContentRect.sizeDelta = new Vector2(0, itemRectSizeDelta.y * _GoldRankList.Count);
+
+        //自己是否上榜
         for (int i = 0; i < _GoldRankList.Count; i++)
         {
-            GameObject goChild = GameObject.Instantiate(Item, Content.transform);
+            if (_GoldRankList[i].name.Equals(UserData.name))
+            {
+                myGoldRank = i + 1 + "";
+            }
+        }
+
+        float f;
+        if (string.IsNullOrEmpty(myGoldRank))
+        {
+            f = itemRectSizeDelta.y * _GoldRankList.Count;
+        }
+        else
+        {
+            LogUtil.Log("----1");
+            f = itemRectSizeDelta.y * (_GoldRankList.Count - 1);
+        }
+        ContentRect.sizeDelta = new Vector2(0, f);
+
+
+        for (int i = 0; i < _GoldRankList.Count; i++)
+        {
             GoldRankItemData goldRankItemData = _GoldRankList[i];
+
+            if (goldRankItemData.name.Equals(UserData.name))
+            {
+                continue;
+            }
+
+            GameObject goChild = GameObject.Instantiate(Item, Content.transform);
 
             if (goldRankItemData.name.Equals(UserData.name))
             {
@@ -113,6 +144,66 @@ public class RankListJifenScript : MonoBehaviour
         }
 
         JifenCount.text = "我的金币:" + UserData.gold;
+
+        InitMyRank();
+    }
+
+    private void InitMyRank()
+    {
+        var Text_Ranking = MyRank.transform.Find("Text_Ranking");
+        Text RankText = Text_Ranking.GetComponent<Text>();
+        var Image_Head = MyRank.transform.Find("Image_Head");
+        var Name = MyRank.transform.Find("Name");
+        var Count = MyRank.transform.Find("Count");
+        var Ranking = MyRank.transform.Find("Ranking");
+        var Image_icon = MyRank.transform.Find("Image_icon");
+        var Image_vip = MyRank.transform.Find("Image_vip").GetComponent<Image>();
+        Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(UserData.rechargeVip));
+        Image rankImage = Ranking.GetComponent<Image>();
+
+        Count.GetComponent<Text>().text = "" + UserData.gold;
+        string s = "Sprites/Head/head_" + UserData.head;
+        LogUtil.Log("head" + s);
+        Image_Head.GetComponent<Image>().sprite = Resources.Load<Sprite>(UserData.head);
+        Name.GetComponent<Text>().text = UserData.name;
+        if (VipUtil.GetVipLevel(UserData.rechargeVip) > 0)
+        {
+            Name.GetComponent<Text>().color = new Color(253 / (float)255, 239 / (float)255, 82 / (float)255, 1);
+        }
+
+        MyRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
+
+        Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
+
+        if (string.IsNullOrEmpty(myGoldRank))
+        {
+            Text_Ranking.gameObject.SetActive(true);
+            Ranking.gameObject.SetActive(false);
+            RankText.text = "无";
+        }
+        else
+        {
+            int i = int.Parse(myGoldRank) - 1;
+            if (i < 3)
+            {
+                Text_Ranking.gameObject.SetActive(false);
+                Ranking.gameObject.SetActive(true);
+                if (i == 1)
+                {
+                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_2");
+                }
+                else if (i == 2)
+                {
+                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_3");
+                }
+            }
+            else
+            {
+                Text_Ranking.gameObject.SetActive(true);
+                Ranking.gameObject.SetActive(false);
+                RankText.text = i + 1 + "";
+            }
+        }
     }
 
 
