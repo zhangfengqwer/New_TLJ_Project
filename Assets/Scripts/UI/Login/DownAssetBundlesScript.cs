@@ -8,8 +8,7 @@ public class DownAssetBundlesScript : MonoBehaviour {
 
     public List<string> m_needDownlist = new List<string>();
     public int m_curDownIndex = 0;
-
-    // Use this for initialization
+    
     void Start ()
     {
         

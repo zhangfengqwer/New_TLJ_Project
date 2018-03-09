@@ -25,8 +25,7 @@ public class HeadIconScript : MonoBehaviour {
         {
             return;
         }
-
-        Debug.Log("----------------------------------------------------"+path);
+        
         m_icon.sprite = AssetBundlesManager.getInstance().getAssetBundlesDataByName("head.unity3d").LoadAsset<Sprite>(path);
         //m_icon.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
