@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 67aea4360621acb4ba89b44c9ce1e4d2
+guid: 8d12c07a66285bb42815bb8cd0d90821
 timeCreated: 1514264290
 licenseType: Free
 TextureImporter:
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: sprites/head.unity3d
   assetBundleVariant: 
