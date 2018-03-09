@@ -783,17 +783,8 @@ public class PlatformHelper
 #else
 public class PlatformHelper
 {
-
-    public static void pay(string callObj, string callFunc, string data)
-    {
-
-    }
     // 是否在About框中显示Logo
-    public static string GetTextOfAbout() {
-        return "";
-    }
-
-    public static string GetUniqueIdentifier() 
+    public static string GetTextOfAbout()
     {
         return "";
     }
@@ -808,20 +799,9 @@ public class PlatformHelper
         return 100;
     }
 
-    public static void isLoginConnectingScene(bool value){}
-
-    /// <summary>
-    ///  control 91 toolbar show or hide
-    /// </summary>
-    public static void show91ToolBar(bool value) { }
-
-    /// <summary>
-    /// 获取渠道相关参数  
-    /// </summary>
-    /// <returns></returns>
-    public static string GetThirdParameters()
+    public static string GetUniqueIdentifier()
     {
-        return "";
+        return "Unity_Editor";
     }
 
     public static bool IsIOSForceUpdate()
@@ -841,6 +821,7 @@ public class PlatformHelper
     {
         return "1.5?";
     }
+
     /// <summary>
     /// 获取渠道类型  
     /// </summary>
@@ -849,53 +830,106 @@ public class PlatformHelper
     /// </param>
     public static string GetLoginType()
     {
-//        DebugManager.Log("GetLoginType ---- 91");
         return "";
     }
+
+    /// <summary>
+    /// 获取渠道相关参数  
+    /// </summary>
+    /// <returns></returns>
+    public static string GetThirdParameters()
+    {
+        return "";
+    }
+
     public static void Login(string obj, string func, string data)
     {
+    }
 
+    public static void WXShareFriends(string obj, string func, string data)
+    {
+    }
+
+    public static void WXShareFriendsCircle(string obj, string func, string data)
+    {
+    }
+
+    public static void iOSLog(string str)
+    {
+        LogUtil.Log(str);
+    }
+
+    public static void setProductName(string str)
+    {
     }
 
     /// <summary>
     /// 在外部设置该安装包是否与360等第三方平台合作 
     /// true -- 合作
     /// </summary>
-    public static void GetIsCollaborate()
+    //    public static void GetIsCollaborate()
+    //    {
+    //        GlobalData.IsCollaborate = true;
+    //
+    //    }
+    /// <summary>
+    /// QQ sina微博账号登录 
+    /// 
+    /// </summary>
+    /// <param name="type">QQ ：104； SinaWeiBo：105</param>
+    /// <param name="obj">登录按钮</param>
+    /// <param name="func">回调方法名</param>
+    /// <param name="data">待回调返回到服务端的数据</param>
+    public static void CommonLogin(int type, string obj, string func, string data)
     {
-//        GlobalData.IsCollaborate = true;
     }
 
     public static void setLoginResponse(string loginResponse)
     {
-
     }
 
-    public static void iOSLog(string str){
-        LogUtil.Log(str);
+    public static void closeService()
+    {
     }
 
-    public static void setProductName(string str){}
+    public static bool ForceUpdate()
+    {
+        return false;
+    }
 
-    public static void closeService(){}
 
-    public static bool ForceUpdate() { return false; }
+    public static void onUmUserEvent(int type, String eventID, String label)
+    {
+    }
+
+    public static string getAndroidStringConfig(String name)
+    {
+        return null;
+    }
+
+    public static string getOrderExpand()
+    {
+        return "";
+    }
 
 
-    public static void onUmUserEvent( int type , String eventID, String label) {}
+    public static void isLoginConnectingScene(bool value)
+    {
+    }
 
-    public static string getAndroidStringConfig(String name) { return null; }
-
-    public static string getOrderExpand() { return ""; }
-
-    public static void CommonLogin(int type, string obj, string func, string data){}
-
+    /// <summary>
+    ///  control 91 toolbar show or hide
+    /// </summary>
+    public static void show91ToolBar(bool value)
+    {
+    }
 
     /// <summary>
     /// 是否是第三方SDK 的退出系统 ，如果是第三方系统退出，退出的时候，将要回调
     /// </summary>
     /// <returns></returns>
-    public static bool isThirdSDKQuit(){
+    public static bool isThirdSDKQuit()
+    {
         return false;
     }
 
@@ -906,7 +940,8 @@ public class PlatformHelper
     /// <param name="callObj"></param>
     /// <param name="callFunc"></param>
     /// <param name="data"></param>
-    public static void thirdSDKQuit(string callObj, string callFunc, string data){
+    public static void thirdSDKQuit(string callObj, string callFunc, string data)
+    {
     }
 
 
@@ -916,7 +951,8 @@ public class PlatformHelper
     /// <param name="callObj"></param>
     /// <param name="callFunc"></param>
     /// <param name="data"></param>
-    public static void setQuitCallback(string callObj, string callFunc, string data){
+    public static void setQuitCallback(string callObj, string callFunc, string data)
+    {
     }
 
 
@@ -926,7 +962,8 @@ public class PlatformHelper
     /// <param name="callObj"></param>
     /// <param name="callFunc"></param>
     /// <param name="data"></param>
-    public static void logout(string callObj, string callFunc, string data){
+    public static void logout(string callObj, string callFunc, string data)
+    {
     }
 
 
@@ -936,7 +973,8 @@ public class PlatformHelper
     /// <param name="callObj"></param>
     /// <param name="callFunc"></param>
     /// <param name="data"></param>
-    public static void setLogoutCallback(string callObj, string callFunc, string data){
+    public static void setLogoutCallback(string callObj, string callFunc, string data)
+    {
     }
 
 
@@ -945,7 +983,8 @@ public class PlatformHelper
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public static String commonMethod(String input){
+    public static String commonMethod(String input)
+    {
         return null;
     }
 
@@ -955,7 +994,8 @@ public class PlatformHelper
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public static String thirdCommonMethod(String input){
+    public static String thirdCommonMethod(String input)
+    {
         return null;
     }
 
@@ -964,7 +1004,8 @@ public class PlatformHelper
     /// 第三方游戏中心（一般是浮动图标），是否可见
     /// </summary>
     /// <param name="value"></param>
-    public static void setThirdCenterVisible(bool value){
+    public static void setThirdCenterVisible(bool value)
+    {
     }
 
     /// <summary>
@@ -979,7 +1020,11 @@ public class PlatformHelper
     /// 显示LogUtil信息
     /// </summary>
     /// <param name="value"></param>
-    public static void showDebugInfo(string name ,string unityInfo)
+    public static void showDebugInfo(string name, string unityInfo)
+    {
+    }
+
+    public static void pay(string payType, string callObj, string callFunc, string data)
     {
     }
 
@@ -992,8 +1037,17 @@ public class PlatformHelper
      * 4G 4
      * @param value
      */
-    public static int getNetWork() {
+    public static int getNetWork()
+    {
         return 1;
+    }
+
+    /**
+     * 1表示测试包
+     */
+    public static string getIsTest()
+    {
+        return "1";
     }
 
     /**
@@ -1003,45 +1057,25 @@ public class PlatformHelper
      * 中国电信 3
      * 无卡 0
      */
-    public static int getProvidersName() {
+    public static int getProvidersName()
+    {
         return 1;
     }
 
-    public static void WXShareFriends(string obj, string func, string data)
+    public static void DownApk()
     {
-
     }
 
-    public static void WXShareFriendsCircle(string obj, string func, string data)
-    {
-
-    }
-
-    public static void pay(string payTypeWx, string callObj, string callFunc, string data)
-    {
-
-    }
-
-    public static string getIsTest()
-    {
-        return "1";
-    }
-
-    public static string GetChannelName()
-    {
-        return "ios";
-    }
-
-    public static bool isThirdSDKQuit()
+    public static bool IsThirdLogin()
     {
         return false;
     }
 
-    public static void thirdSDKQuit(string callObj, string callFunc, string data)
+    public static string GetMacId()
     {
+        return "1";
     }
 }
-
 #endif
 
 
