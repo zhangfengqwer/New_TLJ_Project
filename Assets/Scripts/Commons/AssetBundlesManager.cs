@@ -32,6 +32,7 @@ public class AssetBundlesManager
         m_assetBundlesDatalist.Add(new AssetBundlesData("turntable.unity3d", null));
         m_assetBundlesDatalist.Add(new AssetBundlesData("shouchong.unity3d", null));
         m_assetBundlesDatalist.Add(new AssetBundlesData("shop.unity3d", null));
+        m_assetBundlesDatalist.Add(new AssetBundlesData("game.unity3d", null));
     }
 
     public AssetBundle getAssetBundlesDataByName(string name)

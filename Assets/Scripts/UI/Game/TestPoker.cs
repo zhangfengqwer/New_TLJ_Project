@@ -183,7 +183,7 @@ public class TestPoker : MonoBehaviour {
                     temp = "icon_meihua";
                     break;
             }
-            go.transform.Find("Type").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/Poker/"+temp, typeof(Sprite)) as Sprite;
+            go.transform.Find("Type").GetComponent<Image>().sprite = Resources.Load("Sprites/Poker/"+temp, typeof(Sprite)) as Sprite;
             int num = poker.m_num;
             if (num >= 2 && num <= 10)
             {

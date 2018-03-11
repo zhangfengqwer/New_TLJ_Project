@@ -161,31 +161,31 @@ public class GameUtil
             return str;
         }
 
-        string path = "Sprites/Game/Poker/icon_wuzhu";
+        string path = "Sprites/Poker/icon_wuzhu";
         
         if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_FangKuai)
         {
-            path = "Sprites/Game/Poker/icon_fangkuai";
+            path = "Sprites/Poker/icon_fangkuai";
         }
         else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_HeiTao)
         {
-            path = "Sprites/Game/Poker/icon_heitao";
+            path = "Sprites/Poker/icon_heitao";
         }
         else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_HongTao)
         {
-            path = "Sprites/Game/Poker/icon_hongtao";
+            path = "Sprites/Poker/icon_hongtao";
         }
         else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_MeiHua)
         {
-            path = "Sprites/Game/Poker/icon_meihua";
+            path = "Sprites/Poker/icon_meihua";
         }
         else if (masterPokerType == (int)TLJCommon.Consts.PokerType.PokerType_Wang)
         {
-            path = "Sprites/Game/Poker/icon_wuzhu";
+            path = "Sprites/Poker/icon_wuzhu";
         }
         else if (masterPokerType == -1)
         {
-            path = "Sprites/Game/Poker/icon_wuzhu";
+            path = "Sprites/Poker/icon_wuzhu";
         }
 
         return path;
@@ -362,35 +362,35 @@ public class GameUtil
 
         if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_jingdian_common";
+            path = "roomlogo_jingdian_common";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ChuJi) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_jingdian_xinshou";
+            path = "roomlogo_jingdian_xinshou";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_ZhongJi) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_jingdian_jingying";
+            path = "roomlogo_jingdian_jingying";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_GaoJi) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_jingdian_dashi";
+            path = "roomlogo_jingdian_dashi";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_chaodi_common";
+            path = "roomlogo_chaodi_common";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ChuJi) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_chaodi_xinshou";
+            path = "roomlogo_chaodi_xinshou";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_ZhongJi) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_chaodi_jingying";
+            path = "roomlogo_chaodi_jingying";
         }
         else if (gameroomtype.CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_GaoJi) == 0)
         {
-            path = "Sprites/Game/RoomLogo/roomtype_chaodi_dashi";
+            path = "roomlogo_chaodi_dashi";
         }
         else
         {
@@ -404,7 +404,7 @@ public class GameUtil
                     // pvp金币场
                     if (list[1].CompareTo("JinBi") == 0)
                     {
-                        path = "Sprites/Game/RoomLogo/roomlogo_jinbichang";
+                        path = "roomlogo_jinbichang";
 
                         PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
                         if (pvpGameRoomData != null)
@@ -419,7 +419,7 @@ public class GameUtil
                     // pvp话费场
                     else if (list[1].CompareTo("HuaFei") == 0)
                     {
-                        path = "Sprites/Game/RoomLogo/roomlogo_huafeichang";
+                        path = "roomlogo_huafeichang";
 
                         PVPGameRoomData pvpGameRoomData = PVPGameRoomDataScript.getInstance().getDataByRoomType(gameroomtype);
                         if (pvpGameRoomData != null)
@@ -434,8 +434,8 @@ public class GameUtil
                 }
             }
         }
-
-        CommonUtil.setImageSprite(gameRoomLogo, path);
+        
+        CommonUtil.setImageSpriteByAssetBundle(gameRoomLogo, "game.unity3d", path);
     }
 
     public static void showGameObject(GameObject obj)

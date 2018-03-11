@@ -55,8 +55,8 @@ public class ChatPanelScript : MonoBehaviour {
 
         {
             m_tab_bg.transform.localPosition = new Vector3(-83, 0, 0);
-            m_button_chat.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_chat_xuanze", typeof(Sprite)) as Sprite;
-            m_button_biaoqing.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_emogi_weixuanze", typeof(Sprite)) as Sprite;
+            CommonUtil.setImageSpriteByAssetBundle(m_button_chat.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "btn_chat_xuanze");
+            CommonUtil.setImageSpriteByAssetBundle(m_button_biaoqing.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "btn_emogi_weixuanze");
         }
 
         m_ListViewScript_chat.clear();
@@ -89,8 +89,9 @@ public class ChatPanelScript : MonoBehaviour {
         {
             {
                 m_tab_bg.transform.localPosition = new Vector3(83, 0, 0);
-                m_button_chat.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_chat_weixuanze", typeof(Sprite)) as Sprite;
-                m_button_biaoqing.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/btn_emogi_xuanze", typeof(Sprite)) as Sprite;
+
+                CommonUtil.setImageSpriteByAssetBundle(m_button_chat.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "btn_chat_weixuanze");
+                CommonUtil.setImageSpriteByAssetBundle(m_button_biaoqing.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "btn_emogi_xuanze");
             }
         }
 

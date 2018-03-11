@@ -247,7 +247,7 @@ public class GameScript : MonoBehaviour
             m_button_bag.transform.localScale = new Vector3(0, 0, 0);
 
             m_buttonTuoGuan.interactable = false;
-            CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+            CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.GetComponent<Image>(), "game.unity3d", "game_btn_gray");
 
             m_buttonJiPaiQi.transform.localScale = new Vector3(0, 0, 0);
 
@@ -257,7 +257,7 @@ public class GameScript : MonoBehaviour
             }
 
             // 比赛场把金币图标替换为积分图标
-            CommonUtil.setImageSprite(m_myUserInfoUI.transform.Find("Image_goldIcon").GetComponent<Image>(), "Sprites/Icon/icon_jifen");
+            CommonUtil.setImageSpriteByAssetBundle(m_myUserInfoUI.transform.Find("Image_goldIcon").GetComponent<Image>(), "game.unity3d", "icon_jifen");
         }
     }
 
@@ -281,16 +281,16 @@ public class GameScript : MonoBehaviour
                 {
                     m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
                     m_buttonTuoGuan.interactable = true;
-                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                    CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.GetComponent<Image>(), "game.unity3d", "game_btn_green");
                 }
                 else
                 {
                     m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
                     m_buttonTuoGuan.interactable = false;
-                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+                    CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.GetComponent<Image>(), "game.unity3d", "game_btn_gray");
                 }
-
-                CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "Sprites/Game/game_tuoguan");
+                
+                CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "game_tuoguan");
                 GameData.getInstance().m_isTuoGuan = false;
             }
 
@@ -298,7 +298,7 @@ public class GameScript : MonoBehaviour
             {
                 m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
                 m_buttonDiPai.interactable = false;
-                CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(),"Sprites/Game/game_btn_gray");
+                CommonUtil.setImageSpriteByAssetBundle(m_buttonDiPai.GetComponent<Image>(), "game.unity3d", "game_btn_gray");
             }
 
             // 记牌器按钮
@@ -341,13 +341,13 @@ public class GameScript : MonoBehaviour
                 {
                     m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
                     m_buttonTuoGuan.interactable = true;
-                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                    CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.GetComponent<Image>(), "game.unity3d", "game_btn_green");
                 }
                 else
                 {
                     m_buttonTuoGuan.transform.localScale = new Vector3(1, 1, 1);
                     m_buttonTuoGuan.interactable = false;
-                    CommonUtil.setImageSprite(m_buttonTuoGuan.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+                    CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.GetComponent<Image>(), "game.unity3d", "game_btn_gray");
                 }
 
                 m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0); // 禁用开始游戏按钮
@@ -1738,15 +1738,13 @@ public class GameScript : MonoBehaviour
                         {
                             m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
                             m_buttonDiPai.interactable = true;
-                            CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(),
-                                "Sprites/Game/game_btn_green");
+                            CommonUtil.setImageSpriteByAssetBundle(m_buttonDiPai.GetComponent<Image>(), "game.unity3d", "game_btn_green");
                         }
                         else
                         {
                             m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
                             m_buttonDiPai.interactable = false;
-                            CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(),
-                                "Sprites/Game/game_btn_gray");
+                            CommonUtil.setImageSpriteByAssetBundle(m_buttonDiPai.GetComponent<Image>(), "game.unity3d", "game_btn_gray");
                         }
                     }
 
@@ -2042,11 +2040,11 @@ public class GameScript : MonoBehaviour
 
                             if (GameData.getInstance().m_isBanker == 1)
                             {
-                                ShowImageScript.create("Sprites/Game/img_game_po_fail", new Vector3(0, 0, 0));
+                                ShowImageScript.create("img_game_po_fail", new Vector3(0, 0, 0));
                             }
                             else
                             {
-                                ShowImageScript.create("Sprites/Game/img_game_po_success", new Vector3(0, 0, 0));
+                                ShowImageScript.create("img_game_po_success", new Vector3(0, 0, 0));
                             }
                         }
                     }
@@ -2195,14 +2193,14 @@ public class GameScript : MonoBehaviour
                         if (isTuoGuan)
                         {
                             m_tuoguanObj = TuoGuanPanelScript.create(this);
-                            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(),"Sprites/Game/game_yituoguan");
+                            CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "game_yituoguan");
 
                             GameData.getInstance().m_isTuoGuan = true;
                         }
                         // 取消托管
                         else
                         {
-                            CommonUtil.setImageSprite(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(),"Sprites/Game/game_tuoguan");
+                            CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "game_tuoguan");
 
                             GameData.getInstance().m_isTuoGuan = false;
                         }
@@ -2740,13 +2738,13 @@ public class GameScript : MonoBehaviour
                 {
                     m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
                     m_buttonDiPai.interactable = true;
-                    CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(), "Sprites/Game/game_btn_green");
+                    CommonUtil.setImageSpriteByAssetBundle(m_buttonDiPai.GetComponent<Image>(), "game.unity3d", "game_btn_green");
                 }
                 else
                 {
                     m_buttonDiPai.transform.localScale = new Vector3(1, 1, 1);
                     m_buttonDiPai.interactable = false;
-                    CommonUtil.setImageSprite(m_buttonDiPai.GetComponent<Image>(), "Sprites/Game/game_btn_gray");
+                    CommonUtil.setImageSpriteByAssetBundle(m_buttonDiPai.GetComponent<Image>(), "game.unity3d", "game_btn_gray");
                 }
             }
 
@@ -3653,11 +3651,11 @@ public class GameScript : MonoBehaviour
         string imgPath = "";
         if (isChaoDi)
         {
-            imgPath = "Sprites/Game/img_game_chaodi";
+            imgPath = "img_game_chaodi";
         }
         else
         {
-            imgPath = "Sprites/Game/img_game_buchaodi";
+            imgPath = "img_game_buchaodi";
         }
 
         if (uid.CompareTo(UserData.uid) == 0)

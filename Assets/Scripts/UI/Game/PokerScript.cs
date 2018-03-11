@@ -59,33 +59,33 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
         {
             case (int)TLJCommon.Consts.PokerType.PokerType_FangKuai:
                 {
-                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/red_" + m_num);
-                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_fangkuai");
-                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_fangkuai");
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Poker/red_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Poker/icon_fangkuai");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Poker/icon_fangkuai");
                 }
                 break;
 
             case (int)TLJCommon.Consts.PokerType.PokerType_HeiTao:
                 {
-                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/black_" + m_num);
-                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_heitao");
-                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_heitao");
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Poker/black_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Poker/icon_heitao");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Poker/icon_heitao");
                 }
                 break;
 
             case (int)TLJCommon.Consts.PokerType.PokerType_HongTao:
                 {
-                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/red_" + m_num);
-                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_hongtao");
-                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_hongtao");
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Poker/red_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Poker/icon_hongtao");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Poker/icon_hongtao");
                 }
                 break;
 
             case (int)TLJCommon.Consts.PokerType.PokerType_MeiHua:
                 {
-                    CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/black_" + m_num);
-                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Game/Poker/icon_meihua");
-                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_meihua");
+                    CommonUtil.setImageSprite(m_image_num, "Sprites/Poker/black_" + m_num);
+                    CommonUtil.setImageSprite(m_image_small_icon, "Sprites/Poker/icon_meihua");
+                    CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Poker/icon_meihua");
                 }
                 break;
 
@@ -93,13 +93,13 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
                 {
                     if (num == 15)
                     {
-                        CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/black_" + m_num);
-                        CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_xiaowang");
+                        CommonUtil.setImageSprite(m_image_num, "Sprites/Poker/black_" + m_num);
+                        CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Poker/icon_xiaowang");
                     }
                     else if (num == 16)
                     {
-                        CommonUtil.setImageSprite(m_image_num, "Sprites/Game/Poker/red_" + m_num);
-                        CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Game/Poker/icon_dawang");
+                        CommonUtil.setImageSprite(m_image_num, "Sprites/Poker/red_" + m_num);
+                        CommonUtil.setImageSprite(m_image_big_icon, "Sprites/Poker/icon_dawang");
                     }
 
                     m_image_num.SetNativeSize();

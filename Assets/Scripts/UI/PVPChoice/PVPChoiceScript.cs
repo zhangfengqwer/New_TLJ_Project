@@ -96,8 +96,8 @@ public class PVPChoiceScript : MonoBehaviour {
 
         {
             m_tab_bg.transform.localPosition = new Vector3(-83,0,0);
-            m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/tiaozhansai_xuanze", typeof(Sprite)) as Sprite;
-            m_button_huafeisai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/huafeisai_weixuanze", typeof(Sprite)) as Sprite;
+            CommonUtil.setImageSpriteByAssetBundle(m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "tiaozhansai_xuanze");
+            CommonUtil.setImageSpriteByAssetBundle(m_button_huafeisai.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "huafeisai_weixuanze");
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)
@@ -133,8 +133,9 @@ public class PVPChoiceScript : MonoBehaviour {
 
         {
             m_tab_bg.transform.localPosition = new Vector3(83, 0, 0);
-            m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/tiaozhansai_weixuanze", typeof(Sprite)) as Sprite;
-            m_button_huafeisai.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load("Sprites/Game/ChoiceChangCi/huafeisai_xuanze", typeof(Sprite)) as Sprite;
+
+            CommonUtil.setImageSpriteByAssetBundle(m_button_tiaozhansai.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "tiaozhansai_weixuanze");
+            CommonUtil.setImageSpriteByAssetBundle(m_button_huafeisai.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "huafeisai_xuanze");
         }
 
         for (int i = 0; i < PVPGameRoomDataScript.getInstance().getDataList().Count; i++)

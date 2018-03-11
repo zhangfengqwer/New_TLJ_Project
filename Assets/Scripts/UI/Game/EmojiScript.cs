@@ -88,7 +88,6 @@ public class EmojiScript : MonoBehaviour
                 }
                 else
                 {
-                    
                     Destroy(gameObject);
                 }
             }

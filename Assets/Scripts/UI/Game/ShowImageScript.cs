@@ -12,7 +12,7 @@ public class ShowImageScript : MonoBehaviour
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.transform.localPosition = vec3;
-        CommonUtil.setImageSprite(obj.GetComponent<Image>(), imagePath);
+        CommonUtil.setImageSpriteByAssetBundle(obj.GetComponent<Image>(), "game.unity3d", imagePath);
         obj.GetComponent<Image>().SetNativeSize();
 
         return obj;
