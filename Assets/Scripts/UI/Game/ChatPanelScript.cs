@@ -114,8 +114,8 @@ public class ChatPanelScript : MonoBehaviour {
                     reqChat_emoji(id + 1);
                 });
 
-                string path = "Sprites/Emoji/Expression-" + (i + 1) + "_1";
-                CommonUtil.setImageSprite(button.GetComponent<Image>(), path);
+                string path = "Expression-" + (i + 1) + "_1";
+                CommonUtil.setImageSpriteByAssetBundle(button.GetComponent<Image>(),"emoji.unity3d", path);
                 button.GetComponent<Image>().SetNativeSize();
 
                 if (i % 6 == 0)

@@ -51,8 +51,8 @@ public class EmojiScript : MonoBehaviour
     {
         m_emoji_id = emoji_id;
         m_image = gameObject.GetComponent<Image>();
-        string path = "Sprites/Emoji/Expression-" + m_emoji_id + "_1";
-        CommonUtil.setImageSprite(m_image, path);
+        string path = "Expression-" + m_emoji_id + "_1";
+        CommonUtil.setImageSpriteByAssetBundle(m_image,"emoji.unity3d", path);
 
         InvokeRepeating("onInvoke", 1.0f / m_zhenlv, 1.0f / m_zhenlv);
     }
@@ -62,8 +62,8 @@ public class EmojiScript : MonoBehaviour
         try
         {
             ++m_curindex;
-            string path = "Sprites/Emoji/Expression-" + m_emoji_id + "_" + m_curindex;
-            Sprite sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+            string path = "Expression-" + m_emoji_id + "_" + m_curindex;
+            Sprite sprite = CommonUtil.getImageSpriteByAssetBundle("emoji.unity3d", path);
             if (sprite == null)
             {
                 ++repeatCount;
@@ -94,7 +94,7 @@ public class EmojiScript : MonoBehaviour
             }
             else
             {
-                CommonUtil.setImageSprite(m_image, path);
+                CommonUtil.setImageSpriteByAssetBundle(m_image,"emoji.unity3d", path);
             }
         }
         catch (Exception ex)

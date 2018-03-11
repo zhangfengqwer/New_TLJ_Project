@@ -46,6 +46,7 @@ public class OtherPlayerUIScript : MonoBehaviour {
         }
     }
 
+    // 此函数暂时没有地方引用
     public void setHead(string headPath)
     {
         // 优先使用热更新的代码

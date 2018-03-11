@@ -24,6 +24,7 @@ public class AssetBundlesManager
     public void init()
     {
         m_assetBundlesDatalist.Add(new AssetBundlesData("head.unity3d", null));
+        m_assetBundlesDatalist.Add(new AssetBundlesData("emoji.unity3d", null));
     }
 
     public AssetBundle getAssetBundlesDataByName(string name)

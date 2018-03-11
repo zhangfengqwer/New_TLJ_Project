@@ -2567,7 +2567,7 @@ public class GameScript : MonoBehaviour
                 if (playerData != null)
                 {
                     GameData.getInstance().getPlayerDataByUid(uid).m_name = (string)jd["name"];
-                    GameData.getInstance().getPlayerDataByUid(uid).m_head = "Sprites/Head/head_" + (int)jd["head"];
+                    GameData.getInstance().getPlayerDataByUid(uid).m_head = "head_" + (int)jd["head"];
                     GameData.getInstance().getPlayerDataByUid(uid).m_gold = (int)jd["gold"];
                     GameData.getInstance().getPlayerDataByUid(uid).m_vipLevel = (int)jd["vipLevel"];
                     GameData.getInstance().getPlayerDataByUid(uid).m_allGameCount = (int)jd["gameData"]["allGameCount"];

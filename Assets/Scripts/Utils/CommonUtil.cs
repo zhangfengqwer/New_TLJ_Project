@@ -206,6 +206,26 @@ public class CommonUtil
         image.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 
+    static public void setImageSpriteByAssetBundle(Image image, string assetbundleName,string imageName)
+    {
+        AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
+        if (ab != null)
+        {
+            image.sprite = ab.LoadAsset<Sprite>(imageName);
+        }
+    }
+
+    static public Sprite getImageSpriteByAssetBundle(string assetbundleName, string imageName)
+    {
+        AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
+        if (ab != null)
+        {
+            return ab.LoadAsset<Sprite>(imageName);
+        }
+
+        return null;
+    }
+
     static public void setImageColor(Image image,float r, float g, float b)
     {
         image.color = new Color(r / 255.0f, g / 255.0f, b / 255.0f);

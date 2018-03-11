@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 1025932827
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: head.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: emoji.unity3d
+      Dependencies: {}
