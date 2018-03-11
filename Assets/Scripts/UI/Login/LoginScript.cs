@@ -172,11 +172,7 @@ public class LoginScript : MonoBehaviour
             UnityEngine.Debug.Log("不需要下载ab包");
 
             netDataDown();
-        }
-        else
-        {
-            UnityEngine.Debug.Log("需要下载ab包");
-        }        
+        }    
     }
 
     public void netDataDown()
