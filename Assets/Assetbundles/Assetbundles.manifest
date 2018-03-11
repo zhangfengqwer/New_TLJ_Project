@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1474880670
+CRC: 3866088173
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -34,4 +34,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_10:
       Name: poker.unity3d
+      Dependencies: {}
+    Info_11:
+      Name: audios.unity3d
       Dependencies: {}

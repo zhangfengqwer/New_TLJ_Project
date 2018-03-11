@@ -255,6 +255,17 @@ public class CommonUtil
         }
     }
 
+    static public AudioClip getAudioClipByAssetBundle(string assetbundleName, string audioName)
+    {
+        AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
+        if (ab != null)
+        {
+            return ab.LoadAsset<AudioClip>(audioName);
+        }
+
+        return null;
+    }
+
     //字符转ASCII码：
     //character长度只能为1
     static public int charToAsc(string character)
