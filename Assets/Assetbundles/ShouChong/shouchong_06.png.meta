@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 40b438fff0903d54685b2a20d802b6f3
-timeCreated: 1512375183
+guid: ebbad1600e3476443bed47085fee34a8
+timeCreated: 1512375201
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: shouchong.unity3d
   assetBundleVariant: 
