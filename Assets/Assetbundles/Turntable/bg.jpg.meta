@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a22cb53bc1c08b344b687a6e3d423d4c
-timeCreated: 1510826129
+guid: bc1d15b794329744cb9f2b152e263995
+timeCreated: 1520316105
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: turntable.unity3d
   assetBundleVariant: 

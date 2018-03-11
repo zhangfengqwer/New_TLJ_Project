@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3588719584
+CRC: 760385692
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -19,4 +19,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_5:
       Name: tuiguang.unity3d
+      Dependencies: {}
+    Info_6:
+      Name: turntable.unity3d
       Dependencies: {}

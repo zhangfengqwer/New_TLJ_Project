@@ -201,11 +201,11 @@ public class TurntablePanelScript : MonoBehaviour
         {
             if (m_curInGameObject.name.CompareTo(m_rewardObj_list[i].name) == 0)
             {
-                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/zj");
+                CommonUtil.setImageSpriteByAssetBundle(m_rewardObj_list[i].GetComponent<Image>(), "turntable.unity3d", "zj");
             }
             else
             {
-                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/wzj");
+                CommonUtil.setImageSpriteByAssetBundle(m_rewardObj_list[i].GetComponent<Image>(), "turntable.unity3d", "wzj");
             }
         }
 
@@ -230,11 +230,11 @@ public class TurntablePanelScript : MonoBehaviour
         {
             if (m_curInGameObject.name.CompareTo(m_rewardObj_list[i].name) == 0)
             {
-                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/zj");
+                CommonUtil.setImageSpriteByAssetBundle(m_rewardObj_list[i].GetComponent<Image>(), "turntable.unity3d", "zj");
             }
             else
             {
-                CommonUtil.setImageSprite(m_rewardObj_list[i].GetComponent<Image>(), "Sprites/Turntable/wzj");
+                CommonUtil.setImageSpriteByAssetBundle(m_rewardObj_list[i].GetComponent<Image>(), "turntable.unity3d", "wzj");
             }
         }
 
