@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b36e52dc0aaa4ef4690d53f921388611
-timeCreated: 1510733334
+guid: 3ab3466fac5d6b84c9c5877bd9c9c0a3
+timeCreated: 1512556846
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: shop.unity3d
   assetBundleVariant: 

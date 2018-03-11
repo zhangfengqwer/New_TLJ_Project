@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 3028513537
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 979065fb67c54461d3975d4c2f025539
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 36c33a819640bead83b84b1645a12e6d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assetbundles/Shop/anniu_jia.png
+- Assets/Assetbundles/Shop/shop_pop2.png
+- Assets/Assetbundles/Shop/shop_bg_lan.png
+- Assets/Assetbundles/Shop/shop_first_recharge.png
+- Assets/Assetbundles/Shop/anniu_zi_gm.png
+- Assets/Assetbundles/Shop/shop_tab_yuanbao.png
+- Assets/Assetbundles/Shop/shop_title.png
+- Assets/Assetbundles/Shop/buyCountBg.png
+- Assets/Assetbundles/Shop/anniu_zi_zd.png
+- Assets/Assetbundles/Shop/shop_tab_prop.png
+- Assets/Assetbundles/Shop/shop_tab_gold.png
+- Assets/Assetbundles/Shop/anniu_jian.png
+- Assets/Assetbundles/Shop/tab_bg1.png
+- Assets/Assetbundles/Shop/shop_bg.png
+- Assets/Assetbundles/Shop/wechatpay.png
+- Assets/Assetbundles/Shop/shop_zi.png
+- Assets/Assetbundles/Shop/tab_bg2.png
+- Assets/Assetbundles/Shop/shop_bg2.png
+- Assets/Assetbundles/Shop/shop_bg_item.png
+- Assets/Assetbundles/Shop/alipay.png
+- Assets/Assetbundles/Shop/shop_pop.png
+- Assets/Assetbundles/Shop/shop_tab_selected.png
+Dependencies: []

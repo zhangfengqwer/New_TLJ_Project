@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1649433851
+CRC: 730389351
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -25,4 +25,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_7:
       Name: shouchong.unity3d
+      Dependencies: {}
+    Info_8:
+      Name: shop.unity3d
       Dependencies: {}
