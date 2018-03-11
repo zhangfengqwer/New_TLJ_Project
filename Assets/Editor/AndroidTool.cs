@@ -20,19 +20,4 @@ public class AndroidTool  : EditorWindow{
     //        GUILayout.Label("base setting", EditorStyles.boldLabel);
     //        myString = EditorGUILayout.TextField("text field", myString);
     //    }
-
-    public class CreateAssetBundles
-    {
-        [MenuItem("Tools/Build AssetBundles")]
-        static void BuildAllAssetBundles()
-        {
-            string assetBundleDirectory = "Assets/StreamingAssets";
-            if (!Directory.Exists(assetBundleDirectory))
-            {
-                Directory.CreateDirectory(assetBundleDirectory);
-            }
-            BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
-        }
-
-    }
 }
