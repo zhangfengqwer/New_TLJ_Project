@@ -318,7 +318,7 @@ public class MainScript : MonoBehaviour
 
         // 贵族
         GameUtil.setNickNameFontColor(UserAccount, UserData.vipLevel);
-        VipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + UserData.vipLevel);
+        CommonUtil.setImageSpriteByAssetBundle(VipImage, "vip.unity3d", "user_vip_" + UserData.vipLevel);
         if (UserData.vipLevel > 0)
         {
             CommonUtil.setImageSprite(m_nickName_bg, "Sprites/Common/vipname_bg");

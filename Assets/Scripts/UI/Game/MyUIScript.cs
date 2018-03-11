@@ -26,7 +26,7 @@ public class MyUIScript : MonoBehaviour {
         }
 
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
-        CommonUtil.setImageSprite(m_imageZhuanVipLevel, "Sprites/Vip/user_vip_" + vipLevel);
+        CommonUtil.setImageSpriteByAssetBundle(m_imageZhuanVipLevel, "vip.unity3d", "user_vip_" + vipLevel);
     }
 	
 	// Update is called once per frame

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1025932827
+CRC: 3784950286
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,4 +7,13 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: emoji.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: gameresult.unity3d
+      Dependencies: {}
+    Info_3:
+      Name: main.unity3d
+      Dependencies: {}
+    Info_4:
+      Name: vip.unity3d
       Dependencies: {}

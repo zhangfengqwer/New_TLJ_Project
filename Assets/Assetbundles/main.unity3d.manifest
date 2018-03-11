@@ -1,0 +1,64 @@
+ManifestFileVersion: 0
+CRC: 2941093396
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9b5f4838041ce8211c77274f691e2265
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 36c33a819640bead83b84b1645a12e6d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assetbundles/Main/main_laba.png
+- Assets/Assetbundles/Main/shengzi 1.png
+- Assets/Assetbundles/Main/award_3.png
+- Assets/Assetbundles/Main/tubiao_0008.png
+- Assets/Assetbundles/Main/di01.png
+- Assets/Assetbundles/Main/jibibang01.png
+- Assets/Assetbundles/Main/di04.png
+- Assets/Assetbundles/Main/tubiao_0001.png
+- Assets/Assetbundles/Main/beijing.jpg
+- Assets/Assetbundles/Main/tubiao_0003.png
+- Assets/Assetbundles/Main/huizhangbang01.png
+- Assets/Assetbundles/Main/di6.png
+- Assets/Assetbundles/Main/tx_kuang02.png
+- Assets/Assetbundles/Main/tubiao_0002.png
+- Assets/Assetbundles/Main/award_2.png
+- Assets/Assetbundles/Main/award_1.png
+- Assets/Assetbundles/Main/jibibang02.png
+- Assets/Assetbundles/Main/anniu_goumai.png
+- Assets/Assetbundles/Main/huizhangbang02.png
+- Assets/Assetbundles/Main/shengzi.png
+- Assets/Assetbundles/Main/tx_kuang.png
+- Assets/Assetbundles/Main/02.png
+- Assets/Assetbundles/Main/people.png
+- Assets/Assetbundles/Main/main_share.png
+- Assets/Assetbundles/Main/btn_zhuanpan_bg.png
+- Assets/Assetbundles/Main/di03.png
+- Assets/Assetbundles/Main/btn_first_charge_libao.png
+- Assets/Assetbundles/Main/tubiao_0007.png
+- Assets/Assetbundles/Main/anniu_di.png
+- Assets/Assetbundles/Main/01.png
+- Assets/Assetbundles/Main/tubiao_0000.png
+- Assets/Assetbundles/Main/di05.png
+- Assets/Assetbundles/Main/di7.png
+- Assets/Assetbundles/Main/bisaichang.png
+- Assets/Assetbundles/Main/anniu_wenhao.png
+- Assets/Assetbundles/Main/main_jingdian.png
+- Assets/Assetbundles/Main/tengman.png
+- Assets/Assetbundles/Main/tubiao_0005.png
+- Assets/Assetbundles/Main/muban.png
+- Assets/Assetbundles/Main/main_oldplayer.png
+- Assets/Assetbundles/Main/anniu_shezhi.png
+- Assets/Assetbundles/Main/putongchang.png
+- Assets/Assetbundles/Main/main_chaodi.png
+- Assets/Assetbundles/Main/tubiao_0004.png
+- Assets/Assetbundles/Main/btn_zhuanpan_zhizhen.png
+- Assets/Assetbundles/Main/tubiao_0006.png
+- Assets/Assetbundles/Main/di02.png
+Dependencies: []

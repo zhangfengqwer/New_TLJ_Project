@@ -87,7 +87,7 @@ public class RankListCaifuScript : MonoBehaviour
             {
                 mymedalRank = i + 1 + "";
                 //                goChild.GetComponent<Image>().color = new Color(255 / (float)255, 255 / (float)255, 0 / (float)255, 1);
-                goChild.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
+                CommonUtil.setImageSpriteByAssetBundle(goChild.GetComponent<Image>(), "main.unity3d", "di7");
             }
 
 
@@ -101,7 +101,7 @@ public class RankListCaifuScript : MonoBehaviour
             var Image_icon = goChild.transform.Find("Image_icon");
             Image rankImage = Ranking.GetComponent<Image>();
             var Image_vip = goChild.transform.Find("Image_vip").GetComponent<Image>();
-            Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(medalRankItemData.recharge));
+            CommonUtil.setImageSpriteByAssetBundle(Image_vip, "vip.unity3d", "user_vip_" + VipUtil.GetVipLevel(medalRankItemData.recharge));
             Count.GetComponent<Text>().text = "" + medalRankItemData.medal;
             //Image_Head.GetComponent<Image>().sprite =Resources.Load<Sprite>("Sprites/Head/head_" + medalRankItemData.head);
             goChild.GetComponent<HeadIconScript>().setIcon("head_" + medalRankItemData.head);
@@ -120,11 +120,11 @@ public class RankListCaifuScript : MonoBehaviour
                 Ranking.gameObject.SetActive(true);
                 if (i == 1)
                 {
-                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_2");
+                    CommonUtil.setImageSpriteByAssetBundle(rankImage, "main.unity3d", "award_2");
                 }
                 else if (i == 2)
                 {
-                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_3");
+                    CommonUtil.setImageSpriteByAssetBundle(rankImage, "main.unity3d", "award_3");
                 }
             }
             else
@@ -160,7 +160,7 @@ public class RankListCaifuScript : MonoBehaviour
         var Ranking = MyRank.transform.Find("Ranking");
         var Image_icon = MyRank.transform.Find("Image_icon");
         var Image_vip = MyRank.transform.Find("Image_vip").GetComponent<Image>();
-        Image_vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + VipUtil.GetVipLevel(UserData.rechargeVip));
+        CommonUtil.setImageSpriteByAssetBundle(Image_vip, "vip.unity3d", "user_vip_" + VipUtil.GetVipLevel(UserData.rechargeVip));
         Image rankImage = Ranking.GetComponent<Image>();
 
         Count.GetComponent<Text>().text = "" + UserData.medal;
@@ -172,8 +172,8 @@ public class RankListCaifuScript : MonoBehaviour
         {
             Name.GetComponent<Text>().color = new Color(253 / (float)255, 239 / (float)255, 82 / (float)255, 1);
         }
-
-        MyRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Main/di7");
+        
+        CommonUtil.setImageSpriteByAssetBundle(MyRank.GetComponent<Image>(), "main.unity3d", "di7");
 
         Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
 
@@ -192,11 +192,11 @@ public class RankListCaifuScript : MonoBehaviour
                 Ranking.gameObject.SetActive(true);
                 if (i == 1)
                 {
-                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_2");
+                    CommonUtil.setImageSpriteByAssetBundle(rankImage, "main.unity3d", "award_2");
                 }
                 else if (i == 2)
                 {
-                    rankImage.sprite = Resources.Load<Sprite>("Sprites/Main/award_3");
+                    CommonUtil.setImageSpriteByAssetBundle(rankImage, "main.unity3d", "award_3");
                 }
             }
             else

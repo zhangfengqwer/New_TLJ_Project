@@ -66,8 +66,8 @@ public class UserInfoScript : MonoBehaviour
         yuanBaoCount.text = UserData.yuanbao.ToString();
         meiLiZhi.text = UserData.gameData.meiliZhi+"";
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
-
-        Vip.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipLevel);
+        
+        CommonUtil.setImageSpriteByAssetBundle(Vip, "vip.unity3d", "user_vip_" + vipLevel);
         if (UserData.IsRealName)
         {
             ButtonRealName.interactable = false;

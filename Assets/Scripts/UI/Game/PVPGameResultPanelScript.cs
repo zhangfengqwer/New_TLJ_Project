@@ -48,9 +48,9 @@ public class PVPGameResultPanelScript : MonoBehaviour
 
         if (isWin)
         {
-            CommonUtil.setImageSprite(m_image_guang, "Sprites/GameResult/fangsheguang_liang");
-            CommonUtil.setImageSprite(m_image_sidai, "Sprites/GameResult/sidai_hong");
-            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/zi_jinji");
+            CommonUtil.setImageSpriteByAssetBundle(m_image_result, "gameresult.unity3d", "fangsheguang_liang");
+            CommonUtil.setImageSpriteByAssetBundle(m_image_result, "gameresult.unity3d", "sidai_hong");
+            CommonUtil.setImageSpriteByAssetBundle(m_image_result, "gameresult.unity3d", "zi_jinji");
             
             m_image_result.SetNativeSize();
 
@@ -61,9 +61,10 @@ public class PVPGameResultPanelScript : MonoBehaviour
         }
         else
         {
-            CommonUtil.setImageSprite(m_image_guang, "Sprites/GameResult/fangsheguang_hui");
-            CommonUtil.setImageSprite(m_image_sidai, "Sprites/GameResult/sidai_hui");
-            CommonUtil.setImageSprite(m_image_result, "Sprites/GameResult/zi_taotai");
+            CommonUtil.setImageSpriteByAssetBundle(m_image_result, "gameresult.unity3d", "fangsheguang_hui");
+            CommonUtil.setImageSpriteByAssetBundle(m_image_result, "gameresult.unity3d", "sidai_hui");
+            CommonUtil.setImageSpriteByAssetBundle(m_image_result, "gameresult.unity3d", "zi_taotai");
+            
             m_image_result.SetNativeSize();
 
             m_waitMatch.transform.localScale = new Vector3(0, 0, 0);

@@ -79,9 +79,9 @@ public class OtherPlayerUIScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.OtherPlayerUIScript_hotfix", "setVipLevel", null, vipLevel);
             return;
         }
-
-        CommonUtil.setImageSprite(m_imageVipLevel, "Sprites/Vip/user_vip_" + vipLevel);
         
+        CommonUtil.setImageSpriteByAssetBundle(m_imageVipLevel, "vip.unity3d", "user_vip_" + vipLevel);
+
         GameUtil.setNickNameFontColor(m_textName,vipLevel);
     }
 

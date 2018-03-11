@@ -73,7 +73,7 @@ public class VipPanelScript : MonoBehaviour
                 var h = i2;
                 if (isOn)
                 {
-                    VipImage2.sprite = Resources.Load<Sprite>("Sprites/Vip/user_vip_" + vipData.vipLevel);
+                    CommonUtil.setImageSpriteByAssetBundle(VipImage2, "vip.unity3d", "user_vip_" + vipData.vipLevel);
                     if (vipData.medalNum > 0)
                     {
                         VipText2.gameObject.SetActive(true);
@@ -197,7 +197,7 @@ public class VipPanelScript : MonoBehaviour
 
         int vipLevel = VipUtil.GetVipLevel(UserData.rechargeVip);
         int currentVipToTal = VipUtil.GetCurrentVipTotal(vipLevel);
-        MyVipImage.sprite = Resources.Load<Sprite>("Sprites/Vip/shop_vip_" + vipLevel);
+        CommonUtil.setImageSpriteByAssetBundle(MyVipImage, "vip.unity3d", "shop_vip_" + vipLevel);
 
         var vipText = string.Format("累计充值" + "<color=#FF0000FF>{0}</color>" + ",即可升级到" + "<color=#FF0000FF>{1}</color>",
             currentVipToTal + "元", "贵族" + (vipLevel + 1));
