@@ -70,7 +70,7 @@ public class AudioScript : MonoBehaviour {
 
     public void playMusic (string audioPath)
     {
-        m_musicPlayer.clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
+        m_musicPlayer.clip = CommonUtil.getAudioClipByAssetBundle("audios.unity3d", audioPath);
         m_musicPlayer.Play();
         m_musicPlayer.volume = m_musicVolume;
     }
@@ -81,7 +81,7 @@ public class AudioScript : MonoBehaviour {
         {
             if(!m_soundPlayer[i].isPlaying)
             {
-                m_soundPlayer[i].clip = (AudioClip)Resources.Load(audioPath, typeof(AudioClip));
+                m_soundPlayer[i].clip = CommonUtil.getAudioClipByAssetBundle("audios.unity3d", audioPath);
                 m_soundPlayer[i].Play();
 
                 return;
@@ -159,91 +159,91 @@ public class AudioScript : MonoBehaviour {
     // 主界面背景音乐
     public void playMusic_MainBg()
     {
-        playMusic("Audios/bg_main");
+        playMusic("bg_main");
     }
 
     // 游戏内普通场背景音乐
     public void playMusic_GameBg_Relax()
     {
-        playMusic("Audios/bg_game_relax");
+        playMusic("bg_game_relax");
     }
 
     // 游戏内PVP背景音乐
     public void playMusic_GameBg_PVP()
     {
-        playMusic("Audios/bg_game_pvp");
+        playMusic("bg_game_pvp");
     }
 
     // 点击按钮
     public void playSound_ButtonClick ()
     {
-        playSound("Audios/yx_anniu");
+        playSound("yx_anniu");
     }
 
     // 界面弹出
     public void playSound_LayerShow()
     {
-        playSound("Audios/yx_jiemiantanchu");
+        playSound("yx_jiemiantanchu");
     }
 
     // 界面关闭
     public void playSound_LayerClose()
     {
-        playSound("Audios/yx_jiemianguanbi");
+        playSound("yx_jiemianguanbi");
     }
 
     // 显示奖励
     public void playSound_ShowReward()
     {
-        playSound("Audios/yx_getReward");
+        playSound("yx_getReward");
     }
 
     // 出牌时选中牌
     public void playSound_XuanPai()
     {
-        playSound("Audios/yx_xuanpai");
+        playSound("yx_xuanpai");
     }
 
     // 炒底
     public void playSound_ChaoDi()
     {
-        playSound("Audios/yx_chaodi");
+        playSound("yx_chaodi");
     }
 
     // 不炒底
     public void playSound_BuChaoDi()
     {
-        playSound("Audios/yx_buchaodi");
+        playSound("yx_buchaodi");
     }
 
     // 胜利
     public void playSound_Win()
     {
-        playSound("Audios/yx_win");
+        playSound("yx_win");
     }
 
     // 失败
     public void playSound_Fail()
     {
-        playSound("Audios/yx_fail");
+        playSound("yx_fail");
     }
 
     // 出牌
     public void playSound_ChuPai()
     {
-        playSound("Audios/yx_chupai");
+        playSound("yx_chupai");
     }
 
     // 破
     public void playSound_Po()
     {
-        playSound("Audios/yx_po");
+        playSound("yx_po");
     }
 
     // 拖拉机
     public void playSound_TuoLaJi()
     {
-        playSound("Audios/yx_tuolaji");
+        playSound("yx_tuolaji");
     }
 
     //----------------------------------------------------------------------------播放 end
