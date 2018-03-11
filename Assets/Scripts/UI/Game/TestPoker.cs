@@ -183,7 +183,7 @@ public class TestPoker : MonoBehaviour {
                     temp = "icon_meihua";
                     break;
             }
-            go.transform.Find("Type").GetComponent<Image>().sprite = Resources.Load("Sprites/Poker/"+temp, typeof(Sprite)) as Sprite;
+            CommonUtil.setImageSpriteByAssetBundle(go.transform.Find("Type").GetComponent<Image>(), "poker.unity3d", temp);
             int num = poker.m_num;
             if (num >= 2 && num <= 10)
             {

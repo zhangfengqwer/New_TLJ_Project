@@ -1611,8 +1611,7 @@ public class GameScript : MonoBehaviour
 
                     if (GameData.getInstance().m_masterPokerType != -1)
                     {
-                        CommonUtil.setImageSprite(m_imageMasterPokerType,
-                            GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
+                        CommonUtil.setImageSpriteByAssetBundle(m_imageMasterPokerType, "poker.unity3d", GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
                     }
                     else
                     {
@@ -1626,8 +1625,7 @@ public class GameScript : MonoBehaviour
                                 .Add(new TLJCommon.PokerInfo(16, TLJCommon.Consts.PokerType.PokerType_Wang));
                         }
 
-                        CommonUtil.setImageSprite(m_imageMasterPokerType,
-                            GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
+                        CommonUtil.setImageSpriteByAssetBundle(m_imageMasterPokerType, "poker.unity3d", GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
                     }
                 }
 
@@ -2768,7 +2766,7 @@ public class GameScript : MonoBehaviour
                 {
                     GameUtil.showGameObject(m_imageMasterPokerType.gameObject);
                     GameData.getInstance().m_masterPokerType = GameData.getInstance().m_masterPokerType;
-                    CommonUtil.setImageSprite(m_imageMasterPokerType, GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
+                    CommonUtil.setImageSpriteByAssetBundle(m_imageMasterPokerType, "poker.unity3d", GameUtil.getMasterPokerIconPath(GameData.getInstance().m_masterPokerType));
                 }
             }
 
