@@ -108,9 +108,9 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
                         m_btn_tuigungguize.GetComponent<Image>().SetNativeSize();
                         m_btn_bulingjiangli.GetComponent<Image>().SetNativeSize();
 
-                        CommonUtil.setImageSprite(m_btn_myTuiGuang.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/wdtg02");
-                        CommonUtil.setImageSprite(m_btn_tuigungguize.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/tg01");
-                        CommonUtil.setImageSprite(m_btn_bulingjiangli.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/bljl01");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_myTuiGuang.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "wdtg02");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_tuigungguize.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "tg01");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_bulingjiangli.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "bljl01");
                     }
 
                     loadMyTuiGuangData();
@@ -134,9 +134,9 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
                         m_btn_tuigungguize.GetComponent<Image>().SetNativeSize();
                         m_btn_bulingjiangli.GetComponent<Image>().SetNativeSize();
 
-                        CommonUtil.setImageSprite(m_btn_myTuiGuang.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/wdtg01");
-                        CommonUtil.setImageSprite(m_btn_tuigungguize.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/tg02");
-                        CommonUtil.setImageSprite(m_btn_bulingjiangli.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/bljl01");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_myTuiGuang.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "wdtg01");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_tuigungguize.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "tg02");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_bulingjiangli.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "bljl01");
                     }
                 }
                 break;
@@ -158,9 +158,9 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
                         m_btn_tuigungguize.GetComponent<Image>().SetNativeSize();
                         m_btn_bulingjiangli.GetComponent<Image>().SetNativeSize();
 
-                        CommonUtil.setImageSprite(m_btn_myTuiGuang.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/wdtg01");
-                        CommonUtil.setImageSprite(m_btn_tuigungguize.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/tg01");
-                        CommonUtil.setImageSprite(m_btn_bulingjiangli.transform.Find("Image").GetComponent<Image>(), "Sprites/TuiGuang/bljl02");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_myTuiGuang.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "wdtg01");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_tuigungguize.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "tg01");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_bulingjiangli.transform.Find("Image").GetComponent<Image>(), "tuiguang.unity3d", "bljl02");
                     }
                 }
                 break;

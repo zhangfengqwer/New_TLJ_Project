@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8d88d55565f8378418d7f5fd2b84cd59
-timeCreated: 1519957021
+guid: d0045d95b68acdb4c9823962045efb2e
+timeCreated: 1519955712
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -39,7 +39,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 30, y: 0, z: 39, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: tuiguang.unity3d
   assetBundleVariant: 

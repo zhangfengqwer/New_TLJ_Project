@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3784950286
+CRC: 3588719584
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -16,4 +16,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_4:
       Name: vip.unity3d
+      Dependencies: {}
+    Info_5:
+      Name: tuiguang.unity3d
       Dependencies: {}

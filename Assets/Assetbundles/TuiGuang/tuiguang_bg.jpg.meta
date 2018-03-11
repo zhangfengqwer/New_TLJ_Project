@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: da8a764157916894aa712e4996fde8b3
-timeCreated: 1519956718
+guid: 2e2a135783f12314ab3e2fb3fd92d11e
+timeCreated: 1519956249
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: tuiguang.unity3d
   assetBundleVariant: 
