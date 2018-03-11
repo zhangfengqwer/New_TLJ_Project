@@ -13,6 +13,9 @@ public class PropDetailPanelScript : MonoBehaviour {
     public Image m_image_icon;
     public Button m_button_use;
     public PropInfo m_propInfo = null;
+    public GameObject m_changeNum = null;
+
+    public int m_useNum = 1;
 
     public static GameObject create(int prop_id, BagPanelScript parentScript)
     {
@@ -57,6 +60,28 @@ public class PropDetailPanelScript : MonoBehaviour {
             {
                 m_button_use.transform.localScale = new Vector3(0,0,0);
             }
+
+            // 一元话费：显示数量调节对象
+            if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_1yuanhuafei)
+            {
+                int myHuaFei_1 = GameUtil.getMyPropNumById((int)TLJCommon.Consts.Prop.Prop_1yuanhuafei);
+                if (myHuaFei_1 >= 10)
+                {
+                    GameUtil.showGameObject(m_changeNum);
+                    m_useNum = 10;
+
+                    m_changeNum.transform.Find("Button_jia").GetComponent<Button>().interactable = false;
+                }
+                else if (myHuaFei_1 >= 5)
+                {
+                    GameUtil.showGameObject(m_changeNum);
+                    m_useNum = 5;
+
+                    m_changeNum.transform.Find("Button_jia").GetComponent<Button>().interactable = false;
+                }
+
+                m_changeNum.transform.Find("Text_num").GetComponent<Text>().text = m_useNum.ToString();
+            }
         }
     }
 
@@ -77,7 +102,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         // 话费
         else if ((m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_1yuanhuafei) || (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_5yuanhuafei) || (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_10yuanhuafei))
         {
-            UseHuaFeiPanelScript.create(m_propInfo);
+            UseHuaFeiPanelScript.create(m_propInfo,m_useNum);
         }
         //徽章
         else if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_huizhang)
@@ -92,6 +117,81 @@ public class PropDetailPanelScript : MonoBehaviour {
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().SetPropId(m_propInfo.m_id);
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().CallBack = onReceive_UseProp;
             LogicEnginerScript.Instance.GetComponent<UsePropRequest>().OnRequest();
+        }
+    }
+
+    public void onClickJian()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "onClickJian"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "onClickJian", null, null);
+            return;
+        }
+
+        // 一元话费
+        if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_1yuanhuafei)
+        {
+            int myHuaFei_1 = GameUtil.getMyPropNumById((int)TLJCommon.Consts.Prop.Prop_1yuanhuafei);
+
+            if (m_useNum == 10)
+            {
+                m_useNum = 5;
+
+                m_changeNum.transform.Find("Button_jia").GetComponent<Button>().interactable = true;
+            }
+            else if (m_useNum == 5)
+            {
+                m_useNum = 1;
+                    
+                m_changeNum.transform.Find("Button_jia").GetComponent<Button>().interactable = true;
+                m_changeNum.transform.Find("Button_jian").GetComponent<Button>().interactable = false;
+            }
+
+            m_changeNum.transform.Find("Text_num").GetComponent<Text>().text = m_useNum.ToString();
+        }
+    }
+
+    public void onClickJia()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PropDetailPanelScript_hotfix", "onClickJia"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PropDetailPanelScript_hotfix", "onClickJia", null, null);
+            return;
+        }
+
+        // 一元话费
+        if (m_propInfo.m_id == (int)TLJCommon.Consts.Prop.Prop_1yuanhuafei)
+        {
+            int myHuaFei_1 = GameUtil.getMyPropNumById((int)TLJCommon.Consts.Prop.Prop_1yuanhuafei);
+
+            if (m_useNum == 1)
+            {
+                if (myHuaFei_1 >= 5)
+                {
+                    m_useNum = 5;
+
+                    if (myHuaFei_1 < 10)
+                    {
+                        m_changeNum.transform.Find("Button_jia").GetComponent<Button>().interactable = false;
+                    }
+
+                    m_changeNum.transform.Find("Button_jian").GetComponent<Button>().interactable = true;
+                }
+            }
+            else if (m_useNum == 5)
+            {
+                if (myHuaFei_1 >= 10)
+                {
+                    m_useNum = 10;
+
+                    m_changeNum.transform.Find("Button_jia").GetComponent<Button>().interactable = false;
+                    m_changeNum.transform.Find("Button_jian").GetComponent<Button>().interactable = true;
+                }
+            }
+
+            m_changeNum.transform.Find("Text_num").GetComponent<Text>().text = m_useNum.ToString();
         }
     }
 

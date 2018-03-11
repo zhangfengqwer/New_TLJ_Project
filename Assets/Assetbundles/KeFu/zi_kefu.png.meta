@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1f9dce21f901e5542a470d5c6e85305e
-timeCreated: 1512468111
+guid: 6b11c310d58c79d498c01bbb497fdaa8
+timeCreated: 1507796227
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -64,5 +64,5 @@ TextureImporter:
     outline: []
   spritePackingTag: 
   userData: 
-  assetBundleName: 
+  assetBundleName: kefu.unity3d
   assetBundleVariant: 

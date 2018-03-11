@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3039376749
+CRC: 434964279
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5b4f634891eb4981ac1ec4ff1770739f
+    Hash: 4098bf6ef476388806f1c46ecc3e2189
   TypeTreeHash:
     serializedVersion: 2
     Hash: 36c33a819640bead83b84b1645a12e6d
@@ -14,23 +14,23 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Assetbundles/Sprites/Head/head_13.png
-- Assets/Assetbundles/Sprites/Head/head_10.png
-- Assets/Assetbundles/Sprites/Head/head_2.png
-- Assets/Assetbundles/Sprites/Head/head_3.png
-- Assets/Assetbundles/Sprites/Head/head_18.png
-- Assets/Assetbundles/Sprites/Head/head_15.png
-- Assets/Assetbundles/Sprites/Head/head_5.png
-- Assets/Assetbundles/Sprites/Head/head_4.png
-- Assets/Assetbundles/Sprites/Head/head_6.png
-- Assets/Assetbundles/Sprites/Head/head_14.png
-- Assets/Assetbundles/Sprites/Head/head_7.png
-- Assets/Assetbundles/Sprites/Head/head_11.png
-- Assets/Assetbundles/Sprites/Head/head_17.png
-- Assets/Assetbundles/Sprites/Head/head_12.png
-- Assets/Assetbundles/Sprites/Head/head_1.png
-- Assets/Assetbundles/Sprites/Head/default_head.png
-- Assets/Assetbundles/Sprites/Head/head_16.png
-- Assets/Assetbundles/Sprites/Head/head_9.png
-- Assets/Assetbundles/Sprites/Head/head_8.png
+- Assets/Assetbundles/Head/head_13.png
+- Assets/Assetbundles/Head/head_10.png
+- Assets/Assetbundles/Head/head_2.png
+- Assets/Assetbundles/Head/head_3.png
+- Assets/Assetbundles/Head/head_18.png
+- Assets/Assetbundles/Head/head_15.png
+- Assets/Assetbundles/Head/head_5.png
+- Assets/Assetbundles/Head/head_4.png
+- Assets/Assetbundles/Head/head_6.png
+- Assets/Assetbundles/Head/head_14.png
+- Assets/Assetbundles/Head/head_7.png
+- Assets/Assetbundles/Head/head_11.png
+- Assets/Assetbundles/Head/head_17.png
+- Assets/Assetbundles/Head/head_12.png
+- Assets/Assetbundles/Head/head_1.png
+- Assets/Assetbundles/Head/default_head.png
+- Assets/Assetbundles/Head/head_16.png
+- Assets/Assetbundles/Head/head_9.png
+- Assets/Assetbundles/Head/head_8.png
 Dependencies: []
