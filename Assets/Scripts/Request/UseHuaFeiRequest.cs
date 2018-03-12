@@ -10,6 +10,7 @@ public class UseHuaFeiRequest : Request
     public bool flag;
     public string result;
     public int m_prop_id;
+    public int m_prop_num;
     public string m_phone;
 
     public delegate void UseHuaFeiCallBack(string result);
@@ -29,9 +30,10 @@ public class UseHuaFeiRequest : Request
         }
     }
 
-    public void SetData(int prop_id,string phone)
+    public void SetData(int prop_id,int prop_num,string phone)
     {
         m_prop_id = prop_id;
+        m_prop_num = prop_num;
         m_phone = phone;
     }
 
@@ -48,6 +50,7 @@ public class UseHuaFeiRequest : Request
         jsonData["tag"] = Tag;
         jsonData["uid"] = UserData.uid;
         jsonData["prop_id"] = m_prop_id;
+        jsonData["prop_num"] = m_prop_num;
         jsonData["phone"] = m_phone;
 
         string requestData = jsonData.ToJson();

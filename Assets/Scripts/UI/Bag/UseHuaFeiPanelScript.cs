@@ -13,13 +13,15 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
     public Button m_btn_queren;
 
     public int m_shengyuTime = 0;
+    public int m_useNum = 1;
 
-    public static GameObject create(PropInfo propInfo)
+    public static GameObject create(PropInfo propInfo,int useNum)
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/UseHuaFeiPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<UseHuaFeiPanelScript>().m_propInfo = propInfo;
+        obj.GetComponent<UseHuaFeiPanelScript>().m_useNum = useNum;
 
         return obj;
     }
@@ -94,7 +96,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
 
         NetLoading.getInstance().Show();
 
-        LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().SetData(m_propInfo.m_id, m_inputField_phone.text);
+        LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().SetData(m_propInfo.m_id,m_useNum, m_inputField_phone.text);
         LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().CallBack = onReceive_UseHuaFei;
         LogicEnginerScript.Instance.GetComponent<UseHuaFeiRequest>().OnRequest();
     }
@@ -124,7 +126,7 @@ public class UseHuaFeiPanelScript : MonoBehaviour {
         {
             ToastScript.createToast("使用成功，请等待充值到账");
 
-            GameUtil.changeData(m_propInfo.m_id, -1);
+            GameUtil.changeData(m_propInfo.m_id, -m_useNum);
 
             if (BagPanelScript.Instance != null)
             {

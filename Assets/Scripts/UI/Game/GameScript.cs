@@ -1408,6 +1408,10 @@ public class GameScript : MonoBehaviour
         {
             HeartBeat_Play.getInstance().onRespond();
         }
+        else if (tag.CompareTo(TLJCommon.Consts.Tag_BaoXiangDrop) == 0)
+        {
+            onReceive_BaoXiangDrop(data);
+        }
     }
 
     public void onReceive_PlayGame(string data)
@@ -3041,6 +3045,35 @@ public class GameScript : MonoBehaviour
                 }
                     break;
             }
+        }
+        catch (Exception ex)
+        {
+            LogUtil.Log(ex.Message);
+        }
+    }
+
+    public void onReceive_BaoXiangDrop(string data)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript_hotfix", "onReceive_BaoXiangDrop"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript_hotfix", "onReceive_BaoXiangDrop", null, data);
+            return;
+        }
+
+        try
+        {
+            JsonData jd = JsonMapper.ToObject(data);
+
+            string reward = (string)jd["reward"];
+
+            for (int i = 0; i < 50; i++)
+            {
+                BaoXiangScript.create();
+            }
+
+            GameUtil.changeDataWithStr(reward);
+            ShowRewardPanelScript.Show(reward,false);
         }
         catch (Exception ex)
         {

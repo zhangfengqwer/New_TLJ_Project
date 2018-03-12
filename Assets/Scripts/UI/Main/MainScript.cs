@@ -605,16 +605,16 @@ public class MainScript : MonoBehaviour
         ShouChongPanelScript.create();
     }
 
-    public void OnClickOldPlayerBind()
+    public void OnClickTuiGuangYouLi()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "OnClickOldPlayerBind"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "OnClickTuiGuangYouLi"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "OnClickOldPlayerBind", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "OnClickTuiGuangYouLi", null, null);
             return;
         }
 
-        OldPlayerBindPanelScript.create();
+        TuiGuangYouLiPanelScript.create();
     }
 
     public void OnClickMedalHelp()
