@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnterMainPanelShowManager
 {
-    static EnterMainPanelShowManager s_instance = null;
+    public static EnterMainPanelShowManager s_instance = null;
 
-    List<EnterMainPanelObj> s_panelObjList = new List<EnterMainPanelObj>();
+    public List<EnterMainPanelObj> s_panelObjList = new List<EnterMainPanelObj>();
 
     public static EnterMainPanelShowManager getInstance()
     {
@@ -22,13 +22,28 @@ public class EnterMainPanelShowManager
 
     public void init()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EnterMainPanelShowManager_hotfix", "init"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EnterMainPanelShowManager_hotfix", "init", null, null);
+            return;
+        }
+
         s_panelObjList.Add(new EnterMainPanelObj("sign", false));
         s_panelObjList.Add(new EnterMainPanelObj("newPlayerTuiGuang", false));
         s_panelObjList.Add(new EnterMainPanelObj("activity", false));
+        s_panelObjList.Add(new EnterMainPanelObj("huizhangduihuan", false));
     }
 
     public void showNextPanel()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EnterMainPanelShowManager_hotfix", "showNextPanel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EnterMainPanelShowManager_hotfix", "showNextPanel", null, null);
+            return;
+        }
+
         if (!getEnterMainPanelObjIShowByName("sign"))
         {
             setEnterMainPanelObjIShowByName("sign", true);
@@ -58,6 +73,18 @@ public class EnterMainPanelShowManager
             
             NoticePanelScript.create();
         }
+        else if (!getEnterMainPanelObjIShowByName("huizhangduihuan"))
+        {
+            setEnterMainPanelObjIShowByName("huizhangduihuan", true);
+
+            string time = "isShowHuiZhangDuiHuan_" + CommonUtil.getCurYearMonthDay();
+            if (PlayerPrefs.GetInt(time, 0) == 0)
+            {
+                PlayerPrefs.SetInt(time, 1);
+
+                MedalDuiHuanPanelScript.create();
+            }
+        }
         else
         {
         }
@@ -65,6 +92,13 @@ public class EnterMainPanelShowManager
 
     public bool getEnterMainPanelObjIShowByName(string panelName)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EnterMainPanelShowManager_hotfix", "getEnterMainPanelObjIShowByName"))
+        {
+            bool b = (bool)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EnterMainPanelShowManager_hotfix", "getEnterMainPanelObjIShowByName", null, panelName);
+            return b;
+        }
+
         for (int i = 0; i < s_panelObjList.Count; i++)
         {
             if (s_panelObjList[i].m_panelName.CompareTo(panelName) == 0)
@@ -78,6 +112,13 @@ public class EnterMainPanelShowManager
 
     public void setEnterMainPanelObjIShowByName(string panelName,bool isShow)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("EnterMainPanelShowManager_hotfix", "setEnterMainPanelObjIShowByName"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.EnterMainPanelShowManager_hotfix", "setEnterMainPanelObjIShowByName", null, panelName, isShow);
+            return;
+        }
+
         for (int i = 0; i < s_panelObjList.Count; i++)
         {
             if (s_panelObjList[i].m_panelName.CompareTo(panelName) == 0)
