@@ -49,6 +49,8 @@ public class ShuRuTuiGuangCodePanelScript : MonoBehaviour {
         if (tuiguangcode.CompareTo("") == 0)
         {
             ToastScript.createToast("请输入推广码");
+
+            return;
         }
 
         NetLoading.getInstance().Show();
