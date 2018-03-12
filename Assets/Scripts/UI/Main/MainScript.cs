@@ -1056,9 +1056,32 @@ public class MainScript : MonoBehaviour
         // 活动
         {
             bool isShowRedPoint = false;
-            for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
+//            for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
+//            {
+//                if (NoticelDataScript.getInstance().getNoticeDataList()[i].state == 0)
+//                {
+//                    isShowRedPoint = true;
+//                    break;
+//                }
+//            }
+            for (int i = 0; i < Activity.activityDatas.Count; i++)
             {
-                if (NoticelDataScript.getInstance().getNoticeDataList()[i].state == 0)
+                Activity.ActivityData activityData = Activity.activityDatas[i];
+                string data = UserData.uid + "activity" + activityData.ActivityId;
+                string s = PlayerPrefs.GetString(data);
+                if (string.IsNullOrEmpty(s))
+                {
+                    isShowRedPoint = true;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < Activity.noticeDatas.Count; i++)
+            {
+                NoticeData noticeData = Activity.noticeDatas[i];
+                string data = UserData.uid + "notice" + noticeData.notice_id;
+                string s = PlayerPrefs.GetString(data);
+                if (string.IsNullOrEmpty(s))
                 {
                     isShowRedPoint = true;
                     break;
