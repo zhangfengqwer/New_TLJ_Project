@@ -630,6 +630,18 @@ public class MainScript : MonoBehaviour
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
     }
 
+    public void OnClickMedalDuiHuan()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "OnClickMedalDuiHuan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "OnClickMedalDuiHuan", null, null);
+            return;
+        }
+
+        MedalDuiHuanPanelScript.create();
+    }
+
     public void onClickZhuanPan()
     {
         // 优先使用热更新的代码
