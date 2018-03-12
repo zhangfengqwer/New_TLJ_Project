@@ -9,6 +9,13 @@ public class ActivityManager
 
     public static GameObject getActivityPanel(Activity.ActivityData activity)
     {
+        // 使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ActivityManager_hotfix", "getActivityPanel"))
+        {
+            s_panel = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ActivityManager_hotfix", "getActivityPanel", null, activity);
+            return s_panel;
+        }
+
         if (s_panel != null)
         {
             GameObject.Destroy(s_panel);
@@ -125,9 +132,9 @@ public class ActivityManager
             default:
                 {
                     // 使用热更新的代码
-                    if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ActivityManager_hotfix", "getActivityPanel"))
+                    if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ActivityManager_hotfix", "getActivityPanel_default"))
                     {
-                        s_panel = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ActivityManager_hotfix", "getActivityPanel", null, activity);
+                        s_panel = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ActivityManager_hotfix", "getActivityPanel_default", null, activity);
                         return s_panel;
                     }
                 }
