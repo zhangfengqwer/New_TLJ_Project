@@ -18,14 +18,15 @@ public class Activity : MonoBehaviour
 
     public ToggleGroup toggleGroup;
 
-    private List<ActivityData> activityDatas;
-    private List<NoticeData> noticeDatas = new List<NoticeData>();
+    public static List<ActivityData> activityDatas = new List<ActivityData>();
+    public static List<NoticeData> noticeDatas = new List<NoticeData>();
     public GameObject RightBg;
     public Button BtnActivity;
     public Button BtnNotice;
     public Image TabImage;
     private GameObject Content;
     public GameObject ItemNotice;
+    private int hasRead = 0;
 
     // Use this for initialization
     void Start()
@@ -57,7 +58,8 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "OnClickButton"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "OnClickButton", null, i);
+            ILRuntimeUtil.getInstance().getAppDomain()
+                .Invoke("HotFix_Project.Activity_hotfix", "OnClickButton", null, i);
             return;
         }
 
@@ -86,11 +88,17 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "DeleteAllItem"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "DeleteAllItem", null, go);
+            ILRuntimeUtil.getInstance().getAppDomain()
+                .Invoke("HotFix_Project.Activity_hotfix", "DeleteAllItem", null, go);
             return;
         }
 
-        for (int j = go.transform.childCount - 1; j >= 0; j--)
+//        for (int j = go.transform.childCount - 1; j >= 0; j--)
+//        {
+//            Destroy(go.transform.GetChild(j).gameObject);
+//        }
+
+        for (int j = 0; j < go.transform.childCount; j++)
         {
             Destroy(go.transform.GetChild(j).gameObject);
         }
@@ -101,12 +109,13 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "GetNoticeData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "GetNoticeData", null, result);
+            ILRuntimeUtil.getInstance().getAppDomain()
+                .Invoke("HotFix_Project.Activity_hotfix", "GetNoticeData", null, result);
             return;
         }
 
         NoticelDataScript.getInstance().initJson(result);
-
+        noticeDatas.Clear();
         foreach (var noticeData in NoticelDataScript.getInstance().getNoticeDataList())
         {
             if (noticeData.type == 1)
@@ -121,7 +130,8 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "GetActivityData"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "GetActivityData", null, result);
+            ILRuntimeUtil.getInstance().getAppDomain()
+                .Invoke("HotFix_Project.Activity_hotfix", "GetActivityData", null, result);
             return;
         }
 
@@ -136,7 +146,8 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "onInitializeItemNotice"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "onInitializeItemNotice", null, go, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix",
+                "onInitializeItemNotice", null, go, dataindex);
             return;
         }
 
@@ -145,14 +156,13 @@ public class Activity : MonoBehaviour
         if (dataindex == 0)
         {
             toggle.isOn = true;
-           
+
             if (go.transform.GetChild(0).gameObject.activeSelf)
             {
                 go.transform.GetChild(0).gameObject.SetActive(false);
             }
 
             InitItemNotice(dataindex);
-
         }
         else
         {
@@ -166,6 +176,17 @@ public class Activity : MonoBehaviour
         NoticeData noticeData = noticeDatas[dataindex];
 
         go.transform.GetChild(2).GetComponent<Text>().text = noticeData.title;
+
+        //设置小红点
+        string s = PlayerPrefs.GetString(UserData.uid + "notice" + noticeDatas[dataindex].notice_id);
+        if (string.IsNullOrEmpty(s))
+        {
+            go.transform.Find("RedPoint").gameObject.SetActive(true);
+        }
+        else
+        {
+            go.transform.Find("RedPoint").gameObject.SetActive(false);
+        }
     }
 
     private void InitItemNotice(int dataindex)
@@ -173,13 +194,14 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "InitItemNotice"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "InitItemNotice", null, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain()
+                .Invoke("HotFix_Project.Activity_hotfix", "InitItemNotice", null, dataindex);
             return;
         }
 
         GameObject go = GameObject.Instantiate(ItemNotice, RightBg.transform);
         go.transform.Find("Text_title").GetComponent<Text>().text = noticeDatas[dataindex].title_limian;
-        go.transform.Find("Text_content").GetComponent<Text>().text = noticeDatas[dataindex].content.Replace("^","\n");
+        go.transform.Find("Text_content").GetComponent<Text>().text = noticeDatas[dataindex].content.Replace("^", "\n");
         go.transform.Find("Text_from").GetComponent<Text>().text = noticeDatas[dataindex].from;
     }
 
@@ -188,7 +210,8 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "onInitializeItemActivity"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "onInitializeItemActivity", null, go, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix",
+                "onInitializeItemActivity", null, go, dataindex);
             return;
         }
 
@@ -201,6 +224,7 @@ public class Activity : MonoBehaviour
             {
                 go.transform.GetChild(0).gameObject.SetActive(false);
             }
+
             GameObject panel = ActivityManager.getActivityPanel(activityDatas[dataindex]);
             if (panel != null)
             {
@@ -219,8 +243,18 @@ public class Activity : MonoBehaviour
 
         //设置数据
         ActivityData activityData = activityDatas[dataindex];
-
         go.transform.GetChild(2).GetComponent<Text>().text = activityData.Title;
+
+        //设置小红点
+        string s = PlayerPrefs.GetString(UserData.uid + "activity" + activityDatas[dataindex].ActivityId);
+        if (string.IsNullOrEmpty(s))
+        {
+            go.transform.Find("RedPoint").gameObject.SetActive(true);
+        }
+        else
+        {
+            go.transform.Find("RedPoint").gameObject.SetActive(false);
+        }
     }
 
     public void OnToggleValueChange(GameObject go, bool isOn, int dataindex)
@@ -228,11 +262,11 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "OnToggleValueChange"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "OnToggleValueChange", null, go, isOn, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "OnToggleValueChange",
+                null, go, isOn, dataindex);
             return;
         }
 
-        Debug.Log("isOn" + isOn + ",name:" + go.name);
         if (isOn)
         {
             go.transform.GetChild(0).gameObject.SetActive(false);
@@ -242,12 +276,15 @@ public class Activity : MonoBehaviour
                 panel.transform.SetParent(RightBg.transform);
                 panel.transform.localScale = new Vector3(1, 1, 1);
                 panel.transform.localPosition = new Vector3(0, 0, 0);
+                PlayerPrefs.SetString(UserData.uid + "activity" + activityDatas[dataindex].ActivityId, "1");
+                go.transform.Find("RedPoint").gameObject.SetActive(false);
             }
         }
         else
         {
             go.transform.GetChild(0).gameObject.SetActive(true);
         }
+        OtherData.s_mainScript.checkRedPoint();
     }
 
     public void OnNoticeToggleValueChange(GameObject go, bool isOn, int dataindex)
@@ -255,20 +292,24 @@ public class Activity : MonoBehaviour
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "OnNoticeToggleValueChange"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix", "OnNoticeToggleValueChange", null, go, isOn, dataindex);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Activity_hotfix",
+                "OnNoticeToggleValueChange", null, go, isOn, dataindex);
             return;
         }
 
-        Debug.Log("isOn" + isOn + ",name:" + go.name);
         if (isOn)
         {
             go.transform.GetChild(0).gameObject.SetActive(false);
             DeleteAllItem(RightBg);
             InitItemNotice(dataindex);
+            PlayerPrefs.SetString(UserData.uid + "notice" + noticeDatas[dataindex].notice_id, "1");
+            go.transform.Find("RedPoint").gameObject.SetActive(false);
         }
         else
         {
             go.transform.GetChild(0).gameObject.SetActive(true);
         }
+
+        OtherData.s_mainScript.checkRedPoint();
     }
 }
