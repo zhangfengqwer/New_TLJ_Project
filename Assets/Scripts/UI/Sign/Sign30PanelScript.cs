@@ -69,7 +69,7 @@ public class Sign30PanelScript : MonoBehaviour {
         m_text_time.text = CommonUtil.getCurYear() + "年" + CommonUtil.getCurMonth() + "月";
 
         // 本月天数
-        m_curMonthdays = DateTime.DaysInMonth(CommonUtil.getCurYear(), CommonUtil.getCurMonth());
+        m_curMonthdays = CommonUtil.getCurMonthAllDays();
 
         // 显示当天签到奖励
         {
@@ -107,6 +107,12 @@ public class Sign30PanelScript : MonoBehaviour {
                 obj.transform.localPosition = new Vector3(x, y, 1);
             }
 
+            // 奖励icon
+            {
+                int prop_id = GameUtil.getPropIdFromReward(Sign30Data.getInstance().getSign30DataContentList()[i].reward_prop);
+                CommonUtil.setImageSprite(obj.transform.Find("Image_icon").GetComponent<Image>(), GameUtil.getPropIconPath(prop_id));
+            }
+
             // 第几天
             obj.transform.Find("Text_day").GetComponent<Text>().text = (i + 1).ToString();
 
@@ -131,12 +137,14 @@ public class Sign30PanelScript : MonoBehaviour {
 
                         for (int k = 0; k < Sign30RecordData.getInstance().getSign30RecordList().Count; k++)
                         {
+                            // 已签
                             if (Sign30RecordData.getInstance().getSign30RecordList()[k] == day)
                             {
                                 isSigned = true;
 
-                                obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
-
+                                //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
+                                obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
                                 break;
                             }
                         }
@@ -151,7 +159,8 @@ public class Sign30PanelScript : MonoBehaviour {
                                 // 如果是今天没有签到的话，不显示补签
                                 if (day == CommonUtil.getCurDay())
                                 {
-                                    obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                    //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                    obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
                                 }
                             }
                         }
@@ -160,19 +169,22 @@ public class Sign30PanelScript : MonoBehaviour {
                         {
                             if (isSigned)
                             {
-                                obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
                             }
                             else
                             {
                                 obj.transform.Find("Image_yiqian").localScale = new Vector3(0, 0, 0);
-                                obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                                obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
                             }
                         }
                         // 未来
                         else
                         {
                             obj.transform.Find("Image_yiqian").localScale = new Vector3(0, 0, 0);
-                            obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                            //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                            obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
                         }
                     }
                 }
@@ -180,7 +192,7 @@ public class Sign30PanelScript : MonoBehaviour {
         }
 
         // 连续累计签到天数显示
-        m_text_lianxuqiandaotianshu.text = "累计签到天数：" + Sign30RecordData.getInstance().getSign30RecordList().Count.ToString() + "天";
+        m_text_lianxuqiandaotianshu.text = "连续签到天数：" + Sign30RecordData.getInstance().getLianXuSignDays().ToString() + "天";
 
         // 累计签到奖励
         setLeiJiSignState();
@@ -195,45 +207,98 @@ public class Sign30PanelScript : MonoBehaviour {
             return;
         }
 
-        List<int> temp = new List<int>();
-        for (int i = 0; i < Sign30Data.getInstance().getSign30DataContentList().Count; i++)
+        int signAllDays = Sign30RecordData.getInstance().getLianXuSignDays();
+        
+        // 全勤奖
+        if (signAllDays == CommonUtil.getCurMonthAllDays())
         {
-            if (Sign30Data.getInstance().getSign30DataContentList()[i].type == 2)
+            bool isGet = Sign30RecordData.getInstance().isLeiJiSignTheDay(35);
+
+            // 达成已领取
+            if (isGet)
             {
-                temp.Add(Sign30Data.getInstance().getSign30DataContentList()[i].day);
+                CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+            }
+            // 达成未领取
+            else
+            {
+            }
 
-                // 已领取
-                for (int j = 0; j < Sign30RecordData.getInstance().getSign30LeiJiRecordList().Count; j++)
+            CommonUtil.setImageSprite(m_obj_leiji1.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+            CommonUtil.setImageSprite(m_obj_leiji2.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+            CommonUtil.setImageSprite(m_obj_leiji3.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+        }
+        else
+        {
+            CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+
+            if (signAllDays >= Sign30Data.getInstance().getSign30DataById(34).day)
+            {
+                bool isGet = Sign30RecordData.getInstance().isLeiJiSignTheDay(34);
+
+                // 达成已领取
+                if (isGet)
                 {
-                    if (Sign30RecordData.getInstance().getSign30LeiJiRecordList()[j] == Sign30Data.getInstance().getSign30DataContentList()[i].id)
-                    {
-                        if (temp.Count == 1)
-                        {
-                            m_obj_leiji1.transform.Find("Image").localScale = new Vector3(1, 1, 1);
-                        }
-                        else if (temp.Count == 2)
-                        {
-                            m_obj_leiji2.transform.Find("Image").localScale = new Vector3(1, 1, 1);
-                        }
-                        else if (temp.Count == 3)
-                        {
-                            m_obj_leiji3.transform.Find("Image").localScale = new Vector3(1, 1, 1);
-                        }
-                        else if (temp.Count == 4)
-                        {
-                            m_obj_leiji4.transform.Find("Image").localScale = new Vector3(1, 1, 1);
-                        }
-
-                        break;
-                    }
+                    CommonUtil.setImageSprite(m_obj_leiji3.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
                 }
+                // 达成未领取
+                else
+                {
+                }
+
+                CommonUtil.setImageSprite(m_obj_leiji1.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji2.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+            }
+            else if (signAllDays >= Sign30Data.getInstance().getSign30DataById(33).day)
+            {
+                bool isGet = Sign30RecordData.getInstance().isLeiJiSignTheDay(33);
+
+                // 达成已领取
+                if (isGet)
+                {
+                    CommonUtil.setImageSprite(m_obj_leiji2.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                }
+                // 达成未领取
+                else
+                {
+                }
+
+                CommonUtil.setImageSprite(m_obj_leiji1.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji3.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+            }
+            else if (signAllDays >= Sign30Data.getInstance().getSign30DataById(32).day)
+            {
+                bool isGet = Sign30RecordData.getInstance().isLeiJiSignTheDay(32);
+
+                // 达成已领取
+                if (isGet)
+                {
+                    CommonUtil.setImageSprite(m_obj_leiji1.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                }
+                // 达成未领取
+                else
+                {
+                }
+
+                CommonUtil.setImageSprite(m_obj_leiji2.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji3.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+            }
+            else
+            {
+                CommonUtil.setImageSprite(m_obj_leiji1.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji2.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji3.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
+                CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
             }
         }
-
-        m_obj_leiji1.transform.Find("Text").GetComponent<Text>().text = "本月累计签到" + temp[0].ToString() + "天";
-        m_obj_leiji2.transform.Find("Text").GetComponent<Text>().text = "本月累计签到" + temp[1].ToString() + "天";
-        m_obj_leiji3.transform.Find("Text").GetComponent<Text>().text = "本月累计签到" + temp[2].ToString() + "天";
-        m_obj_leiji4.transform.Find("Text").GetComponent<Text>().text = "本月累计签到" + temp[3].ToString() + "天";
+        
+        m_obj_leiji1.transform.Find("Text").GetComponent<Text>().text = "连续签到" + Sign30Data.getInstance().getSign30DataById(32).day.ToString() + "天";
+        m_obj_leiji2.transform.Find("Text").GetComponent<Text>().text = "连续签到" + Sign30Data.getInstance().getSign30DataById(33).day.ToString() + "天";
+        m_obj_leiji3.transform.Find("Text").GetComponent<Text>().text = "连续签到" + Sign30Data.getInstance().getSign30DataById(34).day.ToString() + "天";
+        m_obj_leiji4.transform.Find("Text").GetComponent<Text>().text = "全勤奖励";
     }
 
     public void onReceive_Sign30(string result)
@@ -285,15 +350,18 @@ public class Sign30PanelScript : MonoBehaviour {
                         {
                             Sign30RecordData.getInstance().getSign30RecordList().Add(id);
 
-                            m_text_lianxuqiandaotianshu.text = "累计签到天数：" + Sign30RecordData.getInstance().getSign30RecordList().Count.ToString() + "天";
+                            m_text_lianxuqiandaotianshu.text = "连续签到天数：" + Sign30RecordData.getInstance().getLianXuSignDays().ToString() + "天";
 
                             GameObject obj = transform.Find("Image_bg/" + (id - 1).ToString()).gameObject;
                             obj.transform.Find("Image_yiqian").localScale = new Vector3(1, 1, 1);
-                            obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                            //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                            obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
+                            obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
 
                             OtherData.s_mainScript.checkRedPoint();
 
                             setBtnSignState(Sign30Data.getInstance().getSign30DataById(id).day);
+                            setLeiJiSignState();
                         }
                     }
                     break;
@@ -306,11 +374,13 @@ public class Sign30PanelScript : MonoBehaviour {
                         {
                             Sign30RecordData.getInstance().getSign30RecordList().Add(id);
 
-                            m_text_lianxuqiandaotianshu.text = "累计签到天数：" + Sign30RecordData.getInstance().getSign30RecordList().Count.ToString() + "天";
+                            m_text_lianxuqiandaotianshu.text = "连续签到天数：" + Sign30RecordData.getInstance().getLianXuSignDays().ToString() + "天";
 
                             GameObject obj = transform.Find("Image_bg/" + (id - 1).ToString()).gameObject;
                             obj.transform.Find("Image_yiqian").localScale = new Vector3(1, 1, 1);
-                            obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+                            //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
+
+                            obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
                         }
 
                         Destroy(OtherData.s_buQianQueRenPanelScript.gameObject);
@@ -615,8 +685,11 @@ public class Sign30PanelScript : MonoBehaviour {
             // 补签
             else
             {
-                CommonUtil.setButtonEnable(m_btn_sign, true);
-                CommonUtil.setImageSprite(m_btn_sign.transform.Find("Image").GetComponent<Image>(),"Sprites/Sign30/wz_buqian");
+                CommonUtil.setButtonEnable(m_btn_sign, false);
+                CommonUtil.setImageSprite(m_btn_sign.transform.Find("Image").GetComponent<Image>(), "Sprites/Sign30/wz_qiandao");
+
+                //CommonUtil.setButtonEnable(m_btn_sign, true);
+                //CommonUtil.setImageSprite(m_btn_sign.transform.Find("Image").GetComponent<Image>(),"Sprites/Sign30/wz_buqian");
             }
         }
     }

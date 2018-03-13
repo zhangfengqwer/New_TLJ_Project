@@ -129,6 +129,24 @@ public class ActivityManager
                 }
                 break;
 
+            // 微信公众号
+            case 5:
+                {
+                    {
+                        GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
+                        s_panel = GameObject.Instantiate(prefabs);
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown(url);
+
+                        Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
+
+                        script.m_btn1.transform.localScale = new Vector3(0, 0, 0);
+                        script.m_btn2.transform.localScale = new Vector3(0, 0, 0);
+                        script.m_btn3.transform.localScale = new Vector3(0, 0, 0);
+                    }
+                }
+                break;
+
             default:
                 {
                     // 使用热更新的代码
