@@ -319,6 +319,14 @@ public class PropDetailPanelScript : MonoBehaviour {
                     // 不用处理
                 }
                 break;
+
+            // 10元、20元京东卡
+            case 130:
+            case 131:
+                {
+                    ToastScript.createToast("请去邮箱查看");
+                }
+                break;
         }
     }
 

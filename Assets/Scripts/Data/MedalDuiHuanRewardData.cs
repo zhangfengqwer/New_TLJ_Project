@@ -88,4 +88,5 @@ public class MedalDuiHuanRewardDataContent
     public string reward_prop;
     public string desc;
     public int price;
+    public int vipLevel;
 }

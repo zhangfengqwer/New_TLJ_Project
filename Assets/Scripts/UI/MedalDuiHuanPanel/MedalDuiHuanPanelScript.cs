@@ -234,6 +234,9 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
 
                     // 名字
                     btn.transform.Find("Image_btn/Text_price").GetComponent<Text>().text = temp.price.ToString();
+
+                    // vip等级
+                    CommonUtil.setImageSpriteByAssetBundle(btn.transform.Find("Image_vip").GetComponent<Image>(),"vip.unity3d", "user_vip_" + temp.vipLevel);
                 }
                 else
                 {
