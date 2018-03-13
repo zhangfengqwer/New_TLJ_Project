@@ -297,6 +297,8 @@ public class MedalDuiHuanQueRenPanelScript : MonoBehaviour {
             {
                 ShowRewardPanelScript.Show(reward, false);
             }
+
+            Destroy(gameObject);
         }
         else
         {

@@ -85,7 +85,7 @@ public class ActivityManager
                         script.m_btn1.onClick.AddListener(() =>
                         {
                             GameObject.Destroy(OtherData.s_activity.gameObject);
-                            PVPChoiceScript.create();
+                            PVPChoiceScript.create(true);
                         });
 
                         script.m_btn2.transform.localScale = new Vector3(0, 0, 0);
@@ -125,6 +125,24 @@ public class ActivityManager
                     {
                         GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_huafeisuipian") as GameObject;
                         s_panel = GameObject.Instantiate(prefabs);
+                    }
+                }
+                break;
+
+            // 微信公众号
+            case 5:
+                {
+                    {
+                        GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_image_button") as GameObject;
+                        s_panel = GameObject.Instantiate(prefabs);
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.AddComponent<DownImageUtil>();
+                        s_panel.GetComponent<Activity_image_button_Script>().m_image.gameObject.GetComponent<DownImageUtil>().startDown(url);
+
+                        Activity_image_button_Script script = s_panel.GetComponent<Activity_image_button_Script>();
+
+                        script.m_btn1.transform.localScale = new Vector3(0, 0, 0);
+                        script.m_btn2.transform.localScale = new Vector3(0, 0, 0);
+                        script.m_btn3.transform.localScale = new Vector3(0, 0, 0);
                     }
                 }
                 break;

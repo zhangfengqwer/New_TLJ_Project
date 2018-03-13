@@ -79,6 +79,32 @@ public class Sign30RecordData {
         return m_sign30LeiJiRecordList;
     }
 
+    public bool isSignTheDay(int id)
+    {
+        for (int i = 0; i < m_sign30RecordList.Count; i++)
+        {
+            if (m_sign30RecordList[i] == id)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool isLeiJiSignTheDay(int id)
+    {
+        for (int i = 0; i < m_sign30LeiJiRecordList.Count; i++)
+        {
+            if (m_sign30LeiJiRecordList[i] == id)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public bool todayIsSign()
     {
         // 优先使用热更新的代码
@@ -103,5 +129,43 @@ public class Sign30RecordData {
         }
 
         return false;
+    }
+
+    public int getLianXuSignDays()
+    {
+        return getLianXuSignDays(m_sign30RecordList);
+    }
+
+    public int getLianXuSignDays(List<int> signRecordList)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Sign30RecordData_hotfix", "getLianXuSignDays"))
+        {
+            int i = (int)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.Sign30RecordData_hotfix", "getLianXuSignDays", null, null);
+            return i;
+        }
+
+        signRecordList.Sort();
+
+        List<int> temp = new List<int>();
+
+        if (signRecordList.Count > 0)
+        {
+            temp.Add(signRecordList[signRecordList.Count - 1]);
+
+            for (int i = signRecordList.Count - 2; i >= 0; i--)
+            {
+                if ((temp[temp.Count - 1] - signRecordList[i]) == 1)
+                {
+                    temp.Add(signRecordList[i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        return temp.Count;
     }
 }

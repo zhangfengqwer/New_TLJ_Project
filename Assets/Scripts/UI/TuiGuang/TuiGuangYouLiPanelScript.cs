@@ -219,6 +219,9 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
                 {
                     obj.transform.Find("Text_task2_state").GetComponent<Text>().text = "可领取";
                     CommonUtil.setFontColor(obj.transform.Find("Text_task2_state").GetComponent<Text>(), 251, 75, 9);
+
+                    // 启用一键领取按钮
+                    m_btn_yijianlingqu.interactable = true;
                 }
                 // 已领取
                 else if (temp.task2_state == 3)

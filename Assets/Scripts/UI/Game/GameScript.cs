@@ -257,7 +257,7 @@ public class GameScript : MonoBehaviour
             }
 
             // 比赛场把金币图标替换为积分图标
-            CommonUtil.setImageSpriteByAssetBundle(m_myUserInfoUI.transform.Find("Image_goldIcon").GetComponent<Image>(), "game.unity3d", "icon_jifen");
+            CommonUtil.setImageSprite(m_myUserInfoUI.transform.Find("Image_goldIcon").GetComponent<Image>(), "Sprites/Icon/icon_jifen");
         }
     }
 

@@ -71,6 +71,11 @@ public class CommonUtil
         return DateTime.Now.Second;
     }
 
+    static public int getCurMonthAllDays()
+    {
+        return DateTime.DaysInMonth(getCurYear(), getCurMonth());
+    }
+
     static public bool splitStrIsPerfect(string str, List<string> list, char c)
     {
         bool b = false;

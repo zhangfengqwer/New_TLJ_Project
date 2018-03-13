@@ -233,7 +233,7 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
                     CommonUtil.setImageSprite(btn.transform.Find("Image").GetComponent<Image>(), GameUtil.getPropIconPath(GameUtil.getPropIdFromReward(temp.reward_prop)));
 
                     // 名字
-                    btn.transform.Find("Text").GetComponent<Text>().text = temp.name;
+                    btn.transform.Find("Image_btn/Text_price").GetComponent<Text>().text = temp.price.ToString();
                 }
                 else
                 {

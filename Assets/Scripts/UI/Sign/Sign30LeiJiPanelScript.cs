@@ -41,39 +41,70 @@ public class Sign30LeiJiPanelScript : MonoBehaviour {
 
         Sign30DataContent temp = Sign30Data.getInstance().getSign30DataById(m_id);
 
-        m_text_title.text = ("本月累计签到" + temp.day.ToString() + "天");
+        // 全勤奖
+        if (temp.day == 31)
+        {
+            m_text_title.text = ("连续签到" + CommonUtil.getCurMonthAllDays().ToString() + "天");
+        }
+        else
+        {
+            m_text_title.text = ("连续签到" + temp.day.ToString() + "天");
+        }
 
         // 领取奖励按钮状态
         {
-            // 未达成
-            if (temp.day > Sign30RecordData.getInstance().getSign30RecordList().Count)
+            int signAllDays = Sign30RecordData.getInstance().getLianXuSignDays();
+
+            if (m_id == 35)
             {
-                CommonUtil.setButtonEnable(m_btn_lingqujiangli, false);
+                // 达成
+                if (signAllDays == CommonUtil.getCurMonthAllDays())
+                {
+                    bool isGet = Sign30RecordData.getInstance().isLeiJiSignTheDay(m_id);
+
+                    // 达成已领取
+                    if (isGet)
+                    {
+                        CommonUtil.setButtonEnable(m_btn_lingqujiangli, false);
+                        CommonUtil.setImageSprite(m_btn_lingqujiangli.transform.Find("Image").GetComponent<Image>(), "Sprites/Sign30/wz_yilingqu");
+                        m_btn_lingqujiangli.transform.Find("Image").GetComponent<Image>().SetNativeSize();
+                    }
+                    // 达成未领取
+                    else
+                    {
+                        CommonUtil.setButtonEnable(m_btn_lingqujiangli, true);
+                    }
+                }
+                // 未达成
+                else
+                {
+                    CommonUtil.setButtonEnable(m_btn_lingqujiangli, false);
+                }
             }
             else
             {
-                bool isGet = false;
-
-                for (int i = 0; i < Sign30RecordData.getInstance().getSign30LeiJiRecordList().Count; i++)
+                // 达成
+                if (signAllDays >= Sign30Data.getInstance().getSign30DataContentList()[m_id - 1].day)
                 {
-                    if (Sign30RecordData.getInstance().getSign30LeiJiRecordList()[i] == m_id)
+                    bool isGet = Sign30RecordData.getInstance().isLeiJiSignTheDay(m_id);
+
+                    // 达成已领取
+                    if (isGet)
                     {
-                        isGet = true;
-                        break;
+                        CommonUtil.setButtonEnable(m_btn_lingqujiangli, false);
+                        CommonUtil.setImageSprite(m_btn_lingqujiangli.transform.Find("Image").GetComponent<Image>(), "Sprites/Sign30/wz_yilingqu");
+                        m_btn_lingqujiangli.transform.Find("Image").GetComponent<Image>().SetNativeSize();
+                    }
+                    // 达成未领取
+                    else
+                    {
+                        CommonUtil.setButtonEnable(m_btn_lingqujiangli, true);
                     }
                 }
-
-                // 达成已领取
-                if (isGet)
-                {
-                    CommonUtil.setButtonEnable(m_btn_lingqujiangli, false);
-                    CommonUtil.setImageSprite(m_btn_lingqujiangli.transform.Find("Image").GetComponent<Image>(), "Sprites/Sign30/wz_yilingqu");
-                    m_btn_lingqujiangli.transform.Find("Image").GetComponent<Image>().SetNativeSize();
-                }
-                // 达成未领取
+                // 未达成
                 else
                 {
-                    CommonUtil.setButtonEnable(m_btn_lingqujiangli, true);
+                    CommonUtil.setButtonEnable(m_btn_lingqujiangli, false);
                 }
             }
         }
