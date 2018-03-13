@@ -216,7 +216,13 @@ public class MedalDuiHuanQueRenPanelScript : MonoBehaviour {
             ToastScript.createToast("徽章不足,无法兑换");
             return;
         }
-        else
+
+        if (UserData.vipLevel < m_medalDuiHuanRewardData.vipLevel)
+        {
+            ToastScript.createToast("贵族等级不足，无法兑换");
+            return;
+        }
+
         {
             NetLoading.getInstance().Show();
 
