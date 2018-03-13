@@ -712,4 +712,13 @@ public class Sign30PanelScript : MonoBehaviour {
         CommonUtil.setImageSprite(m_obj_meiri_reward1.transform.Find("Image").GetComponent<Image>(),GameUtil.getPropIconPath(prop_id));
         m_obj_meiri_reward1.transform.Find("Text").GetComponent<Text>().text = prop_num.ToString();
     }
+
+    public void OnClickClose()
+    {
+        Destroy(gameObject);
+
+        AudioScript.getAudioScript().playSound_LayerClose();
+
+        EnterMainPanelShowManager.getInstance().showNextPanel();
+    }
 }

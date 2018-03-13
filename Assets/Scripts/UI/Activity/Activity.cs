@@ -312,4 +312,13 @@ public class Activity : MonoBehaviour
 
         OtherData.s_mainScript.checkRedPoint();
     }
+
+    public void OnClickClose()
+    {
+        Destroy(gameObject);
+
+        AudioScript.getAudioScript().playSound_LayerClose();
+
+        EnterMainPanelShowManager.getInstance().showNextPanel();
+    }
 }

@@ -1068,14 +1068,7 @@ public class MainScript : MonoBehaviour
         // 活动
         {
             bool isShowRedPoint = false;
-//            for (int i = 0; i < NoticelDataScript.getInstance().getNoticeDataList().Count; i++)
-//            {
-//                if (NoticelDataScript.getInstance().getNoticeDataList()[i].state == 0)
-//                {
-//                    isShowRedPoint = true;
-//                    break;
-//                }
-//            }
+
             for (int i = 0; i < Activity.activityDatas.Count; i++)
             {
                 Activity.ActivityData activityData = Activity.activityDatas[i];
