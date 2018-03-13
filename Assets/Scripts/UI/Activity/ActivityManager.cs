@@ -85,7 +85,7 @@ public class ActivityManager
                         script.m_btn1.onClick.AddListener(() =>
                         {
                             GameObject.Destroy(OtherData.s_activity.gameObject);
-                            PVPChoiceScript.create();
+                            PVPChoiceScript.create(true);
                         });
 
                         script.m_btn2.transform.localScale = new Vector3(0, 0, 0);

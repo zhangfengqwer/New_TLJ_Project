@@ -13,10 +13,22 @@ public class PVPChoiceScript : MonoBehaviour {
     public Button m_button_huafeisai;
     public bool m_curShowTiaoZhanSai = true;
 
+    public static bool s_isShowBiSaiChang = false;
+
     public static GameObject create()
     {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/Panel_PVP_Choice") as GameObject;
         GameObject obj = MonoBehaviour.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        return obj;
+    }
+
+    public static GameObject create(bool isShowBiSaiChang)
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/Panel_PVP_Choice") as GameObject;
+        GameObject obj = MonoBehaviour.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        s_isShowBiSaiChang = isShowBiSaiChang;
 
         return obj;
     }
@@ -35,8 +47,16 @@ public class PVPChoiceScript : MonoBehaviour {
 
         m_ListViewScript = m_listView.GetComponent<ListViewScript>();
 
-        showJinBiChang();
-        showMyBaoMingFei(true);
+        if (s_isShowBiSaiChang)
+        {
+            showHuaFeiChang();
+            showMyBaoMingFei(false);
+        }
+        else
+        {
+            showJinBiChang();
+            showMyBaoMingFei(true);
+        }
     }
 	
 	// Update is called once per frame
