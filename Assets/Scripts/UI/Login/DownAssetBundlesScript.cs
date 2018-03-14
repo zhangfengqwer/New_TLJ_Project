@@ -11,6 +11,8 @@ public class DownAssetBundlesScript : MonoBehaviour
     public int m_curDownIndex = 0;
     public static string fileRootPath;
 
+    public Text m_text;
+
 
     void Start()
     {
@@ -44,10 +46,32 @@ public class DownAssetBundlesScript : MonoBehaviour
 
             startDown();
 
+            InvokeRepeating("onInvoke",0.5f,0.5f);
+
             return true;
         }
 
         return false;
+    }
+
+    public void onInvoke()
+    {
+        if (m_text.text.CompareTo("正在下载资源...") == 0)
+        {
+            m_text.text = "正在下载资源";
+        }
+        else if (m_text.text.CompareTo("正在下载资源") == 0)
+        {
+            m_text.text = "正在下载资源.";
+        }
+        else if (m_text.text.CompareTo("正在下载资源.") == 0)
+        {
+            m_text.text = "正在下载资源..";
+        }
+        else if (m_text.text.CompareTo("正在下载资源..") == 0)
+        {
+            m_text.text = "正在下载资源...";
+        }
     }
 
     public void startDown()
@@ -114,7 +138,9 @@ public class DownAssetBundlesScript : MonoBehaviour
             else
             {
                 LogUtil.Log("下载完毕");
-                
+
+                CancelInvoke("onInvoke");
+
                 GameUtil.hideGameObject(gameObject);
 
                 OtherData.s_loginScript.netDataDown();
