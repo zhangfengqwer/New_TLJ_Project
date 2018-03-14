@@ -108,40 +108,76 @@ public class LoginScript : MonoBehaviour
 
         bool is3RdLogin = ChannelHelper.Is3RdLogin();
         string channelAllName = ChannelHelper.GetChannelAllName();
-        LogUtil.Log("渠道号:" + OtherData.s_channelName + ",渠道名:"+ channelAllName);
+        LogUtil.Log("渠道号:" + OtherData.s_channelName + ",渠道名:" + channelAllName);
 
         bool isThirdLogin = PlatformHelper.IsThirdLogin();
 
-        if (is3RdLogin)
+        if (is3RdLogin && isThirdLogin)
         {
-            if (isThirdLogin)
+            m_button_3rdLogin.gameObject.SetActive(true);
+            GameUtil.showGameObject(m_button_3rdLogin.gameObject);
+
+            GameUtil.hideGameObject(m_button_defaultLogin.gameObject);
+            GameUtil.hideGameObject(m_button_guanfang.gameObject);
+            GameUtil.hideGameObject(m_button_qq.gameObject);
+            GameUtil.hideGameObject(m_button_wechat.gameObject);
+
+            var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
+            childText.text = channelAllName + "账号登录";
+
+            m_button_3rdLogin.onClick.AddListener(() =>
             {
-                m_button_3rdLogin.gameObject.SetActive(true);
-                m_button_defaultLogin.gameObject.SetActive(false);
-                m_button_guanfang.gameObject.SetActive(false);
-                m_button_qq.gameObject.SetActive(false);
-                m_button_wechat.gameObject.SetActive(false);
-                var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
-                childText.text = channelAllName + "账号登录";
-            }
+                AudioScript.getAudioScript().playSound_ButtonClick();
+                PlatformHelper.Login("AndroidCallBack", "GetLoginResult", OtherData.s_channelName);
+                NetLoading.getInstance().Show();
+            });
         }
         else
         {
-            m_button_3rdLogin.gameObject.SetActive(false);
-            m_button_defaultLogin.gameObject.SetActive(true);
-            m_button_guanfang.gameObject.SetActive(true);
-            m_button_qq.gameObject.SetActive(true);
-            m_button_wechat.gameObject.SetActive(true);
-            var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
-            childText.text = channelAllName + "账号登录";
+            GameUtil.showGameObject(m_button_guanfang.gameObject);
+            GameUtil.showGameObject(m_button_qq.gameObject);
+            GameUtil.showGameObject(m_button_wechat.gameObject);
+
+            GameUtil.hideGameObject(m_button_3rdLogin.gameObject);
+            GameUtil.hideGameObject(m_button_defaultLogin.gameObject);
         }
 
-        m_button_3rdLogin.onClick.AddListener(() =>
-        {
-            AudioScript.getAudioScript().playSound_ButtonClick();
-            PlatformHelper.Login("AndroidCallBack", "GetLoginResult", OtherData.s_channelName);
-            NetLoading.getInstance().Show();
-        });
+        //bool is3RdLogin = ChannelHelper.Is3RdLogin();
+        //string channelAllName = ChannelHelper.GetChannelAllName();
+        //LogUtil.Log("渠道号:" + OtherData.s_channelName + ",渠道名:"+ channelAllName);
+
+        //bool isThirdLogin = PlatformHelper.IsThirdLogin();
+
+        //if (is3RdLogin)
+        //{
+        //    if (isThirdLogin)
+        //    {
+        //        m_button_3rdLogin.gameObject.SetActive(true);
+        //        m_button_defaultLogin.gameObject.SetActive(false);
+        //        m_button_guanfang.gameObject.SetActive(false);
+        //        m_button_qq.gameObject.SetActive(false);
+        //        m_button_wechat.gameObject.SetActive(false);
+        //        var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
+        //        childText.text = channelAllName + "账号登录";
+        //    }
+        //}
+        //else
+        //{
+        //    m_button_3rdLogin.gameObject.SetActive(false);
+        //    m_button_defaultLogin.gameObject.SetActive(true);
+        //    m_button_guanfang.gameObject.SetActive(true);
+        //    m_button_qq.gameObject.SetActive(true);
+        //    m_button_wechat.gameObject.SetActive(true);
+        //    var childText = m_button_3rdLogin.transform.GetChild(0).GetComponent<Text>();
+        //    childText.text = channelAllName + "账号登录";
+        //}
+
+        //m_button_3rdLogin.onClick.AddListener(() =>
+        //{
+        //    AudioScript.getAudioScript().playSound_ButtonClick();
+        //    PlatformHelper.Login("AndroidCallBack", "GetLoginResult", OtherData.s_channelName);
+        //    NetLoading.getInstance().Show();
+        //});
     }
 
     public void onGetAllNetFile()
@@ -562,14 +598,17 @@ public class LoginScript : MonoBehaviour
         else if (tag.CompareTo(TLJCommon.Consts.Tag_Login) == 0)
         {
             onReceive_Login(data);
+            ReqLoginDataStatistics.req((int)ReqLoginDataStatistics.StatisticsType.StatisticsType_Login);
         }
         else if (tag.CompareTo(TLJCommon.Consts.Tag_QuickRegister) == 0)
         {
             onReceive_QuickRegister(data);
+            ReqLoginDataStatistics.req((int)ReqLoginDataStatistics.StatisticsType.StatisticsType_Register);
         }
         else if (tag.CompareTo(TLJCommon.Consts.Tag_Third_Login) == 0)
         {
             onReceive_Third_Login(data);
+            ReqLoginDataStatistics.req((int)ReqLoginDataStatistics.StatisticsType.StatisticsType_Login);
         }
     }
 
@@ -1141,6 +1180,9 @@ public class LoginScript : MonoBehaviour
         m_inputAccount.text = PlayerPrefs.GetString("account", "");
         m_inputPassword.text = PlayerPrefs.GetString("password", "");
 
+        Set3rdLogin();
+        setLogonTypeUI();
+
         if (!OtherData.s_isFromSetToLogin)
         {
             m_healthTipPanel.transform.localScale = new Vector3(1, 1, 1);
@@ -1153,8 +1195,5 @@ public class LoginScript : MonoBehaviour
             // 获取数值表
             OtherData.s_getNetEntityFile.getNetFile();
         }
-
-        // 健康忠告提示文字
-        //m_text_tips.text = GameUtil.getOneTips();
     }
 }
