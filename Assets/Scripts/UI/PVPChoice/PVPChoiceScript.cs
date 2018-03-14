@@ -184,7 +184,6 @@ public class PVPChoiceScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPChoiceScript_hotfix", "showMyBaoMingFei", null, isGold);
             return;
         }
-
         {
             int num = 0;
 
@@ -214,13 +213,15 @@ public class PVPChoiceScript : MonoBehaviour {
                 transform.Find("Image_bg/mybaomingfei").GetComponent<Text>().text = "我的     :" + num.ToString();
             }
 
+            Image icon = transform.Find("Image_bg/mybaomingfei/Image").GetComponent<Image>();
+
             if (isGold)
             {
-                CommonUtil.setImageSprite(transform.Find("Image_bg/mybaomingfei/Image").GetComponent<Image>(), GameUtil.getPropIconPath(1));
+                CommonUtil.setImageSprite(icon, GameUtil.getPropIconPath(1));
             }
             else
             {
-                CommonUtil.setImageSprite(transform.Find("Image_bg/mybaomingfei/Image").GetComponent<Image>(), GameUtil.getPropIconPath(107));
+                CommonUtil.setImageSprite(icon, GameUtil.getPropIconPath(107));
             }
         }
     }

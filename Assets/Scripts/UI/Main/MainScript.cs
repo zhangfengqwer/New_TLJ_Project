@@ -982,6 +982,15 @@ public class MainScript : MonoBehaviour
                         List<string> tempList = new List<string>();
                         CommonUtil.splitStr(baomingfei, tempList, ':');
                         GameUtil.changeData(int.Parse(tempList[0]), -int.Parse(tempList[1]));
+
+                        if (int.Parse(tempList[0]) == 1)
+                        {
+                            OtherData.s_pvpChoiceScript.showMyBaoMingFei(true);
+                        }
+                        else
+                        {
+                            OtherData.s_pvpChoiceScript.showMyBaoMingFei(false);
+                        }
                     }
                 }
             }

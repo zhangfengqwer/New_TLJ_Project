@@ -181,18 +181,15 @@ public class Item_Task_List_Script : MonoBehaviour {
             // 增加奖励
             if (!string.IsNullOrEmpty(reward))
             {
-                // 更新部分
+                List<string> list = new List<string>();
+                CommonUtil.splitStr(reward, list, ';');
+
+                for (int i = 0; i < list.Count; i++)
                 {
-                    List<string> list = new List<string>();
-                    CommonUtil.splitStr(reward, list, ';');
+                    List<string> tempList = new List<string>();
+                    CommonUtil.splitStr(list[i], tempList, ':');
 
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        List<string> tempList = new List<string>();
-                        CommonUtil.splitStr(list[i], tempList, ':');
-
-                        GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
-                    }
+                    GameUtil.changeData(int.Parse(tempList[0]), int.Parse(tempList[1]));
                 }
 
                 //ShowRewardPanelScript.create().GetComponent<ShowRewardPanelScript>().setData(TaskDataScript.getInstance().getTaskDataById(task_id).reward);
