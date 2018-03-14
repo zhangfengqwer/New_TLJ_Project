@@ -56,4 +56,13 @@ public class NewPlayerShowTuiGuangPanelScript : MonoBehaviour {
         Destroy(gameObject);
         TuiGuangYouLiPanelScript.create();
     }
+
+    public void OnClickClose()
+    {
+        Destroy(gameObject);
+
+        AudioScript.getAudioScript().playSound_LayerClose();
+
+        EnterMainPanelShowManager.getInstance().showNextPanel();
+    }
 }

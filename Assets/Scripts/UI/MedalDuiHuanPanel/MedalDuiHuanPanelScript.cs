@@ -293,4 +293,13 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
         int goods_id = int.Parse(btn.transform.name);
         MedalDuiHuanQueRenPanelScript.create(goods_id);
     }
+
+    public void OnClickClose()
+    {
+        Destroy(gameObject);
+
+        AudioScript.getAudioScript().playSound_LayerClose();
+
+        EnterMainPanelShowManager.getInstance().showNextPanel();
+    }
 }

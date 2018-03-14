@@ -57,8 +57,7 @@ public class Sign30RecordData {
                 }
             }
 
-            // 显示新人推广
-            OtherData.s_mainScript.checkShowNewPlayerTuiGuang();
+            EnterMainPanelShowManager.getInstance().showNextPanel();
 
             return true;
         }

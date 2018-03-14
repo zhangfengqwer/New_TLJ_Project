@@ -41,6 +41,12 @@ public class CommonUtil
         return DateTime.Now.Year + "/" + DateTime.Now.Month;
     }
 
+    // 格式2017/7/10
+    static public string getCurYearMonthDay()
+    {
+        return DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
+    }
+
     static public int getCurYear()
     {
         return DateTime.Now.Year;
