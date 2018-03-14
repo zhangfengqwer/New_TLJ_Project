@@ -215,6 +215,10 @@ public class PropDetailPanelScript : MonoBehaviour {
             useProp(m_propInfo.m_id);
             UpdatePropData();
         }
+        else
+        {
+            ToastScript.createToast("使用失败");
+        }
     }
 
     public void useProp(int id)
