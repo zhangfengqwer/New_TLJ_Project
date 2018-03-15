@@ -175,7 +175,7 @@ public class RankListCaifuScript : MonoBehaviour
         
         CommonUtil.setImageSpriteByAssetBundle(MyRank.GetComponent<Image>(), "main.unity3d", "di7");
 
-        Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_jinbi");
+        Image_icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Icon/Prop/icon_huizhang");
 
         if (string.IsNullOrEmpty(mymedalRank))
         {

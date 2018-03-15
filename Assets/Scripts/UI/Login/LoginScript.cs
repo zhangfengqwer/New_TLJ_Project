@@ -112,11 +112,27 @@ public class LoginScript : MonoBehaviour
 
         bool isThirdLogin = PlatformHelper.IsThirdLogin();
 
+        //应用宝渠道
+        if ("yyb".Equals(OtherData.s_channelName))
+        {
+            GameUtil.hideGameObject(m_button_3rdLogin.gameObject);
+            GameUtil.hideGameObject(m_button_defaultLogin.gameObject);
+            m_button_guanfang.gameObject.SetActive(false);
+            GameUtil.showGameObject(m_button_qq.gameObject);
+            GameUtil.showGameObject(m_button_wechat.gameObject);
+
+            Vector3 qqV3 = m_button_qq.gameObject.transform.localPosition;
+            m_button_qq.gameObject.transform.localPosition = new Vector3(-168, qqV3.y, qqV3.z);
+
+            Vector3 wxV3 = m_button_wechat.gameObject.transform.localPosition;
+            m_button_wechat.gameObject.transform.localPosition = new Vector3(132, wxV3.y, wxV3.z);
+            return;
+        }
+
         if (is3RdLogin && isThirdLogin)
         {
             m_button_3rdLogin.gameObject.SetActive(true);
             GameUtil.showGameObject(m_button_3rdLogin.gameObject);
-
             GameUtil.hideGameObject(m_button_defaultLogin.gameObject);
             GameUtil.hideGameObject(m_button_guanfang.gameObject);
             GameUtil.hideGameObject(m_button_qq.gameObject);
@@ -137,7 +153,6 @@ public class LoginScript : MonoBehaviour
             GameUtil.showGameObject(m_button_guanfang.gameObject);
             GameUtil.showGameObject(m_button_qq.gameObject);
             GameUtil.showGameObject(m_button_wechat.gameObject);
-
             GameUtil.hideGameObject(m_button_3rdLogin.gameObject);
             GameUtil.hideGameObject(m_button_defaultLogin.gameObject);
         }
