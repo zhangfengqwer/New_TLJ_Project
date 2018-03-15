@@ -63,8 +63,8 @@ public class LoginScript : MonoBehaviour
             m_panel_login.transform.localScale = new Vector3(0, 0, 0);
             m_panel_register.transform.localScale = new Vector3(0, 0, 0);
 
-            // 出版号
-            m_text_chubanhao.text = PlayerPrefs.GetString("banhao", "");
+            //// 出版号
+            //m_text_chubanhao.text = PlayerPrefs.GetString("banhao", "");
 
             if (!OtherData.s_isFromSetToLogin)
             {
@@ -1137,7 +1137,7 @@ public class LoginScript : MonoBehaviour
             return;
         }
 
-        startHealthTimer(0.5f);
+        startHealthTimer(1.5f);
     }
 
     public void startHealthTimer(float time)

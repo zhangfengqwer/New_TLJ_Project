@@ -49,21 +49,21 @@ public class ILRuntimeUtil : MonoBehaviour
         LogUtil.Log("dll保存地址：" + fileInfoPath);
         string dllVersion = PlayerPrefs.GetString("dllVersion", "");
 
-        //if (string.IsNullOrEmpty(dllVersion) || !dllVersion.Equals(url) || !File.Exists(fileInfoPath))
+        if (string.IsNullOrEmpty(dllVersion) || !dllVersion.Equals(url) || !File.Exists(fileInfoPath))
         {
             LogUtil.Log("下载dll");
             StartCoroutine(LoadHotFixAssembly(url));
         }
-        //else
-        //{
-        //    LogUtil.Log("加载缓存dll");
-        //    using (FileStream fs = new FileStream(fileInfoPath, FileMode.Open))
-        //    {
-        //        s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
-        //    }
-        //    InitializeILRuntime();
-        //    OnHotFixLoaded();
-        //}
+        else
+        {
+            LogUtil.Log("加载缓存dll");
+            using (FileStream fs = new FileStream(fileInfoPath, FileMode.Open))
+            {
+                s_appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+            }
+            InitializeILRuntime();
+            OnHotFixLoaded();
+        }
     }
 
     IEnumerator LoadHotFixAssembly(string url)

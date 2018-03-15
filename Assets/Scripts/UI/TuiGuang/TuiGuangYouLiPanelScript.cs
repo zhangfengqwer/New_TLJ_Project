@@ -72,6 +72,11 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
 
         MyTuiGuangData.getInstance().initJson(data);
 
+        if (MyTuiGuangData.getInstance().getMyTuiGuangDataList().Count == 0)
+        {
+            m_curShowTab = CurShowTab.CurShowTab_bulingjiangli;
+        }
+
         showTab(m_curShowTab);
     }
 
