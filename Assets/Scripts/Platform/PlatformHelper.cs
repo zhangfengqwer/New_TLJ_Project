@@ -755,6 +755,9 @@ public class PlatformHelper
     [DllImport("__Internal")]
     public static extern string GetVersionName();
 
+    [DllImport("__Internal")]
+    public static extern string getIsTest();
+    
     public static string GetChannelName()
     {
         return "ios";
