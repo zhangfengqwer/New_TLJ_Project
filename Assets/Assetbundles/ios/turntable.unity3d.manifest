@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 2387487329
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e97b3e8608fe9d55e524e1e3f2142cab
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a725426408a5b104a220ba90be288c03
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assetbundles/Turntable/zj.png
+- Assets/Assetbundles/Turntable/wzj.png
+- Assets/Assetbundles/Turntable/Image.controller
+- Assets/Assetbundles/Turntable/btn_free_tip.png
+- Assets/Assetbundles/Turntable/btn_huizhang_tip.png
+- Assets/Assetbundles/Turntable/bg.jpg
+- Assets/Assetbundles/Turntable/title.png
+- Assets/Assetbundles/Turntable/btn_huizhang.png
+- Assets/Assetbundles/Turntable/huizhangjiaobiao.png
+- Assets/Assetbundles/Turntable/btn_free.png
+Dependencies: []
