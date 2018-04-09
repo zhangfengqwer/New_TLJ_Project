@@ -9,6 +9,17 @@ public class ChannelHelper
         {"vivo", "vivo"},
         {"yyb", "应用宝"},
         {"baidu", "百度"},
+        {"oppo", "oppo"},
+        {"aiyouxi", "爱游戏"},
+        {"xiaomi", "小米"},
+        {"aligame", "阿里游戏"},
+        {"meizu", "魅族"},
+        {"zhuoyi", "卓易"},
+        {"appchina", "应用汇"},
+        {"leshi", "乐视"},
+        {"ydmm", "移动mm"},
+        {"mumayi", "木蚂蚁"},
+        {"anzhi", "安智"},
     };
 
     public static bool Is3RdLogin()
