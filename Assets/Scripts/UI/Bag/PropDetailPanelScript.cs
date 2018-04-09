@@ -82,6 +82,23 @@ public class PropDetailPanelScript : MonoBehaviour {
 
                 m_changeNum.transform.Find("Text_num").GetComponent<Text>().text = m_useNum.ToString();
             }
+
+            if ((m_propInfo.m_id == 111) ||
+                (m_propInfo.m_id == 112) ||
+                (m_propInfo.m_id == 113))
+            {
+                GameObject obj = new GameObject();
+                Text text = obj.AddComponent<Text>();
+                text.text = "完成一次对局方可使用";
+                text.fontSize = 20;
+                CommonUtil.setFontColor(text, 0, 0, 0);
+                text.font = transform.Find("Image_bg/Text_desc").GetComponent<Text>().font;
+                text.GetComponent<RectTransform>().sizeDelta = new Vector2(250, 30);
+
+                obj.transform.SetParent(transform.Find("Image_bg"));
+                obj.transform.localPosition = new Vector3(26, 30, 0);
+                obj.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 

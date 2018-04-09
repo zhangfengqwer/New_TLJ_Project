@@ -52,6 +52,8 @@ public class GameScript : MonoBehaviour
     //bool m_isStartGame = false;
     public bool m_hasJiPaiQiUse = false;
 
+    public int m_fuwufei = 500;
+
     private void Awake()
     {
         OtherData.s_gameScript = this;
@@ -1489,13 +1491,13 @@ public class GameScript : MonoBehaviour
                 Destroy(m_pvpGameResultPanel);
                 JueShengJuTiShiPanelScript.checkClose();
 
-                // 休闲场扣除报名费：金币*200
+                // 休闲场扣除报名费
                 {
                     if ((GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common) == 0) ||
                         (GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common) == 0))
                     {
-                        GameUtil.changeData(1, -200);
-
+                        GameUtil.changeData(1, -m_fuwufei);
+                        m_myUserInfoUI.GetComponent<MyUIScript>().m_textFuWuFei.text = (-m_fuwufei).ToString();
                         m_myUserInfoUI.GetComponent<MyUIScript>().m_textFuWuFei.GetComponent<Animation>().Play("game_fuwufei");
                     }
                 }
@@ -2664,6 +2666,11 @@ public class GameScript : MonoBehaviour
             else
             {
                 GameUtil.showGameObject(m_buttonStartGame.gameObject);
+
+                if (!isPVP())
+                {
+                    ToastScript.createToast("每局服务费" + m_fuwufei + "金币");
+                }
             }
         }
     }

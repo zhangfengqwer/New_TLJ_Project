@@ -524,4 +524,17 @@ public class TurntablePanelScript : MonoBehaviour
         string tip = "1、使用徽章进行抽奖，每日可获得三次抽奖机会。\r\n2、通过比赛场获得胜利可赢取徽章奖励。";
         TurntableTipPanelScript.create().GetComponent<TurntableTipPanelScript>().setTip(tip);
     }
+
+    public void onClickDuiHuan()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "onClickDuiHuan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "onClickDuiHuan", null, null);
+            return;
+        }
+
+        Destroy(gameObject);
+        NoticePanelScript.create();
+    }
 }
