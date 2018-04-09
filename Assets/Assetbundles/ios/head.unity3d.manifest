@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 3330696713
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d6a95b2982b6cd2ceeda72928fb45e3c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 36c33a819640bead83b84b1645a12e6d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assetbundles/Head/head_13.png
+- Assets/Assetbundles/Head/head_10.png
+- Assets/Assetbundles/Head/head_2.png
+- Assets/Assetbundles/Head/head_3.png
+- Assets/Assetbundles/Head/head_18.png
+- Assets/Assetbundles/Head/head_15.png
+- Assets/Assetbundles/Head/head_5.png
+- Assets/Assetbundles/Head/head_4.png
+- Assets/Assetbundles/Head/head_6.png
+- Assets/Assetbundles/Head/head_14.png
+- Assets/Assetbundles/Head/head_7.png
+- Assets/Assetbundles/Head/head_11.png
+- Assets/Assetbundles/Head/head_17.png
+- Assets/Assetbundles/Head/head_12.png
+- Assets/Assetbundles/Head/head_1.png
+- Assets/Assetbundles/Head/default_head.png
+- Assets/Assetbundles/Head/head_16.png
+- Assets/Assetbundles/Head/head_9.png
+- Assets/Assetbundles/Head/head_8.png
+Dependencies: []

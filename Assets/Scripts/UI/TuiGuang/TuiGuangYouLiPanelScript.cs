@@ -74,7 +74,8 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
 
         if (MyTuiGuangData.getInstance().getMyTuiGuangDataList().Count == 0)
         {
-            m_curShowTab = CurShowTab.CurShowTab_bulingjiangli;
+            m_curShowTab = TuiGuangYouLiPanelScript.CurShowTab.CurShowTab_bulingjiangli;
+            gameObject.transform.Find("Image_bg/Image_right_bg/wodetuiguang/Text_meiyouyaoqing").localScale = new Vector3(1,1,1);
         }
 
         showTab(m_curShowTab);

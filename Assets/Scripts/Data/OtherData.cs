@@ -118,6 +118,8 @@ public class OtherData
             s_isTest = true;
         }
 
+        //s_isTest = false;
+
         if (s_isTest)
         {
             return s_webStorageUrl_test;

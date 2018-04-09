@@ -113,9 +113,12 @@ public class Sign30PanelScript : MonoBehaviour {
                 CommonUtil.setImageSprite(obj.transform.Find("Image_icon").GetComponent<Image>(), GameUtil.getPropIconPath(prop_id));
             }
 
+            // 奖励数量
+            obj.transform.Find("Text_rewardNum").GetComponent<Text>().text = GameUtil.getPropNumFromReward(Sign30Data.getInstance().getSign30DataContentList()[i].reward_prop).ToString();
+
             // 第几天
             obj.transform.Find("Text_day").GetComponent<Text>().text = (i + 1).ToString();
-
+            
             // 当天的做一些其他处理
             if ((i + 1) == CommonUtil.getCurDay())
             {
@@ -144,7 +147,7 @@ public class Sign30PanelScript : MonoBehaviour {
 
                                 //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
                                 obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
-                                obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
+                                //obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
                                 break;
                             }
                         }
@@ -188,6 +191,27 @@ public class Sign30PanelScript : MonoBehaviour {
                         }
                     }
                 }
+            }
+        }
+
+        // 累计签到奖励
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                Sign30DataContent data = Sign30Data.getInstance().getSign30DataById(31 + i);
+                int prop_id = GameUtil.getPropIdFromReward(data.reward_prop);
+                int prop_num = GameUtil.getPropNumFromReward(data.reward_prop);
+
+                GameObject parent = transform.Find("Image_bg/Image_leiji_" + i.ToString()).gameObject;
+
+                // 天数
+                parent.transform.Find("Text_day").GetComponent<Text>().text = data.day.ToString() + "天";
+
+                // 奖励icon
+                CommonUtil.setImageSprite(parent.transform.Find("Image_rewardIcon").GetComponent<Image>(), GameUtil.getPropIconPath(prop_id));
+
+                // 奖励数量
+                parent.transform.Find("Text_rewardNum").GetComponent<Text>().text = "*" + prop_num.ToString();
             }
         }
 
@@ -294,11 +318,6 @@ public class Sign30PanelScript : MonoBehaviour {
                 CommonUtil.setImageSprite(m_obj_leiji4.transform.Find("Button").GetComponent<Image>(), "Sprites/Sign30/lihe_bukelingqu");
             }
         }
-        
-        m_obj_leiji1.transform.Find("Text").GetComponent<Text>().text = "连续签到" + Sign30Data.getInstance().getSign30DataById(32).day.ToString() + "天";
-        m_obj_leiji2.transform.Find("Text").GetComponent<Text>().text = "连续签到" + Sign30Data.getInstance().getSign30DataById(33).day.ToString() + "天";
-        m_obj_leiji3.transform.Find("Text").GetComponent<Text>().text = "连续签到" + Sign30Data.getInstance().getSign30DataById(34).day.ToString() + "天";
-        m_obj_leiji4.transform.Find("Text").GetComponent<Text>().text = "全勤奖励";
     }
 
     public void onReceive_Sign30(string result)
@@ -356,7 +375,7 @@ public class Sign30PanelScript : MonoBehaviour {
                             obj.transform.Find("Image_yiqian").localScale = new Vector3(1, 1, 1);
                             //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
                             obj.transform.Find("Image_yiguoqi").localScale = new Vector3(0, 0, 0);
-                            obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
+                            //obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
 
                             OtherData.s_mainScript.checkRedPoint();
 
@@ -380,7 +399,7 @@ public class Sign30PanelScript : MonoBehaviour {
                             obj.transform.Find("Image_yiqian").localScale = new Vector3(1, 1, 1);
                             //obj.transform.Find("Image_buqian").localScale = new Vector3(0, 0, 0);
 
-                            obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
+                            //obj.transform.Find("Image_icon").localScale = new Vector3(0, 0, 0);
                         }
 
                         Destroy(OtherData.s_buQianQueRenPanelScript.gameObject);

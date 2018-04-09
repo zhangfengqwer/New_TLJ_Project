@@ -224,6 +224,10 @@ public class CommonUtil
         {
             image.sprite = ab.LoadAsset<Sprite>(imageName);
         }
+        else
+        {
+            Debug.Log("不存在此图片：" + assetbundleName + "." + imageName);
+        }
     }
 
     static public Sprite getImageSpriteByAssetBundle(string assetbundleName, string imageName)
