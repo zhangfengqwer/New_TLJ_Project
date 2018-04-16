@@ -43,6 +43,8 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
     {
         OtherData.s_tuiGuangYouLiPanelScript = this;
 
+        initUI_Image();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuiGuangYouLiPanelScript_hotfix", "Start"))
         {
@@ -57,6 +59,19 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
 
         LogicEnginerScript.Instance.GetComponent<MyTuiGuangYouLiDataRequest>().CallBack = onCallBackMyTuiGuangYouLiData;
         LogicEnginerScript.Instance.GetComponent<MyTuiGuangYouLiDataRequest>().OnRequest();
+    }
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuiGuangYouLiPanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuiGuangYouLiPanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Image_right_bg/bulingjiangli/Image").GetComponent<Image>(), "tuiguang.unity3d", "tuiguang_bg");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Image_right_bg/bulingjiangli/Image (2)").GetComponent<Image>(), "tuiguang.unity3d", "srsp");
     }
 
     public void onCallBackMyTuiGuangYouLiData(string data)

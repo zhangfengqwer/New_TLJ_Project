@@ -39,6 +39,8 @@ public class TurntablePanelScript : MonoBehaviour
     {
         OtherData.s_turntablePanelScript = this;
 
+        initUI_Image();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "Start"))
         {
@@ -60,6 +62,18 @@ public class TurntablePanelScript : MonoBehaviour
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().CallBack = onReceive_GetTurntable;
             LogicEnginerScript.Instance.GetComponent<GetTurntableRequest>().OnRequest();
         }
+    }
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TurntablePanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TurntablePanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Imagebg").GetComponent<Image>(), "turntable.unity3d", "bg");
     }
 
     private void Update()

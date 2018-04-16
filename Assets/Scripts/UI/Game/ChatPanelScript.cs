@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ChatPanelScript : MonoBehaviour {
 
     public GameScript m_parentScript;
+    public DDZ_GameScript m_parentScript_ddz;
 
     public GameObject m_listView_chat;
     public ListViewScript m_ListViewScript_chat;
@@ -25,6 +26,16 @@ public class ChatPanelScript : MonoBehaviour {
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<ChatPanelScript>().m_parentScript = parent;
+
+        return obj;
+    }
+
+    public static GameObject create(DDZ_GameScript parent)
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/ChatPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<ChatPanelScript>().m_parentScript_ddz = parent;
 
         return obj;
     }
@@ -156,7 +167,15 @@ public class ChatPanelScript : MonoBehaviour {
         if (m_canChat)
         {
             m_canChat = false;
-            m_parentScript.reqChat(1,chatText.m_id);
+
+            if (m_parentScript != null)
+            {
+                m_parentScript.reqChat(1, chatText.m_id);
+            }
+            else if (m_parentScript_ddz != null)
+            {
+                m_parentScript_ddz.m_DDZ_NetReqLogic.reqChat(1, chatText.m_id);
+            }
 
             Invoke("onInvoke",4);
         }
@@ -178,8 +197,15 @@ public class ChatPanelScript : MonoBehaviour {
         if (m_canChat)
         {
             m_canChat = false;
-            m_parentScript.reqChat(2, id);
 
+            if (m_parentScript != null)
+            {
+                m_parentScript.reqChat(2, id);
+            }
+            else if (m_parentScript_ddz != null)
+            {
+                m_parentScript_ddz.m_DDZ_NetReqLogic.reqChat(2, id);
+            }
             Invoke("onInvoke", 2);
         }
         else

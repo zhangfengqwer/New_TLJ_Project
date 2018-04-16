@@ -222,12 +222,35 @@ public class CommonUtil
         AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
         if (ab != null)
         {
-            image.sprite = ab.LoadAsset<Sprite>(imageName);
+            Sprite sprite = ab.LoadAsset<Sprite>(imageName);
+            if (sprite != null)
+            {
+                image.sprite = sprite;
+            }
+            else
+            {
+                Debug.Log("---------------------不存在此图片：" + assetbundleName + "." + imageName);
+            }
         }
         else
         {
-            Debug.Log("不存在此图片：" + assetbundleName + "." + imageName);
+            Debug.Log("---------------------不存在此ab包：" + assetbundleName);
         }
+    }
+
+    static public bool checkSpriteIsExistByAssetBundle(string assetbundleName, string imageName)
+    {
+        AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
+        if (ab != null)
+        {
+            Sprite sprite = ab.LoadAsset<Sprite>(imageName);
+            if (sprite != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static public Sprite getImageSpriteByAssetBundle(string assetbundleName, string imageName)

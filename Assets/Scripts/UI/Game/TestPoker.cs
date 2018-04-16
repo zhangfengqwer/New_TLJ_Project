@@ -230,7 +230,7 @@ public class TestPoker : MonoBehaviour {
             return;
         }
 
-        if (selectedPokers.Count == 25)
+        if ((selectedPokers.Count == 25) || (selectedPokers.Count == 17))
         {
             foreach (var poker in selectedPokers)
             {
@@ -242,7 +242,7 @@ public class TestPoker : MonoBehaviour {
         }
         else
         {
-            ToastScript.createToast("牌不是25张");
+            ToastScript.createToast("牌不是25或17张");
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChangeHeadPanelScript : MonoBehaviour {
 
@@ -24,6 +25,8 @@ public class ChangeHeadPanelScript : MonoBehaviour {
 
         s_instance = this;
 
+        initUI_Image();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "Start"))
         {
@@ -31,9 +34,25 @@ public class ChangeHeadPanelScript : MonoBehaviour {
             return;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        for (int i = 1; i < 18; i++)
+        {
+            Image image =  gameObject.transform.Find("Image_bg/Image_headList/" + i).GetComponent<Image>();
+            CommonUtil.setImageSpriteByAssetBundle(image, "head.unity3d", "head_" + i);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

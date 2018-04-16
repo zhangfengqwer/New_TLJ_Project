@@ -214,11 +214,27 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PokerScript_hotfix", "OnPointerUp"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PokerScript_hotfix", "OnPointerUp", null, eventData);
+            return;
+        }
+
         if (m_canTouch)
         {
+            // 升级
             for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
             {
                 PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
+
+                pokerScript.setIsJump(pokerScript.getIsSelect());
+            }
+
+            // 斗地主
+            for (int i = 0; i < DDZ_GameData.getInstance().m_myPokerObjList.Count; i++)
+            {
+                PokerScript pokerScript = DDZ_GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
 
                 pokerScript.setIsJump(pokerScript.getIsSelect());
             }
@@ -234,10 +250,20 @@ public class PokerScript : MonoBehaviour, IPointerDownHandler,IPointerEnterHandl
             return;
         }
 
+        // 升级
         for (int i = 0; i < GameData.getInstance().m_myPokerObjList.Count; i++)
         {
             PokerScript pokerScript = GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
             
+            pokerScript.setIsSelect(false);
+            pokerScript.setIsJump(false);
+        }
+
+        // 斗地主
+        for (int i = 0; i < DDZ_GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            PokerScript pokerScript = DDZ_GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
+
             pokerScript.setIsSelect(false);
             pokerScript.setIsJump(false);
         }

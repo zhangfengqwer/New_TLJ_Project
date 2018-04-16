@@ -42,6 +42,8 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
     {
         OtherData.s_medalDuiHuanPanelScript = this;
 
+        initUI_Image();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalDuiHuanPanelScript_hotfix", "Start"))
         {
@@ -58,6 +60,18 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
 
         LogicEnginerScript.Instance.GetComponent<GetMedalDuiHuanRewardRequest>().CallBack = onCallBackGetMedalDuiHuanReward;
         LogicEnginerScript.Instance.GetComponent<GetMedalDuiHuanRewardRequest>().OnRequest();
+    }
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalDuiHuanPanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalDuiHuanPanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Imagebg/Image_beijing").GetComponent<Image>(), "medalduihuan.unity3d", "bg");
     }
 
     // Update is called once per frame
@@ -120,8 +134,8 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
                         m_btn_duihuanshangpin.GetComponent<Image>().SetNativeSize();
                         m_btn_duihuanjilu.GetComponent<Image>().SetNativeSize();
 
-                        CommonUtil.setImageSprite(m_btn_duihuanshangpin.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalDuiHuan/dhsp");
-                        CommonUtil.setImageSprite(m_btn_duihuanjilu.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalDuiHuan/dhjl");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_duihuanshangpin.transform.Find("Image").GetComponent<Image>(), "medalduihuan.unity3d", "dhsp");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_duihuanjilu.transform.Find("Image").GetComponent<Image>(), "medalduihuan.unity3d", "dhjl");
                     }
 
                     loadDuiHuanShangPin();
@@ -140,8 +154,8 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
                         m_btn_duihuanshangpin.GetComponent<Image>().SetNativeSize();
                         m_btn_duihuanjilu.GetComponent<Image>().SetNativeSize();
 
-                        CommonUtil.setImageSprite(m_btn_duihuanshangpin.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalDuiHuan/dhsp02");
-                        CommonUtil.setImageSprite(m_btn_duihuanjilu.transform.Find("Image").GetComponent<Image>(), "Sprites/MedalDuiHuan/dhjl02");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_duihuanshangpin.transform.Find("Image").GetComponent<Image>(), "medalduihuan.unity3d", "dhsp02");
+                        CommonUtil.setImageSpriteByAssetBundle(m_btn_duihuanjilu.transform.Find("Image").GetComponent<Image>(), "medalduihuan.unity3d", "dhjl02");
                     }
 
                     loadDuiHuanJiLu();

@@ -18,6 +18,18 @@ public class ShowImageScript : MonoBehaviour
         return obj;
     }
 
+    public static GameObject create(Sprite sprite, Vector3 vec3)
+    {
+        GameObject prefab = Resources.Load("Prefabs/Game/ShowImage") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.transform.localPosition = vec3;
+        obj.GetComponent<Image>().sprite = sprite;
+        obj.GetComponent<Image>().SetNativeSize();
+
+        return obj;
+    }
+
     // Use this for initialization
     void Start ()
     {

@@ -82,8 +82,9 @@ public class GameScript : MonoBehaviour
         startBgm();
         
         initData();
-
+        
         initUI();
+        initUI_Image();
 
         checkGameRoomType();
     }
@@ -178,6 +179,18 @@ public class GameScript : MonoBehaviour
             m_myUserInfoUI.GetComponent<MyUIScript>().setName(UserData.name);
             m_myUserInfoUI.GetComponent<MyUIScript>().m_uid = UserData.uid;
         }
+    }
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg").GetComponent<Image>(), "game.unity3d", "game_bg");
     }
 
     public bool isPVP()
@@ -546,7 +559,7 @@ public class GameScript : MonoBehaviour
         m_waitMatchPanel = WaitMatchPanelScript.create(GameData.getInstance().getGameRoomType());
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(time, isContinueGame);
+        script.start(GameData.getInstance().m_gameRoomType,time, isContinueGame);
     }
 
     public void onTimerEvent_TimeEnd(bool isContinueGame)

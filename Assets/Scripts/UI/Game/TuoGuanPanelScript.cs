@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class TuoGuanPanelScript : MonoBehaviour {
 
-    public GameScript m_parentScript;
-    
+    public GameScript m_parentScript = null;
+    public DDZ_GameScript m_parentScript_ddz = null;
+
     public static GameObject create(GameScript parentScript)
     {
         GameObject prefab = Resources.Load("Prefabs/Game/TuoGuanPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         obj.GetComponent<TuoGuanPanelScript>().m_parentScript = parentScript;
+
+        return obj;
+    }
+
+    public static GameObject create(DDZ_GameScript parentScript)
+    {
+        GameObject prefab = Resources.Load("Prefabs/Game/TuoGuanPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<TuoGuanPanelScript>().m_parentScript_ddz = parentScript;
 
         return obj;
     }
@@ -37,7 +48,15 @@ public class TuoGuanPanelScript : MonoBehaviour {
             return;
         }
 
-        m_parentScript.onClickCancelTuoGuan();
+        if (m_parentScript != null)
+        {
+            m_parentScript.onClickCancelTuoGuan();
+        }
+        else if (m_parentScript_ddz != null)
+        {
+            m_parentScript_ddz.onClickCancelTuoGuan();
+        }
+       
         Destroy(gameObject);
     }
 }

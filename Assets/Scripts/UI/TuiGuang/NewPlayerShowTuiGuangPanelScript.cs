@@ -25,10 +25,24 @@ public class NewPlayerShowTuiGuangPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NewPlayerShowTuiGuangPanelScript_hotfix", "Start", null, null);
             return;
         }
+
+        initUI_Image();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("NewPlayerShowTuiGuangPanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.NewPlayerShowTuiGuangPanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Bg/Image").GetComponent<Image>(), "tuiguang.unity3d", "tuiguang_bg");
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

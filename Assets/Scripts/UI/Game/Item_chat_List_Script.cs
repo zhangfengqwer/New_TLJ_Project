@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Item_chat_List_Script : MonoBehaviour {
 
     public ChatPanelScript m_parentScript;
-    
+
     public Text m_text_content;
     public Button m_button_item;
 
@@ -53,6 +53,7 @@ public class Item_chat_List_Script : MonoBehaviour {
         }
 
         LogUtil.Log("聊天："+ m_chatText.m_text);
+        
         m_parentScript.reqChat(m_chatText);
     }
 }

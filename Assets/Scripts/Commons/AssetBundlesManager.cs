@@ -37,6 +37,9 @@ public class AssetBundlesManager
         m_assetBundlesDatalist.Add(new AssetBundlesData("game.unity3d", null));
         m_assetBundlesDatalist.Add(new AssetBundlesData("poker.unity3d", null));
         m_assetBundlesDatalist.Add(new AssetBundlesData("kefu.unity3d", null));
+        m_assetBundlesDatalist.Add(new AssetBundlesData("medalduihuan.unity3d", null));
+        m_assetBundlesDatalist.Add(new AssetBundlesData("animations.unity3d", null));
+        m_assetBundlesDatalist.Add(new AssetBundlesData("doudizhu.unity3d", null));
     }
 
     public AssetBundle getAssetBundlesDataByName(string name)

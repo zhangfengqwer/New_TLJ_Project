@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShouChongPanelScript : MonoBehaviour {
 
@@ -22,10 +23,25 @@ public class ShouChongPanelScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShouChongPanelScript_hotfix", "Start", null, null);
             return;
         }
+
+        initUI_Image();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ShouChongPanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ShouChongPanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg").GetComponent<Image>(), "shouchong.unity3d", "shouchong_bg");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Image_text").GetComponent<Image>(), "shouchong.unity3d", "shouchong_9");
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

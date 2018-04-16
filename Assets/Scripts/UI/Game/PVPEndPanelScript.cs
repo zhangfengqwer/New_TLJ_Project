@@ -27,12 +27,26 @@ public class PVPEndPanelScript : MonoBehaviour {
     {
         OtherData.s_pvpEndPanelScript = this;
 
+        initUI_Image();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript_hotfix", "Start", null, null);
             return;
         }
+    }
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("PVPEndPanelScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.PVPEndPanelScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Image").GetComponent<Image>(), "gameresult.unity3d", "bg");
     }
 
     public void setData(int mingci,string pvpreward)

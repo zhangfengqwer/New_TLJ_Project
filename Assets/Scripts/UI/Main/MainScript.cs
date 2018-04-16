@@ -47,6 +47,8 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        initUI_Image();
+
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "Start"))
         {
@@ -58,6 +60,8 @@ public class MainScript : MonoBehaviour
         Input.multiTouchEnabled = false;
 
         ToastScript.clear();
+
+        //initUI();
 
         // 安卓回调
         AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
@@ -128,6 +132,24 @@ public class MainScript : MonoBehaviour
         }
 
         m_laBaScript = m_laba.GetComponent<LaBaScript>();
+    }
+
+    public void initUI_Image()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "initUI_Image", null, null);
+            return;
+        }
+
+        gameObject.transform.Find("Room/Button_EnterXiuXianChang").GetComponent<PlayAnimation>().start("animations.unity3d", "putongchang");
+        gameObject.transform.Find("Room/Button_EnterJingJiChang").GetComponent<PlayAnimation>().start("animations.unity3d", "bishaichang");
+        
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Bg").GetComponent<Image>(), "main.unity3d", "beijing");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("RankingList").GetComponent<Image>(), "main.unity3d", "di01");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/xiuxianchang/Button_jingdianchang").GetComponent<Image>(), "main.unity3d", "main_jingdian");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/xiuxianchang/Button_chaodichang").GetComponent<Image>(), "main.unity3d", "main_chaodi");
     }
 
     // 显示新人推广礼
@@ -334,8 +356,7 @@ public class MainScript : MonoBehaviour
         
         NetLoading.getInstance().Close();
     }
-
-
+    
     public void showWaitMatchPanel(float time, string gameroomtype)
     {
         // 优先使用热更新的代码
@@ -354,7 +375,7 @@ public class MainScript : MonoBehaviour
         m_waitMatchPanel = WaitMatchPanelScript.create(gameroomtype);
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.setOnTimerEvent_TimeEnd(onTimerEvent_TimeEnd);
-        script.start(time,false);
+        script.start(GameData.getInstance().m_gameRoomType,time, false);
     }
 
     public void onTimerEvent_TimeEnd(bool isContinueGame)
@@ -393,15 +414,16 @@ public class MainScript : MonoBehaviour
 
     public void onClickEnterJingJiChang()
     {
-        // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickEnterJingJiChang"))
-        {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickEnterJingJiChang", null, null);
-            return;
-        }
+        //// 优先使用热更新的代码
+        //if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickEnterJingJiChang"))
+        //{
+        //    ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickEnterJingJiChang", null, null);
+        //    return;
+        //}
 
-        AudioScript.getAudioScript().playSound_ButtonClick();
-        PVPChoiceScript.create();
+        //AudioScript.getAudioScript().playSound_ButtonClick();
+        //PVPChoiceScript.create();
+        SceneManager.LoadScene("GameScene_doudizhu");
     }
 
     public void onClickJingDianChang()

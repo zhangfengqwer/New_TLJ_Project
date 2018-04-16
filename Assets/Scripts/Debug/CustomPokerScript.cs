@@ -8,12 +8,6 @@ public class CustomPokerScript : MonoBehaviour
     // 请求自定义牌型
     public static void reqCustomPoker(string uid,List<TLJCommon.PokerInfo> pokerList)
     {
-        if (pokerList.Count != 25)
-        {
-            ToastScript.createToast("张数必须为25");
-            return;
-        }
-
         JsonData data = new JsonData();
 
         data["tag"] = TLJCommon.Consts.Tag_DebugSetPoker;

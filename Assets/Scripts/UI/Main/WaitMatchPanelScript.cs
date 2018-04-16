@@ -21,8 +21,6 @@ public class WaitMatchPanelScript : MonoBehaviour {
         GameObject prefab = Resources.Load("Prefabs/UI/Panel/WaitMatchPanel") as GameObject;
         GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
-        obj.GetComponent<WaitMatchPanelScript>().checkHideTuiSai(gameRoomType);
-
         return obj;
     }
 
@@ -69,8 +67,23 @@ public class WaitMatchPanelScript : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void Update ()
+    public void checkHideTuiSai_DDZ(string gameRoomType)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "checkHideTuiSai_DDZ"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.WaitMatchPanelScript_hotfix", "checkHideTuiSai_DDZ", null, gameRoomType);
+            return;
+        }
+        
+        if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_DDZ_Normal) == 0)
+        {
+            m_button_TuiSai.transform.localScale = new Vector3(0, 0, 0);
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "Update"))
@@ -107,7 +120,7 @@ public class WaitMatchPanelScript : MonoBehaviour {
         m_onTimerEvent_TimeEnd = onTimerEvent_TimeEnd;
     }
 
-    public void start(float seconds, bool isContinueGame)
+    public void start(string gameRoomType,float seconds, bool isContinueGame)
     {
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("WaitMatchPanelScript_hotfix", "start"))
@@ -121,6 +134,15 @@ public class WaitMatchPanelScript : MonoBehaviour {
         m_isContinueGame = isContinueGame;
 
         m_text_time.text = ((int)m_time).ToString();
+
+        if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_DDZ_Normal) == 0)
+        {
+            checkHideTuiSai_DDZ(gameRoomType);
+        }
+        else
+        {
+            checkHideTuiSai(gameRoomType);
+        }
     }
 
     public void stop()
