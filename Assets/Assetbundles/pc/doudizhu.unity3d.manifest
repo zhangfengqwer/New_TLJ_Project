@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4157321
+CRC: 1525275892
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9c10a669ec54adf3b01dda04bbc509d0
+    Hash: 9bf9ed2ed264edecb92d50ffdb2bca1d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 36c33a819640bead83b84b1645a12e6d
@@ -18,6 +18,7 @@ Assets:
 - Assets/Assetbundles/DouDiZhu/doudizhu_gameresult_bg.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_dizhusuccess.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_jiao1fen.png
+- Assets/Assetbundles/DouDiZhu/doudizhu_dipaikuang.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_dizhu.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_bg.jpg
 - Assets/Assetbundles/DouDiZhu/doudizhu_set.png
@@ -34,13 +35,13 @@ Assets:
 - Assets/Assetbundles/DouDiZhu/doudizhu_dizhufail.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_3fen.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_bujiabang.png
-- "Assets/Assetbundles/DouDiZhu/\u786E\u5B9Apressed.png"
+- Assets/Assetbundles/DouDiZhu/doudizhu_btn_queding.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_chupai.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_1fen.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_buchu.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_tishi.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_exit.png
-- "Assets/Assetbundles/DouDiZhu/\u7B49\u5F85\u73A9\u5BB6\u52A0\u68D2.png"
+- Assets/Assetbundles/DouDiZhu/doudizhu_text_waitjiabang.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_bangzi.png
 - Assets/Assetbundles/DouDiZhu/doudizhu_2fen.png
 Dependencies: []

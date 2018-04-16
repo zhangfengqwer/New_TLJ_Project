@@ -246,5 +246,161 @@ public class AudioScript : MonoBehaviour {
         playSound("yx_tuolaji");
     }
 
+    // 抢地主
+    public void playSound_QiangDiZhu(int score)
+    {
+        playSound("jiaofen_" +score.ToString());
+    }
+
+    // 斗地主胜利
+    public void playSound_DouDiZhu_win()
+    {
+        playSound("win");
+    }
+
+    // 斗地主失败
+    public void playSound_DouDiZhu_lose()
+    {
+        playSound("lose");
+    }
+
+    // 斗地主出牌音效
+    public void playSound_DouDiZhu_ChuPai(List<TLJCommon.PokerInfo> list)
+    {
+        CrazyLandlords.Helper.CardsType cardsType;
+        CrazyLandlords.Helper.LandlordsCardsHelper.GetCardsType(list.ToArray(), out cardsType);
+
+        if (list.Count == 0)
+        {
+            playSound("guo");
+            return;
+        }
+
+        switch (cardsType)
+        {
+            case CrazyLandlords.Helper.CardsType.JokerBoom:
+                {
+                    playSound("huojian");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.Boom:
+                {
+                    playSound("bomb");
+                }
+                break;
+
+            case CrazyLandlords.Helper.CardsType.BoomAndOne:
+                {
+                    playSound("bomb");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.BoomAndTwo:                //四带二个对
+                {
+                    //playSound("bomb");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.OnlyThree:
+                {
+                    playSound("three");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.ThreeAndOne:
+                {
+                    playSound("three_one");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.ThreeAndTwo:
+                {
+                    playSound("three_two");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.Straight:
+                {
+                    playSound("shunzi");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.DoubleStraight:
+                {
+                    playSound("liandui");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.TripleStraight:
+            case CrazyLandlords.Helper.CardsType.TripleStraightAndOne:
+            case CrazyLandlords.Helper.CardsType.TripleStraightAndTwo:
+                {
+                    playSound("feiji");
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.Double:
+                {
+                    int num = list[0].m_num;
+
+                    if ((num >= 3) && (num <= 10))
+                    {
+                        playSound("double_" + num.ToString());
+                    }
+                    else if (num == 11)
+                    {
+                        playSound("double_J");
+                    }
+                    else if (num == 12)
+                    {
+                        playSound("double_Q");
+                    }
+                    else if (num == 13)
+                    {
+                        playSound("double_K");
+                    }
+                    else if (num == 14)
+                    {
+                        playSound("double_A");
+                    }
+                    else if (num == 15)
+                    {
+                        playSound("double_2");
+                    }
+                }
+                break;
+            case CrazyLandlords.Helper.CardsType.Single:
+                {
+                    int num = list[0].m_num;
+
+                    if ((num >= 3) && (num <= 10))
+                    {
+                        playSound(num.ToString());
+                    }
+                    else if (num == 11)
+                    {
+                        playSound("J");
+                    }
+                    else if (num == 12)
+                    {
+                        playSound("Q");
+                    }
+                    else if (num == 13)
+                    {
+                        playSound("K");
+                    }
+                    else if (num == 14)
+                    {
+                        playSound("A");
+                    }
+                    else if (num == 15)
+                    {
+                        playSound("2");
+                    }
+                    else if (num == 16)
+                    {
+                        playSound("xiaowang");
+                    }
+                    else if (num == 17)
+                    {
+                        playSound("dawang");
+                    }
+                }
+                break;
+        }
+    }
+
     //----------------------------------------------------------------------------播放 end
 }

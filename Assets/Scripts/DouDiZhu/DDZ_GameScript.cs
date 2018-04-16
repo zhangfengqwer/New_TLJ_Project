@@ -691,6 +691,8 @@ public class DDZ_GameScript : MonoBehaviour {
                         GameUtil.hideGameObject(m_qiangDiZhu);
                     }
 
+                    AudioScript.getAudioScript().playSound_QiangDiZhu(fen);
+
                     // 停止倒计时
                     m_timerScript.stop();
                 }
@@ -892,6 +894,8 @@ public class DDZ_GameScript : MonoBehaviour {
                             }
                         }
 
+                        AudioScript.getAudioScript().playSound_DouDiZhu_ChuPai(outPokerList);
+
                         // 不出
                         if (outPokerList.Count == 0)
                         {
@@ -1041,35 +1045,6 @@ public class DDZ_GameScript : MonoBehaviour {
                     {
                         //ToastScript.createToast("异常：" + ex.Message);
                     }
-                }
-                break;
-                
-            // 换桌
-            case (int)TLJCommon.Consts.DDZ_PlayAction.PlayAction_ChangeRoom:
-                {
-                    //int code = (int)jd["code"];
-
-                    //switch (code)
-                    //{
-                    //    case (int)TLJCommon.Consts.Code.Code_OK:
-                    //        {
-                    //            int roomId = (int)jd["roomId"];
-                    //            //ToastScript.createToast("加入房间成功");
-
-                    //            // 禁用开始游戏按钮
-                    //            m_buttonStartGame.transform.localScale = new Vector3(0, 0, 0);
-
-                    //            //m_waitOtherPlayer = WaitOtherPlayerScript.create();
-                    //            showWaitMatchPanel(DDZ_GameData.getInstance().m_waitMatchTime, false);
-                    //        }
-                    //        break;
-
-                    //    case (int)TLJCommon.Consts.Code.Code_CommonFail:
-                    //        {
-                    //            ToastScript.createToast("您已加入其它房间，无法开始新游戏");
-                    //        }
-                    //        break;
-                    //}
                 }
                 break;
                 

@@ -34,10 +34,12 @@ public class DDZ_GameResult : MonoBehaviour {
                 if (isDiZhuWin == 1)
                 {
                     CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_result").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_dizhusuccess");
+                    AudioScript.getAudioScript().playSound_DouDiZhu_win();
                 }
                 else
                 {
                     CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_result").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_dizhufail");
+                    AudioScript.getAudioScript().playSound_DouDiZhu_lose();
                 }
             }
             else
@@ -46,10 +48,12 @@ public class DDZ_GameResult : MonoBehaviour {
                 if (isDiZhuWin == 0)
                 {
                     CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_result").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_nongminsuccess");
+                    AudioScript.getAudioScript().playSound_DouDiZhu_lose();
                 }
                 else
                 {
                     CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_result").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_nongminfail");
+                    AudioScript.getAudioScript().playSound_DouDiZhu_win();
                 }
             }
         }
