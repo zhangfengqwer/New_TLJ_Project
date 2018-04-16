@@ -4,7 +4,7 @@ using UnityEngine;
 public class AssetBundlesManager
 {
     public static AssetBundlesManager s_instance = null;
-    public Dictionary<string, AssetBundle> ABDics = new Dictionary<string, AssetBundle>();
+    public Dictionary<string, AssetBundle> ABDic = new Dictionary<string, AssetBundle>();
 
     public static AssetBundlesManager getInstance()
     {
@@ -19,7 +19,7 @@ public class AssetBundlesManager
     public AssetBundle getAssetBundlesDataByName(string name)
     {
         AssetBundle ab;
-        if (!ABDics.TryGetValue(name, out ab))
+        if (!ABDic.TryGetValue(name, out ab))
         {
             LogUtil.LogError("ab包不存在:" + name);
         }

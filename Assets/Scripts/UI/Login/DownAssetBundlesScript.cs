@@ -56,6 +56,7 @@ public class DownAssetBundlesScript : MonoBehaviour
             //网络
             webVersionConfig = LitJson.JsonMapper.ToObject<VersionConfig>(data);
             Dictionary<string, FileVersionInfo> webDic = new Dictionary<string, FileVersionInfo>();
+
             foreach (var item in webVersionConfig.FileVersionInfos)
             {
                 webDic.Add(item.File, item);
@@ -102,6 +103,7 @@ public class DownAssetBundlesScript : MonoBehaviour
                 foreach (FileVersionInfo fileVersionInfo in webVersionConfig.FileVersionInfos)
                 {
                     FileVersionInfo localVersionInfo;
+
                     if (localDic.TryGetValue(fileVersionInfo.File, out localVersionInfo))
                     {
                         if (fileVersionInfo.MD5 == localVersionInfo.MD5)
@@ -111,7 +113,7 @@ public class DownAssetBundlesScript : MonoBehaviour
                             if (filePath.EndsWith(".unity3d"))
                             {
                                 AssetBundle loadFromFile = AssetBundle.LoadFromFile(fileRootPath + "/" + fileVersionInfo.File);
-                                AssetBundlesManager.getInstance().ABDics.Add(fileVersionInfo.File, loadFromFile);
+                                AssetBundlesManager.getInstance().ABDic.Add(fileVersionInfo.File, loadFromFile);
                             }
                             continue;
                         }
@@ -127,15 +129,12 @@ public class DownAssetBundlesScript : MonoBehaviour
                         m_needDownlist.Add(fileVersionInfo.File);
                     }
                 }
-
             }
 
             if (m_needDownlist.Count > 0)
             {
                 GameUtil.showGameObject(gameObject);
-
                 startDown();
-
                 InvokeRepeating("onInvoke", 0.5f, 0.5f);
             }
         }
@@ -193,7 +192,7 @@ public class DownAssetBundlesScript : MonoBehaviour
 
         //缓存ab包
         AssetBundle myLoadedAssetBundle = AssetBundle.LoadFromMemory(request.downloadHandler.data);
-        AssetBundlesManager.getInstance().ABDics.Add(ab_name, myLoadedAssetBundle);
+        AssetBundlesManager.getInstance().ABDic.Add(ab_name, myLoadedAssetBundle);
 
         //保存ab到本地
         {
