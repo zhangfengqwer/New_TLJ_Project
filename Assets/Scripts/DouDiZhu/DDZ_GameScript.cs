@@ -1315,8 +1315,6 @@ public class DDZ_GameScript : MonoBehaviour {
                         CrazyLandlords.Helper.LandlordsCardsHelper.SetWeight(DDZ_GameData.getInstance().m_myPokerList);
 
                         createMyPokerObj(); // 创建我的牌对象
-
-                        GameUtil.showGameObject(m_waitjiabang);
                     }
 
                     // 剩余牌数
@@ -1422,7 +1420,7 @@ public class DDZ_GameScript : MonoBehaviour {
                     }
                     break;
 
-                case (int)TLJCommon.Consts.RoomState.RoomState_gaming:
+                case (int)TLJCommon.Consts.DDZ_RoomState.RoomState_gaming:
                     {
                         // 当前谁出牌
                         {
@@ -1486,70 +1484,51 @@ public class DDZ_GameScript : MonoBehaviour {
                             }
                         }
 
-                        // 已经出掉的牌
+                        // 剩余牌数
+                        for (int i = 0; i < jd["playerRestPokerCount"].Count; i++)
                         {
-                            string uid = (string)jd["uid"];
-                            int restPokerCount = (int)jd["restPokerCount"];
+                            string uid = jd["playerRestPokerCount"][i]["uid"].ToString();
+                            int restPokerCount = (int)jd["playerRestPokerCount"][i]["restPokerCount"];
 
-                            // 清空此人之前出的牌
+                            GameObject playerHead = getPlayerHeadByUid(uid);
+
+                            // 剩余牌数
+                            playerHead.transform.Find("Image_shengyupaishu/Text_num").GetComponent<Text>().text = restPokerCount.ToString();
+                        }
+
+                        string biggestPlayerUID = jd["biggestPlayerUID"].ToString();
+                        if (biggestPlayerUID.CompareTo("") != 0)
+                        {
+                            DDZ_GameData.getInstance().m_maxPlayerOutPokerUID = biggestPlayerUID;
+                        }
+
+                        // 显示当前回合出的牌
+                        {
+                            for (int i = 0; i < 3; i++)
                             {
-                                for (int i = 0; i < DDZ_GameData.getInstance().m_playerDataList.Count; i++)
-                                {
-                                    if (DDZ_GameData.getInstance().m_playerDataList[i].m_uid.CompareTo(uid) == 0)
-                                    {
-                                        for (int j = DDZ_GameData.getInstance().m_playerDataList[i].m_outPokerObjList.Count - 1; j >= 0; j--)
-                                        {
-                                            Destroy(DDZ_GameData.getInstance().m_playerDataList[i].m_outPokerObjList[j]);
-                                        }
-                                        DDZ_GameData.getInstance().m_playerDataList[i].m_outPokerObjList.Clear();
+                                PlayerData playerData = DDZ_GameData.getInstance().m_playerDataList[i];
 
-                                        break;
-                                    }
-                                }
-                            }
-
-                            // 出牌列表
-                            List<TLJCommon.PokerInfo> outPokerList = new List<TLJCommon.PokerInfo>();
-                            {
-                                for (int i = 0; i < jd["pokerList"].Count; i++)
+                                List<TLJCommon.PokerInfo> outPokerList = new List<TLJCommon.PokerInfo>();
+                                for (int j = 0; j < jd["player" + i + "OutPokerList"].Count; j++)
                                 {
-                                    int num = (int)jd["pokerList"][i]["num"];
-                                    int pokerType = (int)jd["pokerList"][i]["pokerType"];
+                                    int num = (int)jd["player" + i + "OutPokerList"][j]["num"];
+                                    int pokerType = (int)jd["player" + i + "OutPokerList"][j]["pokerType"];
 
                                     outPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
-                                }
-                            }
 
-                            AudioScript.getAudioScript().playSound_DouDiZhu_ChuPai(outPokerList);
+                                    if (biggestPlayerUID.CompareTo(playerData.m_uid) == 0)
+                                    {
+                                        DDZ_GameData.getInstance().m_maxPlayerOutPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                                    }
+                                }
 
-                            // 不出
-                            if (outPokerList.Count == 0)
-                            {
-                                if (uid.CompareTo(m_playerHead_down.transform.name) == 0)
-                                {
-                                    ShowImageScript.create(CommonUtil.getImageSpriteByAssetBundle("doudizhu.unity3d", "doudizhu_buchu_text"), new Vector3(-490, -188, 0));
-                                }
-                                else if (uid.CompareTo(m_playerHead_left.transform.name) == 0)
-                                {
-                                    ShowImageScript.create(CommonUtil.getImageSpriteByAssetBundle("doudizhu.unity3d", "doudizhu_buchu_text"), new Vector3(-490, 160, 0));
-                                }
-                                if (uid.CompareTo(m_playerHead_right.transform.name) == 0)
-                                {
-                                    ShowImageScript.create(CommonUtil.getImageSpriteByAssetBundle("doudizhu.unity3d", "doudizhu_buchu_text"), new Vector3(490, 160, 0));
-                                }
+                                showOtherOutPoker(outPokerList, playerData.m_uid);
                             }
-                            else
-                            {
-                                DDZ_GameData.getInstance().m_maxPlayerOutPokerList = outPokerList;
-                            }
-
-                            // 显示出的牌
-                            showOtherOutPoker(outPokerList, uid);
                         }
                     }
                     break;
 
-                case (int)TLJCommon.Consts.RoomState.RoomState_end:
+                case (int)TLJCommon.Consts.DDZ_RoomState.RoomState_end:
                     {
                         GameUtil.showGameObject(m_buttonStartGame.gameObject);
                     }

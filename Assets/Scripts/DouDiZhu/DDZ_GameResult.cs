@@ -65,7 +65,6 @@ public class DDZ_GameResult : MonoBehaviour {
             for (int i = 0; i < DDZ_GameData.getInstance().m_playerDataList.Count; i++)
             {
                 PlayerData playerData = DDZ_GameData.getInstance().m_playerDataList[i];
-
                 string score = jd[playerData.m_uid]["score"].ToString();
                 int beishu = (int)(jd[playerData.m_uid]["beishu"]);
 

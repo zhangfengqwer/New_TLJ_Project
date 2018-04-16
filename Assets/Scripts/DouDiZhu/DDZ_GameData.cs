@@ -14,7 +14,7 @@ public class DDZ_GameData
         return s_instance;
     }
 
-    public string m_tag = TLJCommon.Consts.GameRoomType_DDZ_Normal;
+    public string m_tag = TLJCommon.Consts.Tag_DouDiZhu_Game;
     public string m_gameRoomType = "";
 
     public List<TLJCommon.PokerInfo> m_myPokerList = new List<TLJCommon.PokerInfo>();                   // 我的手牌
