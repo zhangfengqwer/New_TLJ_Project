@@ -337,7 +337,7 @@ public class AudioScript : MonoBehaviour {
                 {
                     int num = list[0].m_num;
 
-                    if ((num >= 3) && (num <= 10))
+                    if ((num >= 2) && (num <= 10))
                     {
                         playSound("double_" + num.ToString());
                     }
@@ -357,17 +357,13 @@ public class AudioScript : MonoBehaviour {
                     {
                         playSound("double_A");
                     }
-                    else if (num == 15)
-                    {
-                        playSound("double_2");
-                    }
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.Single:
                 {
                     int num = list[0].m_num;
 
-                    if ((num >= 3) && (num <= 10))
+                    if ((num >= 2) && (num <= 10))
                     {
                         playSound(num.ToString());
                     }
@@ -389,13 +385,9 @@ public class AudioScript : MonoBehaviour {
                     }
                     else if (num == 15)
                     {
-                        playSound("2");
-                    }
-                    else if (num == 16)
-                    {
                         playSound("xiaowang");
                     }
-                    else if (num == 17)
+                    else if (num == 16)
                     {
                         playSound("dawang");
                     }
