@@ -578,6 +578,10 @@ public class GameUtil
         {
             roonName = "抄底玩法-大师场";
         }
+        else if (gameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_DDZ_Normal) == 0)
+        {
+            roonName = "斗地主";
+        }
         else
         {
             List<string> list = new List<string>();

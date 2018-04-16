@@ -39,6 +39,9 @@ public class MainScript : MonoBehaviour
     public static GameObject logicEnginer;
     public static GameObject playEnginer;
 
+    public string m_curInGameRoomType;
+    public string m_wantInGameRoomType;
+
     private void Awake()
     {
         OtherData.s_mainScript = this;
@@ -423,7 +426,9 @@ public class MainScript : MonoBehaviour
 
         //AudioScript.getAudioScript().playSound_ButtonClick();
         //PVPChoiceScript.create();
-        SceneManager.LoadScene("GameScene_doudizhu");
+
+        m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
+        reqIsJoinRoom();
     }
 
     public void onClickJingDianChang()
@@ -435,6 +440,7 @@ public class MainScript : MonoBehaviour
             return;
         }
 
+        m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common;
         GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
         reqIsJoinRoom();
         //GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_jingdian);
@@ -449,6 +455,7 @@ public class MainScript : MonoBehaviour
             return;
         }
 
+        m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common;
         GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_ChaoDi_Common);
         reqIsJoinRoom();
         //GameLevelChoiceScript.create(GameLevelChoiceScript.GameChangCiType.GameChangCiType_chaodi);
@@ -685,9 +692,16 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-        GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
-        SceneManager.LoadScene("GameScene");
+        if (m_curInGameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_DDZ_Normal) == 0)
+        {
+            SceneManager.LoadScene("GameScene_doudizhu");
+        }
+        else
+        {
+            GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+            GameData.getInstance().setGameRoomType(TLJCommon.Consts.GameRoomType_XiuXian_JingDian_Common);
+            SceneManager.LoadScene("GameScene");
+        }
     }
 
     //-----------------------------------------------------------------------------
@@ -961,15 +975,23 @@ public class MainScript : MonoBehaviour
 
         if (isJoinGame == 1)
         {
-            string gameRoomType = jd["gameRoomType"].ToString();
-            string roonName = GameUtil.getRoomName(gameRoomType);
-
+            m_curInGameRoomType = jd["gameRoomType"].ToString();
+            string roonName = GameUtil.getRoomName(m_curInGameRoomType);
             HasInRoomPanelScript.create("您当前正在：\n" +  roonName +"\n进行游戏，点击确认回到该房间。", onClickRetryJoinGame);
         }
         else
         {
-            GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
-            SceneManager.LoadScene("GameScene");
+            // 斗地主
+            if (m_wantInGameRoomType.CompareTo(TLJCommon.Consts.GameRoomType_DDZ_Normal) == 0)
+            {
+                SceneManager.LoadScene("GameScene_doudizhu");
+            }
+            // 升级
+            else
+            {
+                GameData.getInstance().m_tag = TLJCommon.Consts.Tag_XiuXianChang;
+                SceneManager.LoadScene("GameScene");
+            }
         }
     }
 

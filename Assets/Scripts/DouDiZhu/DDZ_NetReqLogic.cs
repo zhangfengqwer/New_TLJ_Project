@@ -8,6 +8,32 @@ public class DDZ_NetReqLogic : MonoBehaviour
 {
     string m_tag = TLJCommon.Consts.Tag_DouDiZhu_Game;
 
+    // 是否已经加入房间
+    public void reqIsJoinRoom()
+    {
+        NetLoading.getInstance().Show();
+
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_IsJoinGame;
+        data["uid"] = UserData.uid;
+
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
+    }
+
+    // 请求恢复房间
+    public void reqRetryJoinGame()
+    {
+        NetLoading.getInstance().Close();
+
+        JsonData data = new JsonData();
+
+        data["tag"] = TLJCommon.Consts.Tag_RetryJoinGame;
+        data["uid"] = UserData.uid;
+
+        PlayServiceSocket.s_instance.sendMessage(data.ToJson());
+    }
+
     // 请求加入房间
     public void reqJoinRoom(string gameroomtype)
     {
