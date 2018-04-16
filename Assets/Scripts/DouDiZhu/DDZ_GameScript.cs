@@ -1596,6 +1596,16 @@ public class DDZ_GameScript : MonoBehaviour {
                 Destroy(m_dipaiObj.transform.GetChild(i).gameObject);
             }
         }
+
+        {
+            DDZ_GameData.getInstance().m_myPokerList.Clear();
+            DDZ_GameData.getInstance().m_dipaiList.Clear();
+            DDZ_GameData.getInstance().m_maxPlayerOutPokerList.Clear();
+            DDZ_GameData.getInstance().m_playerDataList.Clear();
+
+            DDZ_GameData.getInstance().m_isDiZhu = 0;
+            DDZ_GameData.getInstance().m_maxPlayerOutPokerUID = "";
+        }
     }
 
     public void clearData()
