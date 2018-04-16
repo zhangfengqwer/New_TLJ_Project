@@ -1,0 +1,77 @@
+ManifestFileVersion: 0
+CRC: 526823232
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c37ab28656822e97cd3ded23fe085574
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 36c33a819640bead83b84b1645a12e6d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assetbundles/Animations/bishaichang1.png
+- Assets/Assetbundles/Animations/bishaichang13.png
+- Assets/Assetbundles/Animations/putongchang13.png
+- Assets/Assetbundles/Animations/putongchang16.png
+- Assets/Assetbundles/Animations/bishaichang9.png
+- Assets/Assetbundles/Animations/putongchang2.png
+- Assets/Assetbundles/Animations/putongchang9.png
+- Assets/Assetbundles/Animations/putongchang11.png
+- Assets/Assetbundles/Animations/putongchang6.png
+- Assets/Assetbundles/Animations/putongchang4.png
+- Assets/Assetbundles/Animations/putongchang10.png
+- Assets/Assetbundles/Animations/putongchang5.png
+- Assets/Assetbundles/Animations/putongchang15.png
+- Assets/Assetbundles/Animations/putongchang20.png
+- Assets/Assetbundles/Animations/bishaichang6.png
+- Assets/Assetbundles/Animations/putongchang23.png
+- Assets/Assetbundles/Animations/bishaichang22.png
+- Assets/Assetbundles/Animations/putongchang8.png
+- Assets/Assetbundles/Animations/bishaichang27.png
+- Assets/Assetbundles/Animations/putongchang3.png
+- Assets/Assetbundles/Animations/bishaichang25.png
+- Assets/Assetbundles/Animations/bishaichang23.png
+- Assets/Assetbundles/Animations/bishaichang29.png
+- Assets/Assetbundles/Animations/putongchang21.png
+- Assets/Assetbundles/Animations/putongchang12.png
+- Assets/Assetbundles/Animations/bishaichang18.png
+- Assets/Assetbundles/Animations/bishaichang7.png
+- Assets/Assetbundles/Animations/putongchang25.png
+- Assets/Assetbundles/Animations/putongchang30.png
+- Assets/Assetbundles/Animations/bishaichang3.png
+- Assets/Assetbundles/Animations/putongchang1.png
+- Assets/Assetbundles/Animations/bishaichang14.png
+- Assets/Assetbundles/Animations/bishaichang5.png
+- Assets/Assetbundles/Animations/bishaichang24.png
+- Assets/Assetbundles/Animations/bishaichang15.png
+- Assets/Assetbundles/Animations/bishaichang10.png
+- Assets/Assetbundles/Animations/bishaichang19.png
+- Assets/Assetbundles/Animations/bishaichang30.png
+- Assets/Assetbundles/Animations/bishaichang16.png
+- Assets/Assetbundles/Animations/bishaichang2.png
+- Assets/Assetbundles/Animations/bishaichang20.png
+- Assets/Assetbundles/Animations/putongchang18.png
+- Assets/Assetbundles/Animations/putongchang17.png
+- Assets/Assetbundles/Animations/putongchang22.png
+- Assets/Assetbundles/Animations/putongchang27.png
+- Assets/Assetbundles/Animations/putongchang19.png
+- Assets/Assetbundles/Animations/putongchang26.png
+- Assets/Assetbundles/Animations/bishaichang8.png
+- Assets/Assetbundles/Animations/putongchang28.png
+- Assets/Assetbundles/Animations/bishaichang4.png
+- Assets/Assetbundles/Animations/putongchang14.png
+- Assets/Assetbundles/Animations/bishaichang11.png
+- Assets/Assetbundles/Animations/putongchang24.png
+- Assets/Assetbundles/Animations/bishaichang21.png
+- Assets/Assetbundles/Animations/putongchang29.png
+- Assets/Assetbundles/Animations/bishaichang26.png
+- Assets/Assetbundles/Animations/bishaichang12.png
+- Assets/Assetbundles/Animations/bishaichang17.png
+- Assets/Assetbundles/Animations/putongchang7.png
+- Assets/Assetbundles/Animations/bishaichang28.png
+Dependencies: []

@@ -1,0 +1,108 @@
+ManifestFileVersion: 0
+CRC: 3048480307
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cf9252e9bad9c847fd32c612b2c233a6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 36c33a819640bead83b84b1645a12e6d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Assetbundles/Emoji/Expression-3_4.png
+- Assets/Assetbundles/Emoji/Expression-9_5.png
+- Assets/Assetbundles/Emoji/Expression-14_7.png
+- Assets/Assetbundles/Emoji/Expression-14_11.png
+- Assets/Assetbundles/Emoji/Expression-11_6.png
+- Assets/Assetbundles/Emoji/Expression-15_4.png
+- Assets/Assetbundles/Emoji/Expression-9_1.png
+- Assets/Assetbundles/Emoji/Expression-13_1.png
+- Assets/Assetbundles/Emoji/Expression-10_3.png
+- Assets/Assetbundles/Emoji/Expression-6_9.png
+- Assets/Assetbundles/Emoji/Expression-6_4.png
+- Assets/Assetbundles/Emoji/Expression-16_4.png
+- Assets/Assetbundles/Emoji/Expression-2_8.png
+- Assets/Assetbundles/Emoji/Expression-9_3.png
+- Assets/Assetbundles/Emoji/Expression-14_1.png
+- Assets/Assetbundles/Emoji/Expression-4_4.png
+- Assets/Assetbundles/Emoji/Expression-10_6.png
+- Assets/Assetbundles/Emoji/Expression-6_6.png
+- Assets/Assetbundles/Emoji/Expression-11_2.png
+- Assets/Assetbundles/Emoji/Expression-14_10.png
+- Assets/Assetbundles/Emoji/Expression-12_3.png
+- Assets/Assetbundles/Emoji/Expression-2_4.png
+- Assets/Assetbundles/Emoji/Expression-10_4.png
+- Assets/Assetbundles/Emoji/Expression-1_2.png
+- Assets/Assetbundles/Emoji/Expression-11_4.png
+- Assets/Assetbundles/Emoji/Expression-6_5.png
+- Assets/Assetbundles/Emoji/Expression-2_9.png
+- Assets/Assetbundles/Emoji/Expression-1_6.png
+- Assets/Assetbundles/Emoji/Expression-5_2.png
+- Assets/Assetbundles/Emoji/Expression-13_3.png
+- Assets/Assetbundles/Emoji/Expression-11_5.png
+- Assets/Assetbundles/Emoji/Expression-16_2.png
+- Assets/Assetbundles/Emoji/Expression-5_1.png
+- Assets/Assetbundles/Emoji/Expression-1_5.png
+- Assets/Assetbundles/Emoji/Expression-14_4.png
+- Assets/Assetbundles/Emoji/Expression-14_5.png
+- Assets/Assetbundles/Emoji/Expression-11_1.png
+- Assets/Assetbundles/Emoji/Expression-8_1.png
+- Assets/Assetbundles/Emoji/Expression-6_1.png
+- Assets/Assetbundles/Emoji/Expression-3_5.png
+- Assets/Assetbundles/Emoji/Expression-15_1.png
+- Assets/Assetbundles/Emoji/Expression-3_1.png
+- Assets/Assetbundles/Emoji/Expression-12_2.png
+- Assets/Assetbundles/Emoji/Expression-1_7.png
+- Assets/Assetbundles/Emoji/Expression-9_6.png
+- Assets/Assetbundles/Emoji/Expression-10_2.png
+- Assets/Assetbundles/Emoji/Expression-4_3.png
+- Assets/Assetbundles/Emoji/Expression-9_8.png
+- Assets/Assetbundles/Emoji/Expression-13_2.png
+- Assets/Assetbundles/Emoji/Expression-2_7.png
+- Assets/Assetbundles/Emoji/Expression-14_6.png
+- Assets/Assetbundles/Emoji/Expression-10_5.png
+- Assets/Assetbundles/Emoji/Expression-6_7.png
+- Assets/Assetbundles/Emoji/Expression-7_1.png
+- Assets/Assetbundles/Emoji/Expression-1_8.png
+- Assets/Assetbundles/Emoji/Expression-9_2.png
+- Assets/Assetbundles/Emoji/Expression-10_1.png
+- Assets/Assetbundles/Emoji/Expression-11_3.png
+- Assets/Assetbundles/Emoji/Expression-12_1.png
+- Assets/Assetbundles/Emoji/Expression-2_3.png
+- Assets/Assetbundles/Emoji/Expression-3_3.png
+- Assets/Assetbundles/Emoji/Expression-14_8.png
+- Assets/Assetbundles/Emoji/Expression-11_8.png
+- Assets/Assetbundles/Emoji/Expression-8_2.png
+- Assets/Assetbundles/Emoji/Expression-16_3.png
+- Assets/Assetbundles/Emoji/Expression-2_1.png
+- Assets/Assetbundles/Emoji/Expression-3_2.png
+- Assets/Assetbundles/Emoji/Expression-2_5.png
+- Assets/Assetbundles/Emoji/Expression-15_3.png
+- Assets/Assetbundles/Emoji/Expression-16_1.png
+- Assets/Assetbundles/Emoji/Expression-6_2.png
+- Assets/Assetbundles/Emoji/Expression-7_2.png
+- Assets/Assetbundles/Emoji/Expression-14_2.png
+- Assets/Assetbundles/Emoji/Expression-6_8.png
+- Assets/Assetbundles/Emoji/Expression-6_3.png
+- Assets/Assetbundles/Emoji/Expression-2_6.png
+- Assets/Assetbundles/Emoji/Expression-11_7.png
+- Assets/Assetbundles/Emoji/Expression-11_9.png
+- Assets/Assetbundles/Emoji/Expression-15_2.png
+- Assets/Assetbundles/Emoji/Expression-9_7.png
+- Assets/Assetbundles/Emoji/Expression-13_4.png
+- Assets/Assetbundles/Emoji/Expression-1_3.png
+- Assets/Assetbundles/Emoji/Expression-1_1.png
+- Assets/Assetbundles/Emoji/Expression-9_4.png
+- Assets/Assetbundles/Emoji/Expression-4_2.png
+- Assets/Assetbundles/Emoji/Expression-2_2.png
+- Assets/Assetbundles/Emoji/Expression-14_12.png
+- Assets/Assetbundles/Emoji/Expression-4_1.png
+- Assets/Assetbundles/Emoji/Expression-14_9.png
+- Assets/Assetbundles/Emoji/Expression-1_4.png
+- Assets/Assetbundles/Emoji/Expression-14_3.png
+Dependencies: []
