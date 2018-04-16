@@ -219,12 +219,14 @@ public class LoginScript : MonoBehaviour
 
         m_healthTipPanel.transform.localScale = new Vector3(0, 0, 0);
 
-        if (!m_obj_DownAssetBundles.GetComponent<DownAssetBundlesScript>().checkDown())
-        {
-            UnityEngine.Debug.Log("不需要下载ab包");
-
-            netDataDown();
-        }    
+        m_obj_DownAssetBundles.GetComponent<DownAssetBundlesScript>().checkDown();
+        netDataDown();
+//        if (!m_obj_DownAssetBundles.GetComponent<DownAssetBundlesScript>().checkDown())
+//        {
+//            UnityEngine.Debug.Log("不需要下载ab包");
+//
+//            netDataDown();
+//        }    
     }
 
     public void netDataDown()
