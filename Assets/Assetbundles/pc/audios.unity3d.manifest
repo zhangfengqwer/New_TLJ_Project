@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 633440663
+CRC: 4281464289
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7ad25cc86fb4f6a22720c61c1a6388fa
+    Hash: 28e5b96383e69b9d83fc1c8c02343d0d
   TypeTreeHash:
     serializedVersion: 2
     Hash: c516f2a3b2b6b67ef759f6410a790acd
@@ -12,26 +12,73 @@ ClassTypes:
 - Class: 83
   Script: {instanceID: 0}
 Assets:
+- Assets/Assetbundles/Audios/10.wav
 - Assets/Assetbundles/Audios/yx_getReward.mp3
+- Assets/Assetbundles/Audios/huojian.wav
+- Assets/Assetbundles/Audios/jiaofen_1.wav
+- Assets/Assetbundles/Audios/9.wav
 - Assets/Assetbundles/Audios/yx_tuolaji.mp3
+- Assets/Assetbundles/Audios/double_A.wav
 - Assets/Assetbundles/Audios/game_jiguanqiang.mp3
+- Assets/Assetbundles/Audios/dawang.wav
+- Assets/Assetbundles/Audios/double_7.wav
+- Assets/Assetbundles/Audios/qiangdizhu.wav
+- Assets/Assetbundles/Audios/double_4.wav
+- Assets/Assetbundles/Audios/double_9.wav
+- Assets/Assetbundles/Audios/three.wav
 - Assets/Assetbundles/Audios/yx_anniu.mp3
 - Assets/Assetbundles/Audios/bg_game_pvp.mp3
 - Assets/Assetbundles/Audios/sengChat.mp3
+- Assets/Assetbundles/Audios/K.wav
+- Assets/Assetbundles/Audios/three_two.wav
+- Assets/Assetbundles/Audios/jiaofen_0.wav
 - Assets/Assetbundles/Audios/chupai_tuolaji.mp3
+- Assets/Assetbundles/Audios/lose.wav
+- Assets/Assetbundles/Audios/8.wav
 - Assets/Assetbundles/Audios/yx_jiemianguanbi.mp3
+- Assets/Assetbundles/Audios/double_5.wav
 - Assets/Assetbundles/Audios/game_hongjiu.mp3
+- Assets/Assetbundles/Audios/feiji.wav
+- Assets/Assetbundles/Audios/shunzi.wav
+- Assets/Assetbundles/Audios/three_one.wav
 - Assets/Assetbundles/Audios/jinbisaluo.mp3
 - Assets/Assetbundles/Audios/yx_jiemiantanchu.mp3
+- Assets/Assetbundles/Audios/jiaofen_2.wav
+- Assets/Assetbundles/Audios/double_Q.wav
+- Assets/Assetbundles/Audios/bomb.wav
+- Assets/Assetbundles/Audios/xiaowang.wav
+- Assets/Assetbundles/Audios/double_10.wav
 - Assets/Assetbundles/Audios/yx_fail.mp3
+- Assets/Assetbundles/Audios/four_two.wav
+- Assets/Assetbundles/Audios/double_3.wav
+- Assets/Assetbundles/Audios/double_8.wav
+- Assets/Assetbundles/Audios/7.wav
+- Assets/Assetbundles/Audios/double_6.wav
 - Assets/Assetbundles/Audios/yx_win.mp3
+- Assets/Assetbundles/Audios/2.wav
 - Assets/Assetbundles/Audios/game_jidan.mp3
 - Assets/Assetbundles/Audios/yx_buchaodi.mp3
 - Assets/Assetbundles/Audios/yx_chaodi.mp3
+- Assets/Assetbundles/Audios/buqiang.wav
+- Assets/Assetbundles/Audios/double_2.wav
+- Assets/Assetbundles/Audios/A.wav
 - Assets/Assetbundles/Audios/yx_xuanpai.mp3
+- Assets/Assetbundles/Audios/5.wav
+- Assets/Assetbundles/Audios/double_J.wav
+- Assets/Assetbundles/Audios/liandui.wav
+- Assets/Assetbundles/Audios/4.wav
+- Assets/Assetbundles/Audios/jiaofen_3.wav
+- Assets/Assetbundles/Audios/J.wav
+- Assets/Assetbundles/Audios/guo.wav
+- Assets/Assetbundles/Audios/6.wav
+- Assets/Assetbundles/Audios/Q.wav
 - Assets/Assetbundles/Audios/yx_po.mp3
 - Assets/Assetbundles/Audios/bg_main.mp3
+- Assets/Assetbundles/Audios/3.wav
+- Assets/Assetbundles/Audios/four_one.wav
+- Assets/Assetbundles/Audios/win.wav
 - Assets/Assetbundles/Audios/game_aixin.mp3
+- Assets/Assetbundles/Audios/double_K.wav
 - Assets/Assetbundles/Audios/yx_chupai.mp3
 - Assets/Assetbundles/Audios/game_meigui.mp3
 Dependencies: []

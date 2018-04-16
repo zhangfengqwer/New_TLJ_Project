@@ -267,7 +267,9 @@ public class AudioScript : MonoBehaviour {
     // 斗地主出牌音效
     public void playSound_DouDiZhu_ChuPai(List<TLJCommon.PokerInfo> list)
     {
+        CrazyLandlords.Helper.LandlordsCardsHelper.SetWeight(list);
         CrazyLandlords.Helper.CardsType cardsType;
+
         CrazyLandlords.Helper.LandlordsCardsHelper.GetCardsType(list.ToArray(), out cardsType);
 
         if (list.Count == 0)
@@ -289,12 +291,12 @@ public class AudioScript : MonoBehaviour {
                 }
                 break;
 
-            case CrazyLandlords.Helper.CardsType.BoomAndOne:
+            case CrazyLandlords.Helper.CardsType.BoomAndOne:                //四带一
                 {
-                    playSound("bomb");
+                    //playSound("bomb");
                 }
                 break;
-            case CrazyLandlords.Helper.CardsType.BoomAndTwo:                //四带二个对
+            case CrazyLandlords.Helper.CardsType.BoomAndTwo:                //四带二
                 {
                     //playSound("bomb");
                 }
