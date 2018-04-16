@@ -1287,6 +1287,26 @@ public class DDZ_GameScript : MonoBehaviour {
                     GameObject playerHead = getPlayerHeadByUid(dizhuUID);
                     CommonUtil.setImageSpriteByAssetBundle(playerHead.transform.Find("").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_dizhu");
 
+                    // 把底牌加上去
+                    {
+                        DDZ_GameData.getInstance().m_dipaiList.Clear();
+
+                        for (int i = 0; i < jd["diPokerList"].Count; i++)
+                        {
+                            int num = (int)jd["diPokerList"][i]["num"];
+                            int pokerType = (int)jd["diPokerList"][i]["pokerType"];
+
+                            //if (UserData.uid.CompareTo(dizhuUID) == 0)
+                            //{
+                            //    DDZ_GameData.getInstance().m_myPokerList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                            //}
+
+                            DDZ_GameData.getInstance().m_dipaiList.Add(new TLJCommon.PokerInfo(num, (TLJCommon.Consts.PokerType)pokerType));
+                        }
+
+                        createDiPokerObj();
+                    }
+
                     if (UserData.uid.CompareTo(dizhuUID) == 0)
                     {
                         DDZ_GameData.getInstance().m_isDiZhu = 1;
