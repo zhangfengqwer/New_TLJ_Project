@@ -50,6 +50,7 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+     
         initUI_Image();
 
         // 优先使用热更新的代码
