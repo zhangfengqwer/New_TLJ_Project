@@ -427,18 +427,15 @@ public class MainScript : MonoBehaviour
 
     public void onClickEnterJingJiChang()
     {
-        //// 优先使用热更新的代码
-        //if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickEnterJingJiChang"))
-        //{
-        //    ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickEnterJingJiChang", null, null);
-        //    return;
-        //}
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickEnterJingJiChang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickEnterJingJiChang", null, null);
+            return;
+        }
 
-        //AudioScript.getAudioScript().playSound_ButtonClick();
-        //PVPChoiceScript.create();
-
-        m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
-        reqIsJoinRoom();
+        AudioScript.getAudioScript().playSound_ButtonClick();
+        PVPChoiceScript.create();
     }
 
     public void onClickEnterDDZ()
