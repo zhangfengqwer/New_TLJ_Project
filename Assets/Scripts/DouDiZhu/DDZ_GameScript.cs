@@ -838,6 +838,17 @@ public class DDZ_GameScript : MonoBehaviour {
                         {
                             if (uid.CompareTo(UserData.uid) == 0)
                             {
+                                if (isFreeOutPoker)
+                                {
+                                    GameUtil.hideGameObject(m_buttonBuChu.gameObject);
+                                    GameUtil.hideGameObject(m_buttonTiShi.gameObject);
+                                }
+                                else
+                                {
+                                    GameUtil.showGameObject(m_buttonBuChu.gameObject);
+                                    GameUtil.showGameObject(m_buttonTiShi.gameObject);
+                                }
+
                                 // 清空此人之前出的牌
                                 {
                                     for (int i = 0; i < DDZ_GameData.getInstance().m_playerDataList.Count; i++)
@@ -1448,6 +1459,17 @@ public class DDZ_GameScript : MonoBehaviour {
                             {
                                 if (curOutPokerPlayer.CompareTo(UserData.uid) == 0)
                                 {
+                                    if (isFreeOutPoker)
+                                    {
+                                        GameUtil.hideGameObject(m_buttonBuChu.gameObject);
+                                        GameUtil.hideGameObject(m_buttonTiShi.gameObject);
+                                    }
+                                    else
+                                    {
+                                        GameUtil.showGameObject(m_buttonBuChu.gameObject);
+                                        GameUtil.showGameObject(m_buttonTiShi.gameObject);
+                                    }
+
                                     // 清空此人之前出的牌
                                     {
                                         for (int i = 0; i < DDZ_GameData.getInstance().m_playerDataList.Count; i++)
