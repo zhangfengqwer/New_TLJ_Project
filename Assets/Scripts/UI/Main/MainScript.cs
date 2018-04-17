@@ -153,6 +153,8 @@ public class MainScript : MonoBehaviour
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("RankingList").GetComponent<Image>(), "main.unity3d", "di01");
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/xiuxianchang/Button_jingdianchang").GetComponent<Image>(), "main.unity3d", "main_jingdian");
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/xiuxianchang/Button_chaodichang").GetComponent<Image>(), "main.unity3d", "main_chaodi");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/Button_EnterDDZ").GetComponent<Image>(), "main.unity3d", "ddz");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/Button_EnterShengji").GetComponent<Image>(), "main.unity3d", "shengji");
     }
 
     // 显示新人推广礼
@@ -427,6 +429,12 @@ public class MainScript : MonoBehaviour
         //AudioScript.getAudioScript().playSound_ButtonClick();
         //PVPChoiceScript.create();
 
+        m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
+        reqIsJoinRoom();
+    }
+
+    public void onClickEnterDDZ()
+    {
         m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
         reqIsJoinRoom();
     }
