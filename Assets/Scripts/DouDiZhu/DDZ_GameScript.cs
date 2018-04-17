@@ -416,8 +416,8 @@ public class DDZ_GameScript : MonoBehaviour {
         {
             GameObject poker = PokerScript.createPoker();
             poker.transform.SetParent(GameObject.Find("Canvas/DiPai").transform);
-            poker.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
-            poker.transform.localPosition = new Vector3(-120 + i * 120, 0, 0);
+            poker.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            poker.transform.localPosition = new Vector3(-76.5f + i * 76.5f, 0, 0);
 
             poker.GetComponent<PokerScript>().initPoker(DDZ_GameData.getInstance().m_dipaiList[i].m_num,(int)DDZ_GameData.getInstance().m_dipaiList[i].m_pokerType);
             poker.GetComponent<PokerScript>().m_canTouch = false;

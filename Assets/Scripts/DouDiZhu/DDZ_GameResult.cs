@@ -26,6 +26,8 @@ public class DDZ_GameResult : MonoBehaviour {
     void Start () {
         JsonData jd = JsonMapper.ToObject(m_jsonData);
 
+        initUI_Image();
+
         // 胜负图片显示
         {
             int isDiZhuWin = (int)jd["isDiZhuWin"];
@@ -102,9 +104,14 @@ public class DDZ_GameResult : MonoBehaviour {
             }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void initUI_Image()
+    {
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_gameresult_bg");
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
