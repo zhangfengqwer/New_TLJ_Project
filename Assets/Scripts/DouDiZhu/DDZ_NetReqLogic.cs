@@ -139,7 +139,8 @@ public class DDZ_NetReqLogic : MonoBehaviour
                     LandlordsCardsHelper.SetWeight(m_maxPlayerOutPokerList);
                     CardsType lastType;
                     if (LandlordsCardsHelper.GetCardsType(m_maxPlayerOutPokerList.ToArray(), out lastType))
-                    {
+                    {   
+                        //TODO 
                         if (lastType != type || LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(),type) <= LandlordsCardsHelper.GetWeight(m_maxPlayerOutPokerList.ToArray(), type))
                         {
                             ToastScript.createToast("出牌不符合规则");

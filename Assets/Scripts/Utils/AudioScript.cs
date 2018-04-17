@@ -288,6 +288,10 @@ public class AudioScript : MonoBehaviour {
             case CrazyLandlords.Helper.CardsType.Boom:
                 {
                     playSound("bomb");
+
+                    //GameObject obj = CommonUtil.getGameObjectByAssetBundle("animations.unity3d", "Boom");
+                    //obj.transform.SetParent(GameObject.Find("Canvas_Middle").transform);
+                    //obj.transform.localScale = new Vector3(1,1,1);
                 }
                 break;
 

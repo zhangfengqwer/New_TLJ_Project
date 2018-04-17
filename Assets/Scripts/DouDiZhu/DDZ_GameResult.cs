@@ -102,4 +102,9 @@ public class DDZ_GameResult : MonoBehaviour {
         m_parentScript.m_DDZ_NetReqLogic.reqJoinRoom(TLJCommon.Consts.GameRoomType_DDZ_Normal);
         Destroy(gameObject);
     }
+
+    public void onClickOK()
+    {
+        m_parentScript.exitRoom();
+    }
 }

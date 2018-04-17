@@ -264,6 +264,17 @@ public class CommonUtil
         return null;
     }
 
+    static public GameObject getGameObjectByAssetBundle(string assetbundleName, string objName)
+    {
+        AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
+        if (ab != null)
+        {
+            return ab.LoadAsset<GameObject>(objName);
+        }
+
+        return null;
+    }
+
     static public void setImageColor(Image image,float r, float g, float b)
     {
         image.color = new Color(r / 255.0f, g / 255.0f, b / 255.0f);
