@@ -9,6 +9,8 @@ public class DDZ_GameResult : MonoBehaviour {
     public DDZ_GameScript m_parentScript;
     public string m_jsonData;
 
+    public Text m_beishu;
+
     public static GameObject create(DDZ_GameScript parentScript,string jsonData)
     {
         GameObject prefab = Resources.Load("Prefabs/DouDiZhu/DDZ_GameResult") as GameObject;
@@ -87,6 +89,16 @@ public class DDZ_GameResult : MonoBehaviour {
                     gameObject.transform.Find("playerScore_other" + hasSetOtherCount + "/Text_name").GetComponent<Text>().text = playerData.m_name;
                     gameObject.transform.Find("playerScore_other" + hasSetOtherCount + "/Text_score").GetComponent<Text>().text = score.ToString();
                 }
+            }
+        }
+
+        // 倍数
+        {
+            string key = ("beishu_" + UserData.uid);
+            for (int i = 0; i < jd[key].Count; i++)
+            {
+                string str = jd[key][i].ToString();
+                m_beishu.text += (str + "\r\n");
             }
         }
     }
