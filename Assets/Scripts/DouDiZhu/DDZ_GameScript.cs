@@ -919,8 +919,6 @@ public class DDZ_GameScript : MonoBehaviour {
                             }
                         }
 
-                        AudioScript.getAudioScript().playSound_DouDiZhu_ChuPai(outPokerList);
-
                         // 不出
                         if (outPokerList.Count == 0)
                         {
@@ -957,6 +955,8 @@ public class DDZ_GameScript : MonoBehaviour {
 
                         // 显示出的牌
                         showOtherOutPoker(outPokerList, uid);
+
+                        AudioScript.getAudioScript().playSound_DouDiZhu_ChuPai(outPokerList, uid);
 
                         // 如果是自己出的牌，那么就得删掉这些牌
                         if (uid.CompareTo(UserData.uid) == 0)

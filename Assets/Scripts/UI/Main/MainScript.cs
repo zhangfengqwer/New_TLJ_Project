@@ -149,8 +149,8 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        gameObject.transform.Find("Room/Button_EnterXiuXianChang").GetComponent<PlayAnimation>().start("animations.unity3d", "putongchang");
-        gameObject.transform.Find("Room/Button_EnterJingJiChang").GetComponent<PlayAnimation>().start("animations.unity3d", "bishaichang");
+        gameObject.transform.Find("Room/Button_EnterXiuXianChang").GetComponent<PlayAnimation>().start("animations.unity3d", "putongchang",true);
+        gameObject.transform.Find("Room/Button_EnterJingJiChang").GetComponent<PlayAnimation>().start("animations.unity3d", "bishaichang", true);
         
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Bg").GetComponent<Image>(), "main.unity3d", "beijing");
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("RankingList").GetComponent<Image>(), "main.unity3d", "di01");
