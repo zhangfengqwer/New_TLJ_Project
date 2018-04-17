@@ -252,6 +252,26 @@ public class DDZ_GameScript : MonoBehaviour {
         }
     }
 
+    public void onClickPlayerHead_down()
+    {
+        GameUserInfoPanelScript.create(m_playerHead_down.transform.name);
+    }
+
+    public void onClickPlayerHead_up()
+    {
+        GameUserInfoPanelScript.create(m_playerHead_up.transform.name);
+    }
+
+    public void onClickPlayerHead_left()
+    {
+        GameUserInfoPanelScript.create(m_playerHead_left.transform.name);
+    }
+
+    public void onClickPlayerHead_right()
+    {
+        GameUserInfoPanelScript.create(m_playerHead_right.transform.name);
+    }
+
     public void onClickSet()
     {
         SetScript.create(true);
@@ -722,7 +742,7 @@ public class DDZ_GameScript : MonoBehaviour {
                     string uid = (string)jd["uid"];
 
                     GameObject playerHead = getPlayerHeadByUid(uid);
-                    CommonUtil.setImageSpriteByAssetBundle(playerHead.transform.Find("").GetComponent<Image>(),"doudizhu.unity3d", "doudizhu_dizhu");
+                    CommonUtil.setImageSpriteByAssetBundle(playerHead.GetComponent<Image>(),"doudizhu.unity3d", "doudizhu_dizhu");
 
                     // 倍数
                     {
@@ -1326,7 +1346,7 @@ public class DDZ_GameScript : MonoBehaviour {
                 if (dizhuUID.CompareTo("") != 0)
                 {
                     GameObject playerHead = getPlayerHeadByUid(dizhuUID);
-                    CommonUtil.setImageSpriteByAssetBundle(playerHead.transform.Find("").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_dizhu");
+                    CommonUtil.setImageSpriteByAssetBundle(playerHead.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_dizhu");
 
                     // 把底牌加上去
                     {
@@ -1607,6 +1627,28 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void cleanRoom()
     {
+        {
+            m_playerHead_left.transform.Find("Text_name").GetComponent<Text>().text = UserData.name;
+            m_playerHead_left.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
+
+            m_playerHead_right.transform.Find("Text_name").GetComponent<Text>().text = UserData.name;
+            m_playerHead_right.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
+
+            m_playerHead_up.transform.Find("Text_name").GetComponent<Text>().text = UserData.name;
+            m_playerHead_up.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
+
+            GameUtil.hideGameObject(m_playerHead_left);
+            GameUtil.hideGameObject(m_playerHead_right);
+            GameUtil.hideGameObject(m_playerHead_up);
+
+            CommonUtil.setImageSpriteByAssetBundle(m_playerHead_down.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_nongmin");
+            CommonUtil.setImageSpriteByAssetBundle(m_playerHead_up.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_nongmin");
+            CommonUtil.setImageSpriteByAssetBundle(m_playerHead_left.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_nongmin");
+            CommonUtil.setImageSpriteByAssetBundle(m_playerHead_right.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_nongmin");
+
+            m_text_beishu.text = "X1";
+        }
+
         {
             // 剩余牌数
             GameUtil.hideGameObject(m_playerHead_down.transform.Find("Image_shengyupaishu").gameObject);
