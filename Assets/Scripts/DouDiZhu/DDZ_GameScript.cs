@@ -793,6 +793,8 @@ public class DDZ_GameScript : MonoBehaviour {
 
                     if (isJiaBang == 1)
                     {
+                        AudioScript.getAudioScript().playSound_DouDiZhu_jiabang();
+
                         GameObject playerHead = getPlayerHeadByUid(uid);
                         if (playerHead != null)
                         {
