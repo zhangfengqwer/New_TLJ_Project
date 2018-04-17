@@ -23,6 +23,8 @@ public class DDZ_GameScript : MonoBehaviour {
     public Button m_buttonChuPai;
     public Button m_buttonTuoGuan;
 
+    public Text m_text_beishu;
+
     public GameObject m_waitMatchPanel = null;
     public GameObject m_qiangDiZhu = null;
     public GameObject m_jiabang = null;
@@ -722,6 +724,12 @@ public class DDZ_GameScript : MonoBehaviour {
                     GameObject playerHead = getPlayerHeadByUid(uid);
                     CommonUtil.setImageSpriteByAssetBundle(playerHead.transform.Find("").GetComponent<Image>(),"doudizhu.unity3d", "doudizhu_dizhu");
 
+                    // 倍数
+                    {
+                        int my_beishu = (int)jd["beishu_" + UserData.uid];
+                        m_text_beishu.text = ("X" + my_beishu);
+                    }
+
                     // 把底牌加上去
                     {
                         DDZ_GameData.getInstance().m_dipaiList.Clear();
@@ -788,6 +796,12 @@ public class DDZ_GameScript : MonoBehaviour {
             // 加棒
             case (int)TLJCommon.Consts.DDZ_PlayAction.PlayAction_JiaBang:
                 {
+                    // 倍数
+                    {
+                        int my_beishu = (int)jd["beishu_" + UserData.uid];
+                        m_text_beishu.text = ("X" + my_beishu);
+                    }
+
                     string uid = (string)jd["uid"];
                     int isJiaBang = (int)jd["isJiaBang"];
 
@@ -901,6 +915,12 @@ public class DDZ_GameScript : MonoBehaviour {
                 {
                     try
                     {
+                        // 倍数
+                        {
+                            int my_beishu = (int)jd["beishu_" + UserData.uid];
+                            m_text_beishu.text = ("X" + my_beishu);
+                        }
+
                         m_timerScript.stop();
 
                         string uid = (string)jd["uid"];
