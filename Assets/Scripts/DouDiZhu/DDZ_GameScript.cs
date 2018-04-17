@@ -92,6 +92,8 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void initData()
     {
+        m_playerHead_down.name = UserData.uid;
+
         // 游戏服务器
         PlayServiceSocket.s_instance.setOnPlayService_Connect(onSocketConnect_Play);
         PlayServiceSocket.s_instance.setOnPlayService_Receive(onSocketReceive_Play);
