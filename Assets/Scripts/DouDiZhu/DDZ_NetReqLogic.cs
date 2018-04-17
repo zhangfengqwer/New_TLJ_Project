@@ -161,21 +161,24 @@ public class DDZ_NetReqLogic : MonoBehaviour
                     return;
                 }
             }
+            else
+            {
+                if (DDZ_GameData.getInstance().m_isFreeOutPoker)
+                {
+                    ToastScript.createToast("请选择您出的牌");
+                    return;
+                }
+                else
+                {
+                    // 不要
+                }
+            }
         }
 
         PlayServiceSocket.s_instance.sendMessage(data.ToJson());
 
         // 所有牌设为未选中
         PokerScript.setAllPokerWeiXuanZe();
-
-        if (hasOutPoker)
-        {
-            
-        }
-        else
-        {
-            // 不要
-        }
     }
 
     public void reqSetTuoGuanState(bool isTuoGuan)

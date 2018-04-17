@@ -340,12 +340,12 @@ public class AudioScript : MonoBehaviour {
                     playSound("shunzi");
 
                     {
-                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "shunzi"));
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "shunzi1"));
                         PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
                         playAnimation.start("animations.unity3d", "shunzi", false, 0.07f);
 
                         int middle = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList.Count / 2;
-                        float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.localPosition.y + 80;
+                        float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.position.y + 80;
                         obj.transform.localPosition = new Vector3(0 , y , 0);
                     }
                 }
@@ -355,13 +355,14 @@ public class AudioScript : MonoBehaviour {
                     playSound("liandui");
 
                     {
-                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "liandui"));
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "liandui1"));
                         PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
                         playAnimation.start("animations.unity3d", "liandui", false, 0.07f);
 
                         int middle = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList.Count / 2;
-                        float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.localPosition.y + 80;
-                        obj.transform.localPosition = new Vector3(0, y, 0);
+                        float x = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.position.x;
+                        float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.position.y;
+                        obj.transform.position = new Vector3(x, y, 0);
                     }
                 }
                 break;
