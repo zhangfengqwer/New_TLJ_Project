@@ -881,7 +881,7 @@ public class DDZ_GameScript : MonoBehaviour {
                             }
                             else
                             {
-                                m_startChuPai.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                                GameUtil.hideGameObject(m_startChuPai);
 
                                 // 开始出牌倒计时
                                 m_timerScript.start(DDZ_GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, false);
@@ -1082,6 +1082,11 @@ public class DDZ_GameScript : MonoBehaviour {
                 {
                     try
                     {
+                        // 处理
+                        {
+                            Destroy(m_tuoguanObj);
+                        }
+
                         DDZ_GameResult.create(this, data);
                     }
                     catch (Exception ex)
@@ -1502,7 +1507,7 @@ public class DDZ_GameScript : MonoBehaviour {
                                 }
                                 else
                                 {
-                                    m_startChuPai.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                                    GameUtil.hideGameObject(m_startChuPai);
 
                                     // 开始出牌倒计时
                                     m_timerScript.start(DDZ_GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, false);
