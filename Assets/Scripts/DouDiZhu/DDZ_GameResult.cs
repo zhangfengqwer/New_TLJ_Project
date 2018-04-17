@@ -107,7 +107,7 @@ public class DDZ_GameResult : MonoBehaviour {
 
     public void initUI_Image()
     {
-        CommonUtil.setImageSpriteByAssetBundle(gameObject.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_gameresult_bg");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_gameresult_bg");
     }
 
     // Update is called once per frame

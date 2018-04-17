@@ -256,22 +256,22 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickPlayerHead_down()
     {
-        GameUserInfoPanelScript.create(m_playerHead_down.transform.name);
+        GameUserInfoPanelScript.create_ddz(m_playerHead_down.transform.name);
     }
 
     public void onClickPlayerHead_up()
     {
-        GameUserInfoPanelScript.create(m_playerHead_up.transform.name);
+        GameUserInfoPanelScript.create_ddz(m_playerHead_up.transform.name);
     }
 
     public void onClickPlayerHead_left()
     {
-        GameUserInfoPanelScript.create(m_playerHead_left.transform.name);
+        GameUserInfoPanelScript.create_ddz(m_playerHead_left.transform.name);
     }
 
     public void onClickPlayerHead_right()
     {
-        GameUserInfoPanelScript.create(m_playerHead_right.transform.name);
+        GameUserInfoPanelScript.create_ddz(m_playerHead_right.transform.name);
     }
 
     public void onClickSet()

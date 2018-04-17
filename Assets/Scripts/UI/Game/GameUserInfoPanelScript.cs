@@ -29,6 +29,16 @@ public class GameUserInfoPanelScript : MonoBehaviour {
         return obj;
     }
 
+    public static GameObject create_ddz(string uid)
+    {
+        GameObject prefab = Resources.Load("Prefabs/Game/GameUserInfoPanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        obj.GetComponent<GameUserInfoPanelScript>().setPlayer_ddz(uid);
+
+        return obj;
+    }
+
     void Start()
     {
         // 优先使用热更新的代码
@@ -81,6 +91,67 @@ public class GameUserInfoPanelScript : MonoBehaviour {
         {
             PlayerData playerData = GameData.getInstance().getPlayerDataByUid(uid);
                         
+            m_text_name.text = playerData.m_name;
+
+            if (playerData.m_allGameCount == 0)
+            {
+                m_text_shenglv.text = "0%";
+                m_text_taopaolv.text = "0%";
+            }
+            else
+            {
+                float shenglv = (float)playerData.m_winCount / (float)playerData.m_allGameCount * 100.0f;
+                float taopaolv = (float)playerData.m_runCount / (float)playerData.m_allGameCount * 100.0f;
+
+                m_text_shenglv.text = (int)shenglv + "%";
+                m_text_taopaolv.text = (int)taopaolv + "%";
+            }
+
+            m_text_zongjushu.text = playerData.m_allGameCount.ToString();
+            m_text_meilizhi.text = playerData.m_meiliZhi.ToString();
+
+            m_headIcon.GetComponent<HeadIconScript>().setIcon(playerData.m_head);
+        }
+    }
+
+    public void setPlayer_ddz(string uid)
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameUserInfoPanelScript_hotfix", "setPlayer"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameUserInfoPanelScript_hotfix", "setPlayer", null, uid);
+            return;
+        }
+
+        if (uid.CompareTo(UserData.uid) == 0)
+        {
+            m_text_name.text = UserData.name;
+
+            if (UserData.gameData.allGameCount == 0)
+            {
+                m_text_shenglv.text = "0%";
+                m_text_taopaolv.text = "0%";
+            }
+            else
+            {
+                float shenglv = (float)UserData.gameData.winCount / (float)UserData.gameData.allGameCount * 100.0f;
+                float taopaolv = (float)UserData.gameData.runCount / (float)UserData.gameData.allGameCount * 100.0f;
+
+                m_text_shenglv.text = (int)shenglv + "%";
+                m_text_taopaolv.text = (int)taopaolv + "%";
+            }
+
+            m_text_zongjushu.text = UserData.gameData.allGameCount.ToString();
+            m_text_meilizhi.text = UserData.gameData.meiliZhi.ToString();
+
+            m_gameobj_down.transform.localScale = new Vector3(0, 0, 0);
+
+            m_headIcon.GetComponent<HeadIconScript>().setIcon(UserData.head);
+        }
+        else
+        {
+            PlayerData playerData = DDZ_GameData.getInstance().getPlayerDataByUid(uid);
+
             m_text_name.text = playerData.m_name;
 
             if (playerData.m_allGameCount == 0)
