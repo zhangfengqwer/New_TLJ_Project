@@ -50,7 +50,9 @@ public class MainScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-     
+//        GameObject go = CommonUtil.getGameObjectByAssetBundle("animations.unity3d", "Boom");
+//   GameObject.Instantiate(go, gameObject.transform);
+
         initUI_Image();
 
         // 优先使用热更新的代码

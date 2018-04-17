@@ -131,32 +131,35 @@ public class DDZ_NetReqLogic : MonoBehaviour
             LandlordsCardsHelper.SetWeight(myOutPokerList);
             LandlordsCardsHelper.SetWeight(m_maxPlayerOutPokerList);
 
-            CardsType type;
-            if (LandlordsCardsHelper.GetCardsType(myOutPokerList.ToArray(), out type))
+            if (myOutPokerList.Count != 0)
             {
-                if (!DDZ_GameData.getInstance().m_isFreeOutPoker)
+                CardsType type;
+                if (LandlordsCardsHelper.GetCardsType(myOutPokerList.ToArray(), out type))
                 {
-                    CardsType lastType;
-                    if (LandlordsCardsHelper.GetCardsType(m_maxPlayerOutPokerList.ToArray(), out lastType))
+                    if (!DDZ_GameData.getInstance().m_isFreeOutPoker)
                     {
-                        List<PokerInfo[]> pokerInfoses = LandlordsCardsHelper.GetPrompt(myOutPokerList, m_maxPlayerOutPokerList, lastType);
-                        if (pokerInfoses.Count == 0)
+                        CardsType lastType;
+                        if (LandlordsCardsHelper.GetCardsType(m_maxPlayerOutPokerList.ToArray(), out lastType))
                         {
-                            ToastScript.createToast("出牌不符合规则");
+                            List<PokerInfo[]> pokerInfoses = LandlordsCardsHelper.GetPrompt(myOutPokerList, m_maxPlayerOutPokerList, lastType);
+                            if (pokerInfoses.Count == 0)
+                            {
+                                ToastScript.createToast("出牌不符合规则");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            ToastScript.createToast("上一家出牌不符合规则");
                             return;
                         }
                     }
-                    else
-                    {
-                        ToastScript.createToast("上一家出牌不符合规则");
-                        return;
-                    }
                 }
-            }
-            else
-            {
-                ToastScript.createToast("出牌不符合规则");
-                return;
+                else
+                {
+                    ToastScript.createToast("自己出牌不符合规则");
+                    return;
+                }
             }
         }
 
