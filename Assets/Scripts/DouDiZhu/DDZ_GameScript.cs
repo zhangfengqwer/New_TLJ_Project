@@ -59,6 +59,9 @@ public class DDZ_GameScript : MonoBehaviour {
         initUI_Image();
 
         m_DDZ_NetReqLogic.reqIsJoinRoom();
+
+        AudioScript.getAudioScript().stopMusic();
+        AudioScript.getAudioScript().playMusic_DDZ();
     }
 
     public void initUI()
@@ -669,7 +672,7 @@ public class DDZ_GameScript : MonoBehaviour {
 
                     if (UserData.uid.CompareTo(uid) == 0)
                     {
-                        GameUtil.showGameObject(m_qiangDiZhu);
+                        m_qiangDiZhu.transform.localScale = new Vector3(1.2f, 1.2f,1.2f);
                     }
 
                     {
@@ -748,7 +751,7 @@ public class DDZ_GameScript : MonoBehaviour {
 
                         createMyPokerObj(); // 创建我的牌对象
 
-                        GameUtil.showGameObject(m_waitjiabang);
+                        m_waitjiabang.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     }
 
                     // 剩余牌数
@@ -772,7 +775,7 @@ public class DDZ_GameScript : MonoBehaviour {
             // 通知玩家加棒
             case (int)TLJCommon.Consts.DDZ_PlayAction.PlayAction_CallPlayerJiaBang:
                 {
-                    GameUtil.showGameObject(m_jiabang);
+                    m_jiabang.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
                     {
                         // 开始倒计时
@@ -868,7 +871,7 @@ public class DDZ_GameScript : MonoBehaviour {
 
                                 DDZ_GameData.getInstance().m_isFreeOutPoker = isFreeOutPoker;
 
-                                GameUtil.showGameObject(m_startChuPai);
+                                m_startChuPai.transform.localScale = new Vector3(1.2f, 1.2f,1.2f);
 
                                 // 开始出牌倒计时
                                 m_timerScript.start(DDZ_GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, true);
@@ -876,7 +879,7 @@ public class DDZ_GameScript : MonoBehaviour {
                             }
                             else
                             {
-                                GameUtil.hideGameObject(m_startChuPai);
+                                m_startChuPai.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
                                 // 开始出牌倒计时
                                 m_timerScript.start(DDZ_GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, false);
@@ -1396,7 +1399,7 @@ public class DDZ_GameScript : MonoBehaviour {
 
                         if (UserData.uid.CompareTo(uid) == 0)
                         {
-                            GameUtil.showGameObject(m_qiangDiZhu);
+                            m_qiangDiZhu.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
                         }
 
                         {
@@ -1411,7 +1414,7 @@ public class DDZ_GameScript : MonoBehaviour {
                     {
                         if (DDZ_GameData.getInstance().m_isDiZhu == 1)
                         {
-                            GameUtil.showGameObject(m_waitjiabang);
+                            m_waitjiabang.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                             return;
                         }
 
@@ -1420,7 +1423,7 @@ public class DDZ_GameScript : MonoBehaviour {
                         // 通知玩家加棒
                         if (isNeedChoiceJiaBang == 1)
                         {
-                            GameUtil.showGameObject(m_jiabang);
+                            m_jiabang.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
                             {
                                 // 开始倒计时
@@ -1489,7 +1492,7 @@ public class DDZ_GameScript : MonoBehaviour {
 
                                     DDZ_GameData.getInstance().m_isFreeOutPoker = isFreeOutPoker;
 
-                                    GameUtil.showGameObject(m_startChuPai);
+                                    m_startChuPai.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
                                     // 开始出牌倒计时
                                     m_timerScript.start(DDZ_GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, true);
@@ -1497,7 +1500,7 @@ public class DDZ_GameScript : MonoBehaviour {
                                 }
                                 else
                                 {
-                                    GameUtil.hideGameObject(m_startChuPai);
+                                    m_startChuPai.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
                                     // 开始出牌倒计时
                                     m_timerScript.start(DDZ_GameData.getInstance().m_outPokerTime, TimerScript.TimerType.TimerType_OutPoker, false);
