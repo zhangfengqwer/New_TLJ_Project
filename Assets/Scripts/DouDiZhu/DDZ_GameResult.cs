@@ -9,6 +9,8 @@ public class DDZ_GameResult : MonoBehaviour {
     public DDZ_GameScript m_parentScript;
     public string m_jsonData;
 
+    public Text m_beishu;
+
     public static GameObject create(DDZ_GameScript parentScript,string jsonData)
     {
         GameObject prefab = Resources.Load("Prefabs/DouDiZhu/DDZ_GameResult") as GameObject;
@@ -23,6 +25,8 @@ public class DDZ_GameResult : MonoBehaviour {
     // Use this for initialization
     void Start () {
         JsonData jd = JsonMapper.ToObject(m_jsonData);
+
+        initUI_Image();
 
         // 胜负图片显示
         {
@@ -89,10 +93,25 @@ public class DDZ_GameResult : MonoBehaviour {
                 }
             }
         }
+
+        // 倍数
+        {
+            string key = ("beishu_" + UserData.uid);
+            for (int i = 0; i < jd[key].Count; i++)
+            {
+                string str = jd[key][i].ToString();
+                m_beishu.text += (str + "\r\n");
+            }
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void initUI_Image()
+    {
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_gameresult_bg");
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

@@ -247,6 +247,12 @@ public class AudioScript : MonoBehaviour {
         playSound("yx_tuolaji");
     }
 
+    // 斗地主背景音乐
+    public void playMusic_DDZ()
+    {
+        playMusic("ddz_bgm");
+    }
+
     // 抢地主
     public void playSound_QiangDiZhu(int score)
     {
@@ -263,6 +269,12 @@ public class AudioScript : MonoBehaviour {
     public void playSound_DouDiZhu_lose()
     {
         playSound("lose");
+    }
+
+    // 斗地主加棒
+    public void playSound_DouDiZhu_jiabang()
+    {
+        playSound("jiabang");
     }
 
     // 斗地主出牌音效
@@ -342,7 +354,8 @@ public class AudioScript : MonoBehaviour {
                     {
                         GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "shunzi1"));
                         PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
-                        playAnimation.start("animations.unity3d", "shunzi", false, 0.07f);
+                        playAnimation.start("animations.unity3d", "shunzi", false, 0.1f);
+                        obj.transform.localScale = new Vector3(2,2,2);
 
                         int middle = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList.Count / 2;
                         float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.position.y + 80;
@@ -357,7 +370,8 @@ public class AudioScript : MonoBehaviour {
                     {
                         GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "liandui1"));
                         PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
-                        playAnimation.start("animations.unity3d", "liandui", false, 0.07f);
+                        playAnimation.start("animations.unity3d", "liandui", false, 0.1f);
+                        obj.transform.localScale = new Vector3(2, 2, 2);
 
                         int middle = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList.Count / 2;
                         float x = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.position.x;
