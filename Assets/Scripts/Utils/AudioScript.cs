@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class AudioScript : MonoBehaviour {
 
@@ -265,7 +266,7 @@ public class AudioScript : MonoBehaviour {
     }
 
     // 斗地主出牌音效
-    public void playSound_DouDiZhu_ChuPai(List<TLJCommon.PokerInfo> list)
+    public void playSound_DouDiZhu_ChuPai(List<TLJCommon.PokerInfo> list,string uid)
     {
         CrazyLandlords.Helper.LandlordsCardsHelper.SetWeight(list);
         CrazyLandlords.Helper.CardsType cardsType;
@@ -283,15 +284,29 @@ public class AudioScript : MonoBehaviour {
             case CrazyLandlords.Helper.CardsType.JokerBoom:
                 {
                     playSound("huojian");
+
+                    {
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "huojian"));
+                        PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
+                        playAnimation.start("animations.unity3d", "huojian", true, 0.07f);
+
+                        obj.transform.localPosition = new Vector3(0, -200, 0);
+                        obj.transform.DOMoveY(3, 2).OnComplete(() =>
+                        {
+                            GameObject.Destroy(obj);
+                        });
+                    }
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.Boom:
                 {
                     playSound("bomb");
-
-                    //GameObject obj = CommonUtil.getGameObjectByAssetBundle("animations.unity3d", "Boom");
-                    //obj.transform.SetParent(GameObject.Find("Canvas_Middle").transform);
-                    //obj.transform.localScale = new Vector3(1,1,1);
+                    
+                    {
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject,CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "zhadan1"));
+                        PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
+                        playAnimation.start("animations.unity3d", "zhadan",false, 0.07f);
+                    }
                 }
                 break;
 
@@ -323,11 +338,31 @@ public class AudioScript : MonoBehaviour {
             case CrazyLandlords.Helper.CardsType.Straight:
                 {
                     playSound("shunzi");
+
+                    {
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "shunzi"));
+                        PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
+                        playAnimation.start("animations.unity3d", "shunzi", false, 0.07f);
+
+                        int middle = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList.Count / 2;
+                        float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.localPosition.y + 80;
+                        obj.transform.localPosition = new Vector3(0 , y , 0);
+                    }
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.DoubleStraight:
                 {
                     playSound("liandui");
+
+                    {
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "liandui"));
+                        PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
+                        playAnimation.start("animations.unity3d", "liandui", false, 0.07f);
+
+                        int middle = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList.Count / 2;
+                        float y = DDZ_GameData.getInstance().getPlayerDataByUid(uid).m_outPokerObjList[middle].transform.localPosition.y + 80;
+                        obj.transform.localPosition = new Vector3(0, y, 0);
+                    }
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.TripleStraight:
@@ -335,6 +370,18 @@ public class AudioScript : MonoBehaviour {
             case CrazyLandlords.Helper.CardsType.TripleStraightAndTwo:
                 {
                     playSound("feiji");
+
+                    {
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "feiji"));
+                        PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
+                        playAnimation.start("animations.unity3d", "feiji", true, 0.07f);
+
+                        obj.transform.localPosition = new Vector3(-400, 0, 0);
+                        obj.transform.DOMoveX(4, 2).OnComplete(() =>
+                        {
+                            GameObject.Destroy(obj);
+                        });
+                    }
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.Double:
