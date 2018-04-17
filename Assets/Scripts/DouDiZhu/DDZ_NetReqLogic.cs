@@ -2,6 +2,7 @@
 using LitJson;
 using System.Collections;
 using System.Collections.Generic;
+using TLJCommon;
 using UnityEngine;
 
 public class DDZ_NetReqLogic : MonoBehaviour
@@ -126,43 +127,20 @@ public class DDZ_NetReqLogic : MonoBehaviour
         
         // 检测出牌合理性
         {
+            List<TLJCommon.PokerInfo> m_maxPlayerOutPokerList = DDZ_GameData.getInstance().m_maxPlayerOutPokerList;
             LandlordsCardsHelper.SetWeight(myOutPokerList);
+            LandlordsCardsHelper.SetWeight(m_maxPlayerOutPokerList);
+
             CardsType type;
             if (LandlordsCardsHelper.GetCardsType(myOutPokerList.ToArray(), out type))
             {
-                int myWeight = LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(), type);
-               
-                if (DDZ_GameData.getInstance().m_isFreeOutPoker)
+                if (!DDZ_GameData.getInstance().m_isFreeOutPoker)
                 {
-                }
-                else
-                {
-                    List<TLJCommon.PokerInfo> m_maxPlayerOutPokerList = DDZ_GameData.getInstance().m_maxPlayerOutPokerList;
-                    LandlordsCardsHelper.SetWeight(m_maxPlayerOutPokerList);
                     CardsType lastType;
                     if (LandlordsCardsHelper.GetCardsType(m_maxPlayerOutPokerList.ToArray(), out lastType))
                     {
-                        int lastWeight = LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(), lastType);
-
-                        if (lastType == CardsType.JokerBoom)
-                        {
-
-                        }else if (lastType == CardsType.Boom)
-                        {
-                            if (type == CardsType.JokerBoom)
-                            {
-
-                            }else if (type == CardsType.Boom && myWeight > lastWeight)
-                            {
-
-                            }
-                            else
-                            {
-                                ToastScript.createToast("出牌不符合规则");
-                                return;
-                            }
-                        }
-                        else if (lastType != type || LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(), type) <= LandlordsCardsHelper.GetWeight(m_maxPlayerOutPokerList.ToArray(), type))
+                        List<PokerInfo[]> pokerInfoses = LandlordsCardsHelper.GetPrompt(myOutPokerList, m_maxPlayerOutPokerList, lastType);
+                        if (pokerInfoses.Count == 0)
                         {
                             ToastScript.createToast("出牌不符合规则");
                             return;
@@ -177,15 +155,8 @@ public class DDZ_NetReqLogic : MonoBehaviour
             }
             else
             {
-                if (DDZ_GameData.getInstance().m_isFreeOutPoker)
-                {
-                    ToastScript.createToast("出牌不符合规则");
-                    return;
-                }
-                else
-                {
-
-                }
+                ToastScript.createToast("出牌不符合规则");
+                return;
             }
         }
 
