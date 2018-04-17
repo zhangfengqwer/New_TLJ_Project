@@ -17,6 +17,7 @@ public class MainScript : MonoBehaviour
 
     public Button m_button_xiuxianchang;
     public Button m_button_jingjichang;
+    public Button m_button_DDZ_Back;
     public GameObject m_xiuxianchang;
     public Image m_nickName_bg;
     public Text UserAccount;
@@ -65,6 +66,8 @@ public class MainScript : MonoBehaviour
         ToastScript.clear();
 
         //initUI();
+
+
 
         // 安卓回调
         AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
@@ -155,6 +158,12 @@ public class MainScript : MonoBehaviour
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/xiuxianchang/Button_chaodichang").GetComponent<Image>(), "main.unity3d", "main_chaodi");
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/Button_EnterDDZ").GetComponent<Image>(), "main.unity3d", "ddz");
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Room/Button_EnterShengji").GetComponent<Image>(), "main.unity3d", "shengji");
+
+        gameObject.transform.Find("Room/Button_EnterXiuXianChang").gameObject.SetActive(false);
+        gameObject.transform.Find("Room/Button_EnterJingJiChang").gameObject.SetActive(false);
+
+        m_button_DDZ_Back.gameObject.SetActive(false);
+
     }
 
     // 显示新人推广礼
@@ -164,7 +173,6 @@ public class MainScript : MonoBehaviour
         {
             NewPlayerShowTuiGuangPanelScript.create();
             PlayerPrefs.SetInt("isShowNewPlayerTuiGuang_" + UserData.uid, 1);
-
             return true;
         }
 
@@ -185,7 +193,6 @@ public class MainScript : MonoBehaviour
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onInvokeStartMusic", null, null);
             return;
         }
-
         AudioScript.getAudioScript().playMusic_MainBg();
     }
 
@@ -196,7 +203,6 @@ public class MainScript : MonoBehaviour
         {
             return (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "getLogicEnginerObj", null, null);
         }
-
         return logicEnginer;
     }
 
@@ -413,6 +419,8 @@ public class MainScript : MonoBehaviour
         m_button_xiuxianchang.transform.localScale = new Vector3(0, 0, 0);
         m_button_jingjichang.transform.localScale = new Vector3(0, 0, 0);
         m_xiuxianchang.transform.localScale = new Vector3(1, 1, 1);
+        m_button_DDZ_Back.gameObject.SetActive(false);
+
 
         m_xiuxianchang.GetComponent<Animation>().Play("xiuxianchang_show");
     }
@@ -437,6 +445,18 @@ public class MainScript : MonoBehaviour
     {
         m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
         reqIsJoinRoom();
+    }
+
+    //TODO
+    public void onClickEnterShengji()
+    {
+        gameObject.transform.Find("Room/Button_EnterXiuXianChang").gameObject.SetActive(true);
+        gameObject.transform.Find("Room/Button_EnterJingJiChang").gameObject.SetActive(true);
+        m_button_DDZ_Back.gameObject.SetActive(true);
+
+
+        gameObject.transform.Find("Room/Button_EnterDDZ").gameObject.SetActive(false);
+        gameObject.transform.Find("Room/Button_EnterShengji").gameObject.SetActive(false);
     }
 
     public void onClickJingDianChang()
@@ -481,6 +501,24 @@ public class MainScript : MonoBehaviour
         m_button_xiuxianchang.transform.localScale = new Vector3(1, 1, 1);
         m_button_jingjichang.transform.localScale = new Vector3(1, 1, 1);
         m_xiuxianchang.transform.localScale = new Vector3(0, 0, 0);
+        m_button_DDZ_Back.gameObject.SetActive(true);
+    }
+
+    public void onClickDDZ_back()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MainScript_hotfix", "onClickDDZ_back"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MainScript_hotfix", "onClickDDZ_back", null, null);
+            return;
+        }
+
+        gameObject.transform.Find("Room/Button_EnterXiuXianChang").gameObject.SetActive(false);
+        gameObject.transform.Find("Room/Button_EnterJingJiChang").gameObject.SetActive(false);
+        m_button_DDZ_Back.gameObject.SetActive(false);
+
+        gameObject.transform.Find("Room/Button_EnterDDZ").gameObject.SetActive(true);
+        gameObject.transform.Find("Room/Button_EnterShengji").gameObject.SetActive(true);
     }
 
     public void OnClickHead()
