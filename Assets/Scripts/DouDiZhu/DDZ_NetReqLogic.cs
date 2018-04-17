@@ -130,6 +130,8 @@ public class DDZ_NetReqLogic : MonoBehaviour
             CardsType type;
             if (LandlordsCardsHelper.GetCardsType(myOutPokerList.ToArray(), out type))
             {
+                int myWeight = LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(), type);
+               
                 if (DDZ_GameData.getInstance().m_isFreeOutPoker)
                 {
                 }
@@ -139,9 +141,28 @@ public class DDZ_NetReqLogic : MonoBehaviour
                     LandlordsCardsHelper.SetWeight(m_maxPlayerOutPokerList);
                     CardsType lastType;
                     if (LandlordsCardsHelper.GetCardsType(m_maxPlayerOutPokerList.ToArray(), out lastType))
-                    {   
-                        //TODO 
-                        if (lastType != type || LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(),type) <= LandlordsCardsHelper.GetWeight(m_maxPlayerOutPokerList.ToArray(), type))
+                    {
+                        int lastWeight = LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(), lastType);
+
+                        if (lastType == CardsType.JokerBoom)
+                        {
+
+                        }else if (lastType == CardsType.Boom)
+                        {
+                            if (type == CardsType.JokerBoom)
+                            {
+
+                            }else if (type == CardsType.Boom && myWeight > lastWeight)
+                            {
+
+                            }
+                            else
+                            {
+                                ToastScript.createToast("出牌不符合规则");
+                                return;
+                            }
+                        }
+                        else if (lastType != type || LandlordsCardsHelper.GetWeight(myOutPokerList.ToArray(), type) <= LandlordsCardsHelper.GetWeight(m_maxPlayerOutPokerList.ToArray(), type))
                         {
                             ToastScript.createToast("出牌不符合规则");
                             return;
