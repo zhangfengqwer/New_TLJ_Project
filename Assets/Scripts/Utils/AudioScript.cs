@@ -286,12 +286,12 @@ public class AudioScript : MonoBehaviour {
                     playSound("huojian");
 
                     {
-                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "huojian"));
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "huojian1"));
                         PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
                         playAnimation.start("animations.unity3d", "huojian", true, 0.07f);
 
                         obj.transform.localPosition = new Vector3(0, -200, 0);
-                        obj.transform.DOMoveY(3, 2).OnComplete(() =>
+                        obj.transform.DOMoveY(10, 3).OnComplete(() =>
                         {
                             GameObject.Destroy(obj);
                         });
@@ -372,12 +372,12 @@ public class AudioScript : MonoBehaviour {
                     playSound("feiji");
 
                     {
-                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "feiji"));
+                        GameObject obj = CreateUGUI.createImageObj(GameObject.Find("Canvas_Middle").gameObject, CommonUtil.getImageSpriteByAssetBundle("animations.unity3d", "feiji1"));
                         PlayAnimation playAnimation = obj.AddComponent<PlayAnimation>();
                         playAnimation.start("animations.unity3d", "feiji", true, 0.07f);
 
-                        obj.transform.localPosition = new Vector3(-400, 0, 0);
-                        obj.transform.DOMoveX(4, 2).OnComplete(() =>
+                        obj.transform.localPosition = new Vector3(-500, 0, 0);
+                        obj.transform.DOMoveX(10, 3).OnComplete(() =>
                         {
                             GameObject.Destroy(obj);
                         });
