@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -221,19 +220,19 @@ public class CommonUtil
 
     static public void setImageSpriteByAssetBundle(Image image, string assetbundleName,string imageName)
     {
-#if UNITY_EDITOR
-        string[] realPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundleName);
-        foreach (var path in realPaths)
-        {
-            string assetName = Path.GetFileNameWithoutExtension(path);
-            if (assetName == imageName)
-            {
-                image.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
-                break;
-            }
-        }
-        return;
-#endif
+//#if UNITY_EDITOR
+//        string[] realPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundleName);
+//        foreach (var path in realPaths)
+//        {
+//            string assetName = Path.GetFileNameWithoutExtension(path);
+//            if (assetName == imageName)
+//            {
+//                image.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+//                break;
+//            }
+//        }
+//        return;
+//#endif
 
         AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
         if (ab != null)
@@ -322,18 +321,18 @@ public class CommonUtil
 
     static public AudioClip getAudioClipByAssetBundle(string assetbundleName, string audioName)
     {
-#if UNITY_EDITOR
-        string[] realPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundleName);
-        foreach (var path in realPaths)
-        {
-            string assetName = Path.GetFileNameWithoutExtension(path);
-            if (assetName == audioName)
-            {
-                return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
-            }
-        }
-        return null;
-#endif
+//#if UNITY_EDITOR
+//        string[] realPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundleName);
+//        foreach (var path in realPaths)
+//        {
+//            string assetName = Path.GetFileNameWithoutExtension(path);
+//            if (assetName == audioName)
+//            {
+//                return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+//            }
+//        }
+//        return null;
+//#endif
 
         AssetBundle ab = AssetBundlesManager.getInstance().getAssetBundlesDataByName(assetbundleName);
         if (ab != null)
