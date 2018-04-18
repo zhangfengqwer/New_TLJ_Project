@@ -70,6 +70,7 @@ public class DDZ_GameResult : MonoBehaviour {
             {
                 PlayerData playerData = DDZ_GameData.getInstance().m_playerDataList[i];
                 string score = jd[playerData.m_uid]["score"].ToString();
+                int scire_i = int.Parse(score);
                 int beishu = (int)(jd[playerData.m_uid]["beishu"]);
 
                 if (int.Parse(score) > 0)
@@ -84,6 +85,12 @@ public class DDZ_GameResult : MonoBehaviour {
                     gameObject.transform.Find("Text_beishu").GetComponent<Text>().text = beishu.ToString();
                     gameObject.transform.Find("playerScore_my/Text_name").GetComponent<Text>().text = UserData.name;
                     gameObject.transform.Find("playerScore_my/Text_score").GetComponent<Text>().text = score.ToString();
+
+                    // 金币变化
+                    {
+                        GameUtil.changeData(1, scire_i);
+                        m_parentScript.m_playerHead_down.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
+                    }
                 }
                 else
                 {
