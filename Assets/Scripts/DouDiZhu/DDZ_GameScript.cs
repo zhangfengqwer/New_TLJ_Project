@@ -288,8 +288,7 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickExitRoom()
     {
-        //QueRenExitPanelScript.create(this, "是否确定退出？");
-        exitRoom();
+        QueRenExitPanelScript.create(this, "是否确定退出？");
     }
 
     public void onClickBuOutPoker()
@@ -593,7 +592,7 @@ public class DDZ_GameScript : MonoBehaviour {
         }
         else if (tag.CompareTo(TLJCommon.Consts.Tag_BaoXiangDrop) == 0)
         {
-            //onReceive_BaoXiangDrop(data);
+            onReceive_BaoXiangDrop(data);
         }
     }
 
@@ -659,11 +658,12 @@ public class DDZ_GameScript : MonoBehaviour {
                 {
                     Destroy(m_waitMatchPanel);
 
-                    // 休闲场扣除报名费
+                    // 扣除报名费
                     {
                         if (DDZ_GameData.getInstance().getGameRoomType().CompareTo(TLJCommon.Consts.GameRoomType_DDZ_Normal) == 0)
                         {
                             GameUtil.changeData(1, -m_fuwufei);
+                            m_playerHead_down.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
                         }
                     }
 
@@ -1127,6 +1127,7 @@ public class DDZ_GameScript : MonoBehaviour {
                         // 处理
                         {
                             Destroy(m_tuoguanObj);
+                            CommonUtil.setImageSpriteByAssetBundle(m_buttonTuoGuan.transform.Find("Image").GetComponent<Image>(), "game.unity3d", "game_tuoguan");
                         }
 
                         DDZ_GameResult.create(this, data);
@@ -1615,6 +1616,28 @@ public class DDZ_GameScript : MonoBehaviour {
         }
     }
 
+    public void onReceive_BaoXiangDrop(string data)
+    {
+        try
+        {
+            JsonData jd = JsonMapper.ToObject(data);
+
+            string reward = (string)jd["reward"];
+
+            for (int i = 0; i < 50; i++)
+            {
+                BaoXiangScript.create();
+            }
+
+            GameUtil.changeDataWithStr(reward);
+            ShowRewardPanelScript.Show(reward, false);
+        }
+        catch (Exception ex)
+        {
+            LogUtil.Log(ex.Message);
+        }
+    }
+
     public void exitRoom()
     {
         // 清空本局数据
@@ -1657,6 +1680,11 @@ public class DDZ_GameScript : MonoBehaviour {
             GameUtil.hideGameObject(m_playerHead_up.transform.Find("Image_shengyupaishu").gameObject);
             GameUtil.hideGameObject(m_playerHead_left.transform.Find("Image_shengyupaishu").gameObject);
             GameUtil.hideGameObject(m_playerHead_right.transform.Find("Image_shengyupaishu").gameObject);
+
+            m_playerHead_down.transform.Find("Image_shengyupaishu/Text_num").GetComponent<Text>().text = "17";
+            m_playerHead_up.transform.Find("Image_shengyupaishu/Text_num").GetComponent<Text>().text = "17";
+            m_playerHead_left.transform.Find("Image_shengyupaishu/Text_num").GetComponent<Text>().text = "17";
+            m_playerHead_right.transform.Find("Image_shengyupaishu/Text_num").GetComponent<Text>().text = "17";
 
             // 棒子
             GameUtil.hideGameObject(m_playerHead_down.transform.Find("Image_bangzi").gameObject);
@@ -1770,9 +1798,8 @@ public class DDZ_GameScript : MonoBehaviour {
             int todayCount = (int)jd["todayCount"];
             int goldNum = (int)jd["goldNum"];
 
-            GameUtil.changeDataWithStr("1:" + goldNum);
-
-            //m_myUserInfoUI.GetComponent<MyUIScript>().setGoldNum(UserData.gold);
+            GameUtil.changeData(1,goldNum);
+            m_playerHead_down.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
 
             if (todayCount == 1)
             {

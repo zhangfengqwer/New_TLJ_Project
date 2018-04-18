@@ -440,6 +440,12 @@ public class MainScript : MonoBehaviour
 
     public void onClickEnterDDZ()
     {
+        if (UserData.gold < 1000)
+        {
+            ToastScript.createToast("金币不足1000，无法进入游戏");
+            return;
+        }
+
         m_wantInGameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
         reqIsJoinRoom();
     }
