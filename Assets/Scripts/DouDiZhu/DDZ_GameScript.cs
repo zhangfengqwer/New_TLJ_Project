@@ -310,30 +310,54 @@ public class DDZ_GameScript : MonoBehaviour {
         TestPoker.create();
     }
 
+    private List<PokerInfo[]> promptPokers;
     public void onClickTiShi()
     {
         // 所有牌设为未选中
         PokerScript.setAllPokerWeiXuanZe();
 
         AudioScript.getAudioScript().playSound_XuanPai();
-        LandlordsCardsHelper.SetWeight(DDZ_GameData.getInstance().m_myPokerList);
-        LandlordsCardsHelper.SetWeight(DDZ_GameData.getInstance().m_maxPlayerOutPokerList);
-        CardsType lastType;
-        LandlordsCardsHelper.GetCardsType(DDZ_GameData.getInstance().m_maxPlayerOutPokerList.ToArray(), out lastType);
-        List<PokerInfo[]> promptPokers = LandlordsCardsHelper.GetPrompt(DDZ_GameData.getInstance().m_myPokerList, DDZ_GameData.getInstance().m_maxPlayerOutPokerList, lastType);
-        if (promptPokers.Count > 0)
+
+
+        if (promptPokers == null || promptPokers.Count == 0)
         {
-            List<PokerInfo> listPoker = promptPokers[RandomHelper.RandomNumber(0, promptPokers.Count)].ToList();
-
-            Debug.LogWarning("ziji:");
-            foreach (var item in listPoker)
+            LandlordsCardsHelper.SetWeight(DDZ_GameData.getInstance().m_myPokerList);
+            LandlordsCardsHelper.SetWeight(DDZ_GameData.getInstance().m_maxPlayerOutPokerList);
+            CardsType lastType;
+            LandlordsCardsHelper.GetCardsType(DDZ_GameData.getInstance().m_maxPlayerOutPokerList.ToArray(), out lastType);
+            promptPokers = LandlordsCardsHelper.GetPrompt(DDZ_GameData.getInstance().m_myPokerList, DDZ_GameData.getInstance().m_maxPlayerOutPokerList, lastType);
+            if (promptPokers.Count > 0)
             {
-                Debug.LogWarning(item.m_num);
-                Debug.LogWarning(item.m_weight_DDZ);
-            }
-      
-            Debug.LogWarning(lastType);
+//                List<PokerInfo> listPoker = promptPokers[RandomHelper.RandomNumber(0, promptPokers.Count)].ToList();
+                List<PokerInfo> listPoker = promptPokers[0].ToList();
+                promptPokers.RemoveAt(0);
 
+                for (int i = 0; i < listPoker.Count; i++)
+                {
+                    for (int j = DDZ_GameData.getInstance().m_myPokerObjList.Count - 1; j >= 0; j--)
+                    {
+                        PokerScript pokerScript = DDZ_GameData.getInstance().m_myPokerObjList[j].GetComponent<PokerScript>();
+
+                        if ((pokerScript.getPokerNum() == listPoker[i].m_num) &&
+                            (pokerScript.getPokerType() == (int)listPoker[i].m_pokerType))
+                        {
+                            pokerScript.setIsSelect(true);
+                            pokerScript.setIsJump(true);
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ToastScript.createToast("没有牌可以出");
+                onClickBuOutPoker();
+            }
+        }
+        else
+        {
+            List<PokerInfo> listPoker = promptPokers[0].ToList();
+            promptPokers.RemoveAt(0);
 
             for (int i = 0; i < listPoker.Count; i++)
             {
@@ -350,10 +374,6 @@ public class DDZ_GameScript : MonoBehaviour {
                     }
                 }
             }
-        }
-        else
-        {
-            ToastScript.createToast("没有牌可以出");
         }
     }
     public void onClickChat()
@@ -1075,6 +1095,8 @@ public class DDZ_GameScript : MonoBehaviour {
                         //ToastScript.createToast("异常：" + ex.Message);
                     }
                 }
+                //清除出牌提示
+                promptPokers = null;
                 break;
 
             // 改变托管状态

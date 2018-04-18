@@ -30,12 +30,14 @@ public class CreateAssetBundles
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
 #endif
         GenerateVersionInfo(assetBundleDirectory);
+
+
+        Debug.Log("打包完成");
     }
 
     private static void GenerateVersionInfo(string dir)
     {
         VersionConfig versionProto = new VersionConfig();
-        Debug.Log(Directory.GetDirectories(dir));
         GenerateVersionProto(dir, versionProto);
 
         using (FileStream fileStream = new FileStream(dir + "/Version.txt", FileMode.Create))
