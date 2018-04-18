@@ -726,6 +726,24 @@ public class DDZ_GameScript : MonoBehaviour {
                     
                     int fen = (int)jd["fen"];
 
+                    // 图片提示
+                    {
+                        string imgName = "doudizhu_" + fen + "fen";
+
+                        if (uid.CompareTo(m_playerHead_down.transform.name) == 0)
+                        {
+                            ShowImageScript.create(CommonUtil.getImageSpriteByAssetBundle("doudizhu.unity3d", imgName), new Vector3(-490, -188, 0));
+                        }
+                        else if (uid.CompareTo(m_playerHead_left.transform.name) == 0)
+                        {
+                            ShowImageScript.create(CommonUtil.getImageSpriteByAssetBundle("doudizhu.unity3d", imgName), new Vector3(-490, 160, 0));
+                        }
+                        if (uid.CompareTo(m_playerHead_right.transform.name) == 0)
+                        {
+                            ShowImageScript.create(CommonUtil.getImageSpriteByAssetBundle("doudizhu.unity3d", imgName), new Vector3(490, 160, 0));
+                        }
+                    }
+
                     if (UserData.uid.CompareTo(uid) == 0)
                     {
                         GameUtil.hideGameObject(m_qiangDiZhu);
@@ -798,7 +816,9 @@ public class DDZ_GameScript : MonoBehaviour {
             // 没人抢地主
             case (int)TLJCommon.Consts.DDZ_PlayAction.PlayAction_NoOneQiangDiZhu:
                 {
-                    ToastScript.createToast("没有人抢地主");
+                    ToastScript.createToast("没有人抢地主，重新发牌");
+
+                    DDZ_GameData.getInstance().m_myPokerList.Clear();
                 }
                 break;
 
