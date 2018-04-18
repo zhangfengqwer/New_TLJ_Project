@@ -581,6 +581,11 @@ namespace CrazyLandlords.Helper
                         isRule = true;
                         type = CardsType.OnlyThree;
                     }
+                    else if (IsTripleStraight(cards))
+                    {
+                        isRule = true;
+                        type = CardsType.TripleStraight;
+                    }
                     break;
                 case 10:
                     if (IsStraight(cards))
@@ -628,6 +633,11 @@ namespace CrazyLandlords.Helper
                         isRule = true;
                         type = CardsType.TripleStraightAndOne;
                     }
+                    else if (IsTripleStraight(cards))
+                    {
+                        isRule = true;
+                        type = CardsType.TripleStraight;
+                    }
                     break;
                 case 13:
                     break;
@@ -643,6 +653,11 @@ namespace CrazyLandlords.Helper
                     {
                         isRule = true;
                         type = CardsType.OnlyThree;
+                    }
+                    else if (IsTripleStraight(cards))
+                    {
+                        isRule = true;
+                        type = CardsType.TripleStraight;
                     }
                     else if (IsTripleStraightAndTwo(cards))
                     {
@@ -669,6 +684,11 @@ namespace CrazyLandlords.Helper
                     {
                         isRule = true;
                         type = CardsType.DoubleStraight;
+                    }
+                    else if (IsTripleStraight(cards))
+                    {
+                        isRule = true;
+                        type = CardsType.TripleStraight;
                     }
                     else if (IsOnlyThree(cards))
                     {
