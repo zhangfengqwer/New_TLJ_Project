@@ -124,6 +124,12 @@ public class DDZ_GameResult : MonoBehaviour {
 
     public void onClickJiXu()
     {
+        if (UserData.gold < 1000)
+        {
+            ToastScript.createToast("金币不足1000，无法继续游戏");
+            return;
+        }
+
         m_parentScript.cleanRoom();
         m_parentScript.m_DDZ_NetReqLogic.reqJoinRoom(TLJCommon.Consts.GameRoomType_DDZ_Normal);
         Destroy(gameObject);

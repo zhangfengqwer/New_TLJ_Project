@@ -8,7 +8,8 @@ public class QueRenExitPanelScript : MonoBehaviour {
 
     public static GameObject s_gameobject = null;
 
-    public GameScript m_parentScript;
+    public GameScript m_parentScript = null;
+    public DDZ_GameScript m_parentScript_ddz = null;
     public Text m_text_tips;
 
     public static GameObject create(GameScript parentScript,string text)
@@ -17,6 +18,17 @@ public class QueRenExitPanelScript : MonoBehaviour {
         s_gameobject = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
 
         s_gameobject.GetComponent<QueRenExitPanelScript>().m_parentScript = parentScript;
+        s_gameobject.GetComponent<QueRenExitPanelScript>().m_text_tips.text = text;
+
+        return s_gameobject;
+    }
+
+    public static GameObject create(DDZ_GameScript parentScript, string text)
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/QueRenExitPanel") as GameObject;
+        s_gameobject = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        s_gameobject.GetComponent<QueRenExitPanelScript>().m_parentScript_ddz = parentScript;
         s_gameobject.GetComponent<QueRenExitPanelScript>().m_text_tips.text = text;
 
         return s_gameobject;
@@ -44,7 +56,14 @@ public class QueRenExitPanelScript : MonoBehaviour {
             return;
         }
 
-        m_parentScript.exitRoom();
+        if (m_parentScript != null)
+        {
+            m_parentScript.exitRoom();
+        }
+        else if (m_parentScript_ddz != null)
+        {
+            m_parentScript_ddz.exitRoom();
+        }
     }
 
     public void OnClickCancel()
