@@ -21,15 +21,25 @@ public class AndroidTool  : EditorWindow
             if (item.EndsWith(".unity"))
             {
                 list.Add(item);
+                Debug.Log(item);
             }
         }
-        BuildPipeline.BuildPlayer(list.ToArray(), exportApkPath + "fksj.apk", BuildTarget.Android, BuildOptions.None);
+
+        scenes = new string[]
+        {
+            "Assets/Scenes/LoginScene.unity", "Assets/Scenes/MainScene.unity",
+            "Assets/Scenes/GameScene.unity", "Assets/Scenes/GameScene_doudizhu.unity",
+        };
+        BuildPipeline.BuildPlayer(scenes, exportApkPath + "fksj.apk", BuildTarget.Android, BuildOptions.None);
     }
 
     [MenuItem("Tools/复制bin到游戏(先生成Apk)")]
     public static void Copy2GameAsset()
     {
         new FastZip().ExtractZip(exportApkPath + "fksj.apk", exportApkPath + "fksj/", "");
+
+//        FileHelper.DelectDir(fksjAssetPath);
+
         bool copyOldLabFilesToNewLab = FileHelper.CopyOldLabFilesToNewLab(@"C:\Users\Administrator\Desktop\fksj\fksj\assets", fksjAssetPath);
         Debug.Log(copyOldLabFilesToNewLab);
     }
