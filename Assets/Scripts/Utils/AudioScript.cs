@@ -324,12 +324,12 @@ public class AudioScript : MonoBehaviour {
 
             case CrazyLandlords.Helper.CardsType.BoomAndOne:                //四带一
                 {
-                    //playSound("bomb");
+                    playSound("four_one");
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.BoomAndTwo:                //四带二
                 {
-                    //playSound("bomb");
+                    playSound("four_two");
                 }
                 break;
             case CrazyLandlords.Helper.CardsType.OnlyThree:
