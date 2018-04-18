@@ -21,7 +21,6 @@ public class AndroidTool  : EditorWindow
             if (item.EndsWith(".unity"))
             {
                 list.Add(item);
-                Debug.Log(item);
             }
         }
 
@@ -38,10 +37,9 @@ public class AndroidTool  : EditorWindow
     {
         new FastZip().ExtractZip(exportApkPath + "fksj.apk", exportApkPath + "fksj/", "");
 
-//        FileHelper.DelectDir(fksjAssetPath);
+        //        FileHelper.DelectDir(fksjAssetPath);
 
-        bool copyOldLabFilesToNewLab = FileHelper.CopyOldLabFilesToNewLab(@"C:\Users\Administrator\Desktop\fksj\fksj\assets", fksjAssetPath);
-        Debug.Log(copyOldLabFilesToNewLab);
+//        bool copyOldLabFilesToNewLab = FileHelper.CopyOldLabFilesToNewLab(@"C:\Users\Administrator\Desktop\fksj\fksj\assets", fksjAssetPath);
+//        Debug.Log(copyOldLabFilesToNewLab);
     }
-
 }

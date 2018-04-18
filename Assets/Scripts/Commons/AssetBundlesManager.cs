@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 public class AssetBundlesManager
@@ -19,6 +21,7 @@ public class AssetBundlesManager
     public AssetBundle getAssetBundlesDataByName(string name)
     {
         AssetBundle ab;
+
         if (!ABDic.TryGetValue(name, out ab))
         {
             LogUtil.LogError("ab包不存在:" + name);
