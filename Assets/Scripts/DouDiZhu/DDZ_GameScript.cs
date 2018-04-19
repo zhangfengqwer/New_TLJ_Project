@@ -1453,6 +1453,12 @@ public class DDZ_GameScript : MonoBehaviour {
                     }
                 }
             }
+            
+            // 倍数
+            {
+                int beishu = (int)jd["beishu"];
+                m_text_beishu.text = ("X" + beishu);
+            }
 
             //----------------------------------------------------------------------------------------------------------------
             switch (roomState)
