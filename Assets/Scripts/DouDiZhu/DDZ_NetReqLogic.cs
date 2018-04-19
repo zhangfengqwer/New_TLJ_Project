@@ -7,11 +7,21 @@ using UnityEngine;
 
 public class DDZ_NetReqLogic : MonoBehaviour
 {
+    public string m_hotfix_class = "DDZ_NetReqLogic_hotfix";
+    public string m_hotfix_path = "HotFix_Project.DDZ_NetReqLogic_hotfix";
+
     string m_tag = TLJCommon.Consts.Tag_DouDiZhu_Game;
 
     // 是否已经加入房间
     public void reqIsJoinRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqIsJoinRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqIsJoinRoom", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
 
         JsonData data = new JsonData();
@@ -25,6 +35,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 请求恢复房间
     public void reqRetryJoinGame()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqRetryJoinGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqRetryJoinGame", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData data = new JsonData();
@@ -38,6 +55,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 请求加入房间
     public void reqJoinRoom(string gameroomtype)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqJoinRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqJoinRoom", null, gameroomtype);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = m_tag;
@@ -51,6 +75,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 请求退出房间
     public void reqExitRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqExitRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqExitRoom", null, null);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = m_tag;
@@ -63,6 +94,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 请求抢地主
     public void reqQiangDiZhu(int fen)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqQiangDiZhu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqQiangDiZhu", null, fen);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = m_tag;
@@ -76,6 +114,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 请求加棒
     public void reqJiaBang(int isJiaBang)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqJiaBang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqJiaBang", null, isJiaBang);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = m_tag;
@@ -89,6 +134,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 请求出牌
     public void reqOutPoker()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqOutPoker"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqOutPoker", null, null);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = DDZ_GameData.getInstance().m_tag;
@@ -183,6 +235,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
 
     public void reqSetTuoGuanState(bool isTuoGuan)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqSetTuoGuanState"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqSetTuoGuanState", null, isTuoGuan);
+            return;
+        }
+
         NetLoading.getInstance().Show();
 
         JsonData data = new JsonData();
@@ -198,6 +257,13 @@ public class DDZ_NetReqLogic : MonoBehaviour
     // 发送聊天信息
     public void reqChat(int type, int content_id)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "reqChat"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "reqChat", null, type, content_id);
+            return;
+        }
+
         JsonData data = new JsonData();
 
         data["tag"] = m_tag;

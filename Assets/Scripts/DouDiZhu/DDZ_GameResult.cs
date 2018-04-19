@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class DDZ_GameResult : MonoBehaviour {
 
+    public string m_hotfix_class = "DDZ_GameResult_hotfix";
+    public string m_hotfix_path = "HotFix_Project.DDZ_GameResult_hotfix";
+
     public DDZ_GameScript m_parentScript;
     public string m_jsonData;
 
@@ -23,7 +26,17 @@ public class DDZ_GameResult : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        OtherData.s_ddz_gameResult = this;
+
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "Start", null, null);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(m_jsonData);
 
         initUI_Image();
@@ -114,6 +127,13 @@ public class DDZ_GameResult : MonoBehaviour {
 
     public void initUI_Image()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "initUI_Image"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "initUI_Image", null, null);
+            return;
+        }
+
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg").GetComponent<Image>(), "doudizhu.unity3d", "doudizhu_gameresult_bg");
     }
 
@@ -124,6 +144,13 @@ public class DDZ_GameResult : MonoBehaviour {
 
     public void onClickJiXu()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickJiXu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickJiXu", null, null);
+            return;
+        }
+
         if (UserData.gold < 1000)
         {
             ToastScript.createToast("金币不足1000，无法继续游戏");
@@ -137,6 +164,13 @@ public class DDZ_GameResult : MonoBehaviour {
 
     public void onClickOK()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickOK"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickOK", null, null);
+            return;
+        }
+
         m_parentScript.exitRoom();
     }
 }

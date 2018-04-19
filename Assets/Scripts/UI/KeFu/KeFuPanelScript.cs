@@ -17,15 +17,15 @@ public class KeFuPanelScript : MonoBehaviour {
     void Start ()
     {
         OtherData.s_keFuPanelScript = this;
-
-        initUI_Image();
-
+        
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("KeFuPanelScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.KeFuPanelScript_hotfix", "Start", null, null);
             return;
         }
+
+        initUI_Image();
     }
 
     public void initUI_Image()

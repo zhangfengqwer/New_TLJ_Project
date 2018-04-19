@@ -280,6 +280,13 @@ public class AudioScript : MonoBehaviour {
     // 斗地主出牌音效
     public void playSound_DouDiZhu_ChuPai(List<TLJCommon.PokerInfo> list,string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("playSound_DouDiZhu_ChuPai_hotfix", "playSound_DouDiZhu_ChuPai"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.playSound_DouDiZhu_ChuPai_hotfix", "playSound_DouDiZhu_ChuPai", null, list, uid);
+            return;
+        }
+
         CrazyLandlords.Helper.LandlordsCardsHelper.SetWeight(list);
         CrazyLandlords.Helper.CardsType cardsType;
 

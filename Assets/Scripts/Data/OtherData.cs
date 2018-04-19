@@ -15,7 +15,7 @@ public class OtherData
     public static int s_defaultLoginType = (int) DefaultLoginType.DefaultLoginType_Default;
 
     public static string s_channelName = ""; // 渠道号
-    public static string s_apkVersion = "1.1.0"; // apk版本号
+    public static string s_apkVersion = "1.2.0"; // apk版本号
     public static string s_codeVersion; // 代码版本
     public static string s_resVersion; // 资源版本
 
@@ -98,6 +98,8 @@ public class OtherData
     public static BuQianQueRenPanelScript s_buQianQueRenPanelScript = null;
     public static Activity s_activity = null;
     public static Notice s_notice = null;
+    public static DDZ_GameScript s_ddz_gameScript = null;
+    public static DDZ_GameResult s_ddz_gameResult = null;
 
     public static string getWebUrl()
     {

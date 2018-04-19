@@ -41,15 +41,15 @@ public class MedalDuiHuanPanelScript : MonoBehaviour
     void Start()
     {
         OtherData.s_medalDuiHuanPanelScript = this;
-
-        initUI_Image();
-
+        
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("MedalDuiHuanPanelScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.MedalDuiHuanPanelScript_hotfix", "Start", null, null);
             return;
         }
+
+        initUI_Image();
 
         m_listView_duihuanshangpin = m_obj_duihuanshangpin.GetComponent<ListViewScript>();
         m_listView_duihuanjilu = m_obj_duihuanjilu.GetComponent<ListViewScript>();
