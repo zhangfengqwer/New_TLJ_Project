@@ -418,8 +418,26 @@ public class DDZ_GameScript : MonoBehaviour {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickOutPoker", null, null);
             return;
         }
+        
+        bool hasOutPoker = false;
+        for (int i = 0; i < DDZ_GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            PokerScript pokerScript = DDZ_GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
+            if (pokerScript.getIsJump())
+            {
+                hasOutPoker = true;
+                break;
+            }
+        }
 
-        m_DDZ_NetReqLogic.reqOutPoker();
+        if (hasOutPoker)
+        {
+            m_DDZ_NetReqLogic.reqOutPoker();
+        }
+        else
+        {
+            ToastScript.createToast("请选择您出的牌");
+        }
     }
 
     public void onClickCustomPoker()
