@@ -38,7 +38,7 @@ public class NewPlayerShowTuiGuangPanelScript : MonoBehaviour {
             return;
         }
 
-        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Bg/Image").GetComponent<Image>(), "tuiguang.unity3d", "tuiguang_bg");
+        CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg/Image").GetComponent<Image>(), "tuiguang.unity3d", "tuiguang_bg");
     }
 
     // Update is called once per frame
