@@ -42,15 +42,15 @@ public class TuiGuangYouLiPanelScript : MonoBehaviour {
     void Start ()
     {
         OtherData.s_tuiGuangYouLiPanelScript = this;
-
-        initUI_Image();
-
+        
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("TuiGuangYouLiPanelScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.TuiGuangYouLiPanelScript_hotfix", "Start", null, null);
             return;
         }
+
+        initUI_Image();
 
         m_text_myTuiGuangCode.text = "我的推广码：" + UserData.myTuiGuangCode;
         m_listview_player = m_obj_tuiGuangList.GetComponent<ListViewScript>();

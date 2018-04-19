@@ -527,7 +527,7 @@ public class BuyGoodsPanelScript : MonoBehaviour
             }
 
             //更新背包数据
-            LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = MainScript.onReceive_GetUserBag;
+            LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().CallBack = OtherData.s_mainScript.onReceive_GetUserBag;
             LogicEnginerScript.Instance.GetComponent<GetUserBagRequest>().OnRequest();
             LogicEnginerScript.Instance.GetComponent<GetUserInfoRequest>().OnRequest();
             Destroy(gameObject);

@@ -25,14 +25,14 @@ public class ChangeHeadPanelScript : MonoBehaviour {
 
         s_instance = this;
 
-        initUI_Image();
-
         // 优先使用热更新的代码
         if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ChangeHeadPanelScript_hotfix", "Start"))
         {
             ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ChangeHeadPanelScript_hotfix", "Start", null, null);
             return;
         }
+
+        initUI_Image();
     }
 
     public void initUI_Image()

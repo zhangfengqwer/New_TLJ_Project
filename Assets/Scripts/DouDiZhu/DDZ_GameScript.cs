@@ -51,6 +51,15 @@ public class DDZ_GameScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        OtherData.s_ddz_gameScript = this;
+
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "Start"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "Start", null, null);
+            return;
+        }
+
         DDZ_GameData.getInstance().m_tag = TLJCommon.Consts.Tag_DouDiZhu_Game;
         DDZ_GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
 
@@ -68,6 +77,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void initUI()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "initUI"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "initUI", null, null);
+            return;
+        }
+
         // 初始化定时器
         {
             m_timer = TimerScript.createTimer();
@@ -92,6 +108,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void initData()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "initData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "initData", null, null);
+            return;
+        }
+
         m_playerHead_down.name = UserData.uid;
 
         // 游戏服务器
@@ -130,6 +153,13 @@ public class DDZ_GameScript : MonoBehaviour {
     {
         try
         {
+            // 优先使用热更新的代码
+            if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "startGame_InitUI"))
+            {
+                ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "startGame_InitUI", null, jsonData);
+                return;
+            }
+
             DDZ_GameData.getInstance().m_isStartGame = true;
 
             {
@@ -202,8 +232,33 @@ public class DDZ_GameScript : MonoBehaviour {
 		
 	}
 
+    public void OnDestroy()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "OnDestroy"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "OnDestroy", null, null);
+            return;
+        }
+
+        OtherData.s_ddz_gameScript = null;
+
+        if (HeartBeat_Play.getInstance() != null)
+        {
+            HeartBeat_Play.getInstance().stopHeartBeat();
+        }
+
+    }
+
     public GameObject getPlayerHeadByUid(string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "getPlayerHeadByUid"))
+        {
+            GameObject obj = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "getPlayerHeadByUid", null, uid);
+            return obj;
+        }
+
         if (uid.CompareTo(m_playerHead_down.transform.name) == 0)
         {
             return m_playerHead_down;
@@ -227,9 +282,9 @@ public class DDZ_GameScript : MonoBehaviour {
     public void onTimerEventTimeEnd()
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("GameScript_hotfix", "onTimerEventTimeEnd"))
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onTimerEventTimeEnd"))
         {
-            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.GameScript_hotfix", "onTimerEventTimeEnd", null, null);
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onTimerEventTimeEnd", null, null);
             return;
         }
 
@@ -256,31 +311,73 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickPlayerHead_down()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickPlayerHead_down"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickPlayerHead_down", null, null);
+            return;
+        }
+
         GameUserInfoPanelScript.create_ddz(m_playerHead_down.transform.name);
     }
 
     public void onClickPlayerHead_up()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickPlayerHead_up"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickPlayerHead_up", null, null);
+            return;
+        }
+
         GameUserInfoPanelScript.create_ddz(m_playerHead_up.transform.name);
     }
 
     public void onClickPlayerHead_left()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickPlayerHead_left"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickPlayerHead_left", null, null);
+            return;
+        }
+
         GameUserInfoPanelScript.create_ddz(m_playerHead_left.transform.name);
     }
 
     public void onClickPlayerHead_right()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickPlayerHead_right"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickPlayerHead_right", null, null);
+            return;
+        }
+
         GameUserInfoPanelScript.create_ddz(m_playerHead_right.transform.name);
     }
 
     public void onClickSet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickSet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickSet", null, null);
+            return;
+        }
+
         SetScript.create(true);
     }
 
     public void onClickJoinRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickJoinRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickJoinRoom", null, null);
+            return;
+        }
+
         AudioScript.getAudioScript().playSound_ButtonClick();
 
         m_DDZ_NetReqLogic.reqJoinRoom(TLJCommon.Consts.GameRoomType_DDZ_Normal);
@@ -288,11 +385,25 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickExitRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickExitRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickExitRoom", null, null);
+            return;
+        }
+
         QueRenExitPanelScript.create(this, "是否确定退出？");
     }
 
     public void onClickBuOutPoker()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickBuOutPoker"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickBuOutPoker", null, null);
+            return;
+        }
+
         // 所有牌设为未选中
         PokerScript.setAllPokerWeiXuanZe();
 
@@ -301,17 +412,56 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickOutPoker()
     {
-        m_DDZ_NetReqLogic.reqOutPoker();
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickOutPoker"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickOutPoker", null, null);
+            return;
+        }
+        
+        bool hasOutPoker = false;
+        for (int i = 0; i < DDZ_GameData.getInstance().m_myPokerObjList.Count; i++)
+        {
+            PokerScript pokerScript = DDZ_GameData.getInstance().m_myPokerObjList[i].GetComponent<PokerScript>();
+            if (pokerScript.getIsJump())
+            {
+                hasOutPoker = true;
+                break;
+            }
+        }
+
+        if (hasOutPoker)
+        {
+            m_DDZ_NetReqLogic.reqOutPoker();
+        }
+        else
+        {
+            ToastScript.createToast("请选择您出的牌");
+        }
     }
 
     public void onClickCustomPoker()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickCustomPoker"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickCustomPoker", null, null);
+            return;
+        }
+
         TestPoker.create();
     }
 
-    private List<PokerInfo[]> promptPokers;
+    public List<PokerInfo[]> promptPokers;
     public void onClickTiShi()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickTiShi"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickTiShi", null, null);
+            return;
+        }
+
         // 所有牌设为未选中
         PokerScript.setAllPokerWeiXuanZe();
 
@@ -377,11 +527,25 @@ public class DDZ_GameScript : MonoBehaviour {
     }
     public void onClickChat()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickChat"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickChat", null, null);
+            return;
+        }
+
         ChatPanelScript.create(this);
     }
 
     public void onClickTuoGuan()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickTuoGuan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickTuoGuan", null, null);
+            return;
+        }
+
         AudioScript.getAudioScript().playSound_ButtonClick();
 
         m_DDZ_NetReqLogic.reqSetTuoGuanState(true);
@@ -389,6 +553,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickCancelTuoGuan()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickCancelTuoGuan"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickCancelTuoGuan", null, null);
+            return;
+        }
+
         AudioScript.getAudioScript().playSound_ButtonClick();
 
         m_DDZ_NetReqLogic.reqSetTuoGuanState(false);
@@ -396,36 +567,85 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onClickQiangDiZhu_0fen()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickQiangDiZhu_0fen"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickQiangDiZhu_0fen", null, null);
+            return;
+        }
+
         m_DDZ_NetReqLogic.reqQiangDiZhu(0);
     }
 
     public void onClickQiangDiZhu_1fen()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickQiangDiZhu_1fen"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickQiangDiZhu_1fen", null, null);
+            return;
+        }
+
         m_DDZ_NetReqLogic.reqQiangDiZhu(1);
     }
 
     public void onClickQiangDiZhu_2fen()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickQiangDiZhu_2fen"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickQiangDiZhu_2fen", null, null);
+            return;
+        }
+
         m_DDZ_NetReqLogic.reqQiangDiZhu(2);
     }
 
     public void onClickQiangDiZhu_3fen()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickQiangDiZhu_3fen"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickQiangDiZhu_3fen", null, null);
+            return;
+        }
+
         m_DDZ_NetReqLogic.reqQiangDiZhu(3);
     }
 
     public void onClickJiaBang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickJiaBang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickJiaBang", null, null);
+            return;
+        }
+
         m_DDZ_NetReqLogic.reqJiaBang(1);
     }
 
     public void onClickBuJiaBang()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickBuJiaBang"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickBuJiaBang", null, null);
+            return;
+        }
+
         m_DDZ_NetReqLogic.reqJiaBang(0);
     }
 
     public void showWaitMatchPanel(float time, bool isContinueGame)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "showWaitMatchPanel"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "showWaitMatchPanel", null, time, isContinueGame);
+            return;
+        }
+
         m_waitMatchPanel = WaitMatchPanelScript.create(DDZ_GameData.getInstance().getGameRoomType());
         WaitMatchPanelScript script = m_waitMatchPanel.GetComponent<WaitMatchPanelScript>();
         script.start(DDZ_GameData.getInstance().m_gameRoomType, time, false);
@@ -433,6 +653,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void createMyPokerObj()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "createMyPokerObj"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "createMyPokerObj", null, null);
+            return;
+        }
+
         // 先删掉旧的
         for (int i = DDZ_GameData.getInstance().m_myPokerObjList.Count - 1; i >= 0; i--)
         {
@@ -457,7 +684,14 @@ public class DDZ_GameScript : MonoBehaviour {
     }
 
     public void createDiPokerObj()
-    {        
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "createDiPokerObj"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "createDiPokerObj", null, null);
+            return;
+        }
+
         for (int i = 0; i < DDZ_GameData.getInstance().m_dipaiList.Count; i++)
         {
             GameObject poker = PokerScript.createPoker();
@@ -472,6 +706,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void showOtherOutPoker(List<TLJCommon.PokerInfo> pokerList, string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "showOtherOutPoker"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "showOtherOutPoker", null, pokerList, uid);
+            return;
+        }
+
         if (pokerList.Count == 0)
         {
             return;
@@ -497,6 +738,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void initOutPokerPos(List<GameObject> objList, string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "initOutPokerPos"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "initOutPokerPos", null, objList, uid);
+            return;
+        }
+
         int jiange = 30;
 
         if (uid.CompareTo(m_playerHead_down.transform.name) == 0)
@@ -535,6 +783,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void initMyPokerPos(List<GameObject> objList)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "initMyPokerPos"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "initMyPokerPos", null, objList);
+            return;
+        }
+
         int jiange = 35;
 
         int minJiange = 35;
@@ -565,6 +820,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void setTimerPos(string uid)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "setTimerPos"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "setTimerPos", null, uid);
+            return;
+        }
+
         if (uid.CompareTo(m_playerHead_down.transform.name) == 0)
         {
             m_timer.transform.localPosition = new Vector3(-513, -170, 0);
@@ -587,6 +849,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onReceive(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
 
@@ -618,6 +887,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onReceive_PlayGame(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive_PlayGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive_PlayGame", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int playAction = (int)jd["playAction"];
 
@@ -1275,6 +1551,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onReceive_UserInfo_Game(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive_UserInfo_Game"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive_UserInfo_Game", null, data);
+            return;
+        }
+
         JsonData jd = JsonMapper.ToObject(data);
         int code = (int)jd["code"];
 
@@ -1316,6 +1599,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onReceive_IsJoinGame(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive_IsJoinGame"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive_IsJoinGame", null, data);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         JsonData jd = JsonMapper.ToObject(data);
@@ -1341,6 +1631,13 @@ public class DDZ_GameScript : MonoBehaviour {
     {
         try
         {
+            // 优先使用热更新的代码
+            if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive_ResumeGame"))
+            {
+                ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive_ResumeGame", null, data);
+                return;
+            }
+
             NetLoading.getInstance().Close();
 
             clearData();
@@ -1452,6 +1749,12 @@ public class DDZ_GameScript : MonoBehaviour {
                         GameUtil.hideGameObject(m_jiabang);
                     }
                 }
+            }
+            
+            // 倍数
+            {
+                int beishu = (int)jd["beishu"];
+                m_text_beishu.text = ("X" + beishu);
             }
 
             //----------------------------------------------------------------------------------------------------------------
@@ -1662,6 +1965,13 @@ public class DDZ_GameScript : MonoBehaviour {
     {
         try
         {
+            // 优先使用热更新的代码
+            if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive_BaoXiangDrop"))
+            {
+                ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive_BaoXiangDrop", null, data);
+                return;
+            }
+
             JsonData jd = JsonMapper.ToObject(data);
 
             string reward = (string)jd["reward"];
@@ -1682,6 +1992,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void exitRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "exitRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "exitRoom", null, null);
+            return;
+        }
+
         // 清空本局数据
         {
             clearData();
@@ -1694,6 +2011,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void cleanRoom()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "cleanRoom"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "cleanRoom", null, null);
+            return;
+        }
+
         {
             m_playerHead_left.transform.Find("Text_name").GetComponent<Text>().text = UserData.name;
             m_playerHead_left.transform.Find("Text_gold").GetComponent<Text>().text = UserData.gold.ToString();
@@ -1776,6 +2100,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void clearData()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "clearData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "clearData", null, null);
+            return;
+        }
+
         DDZ_GameData.getInstance().clear();
     }
 
@@ -1783,11 +2114,25 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onSocketReceive_Play(string data)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onSocketReceive_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onSocketReceive_Play", null, data);
+            return;
+        }
+
         onReceive(data);
     }
 
     public void onSocketConnect_Play(bool result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onSocketConnect_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onSocketConnect_Play", null, result);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         if (result)
@@ -1811,12 +2156,26 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onSocketClose_Play()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onSocketClose_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onSocketClose_Play", null, null);
+            return;
+        }
+
         checkNet();
     }
 
     public void onReceive_Main(string data)
     {
-        LogUtil.Log("GameScript.onReceive_Main----" + data);
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onReceive_Main"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onReceive_Main", null, data);
+            return;
+        }
+
+        LogUtil.Log("DDZ_GameScript.onReceive_Main----" + data);
         JsonData jd = JsonMapper.ToObject(data);
         string tag = (string)jd["tag"];
 
@@ -1864,6 +2223,13 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onSocketConnect_Logic(bool result)
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onSocketConnect_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onSocketConnect_Logic", null, result);
+            return;
+        }
+
         NetLoading.getInstance().Close();
 
         if (result)
@@ -1883,12 +2249,26 @@ public class DDZ_GameScript : MonoBehaviour {
 
     public void onSocketClose_Logic()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onSocketClose_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onSocketClose_Logic", null, null);
+            return;
+        }
+
         checkNet();
     }
 
     // 点击网络断开弹框中的重连按钮:logic
     public void onClickChongLian_Logic()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickChongLian_Logic"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickChongLian_Logic", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
         LogicEnginerScript.Instance.startConnect();
@@ -1897,6 +2277,13 @@ public class DDZ_GameScript : MonoBehaviour {
     // 点击网络断开弹框中的重连按钮:play
     public void onClickChongLian_Play()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onClickChongLian_Play"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onClickChongLian_Play", null, null);
+            return;
+        }
+
         NetLoading.getInstance().Show();
         NetErrorPanelScript.getInstance().Close();
         PlayServiceSocket.s_instance.startConnect();
@@ -1905,6 +2292,13 @@ public class DDZ_GameScript : MonoBehaviour {
     // 检测服务器是否连接
     public void checkNet()
     {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "checkNet"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "checkNet", null, null);
+            return;
+        }
+
         if (!LogicEnginerScript.Instance.isConnecion())
         {
             Destroy(LogicEnginerScript.Instance.gameObject);

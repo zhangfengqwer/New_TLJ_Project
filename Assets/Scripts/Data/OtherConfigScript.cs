@@ -67,7 +67,9 @@ public class OtherConfigScript
         }
 
         JsonData jd = JsonMapper.ToObject(jsonData);
-        m_CodeVersion = (int)jd["CodeVersion"];
+
+        string key = "CodeVersion-" + OtherData.s_apkVersion;
+        m_CodeVersion = (int)jd[key];
 
         NetLoading.getInstance().Close();
 
