@@ -321,4 +321,9 @@ public class Activity : MonoBehaviour
 
         EnterMainPanelShowManager.getInstance().showNextPanel();
     }
+
+    public void OnToggleClick(int i)
+    {
+
+    }
 }
