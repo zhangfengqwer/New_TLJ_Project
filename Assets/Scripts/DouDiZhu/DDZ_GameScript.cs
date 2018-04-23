@@ -60,6 +60,17 @@ public class DDZ_GameScript : MonoBehaviour {
             return;
         }
 
+        // 禁止多点触摸
+        Input.multiTouchEnabled = false;
+
+        ToastScript.clear();
+
+        // 安卓回调
+        AndroidCallBack.s_onPauseCallBack = onPauseCallBack;
+        AndroidCallBack.s_onResumeCallBack = onResumeCallBack;
+
+        AudioScript.getAudioScript().stopMusic();
+
         DDZ_GameData.getInstance().m_tag = TLJCommon.Consts.Tag_DouDiZhu_Game;
         DDZ_GameData.getInstance().m_gameRoomType = TLJCommon.Consts.GameRoomType_DDZ_Normal;
 
@@ -2319,5 +2330,35 @@ public class DDZ_GameScript : MonoBehaviour {
         {
             //ToastScript.createToast("两个服务器都成功连接");
         }
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    public void onPauseCallBack()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onPauseCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onPauseCallBack", null, null);
+            return;
+        }
+
+        //LogicEnginerScript.Instance.Stop();
+        //PlayServiceSocket.s_instance.Stop();
+    }
+
+    public void onResumeCallBack()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc(m_hotfix_class, "onResumeCallBack"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke(m_hotfix_path, "onResumeCallBack", null, null);
+            return;
+        }
+
+        //NetErrorPanelScript.getInstance().Show();
+        //NetErrorPanelScript.getInstance().setOnClickButton(onClickBack);
+        //NetErrorPanelScript.getInstance().setContentText("与服务器断开连接，点击确定回到主界面");
+
+        checkNet();
     }
 }

@@ -4004,10 +4004,6 @@ public class GameScript : MonoBehaviour
 
         if (!LogicEnginerScript.Instance.isConnecion())
         {
-            //NetErrorPanelScript.getInstance().Show();
-            //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Logic);
-            //NetErrorPanelScript.getInstance().setContentText("与逻辑服务器断开连接，请重新连接");
-
             Destroy(LogicEnginerScript.Instance.gameObject);
 
             NetErrorPanelScript.getInstance().Show();
@@ -4016,10 +4012,6 @@ public class GameScript : MonoBehaviour
         }
         else if (!PlayServiceSocket.s_instance.isConnecion())
         {
-            //NetErrorPanelScript.getInstance().Show();
-            //NetErrorPanelScript.getInstance().setOnClickButton(onClickChongLian_Play);
-            //NetErrorPanelScript.getInstance().setContentText("与游戏服务器断开连接，请重新连接");
-            
             Destroy(PlayServiceSocket.s_instance.gameObject);
 
             NetErrorPanelScript.getInstance().Show();

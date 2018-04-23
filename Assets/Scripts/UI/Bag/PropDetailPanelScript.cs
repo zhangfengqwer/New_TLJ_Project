@@ -129,7 +129,7 @@ public class PropDetailPanelScript : MonoBehaviour {
         //话费碎片
         else if ((m_propInfo.m_id == 120) || (m_propInfo.m_id == 121) || (m_propInfo.m_id == 122))
         {
-            Activity.create(1);
+            Activity.create(4);
         }
         // 其他
         else

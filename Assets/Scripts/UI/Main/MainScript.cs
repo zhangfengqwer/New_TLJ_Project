@@ -163,6 +163,7 @@ public class MainScript : MonoBehaviour
 
         m_button_DDZ_Back.gameObject.SetActive(false);
 
+        HuanLeSongPanelScript.create();
     }
 
     // 显示新人推广礼

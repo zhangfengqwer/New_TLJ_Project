@@ -203,13 +203,19 @@ public class GameUtil
             return;
         }
 
-        List<string> list = new List<string>();
-        CommonUtil.splitStr(reward,list,':');
+        List<string> list1 = new List<string>();
+        CommonUtil.splitStr(reward, list1, ';');
 
-        int id = int.Parse(list[0]);
-        int num = int.Parse(list[1]);
+        for (int i = 0; i < list1.Count; i++)
+        {
+            List<string> list2 = new List<string>();
+            CommonUtil.splitStr(list1[i], list2, ':');
 
-        changeData(id,num);
+            int id = int.Parse(list2[0]);
+            int num = int.Parse(list2[1]);
+
+            changeData(id, num);
+        }
     }
 
     /*

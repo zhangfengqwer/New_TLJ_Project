@@ -42,18 +42,19 @@ public class Sign30LeiJiPanelScript : MonoBehaviour {
         Sign30DataContent temp = Sign30Data.getInstance().getSign30DataById(m_id);
 
         // 全勤奖
-        if (temp.day == 31)
+        if (temp.day == CommonUtil.getCurMonthAllDays())
         {
-            m_text_title.text = ("连续签到" + CommonUtil.getCurMonthAllDays().ToString() + "天");
+            m_text_title.text = ("累计签到" + CommonUtil.getCurMonthAllDays().ToString() + "天");
+            gameObject.transform.Find("Image_bg/Text_quanqin_tip").localScale = new Vector3(1,1,1);
         }
         else
         {
-            m_text_title.text = ("连续签到" + temp.day.ToString() + "天");
+            m_text_title.text = ("累计签到" + temp.day.ToString() + "天");
         }
 
         // 领取奖励按钮状态
         {
-            int signAllDays = Sign30RecordData.getInstance().getLianXuSignDays();
+            int signAllDays = Sign30RecordData.getInstance().getSign30RecordList().Count;
 
             if (m_id == 35)
             {
