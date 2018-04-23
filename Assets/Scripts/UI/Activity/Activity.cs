@@ -28,8 +28,8 @@ public class Activity : MonoBehaviour
     public GameObject ItemNotice;
     private int hasRead = 0;
 
-    private List<Toggle> activityToggles = new List<Toggle>();
-    private int num;
+    private Dictionary<int, Toggle> activityToggles = new Dictionary<int, Toggle>();
+    private int activityId;
     private bool isFinish;
 
     public static GameObject create()
@@ -148,12 +148,12 @@ public class Activity : MonoBehaviour
     public void GetActivityData(string result)
     {
         // 优先使用热更新的代码
-//        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "GetActivityData"))
-//        {
-//            ILRuntimeUtil.getInstance().getAppDomain()
-//                .Invoke("HotFix_Project.Activity_hotfix", "GetActivityData", null, result);
-//            return;
-//        }
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "GetActivityData"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain()
+                .Invoke("HotFix_Project.Activity_hotfix", "GetActivityData", null, result);
+            return;
+        }
 
         JsonData jsonData = JsonMapper.ToObject(result);
         Debug.Log(jsonData["activityDatas"].ToString());
@@ -237,12 +237,23 @@ public class Activity : MonoBehaviour
         }
 
         Toggle toggle = go.GetComponent<Toggle>();
-        activityToggles.Add(toggle);
 
-        if (activityToggles.Count == activityDatas.Count)
+        activityToggles.Add(activityDatas[dataindex].ActivityId, toggle);
+
+        if (activityId > 0)
         {
-            activityToggles[num].isOn = true;
-            isFinish = true;
+            if (activityToggles.Count == activityDatas.Count)
+            {
+                Toggle t;
+                if (activityToggles.TryGetValue(activityId, out t))
+                {
+                    t.isOn = true;
+                }
+                else
+                {
+                    LogUtil.LogError("num异常:" + activityId);
+                }
+            }
         }
 
         toggle.group = toggleGroup;
@@ -353,6 +364,6 @@ public class Activity : MonoBehaviour
 
     public void SetType(int i)
     {
-        num = i;
+        activityId = i;
     }
 }
