@@ -28,6 +28,26 @@ public class Activity : MonoBehaviour
     public GameObject ItemNotice;
     private int hasRead = 0;
 
+    private List<Toggle> activityToggles = new List<Toggle>();
+    private int num;
+    private bool isFinish;
+
+    public static GameObject create()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/ActivityAndNoticePanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+        return obj;
+    }
+    public static GameObject create(int i)
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/Panel/ActivityAndNoticePanel") as GameObject;
+        GameObject obj = GameObject.Instantiate(prefab, GameObject.Find("Canvas_Middle").transform);
+
+        Activity activity = obj.GetComponent<Activity>();
+        activity.SetType(i);
+        return obj;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -64,7 +84,7 @@ public class Activity : MonoBehaviour
         }
 
         DeleteAllItem(Content);
-
+        activityToggles.Clear();
         switch (i)
         {
             case 0:
@@ -128,16 +148,17 @@ public class Activity : MonoBehaviour
     public void GetActivityData(string result)
     {
         // 优先使用热更新的代码
-        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "GetActivityData"))
-        {
-            ILRuntimeUtil.getInstance().getAppDomain()
-                .Invoke("HotFix_Project.Activity_hotfix", "GetActivityData", null, result);
-            return;
-        }
+//        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("Activity_hotfix", "GetActivityData"))
+//        {
+//            ILRuntimeUtil.getInstance().getAppDomain()
+//                .Invoke("HotFix_Project.Activity_hotfix", "GetActivityData", null, result);
+//            return;
+//        }
 
         JsonData jsonData = JsonMapper.ToObject(result);
         Debug.Log(jsonData["activityDatas"].ToString());
         activityDatas = JsonMapper.ToObject<List<ActivityData>>(jsonData["activityDatas"].ToString());
+
         BtnActivity.onClick.Invoke();
     }
 
@@ -216,6 +237,14 @@ public class Activity : MonoBehaviour
         }
 
         Toggle toggle = go.GetComponent<Toggle>();
+        activityToggles.Add(toggle);
+
+        if (activityToggles.Count == activityDatas.Count)
+        {
+            activityToggles[num].isOn = true;
+            isFinish = true;
+        }
+
         toggle.group = toggleGroup;
         if (dataindex == 0)
         {
@@ -322,8 +351,8 @@ public class Activity : MonoBehaviour
         EnterMainPanelShowManager.getInstance().showNextPanel();
     }
 
-    public void OnToggleClick(int i)
+    public void SetType(int i)
     {
-
+        num = i;
     }
 }
