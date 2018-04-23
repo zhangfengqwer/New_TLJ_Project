@@ -7,7 +7,7 @@ using UnityEngine;
 public class AndroidTool  : EditorWindow
 {
 
-    private static string fksjAssetPath = @"E:\fksj\javgame_online\fwsjsdk\src\main\assets";
+    private static string fksjAssetPath = @"E:\fksj\javgame_online\app\src\main\assets";
     private static string exportApkPath = @"C:\Users\Administrator\Desktop\fksj\";
     private const string scenePath = "Assets/Scenes";
 
@@ -35,11 +35,13 @@ public class AndroidTool  : EditorWindow
     [MenuItem("Tools/复制bin到游戏(先生成Apk)")]
     public static void Copy2GameAsset()
     {
+        FileHelper.DelectDir(exportApkPath + "fksj/");
+
         new FastZip().ExtractZip(exportApkPath + "fksj.apk", exportApkPath + "fksj/", "");
 
-        //        FileHelper.DelectDir(fksjAssetPath);
+        FileHelper.DelectDir(fksjAssetPath);
 
-//        bool copyOldLabFilesToNewLab = FileHelper.CopyOldLabFilesToNewLab(@"C:\Users\Administrator\Desktop\fksj\fksj\assets", fksjAssetPath);
-//        Debug.Log(copyOldLabFilesToNewLab);
+        bool copyOldLabFilesToNewLab = FileHelper.CopyOldLabFilesToNewLab(@"C:\Users\Administrator\Desktop\fksj\fksj\assets", fksjAssetPath);
+        Debug.Log(copyOldLabFilesToNewLab);
     }
 }
