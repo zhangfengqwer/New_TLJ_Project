@@ -126,6 +126,11 @@ public class PropDetailPanelScript : MonoBehaviour {
         {
             ShopPanelScript.create(3);
         }
+        //话费碎片
+        else if ((m_propInfo.m_id == 120) || (m_propInfo.m_id == 121) || (m_propInfo.m_id == 122))
+        {
+            NoticePanelScript.create();
+        }
         // 其他
         else
         {
