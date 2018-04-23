@@ -570,7 +570,8 @@ public class MainScript : MonoBehaviour
             return;
         }
 
-        NoticePanelScript.create();
+        Activity.create();
+//        NoticePanelScript.create();
     }
 
     public void OnClickSign()
