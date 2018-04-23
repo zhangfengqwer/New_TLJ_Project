@@ -46,4 +46,16 @@ public class HuanLeSongPanelScript : MonoBehaviour {
 
         CommonUtil.setImageSpriteByAssetBundle(gameObject.transform.Find("Image_bg").GetComponent<Image>(), "huanlesong.unity3d", "huanlesong_bg");
     }
+
+    public void onClickLingQu()
+    {
+        // 优先使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("HuanLeSongPanelScript_hotfix", "onClickLingQu"))
+        {
+            ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.HuanLeSongPanelScript_hotfix", "onClickLingQu", null, null);
+            return;
+        }
+
+        ToastScript.createToast("暂未开放");
+    }
 }

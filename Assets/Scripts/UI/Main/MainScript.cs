@@ -162,8 +162,6 @@ public class MainScript : MonoBehaviour
         gameObject.transform.Find("Room/Button_EnterJingJiChang").gameObject.SetActive(false);
 
         m_button_DDZ_Back.gameObject.SetActive(false);
-
-        HuanLeSongPanelScript.create();
     }
 
     // 显示新人推广礼
