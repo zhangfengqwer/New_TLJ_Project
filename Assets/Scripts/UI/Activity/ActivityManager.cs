@@ -61,6 +61,13 @@ public class ActivityManager
                 }
                 break;
 
+            // 五一活动
+            case 6:
+                {
+                    setPanel_51(url);
+                }
+                break;
+
             default:
                 {
                     setPanel_other(activity);
@@ -220,5 +227,20 @@ public class ActivityManager
         script.m_btn1.transform.localScale = new Vector3(0, 0, 0);
         script.m_btn2.transform.localScale = new Vector3(0, 0, 0);
         script.m_btn3.transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    // 五一活动
+    public static void setPanel_51(string url)
+    {
+        // 使用热更新的代码
+        if (ILRuntimeUtil.getInstance().checkDllClassHasFunc("ActivityManager_hotfix", "setPanel_51"))
+        {
+            s_panel = (GameObject)ILRuntimeUtil.getInstance().getAppDomain().Invoke("HotFix_Project.ActivityManager_hotfix", "setPanel_51", null, url);
+            return;
+        }
+
+        GameObject prefabs = Resources.Load("Prefabs/Activity/Activity_51") as GameObject;
+        s_panel = GameObject.Instantiate(prefabs);
+        s_panel.GetComponent<Activity_51_Script>().setImage(url);
     }
 }
