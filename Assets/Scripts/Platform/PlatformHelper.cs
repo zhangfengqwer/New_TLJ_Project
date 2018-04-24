@@ -297,7 +297,7 @@ public class PlatformHelper
 
     public static string GetMacId()
     {
-        return "1";
+        return "2";
     }
 }
 #elif UNITY_ANDROID /// <summary>
